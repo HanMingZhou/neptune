@@ -1,0 +1,109 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sshpiper-sa
+  namespace: kubeflow
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sshpiper-role
+rules:
+  - apiGroups: ["sshpiper.com"]
+    resources: ["pipes"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: sshpiper-binding
+subjects:
+  - kind: ServiceAccount
+    name: sshpiper-sa
+    namespace: kubeflow
+roleRef:
+  kind: ClusterRole
+  name: sshpiper-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sshpiper
+  namespace: kubeflow
+spec:
+  type: LoadBalancer
+  ports:
+      - name: ssh
+        port: 22          # 对外暴露的标准 SSH 端口 (用户可以直接 ssh user@lb-ip)
+        targetPort: 2222  # 转发到 Pod 内部的 2222 端口
+        protocol: TCP
+  selector:
+    app: sshpiper
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sshpiper
+  namespace: kubeflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sshpiper
+  template:
+    metadata:
+      labels:
+        app: sshpiper
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      serviceAccountName: sshpiper-sa
+      securityContext:
+        # 启用 root 用户 (UID 0) 运行 Pod
+        runAsUser: 0
+        runAsGroup: 0
+      containers:
+        - name: sshpiper
+          image: farmer1992/sshpiperd:latest
+          command: ["/sshpiperd/sshpiperd"]
+          args: ["/sshpiperd/plugins/kubernetes", "--all-namespaces"]
+          ports:
+            - containerPort: 2222
+              name: ssh
+          env:
+            - name: SSHPIPERD_SERVER_KEY
+              value: "/serverkey/server_key"
+          volumeMounts:
+            - name: sshpiper-server-key
+              mountPath: "/serverkey/"
+              readOnly: true
+      volumes:
+        - name: sshpiper-server-key
+          secret:
+            secretName: sshpiper-server-key
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sshpiper-server-key
+  namespace: kubeflow
+type: Opaque
+stringData:
+  server_key: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+    QyNTUxOQAAACDbGHRrU40eDjSMHFgLwF4nGwLi5gegvSlwHEKWTagdaQAAAKiT1y6qk9cu
+    qgAAAAtzc2gtZWQyNTUxOQAAACDbGHRrU40eDjSMHFgLwF4nGwLi5gegvSlwHEKWTagdaQ
+    AAAEA9607plh/RvCLpfPnTC4L7jGewpna82Z2+qmTb8ADaetsYdGtTjR4ONIwcWAvAXicb
+    AuLmB6C9KXAcQpZNqB1pAAAAH2plcnJ5dG9tQGplcnJ5TWFjQm9vay1Qcm8ubG9jYWwBAg
+    MEBQY=
+    -----END OPENSSH PRIVATE KEY-----

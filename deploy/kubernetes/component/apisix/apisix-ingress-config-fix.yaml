@@ -1,0 +1,54 @@
+# ⚠️ 注意：此文件用于修复 Ingress Controller 配置问题
+# ========================================================
+#
+# 场景：当 Ingress Controller 日志显示 "no GatewayProxy configs provided" 时使用
+#
+# 使用前请确认：
+# 1. 你的 APISIX Admin API Key 与此文件中的一致
+# 2. baseURL 地址正确
+#
+# 使用方法：
+# kubectl apply -f apisix-ingress-config-fix.yaml
+# kubectl rollout restart deployment apisix-ingress-controller -n apisix
+#
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apisix-ingress-config
+  namespace: apisix
+  annotations:
+    meta.helm.sh/release-name: apisix
+    meta.helm.sh/release-namespace: apisix
+  labels:
+    app.kubernetes.io/managed-by: Helm
+data:
+  config.yaml: |
+    log_level: info
+    controller_name: apisix.apache.org/apisix-ingress-controller
+    leader_election_id: apisix-ingress-controller-leader
+    leader_election:
+      leaseDuration: 15s
+      renewDeadline: 10s
+      retryPeriod: 2s
+      disable: false
+    metrics_addr: :8080
+    enable_http2: false
+    probe_addr: :8081
+    secure_metrics: false
+    exec_adc_timeout: 15s
+    provider:
+      type: apisix
+      sync_period: 10s
+      init_sync_delay: 5s
+      # 🔧 关键修复：添加 APISIX Admin API 配置
+      apisix:
+        admin_api_version: v3
+        admin_key: edd1c9f034335f136f87ad84b625c8f1
+        cluster_name: default
+        base_url: http://apisix-admin.apisix.svc.cluster.local:9180/apisix/admin
+    webhook:
+      enable: true
+      port: 9443
+      tls_cert_file: "tls.crt"
+      tls_key_file: "tls.key"
+      tls_cert_dir: "/certs"

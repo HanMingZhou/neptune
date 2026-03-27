@@ -1,0 +1,8 @@
+.git
+.gitignore
+.DS_Store
+*.md
+docs/
+Dockerfile
+.dockerignore
+config.dev.yaml

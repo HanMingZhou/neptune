@@ -1,0 +1,129 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: neptune-server-config
+  labels:
+    app: neptune-server
+    app.kubernetes.io/name: neptune-server
+    app.kubernetes.io/component: backend
+data:
+  config.yaml: |
+    # Neptune AI Platform - Kubernetes 环境配置
+
+    # jwt configuration
+    jwt:
+        signing-key: qmPlus
+        expires-time: 7d
+        buffer-time: 1d
+        issuer: qmPlus
+
+    # zap logger configuration
+    zap:
+        level: info
+        format: console
+        prefix: "[neptune-server]"
+        director: log
+        show-line: true
+        encode-level: LowercaseColorLevelEncoder
+        stacktrace-key: stacktrace
+        log-in-console: true
+        retention-day: -1
+
+    # redis configuration
+    redis:
+        useCluster: false
+        addr: neptune-redis:6379
+        password: ""
+        db: 0
+
+    # redis-list configuration
+    redis-list:
+        - name: cache
+          useCluster: false
+          addr: neptune-redis:6379
+          password: ""
+          db: 0
+
+    # system configuration
+    system:
+        env: public
+        addr: 8888
+        db-type: mysql
+        oss-type: local
+        use-redis: true
+        use-mongo: false
+        use-multipoint: true
+        iplimit-count: 15000
+        iplimit-time: 3600
+        router-prefix: "aiInfra"
+        use-strict-auth: false
+
+    # captcha configuration
+    captcha:
+        key-long: 6
+        img-width: 240
+        img-height: 80
+        open-captcha: 0
+        open-captcha-timeout: 3600
+
+    # mysql connect configuration
+    mysql:
+        path: neptune-mysql
+        port: "3306"
+        config: "charset=utf8mb4&parseTime=True&loc=Local"
+        db-name: "aiInfra"
+        username: "root"
+        password: "123456"
+        max-idle-conns: 10
+        max-open-conns: 100
+        log-mode: ""
+        log-zap: false
+
+    # local configuration
+    local:
+        path: uploads/file
+        store-path: uploads/file
+
+    # autocode configuration
+    autocode:
+        web: web/src
+        root: ""
+        server: server
+        module: 'github.com/flipped-aurora/gin-vue-admin/server'
+        ai-path: ""
+
+    # excel configuration
+    excel:
+        dir: ./resource/excel/
+
+    # disk usage configuration
+    disk-list:
+        - mount-point: "/"
+
+    # cors configuration
+    cors:
+        mode: allow-all
+
+    # mcp configuration
+    mcp:
+        name: GVA_MCP
+        version: v1.0.0
+        sse_path: /sse
+        message_path: /message
+        url_prefix: ''
+        addr: 8889
+        separate: false
+
+    # apisix configuration
+    apisix:
+        enabled: true
+        base-domain: "neptune.local"
+        gateway-namespace: "apisix"
+        auth-enabled: true
+        auth-uri: "http://neptune-server.neptune.svc.cluster.local:8888/aiInfra/api/v1/apisix/auth"
+        http-port: 8888
+
+    # sshpiper configuration
+    sshpiper:
+        host: "sshpiper.neptune.svc.cluster.local"
+        port: 22

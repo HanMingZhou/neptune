@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: neptune-web
+  labels:
+    app: neptune-web
+    app.kubernetes.io/name: neptune-web
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/version: "1.0.0"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: neptune-web
+  template:
+    metadata:
+      labels:
+        app: neptune-web
+        app.kubernetes.io/name: neptune-web
+        app.kubernetes.io/component: frontend
+    spec:
+      containers:
+        - name: neptune-web
+          # 请替换为您实际的镜像仓库地址
+          image: your-registry.com/neptune/web:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            failureThreshold: 3
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d/
+      # imagePullSecrets:
+      #   - name: your-registry-secret
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: neptune-web-nginx-config

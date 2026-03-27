@@ -1,0 +1,95 @@
+package system
+
+import (
+	common "gin-vue-admin/model/common/request"
+	"gin-vue-admin/model/common/response"
+	"gin-vue-admin/model/system/request"
+	"gin-vue-admin/utils"
+	"strings"
+
+	"github.com/gin-gonic/gin"
+)
+
+type AutoCodePackageApi struct{}
+
+// Create
+// @Tags      AutoCodePackage
+// @Summary   创建package
+// @Security  ApiKeyAuth
+// @accept    application/json
+// @Produce   application/json
+// @Param     data  body      request.SysAutoCodePackageCreate                                         true  "创建package"
+// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "创建package成功"
+// @Router    /autoCode/createPackage [post]
+func (a *AutoCodePackageApi) Create(c *gin.Context) {
+	var info request.SysAutoCodePackageCreate
+	_ = c.ShouldBindJSON(&info)
+	if err := utils.Verify(info, utils.AutoPackageVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	if strings.Contains(info.PackageName, "\\") || strings.Contains(info.PackageName, "/") || strings.Contains(info.PackageName, "..") {
+		response.FailWithMessage("包名不合法", c)
+		return
+	} // PackageName可能导致路径穿越的问题 / 和 \ 都要防止
+	err := autoCodePackageService.Create(c.Request.Context(), &info)
+	if err != nil {
+		utils.HandleError(c, err, "创建失败")
+		return
+	}
+	response.OkWithMessage("创建成功", c)
+}
+
+// Delete
+// @Tags      AutoCode
+// @Summary   删除package
+// @Security  ApiKeyAuth
+// @accept    application/json
+// @Produce   application/json
+// @Param     data  body      common.GetById                                         true  "创建package"
+// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "删除package成功"
+// @Router    /autoCode/delPackage [post]
+func (a *AutoCodePackageApi) Delete(c *gin.Context) {
+	var info common.GetById
+	_ = c.ShouldBindJSON(&info)
+	err := autoCodePackageService.Delete(c.Request.Context(), info)
+	if err != nil {
+		utils.HandleError(c, err, "删除失败")
+		return
+	}
+	response.OkWithMessage("删除成功", c)
+}
+
+// All
+// @Tags      AutoCodePackage
+// @Summary   获取package
+// @Security  ApiKeyAuth
+// @accept    application/json
+// @Produce   application/json
+// @Success   200  {object}  response.Response{data=map[string]interface{},msg=string}  "创建package成功"
+// @Router    /autoCode/getPackage [post]
+func (a *AutoCodePackageApi) All(c *gin.Context) {
+	data, err := autoCodePackageService.All(c.Request.Context())
+	if err != nil {
+		utils.HandleError(c, err, "获取失败")
+		return
+	}
+	response.OkWithDetailed(gin.H{"pkgs": data}, "获取成功", c)
+}
+
+// Templates
+// @Tags      AutoCodePackage
+// @Summary   获取package
+// @Security  ApiKeyAuth
+// @accept    application/json
+// @Produce   application/json
+// @Success   200  {object}  response.Response{data=map[string]interface{},msg=string}  "创建package成功"
+// @Router    /autoCode/getTemplates [get]
+func (a *AutoCodePackageApi) Templates(c *gin.Context) {
+	data, err := autoCodePackageService.Templates(c.Request.Context())
+	if err != nil {
+		utils.HandleError(c, err, "获取失败")
+		return
+	}
+	response.OkWithDetailed(data, "获取成功", c)
+}

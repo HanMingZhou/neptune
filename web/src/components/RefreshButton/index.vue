@@ -1,0 +1,56 @@
+<template>
+  <button 
+    @click="handleManualRefresh" 
+    class="size-[42px] flex items-center justify-center bg-white dark:bg-zinc-800 border border-border-light dark:border-border-dark rounded-lg text-slate-400 hover:text-primary transition-colors shadow-sm disabled:opacity-50"
+    :disabled="loading"
+    :title="t('refresh')"
+  >
+    <span class="material-icons" :class="{ 'animate-spin': loading }">refresh</span>
+  </button>
+</template>
+
+<script setup>
+import { onMounted, onUnmounted, inject } from 'vue'
+import { REFRESH_INTERVAL } from '@/utils/constants'
+
+const props = defineProps({
+  loading: Boolean
+})
+
+const emit = defineEmits(['refresh'])
+const t = inject('t')
+
+let timer = null
+
+const handleManualRefresh = () => {
+  emit('refresh', false) // false means NOT silent
+}
+
+const startTimer = () => {
+  if (timer) clearInterval(timer)
+  timer = setInterval(() => {
+    if (!props.loading) {
+      emit('refresh', true) // true means silent
+    }
+  }, REFRESH_INTERVAL)
+}
+
+onMounted(() => {
+  startTimer()
+})
+
+onUnmounted(() => {
+  if (timer) clearInterval(timer)
+})
+</script>
+
+<style scoped>
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+</style>

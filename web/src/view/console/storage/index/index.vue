@@ -1,0 +1,80 @@
+<template>
+  <div class="max-w-[1400px] mx-auto space-y-6">
+    <StorageManagementHeader
+      :loading="loading"
+      @create="openCreateDialog"
+      @refresh="fetchList"
+    />
+
+    <StorageTableCard
+      v-model:page="pageInfo.page"
+      v-model:search-name="searchName"
+      v-model:search-status="searchStatus"
+      :btn-loading="btnLoading"
+      :items="volumeList"
+      :loading="loading"
+      :total="total"
+      @create="openCreateDialog"
+      @delete="handleDelete"
+      @expand="openExpandDialog"
+      @refresh="fetchList"
+    />
+
+    <StorageDialogsHost
+      :cluster-options="clusterOptions"
+      :create-form="createForm"
+      :creating="creating"
+      :expand-form="expandForm"
+      :expanding="expanding"
+      :show-create-dialog="showCreateDialog"
+      :show-expand-dialog="showExpandDialog"
+      :storage-products="storageProducts"
+      @cluster-change="onClusterChange"
+      @submit-create="handleCreate"
+      @submit-expand="handleExpand"
+      @update:create-visible="showCreateDialog = $event"
+      @update:expand-visible="showExpandDialog = $event"
+    />
+  </div>
+</template>
+
+<script setup>
+import { inject, onMounted } from 'vue'
+import StorageDialogsHost from './components/StorageDialogsHost.vue'
+import StorageManagementHeader from './components/StorageManagementHeader.vue'
+import StorageTableCard from './components/StorageTableCard.vue'
+import { useStorageList } from './composables/useStorageList'
+
+const t = inject('t', (key) => key)
+
+const {
+  btnLoading,
+  clusterOptions,
+  createForm,
+  creating,
+  expanding,
+  expandForm,
+  fetchAreas,
+  fetchList,
+  handleCreate,
+  handleDelete,
+  handleExpand,
+  loading,
+  onClusterChange,
+  openCreateDialog,
+  openExpandDialog,
+  pageInfo,
+  searchName,
+  searchStatus,
+  showCreateDialog,
+  showExpandDialog,
+  storageProducts,
+  total,
+  volumeList
+} = useStorageList({ t })
+
+onMounted(() => {
+  fetchList()
+  fetchAreas()
+})
+</script>

@@ -1,0 +1,146 @@
+# ⚠️ 警告：此文件是参考模板，请勿直接 kubectl apply！
+# ========================================================
+# 
+# APISIX Stream Proxy 配置模板 - 用于 SSH 流量转发
+#
+# 原因：
+# 1. ConfigMap 部分会 **完全覆盖** 现有 APISIX 配置，导致丢失 Helm 安装时的其他配置
+# 2. Service 的 selector 可能与你的集群不匹配
+#
+# 正确做法：
+# 1. ConfigMap: 使用 kubectl edit configmap apisix -n apisix，仅添加 stream_proxy 相关配置
+# 2. Service: 使用 kubectl edit svc apisix-gateway -n apisix，仅添加 SSH 端口
+#
+# 或使用 kubectl patch 命令：
+# kubectl patch svc apisix-gateway -n apisix --type='json' -p='[{"op":"add","path":"/spec/ports/-","value":{"name":"ssh","port":22,"targetPort":9100,"protocol":"TCP"}}]'
+#
+# 应用后需要重启 APISIX: kubectl rollout restart deployment apisix -n apisix
+#
+---
+# 1. 更新 APISIX ConfigMap，启用 stream_proxy
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apisix
+  namespace: apisix
+  labels:
+    app.kubernetes.io/name: apisix
+data:
+  config.yaml: |
+    apisix:
+      node_listen:
+        - 9080
+      enable_admin: true
+      enable_admin_cors: true
+      enable_control: true
+      control:
+        ip: 0.0.0.0
+        port: 9090
+
+      # ⭐ 关键配置：启用 HTTP 和 Stream 双模式
+      proxy_mode: http&stream
+      stream_proxy:
+        only: false
+        tcp:
+          - addr: 9100      # APISIX 内部 Stream 监听端口
+            tls: false
+
+    # Admin API 配置
+    deployment:
+      admin:
+        allow_admin:
+          - 0.0.0.0/0
+        admin_listen:
+          ip: 0.0.0.0
+          port: 9180
+        admin_key:
+          - name: admin
+            key: edd1c9f034335f136f87ad84b625c8f1
+            role: admin
+
+    # etcd 配置
+    etcd:
+      host:
+        - http://apisix-etcd:2379
+      prefix: /apisix
+      timeout: 30
+
+    # 插件配置
+    plugins:
+      - real-ip
+      - client-control
+      - proxy-control
+      - request-id
+      - cors
+      - ip-restriction
+      - uri-blocker
+      - request-validation
+      - proxy-mirror
+      - proxy-cache
+      - proxy-rewrite
+      - api-breaker
+      - limit-conn
+      - limit-count
+      - limit-req
+      - basic-auth
+      - key-auth
+      - jwt-auth
+      - consumer-restriction
+      - response-rewrite
+      - redirect
+      - echo
+      - serverless-pre-function
+      - serverless-post-function
+      - example-plugin
+      - prometheus
+      - http-logger
+      - syslog
+
+---
+# 2. 更新 APISIX Gateway Service，暴露 SSH 端口
+# 注意：如果使用 Helm 安装，Service 可能由 Helm 管理，直接 apply 可能会被覆盖
+# 建议使用 kubectl patch 命令或手动 kubectl edit
+apiVersion: v1
+kind: Service
+metadata:
+  name: apisix-gateway
+  namespace: apisix
+  labels:
+    app.kubernetes.io/name: apisix
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: 9080
+      protocol: TCP
+    - name: https
+      port: 443
+      targetPort: 9443
+      protocol: TCP
+    # ⭐ SSH 端口映射
+    - name: ssh
+      port: 22              # 对外暴露的标准 SSH 端口
+      targetPort: 9100      # APISIX 内部 stream_proxy 监听端口
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: apisix
+
+---
+# 3. ApisixRoute Stream 路由 - 将 SSH 流量转发到 SSHPiper
+# 此 CRD 由应用程序自动创建，这里仅作参考
+# apiVersion: apisix.apache.org/v2
+# kind: ApisixRoute
+# metadata:
+#   name: stream-sshpiper
+#   namespace: kubeflow
+# spec:
+#   ingressClassName: apisix
+#   stream:
+#     - name: tcp-access
+#       protocol: TCP
+#       match:
+#         ingressPort: 9100    # 必须匹配 APISIX 内部 Stream Proxy 的监听端口 (9100) 而不是 22!
+#       backend:
+#         serviceName: sshpiper
+#         servicePort: 22
