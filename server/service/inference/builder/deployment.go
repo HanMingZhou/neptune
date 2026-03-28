@@ -33,6 +33,7 @@ func (b *BaseInferenceBuilder) BuildDeployment(spec *InferenceSpec) (*appsv1.Dep
 	volumeMounts = append(volumeMounts, spec.UserVolumeMounts...)
 
 	replicas := int32(1)
+	affinity := helper.BuildSchedulingAffinity(spec.InstanceName, spec.AllowedNodes, spec.StrictSpread)
 
 	// Pod 标签：包含 Informer 识别所需的 instance-type 和 job-id，
 	// 同时保持与 K8s Service selector 的兼容
@@ -115,6 +116,7 @@ func (b *BaseInferenceBuilder) BuildDeployment(spec *InferenceSpec) (*appsv1.Dep
 					},
 					Volumes:     volumes,
 					Tolerations: tolerations,
+					Affinity:    affinity,
 				},
 			},
 		},

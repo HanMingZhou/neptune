@@ -61,9 +61,9 @@
       <el-form :model="form" label-position="top">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <el-form-item :label="t('inference.workerCount')" required>
-            <div class="flex items-center">
+            <div class="create-form-stepper">
               <button
-                class="w-9 h-9 border border-border-light dark:border-border-dark rounded-l-lg hover:bg-slate-50 dark:hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                class="create-form-stepper__button"
                 type="button"
                 @click="$emit('update:field', { key: 'workerCount', value: Math.max(2, form.workerCount - 1) })"
               >
@@ -71,8 +71,8 @@
               </button>
               <input
                 :value="form.workerCount"
-                class="w-16 h-9 text-center border-y border-border-light dark:border-border-dark bg-white dark:bg-zinc-800 outline-none"
-                min="1"
+                class="create-form-stepper__input"
+                min="2"
                 type="number"
                 @input="$emit('update:field', { key: 'workerCount', value: Number($event.target.value) || 2 })"
               />
@@ -85,6 +85,16 @@
               </button>
             </div>
           </el-form-item>
+          <el-form-item label="调度策略" required>
+            <el-select
+              :model-value="form.scheduleStrategy"
+              class="w-full"
+              @update:model-value="$emit('update:field', { key: 'scheduleStrategy', value: $event || 'BALANCED' })"
+            >
+              <el-option label="智能均衡（默认）" value="BALANCED" />
+              <el-option label="严格分布式（节点不足则失败）" value="STRICT" />
+            </el-select>
+          </el-form-item>
           <el-form-item :label="t('inference.autoRestart')">
             <div class="flex items-center gap-4">
               <el-switch
@@ -93,9 +103,9 @@
               />
               <template v-if="form.autoRestart">
                 <span class="text-xs text-slate-500">{{ t('inference.maxRestarts') }}</span>
-                <div class="flex items-center">
+                <div class="create-form-stepper">
                   <button
-                    class="w-8 h-8 border border-border-light dark:border-border-dark rounded-l-lg hover:bg-slate-50 dark:hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                    class="create-form-stepper__button"
                     type="button"
                     @click="$emit('update:field', { key: 'maxRestarts', value: Math.max(1, form.maxRestarts - 1) })"
                   >
@@ -103,7 +113,7 @@
                   </button>
                   <input
                     :value="form.maxRestarts"
-                    class="w-12 h-8 text-center border-y border-border-light dark:border-border-dark bg-white dark:bg-zinc-800 outline-none text-sm"
+                    class="create-form-stepper__input"
                     max="10"
                     min="1"
                     type="number"

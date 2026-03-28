@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="sticky top-0.5 z-10">
-      <el-input v-model="filterText" class="w-3/5" :placeholder="t('filter')" />
-      <el-button class="float-right" type="primary" @click="relation"
-        >{{ t('confirm') }}</el-button
-      >
+      <div class="flex flex-wrap items-center gap-3">
+        <el-input v-model="filterText" class="min-w-[220px] flex-1" :placeholder="t('filter')" />
+        <el-button class="shrink-0" type="primary" @click="relation">{{ t('confirm') }}</el-button>
+      </div>
     </div>
-    <div class="tree-content clear-both">
+    <div class="tree-content pt-3">
       <el-scrollbar>
         <el-tree
           ref="menuTree"
@@ -21,27 +21,38 @@
           @check="nodeChange"
         >
           <template #default="{ node, data }">
-            <span class="custom-tree-node">
-              <span>{{ node.label }}</span>
-              <span v-if="node.checked && !data.name?.startsWith('http://') && !data.name?.startsWith('https://')">
-                <el-button
-                  type="primary"
-                  link
-                  :style="{
-                    color:
-                      row.defaultRouter === data.name ? '#E6A23C' : '#85ce61'
-                  }"
-                  @click.stop="() => setDefault(data)"
+            <div class="custom-tree-node">
+              <span class="custom-tree-node__label">{{ node.label }}</span>
+              <div v-if="shouldShowActions(node, data)" class="custom-tree-node__actions">
+                <el-tag
+                  v-if="isDefaultRoute(data)"
+                  effect="plain"
+                  round
+                  size="small"
+                  type="warning"
                 >
-                  {{ row.defaultRouter === data.name ? t('homePage') : t('setHomePage') }}
-                </el-button>
-              </span>
-              <span v-if="data.menuBtn.length">
-                <el-button type="primary" link @click.stop="() => OpenBtn(data)">
+                  {{ t('homePage') }}
+                </el-tag>
+                <el-link
+                  v-else-if="canSetDefaultRoute(node, data)"
+                  :underline="false"
+                  class="custom-tree-node__link"
+                  type="primary"
+                  @click.stop="setDefault(data)"
+                >
+                  {{ t('setHomePage') }}
+                </el-link>
+                <el-link
+                  v-if="hasMenuButtons(data)"
+                  :underline="false"
+                  class="custom-tree-node__link"
+                  type="primary"
+                  @click.stop="OpenBtn(data)"
+                >
                   {{ t('assignBtn') }}
-                </el-button>
-              </span>
-            </span>
+                </el-link>
+              </div>
+            </div>
           </template>
         </el-tree>
       </el-scrollbar>
@@ -138,6 +149,35 @@
       emit('changeRow', 'defaultRouter', res.data.authority.defaultRouter)
     }
   }
+
+  const isExternalRoute = (data) => {
+    const name = String(data?.name || '')
+    return name.startsWith('http://') || name.startsWith('https://')
+  }
+
+  const isLeafMenu = (data) => !Array.isArray(data?.children) || data.children.length === 0
+
+  const hasMenuButtons = (data) => Array.isArray(data?.menuBtn) && data.menuBtn.length > 0
+
+  const isDefaultRoute = (data) => props.row.defaultRouter === data?.name
+
+  const canSetDefaultRoute = (node, data) => {
+    if (!node?.checked) {
+      return false
+    }
+    if (!data?.name || data.hidden) {
+      return false
+    }
+    return isLeafMenu(data) && !isExternalRoute(data) && !isDefaultRoute(data)
+  }
+
+  const shouldShowActions = (node, data) => {
+    if (hasMenuButtons(data)) {
+      return true
+    }
+    return canSetDefaultRoute(node, data) || isDefaultRoute(data)
+  }
+
   const nodeChange = () => {
     needConfirm.value = true
   }
@@ -228,8 +268,18 @@
 
 <style scoped>
   .custom-tree-node {
-    span + span {
-      @apply ml-3;
-    }
+    @apply flex w-full items-center gap-3 pr-3;
+  }
+
+  .custom-tree-node__label {
+    @apply min-w-0 flex-1 truncate;
+  }
+
+  .custom-tree-node__actions {
+    @apply flex shrink-0 items-center gap-3;
+  }
+
+  .custom-tree-node__link {
+    @apply text-xs font-medium;
   }
 </style>

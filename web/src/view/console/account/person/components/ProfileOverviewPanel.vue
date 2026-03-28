@@ -4,42 +4,61 @@
       :edit-flag="editFlag"
       :nick-name="nickName"
       :user-info="userInfo"
+      @change-email="emit('change-email')"
+      @change-password="emit('change-password')"
+      @change-phone="emit('change-phone')"
       @close-edit="emit('close-edit')"
       @confirm-edit="emit('confirm-edit')"
       @open-edit="emit('open-edit')"
       @update:nick-name="emit('update:nick-name', $event)"
     />
 
-    <div class="grid lg:grid-cols-12 md:grid-cols-1 gap-8">
-      <div class="lg:col-span-4">
-        <BasicInfoCard
-          :user-info="userInfo"
-          @change-email="emit('change-email')"
-          @change-password="emit('change-password')"
-          @change-phone="emit('change-phone')"
-        />
+    <section class="surface-card detail-surface">
+      <header class="detail-header">
+        <div class="space-y-3">
+          <p class="section-kicker">{{ t('accountOverview') }}</p>
+          <h2 class="text-3xl font-semibold tracking-tight text-slate-950">
+            {{ t('person') }}
+          </h2>
+          <p class="max-w-3xl text-sm leading-7 text-slate-500">
+            {{ t('profileCenterDesc') }}
+          </p>
+        </div>
+      </header>
 
-        <SkillsCard :skills="skills" />
-      </div>
+      <div class="detail-list">
+        <article
+          v-for="item in overviewItems"
+          :key="item.key"
+          class="detail-row"
+        >
+          <div class="detail-main">
+            <div class="info-icon">
+              <el-icon><component :is="item.icon" /></el-icon>
+            </div>
+            <div class="detail-copy">
+              <p class="detail-label">{{ item.label }}</p>
+              <p class="detail-value">{{ item.value }}</p>
+              <p class="detail-note">{{ item.description }}</p>
+            </div>
+          </div>
 
-      <div class="lg:col-span-8">
-        <ProfileStatsTabs :activities="activities" :stats="stats" />
+          <el-button class="action-link" @click="item.action()">
+            {{ t('edit') }}
+          </el-button>
+        </article>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script setup>
-import BasicInfoCard from './BasicInfoCard.vue'
-import ProfileHero from './ProfileHero.vue'
-import ProfileStatsTabs from './ProfileStatsTabs.vue'
-import SkillsCard from './SkillsCard.vue'
+import { computed, inject } from 'vue'
+import { Key, Message, Phone, User } from '@element-plus/icons-vue'
 
-defineProps({
-  activities: {
-    type: Array,
-    default: () => []
-  },
+import ProfileHero from './ProfileHero.vue'
+
+const props = defineProps({
   editFlag: {
     type: Boolean,
     default: false
@@ -47,14 +66,6 @@ defineProps({
   nickName: {
     type: String,
     default: ''
-  },
-  skills: {
-    type: Array,
-    default: () => []
-  },
-  stats: {
-    type: Array,
-    default: () => []
   },
   userInfo: {
     type: Object,
@@ -71,56 +82,164 @@ const emit = defineEmits([
   'open-edit',
   'update:nick-name'
 ])
+
+const t = inject('t', (key) => key)
+
+const overviewItems = computed(() => [
+  {
+    key: 'nickname',
+    icon: User,
+    label: t('nickname'),
+    value: props.userInfo.nickName || t('nicknameEmpty'),
+    description: t('nicknameUpdateHint'),
+    action: () => emit('open-edit')
+  },
+  {
+    key: 'phone',
+    icon: Phone,
+    label: t('phoneLabel'),
+    value: props.userInfo.phone || t('notSet'),
+    description: t(props.userInfo.phone ? 'phoneReadyHint' : 'phonePendingHint'),
+    action: () => emit('change-phone')
+  },
+  {
+    key: 'email',
+    icon: Message,
+    label: t('emailLabel'),
+    value: props.userInfo.email || t('notSet'),
+    description: t(props.userInfo.email ? 'emailReadyHint' : 'emailPendingHint'),
+    action: () => emit('change-email')
+  },
+  {
+    key: 'password',
+    icon: Key,
+    label: t('changePasswordTitle'),
+    value: t('isSet'),
+    description: t('passwordReadyHint'),
+    action: () => emit('change-password')
+  }
+])
 </script>
 
-<style>
+<style scoped>
 .profile-container {
-  @apply p-4 lg:p-6 min-h-screen bg-gray-50 dark:bg-slate-900;
+  padding: 16px;
+  background: #f8fafc;
+}
 
-  .bg-pattern {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+.surface-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  background: #ffffff;
+  padding: 24px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+}
+
+.detail-surface {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.detail-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.detail-list {
+  border-top: 1px solid #e2e8f0;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.detail-main {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.detail-copy {
+  min-width: 0;
+}
+
+.detail-label {
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.detail-value {
+  font-size: 19px;
+  font-weight: 600;
+  color: #0f172a;
+  word-break: break-word;
+}
+
+.detail-note {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #64748b;
+}
+
+.section-kicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.info-icon {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: #f8fafc;
+  color: #475569;
+}
+
+.action-link {
+  flex-shrink: 0;
+  border-radius: 9999px;
+  border-color: #dbe2ea;
+  color: #0f172a;
+}
+
+@media (min-width: 1024px) {
+  .profile-container {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .surface-card {
+    padding: 18px;
+    border-radius: 20px;
   }
 
-  .profile-card {
-    @apply shadow-sm hover:shadow-md transition-shadow duration-300;
+  .detail-row {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .stat-card {
-    @apply p-4 lg:p-6 rounded-lg bg-gray-50 dark:bg-slate-700/50 text-center hover:shadow-md transition-all duration-300;
-  }
-
-  .custom-tabs {
-    :deep(.el-tabs__nav-wrap::after) {
-      @apply h-0.5 bg-gray-100 dark:bg-gray-700;
-    }
-
-    :deep(.el-tabs__active-bar) {
-      @apply h-0.5 bg-blue-500;
-    }
-
-    :deep(.el-tabs__item) {
-      @apply text-base font-medium px-6;
-
-      .el-icon {
-        @apply mr-1 text-lg;
-      }
-
-      &.is-active {
-        @apply text-blue-500;
-      }
-    }
-
-    :deep(.el-timeline-item__node--normal) {
-      @apply left-[-2px];
-    }
-
-    :deep(.el-timeline-item__wrapper) {
-      @apply pl-8;
-    }
-
-    :deep(.el-timeline-item__timestamp) {
-      @apply text-gray-400 text-sm;
-    }
+  .action-link {
+    width: fit-content;
   }
 }
 </style>

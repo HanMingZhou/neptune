@@ -3,6 +3,7 @@ package builder
 import (
 	"gin-vue-admin/model/consts"
 	trainingReq "gin-vue-admin/model/training/request"
+	helper "gin-vue-admin/utils/k8s"
 
 	corev1 "k8s.io/api/core/v1"
 	vcbatch "volcano.sh/apis/pkg/apis/batch/v1alpha1"
@@ -33,6 +34,7 @@ func (s *PyTorchDDPStrategy) BuildTasks(spec *trainingReq.TrainingJobSpec) ([]vc
 	// 构建容器资源（所有节点使用相同的产品规格）
 	nodeResources := buildResources(&spec.Product)
 	baseEnvs := s.buildEnvVars(spec)
+	affinity := helper.BuildSchedulingAffinity(spec.Name, spec.AllowedNodes, spec.StrictSpread)
 
 	tasks := []vcbatch.TaskSpec{}
 
@@ -50,6 +52,8 @@ func (s *PyTorchDDPStrategy) BuildTasks(spec *trainingReq.TrainingJobSpec) ([]vc
 			envs:          baseEnvs,
 			volumes:       spec.Volumes,
 			tolerations:   tolerations,
+			labels:        spec.Labels,
+			affinity:      affinity,
 		}),
 	}
 	tasks = append(tasks, masterTask)
@@ -69,6 +73,8 @@ func (s *PyTorchDDPStrategy) BuildTasks(spec *trainingReq.TrainingJobSpec) ([]vc
 				envs:          baseEnvs,
 				volumes:       spec.Volumes,
 				tolerations:   tolerations,
+				labels:        spec.Labels,
+				affinity:      affinity,
 			}),
 		}
 		tasks = append(tasks, workerTask)

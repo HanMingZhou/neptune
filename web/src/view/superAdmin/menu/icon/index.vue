@@ -8,9 +8,7 @@
       class="w-full"
     >
       <template #prefix>
-        <el-icon>
-          <component v-if="value" :is="value" />
-        </el-icon>
+        <AppIcon v-if="value" :name="value" />
       </template>
       <el-option
         v-for="item in iconOptions"
@@ -20,9 +18,7 @@
         :value="item.key"
       >
         <span class="gva-icon" style="padding: 3px 0 0" :class="item.label">
-          <el-icon>
-            <component v-if="item.label" :is="item.label" />
-          </el-icon>
+          <AppIcon v-if="item.label" :name="item.label" />
         </span>
         <span style="text-align: left">{{ item.key }}</span>
       </el-option>
@@ -32,6 +28,7 @@
 
 <script setup>
 import { inject } from 'vue'
+import AppIcon from '@/components/AppIcon.vue'
 import { useMenuIconOptions } from './composables/useMenuIconOptions'
 
 defineOptions({

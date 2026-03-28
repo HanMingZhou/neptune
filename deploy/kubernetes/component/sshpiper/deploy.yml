@@ -38,7 +38,7 @@ metadata:
   name: sshpiper
   namespace: kubeflow
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
       - name: ssh
         port: 22          # 对外暴露的标准 SSH 端口 (用户可以直接 ssh user@lb-ip)
@@ -72,7 +72,7 @@ spec:
         runAsGroup: 0
       containers:
         - name: sshpiper
-          image: farmer1992/sshpiperd:latest
+          image: farmer1992/sshpiperd:v1.5.3
           command: ["/sshpiperd/sshpiperd"]
           args: ["/sshpiperd/plugins/kubernetes", "--all-namespaces"]
           ports:
@@ -89,21 +89,3 @@ spec:
         - name: sshpiper-server-key
           secret:
             secretName: sshpiper-server-key
-
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: sshpiper-server-key
-  namespace: kubeflow
-type: Opaque
-stringData:
-  server_key: |
-    -----BEGIN OPENSSH PRIVATE KEY-----
-    b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
-    QyNTUxOQAAACDbGHRrU40eDjSMHFgLwF4nGwLi5gegvSlwHEKWTagdaQAAAKiT1y6qk9cu
-    qgAAAAtzc2gtZWQyNTUxOQAAACDbGHRrU40eDjSMHFgLwF4nGwLi5gegvSlwHEKWTagdaQ
-    AAAEA9607plh/RvCLpfPnTC4L7jGewpna82Z2+qmTb8ADaetsYdGtTjR4ONIwcWAvAXicb
-    AuLmB6C9KXAcQpZNqB1pAAAAH2plcnJ5dG9tQGplcnJ5TWFjQm9vay1Qcm8ubG9jYWwBAg
-    MEBQY=
-    -----END OPENSSH PRIVATE KEY-----

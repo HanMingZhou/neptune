@@ -27,7 +27,7 @@
       <input
         :value="volumeMountPath"
         :placeholder="t('enterMountPath')"
-        class="w-full px-4 py-2 border border-border-light dark:border-border-dark rounded-lg text-sm bg-white dark:bg-zinc-800 focus:ring-1 focus:ring-primary outline-none"
+        class="create-form-input"
         type="text"
         @input="$emit('update:volumeMountPath', $event.target.value)"
       />

@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: neptune-web-nginx-config
+  namespace: neptune
   labels:
     app: neptune-web
     app.kubernetes.io/name: neptune-web
@@ -9,7 +10,7 @@ metadata:
 data:
   default.conf: |
     server {
-        listen 80;
+        listen 8080;
         server_name _;
 
         root /usr/share/nginx/html;
@@ -28,7 +29,7 @@ data:
 
         # API 反向代理 -> 后端服务
         location /aiInfra/ {
-            proxy_pass http://neptune-server:8888/aiInfra/;
+            proxy_pass http://neptune-server.neptune.svc.cluster.local:8888/aiInfra/;
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

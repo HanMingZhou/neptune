@@ -1,16 +1,6 @@
 import { computed, ref } from 'vue'
 import { useUserStore } from '@/pinia/modules/user'
 
-const menuItems = [
-  { text: 'Guide', icon: 'Rocket' },
-  { text: '著作权', icon: 'Collection' },
-  { text: '捐赠', icon: 'Present' },
-  { text: '购买授权', icon: 'Money' },
-  { text: '插件市场', icon: 'MagicStick' },
-  { text: '体验项目', icon: 'Connection' },
-  { text: '关于我们', icon: 'InfoFilled' }
-]
-
 const heroStats = [
   { label: '高性能 GPU', value: 'H800' },
   { label: '环境启动', value: '秒级' },
@@ -66,7 +56,6 @@ export function useLandingPage() {
     initialize,
     isDark,
     isLoggedIn,
-    menuItems,
     toggleTheme
   }
 }

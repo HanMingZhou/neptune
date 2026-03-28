@@ -8,15 +8,18 @@ import (
 
 // CreateTrainingJobReq 创建训练任务请求
 type CreateTrainingJobReq struct {
-	Name           string                      `json:"name"`                              // 任务名称
-	Namespace      string                      `json:"namespace"`                         // 命名空间（可选，默认使用用户namespace）
-	FrameworkType  string                      `json:"frameworkType" binding:"required"`  // 框架类型
-	ImageId        uint                        `json:"imageId" binding:"required"`        // 镜像ID
-	StartupCommand string                      `json:"startupCommand" binding:"required"` // 启动命令
-	WorkerCount    int64                       `json:"workerCount"`                       // Worker数量（DDP/MPI模式必填）
-	ResourceId     uint                        `json:"resourceId"`                        // 产品ID
-	Mounts         []CreateTrainingJobMountReq `json:"mounts"`                            // 挂载配置
-	Envs           []CreateTrainingJobEnvReq   `json:"envs"`                              // 环境变量
+	Name              string                      `json:"name"`                              // 任务名称
+	Namespace         string                      `json:"namespace"`                         // 命名空间（可选，默认使用用户namespace）
+	FrameworkType     string                      `json:"frameworkType" binding:"required"`  // 框架类型
+	ImageId           uint                        `json:"imageId" binding:"required"`        // 镜像ID
+	StartupCommand    string                      `json:"startupCommand" binding:"required"` // 启动命令
+	WorkerCount       int64                       `json:"workerCount"`                       // 兼容旧字段：实例数量
+	InstanceCount     int64                       `json:"instanceCount"`                     // 新字段：实例数量
+	ResourceId        uint                        `json:"resourceId"`                        // 兼容旧字段：产品ID
+	TemplateProductId uint                        `json:"templateProductId"`                 // 新字段：模板商品ID
+	ScheduleStrategy  string                      `json:"scheduleStrategy"`                  // 调度策略
+	Mounts            []CreateTrainingJobMountReq `json:"mounts"`                            // 挂载配置
+	Envs              []CreateTrainingJobEnvReq   `json:"envs"`                              // 环境变量
 	// TensorBoard 配置
 	EnableTensorboard  bool   `json:"enableTensorboard"`  // 是否启用TensorBoard
 	TensorboardLogPath string `json:"tensorboardLogPath"` // TensorBoard日志路径（可选，默认为/workspace/logs）
@@ -94,6 +97,8 @@ type TrainingJobSpec struct {
 	Command      []string             // 启动命令
 	Args         []string             // 命令参数
 	WorkerCount  int64                // Worker 数量
+	AllowedNodes []string             // 允许调度的节点集合
+	StrictSpread bool                 // 是否要求严格一节点一实例
 	Product      ProductSpec          // 产品规格（builder 根据此构建资源请求）
 	Volumes      []corev1.Volume      // 卷配置
 	VolumeMounts []corev1.VolumeMount // 卷挂载配置

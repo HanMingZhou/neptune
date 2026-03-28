@@ -7,13 +7,16 @@ import (
 	orderReq "gin-vue-admin/model/order/request"
 	orderResp "gin-vue-admin/model/order/response"
 	productModel "gin-vue-admin/model/product"
+	systemModel "gin-vue-admin/model/system"
 	"gin-vue-admin/utils/order"
+	"strings"
 	"time"
 
 	"github.com/pkg/errors"
 	"github.com/shopspring/decimal"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 // 表名常量
@@ -37,6 +40,7 @@ type OrderManager interface {
 	GetOrderOverview(ctx context.Context, userId uint) (*orderResp.OrderOverviewResp, error)
 	GetUsageList(ctx context.Context, userId uint, req orderReq.GetOrderUsageListReq) ([]orderResp.UnifiedUsageItem, int64, error)
 	GetTransactionList(ctx context.Context, userId uint, req orderReq.GetTransactionListReq) ([]orderResp.TransactionDetail, int64, error)
+	RechargeBalance(ctx context.Context, userId uint, authorityId uint, req orderReq.RechargeBalanceReq) (*orderResp.RechargeBalanceResp, error)
 	GetInvoiceList(ctx context.Context, userId uint, req orderReq.GetInvoiceListReq) ([]orderModel.Invoice, int64, error)
 	ApplyInvoice(ctx context.Context, userId uint, req orderReq.ApplyInvoiceReq) error
 }
@@ -742,6 +746,16 @@ func (s *OrderService) GetTransactionList(ctx context.Context, userId uint, req 
 		Joins("LEFT JOIN "+tableOrders+" "+aliasOrder+" ON "+aliasTx+".order_id = "+aliasOrder+".id").
 		Where(aliasTx+".user_id = ?", userId)
 
+	if keyword := strings.TrimSpace(req.Keyword); keyword != "" {
+		likeKeyword := "%" + keyword + "%"
+		db = db.Where(
+			aliasTx+".transaction_no LIKE ? OR "+aliasTx+".remark LIKE ? OR "+aliasOrder+".order_no LIKE ?",
+			likeKeyword,
+			likeKeyword,
+			likeKeyword,
+		)
+	}
+
 	if req.Type > 0 {
 		db = db.Where(aliasTx+".type = ?", req.Type)
 	}
@@ -794,6 +808,85 @@ func (s *OrderService) GetTransactionList(ctx context.Context, userId uint, req 
 	}
 
 	return list, total, nil
+}
+
+// RechargeBalance 余额充值
+func (s *OrderService) RechargeBalance(ctx context.Context, userId uint, authorityId uint, req orderReq.RechargeBalanceReq) (*orderResp.RechargeBalanceResp, error) {
+	if req.Amount <= 0 {
+		return nil, errors.New("充值金额必须大于 0")
+	}
+
+	switch req.Method {
+	case orderModel.PayMethodAlipay, orderModel.PayMethodWechat:
+		return nil, errors.New("功能开发中")
+	case orderModel.PayMethodSystem:
+		if authorityId != systemModel.SysAuthorityId888 {
+			return nil, errors.New("当前角色无权使用平台代充值")
+		}
+	default:
+		return nil, errors.New("不支持的充值方式")
+	}
+
+	amountDec := decimal.NewFromFloat(req.Amount).Round(6)
+	amountFloat, _ := amountDec.Float64()
+	remark := strings.TrimSpace(req.Remark)
+	if remark == "" {
+		remark = "平台代充值"
+	}
+
+	var resp orderResp.RechargeBalanceResp
+	err := global.GVA_DB.Transaction(func(tx *gorm.DB) error {
+		var wallet orderModel.Wallet
+		if err := tx.Where("user_id = ?", userId).FirstOrCreate(&wallet, orderModel.Wallet{UserId: userId}).Error; err != nil {
+			return errors.Wrap(err, "初始化钱包失败")
+		}
+
+		if err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).Where("user_id = ?", userId).First(&wallet).Error; err != nil {
+			return errors.Wrap(err, "查询钱包失败")
+		}
+
+		balanceBefore := decimal.NewFromFloat(wallet.Balance)
+		balanceAfter := balanceBefore.Add(amountDec).Round(6)
+		balanceAfterFloat, _ := balanceAfter.Float64()
+		balanceBeforeFloat, _ := balanceBefore.Round(6).Float64()
+
+		if err := tx.Model(&orderModel.Wallet{}).
+			Where("id = ?", wallet.ID).
+			Updates(map[string]any{
+				"balance": balanceAfterFloat,
+				"version": gorm.Expr("version + 1"),
+			}).Error; err != nil {
+			return errors.Wrap(err, "更新钱包余额失败")
+		}
+
+		transaction := orderModel.Transaction{
+			TransactionNo: order.GenerateOrderNo(),
+			UserId:        userId,
+			Type:          orderModel.TransactionTypeRecharge,
+			Amount:        amountFloat,
+			BalanceBefore: balanceBeforeFloat,
+			BalanceAfter:  balanceAfterFloat,
+			Method:        req.Method,
+			Remark:        remark,
+			CreatedAt:     time.Now(),
+		}
+		if err := tx.Create(&transaction).Error; err != nil {
+			return errors.Wrap(err, "记录充值流水失败")
+		}
+
+		resp = orderResp.RechargeBalanceResp{
+			TransactionNo: transaction.TransactionNo,
+			Amount:        amountFloat,
+			Method:        req.Method,
+			Balance:       balanceAfterFloat,
+		}
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return &resp, nil
 }
 
 // GetInvoiceList 获取发票列表

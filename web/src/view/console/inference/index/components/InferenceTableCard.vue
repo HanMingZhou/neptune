@@ -48,18 +48,18 @@
       <table class="w-full">
         <thead>
           <tr class="bg-gray-50 dark:bg-zinc-900/50 border-b border-gray-100 dark:border-gray-800 text-slate-500 text-[11px] font-bold uppercase tracking-wider">
-            <th class="px-6 py-4">{{ t('name') }}</th>
-            <th class="px-6 py-4">{{ t('framework') }}</th>
-            <th class="px-6 py-4">{{ t('status') }}</th>
-            <th class="px-6 py-4">{{ t('gpu') }}</th>
-            <th class="px-6 py-4">{{ t('deployMode') }}</th>
-            <th class="px-6 py-4">{{ t('createdAt') }}</th>
-            <th class="px-6 py-4 text-center">{{ t('actions') }}</th>
+            <th class="px-6 py-3">{{ t('name') }}</th>
+            <th class="px-6 py-3">{{ t('framework') }}</th>
+            <th class="px-6 py-3">{{ t('status') }}</th>
+            <th class="px-6 py-3">{{ t('gpu') }}</th>
+            <th class="px-6 py-3">{{ t('deployMode') }}</th>
+            <th class="px-6 py-3">{{ t('createdAt') }}</th>
+            <th class="px-6 py-3 text-center">{{ t('actions') }}</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-100 dark:divide-border-dark text-[13px]">
           <tr v-if="loading">
-            <td colspan="7" class="px-6 py-12 text-center text-slate-400">
+            <td colspan="7" class="px-6 py-10 text-center text-slate-400">
               <div class="flex items-center justify-center gap-2">
                 <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
                 {{ t('loading') }}
@@ -67,7 +67,7 @@
             </td>
           </tr>
           <tr v-else-if="services.length === 0">
-            <td colspan="7" class="px-6 py-12 text-center text-slate-400">
+            <td colspan="7" class="px-6 py-10 text-center text-slate-400">
               <div class="space-y-4 flex flex-col items-center">
                 <span class="material-icons text-6xl text-slate-200 dark:text-zinc-700">rocket_launch</span>
                 <p>{{ t('noData') }}</p>
@@ -81,7 +81,7 @@
             :key="item.id"
             class="hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors group"
           >
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-3 text-center">
               <div class="flex flex-col gap-1 items-center">
                 <span class="font-bold text-primary hover:underline cursor-pointer text-sm" @click="$emit('detail', item)">
                   {{ item.displayName }}
@@ -98,13 +98,13 @@
                 </div>
               </div>
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-3 text-center">
               <span v-if="item.framework" :class="getFrameworkStyle(item.framework)" class="px-2.5 py-1 rounded-full text-[11px] font-bold border border-transparent">
                 {{ item.framework }}
               </span>
               <span v-else class="text-slate-400 text-[11px]">-</span>
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-3 text-center">
               <div class="flex justify-center">
                 <span :class="getStatusStyle(item.status)" class="px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center gap-1.5 border border-transparent">
                   <span v-if="item.status === 'RUNNING'" class="size-1.5 rounded-full animate-pulse bg-emerald-500"></span>
@@ -112,19 +112,19 @@
                 </span>
               </div>
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-3 text-center">
               <span v-if="item.gpu" class="bg-slate-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-[11px] font-mono font-bold">{{ item.gpu }} GPU</span>
               <span v-else class="text-slate-400 text-[11px]">CPU ONLY</span>
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-3 text-center">
               <span :class="getDeployTypeStyle(item.deployType)" class="px-2 py-0.5 rounded text-[11px] font-bold">
                 {{ item.deployType === 'STANDALONE' ? t('standalone') : t('distributed') }}
               </span>
             </td>
-            <td class="px-6 py-4 text-center text-slate-500 text-[12px] font-mono">
+            <td class="px-6 py-3 text-center text-slate-500 text-[12px] font-mono">
               {{ formatTime(item.createdAt) }}
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-3 text-center">
               <div class="flex justify-center gap-2 items-center">
                 <button class="bg-primary/10 hover:bg-primary/20 text-primary px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-1" @click="$emit('detail', item)">
                   <span class="material-icons text-[14px]">info</span>

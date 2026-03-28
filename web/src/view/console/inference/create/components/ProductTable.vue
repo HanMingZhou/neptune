@@ -11,7 +11,7 @@
         <thead>
           <tr class="bg-slate-50 dark:bg-zinc-800/50 border-b border-border-light dark:border-border-dark text-slate-500 text-xs font-bold uppercase tracking-wider">
             <th class="px-6 py-4 w-12"></th>
-            <th class="px-6 py-4">{{ t('hostId') }}</th>
+            <th class="px-6 py-4">{{ t('cluster') }}</th>
             <th class="px-6 py-4">{{ t('gpuConfig') }}</th>
             <th class="px-6 py-4">{{ t('cpuMemory') }}</th>
             <th class="px-6 py-4">{{ t('remainingInventory') }}</th>
@@ -41,7 +41,7 @@
               </div>
             </td>
             <td class="px-6 py-4">
-              <div class="font-bold text-sm">{{ product.id }}</div>
+              <div class="font-bold text-sm">{{ product.clusterName || '-' }}</div>
               <div class="text-xs text-slate-400 mt-1">{{ product.name || product.nodeType }}</div>
             </td>
             <td class="px-6 py-4">

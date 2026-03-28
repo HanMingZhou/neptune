@@ -10,7 +10,6 @@
 
     <LandingNavbar
       :is-dark="isDark"
-      :menu-items="menuItems"
       @toggle-theme="toggleTheme"
     />
 
@@ -47,7 +46,6 @@ const {
   initialize,
   isDark,
   isLoggedIn,
-  menuItems,
   toggleTheme
 } = useLandingPage()
 

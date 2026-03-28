@@ -21,7 +21,6 @@ import (
 	"gin-vue-admin/service/training"
 )
 
-// ServiceGroup 聚合所有服务组
 type ServiceGroup struct {
 	SystemServiceGroup      system.ServiceGroup
 	ExampleServiceGroup     example.ServiceGroup
@@ -43,18 +42,17 @@ type ServiceGroup struct {
 
 var ServiceGroupApp = new(ServiceGroup)
 
-// InitServiceDependencies 初始化服务间依赖
 func InitServiceDependencies() {
 	ServiceGroupApp.NotebookServiceGroup.NotebookService.SetApisixService(&ServiceGroupApp.ApisixServiceGroup.ApisixService)
 	notebook.NotebookServiceApp.SetApisixService(&ServiceGroupApp.ApisixServiceGroup.ApisixService)
-
 	ServiceGroupApp.InferenceServiceGroup.InferenceServiceService.SetApisixService(&ServiceGroupApp.ApisixServiceGroup.ApisixService)
 	inference.InferenceServiceServiceApp.SetApisixService(&ServiceGroupApp.ApisixServiceGroup.ApisixService)
-
 	training.TrainingJobServiceApp.SetApisixService(&ServiceGroupApp.ApisixServiceGroup.ApisixService)
-
 	if global.GVA_K8S_CLUSTER_MANAGER != nil {
 		global.GVA_K8S_CLUSTER_MANAGER.SetOrderManager(&ServiceGroupApp.OrderServiceGroup.OrderService)
 		global.GVA_K8S_CLUSTER_MANAGER.SetProductManager(&ServiceGroupApp.ProductServiceGroup.ProductService)
 	}
 }
+
+// ServiceGroup 聚合所有服务组
+// InitServiceDependencies 初始化服务间依赖

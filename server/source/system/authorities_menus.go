@@ -91,12 +91,6 @@ func (i *initMenuAuthority) InitializeData(ctx context.Context) (next context.Co
 		"invoice":      true, // 发票管理
 	}
 
-	// 收集用户可访问的菜单（顶级 + 子菜单）
-	menuMap := make(map[uint]sysModel.SysBaseMenu)
-	for _, menu := range allMenus {
-		menuMap[menu.ID] = menu
-	}
-
 	for _, menu := range allMenus {
 		if menu.ParentId == 0 {
 			// 顶级菜单
@@ -113,6 +107,46 @@ func (i *initMenuAuthority) InitializeData(ctx context.Context) (next context.Co
 
 	if err = global.GVA_DB.Model(&userAuth).Association("SysBaseMenus").Replace(menu8881); err != nil {
 		return next, errors.Wrap(err, "为普通用户分配菜单失败")
+	}
+
+	var transactionsMenu sysModel.SysBaseMenu
+	if err = global.GVA_DB.Where("name = ?", "transactions").First(&transactionsMenu).Error; err != nil {
+		return next, errors.Wrap(err, "查询交易记录菜单失败")
+	}
+
+	var transactionBtns []sysModel.SysBaseMenuBtn
+	if err = global.GVA_DB.Where("sys_base_menu_id = ?", transactionsMenu.ID).Find(&transactionBtns).Error; err != nil {
+		return next, errors.Wrap(err, "查询交易记录菜单按钮失败")
+	}
+
+	btnIDByName := make(map[string]uint, len(transactionBtns))
+	for _, btn := range transactionBtns {
+		btnIDByName[btn.Name] = btn.ID
+	}
+
+	assignBtn := func(authorityId uint, btnName string) error {
+		btnID, ok := btnIDByName[btnName]
+		if !ok {
+			return nil
+		}
+		return global.GVA_DB.FirstOrCreate(&sysModel.SysAuthorityBtn{}, sysModel.SysAuthorityBtn{
+			AuthorityId:      authorityId,
+			SysMenuID:        transactionsMenu.ID,
+			SysBaseMenuBtnID: btnID,
+		}).Error
+	}
+
+	defaultBtnAssignments := map[uint][]string{
+		adminAuth.AuthorityId: {"recharge_system"},
+		testAuth.AuthorityId:  {"recharge_alipay", "recharge_wechat"},
+		userAuth.AuthorityId:  {"recharge_alipay", "recharge_wechat"},
+	}
+	for authorityId, btnNames := range defaultBtnAssignments {
+		for _, btnName := range btnNames {
+			if err = assignBtn(authorityId, btnName); err != nil {
+				return next, errors.Wrap(err, "初始化交易记录按钮权限失败")
+			}
+		}
 	}
 
 	return next, nil

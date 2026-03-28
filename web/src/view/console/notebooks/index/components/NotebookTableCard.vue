@@ -3,11 +3,11 @@
     <template #toolbar>
       <div class="flex flex-wrap gap-4 items-center">
         <div class="flex items-center gap-3 flex-1">
-          <div class="relative">
+          <div class="relative w-[18rem] max-w-full">
             <input
               :value="searchQuery"
               :placeholder="t('searchInstancePlaceholder')"
-              class="list-search-input"
+              class="list-search-input !w-full"
               type="text"
               @input="$emit('search-change', $event.target.value)"
               @keyup.enter="$emit('refresh')"
@@ -41,13 +41,13 @@
       <table class="w-full">
         <thead>
           <tr class="bg-gray-50 dark:bg-zinc-900/50 border-b border-gray-100 dark:border-gray-800 text-slate-500 text-[11px] font-bold uppercase tracking-wider">
-            <th class="px-6 py-4">{{ t('instanceId') }} / {{ t('name') }}</th>
-            <th class="px-6 py-4">{{ t('status') }}</th>
-            <th class="px-6 py-4">{{ t('spec') }}</th>
-            <th class="px-6 py-4">{{ t('gpu') }}</th>
-            <th class="px-6 py-4 text-center">{{ t('sshLogin') }}</th>
-            <th class="px-6 py-4 text-center">{{ t('quickTools') }}</th>
-            <th class="px-6 py-4 text-center">{{ t('actions') }}</th>
+            <th class="px-6 py-3">{{ t('instanceId') }} / {{ t('name') }}</th>
+            <th class="px-6 py-3">{{ t('status') }}</th>
+            <th class="px-6 py-3">{{ t('spec') }}</th>
+            <th class="px-6 py-3">{{ t('gpu') }}</th>
+            <th class="px-6 py-3 text-center">{{ t('sshLogin') }}</th>
+            <th class="px-6 py-3 text-center">{{ t('quickTools') }}</th>
+            <th class="px-6 py-3 text-center">{{ t('actions') }}</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-100 dark:divide-border-dark text-[13px]">
@@ -74,7 +74,7 @@
             :key="item.id"
             class="hover:bg-gray-50/80 dark:hover:bg-zinc-800/50 transition-colors group"
           >
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-3 text-center">
               <div class="flex flex-col gap-1 items-center">
                 <span class="font-bold text-primary hover:underline cursor-pointer text-sm" @click="$emit('detail', item)">{{ item.displayName || item.instanceName }}</span>
                 <div class="flex items-center gap-1 group/copy">
@@ -89,7 +89,7 @@
                 </div>
               </div>
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-3 text-center">
               <div class="flex justify-center">
                 <span :class="getStatusStyle(item.status)" class="px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center gap-1.5 border border-transparent">
                   <span :class="item.status === 'RUNNING' ? 'animate-pulse bg-emerald-500' : 'bg-current'" class="size-1.5 rounded-full"></span>
@@ -97,7 +97,7 @@
                 </span>
               </div>
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-3 text-center">
               <div class="flex items-center justify-center gap-1">
                 <span class="material-icons text-[14px] text-slate-400">memory</span>
                 <span>{{ item.cpu }} {{ t('cpu') }}</span>
@@ -105,11 +105,11 @@
                 <span>{{ item.memory }} GB</span>
               </div>
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-3 text-center">
               <span v-if="item.gpu" class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[11px] font-mono font-bold">{{ item.gpu }}</span>
               <span v-else class="text-slate-400 text-[11px] font-bold tracking-tight uppercase">{{ t('cpuOnly') }}</span>
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-3 text-center">
               <button
                 v-if="item.status === 'RUNNING'"
                 class="whitespace-nowrap inline-flex items-center gap-1 text-[11px] font-bold text-slate-500 hover:text-primary transition-colors bg-gray-100 dark:bg-zinc-800 hover:bg-primary/10 px-2 py-1 rounded"
@@ -120,7 +120,7 @@
               </button>
               <span v-else class="text-slate-400 text-sm">-</span>
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-3 text-center">
               <div class="flex flex-col items-center gap-1.5">
                 <a
                   v-if="item.status === 'RUNNING' && item.jupyterUrl"
@@ -143,7 +143,7 @@
                 <span v-if="item.status !== 'RUNNING' || (!item.jupyterUrl && !(item.enableTensorboard && item.tensorboardUrl))" class="text-slate-400 text-sm">-</span>
               </div>
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-3 text-center">
               <div class="flex justify-center gap-2 items-center">
                 <button
                   v-if="item.status !== 'RUNNING' && item.status !== 'PENDING' && item.status !== 'CREATING' && item.status !== 'DELETING'"

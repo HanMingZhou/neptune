@@ -13,7 +13,7 @@
           <input
             :value="form.name"
             :placeholder="t('enterJobName')"
-            class="w-full px-4 py-2.5 border border-border-light dark:border-border-dark rounded-lg text-sm bg-white dark:bg-zinc-800 focus:ring-1 focus:ring-primary outline-none"
+            class="create-form-input"
             type="text"
             @input="$emit('update:field', { key: 'name', value: $event.target.value })"
           />
@@ -32,7 +32,7 @@
             <input
               :value="form.tensorboardLogPath"
               :placeholder="t('enterLogPath')"
-              class="w-full px-4 py-2.5 border border-border-light dark:border-border-dark rounded-lg text-sm bg-white dark:bg-zinc-800 focus:ring-1 focus:ring-primary outline-none"
+              class="create-form-input"
               type="text"
               @input="$emit('update:field', { key: 'tensorboardLogPath', value: $event.target.value })"
             />
@@ -58,6 +58,21 @@
             />
           </el-select>
         </div>
+
+        <WorkerCountSection
+          :available-capacity="availableCapacity"
+          :embedded="true"
+          :framework-type="form.frameworkType"
+          :max-worker-count="maxWorkerCount"
+          :schedule-strategy="form.scheduleStrategy"
+          :selected-product="selectedProduct"
+          :show-worker-count="showWorkerCount"
+          :worker-count="form.workerCount"
+          @decrease-worker="$emit('decrease-worker')"
+          @increase-worker="$emit('increase-worker')"
+          @update:schedule-strategy="$emit('update:schedule-strategy', $event)"
+          @update:worker-count="$emit('update:workerCount', $event)"
+        />
       </div>
     </div>
 
@@ -68,7 +83,7 @@
       <textarea
         :value="form.startupCommand"
         :placeholder="t('enterStartupCommand')"
-        class="w-full px-4 py-2.5 border border-border-light dark:border-border-dark rounded-lg text-sm bg-white dark:bg-zinc-800 focus:ring-1 focus:ring-primary outline-none resize-none font-mono"
+        class="create-form-textarea font-mono"
         rows="3"
         @input="$emit('update:field', { key: 'startupCommand', value: $event.target.value })"
       ></textarea>
@@ -113,7 +128,7 @@
               <input
                 :value="mount.mountPath"
                 :placeholder="t('enterMountPath')"
-                class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg text-sm bg-white dark:bg-zinc-900 focus:ring-1 focus:ring-primary outline-none"
+                class="create-form-input"
                 type="text"
                 @input="$emit('update:mount', { index, key: 'mountPath', value: $event.target.value })"
               />
@@ -155,7 +170,7 @@
               <input
                 :value="env.name"
                 :placeholder="t('enterVariableName')"
-                class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg text-sm bg-white dark:bg-zinc-900 focus:ring-1 focus:ring-primary outline-none font-mono"
+                class="create-form-input font-mono"
                 type="text"
                 @input="$emit('update:env', { index, key: 'name', value: $event.target.value })"
               />
@@ -164,7 +179,7 @@
               <input
                 :value="env.value"
                 :placeholder="t('enterVariableValue')"
-                class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg text-sm bg-white dark:bg-zinc-900 focus:ring-1 focus:ring-primary outline-none"
+                class="create-form-input"
                 type="text"
                 @input="$emit('update:env', { index, key: 'value', value: $event.target.value })"
               />
@@ -190,8 +205,13 @@
 
 <script setup>
 import { inject } from 'vue'
+import WorkerCountSection from './WorkerCountSection.vue'
 
 defineProps({
+  availableCapacity: {
+    type: Number,
+    default: 0
+  },
   form: {
     type: Object,
     required: true
@@ -200,22 +220,38 @@ defineProps({
     type: Array,
     default: () => []
   },
+  maxWorkerCount: {
+    type: Number,
+    default: 2
+  },
   pvcs: {
     type: Array,
     default: () => []
+  },
+  selectedProduct: {
+    type: Object,
+    default: null
+  },
+  showWorkerCount: {
+    type: Boolean,
+    default: false
   }
 })
 
 defineEmits([
   'add-env',
   'add-mount',
+  'decrease-worker',
   'insert-mpi-example',
   'insert-pytorch-example',
+  'increase-worker',
   'remove-env',
   'remove-mount',
   'update:env',
   'update:field',
-  'update:mount'
+  'update:mount',
+  'update:schedule-strategy',
+  'update:workerCount'
 ])
 
 const t = inject('t', (key) => key)

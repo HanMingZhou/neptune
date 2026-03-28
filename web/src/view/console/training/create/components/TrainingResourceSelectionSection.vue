@@ -11,19 +11,6 @@
       :groups="filterGroups"
       @change="changeFilter($event.key, $event.value)"
     />
-
-    <WorkerCountSection
-      :available-capacity="availableCapacity"
-      :framework-type="form.frameworkType"
-      :max-worker-count="maxWorkerCount"
-      :selected-product="selectedProduct"
-      :show-worker-count="showWorkerCount"
-      :worker-count="form.workerCount"
-      @decrease-worker="decreaseWorker"
-      @increase-worker="increaseWorker"
-      @update:worker-count="form.workerCount = Math.max(2, Math.min($event || 2, maxWorkerCount))"
-    />
-
     <ProductTable
       :format-price="formatPrice"
       :price-unit-text="priceUnitText"
@@ -50,16 +37,11 @@ import FilterChipSection from '@/components/createPage/FilterChipSection.vue'
 import ProductTable from './ProductTable.vue'
 import StorageHintSection from './StorageHintSection.vue'
 import SummarySection from './SummarySection.vue'
-import WorkerCountSection from './WorkerCountSection.vue'
 
 const props = defineProps({
   areas: {
     type: Array,
     default: () => []
-  },
-  availableCapacity: {
-    type: Number,
-    default: 0
   },
   changeFilter: {
     type: Function,
@@ -68,10 +50,6 @@ const props = defineProps({
   cpuModels: {
     type: Array,
     default: () => []
-  },
-  decreaseWorker: {
-    type: Function,
-    required: true
   },
   filters: {
     type: Object,
@@ -88,14 +66,6 @@ const props = defineProps({
   gpuModels: {
     type: Array,
     default: () => []
-  },
-  increaseWorker: {
-    type: Function,
-    required: true
-  },
-  maxWorkerCount: {
-    type: Number,
-    required: true
   },
   payTypes: {
     type: Array,
@@ -116,10 +86,6 @@ const props = defineProps({
   selectedProduct: {
     type: Object,
     default: null
-  },
-  showWorkerCount: {
-    type: Boolean,
-    default: false
   },
   totalPrice: {
     type: String,

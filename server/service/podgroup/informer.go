@@ -98,6 +98,7 @@ type OrderManager interface {
 type ProductManager interface {
 	ReleaseCapacity(ctx context.Context, productId uint, count int64) error
 	ReleaseCapacityAuto(ctx context.Context, productId uint) error
+	ReleaseResourceAllocations(ctx context.Context, instanceType string, instanceID uint) (bool, error)
 }
 
 type podGroupEvent struct {
@@ -434,6 +435,18 @@ func (f *PodGroupInformerFactory) processDelete(pg *vcv1beta1.PodGroup) error {
 
 // releaseProductCapacity 根据业务资源信息释放产品配额
 func (f *PodGroupInformerFactory) releaseProductCapacity(res resourceIdentity) {
+	if released, err := f.productManager.ReleaseResourceAllocations(context.Background(), res.InstanceType, res.OwnerID); err != nil {
+		logx.Error("Informer 按 allocation 释放资源失败",
+			logx.Field("instanceType", res.InstanceType),
+			logx.Field("ownerID", res.OwnerID),
+			logx.Field("err", err))
+	} else if released {
+		logx.Info("Informer 按 allocation 成功释放资源",
+			logx.Field("instanceType", res.InstanceType),
+			logx.Field("ownerID", res.OwnerID))
+		return
+	}
+
 	var result podgroupModel.ResourceResult
 	config := businessConfigs[res.InstanceType]
 

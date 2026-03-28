@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-[1400px] mx-auto space-y-8">
+  <div class="console-page-container space-y-8">
     <PageIntro :title="t('order.usage')" :description="t('order.usageDesc')">
       <template #actions>
         <RefreshButton :loading="loading" @refresh="fetchData" />

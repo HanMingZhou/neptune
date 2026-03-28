@@ -34,9 +34,17 @@ type GetOrderUsageListReq struct {
 // GetTransactionListReq 交易流水查询请求
 type GetTransactionListReq struct {
 	request.PageInfo
+	Keyword   string `json:"keyword" form:"keyword"`
 	Type      int    `json:"type" form:"type"` // 1-充值 2-消费 3-退款 4-系统调账
 	StartTime string `json:"startTime" form:"startTime"`
 	EndTime   string `json:"endTime" form:"endTime"`
+}
+
+// RechargeBalanceReq 充值请求
+type RechargeBalanceReq struct {
+	Amount float64 `json:"amount" binding:"required,gt=0"`
+	Method int64   `json:"method" binding:"required,oneof=1 2 4"` // 1-支付宝 2-微信 4-系统代充值
+	Remark string  `json:"remark" binding:"max=200"`
 }
 
 // GetInvoiceListReq 发票列表请求

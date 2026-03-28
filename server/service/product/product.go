@@ -17,36 +17,37 @@ type ProductService struct{}
 // 集中维护映射关系，避免多处重复代码导致字段遗漏
 func toProductDetailResponse(p *productModel.Product) productRes.ProductDetailResponse {
 	return productRes.ProductDetailResponse{
-		ID:             p.ID,
-		ProductType:    p.ProductType,
-		Name:           p.Name,
-		Description:    p.Description,
-		Area:           p.Area,
-		NodeName:       p.NodeName,
-		NodeType:       p.NodeType,
-		CPUModel:       p.CPUModel,
-		CPU:            p.CPU,
-		Memory:         p.Memory,
-		GPUModel:       p.GPUModel,
-		GPUCount:       p.GPUCount,
-		GPUMemory:      p.GPUMemory,
-		VGPUNumber:     p.VGPUNumber,
-		VGPUMemory:     p.VGPUMemory,
-		VGPUCores:      p.VGPUCores,
-		PriceHourly:    p.PriceHourly,
-		PriceDaily:     p.PriceDaily,
-		PriceWeekly:    p.PriceWeekly,
-		PriceMonthly:   p.PriceMonthly,
-		DriverVersion:  p.DriverVersion,
-		CUDAVersion:    p.CUDAVersion,
-		SystemDisk:     p.SystemDisk,
-		DataDisk:       p.DataDisk,
-		Status:         p.Status,
-		StorageClass:   p.StorageClass,
-		StoragePriceGB: p.StoragePriceGB,
-		MaxInstances:   p.MaxInstances,
-		Available:      p.AvailableCapacity(),
-		ClusterId:      p.ClusterId,
+		ID:                p.ID,
+		TemplateProductId: p.ID,
+		ProductType:       p.ProductType,
+		Name:              p.Name,
+		Description:       p.Description,
+		Area:              p.Area,
+		NodeName:          p.NodeName,
+		NodeType:          p.NodeType,
+		CPUModel:          p.CPUModel,
+		CPU:               p.CPU,
+		Memory:            p.Memory,
+		GPUModel:          p.GPUModel,
+		GPUCount:          p.GPUCount,
+		GPUMemory:         p.GPUMemory,
+		VGPUNumber:        p.VGPUNumber,
+		VGPUMemory:        p.VGPUMemory,
+		VGPUCores:         p.VGPUCores,
+		PriceHourly:       p.PriceHourly,
+		PriceDaily:        p.PriceDaily,
+		PriceWeekly:       p.PriceWeekly,
+		PriceMonthly:      p.PriceMonthly,
+		DriverVersion:     p.DriverVersion,
+		CUDAVersion:       p.CUDAVersion,
+		SystemDisk:        p.SystemDisk,
+		DataDisk:          p.DataDisk,
+		Status:            p.Status,
+		StorageClass:      p.StorageClass,
+		StoragePriceGB:    p.StoragePriceGB,
+		MaxInstances:      p.MaxInstances,
+		Available:         p.AvailableCapacity(),
+		ClusterId:         p.ClusterId,
 	}
 }
 
@@ -62,7 +63,11 @@ func (s *ProductService) GetProductById(ctx context.Context, productId uint) (*p
 }
 
 // GetProductList 获取产品列表
-func (s *ProductService) GetProductList(ctx context.Context, page, pageSize, productType int) (*productRes.ProductListResponse, error) {
+func (s *ProductService) GetProductList(
+	ctx context.Context,
+	page, pageSize, productType int,
+	filters AggregateProductFilters,
+) (*productRes.ProductListResponse, error) {
 	// 分页参数校验
 	if page < 1 {
 		page = 1
@@ -73,11 +78,7 @@ func (s *ProductService) GetProductList(ctx context.Context, page, pageSize, pro
 
 	var products []productModel.Product
 	var total int64
-	db := global.GVA_DB.WithContext(ctx).Model(&productModel.Product{}).Where("status = ?", productModel.ProductStatusEnabled)
-
-	if productType > 0 {
-		db = db.Where("product_type = ?", productType)
-	}
+	db := s.buildProductListDB(ctx, productType, filters)
 
 	if err := db.Count(&total).Error; err != nil {
 		return nil, err

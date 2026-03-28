@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto max-w-[1400px] space-y-8">
+  <div class="console-page-container w-full space-y-8">
     <PageIntro :title="t('dashboardTitle')" :description="t('dashboardDesc')">
       <template #actions>
         <DashboardHeaderActions :loading="loading" @create="goToCreate" @refresh="fetchData" />
@@ -8,8 +8,8 @@
 
     <DashboardStatsGrid :items="statCards" />
 
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-      <div class="space-y-6 lg:col-span-2">
+    <div class="grid grid-cols-1 gap-8 xl:grid-cols-12">
+      <div class="space-y-6 xl:col-span-8">
         <ResourceTrendCard :items="usageTrends" />
         <RecentInstancesCard
           :items="recentInstances"
@@ -20,7 +20,7 @@
         />
       </div>
 
-      <div class="space-y-6">
+      <div class="space-y-6 xl:col-span-4">
         <QuickEntryCard :items="quickEntries" @select="handleQuickEntry" />
         <QuotaCard />
       </div>

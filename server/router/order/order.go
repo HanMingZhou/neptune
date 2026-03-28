@@ -14,6 +14,7 @@ func (s *OrderRouter) InitOrderRouter(Router *gin.RouterGroup) {
 	orderWithNotRecorderRouter := Router.Group("order")
 	orderApi := v1.ApiGroupApp.OrderApiGroup.OrderApi
 	{
+		orderRouter.POST("recharge", orderApi.RechargeBalance)   // 余额充值
 		orderRouter.POST("invoice/apply", orderApi.ApplyInvoice) // 申请发票
 	}
 	{

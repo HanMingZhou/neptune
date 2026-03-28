@@ -1,21 +1,21 @@
 <template>
   <div>
-    <div class="sticky top-0.5 z-10 flex flex-col space-y-2 bg-surface-light dark:bg-surface-dark pb-2">
-      <div class="flex space-x-2">
+    <div class="sticky top-0.5 z-10 flex flex-col gap-3 bg-surface-light pb-2 dark:bg-surface-dark">
+      <div class="flex flex-wrap items-center gap-3">
         <el-input
           v-model="filterTextName"
-          class="flex-1"
+          class="min-w-[180px] flex-1"
           :placeholder="t('filterName')"
         />
         <el-input
           v-model="filterTextPath"
-          class="flex-1"
+          class="min-w-[180px] flex-1"
           :placeholder="t('filterPath')"
         />
-        <el-button type="primary" @click="authApiEnter">{{ t('confirm') }}</el-button>
+        <el-button class="shrink-0" type="primary" @click="authApiEnter">{{ t('confirm') }}</el-button>
       </div>
       <div class="flex justify-between items-center">
-        <div class="flex space-x-2">
+        <div class="flex flex-wrap gap-2">
           <el-button size="small" @click="expandAll">{{ isAllExpanded ? t('collapseAll') : t('expandAll') }}</el-button>
           <el-button size="small" @click="selectAll">{{ isAllSelected ? t('deselectAll') : t('selectAll') }}</el-button>
         </div>

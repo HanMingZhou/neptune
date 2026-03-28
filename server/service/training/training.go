@@ -68,6 +68,7 @@ type trainingCreateState struct {
 	displayName string
 	image       *imageModel.Image
 	product     *productModel.Product
+	plan        *productService.AllocationPlan
 	cluster     *global.ClusterClientInfo
 	trainingJob *trainingModel.TrainingJob
 }
@@ -153,6 +154,10 @@ func (s *TrainingJobService) CreateTrainingJob(ctx context.Context, req *trainin
 		return nil, err
 	}
 
+	if err = s.saveTrainingAllocations(ctx, state, &cleanups); err != nil {
+		return nil, err
+	}
+
 	if err = s.saveTrainingJobMounts(ctx, state); err != nil {
 		return nil, err
 	}
@@ -190,6 +195,10 @@ func (s *TrainingJobService) buildCreateTrainingState(
 	req *trainingReq.CreateTrainingJobReq,
 	cleanups *Cleanups,
 ) (*trainingCreateState, error) {
+	if err := normalizeTrainingCreateRequest(req); err != nil {
+		return nil, err
+	}
+
 	jobName, displayName := s.prepareTrainingCreateRequest(req)
 
 	image, err := s.getTrainingImage(ctx, req.ImageId)
@@ -197,7 +206,7 @@ func (s *TrainingJobService) buildCreateTrainingState(
 		return nil, err
 	}
 
-	product, err := s.getTrainingProduct(ctx, req.ResourceId)
+	product, err := s.getTrainingProduct(ctx, req.TemplateProductId)
 	if err != nil {
 		return nil, err
 	}
@@ -211,7 +220,12 @@ func (s *TrainingJobService) buildCreateTrainingState(
 		return nil, err
 	}
 
-	if err := s.reserveTrainingCapacity(ctx, product.ID, computeNodes, cleanups); err != nil {
+	plan, err := (&productService.ProductService{}).PlanAllocations(ctx, product.ID, computeNodes, req.ScheduleStrategy)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := s.reserveTrainingCapacity(ctx, plan, cleanups); err != nil {
 		return nil, err
 	}
 
@@ -227,6 +241,7 @@ func (s *TrainingJobService) buildCreateTrainingState(
 		displayName: displayName,
 		image:       image,
 		product:     product,
+		plan:        plan,
 		cluster:     cluster,
 		trainingJob: trainingJob,
 	}, nil
@@ -254,7 +269,7 @@ func (s *TrainingJobService) getTrainingImage(ctx context.Context, imageID uint)
 
 func (s *TrainingJobService) getTrainingProduct(ctx context.Context, productID uint) (*productModel.Product, error) {
 	if productID == 0 {
-		return nil, errors.New("必须指定产品ID (resourceId)")
+		return nil, errors.New("必须指定模板商品ID (templateProductId)")
 	}
 
 	var product productModel.Product
@@ -270,22 +285,25 @@ func (s *TrainingJobService) getTrainingProduct(ctx context.Context, productID u
 
 func (s *TrainingJobService) checkTrainingBalance(ctx context.Context, req *trainingReq.CreateTrainingJobReq) error {
 	orderSvc := &orderService.OrderService{}
-	return orderSvc.CheckBalanceSufficient(ctx, req.UserId, req.ResourceId, req.PayType, 1)
+	return orderSvc.CheckBalanceSufficient(ctx, req.UserId, req.TemplateProductId, req.PayType, req.InstanceCount)
 }
 
 func normalizeTrainingComputeNodes(req *trainingReq.CreateTrainingJobReq) (int64, error) {
 	switch req.FrameworkType {
 	case consts.FrameworkPyTorchDDP:
-		if req.WorkerCount < 1 {
-			return 0, errors.New("DDP 模式工作节点数必须大于 0")
+		if req.InstanceCount < 2 {
+			return 0, errors.New("DDP 模式实例数量必须大于 1")
 		}
-		return req.WorkerCount, nil
+		req.WorkerCount = req.InstanceCount
+		return req.InstanceCount, nil
 	case consts.FrameworkMPI:
-		if req.WorkerCount < 1 {
-			return 0, errors.New("MPI 模式工作节点数必须大于 0")
+		if req.InstanceCount < 2 {
+			return 0, errors.New("MPI 模式实例数量必须大于 1")
 		}
-		return req.WorkerCount, nil
+		req.WorkerCount = req.InstanceCount
+		return req.InstanceCount, nil
 	default:
+		req.InstanceCount = 1
 		req.WorkerCount = 1
 		return 1, nil
 	}
@@ -303,19 +321,22 @@ func calculateTrainingTotalGPU(product *productModel.Product, computeNodes int64
 
 func (s *TrainingJobService) reserveTrainingCapacity(
 	ctx context.Context,
-	productID uint,
-	computeNodes int64,
+	plan *productService.AllocationPlan,
 	cleanups *Cleanups,
 ) error {
 	productSvc := &productService.ProductService{}
-	reserve, err := productSvc.ReserveCapacityWithCount(ctx, productID, computeNodes)
-	if err != nil {
-		return errors.Wrap(err, "锁定产品资源失败")
-	}
+	for _, reservation := range plan.Reservations {
+		reserve, err := productSvc.ReserveCapacityWithCount(ctx, reservation.ProductID, reservation.Count)
+		if err != nil {
+			return errors.Wrap(err, "锁定产品资源失败")
+		}
 
-	cleanups.Add(func(ctx context.Context) {
-		_ = (&productService.ProductService{}).ReleaseCapacity(ctx, productID, reserve.ResourceCount)
-	})
+		productID := reservation.ProductID
+		resourceCount := reserve.ResourceCount
+		cleanups.Add(func(ctx context.Context) {
+			_ = (&productService.ProductService{}).ReleaseCapacity(ctx, productID, resourceCount)
+		})
+	}
 	return nil
 }
 
@@ -343,14 +364,96 @@ func (s *TrainingJobService) buildTrainingJobRecord(
 		ImageId:            req.ImageId,
 		StartupCommand:     req.StartupCommand,
 		TotalGPUCount:      calculateTrainingTotalGPU(product, computeNodes),
-		ProductId:          req.ResourceId,
-		WorkerCount:        req.WorkerCount,
+		ProductId:          req.TemplateProductId,
+		InstanceCount:      computeNodes,
+		ScheduleStrategy:   req.ScheduleStrategy,
+		WorkerCount:        computeNodes,
 		Status:             consts.TrainingStatusSubmitted,
 		EnableTensorboard:  req.EnableTensorboard,
 		TensorboardLogPath: req.TensorboardLogPath,
 		PayType:            req.PayType,
 		Price:              product.GetPrice(req.PayType),
 	}
+}
+
+func normalizeTrainingCreateRequest(req *trainingReq.CreateTrainingJobReq) error {
+	if req.TemplateProductId == 0 {
+		req.TemplateProductId = req.ResourceId
+	}
+	if req.ScheduleStrategy == "" {
+		req.ScheduleStrategy = consts.ScheduleStrategyBalanced
+	}
+	if req.InstanceCount <= 0 {
+		if req.WorkerCount > 0 {
+			req.InstanceCount = req.WorkerCount
+		} else {
+			req.InstanceCount = 1
+		}
+	}
+	return nil
+}
+
+func (s *TrainingJobService) saveTrainingAllocations(
+	ctx context.Context,
+	state *trainingCreateState,
+	cleanups *Cleanups,
+) error {
+	allocations := buildTrainingAllocations(state.trainingJob, state.plan)
+	if len(allocations) == 0 {
+		return nil
+	}
+	if err := (&productService.ProductService{}).SaveResourceAllocations(ctx, allocations); err != nil {
+		return errors.Wrap(err, "保存训练资源分配失败")
+	}
+
+	instanceID := state.trainingJob.ID
+	cleanups.Add(func(ctx context.Context) {
+		_ = (&productService.ProductService{}).DeleteResourceAllocations(ctx, consts.TrainingInstance, instanceID)
+	})
+	return nil
+}
+
+func buildTrainingAllocations(job *trainingModel.TrainingJob, plan *productService.AllocationPlan) []productModel.ResourceAllocation {
+	if plan == nil {
+		return nil
+	}
+	allocations := make([]productModel.ResourceAllocation, 0, job.InstanceCount)
+	replicaIndex := 0
+	for _, reservation := range plan.Reservations {
+		for count := int64(0); count < reservation.Count; count++ {
+			role := consts.TaskSpecWorker
+			if job.FrameworkType == consts.FrameworkPyTorchDDP && replicaIndex == 0 {
+				role = consts.TaskSpecMaster
+			}
+			if job.FrameworkType == consts.FrameworkMPI {
+				role = consts.TaskSpecMPIWorker
+			}
+			allocations = append(allocations, productModel.ResourceAllocation{
+				InstanceType:      consts.TrainingInstance,
+				InstanceID:        job.ID,
+				ClusterID:         job.ClusterID,
+				TemplateProductID: job.ProductId,
+				ProductID:         reservation.ProductID,
+				NodeName:          reservation.NodeName,
+				ScheduleStrategy:  plan.ScheduleStrategy,
+				ReplicaIndex:      replicaIndex,
+				TaskRole:          role,
+				ReservedCount:     1,
+			})
+			replicaIndex++
+		}
+	}
+	return allocations
+}
+
+func allocationNodesForInstance(ctx context.Context, instanceType string, instanceID uint) []string {
+	nodes := make([]string, 0)
+	_ = global.GVA_DB.WithContext(ctx).
+		Table("resource_allocations").
+		Distinct("node_name").
+		Where("instance_type = ? AND instance_id = ?", instanceType, instanceID).
+		Pluck("node_name", &nodes).Error
+	return nodes
 }
 
 func (s *TrainingJobService) persistTrainingJob(ctx context.Context, state *trainingCreateState) error {
@@ -475,7 +578,7 @@ func (s *TrainingJobService) submitTrainingJob(
 	state *trainingCreateState,
 	cleanups *Cleanups,
 ) error {
-	jobSpec := s.buildJobSpec(state.trainingJob, state.product, state.image, state.req)
+	jobSpec := s.buildJobSpec(ctx, state.trainingJob, state.product, state.image, state.req)
 	jobBuilder := builder.NewJobBuilder(state.req.FrameworkType)
 	volcanoJob, err := jobBuilder.Build(jobSpec)
 	if err != nil {
@@ -541,11 +644,11 @@ func (s *TrainingJobService) createTrainingOrder(
 		ProduceType:  orderModel.ProductTypeCompute,
 		ResourceType: orderModel.OrderTypeTraining,
 		ResourceId:   state.trainingJob.ID,
-		ProductId:    state.req.ResourceId,
+		ProductId:    state.req.TemplateProductId,
 		ImageId:      state.req.ImageId,
 		PayType:      consts.PayMethodToInt64[consts.PayMethodBalance],
 		ChargeType:   state.req.PayType,
-		Quantity:     1,
+		Quantity:     int(state.req.InstanceCount),
 		Area:         state.cluster.Area,
 		ClusterId:    state.product.ClusterId,
 		Remark:       fmt.Sprintf("创建训练任务: %s", state.displayName),
@@ -579,7 +682,7 @@ func (s *TrainingJobService) updateTrainingJobOrderID(ctx context.Context, jobID
 }
 
 // buildJobSpec 构建 Job 规格（资源配置从产品获取，不依赖 TrainingJob 冗余字段）
-func (s *TrainingJobService) buildJobSpec(job *trainingModel.TrainingJob, product *productModel.Product, image *imageModel.Image, req *trainingReq.CreateTrainingJobReq) *trainingReq.TrainingJobSpec {
+func (s *TrainingJobService) buildJobSpec(ctx context.Context, job *trainingModel.TrainingJob, product *productModel.Product, image *imageModel.Image, req *trainingReq.CreateTrainingJobReq) *trainingReq.TrainingJobSpec {
 	// 解析启动命令
 	// 使用 /bin/sh -c 方式运行，以支持多行脚本和 shell 特性（如重定向、管道等）
 	var command, args []string
@@ -625,13 +728,15 @@ func (s *TrainingJobService) buildJobSpec(job *trainingModel.TrainingJob, produc
 	}
 
 	return &trainingReq.TrainingJobSpec{
-		Name:        job.JobName,
-		Namespace:   job.Namespace,
-		Framework:   job.FrameworkType,
-		Image:       image.ImageAddr,
-		Command:     command,
-		Args:        args,
-		WorkerCount: job.WorkerCount,
+		Name:         job.JobName,
+		Namespace:    job.Namespace,
+		Framework:    job.FrameworkType,
+		Image:        image.ImageAddr,
+		Command:      command,
+		Args:         args,
+		WorkerCount:  job.WorkerCount,
+		AllowedNodes: allocationNodesForInstance(ctx, consts.TrainingInstance, job.ID),
+		StrictSpread: job.ScheduleStrategy == consts.ScheduleStrategyStrict,
 		Product: trainingReq.ProductSpec{
 			CPU:        product.CPU,
 			Memory:     product.Memory,
@@ -650,6 +755,7 @@ func (s *TrainingJobService) buildJobSpec(job *trainingModel.TrainingJob, produc
 			consts.LabelApp:          consts.TrainingInstance,
 			consts.LabelInstanceType: consts.TrainingInstance,
 			consts.LabelJobID:        fmt.Sprintf("%d", job.ID),
+			"neptune.io/instance":    job.JobName,
 		},
 		MaxRetry: 3,
 	}

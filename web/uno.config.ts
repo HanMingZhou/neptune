@@ -13,28 +13,28 @@ export default defineConfig({
         colors: {
             // 主色 - 来自模版
             primary: {
-                DEFAULT: '#165DFF',
-                hover: '#0E42D2',
-                light: '#E8F3FF'
+                DEFAULT: '#3158d4',
+                hover: '#2445ad',
+                light: '#ecf1ff'
             },
             // 背景色
             background: {
-                light: '#F2F3F5',
-                dark: '#0F0F0F'
+                light: '#f5f7fb',
+                dark: '#0f1117'
             },
             // 表面色
             surface: {
                 light: '#FFFFFF',
-                dark: '#1D1D1D'
+                dark: '#141923'
             },
             // 边框色
             border: {
-                light: '#E5E6EB',
-                dark: '#333333'
+                light: '#dbe2ee',
+                dark: '#2e3647'
             }
         },
         fontFamily: {
-            sans: 'Inter, PingFang SC, Microsoft YaHei, sans-serif',
+            sans: 'Avenir Next, SF Pro Display, SF Pro Text, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif',
         }
     },
     presets: [

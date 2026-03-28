@@ -23,7 +23,7 @@ redis:
     #是否使用redis集群模式
     useCluster: false
     #使用集群模式addr和db默认无效
-    addr: 127.0.0.1:6380
+    addr: 127.0.0.1:6379
     password: "123456"
     db: 0
     clusterAddrs:
@@ -35,7 +35,7 @@ redis:
 redis-list:
     - name: cache           # 数据库的名称,注意: name 需要在 redis-list 中唯一
       useCluster: false     # 是否使用redis集群模式
-      addr: 127.0.0.1:6380  # 使用集群模式addr和db默认无效
+      addr: 127.0.0.1:6379  # 使用集群模式addr和db默认无效
       password: "123456"
       db: 0
       clusterAddrs:

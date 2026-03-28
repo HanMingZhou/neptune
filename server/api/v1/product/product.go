@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"gin-vue-admin/model/common/response"
+	productSvc "gin-vue-admin/service/product"
 	"gin-vue-admin/utils"
 
 	"github.com/gin-gonic/gin"
@@ -37,9 +38,42 @@ func (p *ProductApi) GetProductList(c *gin.Context) {
 		productType = parseInt(pt, 0)
 	}
 
-	products, err := productService.GetProductList(context.Background(), page, pageSize, productType)
+	filters := aggregateProductFiltersFromContext(c)
+
+	products, err := productService.GetProductList(context.Background(), page, pageSize, productType, filters)
 	if err != nil {
 		utils.HandleError(c, err, "查询产品列表失败")
+		return
+	}
+
+	response.OkWithDetailed(products, "获取成功", c)
+}
+
+// GetAggregateProductList 获取集群级聚合商品列表
+func (p *ProductApi) GetAggregateProductList(c *gin.Context) {
+	var page, pageSize, productType int
+	page = 1
+	pageSize = 100
+
+	if pageQuery := c.Query("page"); pageQuery != "" {
+		page = parseInt(pageQuery, 1)
+	}
+	if pageSizeQuery := c.Query("pageSize"); pageSizeQuery != "" {
+		pageSize = parseInt(pageSizeQuery, 100)
+	}
+	if productTypeQuery := c.Query("productType"); productTypeQuery != "" {
+		productType = parseInt(productTypeQuery, 0)
+	}
+
+	products, err := productService.GetAggregateProductList(
+		context.Background(),
+		page,
+		pageSize,
+		productType,
+		aggregateProductFiltersFromContext(c),
+	)
+	if err != nil {
+		utils.HandleError(c, err, "查询聚合商品列表失败")
 		return
 	}
 
@@ -100,4 +134,12 @@ func parseInt(s string, defaultVal int) int {
 		return defaultVal
 	}
 	return v
+}
+
+func aggregateProductFiltersFromContext(c *gin.Context) productSvc.AggregateProductFilters {
+	return productSvc.AggregateProductFilters{
+		Area:     c.Query("area"),
+		GPUModel: c.Query("gpuModel"),
+		CPUModel: c.Query("cpuModel"),
+	}
 }

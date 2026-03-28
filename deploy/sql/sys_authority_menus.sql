@@ -66,4 +66,5 @@ INSERT INTO aiInfra.sys_authority_menus (sys_base_menu_id, sys_authority_authori
 INSERT INTO aiInfra.sys_authority_menus (sys_base_menu_id, sys_authority_authority_id) VALUES (278, 888);
 INSERT INTO aiInfra.sys_authority_menus (sys_base_menu_id, sys_authority_authority_id) VALUES (278, 9528);
 INSERT INTO aiInfra.sys_authority_menus (sys_base_menu_id, sys_authority_authority_id) VALUES (279, 888);
+INSERT INTO aiInfra.sys_authority_menus (sys_base_menu_id, sys_authority_authority_id) VALUES (279, 8881);
 INSERT INTO aiInfra.sys_authority_menus (sys_base_menu_id, sys_authority_authority_id) VALUES (279, 9528);

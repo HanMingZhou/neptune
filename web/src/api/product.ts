@@ -9,6 +9,15 @@ export const getProductList = (params?: any) => {
     });
 };
 
+// 获取集群级聚合商品列表
+export const getAggregateProductList = (params?: any) => {
+    return service({
+        url: '/api/v1/product/aggregate/list',
+        method: 'get',
+        params
+    });
+};
+
 // 获取产品详情
 export const getProductDetail = (id: number | string) => {
     return service({

@@ -31,6 +31,8 @@ type InferenceSpec struct {
 	UserVolumes      []corev1.Volume      // 用户自定义挂载 Volume
 	UserVolumeMounts []corev1.VolumeMount // 用户自定义挂载 VolumeMount
 	UserEnvVars      []corev1.EnvVar      // 用户自定义环境变量
+	AllowedNodes     []string
+	StrictSpread     bool
 }
 
 // GetModelMountPath 获取 PVC 挂载路径（带默认值）

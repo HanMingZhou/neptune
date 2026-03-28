@@ -1,17 +1,21 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark px-6 py-4 flex justify-between items-center">
-    <div class="flex items-center gap-4">
-      <button class="flex items-center gap-1 text-sm text-slate-500 hover:text-primary transition-colors" @click="$emit('back')">
-        <span class="material-icons text-lg">arrow_back</span>
-        {{ t('back') }}
-      </button>
-      <h2 class="text-xl font-bold">{{ title }}</h2>
-      <span :class="['px-3 py-1 rounded-full text-xs font-bold', getStatusClass(status)]">
-        {{ getStatusLabel(status) }}
-      </span>
-    </div>
-    <div class="flex gap-3">
-      <slot name="actions" />
+  <div class="console-page-container px-6 pt-5 pb-3">
+    <div class="rounded-xl border border-border-light bg-surface-light px-5 py-4 dark:border-border-dark dark:bg-surface-dark md:px-6">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex min-w-0 items-center gap-3 md:gap-4">
+          <button class="inline-flex shrink-0 items-center gap-1 text-sm text-slate-500 transition-colors hover:text-primary" @click="$emit('back')">
+            <span class="material-icons text-lg">arrow_back</span>
+            {{ t('back') }}
+          </button>
+          <h2 class="truncate text-lg font-semibold text-slate-900 dark:text-slate-100 md:text-xl">{{ title }}</h2>
+          <span :class="['shrink-0 rounded-full px-3 py-1 text-xs font-bold', getStatusClass(status)]">
+            {{ getStatusLabel(status) }}
+          </span>
+        </div>
+        <div class="flex flex-wrap items-center justify-end gap-2.5">
+          <slot name="actions" />
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -20,54 +20,54 @@
     </div>
 
     <div class="overflow-hidden rounded-xl border border-border-light bg-surface-light shadow-sm dark:border-border-dark dark:bg-surface-dark">
-      <div class="flex flex-wrap items-center gap-4 border-b border-border-light p-4 dark:border-border-dark">
-        <div class="relative max-w-[180px] flex-1">
+      <div class="list-filter-bar border-b border-border-light p-4 dark:border-border-dark">
+        <div class="list-filter-field list-filter-field--compact max-w-[180px]">
           <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-[20px] text-slate-400">hub</span>
           <el-select
             v-model="clusterModel"
             :placeholder="t('cluster')"
             clearable
-            class="!w-full gva-custom-select"
+            class="!w-full list-filter-select gva-custom-select"
             @change="$emit('search')"
           >
             <el-option v-for="cluster in clusters" :key="cluster.id" :label="cluster.name" :value="cluster.id" />
           </el-select>
         </div>
 
-        <div class="relative max-w-[180px] flex-1">
+        <div class="list-filter-field list-filter-field--compact max-w-[180px]">
           <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-[20px] text-slate-400">place</span>
           <el-select
             v-model="areaModel"
             :placeholder="t('area')"
             clearable
-            class="!w-full gva-custom-select"
+            class="!w-full list-filter-select gva-custom-select"
             @change="$emit('search')"
           >
             <el-option v-for="area in areas" :key="area" :label="area" :value="area" />
           </el-select>
         </div>
 
-        <div class="relative max-w-[240px] flex-1">
+        <div class="list-filter-field max-w-[240px]">
           <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-[20px] text-slate-400">search</span>
           <input
             v-model="keywordModel"
             type="text"
             :placeholder="t('searchProductDesc')"
-            class="w-full rounded-lg border-none bg-slate-50 py-2 pl-10 pr-4 text-sm outline-none focus:ring-1 focus:ring-primary dark:bg-zinc-800"
+            class="list-search-input !w-full"
             @keyup.enter="$emit('search')"
           />
         </div>
 
-        <div class="flex gap-2">
+        <div class="list-toolbar-actions">
           <button
-            class="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-all hover:bg-primary-hover"
+            class="list-toolbar-button list-toolbar-button--primary"
             @click="$emit('search')"
           >
             <span class="material-icons text-[18px]">search</span>
             {{ t('searchQuery') }}
           </button>
           <button
-            class="flex items-center gap-2 rounded-lg border border-border-light bg-white px-4 py-2 text-sm font-medium transition-all hover:bg-slate-50 dark:border-border-dark dark:bg-zinc-800 dark:hover:bg-zinc-700"
+            class="list-toolbar-button list-toolbar-button--secondary"
             @click="$emit('reset')"
           >
             <span class="material-icons text-[18px]">autorenew</span>
@@ -75,7 +75,7 @@
           </button>
         </div>
 
-        <div class="ml-auto flex gap-3">
+        <div class="list-toolbar-actions list-toolbar-actions--push">
           <RefreshButton :loading="loading" @refresh="$emit('refresh', $event)" />
           <button
             class="flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/20 transition-all hover:bg-primary-hover"

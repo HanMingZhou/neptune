@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: neptune-server-config
+  namespace: neptune
   labels:
     app: neptune-server
     app.kubernetes.io/name: neptune-server
@@ -125,5 +126,5 @@ data:
 
     # sshpiper configuration
     sshpiper:
-        host: "sshpiper.neptune.svc.cluster.local"
+        host: "sshpiper.kubeflow.svc.cluster.local"
         port: 22

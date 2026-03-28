@@ -11,13 +11,16 @@ type CreateInferenceServiceReq struct {
 	ModelPvcId     uint   `json:"modelPvcId" binding:"required"` // 模型PVC ID
 
 	// 镜像和产品
-	ImageId   uint `json:"imageId" binding:"required"`   // 镜像ID
-	ProductId uint `json:"productId" binding:"required"` // 产品ID
+	ImageId           uint   `json:"imageId" binding:"required"` // 镜像ID
+	ProductId         uint   `json:"productId"`                  // 兼容旧字段：产品ID
+	TemplateProductId uint   `json:"templateProductId"`          // 新字段：模板商品ID
+	ScheduleStrategy  string `json:"scheduleStrategy"`           // 调度策略
 
 	// 并行配置 (分布式模式必填)
 	TensorParallel   int `json:"tensorParallel"`   // 张量并行度
 	PipelineParallel int `json:"pipelineParallel"` // 流水线并行度
-	WorkerCount      int `json:"workerCount"`      // Worker数量（总节点数，包含 head）
+	WorkerCount      int `json:"workerCount"`      // 兼容旧字段：实例数量（总节点数，包含 head）
+	InstanceCount    int `json:"instanceCount"`    // 新字段：实例数量（总节点数，包含 head）
 
 	// 启动命令（用户完全控制，必填）
 	Command string   `json:"command" binding:"required"` // 完整启动命令字符串，如 "python3 -m vllm.entrypoints.openai.api_server --model /model/Qwen2.5 --port 8000"

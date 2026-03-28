@@ -17,7 +17,7 @@
     <div v-if="showUserPopover" class="fixed inset-0 z-40" @click="showUserPopover = false"></div>
 
     <transition name="popover-fade">
-      <div v-if="showUserPopover" class="absolute right-0 top-full mt-2 w-72 bg-white dark:bg-zinc-900 border border-border-light dark:border-border-dark rounded-xl shadow-2xl z-50 overflow-hidden">
+      <div v-if="showUserPopover" class="absolute right-0 top-full mt-2 w-80 bg-white dark:bg-zinc-900 border border-border-light dark:border-border-dark rounded-xl shadow-2xl z-50 overflow-hidden">
         <div class="p-4 bg-gradient-to-r from-primary/5 to-blue-500/5 border-b border-border-light dark:border-border-dark">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-sm border border-primary/10">
@@ -31,12 +31,14 @@
         </div>
 
         <div class="mx-3 mt-3 p-3 bg-slate-50 dark:bg-zinc-800 rounded-lg border border-border-light dark:border-border-dark">
-          <div class="flex items-center justify-between">
-            <div>
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-3">
               <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{{ t('dashboard.balance') }}</p>
-              <p class="text-lg font-black text-primary mt-0.5">¥{{ formattedBalance }}</p>
+              <span class="shrink-0 material-icons text-primary/30 text-2xl">account_balance_wallet</span>
             </div>
-            <span class="material-icons text-primary/30 text-3xl">account_balance_wallet</span>
+            <p class="break-all text-lg leading-tight font-black tabular-nums text-primary">
+              {{ fullBalanceText }}
+            </p>
           </div>
         </div>
 
@@ -106,11 +108,11 @@ const currentAuthorityId = computed(() => props.userInfo?.authorityId ?? props.u
 const alternativeAuthorities = computed(() =>
   (props.userInfo?.authorities || []).filter((item) => item.authorityId !== currentAuthorityId.value)
 )
-const formattedBalance = computed(() =>
-  Number(props.userBalance || 0).toLocaleString(undefined, {
+const fullBalanceText = computed(() =>
+  `¥${Number(props.userBalance || 0).toLocaleString(undefined, {
     maximumFractionDigits: 6,
     minimumFractionDigits: 2
-  })
+  })}`
 )
 
 const closePopover = () => {

@@ -91,15 +91,13 @@ const getIcon = (name) => {
   return iconMap[key] || iconMap.default
 }
 
-const isMaterialIcon = (icon) => icon && /^[a-z][a-z0-9_]*$/.test(icon)
-
 const resolveIcon = (routeName, metaIcon) => {
-  if (isMaterialIcon(metaIcon)) {
-    return metaIcon
-  }
-
   if (metaIcon && iconAliasMap[metaIcon]) {
     return iconAliasMap[metaIcon]
+  }
+
+  if (metaIcon) {
+    return metaIcon
   }
 
   return getIcon(routeName)
@@ -164,6 +162,7 @@ export function useAppLayout() {
   const userStore = useUserStore()
 
   const lang = ref('zh')
+  const isDark = ref(false)
   const userBalance = ref(0)
   const elLocale = computed(() => (lang.value === 'zh' ? zhCn : en))
   const t = createTranslator(lang)
@@ -208,6 +207,7 @@ export function useAppLayout() {
 
   const toggleTheme = () => {
     const nextDark = document.documentElement.classList.toggle('dark')
+    isDark.value = nextDark
     sessionStorage.setItem('theme', nextDark ? 'dark' : 'light')
   }
 
@@ -239,8 +239,12 @@ export function useAppLayout() {
     const savedTheme = sessionStorage.getItem('theme')
     if (savedTheme === 'dark') {
       document.documentElement.classList.add('dark')
+      isDark.value = true
     } else if (savedTheme === 'light') {
       document.documentElement.classList.remove('dark')
+      isDark.value = false
+    } else {
+      isDark.value = document.documentElement.classList.contains('dark')
     }
 
     if (userStore.loadingInstance) {
@@ -255,6 +259,7 @@ export function useAppLayout() {
     dynamicNavigation,
     elLocale,
     initialize,
+    isDark,
     lang,
     logout,
     routerStore,

@@ -1,8 +1,15 @@
 <template>
-  <div class="max-w-[1400px] mx-auto space-y-8">
+  <div class="console-page-container space-y-8">
     <PageIntro :title="t('transactions')" :description="t('transactionsDesc')">
       <template #actions>
-        <TransactionsHeaderActions :balance="balance" :loading="loading" @refresh="fetchData" />
+        <TransactionsHeaderActions
+          :balance="balance"
+          :loading="loading"
+          :can-recharge="canSystemRecharge"
+          :disabled-reason="rechargeDisabledReason"
+          @refresh="fetchData"
+          @recharge="openRechargeDialog"
+        />
       </template>
     </PageIntro>
 
@@ -24,12 +31,22 @@
         @size-change="handleSizeChange"
       />
     </div>
+
+    <RechargeBalanceDialog
+      v-model="rechargeDialogVisible"
+      :form="rechargeForm"
+      :rules="rechargeRules"
+      :submitting="rechargeSubmitting"
+      @closed="closeRechargeDialog"
+      @submit="submitRecharge"
+    />
   </div>
 </template>
 
 <script setup>
 import { inject, onMounted } from 'vue'
 import PageIntro from '@/components/listPage/PageIntro.vue'
+import RechargeBalanceDialog from './components/RechargeBalanceDialog.vue'
 import TransactionsFiltersBar from './components/TransactionsFiltersBar.vue'
 import TransactionsHeaderActions from './components/TransactionsHeaderActions.vue'
 import TransactionsTableSection from './components/TransactionsTableSection.vue'
@@ -49,7 +66,16 @@ const {
   loading,
   page,
   pageSize,
+  canSystemRecharge,
+  closeRechargeDialog,
+  openRechargeDialog,
+  rechargeDialogVisible,
+  rechargeDisabledReason,
+  rechargeForm,
+  rechargeRules,
+  rechargeSubmitting,
   searchQuery,
+  submitRecharge,
   total,
   transactions
 } = useOrderTransactions({ t })

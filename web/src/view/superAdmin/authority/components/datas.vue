@@ -5,18 +5,16 @@
       href="https://plugin.gin-vue-admin.com/#/layout/newPluginInfo?id=36"
     />
     <div class="sticky top-0.5 z-10 my-4">
-      <el-button class="float-left" type="primary" @click="all">{{ t('selectAll') }}</el-button>
-      <el-button class="float-left" type="primary" @click="self"
-        >{{ t('selfRole') }}</el-button
-      >
-      <el-button class="float-left" type="primary" @click="selfAndChildren"
-        >{{ t('selfAndChildrenRole') }}</el-button
-      >
-      <el-button class="float-right" type="primary" @click="authDataEnter"
-        >{{ t('confirm') }}</el-button
-      >
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="flex flex-wrap gap-3">
+          <el-button type="primary" @click="all">{{ t('selectAll') }}</el-button>
+          <el-button type="primary" @click="self">{{ t('selfRole') }}</el-button>
+          <el-button type="primary" @click="selfAndChildren">{{ t('selfAndChildrenRole') }}</el-button>
+        </div>
+        <el-button class="sm:ml-auto" type="primary" @click="authDataEnter">{{ t('confirm') }}</el-button>
+      </div>
     </div>
-    <div class="clear-both pt-4">
+    <div class="pt-4">
       <el-checkbox-group v-model="dataAuthorityId" @change="selectAuthority">
         <el-checkbox
           v-for="(item, key) in authoritys"

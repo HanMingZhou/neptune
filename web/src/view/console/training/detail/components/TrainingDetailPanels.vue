@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-[1400px] mx-auto p-6">
+  <div class="console-page-container px-6 pb-6 pt-1 md:pt-2">
     <OverviewTab
       v-show="activeTab === 'overview'"
       :format-time="formatTime"

@@ -108,9 +108,9 @@
 +-------+  +---------+   +------------------------------+
 | MySQL |  |  Redis  |   |       Kubernetes API         |
 +-------+  +---------+   |  - Kubeflow (Notebook/TB)    |
-                          |  - Volcano  (Training)       |
-                          |  - PVC      (Storage)        |
-                          +------------------------------+
+                          |  - Volcano  (Training)      |
+                          |  - PVC      (Storage)       |
+                          +-----------------------------+
 ```
 
 ### 技术栈

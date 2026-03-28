@@ -2,7 +2,7 @@ import { computed, onMounted, reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { createInferenceService } from '@/api/inference'
 import { getImageList } from '@/api/image'
-import { getProductFilters, getProductList } from '@/api/product'
+import { getAggregateProductList, getProductFilters } from '@/api/product'
 import { getVolumeList } from '@/api/volume'
 import {
   INFERENCE_AUTH_TYPES,
@@ -36,6 +36,7 @@ export const useInferenceCreate = ({ t, router }) => {
     productId: '',
     payType: 1,
     workerCount: 2,
+    scheduleStrategy: 'BALANCED',
     autoRestart: false,
     maxRestarts: 3,
     servicePort: 30000,
@@ -76,12 +77,22 @@ export const useInferenceCreate = ({ t, router }) => {
 
   const hasCommand = computed(() => Boolean(form.command.trim()))
   const frameworkRequired = computed(() => form.deployType === 'DISTRIBUTED')
+  const selectedProduct = computed(() => products.value.find((item) => item.id === form.productId) || null)
+  const maxDistributedCount = computed(() => {
+    const product = selectedProduct.value
+    if (!product) return 0
+    if (form.scheduleStrategy === 'STRICT') {
+      return product.strictMax > 0 ? product.strictMax : (product.available || 0)
+    }
+    return product.balancedMax > 0 ? product.balancedMax : (product.available || 0)
+  })
 
   const canCreate = computed(() => {
     if (!form.displayName || !form.modelPvcId || !form.imageId || !form.productId) return false
     if (!hasCommand.value) return false
     if (frameworkRequired.value && !form.framework) return false
     if (form.deployType === 'DISTRIBUTED' && form.workerCount < 2) return false
+    if (form.deployType === 'DISTRIBUTED' && form.workerCount > maxDistributedCount.value) return false
     return true
   })
 
@@ -132,6 +143,7 @@ export const useInferenceCreate = ({ t, router }) => {
     form.deployType = value
     if (value === 'STANDALONE') {
       form.framework = ''
+      form.scheduleStrategy = 'BALANCED'
       return
     }
 
@@ -169,7 +181,7 @@ export const useInferenceCreate = ({ t, router }) => {
       if (filters.area) params.area = filters.area
       if (filters.gpuModel) params.gpuModel = filters.gpuModel
 
-      const res = await getProductList(params)
+      const res = await getAggregateProductList(params)
       if (res.code === 0) {
         products.value = res.data?.list || []
         if (products.value.length > 0 && !form.productId) {
@@ -247,6 +259,9 @@ export const useInferenceCreate = ({ t, router }) => {
         modelMountPath: form.modelMountPath || '/model',
         imageId: form.imageId,
         productId: form.productId,
+        templateProductId: form.productId,
+        instanceCount: form.deployType === 'DISTRIBUTED' ? form.workerCount : 1,
+        scheduleStrategy: form.deployType === 'DISTRIBUTED' ? form.scheduleStrategy : 'BALANCED',
         payType: form.payType,
         servicePort: form.servicePort,
         authType: form.authType,

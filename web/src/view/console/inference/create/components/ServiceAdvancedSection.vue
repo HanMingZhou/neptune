@@ -96,7 +96,7 @@
                 <div class="col-span-3">
                   <input
                     :value="mount.mountPath"
-                    class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg text-sm bg-white dark:bg-zinc-900 focus:ring-1 focus:ring-primary outline-none"
+                    class="create-form-input"
                     placeholder="/data"
                     type="text"
                     @input="$emit('update:mount', { index, key: 'mountPath', value: $event.target.value })"
@@ -105,7 +105,7 @@
                 <div class="col-span-3">
                   <input
                     :value="mount.subPath"
-                    class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg text-sm bg-white dark:bg-zinc-900 focus:ring-1 focus:ring-primary outline-none"
+                    class="create-form-input"
                     placeholder="sub-dir"
                     type="text"
                     @input="$emit('update:mount', { index, key: 'subPath', value: $event.target.value })"
@@ -148,7 +148,7 @@
                   <input
                     :value="env.name"
                     :placeholder="t('enterVariableName')"
-                    class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg text-sm bg-white dark:bg-zinc-900 focus:ring-1 focus:ring-primary outline-none font-mono"
+                    class="create-form-input font-mono"
                     type="text"
                     @input="$emit('update:env', { index, key: 'name', value: $event.target.value })"
                   />
@@ -157,7 +157,7 @@
                   <input
                     :value="env.value"
                     :placeholder="t('enterVariableValue')"
-                    class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg text-sm bg-white dark:bg-zinc-900 focus:ring-1 focus:ring-primary outline-none"
+                    class="create-form-input"
                     type="text"
                     @input="$emit('update:env', { index, key: 'value', value: $event.target.value })"
                   />

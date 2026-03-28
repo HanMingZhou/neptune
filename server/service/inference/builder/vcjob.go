@@ -43,13 +43,14 @@ func (b *BaseInferenceBuilder) BuildVCJob(spec *InferenceSpec) (*vcbatch.Job, er
 
 	headAddr := fmt.Sprintf("%s-head-0.%s", spec.Name, spec.Name)
 	totalNodes := spec.WorkerCount
+	affinity := helper.BuildSchedulingAffinity(spec.InstanceName, spec.AllowedNodes, spec.StrictSpread)
 
-	headTask := b.buildHeadTask(spec, envVars, headAddr, totalNodes, resources, volumes, volumeMounts, tolerations)
+	headTask := b.buildHeadTask(spec, envVars, headAddr, totalNodes, resources, volumes, volumeMounts, tolerations, affinity)
 	tasks := []vcbatch.TaskSpec{headTask}
 
 	workerReplicas := spec.WorkerCount - 1
 	if workerReplicas > 0 {
-		workerTask := b.buildWorkerTask(spec, envVars, headAddr, totalNodes, workerReplicas, resources, volumes, volumeMounts, tolerations)
+		workerTask := b.buildWorkerTask(spec, envVars, headAddr, totalNodes, workerReplicas, resources, volumes, volumeMounts, tolerations, affinity)
 		tasks = append(tasks, workerTask)
 	}
 
@@ -95,6 +96,7 @@ func (b *BaseInferenceBuilder) buildHeadTask(
 	volumes []corev1.Volume,
 	volumeMounts []corev1.VolumeMount,
 	tolerations []corev1.Toleration,
+	affinity *corev1.Affinity,
 ) vcbatch.TaskSpec {
 	// head 节点 NCCL 环境变量
 	ncclEnvs := append(envVars,
@@ -164,6 +166,7 @@ func (b *BaseInferenceBuilder) buildHeadTask(
 				},
 				Volumes:     volumes,
 				Tolerations: tolerations,
+				Affinity:    affinity,
 			},
 		},
 	}
@@ -185,6 +188,7 @@ func (b *BaseInferenceBuilder) buildWorkerTask(
 	volumes []corev1.Volume,
 	volumeMounts []corev1.VolumeMount,
 	tolerations []corev1.Toleration,
+	affinity *corev1.Affinity,
 ) vcbatch.TaskSpec {
 	// worker 节点 NCCL 环境变量（NODE_RANK 在 shell 中动态计算）
 	ncclEnvs := append(envVars,
@@ -229,6 +233,7 @@ func (b *BaseInferenceBuilder) buildWorkerTask(
 				},
 				Volumes:     volumes,
 				Tolerations: tolerations,
+				Affinity:    affinity,
 			},
 		},
 	}

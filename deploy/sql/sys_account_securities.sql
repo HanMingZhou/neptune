@@ -25,3 +25,4 @@ create index idx_sys_account_securities_github_id
     on sys_account_securities (github_id);
 
 INSERT INTO aiInfra.sys_account_securities (id, created_at, updated_at, deleted_at, user_id, mfa_enabled, mfa_secret, github_id, github_username, access_key_id, access_key_secret) VALUES (1, '2026-02-16 11:57:50.263', '2026-02-20 14:49:35.130', null, 1, 0, 'YNke2CARJYpgE6zk9y2Pntb1F0S9xaWc', '', '', '3fyJL1PIIPU3UFXo', 'fFA20jpMEITEIGoRKm423c5MHiP5i4KL');
+INSERT INTO aiInfra.sys_account_securities (id, created_at, updated_at, deleted_at, user_id, mfa_enabled, mfa_secret, github_id, github_username, access_key_id, access_key_secret) VALUES (2, '2026-02-25 01:12:16.467', '2026-02-25 01:12:16.467', null, 4, 0, '', '', '', '', '');

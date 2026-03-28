@@ -50,9 +50,11 @@ type Inference struct {
 	ImageId uint `json:"imageId" gorm:"column:image_id;not null;comment:镜像ID"`
 
 	// 并行配置 (分布式模式)
-	TensorParallel   int `json:"tensorParallel" gorm:"column:tensor_parallel;default:1;comment:张量并行度"`
-	PipelineParallel int `json:"pipelineParallel" gorm:"column:pipeline_parallel;default:1;comment:流水线并行度"`
-	WorkerCount      int `json:"workerCount" gorm:"column:worker_count;default:0;comment:Worker数量"`
+	TensorParallel   int    `json:"tensorParallel" gorm:"column:tensor_parallel;default:1;comment:张量并行度"`
+	PipelineParallel int    `json:"pipelineParallel" gorm:"column:pipeline_parallel;default:1;comment:流水线并行度"`
+	InstanceCount    int    `json:"instanceCount" gorm:"column:instance_count;default:1;comment:实例数量"`
+	WorkerCount      int    `json:"workerCount" gorm:"column:worker_count;default:0;comment:Worker数量"`
+	ScheduleStrategy string `json:"scheduleStrategy" gorm:"column:schedule_strategy;type:varchar(20);default:BALANCED;comment:调度策略"`
 
 	// 资源配置
 	ProductId  uint   `json:"productId" gorm:"column:product_id;comment:产品ID"`

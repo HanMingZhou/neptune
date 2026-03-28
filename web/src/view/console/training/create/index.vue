@@ -2,19 +2,15 @@
   <div class="min-h-screen bg-background-light dark:bg-background-dark pb-24">
     <PageHeader title-key="createTrainingJob" @back="goBack" />
 
-    <div class="max-w-[1400px] mx-auto px-6 py-6 space-y-6">
+    <div class="console-page-container px-6 py-6 space-y-6">
       <TrainingResourceSelectionSection
         :areas="areas"
-        :available-capacity="availableCapacity"
         :change-filter="changeFilter"
         :cpu-models="cpuModels"
-        :decrease-worker="decreaseWorker"
         :filters="filters"
         :form="form"
         :format-price="formatPrice"
         :gpu-models="gpuModels"
-        :increase-worker="increaseWorker"
-        :max-worker-count="maxWorkerCount"
         :pay-types="payTypes"
         :price-unit-text="priceUnitText"
         :products="products"
@@ -29,16 +25,22 @@
         :active-tab="activeTab"
         :add-env="addEnv"
         :add-mount="addMount"
+        :available-capacity="availableCapacity"
         :change-image-tab="changeImageTab"
+        :decrease-worker="decreaseWorker"
         :filtered-images="filteredImages"
         :form="form"
         :framework-types="frameworkTypes"
         :image-tabs="imageTabs"
+        :increase-worker="increaseWorker"
         :insert-mpi-example="insertMpiExample"
         :insert-pytorch-example="insertPytorchExample"
+        :max-worker-count="maxWorkerCount"
         :pvcs="pvcs"
         :remove-env="removeEnv"
         :remove-mount="removeMount"
+        :selected-product="selectedProduct"
+        :show-worker-count="showWorkerCount"
       />
     </div>
 

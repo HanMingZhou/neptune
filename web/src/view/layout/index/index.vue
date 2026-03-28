@@ -3,6 +3,7 @@
     <div class="flex h-screen w-screen overflow-hidden text-slate-900 dark:text-slate-100 font-sans">
       <LayoutSidebar
         :dynamic-navigation="dynamicNavigation"
+        :is-dark="isDark"
         @toggle-theme="toggleTheme"
       />
 
@@ -16,7 +17,7 @@
           @toggle-lang="toggleLang"
         />
 
-        <main class="flex-1 overflow-y-auto custom-scrollbar p-8 bg-background-light dark:bg-background-dark/50">
+        <main class="flex-1 overflow-y-auto custom-scrollbar px-4 py-6 lg:px-6 lg:py-8 bg-background-light dark:bg-background-dark/50">
           <router-view v-slot="{ Component, route: currentRoute }">
             <keep-alive :include="routerStore.keepAliveRouters">
               <component :is="Component" :key="currentRoute.fullPath" />
@@ -39,6 +40,7 @@ const {
   dynamicNavigation,
   elLocale,
   initialize,
+  isDark,
   lang,
   logout,
   routerStore,

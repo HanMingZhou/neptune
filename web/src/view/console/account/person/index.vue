@@ -1,12 +1,9 @@
 <template>
   <div>
     <ProfileOverviewPanel
-      :activities="activities"
       :edit-flag="editFlag"
       :nick-name="nickName"
       :user-info="userStore.userInfo"
-      :skills="skills"
-      :stats="stats"
       @change-email="emailDialog.visible = true"
       @change-password="passwordDialog.visible = true"
       @change-phone="phoneDialog.visible = true"
@@ -33,7 +30,6 @@ import { useAccountProfile } from './composables/useAccountProfile'
 const t = inject('t', (key) => key)
 
 const {
-  activities,
   closeEdit,
   editFlag,
   emailDialog,
@@ -42,8 +38,6 @@ const {
   openEdit,
   passwordDialog,
   phoneDialog,
-  skills,
-  stats,
   userStore
 } = useAccountProfile({ t })
 </script>

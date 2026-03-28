@@ -21,12 +21,16 @@ RUN apk add --no-cache ca-certificates tzdata \
     && echo $TZ > /etc/timezone
 
 WORKDIR /app
-COPY --from=builder /build/server .
+COPY --from=builder /build/server ./server
 COPY --from=builder /build/config.yaml ./config.yaml
 COPY --from=builder /build/resource ./resource/
-RUN mkdir -p /app/log /app/uploads/file
+RUN addgroup -S app -g 10001 \
+    && adduser -S -D -H -u 10001 -G app app \
+    && mkdir -p /app/log /app/uploads/file /app/resource/excel \
+    && chown -R app:app /app
 
 ENV GVA_CONFIG=/app/config.yaml
 
 EXPOSE 8888
-ENTRYPOINT ["./server"]
+USER app:app
+ENTRYPOINT ["/app/server"]

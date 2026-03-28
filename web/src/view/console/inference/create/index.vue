@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-background-light dark:bg-background-dark pb-32">
     <PageHeader title-key="inference.createTitle" @back="handleCancel" />
 
-    <div class="max-w-[1400px] mx-auto px-6 py-6 space-y-6">
+    <div class="console-page-container px-6 py-6 space-y-6">
       <InferenceResourceSelectionSection
         :areas="areas"
         :change-filter="changeFilter"

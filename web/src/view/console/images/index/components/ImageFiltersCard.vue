@@ -3,7 +3,7 @@
     <div class="p-4 border-b border-border-light dark:border-border-dark flex flex-wrap gap-4 items-center">
       <div class="relative flex-1 max-w-[160px]">
         <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">category</span>
-        <el-select v-model="filterTypeModel" :placeholder="t('imageType')" clearable class="!w-full gva-custom-select">
+        <el-select v-model="filterTypeModel" :placeholder="t('imageType')" clearable class="!w-full list-filter-select gva-custom-select">
           <el-option :label="t('all')" value="" />
           <el-option :label="t('systemImage')" :value="1" />
           <el-option :label="t('customImage')" :value="2" />
@@ -12,7 +12,7 @@
 
       <div class="relative flex-1 max-w-[160px]">
         <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">workspaces</span>
-        <el-select v-model="filterUsageTypeModel" :placeholder="t('imageUsageType')" clearable class="!w-full gva-custom-select">
+        <el-select v-model="filterUsageTypeModel" :placeholder="t('imageUsageType')" clearable class="!w-full list-filter-select gva-custom-select">
           <el-option :label="t('all')" value="" />
           <el-option :label="t('usageNotebook')" :value="1" />
           <el-option :label="t('usageTrain')" :value="2" />
@@ -26,21 +26,21 @@
           v-model="filterKeywordModel"
           type="text"
           :placeholder="t('imageSearchDesc')"
-          class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-zinc-800 border border-border-light dark:border-border-dark rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none"
+          class="list-search-input !w-full"
           @keyup.enter="$emit('search')"
         />
       </div>
 
       <div class="flex gap-2">
         <button
-          class="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg text-sm font-medium transition-all"
+          class="list-toolbar-button list-toolbar-button--primary"
           @click="$emit('search')"
         >
           <span class="material-icons text-[18px]">search</span>
           {{ t('searchQuery') }}
         </button>
         <button
-          class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-zinc-800 border border-border-light dark:border-border-dark hover:bg-slate-50 dark:hover:bg-zinc-700 rounded-lg text-sm font-medium transition-all"
+          class="list-toolbar-button list-toolbar-button--secondary"
           @click="$emit('reset')"
         >
           <span class="material-icons text-[18px]">autorenew</span>
@@ -87,9 +87,3 @@ const filterUsageTypeModel = computed({
   set: (value) => emit('update:filter-usage-type', value)
 })
 </script>
-
-<style scoped>
-.gva-custom-select :deep(.el-input__wrapper) {
-  @apply bg-slate-50 dark:bg-zinc-800 border-none shadow-none pl-10;
-}
-</style>

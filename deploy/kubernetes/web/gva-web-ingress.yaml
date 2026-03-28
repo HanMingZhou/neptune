@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: neptune-ingress
+  namespace: neptune
   labels:
     app.kubernetes.io/name: neptune
     app.kubernetes.io/component: ingress

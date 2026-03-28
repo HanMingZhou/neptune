@@ -1,9 +1,16 @@
-import { ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import dayjs from 'dayjs'
-import { getOrderOverview, getTransactionList } from '@/api/order'
+import { ElMessage } from 'element-plus'
+import { getOrderOverview, getTransactionList, rechargeBalance } from '@/api/order'
+import { useBtnAuth } from '@/utils/btnAuth'
+import { useUserStore } from '@/pinia/modules/user'
+
+const SUPER_ADMIN_AUTHORITY_ID = 888
 
 export function useOrderTransactions({ t }) {
   const translate = t || ((key) => key)
+  const btnAuth = useBtnAuth()
+  const userStore = useUserStore()
 
   const loading = ref(false)
   const balance = ref(0)
@@ -14,13 +21,44 @@ export function useOrderTransactions({ t }) {
   const page = ref(1)
   const pageSize = ref(10)
   const total = ref(0)
+  const rechargeDialogVisible = ref(false)
+  const rechargeSubmitting = ref(false)
+  const rechargeForm = reactive({
+    amount: 100,
+    method: 4,
+    remark: ''
+  })
+
+  const rechargeRules = {
+    amount: [
+      {
+        validator: (_, value, callback) => {
+          if (value === undefined || value === null || Number(value) <= 0) {
+            callback(new Error(translate('order.rechargeAmountRequired')))
+            return
+          }
+          callback()
+        },
+        trigger: 'blur'
+      }
+    ]
+  }
+
+  const canSystemRecharge = computed(() => {
+    const authorityId = Number(userStore.userInfo?.authorityId || userStore.userInfo?.authority?.authorityId || 0)
+    return Boolean(btnAuth.recharge_system) || authorityId === SUPER_ADMIN_AUTHORITY_ID
+  })
+
+  const rechargeDisabledReason = computed(() => (
+    canSystemRecharge.value ? '' : translate('order.personalRechargeComingSoon')
+  ))
 
   const getMethodText = (method) => {
     const methodMap = {
-      1: '支付宝',
-      2: '微信',
-      3: '余额',
-      4: '系统'
+      1: translate('order.alipayRecharge'),
+      2: translate('order.wechatRecharge'),
+      3: translate('order.balancePay'),
+      4: translate('order.platformRecharge')
     }
     return methodMap[method] || '-'
   }
@@ -62,6 +100,20 @@ export function useOrderTransactions({ t }) {
 
   const formatDate = (date) => dayjs(date).format('YYYY-MM-DD HH:mm')
 
+  const resolveTransactionStatus = (item) => {
+    if (item.type === 1 || item.type === 3 || item.type === 4 || !item.orderStatus || Number(item.orderStatus) <= 0) {
+      return {
+        statusStyle: 'bg-emerald-500/10 text-emerald-500',
+        statusText: translate('success')
+      }
+    }
+
+    return {
+      statusStyle: getStatusStyle(item.orderStatus),
+      statusText: getStatusText(item.orderStatus)
+    }
+  }
+
   const fetchData = async (silent = false) => {
     if (!silent) {
       loading.value = true
@@ -90,6 +142,7 @@ export function useOrderTransactions({ t }) {
 
       if (txRes.code === 0) {
         transactions.value = (txRes.data.list || []).map((item) => ({
+          ...resolveTransactionStatus(item),
           id: item.transactionNo || `TXN-${item.id}`,
           time: formatDate(item.createdAt),
           type: item.type === 1 ? 'Recharge' : (item.type === 2 ? 'Consumption' : (item.type === 3 ? 'Refund' : 'Adjustment')),
@@ -99,12 +152,10 @@ export function useOrderTransactions({ t }) {
           method: getMethodText(item.method),
           rawAmount: item.amount,
           orderStatus: item.orderStatus,
-          statusStyle: item.orderStatus !== undefined ? getStatusStyle(item.orderStatus) : '',
-          statusText: item.orderStatus !== undefined ? getStatusText(item.orderStatus) : '',
           remark: item.remark,
           resourceName: item.resourceName || '',
           resourceTypeText: getResourceTypeText(item.resourceType),
-          orderNo: item.orderNo || '',
+          orderNo: item.orderNo || (item.type === 1 ? item.transactionNo : ''),
           balanceAfter: item.balanceAfter ?? 0
         }))
         total.value = txRes.data.total
@@ -139,6 +190,55 @@ export function useOrderTransactions({ t }) {
     fetchData()
   }
 
+  const resetRechargeForm = () => {
+    rechargeForm.amount = 100
+    rechargeForm.method = 4
+    rechargeForm.remark = ''
+  }
+
+  const openRechargeDialog = () => {
+    if (!canSystemRecharge.value) {
+      ElMessage.info(rechargeDisabledReason.value || translate('order.comingSoon'))
+      return
+    }
+    resetRechargeForm()
+    rechargeDialogVisible.value = true
+  }
+
+  const closeRechargeDialog = () => {
+    rechargeDialogVisible.value = false
+    resetRechargeForm()
+  }
+
+  const submitRecharge = async () => {
+    if (!canSystemRecharge.value) {
+      ElMessage.error(translate('order.rechargePermissionDenied'))
+      return
+    }
+
+    rechargeSubmitting.value = true
+    try {
+      const res = await rechargeBalance({
+        amount: rechargeForm.amount,
+        method: rechargeForm.method,
+        remark: rechargeForm.remark
+      })
+
+      if (res.code !== 0) {
+        ElMessage.error(res.msg || translate('order.rechargeFailed'))
+        return
+      }
+
+      ElMessage.success(translate('order.rechargeSuccess'))
+      closeRechargeDialog()
+      await fetchData()
+    } catch (error) {
+      console.error('充值失败:', error)
+    } finally {
+      rechargeSubmitting.value = false
+    }
+  }
+
   watch(filterType, () => {
     page.value = 1
     fetchData()
@@ -158,6 +258,15 @@ export function useOrderTransactions({ t }) {
     pageSize,
     searchQuery,
     total,
-    transactions
+    transactions,
+    canSystemRecharge,
+    rechargeDialogVisible,
+    rechargeDisabledReason,
+    rechargeForm,
+    rechargeRules,
+    rechargeSubmitting,
+    openRechargeDialog,
+    closeRechargeDialog,
+    submitRecharge
   }
 }

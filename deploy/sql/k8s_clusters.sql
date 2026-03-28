@@ -20,24 +20,24 @@ create table k8s_clusters
 create index idx_k8s_clusters_deleted_at
     on k8s_clusters (deleted_at);
 
-INSERT INTO aiInfra.k8s_clusters (id, created_at, updated_at, deleted_at, name, area, description, kubeconfig, api_server, status, harbor_addr, storage_class) VALUES (1, '2025-12-23 00:33:07.000', '2026-02-24 10:40:55.181', null, 'minikube', '上海', 'local', 'apiVersion: v1
+INSERT INTO aiInfra.k8s_clusters (id, created_at, updated_at, deleted_at, name, area, description, kubeconfig, api_server, status, harbor_addr, storage_class) VALUES (1, '2025-12-23 00:33:07.000', '2026-03-28 18:55:07.455', null, 'minikube', '上海', 'local', 'apiVersion: v1
 clusters:
 - cluster:
     certificate-authority: /Users/jerrytom/.minikube/ca.crt
     extensions:
     - extension:
-        last-update: Tue, 24 Feb 2026 10:37:22 CST
+        last-update: Wed, 25 Mar 2026 21:09:14 CST
         provider: minikube.sigs.k8s.io
         version: v1.36.0
       name: cluster_info
-    server: https://127.0.0.1:62586
+    server: https://127.0.0.1:63868
   name: minikube
 contexts:
 - context:
     cluster: minikube
     extensions:
     - extension:
-        last-update: Tue, 24 Feb 2026 10:37:22 CST
+        last-update: Wed, 25 Mar 2026 21:09:14 CST
         provider: minikube.sigs.k8s.io
         version: v1.36.0
       name: context_info
@@ -51,4 +51,4 @@ users:
 - name: minikube
   user:
     client-certificate: /Users/jerrytom/.minikube/profiles/minikube/client.crt
-    client-key: /Users/jerrytom/.minikube/profiles/minikube/client.key', 'https://127.0.0.1:62586', 1, 'https://hub.docker.com/', 'standard');
+    client-key: /Users/jerrytom/.minikube/profiles/minikube/client.key', 'https://127.0.0.1:63868', 1, 'https://hub.docker.com/', 'standard');

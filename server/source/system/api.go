@@ -227,6 +227,7 @@ func (i *initApi) InitializeData(ctx context.Context) (context.Context, error) {
 		{ApiGroup: "费用账单", Method: "POST", Path: "/api/v1/order/order/list", Description: "订单列表"},
 		{ApiGroup: "费用账单", Method: "POST", Path: "/api/v1/order/invoice/list", Description: "发票记录列表"},
 		{ApiGroup: "费用账单", Method: "POST", Path: "/api/v1/order/invoice/apply", Description: "申请发票"},
+		{ApiGroup: "费用账单", Method: "POST", Path: "/api/v1/order/recharge", Description: "余额充值"},
 
 		{ApiGroup: "容器实例", Method: "POST", Path: "/api/v1/notebook/add", Description: "创建容器实例"},
 		{ApiGroup: "容器实例", Method: "POST", Path: "/api/v1/notebook/delete", Description: "删除容器实例"},
@@ -256,7 +257,7 @@ func (i *initApi) InitializeData(ctx context.Context) (context.Context, error) {
 		{ApiGroup: "镜像", Method: "POST", Path: "/api/v1/image/add", Description: "创建镜像"},
 		{ApiGroup: "镜像", Method: "POST", Path: "/api/v1/image/update", Description: "更新镜像"},
 		{ApiGroup: "镜像", Method: "POST", Path: "/api/v1/image/delete", Description: "删除镜像"},
-
+		{ApiGroup: "产品", Method: "GET", Path: "/api/v1/product/aggregate/list", Description: "产品库存总数"},
 		{ApiGroup: "产品", Method: "GET", Path: "/api/v1/product/list", Description: "获取产品列表"},
 		{ApiGroup: "产品", Method: "GET", Path: "/api/v1/product/get", Description: "获取产品详情"},
 		{ApiGroup: "产品", Method: "GET", Path: "/api/v1/product/filter/list", Description: "获取产品筛选条件"},

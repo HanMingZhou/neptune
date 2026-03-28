@@ -8,6 +8,7 @@ import (
 
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	vcbatch "volcano.sh/apis/pkg/apis/batch/v1alpha1"
 )
 
@@ -46,6 +47,8 @@ type taskTemplateOptions struct {
 	volumes       []corev1.Volume
 	tolerations   []corev1.Toleration
 	readiness     *corev1.Probe
+	labels        map[string]string
+	affinity      *corev1.Affinity
 }
 
 // NewJobBuilder 根据框架类型创建对应的 Builder
@@ -157,6 +160,9 @@ func buildGPUTolerations(product *trainingReq.ProductSpec) []corev1.Toleration {
 
 func buildTaskTemplate(opts taskTemplateOptions) corev1.PodTemplateSpec {
 	return corev1.PodTemplateSpec{
+		ObjectMeta: metav1.ObjectMeta{
+			Labels: cloneStringMap(opts.labels),
+		},
 		Spec: corev1.PodSpec{
 			RestartPolicy: corev1.RestartPolicyNever,
 			Containers: []corev1.Container{
@@ -173,6 +179,7 @@ func buildTaskTemplate(opts taskTemplateOptions) corev1.PodTemplateSpec {
 			},
 			Volumes:     append([]corev1.Volume(nil), opts.volumes...),
 			Tolerations: append([]corev1.Toleration(nil), opts.tolerations...),
+			Affinity:    opts.affinity,
 		},
 	}
 }
@@ -183,5 +190,16 @@ func cloneEnvVars(envs []corev1.EnvVar) []corev1.EnvVar {
 	}
 	cloned := make([]corev1.EnvVar, len(envs))
 	copy(cloned, envs)
+	return cloned
+}
+
+func cloneStringMap(values map[string]string) map[string]string {
+	if len(values) == 0 {
+		return nil
+	}
+	cloned := make(map[string]string, len(values))
+	for k, v := range values {
+		cloned[k] = v
+	}
 	return cloned
 }

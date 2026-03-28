@@ -8,7 +8,7 @@
         :class="isActive ? 'sidebar-active shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800'"
         :style="{ paddingLeft: `${level * 16 + 12}px` }"
       >
-        <span v-if="item.icon" class="material-icons text-[18px] opacity-80">{{ item.icon }}</span>
+        <AppIcon v-if="item.icon" :name="item.icon" class="text-[18px] opacity-80" />
         <span class="flex-1 truncate">{{ displayTitle }}</span>
       </div>
     </template>
@@ -20,7 +20,7 @@
         :class="hasActiveChild ? 'text-primary' : 'text-slate-500 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-zinc-800'"
         :style="{ paddingLeft: `${level * 16 + 12}px` }"
       >
-        <span v-if="item.icon" class="material-icons text-[18px] opacity-80">{{ item.icon }}</span>
+        <AppIcon v-if="item.icon" :name="item.icon" class="text-[18px] opacity-80" />
         <span class="flex-1 truncate">{{ displayTitle }}</span>
         <span v-if="hasChildren" class="material-icons text-[16px] transition-transform duration-200" :class="{ '-rotate-90': !isOpen }">expand_more</span>
       </div>
@@ -39,57 +39,58 @@
 </template>
 
 <script setup>
-import { ref, computed, inject } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { ref, computed, inject } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import AppIcon from '@/components/AppIcon.vue'
 
 const props = defineProps({
   item: Object,
   level: { type: Number, default: 0 }
-});
+})
 
-const t = inject('t');
-const route = useRoute();
-const router = useRouter();
-const isOpen = ref(true);
+const t = inject('t')
+const route = useRoute()
+const router = useRouter()
+const isOpen = ref(true)
 
 // 菜单标题：优先使用 i18n 翻译，fallback 到后端返回的 title
 const displayTitle = computed(() => {
   if (props.item.titleKey && t) {
-    const translated = t(props.item.titleKey);
+    const translated = t(props.item.titleKey)
     // 如果翻译结果不等于 key 本身，说明找到了翻译
     if (translated !== props.item.titleKey) {
-      return translated;
+      return translated
     }
   }
-  return props.item.title;
-});
+  return props.item.title
+})
 
-const isActive = computed(() => props.item.routeName === route.name);
-const hasChildren = computed(() => props.item.children && props.item.children.length > 0);
+const isActive = computed(() => props.item.routeName === route.name)
+const hasChildren = computed(() => props.item.children && props.item.children.length > 0)
 
 // 导航到指定路由
 const navigateTo = (routeName) => {
-  console.log('Navigating to:', routeName);
+  console.log('Navigating to:', routeName)
   if (routeName) {
     router.push({ name: routeName }).catch(err => {
-      console.error('Navigation failed:', err);
-    });
+      console.error('Navigation failed:', err)
+    })
   }
-};
+}
 
 // 点击处理（折叠/展开）
 const handleClick = () => {
   if (hasChildren.value) {
-    isOpen.value = !isOpen.value;
+    isOpen.value = !isOpen.value
   }
-};
+}
 
 // 判断是否有子项目处于激活状态
 const hasActiveChild = computed(() => {
   if (!props.item.children) return false;
-  const check = (items) => items.some(i => i.routeName === route.name || (i.children && check(i.children)));
-  return check(props.item.children);
-});
+  const check = (items) => items.some(i => i.routeName === route.name || (i.children && check(i.children)))
+  return check(props.item.children)
+})
 </script>
 
 <style scoped>

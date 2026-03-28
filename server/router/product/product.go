@@ -11,6 +11,7 @@ func (r *ProductRouter) InitProductRouter(Router *gin.RouterGroup) {
 
 	{
 		productWithNotRecorderRouter.GET("list", productApi.GetProductList)
+		productWithNotRecorderRouter.GET("aggregate/list", productApi.GetAggregateProductList)
 		productWithNotRecorderRouter.GET("get", productApi.GetProductDetail)
 		productWithNotRecorderRouter.GET("filter/list", productApi.GetProductFilters)
 	}

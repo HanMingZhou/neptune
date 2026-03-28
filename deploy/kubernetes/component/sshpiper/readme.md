@@ -231,27 +231,51 @@ Pod 的 sshd 验证密码 → 通过/拒绝
 
 ## 六、部署步骤
 
-### 6.1 安装 SSHPiper CRD
-
-```bash
-kubectl apply -f https://raw.githubusercontent.com/tg123/sshpiper/master/plugin/kubernetes/crd.yaml
-```
-
-### 6.2 生成 Host Key
+### 6.1 生成 Host Key
 
 SSHPiper 作为 SSH 服务器需要一个 Host Key（类似 HTTPS 的服务器证书）：
 
 ```bash
 # 生成 Host Key
 ssh-keygen -f ssh_host_ed25519_key -t ed25519 -N ''
+```
 
-# 创建为 K8s Secret
+### 6.2 创建 SSHPiper 服务端私钥 Secret
+
+`deploy.yml` 只引用 `kubeflow/sshpiper-server-key`，不会在仓库中创建私钥 Secret。生成好 Host Key 后执行：
+
+```bash
+kubectl create secret generic sshpiper-server-key \
+  -n kubeflow \
+  --from-file=server_key=ssh_host_ed25519_key
+```
+
+如果你已经在别处生成了服务端私钥，也可以把上面的 `ssh_host_ed25519_key` 替换成你的实际文件路径。
+
+如果需要轮换，可以先删后建：
+
+```bash
+kubectl delete secret sshpiper-server-key -n kubeflow
 kubectl create secret generic sshpiper-server-key \
   --from-file=server_key=ssh_host_ed25519_key \
   -n kubeflow
 ```
 
-### 6.3 部署 SSHPiper
+建议使用专门给当前集群生成的服务端私钥，不要继续复用已经提交过仓库或用于其他环境的旧密钥。
+
+如果你使用 [deploy_all.sh](/Users/jerrytom/go/src/test/kubeflow/neptune/deploy/kubernetes/component/deploy_all.sh)，脚本会先检查 `kubeflow/sshpiper-server-key` 是否已存在；若不存在且本地有 `./sshpiper/ssh_host_ed25519_key`，会自动创建该 Secret。生产环境建议改用你自己生成的私钥，并在执行时指定：
+
+```bash
+SSHPIPER_SERVER_KEY_FILE=/path/to/ssh_host_ed25519_key ./deploy_all.sh
+```
+
+### 6.3 安装 SSHPiper CRD
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/tg123/sshpiper/7ce7b52e6a71f167ee78fd439a19d016e610d1d2/plugin/kubernetes/crd.yaml
+```
+
+### 6.4 部署 SSHPiper
 
 ```bash
 kubectl apply -f deploy.yml
@@ -261,7 +285,7 @@ kubectl apply -f deploy.yml
 > `sshpiperd` 官方镜像默认监听容器内的 **`2222`** 端口，而不是 `22` 端口！
 > 因此，在 `deploy.yml` 的 Service 配置中，必须写明 `port: 22`映射到 `targetPort: 2222`，同时 Deployment 的 `containerPort` 必须声明为 `2222`，否则 APISIX 发往 `sshpiper:22` 的流量将遭到拒绝 (`Connection refused`)。
 
-### 6.4 验证
+### 6.5 验证
 
 ```bash
 # 检查 Pod

@@ -1,5 +1,5 @@
 <template>
-  <aside class="w-64 h-full border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark flex flex-col shrink-0 overflow-y-auto custom-scrollbar shadow-2xl">
+  <aside class="w-64 h-full border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark flex flex-col shrink-0 overflow-hidden shadow-2xl">
     <div class="p-6 pb-2 mb-2 sticky top-0 bg-surface-light dark:bg-surface-dark z-20">
       <div class="flex items-center gap-3 cursor-pointer group transition-all" @click="router.push({ path: '/' })">
         <div class="relative">
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <nav class="flex-1 px-3 py-4 space-y-6">
+    <nav class="flex-1 overflow-y-auto custom-scrollbar px-3 py-4 space-y-6">
       <div v-for="group in dynamicNavigation" :key="group.title" class="space-y-1">
         <p class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[2px] px-3 mb-2">
           {{ t(group.title) }}
@@ -33,13 +33,18 @@
       </div>
     </nav>
 
-    <div class="p-4 border-t border-border-light dark:border-border-dark bg-slate-50/50 dark:bg-zinc-900/50">
+    <div class="shrink-0 p-4 border-t border-border-light dark:border-border-dark bg-slate-50/80 dark:bg-zinc-900/70 backdrop-blur-sm">
       <button
-        class="w-full flex items-center gap-3 px-3 py-2 text-xs text-slate-500 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-zinc-800 rounded font-bold uppercase tracking-wider transition-colors"
+        class="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl border border-border-light/80 bg-white/80 text-xs font-bold uppercase tracking-wider text-slate-500 shadow-sm transition-colors hover:bg-slate-100 dark:border-border-dark dark:bg-zinc-800/80 dark:text-slate-400 dark:hover:bg-zinc-800"
         @click="emit('toggle-theme')"
       >
-        <span class="material-icons text-[18px]">contrast</span>
-        {{ t('theme') }}
+        <span class="flex items-center gap-3">
+          <span class="material-icons text-[18px]">{{ isDark ? 'dark_mode' : 'light_mode' }}</span>
+          {{ t('theme') }}
+        </span>
+        <span class="text-[10px] tracking-[0.16em] text-slate-400 dark:text-slate-500">
+          {{ isDark ? 'DARK' : 'LIGHT' }}
+        </span>
       </button>
     </div>
   </aside>
@@ -55,6 +60,10 @@ defineProps({
   dynamicNavigation: {
     type: Array,
     default: () => []
+  },
+  isDark: {
+    type: Boolean,
+    default: false
   }
 })
 

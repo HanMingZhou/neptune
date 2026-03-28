@@ -93,6 +93,34 @@ func (a *OrderApi) GetTransactionList(c *gin.Context) {
 	}, "获取成功", c)
 }
 
+// RechargeBalance 余额充值
+// @Tags Order
+// @Summary 余额充值
+// @accept application/json
+// @Produce application/json
+// @Param data body request.RechargeBalanceReq true "充值信息"
+// @Success 200 {object} response.Response{data=orderResp.RechargeBalanceResp} "成功"
+// @Router /api/v1/order/recharge [post]
+func (a *OrderApi) RechargeBalance(c *gin.Context) {
+	var req request.RechargeBalanceReq
+	err := c.ShouldBindJSON(&req)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+
+	userId := utils.GetUserID(c)
+	authorityId := utils.GetUserAuthorityId(c)
+	resp, err := orderService.RechargeBalance(c, userId, authorityId, req)
+	if err != nil {
+		global.GVA_LOG.Error("充值失败!", zap.Error(err))
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+
+	response.OkWithDetailed(resp, "充值成功", c)
+}
+
 // GetInvoiceList 获取发票列表
 // @Tags Order
 // @Summary 获取发票列表

@@ -270,6 +270,7 @@ func (i *initCasbin) InitializeData(ctx context.Context) (context.Context, error
 		{Ptype: "p", V0: "888", V1: "/api/v1/product/list", V2: "GET"},
 		{Ptype: "p", V0: "888", V1: "/api/v1/product/get", V2: "GET"},
 		{Ptype: "p", V0: "888", V1: "/api/v1/product/filter/list", V2: "GET"},
+		{Ptype: "p", V0: "888", V1: "/api/v1/product/aggregate/list", V2: "GET"},
 
 		// SSH密钥管理
 		{Ptype: "p", V0: "888", V1: "/api/v1/sshkey/add", V2: "POST"},
@@ -315,6 +316,7 @@ func (i *initCasbin) InitializeData(ctx context.Context) (context.Context, error
 		{Ptype: "p", V0: "888", V1: "/api/v1/order/overview", V2: "GET"},
 		{Ptype: "p", V0: "888", V1: "/api/v1/order/usage/list", V2: "POST"},
 		{Ptype: "p", V0: "888", V1: "/api/v1/order/transaction/list", V2: "POST"},
+		{Ptype: "p", V0: "888", V1: "/api/v1/order/recharge", V2: "POST"},
 		{Ptype: "p", V0: "888", V1: "/api/v1/order/order/list", V2: "POST"},
 		{Ptype: "p", V0: "888", V1: "/api/v1/order/invoice/list", V2: "POST"},
 		{Ptype: "p", V0: "888", V1: "/api/v1/order/invoice/apply", V2: "POST"},
@@ -435,6 +437,7 @@ func (i *initCasbin) InitializeData(ctx context.Context) (context.Context, error
 		{Ptype: "p", V0: "8881", V1: "/api/v1/order/overview", V2: "GET"},
 		{Ptype: "p", V0: "8881", V1: "/api/v1/order/usage/list", V2: "POST"},
 		{Ptype: "p", V0: "8881", V1: "/api/v1/order/transaction/list", V2: "POST"},
+		{Ptype: "p", V0: "8881", V1: "/api/v1/order/recharge", V2: "POST"},
 		{Ptype: "p", V0: "8881", V1: "/api/v1/order/order/list", V2: "POST"},
 		{Ptype: "p", V0: "8881", V1: "/api/v1/order/invoice/list", V2: "POST"},
 		{Ptype: "p", V0: "8881", V1: "/api/v1/order/invoice/apply", V2: "POST"},

@@ -6,6 +6,8 @@
 # local env files
 .env.local
 .env.*.local
+.helm-cache
+*.tgz
 
 # Log files
 npm-debug.log*

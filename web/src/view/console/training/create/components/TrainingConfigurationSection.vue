@@ -14,11 +14,17 @@
     />
 
     <JobConfigSection
+      :available-capacity="availableCapacity"
       :form="form"
       :framework-types="frameworkTypes"
+      :max-worker-count="maxWorkerCount"
       :pvcs="pvcs"
+      :selected-product="selectedProduct"
+      :show-worker-count="showWorkerCount"
       @add-env="addEnv"
       @add-mount="addMount"
+      @decrease-worker="decreaseWorker"
+      @increase-worker="increaseWorker"
       @insert-mpi-example="insertMpiExample"
       @insert-pytorch-example="insertPytorchExample"
       @remove-env="removeEnv"
@@ -26,6 +32,8 @@
       @update:env="form.envs[$event.index][$event.key] = $event.value"
       @update:field="form[$event.key] = $event.value"
       @update:mount="form.mounts[$event.index][$event.key] = $event.value"
+      @update:schedule-strategy="form.scheduleStrategy = $event || 'BALANCED'"
+      @update:workerCount="form.workerCount = Math.max(2, Math.min($event || 2, maxWorkerCount))"
     />
   </div>
 </template>
@@ -40,6 +48,10 @@ const props = defineProps({
     type: String,
     required: true
   },
+  availableCapacity: {
+    type: Number,
+    default: 0
+  },
   addEnv: {
     type: Function,
     required: true
@@ -49,6 +61,10 @@ const props = defineProps({
     required: true
   },
   changeImageTab: {
+    type: Function,
+    required: true
+  },
+  decreaseWorker: {
     type: Function,
     required: true
   },
@@ -76,6 +92,14 @@ const props = defineProps({
     type: Function,
     required: true
   },
+  increaseWorker: {
+    type: Function,
+    required: true
+  },
+  maxWorkerCount: {
+    type: Number,
+    default: 2
+  },
   pvcs: {
     type: Array,
     default: () => []
@@ -87,6 +111,14 @@ const props = defineProps({
   removeMount: {
     type: Function,
     required: true
+  },
+  selectedProduct: {
+    type: Object,
+    default: null
+  },
+  showWorkerCount: {
+    type: Boolean,
+    default: false
   }
 })
 

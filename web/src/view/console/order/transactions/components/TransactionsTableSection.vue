@@ -38,7 +38,7 @@
               ¥{{ tx.balanceAfter.toFixed(2) }}
             </td>
             <td class="px-4 py-3">
-              <span v-if="tx.orderStatus !== undefined" :class="tx.statusStyle" class="px-2 py-0.5 rounded text-[10px] font-black uppercase whitespace-nowrap">
+              <span v-if="tx.statusText" :class="tx.statusStyle" class="px-2 py-0.5 rounded text-[10px] font-black uppercase whitespace-nowrap">
                 {{ tx.statusText }}
               </span>
               <span v-else class="text-emerald-500 material-icons text-[16px]">check_circle</span>

@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-[1400px] mx-auto space-y-6">
+  <div class="console-page-container space-y-6">
     <AuthorityManagementHeader
       :loading="loading"
       @create="addAuthority(0)"

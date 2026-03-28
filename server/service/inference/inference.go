@@ -12,6 +12,7 @@ import (
 	inferenceReq "gin-vue-admin/model/inference/request"
 	"gin-vue-admin/model/inference/response"
 	"gin-vue-admin/service/inference/builder"
+	productService "gin-vue-admin/service/product"
 	terminalService "gin-vue-admin/service/terminal"
 	helper "gin-vue-admin/utils/k8s"
 	"io"
@@ -75,8 +76,13 @@ func (s *InferenceServiceService) CreateInferenceService(ctx context.Context, re
 		return nil, err
 	}
 
-	if err = s.reserveInferenceCapacity(ctx, state.product.ID, state.req.DeployType, state.req.WorkerCount, &cleanups); err != nil {
+	if err = s.reserveInferenceCapacity(ctx, state.plan, &cleanups); err != nil {
 		s.updateStatus(state.service.ID, consts.InferenceStatusFailed, "锁定资源失败")
+		return nil, err
+	}
+
+	if err = s.saveInferenceAllocations(ctx, state.service, state.plan, &cleanups); err != nil {
+		s.updateStatus(state.service.ID, consts.InferenceStatusFailed, err.Error())
 		return nil, err
 	}
 
@@ -131,8 +137,8 @@ func (s *InferenceServiceService) validateCreateRequest(req *inferenceReq.Create
 		if req.Framework != consts.FrameworkSGLang && req.Framework != consts.FrameworkVLLM {
 			return errors.New("分布式模式下框架必须为 SGLANG 或 VLLM")
 		}
-		if req.WorkerCount < 2 {
-			return errors.New("分布式模式 WorkerCount 必须大于 1（总节点数，包含 head）")
+		if req.InstanceCount < 2 {
+			return errors.New("分布式模式实例数量必须大于 1（总节点数，包含 head）")
 		}
 	}
 
@@ -151,7 +157,7 @@ func (s *InferenceServiceService) validateCreateRequest(req *inferenceReq.Create
 }
 
 // buildInferenceSpec 构建推理服务规格（复用于 create 和 restart）
-func (s *InferenceServiceService) buildInferenceSpec(service *inferenceModel.Inference, imageName, modelPvcName string) *builder.InferenceSpec {
+func (s *InferenceServiceService) buildInferenceSpec(ctx context.Context, service *inferenceModel.Inference, imageName, modelPvcName string) *builder.InferenceSpec {
 	spec := &builder.InferenceSpec{
 		Name:             service.InstanceName,
 		Namespace:        service.Namespace,
@@ -173,7 +179,9 @@ func (s *InferenceServiceService) buildInferenceSpec(service *inferenceModel.Inf
 			VGPUMemory: service.VGPUMemory,
 			VGPUCores:  service.VGPUCores,
 		},
-		ServicePort: service.ServicePort,
+		ServicePort:  service.ServicePort,
+		AllowedNodes: allocationNodesForInstance(ctx, consts.InferenceInstance, service.ID),
+		StrictSpread: service.ScheduleStrategy == consts.ScheduleStrategyStrict,
 	}
 
 	// 解析 Command/Args
@@ -237,6 +245,16 @@ func (s *InferenceServiceService) buildInferenceSpec(service *inferenceModel.Inf
 	return spec
 }
 
+func allocationNodesForInstance(ctx context.Context, instanceType string, instanceID uint) []string {
+	nodes := make([]string, 0)
+	_ = global.GVA_DB.WithContext(ctx).
+		Table("resource_allocations").
+		Distinct("node_name").
+		Where("instance_type = ? AND instance_id = ?", instanceType, instanceID).
+		Pluck("node_name", &nodes).Error
+	return nodes
+}
+
 // createInferenceRuntime 创建推理服务运行时资源
 func (s *InferenceServiceService) createInferenceRuntime(ctx context.Context, state *inferenceCreateState, cleanups *Cleanups) error {
 	switch state.req.DeployType {
@@ -287,7 +305,7 @@ func (s *InferenceServiceService) createVCJob(ctx context.Context, cluster *glob
 		return errors.New("集群未配置 Volcano，无法创建分布式推理服务")
 	}
 
-	spec := s.buildInferenceSpec(service, image.ImageAddr, modelPvcName)
+	spec := s.buildInferenceSpec(ctx, service, image.ImageAddr, modelPvcName)
 
 	jobBuilder := builder.NewInferenceBuilder(service.Framework)
 	job, err := jobBuilder.BuildVCJob(spec)
@@ -314,7 +332,7 @@ func (s *InferenceServiceService) createVCJob(ctx context.Context, cluster *glob
 // Volcano 会根据 Pod annotations 自动创建 PodGroup，
 // PodGroup 删除时 Informer 统一处理资源释放和订单停止。
 func (s *InferenceServiceService) createDeployment(ctx context.Context, clientSet *kubernetes.Clientset, service *inferenceModel.Inference, image *imageModel.Image, modelPvcName string) error {
-	spec := s.buildInferenceSpec(service, image.ImageAddr, modelPvcName)
+	spec := s.buildInferenceSpec(ctx, service, image.ImageAddr, modelPvcName)
 
 	jobBuilder := builder.NewInferenceBuilder(service.Framework)
 	deploy, err := jobBuilder.BuildDeployment(spec)
@@ -615,8 +633,17 @@ func (s *InferenceServiceService) StartInferenceService(ctx context.Context, req
 		}
 	}()
 
-	if err = s.reserveInferenceCapacity(ctx, service.ProductId, service.DeployType, service.WorkerCount, &cleanups); err != nil {
+	plan, err := (&productService.ProductService{}).PlanAllocations(ctx, service.ProductId, int64(service.InstanceCount), service.ScheduleStrategy)
+	if err != nil {
+		return errors.Wrap(err, "启动服务规划资源失败")
+	}
+
+	if err = s.reserveInferenceCapacity(ctx, plan, &cleanups); err != nil {
 		return errors.Wrap(err, "启动服务锁定资源失败")
+	}
+
+	if err = s.saveInferenceAllocations(ctx, service, plan, &cleanups); err != nil {
+		return err
 	}
 
 	cluster, err := s.getInferenceCluster(service.ClusterID)

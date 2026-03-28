@@ -76,6 +76,12 @@ const (
 	VolcanoScheduler = "volcano"
 )
 
+// Schedule
+const (
+	ScheduleStrategyBalanced = "BALANCED"
+	ScheduleStrategyStrict   = "STRICT"
+)
+
 // PodGroup
 const (
 	// PodGroup Phase 常量（Volcano 原生状态）

@@ -183,12 +183,19 @@ spec:
 ### 4.1 安装 APISIX
 
 ```bash
-# 添加 Helm 仓库
-helm repo add apisix https://apache.github.io/apisix-helm-chart
+# 推荐直接使用组件目录脚本
+cd ..
+./deploy_all.sh
+```
+
+如果只想单独部署 APISIX，对应的核心 Helm 参数是：
+
+```bash
+helm repo add apisix https://apache.github.io/apisix-helm-chart --force-update
 helm repo update
 
-# 安装 (针对 Ingress Controller 2.0+ 版本)
-helm install apisix apisix/apisix \
+helm upgrade --install apisix apisix/apisix \
+  --version 2.13.0 \
   --create-namespace \
   --namespace apisix \
   --set ingress-controller.enabled=true \
@@ -197,18 +204,15 @@ helm install apisix apisix/apisix \
   --set ingress-controller.gatewayProxy.provider.controlPlane.service.port=9180 \
   --set ingress-controller.gatewayProxy.provider.controlPlane.auth.adminKey.value=edd1c9f034335f136f87ad84b625c8f1 \
   --set ingress-controller.config.apisix.serviceNamespace=apisix \
-  --set apisix.proxy_mode=http\&stream \
+  --set 'apisix.proxy_mode=http&stream' \
   --set "apisix.stream_proxy.tcp[0]=9100"
-
-# 重要：修复 proxy_mode 可能未生效的问题（因命令行 & 字符转义问题）
-# 如果发现 SSH(Stream) 路由无法添加，请手动检查并修改 ConfigMap
-kubectl get configmap apisix -n apisix -o jsonpath='{.data.config\.yaml}' | sed 's/proxy_mode: http/proxy_mode: http\&stream/' | kubectl create configmap apisix -n apisix --from-file=config.yaml=/dev/stdin --dry-run=client -o yaml | kubectl apply -f -
-kubectl rollout restart deployment apisix -n apisix
-
-# 添加 SSH 端口
-kubectl patch svc apisix-gateway -n apisix --type='json' \
-  -p='[{"op":"add","path":"/spec/ports/-","value":{"name":"ssh","port":22,"targetPort":9100,"protocol":"TCP"}}]'
 ```
+
+脚本还会额外做这些兼容处理：
+
+- 自动清理旧版默认 `GatewayProxy apisix`
+- 检查并修复 `proxy_mode` 配置
+- 给 `apisix-gateway` 自动补 SSH 端口 `22 -> 9100`
 
 ### 4.2 验证安装
 
@@ -256,6 +260,23 @@ kubectl logs -n apisix deployment/apisix-ingress-controller -c manager --tail=50
 # 原因：Ingress Controller 2.0+ 需要 GatewayProxy 资源来配置 Admin API 连接。
 # 修复：确保安装时设置了 gatewayProxy.createDefault=true，或手动创建 GatewayProxy 资源。
 
+### 5.2 Ingress Controller 提示 no GatewayProxy configs provided
+
+这种情况通常说明 Ingress Controller 没找到可用的 `GatewayProxy` 配置。
+
+排查命令：
+
+```bash
+kubectl get gatewayproxy -n apisix
+kubectl logs -n apisix deployment/apisix-ingress-controller -c manager --tail=50
+```
+
+如果集群里有旧版 `gatewayproxy/apisix` 与 Helm 新版 `gatewayproxy/apisix-config` 同时存在，建议先清理旧版默认资源：
+
+```bash
+kubectl delete gatewayproxy apisix -n apisix
+```
+
 ### 5.3 路由未同步
 
 如果 ApisixRoute 状态正常但 Admin API 查不到路由：
@@ -264,7 +285,67 @@ kubectl logs -n apisix deployment/apisix-ingress-controller -c manager --tail=50
 3. 检查 `proxy_mode` 是否包含 `stream`：`kubectl exec deployment/apisix -n apisix -- cat /usr/local/apisix/conf/config.yaml | grep proxy_mode`
    如果显示 `proxy_mode: http`，请手动修复 ConfigMap 并重启 APISIX。
 
-### 5.4 SSH 连接失败
+### 5.4 GatewayProxy 冲突
+
+**症状**：Helm upgrade APISIX 时出现：
+
+```text
+gateway proxy configuration conflict
+```
+
+通常表示集群里同时存在两个 `GatewayProxy`：
+
+- `apisix/apisix`
+- `apisix/apisix-config`
+
+并且它们都指向同一个 `apisix-admin:9180`。
+
+排查命令：
+
+```bash
+kubectl get gatewayproxy -n apisix
+kubectl get gatewayproxy apisix -n apisix -o yaml
+kubectl get gatewayproxy apisix-config -n apisix -o yaml
+```
+
+如果 `apisix` 是旧版默认资源，可以直接删除：
+
+```bash
+kubectl delete gatewayproxy apisix -n apisix
+```
+
+当前 `deploy_all.sh` 已经内置了这一步兼容处理。
+
+### 5.5 APISIX Pod 启动即崩
+
+**症状**：`apisix` Pod 反复 `CrashLoopBackOff`，日志中出现：
+
+```text
+did not find expected key
+```
+
+这通常是 `config.yaml` 里的 YAML 被改坏了，例如把下面两行误拼成一行：
+
+```yaml
+proxy_mode: "http&stream"
+stream_proxy:
+```
+
+错误示例：
+
+```yaml
+proxy_mode: "http&stream"  stream_proxy:
+```
+
+排查命令：
+
+```bash
+kubectl get configmap apisix -n apisix -o jsonpath='{.data.config\.yaml}' | nl -ba | sed -n '64,70p'
+```
+
+当前 `deploy_all.sh` 已修复这一兼容问题；如果是历史残留配置导致，可以重新执行一次脚本，或手工修正 `ConfigMap` 后再重启 Deployment。
+
+### 5.6 SSH 连接失败
 
 ```bash
 # 1. 检查 Stream Route

@@ -11,7 +11,7 @@
           <input
             :value="instanceName"
             :placeholder="t('enterInstanceName')"
-            class="w-full px-4 py-2 border border-border-light dark:border-border-dark rounded-lg text-sm bg-white dark:bg-zinc-800 focus:ring-1 focus:ring-primary outline-none"
+            class="create-form-input"
             maxlength="50"
             type="text"
             @input="$emit('update:instanceName', $event.target.value)"
@@ -31,7 +31,7 @@
             <input
               :value="tensorboardLogPath"
               :placeholder="t('enterLogPath')"
-              class="w-full px-4 py-2 border border-border-light dark:border-border-dark rounded-lg text-sm bg-white dark:bg-zinc-800 focus:ring-1 focus:ring-primary outline-none"
+              class="create-form-input"
               type="text"
               @input="$emit('update:tensorboardLogPath', $event.target.value)"
             />

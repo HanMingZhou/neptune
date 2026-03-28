@@ -76,6 +76,13 @@ type TransactionListResp struct {
 	Total int64               `json:"total"`
 }
 
+type RechargeBalanceResp struct {
+	TransactionNo string  `json:"transactionNo"`
+	Amount        float64 `json:"amount"`
+	Method        int64   `json:"method"`
+	Balance       float64 `json:"balance"`
+}
+
 type InvoiceListResp struct {
 	List  []order.Invoice `json:"list"`  // 发票列表
 	Total int64           `json:"total"` // 总记录数

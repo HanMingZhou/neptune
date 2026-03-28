@@ -74,6 +74,7 @@ func RegisterTables() {
 
 		image.Image{},
 		product.Product{},
+		product.ResourceAllocation{},
 		podgroup.PodGroup{},
 
 		training.TrainingJob{},

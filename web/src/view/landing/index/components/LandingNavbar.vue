@@ -25,23 +25,6 @@
         </div>
       </router-link>
 
-      <div class="hidden md:flex items-center gap-8">
-        <a
-          v-for="item in menuItems"
-          :key="item.text"
-          href="#"
-          class="group flex items-center gap-2 text-sm font-medium transition-colors duration-300 !no-underline"
-          :class="isDark ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-indigo-600'"
-        >
-          <component
-            :is="item.icon"
-            class="w-4 h-4 transition-colors duration-300"
-            :class="isDark ? 'text-slate-500 group-hover:text-cyan-400' : 'text-slate-400 group-hover:text-indigo-500'"
-          />
-          <span>{{ item.text }}</span>
-        </a>
-      </div>
-
       <div class="flex items-center gap-4">
         <button
           class="flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 group border-none outline-none"
@@ -69,10 +52,6 @@ defineProps({
   isDark: {
     type: Boolean,
     default: true
-  },
-  menuItems: {
-    type: Array,
-    default: () => []
   }
 })
 

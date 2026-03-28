@@ -31,6 +31,7 @@ type inferenceCreateState struct {
 	user     *systemModel.SysUser
 	image    *imageModel.Image
 	product  *productModel.Product
+	plan     *productService.AllocationPlan
 	modelPVC *pvcModel.Volume
 	cluster  *global.ClusterClientInfo
 	service  *inferenceModel.Inference
@@ -42,6 +43,7 @@ type inferenceOrderSpec struct {
 	productID  uint
 	imageID    uint
 	chargeType int64
+	quantity   int
 	area       string
 	clusterID  uint
 	remark     string
@@ -59,6 +61,20 @@ func (c Cleanups) Run(ctx context.Context) {
 
 // prepareCreateRequest 处理创建请求默认值
 func (s *InferenceServiceService) prepareCreateRequest(req *inferenceReq.CreateInferenceServiceReq) error {
+	if req.TemplateProductId == 0 {
+		req.TemplateProductId = req.ProductId
+	}
+	if req.ScheduleStrategy == "" {
+		req.ScheduleStrategy = consts.ScheduleStrategyBalanced
+	}
+	if req.InstanceCount <= 0 {
+		if req.WorkerCount > 0 {
+			req.InstanceCount = req.WorkerCount
+		} else {
+			req.InstanceCount = 1
+		}
+	}
+	req.WorkerCount = req.InstanceCount
 	if req.ModelMountPath == "" {
 		req.ModelMountPath = "/model"
 	}
@@ -93,12 +109,17 @@ func (s *InferenceServiceService) buildCreateState(ctx context.Context, req *inf
 		return nil, err
 	}
 
-	product, err := s.getEnabledProduct(req.ProductId)
+	product, err := s.getEnabledProduct(req.TemplateProductId)
 	if err != nil {
 		return nil, err
 	}
 
-	if err = (&orderService.OrderService{}).CheckBalanceSufficient(ctx, req.UserId, req.ProductId, req.PayType, 1); err != nil {
+	if err = (&orderService.OrderService{}).CheckBalanceSufficient(ctx, req.UserId, req.TemplateProductId, req.PayType, int64(req.InstanceCount)); err != nil {
+		return nil, err
+	}
+
+	plan, err := (&productService.ProductService{}).PlanAllocations(ctx, product.ID, int64(req.InstanceCount), req.ScheduleStrategy)
+	if err != nil {
 		return nil, err
 	}
 
@@ -123,6 +144,7 @@ func (s *InferenceServiceService) buildCreateState(ctx context.Context, req *inf
 		user:     userInfo,
 		image:    image,
 		product:  product,
+		plan:     plan,
 		modelPVC: modelPVC,
 		service:  service,
 	}, nil
@@ -153,8 +175,10 @@ func (s *InferenceServiceService) buildInferenceServiceRecord(
 		ImageId:          req.ImageId,
 		TensorParallel:   req.TensorParallel,
 		PipelineParallel: req.PipelineParallel,
-		WorkerCount:      req.WorkerCount,
-		ProductId:        req.ProductId,
+		InstanceCount:    req.InstanceCount,
+		WorkerCount:      req.InstanceCount,
+		ScheduleStrategy: req.ScheduleStrategy,
+		ProductId:        req.TemplateProductId,
 		CPU:              product.CPU,
 		Memory:           product.Memory,
 		GPU:              product.GPUCount,
@@ -183,15 +207,40 @@ func (s *InferenceServiceService) persistInferenceService(service *inferenceMode
 }
 
 // reserveInferenceCapacity 锁定推理服务资源配额
-func (s *InferenceServiceService) reserveInferenceCapacity(ctx context.Context, productID uint, deployType string, workerCount int, cleanups *Cleanups) error {
+func (s *InferenceServiceService) reserveInferenceCapacity(ctx context.Context, plan *productService.AllocationPlan, cleanups *Cleanups) error {
 	productSvc := &productService.ProductService{}
-	reserve, err := productSvc.ReserveCapacityWithCount(ctx, productID, calculateInferenceQuotaCount(deployType, workerCount))
-	if err != nil {
-		return errors.Wrap(err, "锁定产品资源失败")
+	for _, reservation := range plan.Reservations {
+		reserve, err := productSvc.ReserveCapacityWithCount(ctx, reservation.ProductID, reservation.Count)
+		if err != nil {
+			return errors.Wrap(err, "锁定产品资源失败")
+		}
+
+		productID := reservation.ProductID
+		resourceCount := reserve.ResourceCount
+		cleanups.Add(func(ctx context.Context) {
+			_ = productSvc.ReleaseCapacity(ctx, productID, resourceCount)
+		})
+	}
+	return nil
+}
+
+func (s *InferenceServiceService) saveInferenceAllocations(
+	ctx context.Context,
+	service *inferenceModel.Inference,
+	plan *productService.AllocationPlan,
+	cleanups *Cleanups,
+) error {
+	allocations := buildInferenceAllocations(service, plan)
+	if len(allocations) == 0 {
+		return nil
+	}
+	if err := (&productService.ProductService{}).SaveResourceAllocations(ctx, allocations); err != nil {
+		return errors.Wrap(err, "保存推理资源分配失败")
 	}
 
+	instanceID := service.ID
 	cleanups.Add(func(ctx context.Context) {
-		_ = productSvc.ReleaseCapacity(ctx, productID, reserve.ResourceCount)
+		_ = (&productService.ProductService{}).DeleteResourceAllocations(ctx, consts.InferenceInstance, instanceID)
 	})
 	return nil
 }
@@ -271,7 +320,7 @@ func (s *InferenceServiceService) createInferenceOrder(ctx context.Context, spec
 		ImageId:      spec.imageID,
 		PayType:      consts.PayMethodToInt64[consts.PayMethodBalance],
 		ChargeType:   spec.chargeType,
-		Quantity:     1,
+		Quantity:     spec.quantity,
 		Area:         spec.area,
 		ClusterId:    spec.clusterID,
 		Remark:       spec.remark,
@@ -300,9 +349,10 @@ func (s *InferenceServiceService) createOrderSpecFromCreateState(state *inferenc
 	return &inferenceOrderSpec{
 		serviceID:  state.service.ID,
 		userID:     state.req.UserId,
-		productID:  state.req.ProductId,
+		productID:  state.req.TemplateProductId,
 		imageID:    state.req.ImageId,
 		chargeType: state.req.PayType,
+		quantity:   state.req.InstanceCount,
 		area:       state.cluster.Area,
 		clusterID:  state.product.ClusterId,
 		remark:     fmt.Sprintf("创建推理服务: %s", state.service.DisplayName),
@@ -317,6 +367,7 @@ func (s *InferenceServiceService) createOrderSpecFromService(service *inferenceM
 		productID:  service.ProductId,
 		imageID:    service.ImageId,
 		chargeType: service.PayType,
+		quantity:   service.InstanceCount,
 		area:       cluster.Area,
 		clusterID:  service.ClusterID,
 		remark:     fmt.Sprintf("重启推理服务: %s", service.DisplayName),
@@ -400,4 +451,38 @@ func calculateInferenceQuotaCount(deployType string, workerCount int) int64 {
 		return int64(workerCount)
 	}
 	return 1
+}
+
+func buildInferenceAllocations(service *inferenceModel.Inference, plan *productService.AllocationPlan) []productModel.ResourceAllocation {
+	if plan == nil {
+		return nil
+	}
+	allocations := make([]productModel.ResourceAllocation, 0, service.InstanceCount)
+	replicaIndex := 0
+	for _, reservation := range plan.Reservations {
+		for count := int64(0); count < reservation.Count; count++ {
+			role := "standalone"
+			if service.DeployType == consts.DeployTypeDistributed {
+				if replicaIndex == 0 {
+					role = "head"
+				} else {
+					role = "worker"
+				}
+			}
+			allocations = append(allocations, productModel.ResourceAllocation{
+				InstanceType:      consts.InferenceInstance,
+				InstanceID:        service.ID,
+				ClusterID:         service.ClusterID,
+				TemplateProductID: service.ProductId,
+				ProductID:         reservation.ProductID,
+				NodeName:          reservation.NodeName,
+				ScheduleStrategy:  plan.ScheduleStrategy,
+				ReplicaIndex:      replicaIndex,
+				TaskRole:          role,
+				ReservedCount:     1,
+			})
+			replicaIndex++
+		}
+	}
+	return allocations
 }

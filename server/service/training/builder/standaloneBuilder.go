@@ -3,6 +3,7 @@ package builder
 import (
 	"gin-vue-admin/model/consts"
 	trainingReq "gin-vue-admin/model/training/request"
+	helper "gin-vue-admin/utils/k8s"
 
 	vcbatch "volcano.sh/apis/pkg/apis/batch/v1alpha1"
 	vcbus "volcano.sh/apis/pkg/apis/bus/v1alpha1"
@@ -21,6 +22,7 @@ func (s *StandaloneStrategy) BuildTasks(spec *trainingReq.TrainingJobSpec) ([]vc
 
 	// GPU Tolerations
 	tolerations := buildGPUTolerations(&spec.Product)
+	affinity := helper.BuildSchedulingAffinity(spec.Name, spec.AllowedNodes, spec.StrictSpread)
 
 	task := vcbatch.TaskSpec{
 		Name:     consts.TaskSpecWorker,
@@ -35,6 +37,8 @@ func (s *StandaloneStrategy) BuildTasks(spec *trainingReq.TrainingJobSpec) ([]vc
 			envs:          spec.Envs,
 			volumes:       spec.Volumes,
 			tolerations:   tolerations,
+			labels:        spec.Labels,
+			affinity:      affinity,
 		}),
 	}
 

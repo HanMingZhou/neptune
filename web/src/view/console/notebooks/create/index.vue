@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-background-light dark:bg-background-dark pb-24">
     <PageHeader title-key="createInstance" @back="goBack" />
 
-    <div class="max-w-[1400px] mx-auto px-6 py-6 space-y-6">
+    <div class="console-page-container px-6 py-6 space-y-6">
       <NotebookResourceSelectionSection
         :areas="areas"
         :available-volumes="availableVolumes"

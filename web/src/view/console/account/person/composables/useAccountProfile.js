@@ -67,47 +67,6 @@ export function useAccountProfile({ t }) {
   const phoneRules = reactive({})
   const emailRules = reactive({})
 
-  const skills = [
-    { label: 'GoLang', type: 'success' },
-    { label: 'JavaScript', type: 'warning' },
-    { label: 'Vue', type: 'danger' },
-    { label: 'Gorm', type: 'info' }
-  ]
-
-  const stats = [
-    { value: '138', labelKey: 'itemParticipated', valueClass: 'text-blue-500' },
-    { value: '2.3k', labelKey: 'codeCommits', valueClass: 'text-green-500' },
-    { value: '95%', labelKey: 'taskCompletion', valueClass: 'text-purple-500' },
-    { value: '12', labelKey: 'medalsWon', valueClass: 'text-yellow-500' }
-  ]
-
-  const activities = [
-    {
-      timestamp: '2024-01-10',
-      title: '完成项目里程碑',
-      content: '成功完成第三季度主要项目开发任务，获得团队一致好评',
-      type: 'primary'
-    },
-    {
-      timestamp: '2024-01-11',
-      title: '代码审核完成',
-      content: '完成核心模块代码审核，提出多项改进建议并获采纳',
-      type: 'success'
-    },
-    {
-      timestamp: '2024-01-12',
-      title: '技术分享会',
-      content: '主持团队技术分享会，分享前端性能优化经验',
-      type: 'warning'
-    },
-    {
-      timestamp: '2024-01-13',
-      title: '新功能上线',
-      content: '成功上线用户反馈的新特性，显著提升用户体验',
-      type: 'danger'
-    }
-  ]
-
   const clearPassword = () => {
     Object.assign(pwdModify, {
       password: '',
@@ -314,39 +273,14 @@ export function useAccountProfile({ t }) {
   })
 
   return {
-    activities,
-    changeEmail,
-    changeEmailFlag,
-    changePhone,
-    changePhoneFlag,
-    clearPassword,
-    closeChangeEmail,
-    closeChangePhone,
     closeEdit,
     editFlag,
     emailDialog,
-    emailForm,
-    emailLoading,
-    emailRules,
-    emailTime,
     enterEdit,
-    getCode,
-    getEmailCode,
     nickName,
     openEdit,
     passwordDialog,
-    passwordLoading,
     phoneDialog,
-    phoneForm,
-    phoneLoading,
-    phoneRules,
-    pwdModify,
-    rules,
-    savePassword,
-    showPassword,
-    skills,
-    stats,
-    time,
     userStore
   }
 }

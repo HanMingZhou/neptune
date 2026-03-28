@@ -27,6 +27,15 @@ export const getTransactionList = (data?: any) => {
     })
 }
 
+// 余额充值
+export const rechargeBalance = (data?: any) => {
+    return service({
+        url: '/api/v1/order/recharge',
+        method: 'post',
+        data
+    })
+}
+
 // 获取订单列表
 export const getOrderList = (data?: any) => {
     return service({

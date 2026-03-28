@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-[1400px] mx-auto space-y-6">
+  <div class="console-page-container space-y-6">
     <PageIntro
       :breadcrumbs="[t('management'), t('sshKeyManage')]"
       :description="t('sshKeyManageDesc')"

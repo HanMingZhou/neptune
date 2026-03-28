@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: neptune-web
+  namespace: neptune
   labels:
     app: neptune-web
     app.kubernetes.io/name: neptune-web
@@ -14,5 +15,5 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: 80
+      targetPort: 8080
       protocol: TCP

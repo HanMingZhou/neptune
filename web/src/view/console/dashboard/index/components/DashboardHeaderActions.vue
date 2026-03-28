@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-3">
+  <div class="flex flex-wrap items-center gap-3">
     <RefreshButton :loading="loading" @refresh="$emit('refresh', $event)" />
     <button
       class="flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/20 transition-all hover:bg-primary-hover"

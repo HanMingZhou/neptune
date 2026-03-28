@@ -2,7 +2,7 @@ import { computed, onMounted, reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { createTrainingJob } from '@/api/training'
 import { getImageList } from '@/api/image'
-import { getProductFilters, getProductList } from '@/api/product'
+import { getAggregateProductList, getProductFilters } from '@/api/product'
 import { getVolumeList } from '@/api/volume'
 import {
   TRAINING_FRAMEWORK_TYPES,
@@ -19,6 +19,7 @@ export const useTrainingCreate = ({ t, router }) => {
     imageId: null,
     startupCommand: '',
     workerCount: 2,
+    scheduleStrategy: 'BALANCED',
     gpuPerWorker: 1,
     gpuType: 'nvidia.com/gpu',
     useSHM: true,
@@ -67,7 +68,7 @@ export const useTrainingCreate = ({ t, router }) => {
 
   const totalResources = computed(() => {
     if (!selectedProduct.value) return null
-    const nodes = showWorkerCount.value ? form.workerCount + 1 : 1
+    const nodes = showWorkerCount.value ? form.workerCount : 1
     const gpu = (selectedProduct.value.gpuCount > 0 ? form.gpuPerWorker : 0) * nodes
     return { gpu, nodes }
   })
@@ -105,7 +106,7 @@ export const useTrainingCreate = ({ t, router }) => {
   const totalPrice = computed(() => {
     if (!selectedProduct.value) return '0.00'
 
-    const nodes = showWorkerCount.value ? form.workerCount + 1 : 1
+    const nodes = showWorkerCount.value ? form.workerCount : 1
     const total = getUnitPrice(selectedProduct.value) * nodes
     return form.payType === 1 ? total.toFixed(4) : total.toFixed(2)
   })
@@ -114,15 +115,21 @@ export const useTrainingCreate = ({ t, router }) => {
 
   const totalAllowedNodes = computed(() => {
     if (!selectedProduct.value) return 0
-    if (selectedProduct.value.gpuCount > 0) {
-      return Math.floor(availableCapacity.value / selectedProduct.value.gpuCount)
+    if (!showWorkerCount.value) {
+      return availableCapacity.value
     }
-    return availableCapacity.value
+
+    const strictMax = selectedProduct.value.strictMax
+    const balancedMax = selectedProduct.value.balancedMax
+    if (form.scheduleStrategy === 'STRICT') {
+      return strictMax > 0 ? strictMax : availableCapacity.value
+    }
+    return balancedMax > 0 ? balancedMax : availableCapacity.value
   })
 
   const maxWorkerCount = computed(() => {
     if (!selectedProduct.value) return 100
-    return Math.max(2, totalAllowedNodes.value - 1)
+    return Math.max(2, totalAllowedNodes.value)
   })
 
   const canCreate = computed(() => {
@@ -130,7 +137,7 @@ export const useTrainingCreate = ({ t, router }) => {
       return false
     }
 
-    const requiredNodes = showWorkerCount.value ? form.workerCount + 1 : 1
+    const requiredNodes = showWorkerCount.value ? form.workerCount : 1
     if (requiredNodes > totalAllowedNodes.value) return false
     if (showWorkerCount.value && form.workerCount < 2) return false
     return true
@@ -169,7 +176,7 @@ export const useTrainingCreate = ({ t, router }) => {
       if (filters.gpuModel) params.gpuModel = filters.gpuModel
       if (filters.cpuModel) params.cpuModel = filters.cpuModel
 
-      const res = await getProductList(params)
+      const res = await getAggregateProductList(params)
       if (res.code === 0) {
         products.value = res.data?.list || []
         if (selectedProduct.value && !products.value.find((item) => item.id === selectedProduct.value.id)) {
@@ -273,7 +280,10 @@ export const useTrainingCreate = ({ t, router }) => {
         startupCommand: form.startupCommand,
         clusterId: selectedProduct.value.clusterId,
         resourceId: selectedProduct.value.id,
+        templateProductId: selectedProduct.value.templateProductId || selectedProduct.value.id,
+        instanceCount: showWorkerCount.value ? form.workerCount : 1,
         workerCount: showWorkerCount.value ? form.workerCount : 0,
+        scheduleStrategy: showWorkerCount.value ? form.scheduleStrategy : 'BALANCED',
         enableTensorboard: form.enableTensorboard,
         tensorboardLogPath: form.tensorboardLogPath,
         payType: form.payType,

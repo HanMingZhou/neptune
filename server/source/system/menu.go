@@ -129,6 +129,38 @@ func (i *initMenu) InitializeData(ctx context.Context) (next context.Context, er
 		return ctx, errors.Wrap(err, SysBaseMenu{}.TableName()+"order子菜单初始化失败!")
 	}
 
+	var transactionsMenu SysBaseMenu
+	if err = global.GVA_DB.Where("name = ?", "transactions").First(&transactionsMenu).Error; err != nil {
+		return ctx, errors.Wrap(err, "查询 transactions 菜单失败")
+	}
+
+	defaultTransactionBtns := []SysBaseMenuBtn{
+		{Name: "recharge_system", Desc: "平台代充值", SysBaseMenuID: transactionsMenu.ID},
+		{Name: "recharge_alipay", Desc: "支付宝充值", SysBaseMenuID: transactionsMenu.ID},
+		{Name: "recharge_wechat", Desc: "微信充值", SysBaseMenuID: transactionsMenu.ID},
+	}
+
+	var existingTransactionBtns []SysBaseMenuBtn
+	if err = global.GVA_DB.Where("sys_base_menu_id = ?", transactionsMenu.ID).Find(&existingTransactionBtns).Error; err != nil {
+		return ctx, errors.Wrap(err, "查询交易记录菜单按钮失败")
+	}
+	existingBtnMap := make(map[string]bool, len(existingTransactionBtns))
+	for _, btn := range existingTransactionBtns {
+		existingBtnMap[btn.Name] = true
+	}
+
+	var missingBtns []SysBaseMenuBtn
+	for _, btn := range defaultTransactionBtns {
+		if !existingBtnMap[btn.Name] {
+			missingBtns = append(missingBtns, btn)
+		}
+	}
+	if len(missingBtns) > 0 {
+		if err = global.GVA_DB.Create(&missingBtns).Error; err != nil {
+			return ctx, errors.Wrap(err, "初始化交易记录菜单按钮失败")
+		}
+	}
+
 	// 3. admin 子菜单 - 扁平化结构（避免3层嵌套）
 	adminChildren := []SysBaseMenu{
 		// 产品管理

@@ -7,10 +7,21 @@
         ¥{{ balance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 6 }) }}
       </p>
     </div>
-    <button disabled class="bg-slate-300 dark:bg-zinc-600 text-white px-6 h-full rounded-xl font-bold text-sm flex items-center gap-2 cursor-not-allowed opacity-60">
-      <span class="material-icons">add_circle</span>
-      {{ t('dashboard.recharge') }}
-    </button>
+    <el-tooltip :disabled="canRecharge || !disabledReason" :content="disabledReason" placement="bottom">
+      <span>
+        <button
+          :disabled="!canRecharge"
+          class="px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 transition-all"
+          :class="canRecharge
+            ? 'bg-primary hover:bg-primary-hover text-white shadow-lg shadow-primary/20'
+            : 'bg-slate-300 dark:bg-zinc-600 text-white cursor-not-allowed opacity-60'"
+          @click="$emit('recharge')"
+        >
+          <span class="material-icons">add_circle</span>
+          {{ t('dashboard.recharge') }}
+        </button>
+      </span>
+    </el-tooltip>
   </div>
 </template>
 
@@ -26,10 +37,18 @@ defineProps({
   loading: {
     type: Boolean,
     default: false
+  },
+  canRecharge: {
+    type: Boolean,
+    default: false
+  },
+  disabledReason: {
+    type: String,
+    default: ''
   }
 })
 
-defineEmits(['refresh'])
+defineEmits(['refresh', 'recharge'])
 
 const t = inject('t', (key) => key)
 </script>

@@ -1,46 +1,46 @@
 <template>
   <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden shadow-sm">
-    <div class="p-4 border-b border-border-light dark:border-border-dark flex flex-wrap gap-4 items-center">
-      <div class="relative flex-1 max-w-[180px]">
+    <div class="list-filter-bar border-b border-border-light p-4 dark:border-border-dark">
+      <div class="list-filter-field list-filter-field--compact max-w-[180px]">
         <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">http</span>
         <input
           v-model="searchInfo.method"
           type="text"
           :placeholder="t('method')"
-          class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-zinc-800 border-none rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none"
+          class="list-search-input !w-full"
           @keyup.enter="$emit('search')"
         />
       </div>
-      <div class="relative flex-1 max-w-[180px]">
+      <div class="list-filter-field list-filter-field--compact max-w-[180px]">
         <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">link</span>
         <input
           v-model="searchInfo.path"
           type="text"
           :placeholder="t('requestPath')"
-          class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-zinc-800 border-none rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none"
+          class="list-search-input !w-full"
           @keyup.enter="$emit('search')"
         />
       </div>
-      <div class="relative flex-1 max-w-[180px]">
+      <div class="list-filter-field list-filter-field--compact max-w-[180px]">
         <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">tag</span>
         <input
           v-model="searchInfo.status"
           type="text"
           :placeholder="t('statusCode')"
-          class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-zinc-800 border-none rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none"
+          class="list-search-input !w-full"
           @keyup.enter="$emit('search')"
         />
       </div>
-      <div class="flex gap-2">
+      <div class="list-toolbar-actions">
         <button
-          class="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg text-sm font-medium"
+          class="list-toolbar-button list-toolbar-button--primary"
           @click="$emit('search')"
         >
           <span class="material-icons text-[18px]">search</span>
           {{ t('searchQuery') }}
         </button>
         <button
-          class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-zinc-800 border border-border-light dark:border-border-dark hover:bg-slate-50 dark:hover:bg-zinc-700 rounded-lg text-sm font-medium"
+          class="list-toolbar-button list-toolbar-button--secondary"
           @click="$emit('reset')"
         >
           <span class="material-icons text-[18px]">refresh</span>

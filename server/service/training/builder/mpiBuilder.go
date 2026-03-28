@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gin-vue-admin/model/consts"
 	trainingReq "gin-vue-admin/model/training/request"
+	helper "gin-vue-admin/utils/k8s"
 	"strings"
 
 	corev1 "k8s.io/api/core/v1"
@@ -45,6 +46,7 @@ func (s *MPIStrategy) BuildTasks(spec *trainingReq.TrainingJobSpec) ([]vcbatch.T
 
 	// GPU Tolerations
 	tolerations := buildGPUTolerations(&spec.Product)
+	affinity := helper.BuildSchedulingAffinity(spec.Name, spec.AllowedNodes, spec.StrictSpread)
 
 	// MPI 环境变量（Master 专用）
 	masterEnvs := cloneEnvVars(spec.Envs)
@@ -88,11 +90,13 @@ func (s *MPIStrategy) BuildTasks(spec *trainingReq.TrainingJobSpec) ([]vcbatch.T
 			envs:          masterEnvs,
 			volumes:       spec.Volumes,
 			tolerations:   tolerations,
+			labels:        spec.Labels,
+			affinity:      affinity,
 		}),
 	}
 
 	// --- Worker Task ---
-	workerTask := s.buildWorkerTask(spec, tolerations)
+	workerTask := s.buildWorkerTask(spec, tolerations, affinity)
 
 	return []vcbatch.TaskSpec{masterTask, workerTask}, nil
 }
@@ -121,7 +125,11 @@ echo "MPI_HOSTS=$MPI_HOSTS"
 }
 
 // buildWorkerTask 构建 Worker TaskSpec
-func (s *MPIStrategy) buildWorkerTask(spec *trainingReq.TrainingJobSpec, tolerations []corev1.Toleration) vcbatch.TaskSpec {
+func (s *MPIStrategy) buildWorkerTask(
+	spec *trainingReq.TrainingJobSpec,
+	tolerations []corev1.Toleration,
+	affinity *corev1.Affinity,
+) vcbatch.TaskSpec {
 	workerResources := buildResources(&spec.Product)
 	workerCmd := []string{"/bin/sh", "-c", mpiWorkerEntrypoint}
 	readinessProbe := &corev1.Probe{
@@ -148,6 +156,8 @@ func (s *MPIStrategy) buildWorkerTask(spec *trainingReq.TrainingJobSpec, tolerat
 			volumes:       spec.Volumes,
 			tolerations:   tolerations,
 			readiness:     readinessProbe,
+			labels:        spec.Labels,
+			affinity:      affinity,
 		}),
 	}
 }

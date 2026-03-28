@@ -1,17 +1,27 @@
 <template>
-  <div v-if="showWorkerCount" class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6">
-    <h3 class="text-base font-bold mb-4 flex items-center gap-2">
+  <div
+    v-if="showWorkerCount"
+    :class="embedded
+      ? 'rounded-xl border border-blue-200/70 bg-blue-50/70 p-4 dark:border-blue-800/60 dark:bg-blue-950/20'
+      : 'bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6'"
+  >
+    <h3 v-if="!embedded" class="text-base font-bold mb-4 flex items-center gap-2">
       <span class="w-1 h-4 bg-primary rounded"></span>
       {{ t('workerNodes') }}
     </h3>
+    <div v-else class="mb-4 flex items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
+      <span class="material-icons text-[18px] text-primary">tune</span>
+      {{ t('workerNodes') }}
+    </div>
     <div>
       <label class="block text-sm text-slate-500 mb-2">
         {{ t('workerCount') }} ({{ t('workerCountHint') }})<span class="text-red-500">*</span>
       </label>
-      <div class="flex items-center">
+      <div class="create-form-stepper">
         <button
           :disabled="workerCount <= 2"
-          class="w-9 h-9 border border-border-light dark:border-border-dark rounded-l-lg hover:bg-slate-50 dark:hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="create-form-stepper__button"
+          type="button"
           @click="$emit('decrease-worker')"
         >
           -
@@ -19,19 +29,34 @@
         <input
           :max="maxWorkerCount"
           :value="workerCount"
-          class="w-16 h-9 text-center border-y border-border-light dark:border-border-dark bg-white dark:bg-zinc-800 outline-none"
+          class="create-form-stepper__input"
           min="2"
           type="number"
           @input="$emit('update:workerCount', Number($event.target.value))"
         />
         <button
           :disabled="workerCount >= maxWorkerCount"
-          class="w-9 h-9 border border-border-light dark:border-border-dark rounded-r-lg hover:bg-slate-50 dark:hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="create-form-stepper__button"
+          type="button"
           @click="$emit('increase-worker')"
         >
           +
         </button>
       </div>
+      <div class="mt-4">
+        <label class="block text-sm text-slate-500 mb-2">调度策略</label>
+        <el-select
+          :model-value="scheduleStrategy"
+          class="w-full"
+          @update:model-value="$emit('update:schedule-strategy', $event)"
+        >
+          <el-option label="智能均衡（默认）" value="BALANCED" />
+          <el-option label="严格分布式（节点不足则失败）" value="STRICT" />
+        </el-select>
+      </div>
+      <p v-if="!selectedProduct" class="mt-2 text-sm text-slate-500">
+        请先选择资源规格，再根据可用节点数调整实例数量
+      </p>
       <p v-if="selectedProduct" class="mt-2 text-sm text-slate-500">
         {{ t('availableCapacity', { count: availableCapacity, unit: selectedProduct.gpuCount > 0 ? 'GPU' : t('instance') }) }}
       </p>
@@ -51,6 +76,10 @@ defineProps({
     type: Number,
     default: 0
   },
+  embedded: {
+    type: Boolean,
+    default: false
+  },
   frameworkType: {
     type: String,
     required: true
@@ -63,6 +92,10 @@ defineProps({
     type: Object,
     default: null
   },
+  scheduleStrategy: {
+    type: String,
+    default: 'BALANCED'
+  },
   showWorkerCount: {
     type: Boolean,
     default: false
@@ -73,7 +106,7 @@ defineProps({
   }
 })
 
-defineEmits(['decrease-worker', 'increase-worker', 'update:workerCount'])
+defineEmits(['decrease-worker', 'increase-worker', 'update:schedule-strategy', 'update:workerCount'])
 
 const t = inject('t', (key) => key)
 </script>

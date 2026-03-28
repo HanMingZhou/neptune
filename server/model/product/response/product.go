@@ -37,36 +37,42 @@ type ProductListResponse struct {
 }
 
 type ProductDetailResponse struct {
-	ID             uint    `json:"id"`
-	ProductType    int     `json:"productType"`
-	Name           string  `json:"name"`
-	Description    string  `json:"description"`
-	Area           string  `json:"area"`
-	NodeName       string  `json:"nodeName"`
-	NodeType       string  `json:"nodeType"`
-	CPUModel       string  `json:"cpuModel"`
-	CPU            int64   `json:"cpu"`
-	Memory         int64   `json:"memory"`
-	GPUModel       string  `json:"gpuModel"`
-	GPUCount       int64   `json:"gpuCount"`
-	GPUMemory      int64   `json:"gpuMemory"`
-	VGPUNumber     int64   `json:"vGpuNumber"`
-	VGPUMemory     int64   `json:"vGpuMemory"`
-	VGPUCores      int64   `json:"vGpuCores"`
-	PriceHourly    float64 `json:"priceHourly"`
-	PriceDaily     float64 `json:"priceDaily"`
-	PriceWeekly    float64 `json:"priceWeekly"`
-	PriceMonthly   float64 `json:"priceMonthly"`
-	DriverVersion  string  `json:"driverVersion"`
-	CUDAVersion    string  `json:"cudaVersion"`
-	SystemDisk     int64   `json:"systemDisk"`
-	DataDisk       int64   `json:"dataDisk"`
-	Status         int     `json:"status"`
-	StorageClass   string  `json:"storageClass"`
-	StoragePriceGB float64 `json:"storagePriceGb"`
-	MaxInstances   int64   `json:"maxInstances"`
-	Available      int64   `json:"available"` // 可用库存
-	ClusterId      uint    `json:"clusterId"`
+	ID                uint    `json:"id"`
+	TemplateProductId uint    `json:"templateProductId,omitempty"`
+	ProductType       int     `json:"productType"`
+	Name              string  `json:"name"`
+	Description       string  `json:"description"`
+	Area              string  `json:"area"`
+	ClusterName       string  `json:"clusterName,omitempty"`
+	NodeName          string  `json:"nodeName"`
+	NodeType          string  `json:"nodeType"`
+	CPUModel          string  `json:"cpuModel"`
+	CPU               int64   `json:"cpu"`
+	Memory            int64   `json:"memory"`
+	GPUModel          string  `json:"gpuModel"`
+	GPUCount          int64   `json:"gpuCount"`
+	GPUMemory         int64   `json:"gpuMemory"`
+	VGPUNumber        int64   `json:"vGpuNumber"`
+	VGPUMemory        int64   `json:"vGpuMemory"`
+	VGPUCores         int64   `json:"vGpuCores"`
+	PriceHourly       float64 `json:"priceHourly"`
+	PriceDaily        float64 `json:"priceDaily"`
+	PriceWeekly       float64 `json:"priceWeekly"`
+	PriceMonthly      float64 `json:"priceMonthly"`
+	DriverVersion     string  `json:"driverVersion"`
+	CUDAVersion       string  `json:"cudaVersion"`
+	SystemDisk        int64   `json:"systemDisk"`
+	DataDisk          int64   `json:"dataDisk"`
+	Status            int     `json:"status"`
+	StorageClass      string  `json:"storageClass"`
+	StoragePriceGB    float64 `json:"storagePriceGb"`
+	MaxInstances      int64   `json:"maxInstances"`
+	Available         int64   `json:"available"` // 可用库存
+	ClusterId         uint    `json:"clusterId"`
+	PhysicalNodeCount int64   `json:"physicalNodeCount,omitempty"`
+	StrictMax         int64   `json:"strictMax,omitempty"`
+	BalancedMax       int64   `json:"balancedMax,omitempty"`
+	TotalSlots        int64   `json:"totalSlots,omitempty"`
 }
 
 type ClusterResponse struct {
@@ -96,4 +102,40 @@ type NodeInfoResponse struct {
 type ReserveResult struct {
 	ResourceCount int64                 `json:"resourceCount"` // 实际锁定的资源数量
 	Product       ProductDetailResponse `json:"product"`       // 产品信息（用于获取 CPU/Memory/GPU 等配置）
+}
+
+type AggregateProductListResponse struct {
+	List  []AggregateProductResponse `json:"list"`
+	Total int64                      `json:"total"`
+}
+
+type AggregateProductResponse struct {
+	ID                uint    `json:"id"`
+	TemplateProductId uint    `json:"templateProductId"`
+	ProductType       int     `json:"productType"`
+	Name              string  `json:"name"`
+	Description       string  `json:"description"`
+	Area              string  `json:"area"`
+	ClusterId         uint    `json:"clusterId"`
+	ClusterName       string  `json:"clusterName"`
+	CPUModel          string  `json:"cpuModel"`
+	CPU               int64   `json:"cpu"`
+	Memory            int64   `json:"memory"`
+	GPUModel          string  `json:"gpuModel"`
+	GPUCount          int64   `json:"gpuCount"`
+	GPUMemory         int64   `json:"gpuMemory"`
+	VGPUNumber        int64   `json:"vGpuNumber"`
+	VGPUMemory        int64   `json:"vGpuMemory"`
+	VGPUCores         int64   `json:"vGpuCores"`
+	DriverVersion     string  `json:"driverVersion"`
+	CUDAVersion       string  `json:"cudaVersion"`
+	PriceHourly       float64 `json:"priceHourly"`
+	PriceDaily        float64 `json:"priceDaily"`
+	PriceWeekly       float64 `json:"priceWeekly"`
+	PriceMonthly      float64 `json:"priceMonthly"`
+	Available         int64   `json:"available"`
+	TotalSlots        int64   `json:"totalSlots"`
+	PhysicalNodeCount int64   `json:"physicalNodeCount"`
+	StrictMax         int64   `json:"strictMax"`
+	BalancedMax       int64   `json:"balancedMax"`
 }
