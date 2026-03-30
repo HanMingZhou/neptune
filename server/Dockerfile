@@ -1,5 +1,5 @@
 # ---- 构建阶段 ----
-FROM golang:1.24 AS builder
+FROM golang:1.25 AS builder
 
 WORKDIR /build
 COPY go.mod go.sum ./
