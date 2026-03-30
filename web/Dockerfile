@@ -9,11 +9,12 @@ ENV NPM_CONFIG_FETCH_TIMEOUT=300000
 ENV NPM_CONFIG_CACHE=/tmp/.npm
 ENV NPM_CONFIG_FUND=false
 ENV NPM_CONFIG_AUDIT=false
+ENV NPM_CONFIG_LOGLEVEL=info
 
 WORKDIR /build
 COPY package.json package-lock.json ./
 RUN npm cache clean --force \
-    && npm ci
+    && npm ci --verbose
 
 COPY . .
 
