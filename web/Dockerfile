@@ -3,7 +3,13 @@ FROM node:20-alpine AS builder
 
 WORKDIR /build
 COPY package.json package-lock.json ./
-RUN npm ci --registry=https://registry.npmmirror.com
+RUN npm config set registry https://registry.npmmirror.com \
+    && npm config set fetch-retries 5 \
+    && npm config set fetch-retry-mintimeout 20000 \
+    && npm config set fetch-retry-maxtimeout 120000 \
+    && npm config set prefer-offline false \
+    && npm cache clean --force \
+    && npm install --no-fund --no-audit
 
 COPY . .
 

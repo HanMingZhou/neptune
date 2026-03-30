@@ -1,7 +1,9 @@
 # ---- 构建阶段 ----
 FROM golang:1.24-alpine AS builder
 
-RUN apk add --no-cache git
+ARG ALPINE_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/alpine
+RUN sed -i "s#https://dl-cdn.alpinelinux.org/alpine#${ALPINE_MIRROR}#g" /etc/apk/repositories \
+    && apk add --no-cache git
 
 WORKDIR /build
 COPY go.mod go.sum ./
@@ -16,7 +18,9 @@ FROM alpine:3.20
 
 ENV GIN_MODE=release
 ENV TZ=Asia/Shanghai
-RUN apk add --no-cache ca-certificates tzdata \
+ARG ALPINE_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/alpine
+RUN sed -i "s#https://dl-cdn.alpinelinux.org/alpine#${ALPINE_MIRROR}#g" /etc/apk/repositories \
+    && apk add --no-cache ca-certificates tzdata \
     && ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
 
