@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: neptune-mysql
+  namespace: neptune
+  labels:
+    app: neptune-mysql
+    app.kubernetes.io/name: neptune-mysql
+    app.kubernetes.io/component: database
+    app.kubernetes.io/version: "9.6.0"
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: neptune-mysql
+  template:
+    metadata:
+      labels:
+        app: neptune-mysql
+        app.kubernetes.io/name: neptune-mysql
+        app.kubernetes.io/component: database
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:9.6.0
+          imagePullPolicy: IfNotPresent
+          args:
+            - "--character-set-server=utf8mb4"
+            - "--collation-server=utf8mb4_0900_ai_ci"
+          ports:
+            - containerPort: 3306
+              name: mysql
+              protocol: TCP
+          env:
+            - name: TZ
+              value: "Asia/Shanghai"
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: neptune-mysql-secret
+                  key: root-password
+            - name: MYSQL_DATABASE
+              value: "aiInfra"
+            - name: MYSQL_USER
+              value: "neptune"
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: neptune-mysql-secret
+                  key: user-password
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+          resources:
+            limits:
+              cpu: "2"
+              memory: 2Gi
+            requests:
+              cpu: 200m
+              memory: 512Mi
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - "-c"
+                - "mysqladmin ping -h localhost -uroot -p$MYSQL_ROOT_PASSWORD"
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - "-c"
+                - "mysqladmin ping -h localhost -uroot -p$MYSQL_ROOT_PASSWORD"
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+      volumes:
+        - name: mysql-data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: neptune-mysql
+  namespace: neptune
+  labels:
+    app: neptune-mysql
+    app.kubernetes.io/name: neptune-mysql
+    app.kubernetes.io/component: database
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3306
+      targetPort: 3306
+      protocol: TCP
+      name: mysql
+  selector:
+    app: neptune-mysql
