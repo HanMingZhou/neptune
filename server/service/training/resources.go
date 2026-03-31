@@ -123,10 +123,7 @@ func buildTrainingTensorboardName(jobName string) string {
 }
 
 func buildTrainingTensorboardRouteReq(job *trainingModel.TrainingJob) *apisixReq.CreateRouteReq {
-	baseDomain := global.GVA_CONFIG.Apisix.BaseDomain
-	if baseDomain == "" {
-		baseDomain = "ai.local"
-	}
+	baseDomain := strings.TrimSpace(global.GVA_CONFIG.Apisix.BaseDomain)
 
 	tbPathMatch := fmt.Sprintf("/tensorboard/%s/%s/*", job.Namespace, job.JobName)
 	tbPathRegex := fmt.Sprintf("^/tensorboard/%s/%s/(.*)", job.Namespace, job.JobName)

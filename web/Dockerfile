@@ -1,9 +1,20 @@
 # ---- 构建阶段 ----
-FROM node:20-alpine AS builder
+FROM node:20-bookworm-slim AS builder
+
+ENV NPM_CONFIG_REGISTRY=https://registry.npmmirror.com
+ENV NPM_CONFIG_FETCH_RETRIES=5
+ENV NPM_CONFIG_FETCH_RETRY_MINTIMEOUT=20000
+ENV NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT=120000
+ENV NPM_CONFIG_FETCH_TIMEOUT=300000
+ENV NPM_CONFIG_CACHE=/tmp/.npm
+ENV NPM_CONFIG_FUND=false
+ENV NPM_CONFIG_AUDIT=false
+ENV NPM_CONFIG_LOGLEVEL=info
 
 WORKDIR /build
 COPY package.json package-lock.json ./
-RUN npm ci --registry=https://registry.npmmirror.com
+RUN npm cache clean --force \
+    && npm ci --verbose
 
 COPY . .
 

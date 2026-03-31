@@ -6,65 +6,6 @@ import UnoCSS from 'unocss/vite';
 // 空模块用于替换不兼容的 form-create 包
 const emptyModule = 'export default {}; export const install = () => {};';
 const normalizeModuleId = (id: string) => id.replace(/\\/g, '/');
-const elementPlusChunkGroups: Record<string, string[]> = {
-  'vendor-element-table': ['pagination', 'scrollbar', 'table', 'table-column', 'virtual-list'],
-  'vendor-element-form': [
-    'cascader',
-    'checkbox',
-    'checkbox-group',
-    'form',
-    'input',
-    'input-number',
-    'option',
-    'option-group',
-    'radio',
-    'radio-group',
-    'select',
-    'select-v2',
-    'switch',
-    'upload'
-  ],
-  'vendor-element-overlay': [
-    'dialog',
-    'drawer',
-    'dropdown',
-    'loading',
-    'message',
-    'message-box',
-    'notification',
-    'popover',
-    'popconfirm',
-    'tooltip'
-  ],
-  'vendor-element-date': ['calendar', 'date-picker', 'time-picker', 'time-select']
-};
-
-const resolveElementPlusChunk = (moduleId: string) => {
-  const componentMatch = moduleId.match(/\/element-plus\/es\/components\/([^/]+)\//);
-  const componentName = componentMatch?.[1];
-
-  if (componentName) {
-    for (const [chunkName, componentNames] of Object.entries(elementPlusChunkGroups)) {
-      if (componentNames.includes(componentName)) {
-        return chunkName;
-      }
-    }
-  }
-
-  if (moduleId.includes('/@floating-ui/') || moduleId.includes('/@popperjs/')) {
-    return 'vendor-element-overlay';
-  }
-
-  if (moduleId.includes('/async-validator/')) {
-    return 'vendor-element-form';
-  }
-
-  if (moduleId.includes('/dayjs/')) {
-    return 'vendor-element-date';
-  }
-
-  return 'vendor-element-plus';
-};
 
 const manualChunks = (id: string) => {
   const moduleId = normalizeModuleId(id);
@@ -77,8 +18,16 @@ const manualChunks = (id: string) => {
     return 'vendor-element-icons';
   }
 
-  if (moduleId.includes('/element-plus/')) {
-    return resolveElementPlusChunk(moduleId);
+  // Keep Element Plus and its tightly coupled runtime dependencies in one
+  // chunk to avoid initialization order issues in production builds.
+  if (
+    moduleId.includes('/element-plus/') ||
+    moduleId.includes('/@floating-ui/') ||
+    moduleId.includes('/@popperjs/') ||
+    moduleId.includes('/async-validator/') ||
+    moduleId.includes('/dayjs/')
+  ) {
+    return 'vendor-element-plus';
   }
 
   if (moduleId.includes('/echarts/')) {
