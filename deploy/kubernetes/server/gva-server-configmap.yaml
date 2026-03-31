@@ -118,13 +118,13 @@ data:
     # apisix configuration
     apisix:
         enabled: true
-        base-domain: "neptune.local"
+        base-domain: ""
         gateway-namespace: "apisix"
         auth-enabled: true
         auth-uri: "http://neptune-server.neptune.svc.cluster.local:8888/aiInfra/api/v1/apisix/auth"
-        http-port: 8888
+        http-port: 0
 
     # sshpiper configuration
     sshpiper:
-        host: "sshpiper.kubeflow.svc.cluster.local"
-        port: 22
+        host: ""
+        port: 0

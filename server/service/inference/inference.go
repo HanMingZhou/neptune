@@ -402,7 +402,7 @@ func (s *InferenceServiceService) ensureInferenceRoute(ctx context.Context, serv
 		return nil
 	}
 
-	baseDomain := global.GVA_CONFIG.Apisix.BaseDomain
+	baseDomain := strings.TrimSpace(global.GVA_CONFIG.Apisix.BaseDomain)
 	authUri := global.GVA_CONFIG.Apisix.AuthUri
 	if authUri == "" {
 		return errors.New("auth-uri 未配置，跳过推理路由创建")
@@ -456,15 +456,7 @@ func (s *InferenceServiceService) deleteInferenceRoute(ctx context.Context, serv
 
 // buildGatewayUrl 构建推理服务的 APISIX 网关完整访问地址
 func buildGatewayUrl(namespace, instanceName string) string {
-	cfg := global.GVA_CONFIG.Apisix
-	scheme := "http"
-	host := cfg.BaseDomain
-	port := cfg.HttpPort
-	// 标准端口不显示
-	if port == 80 || port == 443 {
-		return fmt.Sprintf("%s://%s/inference/%s/%s", scheme, host, namespace, instanceName)
-	}
-	return fmt.Sprintf("%s://%s:%d/inference/%s/%s", scheme, host, port, namespace, instanceName)
+	return fmt.Sprintf("/inference/%s/%s", namespace, instanceName)
 }
 
 // updateStatus 更新服务状态

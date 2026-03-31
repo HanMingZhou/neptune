@@ -23,7 +23,6 @@ import (
 	"gin-vue-admin/utils/timer"
 	"gin-vue-admin/utils/validator"
 	"io"
-	"strconv"
 	"time"
 
 	"github.com/pkg/errors"
@@ -1051,16 +1050,7 @@ func buildTrainingDuration(startedAt, finishedAt *time.Time) string {
 }
 
 func buildTrainingTensorboardURL(namespace, jobName string) string {
-	domain := global.GVA_CONFIG.Apisix.BaseDomain
-	if domain == "" {
-		domain = "ai.local"
-	}
-	port := global.GVA_CONFIG.Apisix.HttpPort
-	if port == 0 {
-		port = 8888
-	}
-	host := domain + ":" + strconv.Itoa(port)
-	return fmt.Sprintf("http://%s/tensorboard/%s/%s/", host, namespace, jobName)
+	return fmt.Sprintf("/tensorboard/%s/%s/", namespace, jobName)
 }
 
 // GetTrainingJobDetail 获取训练任务详情

@@ -37,7 +37,6 @@ import (
 	"gin-vue-admin/utils/validator"
 	"io"
 	"path"
-	"strconv"
 	"strings"
 
 	nbv1 "github.com/kubeflow/kubeflow/components/notebook-controller/api/v1"
@@ -660,10 +659,7 @@ func (nb *NotebookService) createNotebookAccessRoute(ctx context.Context, nbRef 
 		return nil
 	}
 
-	baseDomain := global.GVA_CONFIG.Apisix.BaseDomain
-	if baseDomain == "" {
-		baseDomain = "ai.local"
-	}
+	baseDomain := strings.TrimSpace(global.GVA_CONFIG.Apisix.BaseDomain)
 
 	authEnabled := global.GVA_CONFIG.Apisix.AuthEnabled
 	authUri := global.GVA_CONFIG.Apisix.AuthUri
@@ -766,10 +762,7 @@ func (nb *NotebookService) createTensorboardAccessRoute(ctx context.Context, nbR
 		return
 	}
 
-	baseDomain := global.GVA_CONFIG.Apisix.BaseDomain
-	if baseDomain == "" {
-		baseDomain = "ai.local"
-	}
+	baseDomain := strings.TrimSpace(global.GVA_CONFIG.Apisix.BaseDomain)
 
 	authEnabled := global.GVA_CONFIG.Apisix.AuthEnabled
 	authUri := global.GVA_CONFIG.Apisix.AuthUri
@@ -1384,26 +1377,15 @@ func enrichNotebookDisplayInfo(item *response.NotebookItem, dbNb nbModel.Noteboo
 }
 
 func enrichNotebookAccessInfo(item *response.NotebookItem, dbNb nbModel.Notebook) {
-	domain := global.GVA_CONFIG.Apisix.BaseDomain
-	if domain == "" {
-		domain = "ai.local"
-	}
-
-	port := global.GVA_CONFIG.Apisix.HttpPort
-	if port == 0 {
-		port = 8888
-	}
-
-	jupyterHost := domain + ":" + strconv.Itoa(port)
-	item.JupyterUrl = fmt.Sprintf("http://%s/notebook/%s/%s/lab", jupyterHost, dbNb.Namespace, dbNb.InstanceName)
+	item.JupyterUrl = fmt.Sprintf("/notebook/%s/%s/lab", dbNb.Namespace, dbNb.InstanceName)
 	if dbNb.EnableTensorboard {
-		item.TensorboardUrl = fmt.Sprintf("http://%s/tensorboard/%s/%s/", jupyterHost, dbNb.Namespace, dbNb.InstanceName)
+		item.TensorboardUrl = fmt.Sprintf("/tensorboard/%s/%s/", dbNb.Namespace, dbNb.InstanceName)
 	}
 
 	sshUser := fmt.Sprintf("%s-%s", dbNb.Namespace, dbNb.InstanceName)
 	sshHost := global.GVA_CONFIG.SSHPiper.Host
 	if sshHost == "" {
-		sshHost = domain
+		sshHost = global.GVA_CONFIG.Apisix.BaseDomain
 	}
 
 	sshPort := global.GVA_CONFIG.SSHPiper.Port
@@ -1411,10 +1393,10 @@ func enrichNotebookAccessInfo(item *response.NotebookItem, dbNb nbModel.Notebook
 		sshPort = 22
 	}
 
-	if dbNb.SSHKeyId > 0 {
+	if sshHost != "" && dbNb.SSHKeyId > 0 {
 		item.SSHKeyCommand = fmt.Sprintf("ssh -i ~/.ssh/id_rsa -p %d %s@%s", sshPort, sshUser, sshHost)
 	}
-	if dbNb.EnableSSHPassword && dbNb.SSHPassword != "" {
+	if sshHost != "" && dbNb.EnableSSHPassword && dbNb.SSHPassword != "" {
 		item.SSHCommand = fmt.Sprintf("ssh -p %d %s@%s", sshPort, sshUser, sshHost)
 		item.SSHPassword = dbNb.SSHPassword
 	}

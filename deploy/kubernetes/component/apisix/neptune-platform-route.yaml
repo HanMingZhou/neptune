@@ -1,0 +1,23 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixRoute
+metadata:
+  name: neptune-platform
+  namespace: neptune
+spec:
+  ingressClassName: apisix
+  http:
+    - name: neptune-api
+      match:
+        paths:
+          - /aiInfra/*
+      backends:
+        - serviceName: neptune-server
+          servicePort: 8888
+      websocket: true
+    - name: neptune-web
+      match:
+        paths:
+          - /*
+      backends:
+        - serviceName: neptune-web
+          servicePort: 80
