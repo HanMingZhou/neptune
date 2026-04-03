@@ -70,22 +70,22 @@ export function useOrderTransactions({ t }) {
 
   const getTypeStyle = (type) => {
     const map = {
-      Recharge: 'bg-emerald-500/10 text-emerald-500',
-      Refund: 'bg-amber-500/10 text-amber-500',
-      Consumption: 'bg-slate-500/10 text-slate-500',
-      Adjustment: 'bg-blue-500/10 text-blue-500'
+      Recharge: 'order-tone-chip--recharge',
+      Refund: 'order-tone-chip--warning',
+      Consumption: 'order-tone-chip--consume',
+      Adjustment: 'order-tone-chip--consume'
     }
-    return map[type] || 'bg-slate-500/10 text-slate-500'
+    return map[type] || 'order-tone-chip--consume'
   }
 
   const getStatusStyle = (status) => {
     const map = {
-      1: 'bg-emerald-500/10 text-emerald-500',
-      2: 'bg-slate-500/10 text-slate-500',
-      3: 'bg-blue-500/10 text-blue-500',
-      4: 'bg-slate-400/10 text-slate-400'
+      1: 'order-tone-chip--recharge',
+      2: 'order-tone-chip--consume',
+      3: 'order-tone-chip--warning',
+      4: 'order-tone-chip--consume'
     }
-    return map[status] || 'bg-slate-500/10 text-slate-500'
+    return map[status] || 'order-tone-chip--consume'
   }
 
   const getStatusText = (status) => {
@@ -103,7 +103,7 @@ export function useOrderTransactions({ t }) {
   const resolveTransactionStatus = (item) => {
     if (item.type === 1 || item.type === 3 || item.type === 4 || !item.orderStatus || Number(item.orderStatus) <= 0) {
       return {
-        statusStyle: 'bg-emerald-500/10 text-emerald-500',
+        statusStyle: 'order-tone-chip--recharge',
         statusText: translate('success')
       }
     }

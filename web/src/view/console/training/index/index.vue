@@ -7,7 +7,7 @@
     >
       <template #actions>
         <RefreshButton :loading="loading" @refresh="handleRefresh" />
-        <button class="bg-primary hover:bg-primary-hover text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 flex items-center gap-2 transition-all" @click="goToCreate">
+        <button class="list-toolbar-button list-toolbar-button--primary" @click="goToCreate">
           <span class="material-icons text-[20px]">add</span>
           {{ t('createTraining') }}
         </button>

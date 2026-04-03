@@ -76,26 +76,24 @@
     </div>
 
     <template #footer>
-      <div class="flex items-center justify-between text-xs text-slate-500">
-        <span>{{ t('totalRecords', { total }) }}</span>
-        <el-pagination
-          v-model:current-page="pageModel"
-          v-model:page-size="pageSizeModel"
-          :total="total"
-          :page-sizes="[10, 20, 50]"
-          layout="sizes, prev, pager, next"
-          size="small"
-          class="!p-0"
-          @current-change="$emit('page-change', $event)"
-          @size-change="$emit('size-change', $event)"
-        />
-      </div>
+      <ListPaginationBar
+        v-model:current-page="pageModel"
+        v-model:page-size="pageSizeModel"
+        :total="total"
+        :total-text="t('totalRecords', { total })"
+        :page-sizes="[10, 20, 50]"
+        layout="sizes, prev, pager, next"
+        size="small"
+        @current-change="$emit('page-change', $event)"
+        @size-change="$emit('size-change', $event)"
+      />
     </template>
   </TableCard>
 </template>
 
 <script setup>
 import { computed, inject } from 'vue'
+import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
 
 const props = defineProps({

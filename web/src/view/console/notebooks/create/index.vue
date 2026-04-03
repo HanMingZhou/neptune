@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-background-light dark:bg-background-dark pb-24">
+  <div class="console-create-page pb-24">
     <PageHeader title-key="createInstance" @back="goBack" />
 
     <div class="console-page-container px-6 py-6 space-y-6">
@@ -34,6 +34,7 @@
         :change-image-tab="changeImageTab"
         :enable-ssh-password="enableSshPassword"
         :enable-tensorboard="enableTensorboard"
+        :field-errors="fieldErrors"
         :filtered-images="filteredImages"
         :image-tabs="imageTabs"
         :instance-name="instanceName"
@@ -44,9 +45,11 @@
         @update:selected-image="selectedImage = $event"
         @update:enable-ssh-password="enableSshPassword = $event"
         @update:enable-tensorboard="enableTensorboard = $event"
-        @update:instance-name="instanceName = $event"
+        @update:instance-name="updateInstanceName($event)"
         @update:selected-ssh-key="selectedSshKey = $event"
-        @update:tensorboard-log-path="tensorboardLogPath = $event"
+        @update:tensorboard-log-path="updateTensorboardLogPath($event)"
+        @validate:instance-name="validateInstanceNameField"
+        @validate:tensorboard-log-path="validateTensorboardLogPathField"
       />
     </div>
 
@@ -82,6 +85,7 @@ const {
   cpuModels,
   enableSshPassword,
   enableTensorboard,
+  fieldErrors,
   filteredImages,
   filters,
   formatPrice,
@@ -105,6 +109,10 @@ const {
   sshKeys,
   tensorboardLogPath,
   totalPrice,
+  updateInstanceName,
+  updateTensorboardLogPath,
+  validateInstanceNameField,
+  validateTensorboardLogPathField,
   volumeMountPath
 } = useNotebookCreate({ t, router })
 </script>

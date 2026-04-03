@@ -47,10 +47,10 @@
               </span>
             </td>
             <td class="px-6 py-5 text-right">
-              <button v-if="invoice.status === 'Sent'" class="text-primary text-xs font-black hover:underline">
+              <button v-if="invoice.status === 'Sent'" class="list-row-button list-row-button--info">
                 {{ t('order.downloadElectronic') }}
               </button>
-              <button v-else class="text-slate-400 text-xs font-black hover:underline">
+              <button v-else class="list-row-button list-row-button--neutral">
                 {{ t('order.viewProgress') }}
               </button>
             </td>

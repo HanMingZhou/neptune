@@ -6,13 +6,16 @@
         {{ t('engineConfig') }}
       </h3>
       <el-form :model="form" label-position="top" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <el-form-item :label="t('name')" required>
+        <el-form-item :label="t('name')" :error="fieldErrors.displayName || ''" required>
           <el-input
             :model-value="form.displayName"
+            maxlength="63"
             :placeholder="t('inference.enterName')"
             class="w-full"
             @update:model-value="$emit('update:field', { key: 'displayName', value: $event })"
+            @blur="$emit('validate:display-name')"
           />
+          <div class="text-xs text-slate-400 mt-1">{{ t('resourceNameHint', { max: 63 }) }}</div>
         </el-form-item>
         <el-form-item :label="t('inference.framework')" :required="frameworkRequired">
           <el-select
@@ -176,6 +179,10 @@ defineProps({
     type: Object,
     required: true
   },
+  fieldErrors: {
+    type: Object,
+    default: () => ({})
+  },
   frameworkRequired: {
     type: Boolean,
     default: false
@@ -190,7 +197,7 @@ defineProps({
   }
 })
 
-defineEmits(['deploy-type-change', 'update:field'])
+defineEmits(['deploy-type-change', 'update:field', 'validate:display-name'])
 
 const t = inject('t', (key) => key)
 </script>

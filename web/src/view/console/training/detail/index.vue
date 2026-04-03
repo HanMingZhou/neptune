@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-background-light dark:bg-background-dark">
+  <div class="console-detail-page min-h-screen">
     <DetailHeader
       :action-loading="actionLoading"
       :get-status-class="getStatusClass"

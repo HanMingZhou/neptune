@@ -12,10 +12,14 @@
             :value="instanceName"
             :placeholder="t('enterInstanceName')"
             class="create-form-input"
-            maxlength="50"
+            :aria-invalid="instanceNameError ? 'true' : 'false'"
+            maxlength="63"
             type="text"
             @input="$emit('update:instanceName', $event.target.value)"
+            @blur="$emit('validate:instance-name')"
           />
+          <p class="create-form-help">{{ t('resourceNameHint', { max: 63 }) }}</p>
+          <p v-if="instanceNameError" class="create-form-error">{{ instanceNameError }}</p>
         </div>
         <div>
           <label class="flex items-center gap-2 cursor-pointer">
@@ -32,9 +36,12 @@
               :value="tensorboardLogPath"
               :placeholder="t('enterLogPath')"
               class="create-form-input"
+              :aria-invalid="tensorboardPathError ? 'true' : 'false'"
               type="text"
               @input="$emit('update:tensorboardLogPath', $event.target.value)"
+              @blur="$emit('validate:tensorboard-log-path')"
             />
+            <p v-if="tensorboardPathError" class="create-form-error">{{ tensorboardPathError }}</p>
           </div>
         </div>
       </div>
@@ -90,6 +97,10 @@ defineProps({
     type: String,
     default: ''
   },
+  instanceNameError: {
+    type: String,
+    default: ''
+  },
   selectedSshKey: {
     type: [Number, String],
     default: null
@@ -101,6 +112,10 @@ defineProps({
   tensorboardLogPath: {
     type: String,
     default: ''
+  },
+  tensorboardPathError: {
+    type: String,
+    default: ''
   }
 })
 
@@ -109,7 +124,9 @@ defineEmits([
   'update:enableTensorboard',
   'update:instanceName',
   'update:selectedSshKey',
-  'update:tensorboardLogPath'
+  'update:tensorboardLogPath',
+  'validate:instance-name',
+  'validate:tensorboard-log-path'
 ])
 
 const t = inject('t', (key) => key)

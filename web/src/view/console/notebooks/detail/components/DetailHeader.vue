@@ -8,24 +8,24 @@
   >
     <template #actions>
       <button
-        v-if="notebook.status === 'Stopped'"
+        v-if="normalizedStatus === 'STOPPED'"
         :disabled="actionLoading"
-        class="px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg text-sm font-bold transition-colors disabled:opacity-50"
+        class="detail-header-action detail-header-action--primary"
         @click="$emit('start')"
       >
         {{ t('start') }}
       </button>
       <button
-        v-if="notebook.status === 'Running'"
+        v-if="normalizedStatus === 'RUNNING'"
         :disabled="actionLoading"
-        class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-sm font-bold transition-colors disabled:opacity-50"
+        class="detail-header-action detail-header-action--warning"
         @click="$emit('stop')"
       >
         {{ t('stop') }}
       </button>
       <button
         :disabled="actionLoading"
-        class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-bold transition-colors disabled:opacity-50"
+        class="detail-header-action detail-header-action--danger"
         @click="$emit('delete')"
       >
         {{ t('delete') }}
@@ -35,10 +35,13 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
+import { computed, inject } from 'vue'
 import DetailHeaderShell from '@/components/detailPage/DetailHeaderShell.vue'
 
-defineProps({
+defineEmits(['back', 'delete', 'start', 'stop'])
+
+const t = inject('t', (key) => key)
+const props = defineProps({
   actionLoading: {
     type: Boolean,
     default: false
@@ -57,7 +60,5 @@ defineProps({
   }
 })
 
-defineEmits(['back', 'delete', 'start', 'stop'])
-
-const t = inject('t', (key) => key)
+const normalizedStatus = computed(() => `${props.notebook.status || ''}`.trim().toUpperCase())
 </script>

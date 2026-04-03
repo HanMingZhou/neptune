@@ -17,7 +17,7 @@
           @toggle-lang="toggleLang"
         />
 
-        <main class="flex-1 overflow-y-auto custom-scrollbar px-4 py-6 lg:px-6 lg:py-8 bg-background-light dark:bg-background-dark/50">
+        <main class="workspace-shell flex-1 overflow-y-auto custom-scrollbar py-6 lg:py-8 bg-background-light dark:bg-background-dark">
           <router-view v-slot="{ Component, route: currentRoute }">
             <keep-alive :include="routerStore.keepAliveRouters">
               <component :is="Component" :key="currentRoute.fullPath" />

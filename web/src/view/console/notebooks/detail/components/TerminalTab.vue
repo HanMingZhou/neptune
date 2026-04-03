@@ -3,7 +3,7 @@
     :body-style="{ overscrollBehavior: 'contain' }"
     :can-connect="isInstanceRunning"
     :connected-label="'Gateway: 22'"
-    :disabled-status-text="notebook.status !== 'Running' ? `${t('instanceStatus')}: ${notebook.status}` : ''"
+    :disabled-status-text="!isInstanceRunning ? `${t('instanceStatus')}: ${notebook.status || '-'}` : ''"
     :set-terminal-ref="setTerminalRef"
     :terminal-connected="terminalConnected"
     :terminal-title="`root@${notebook.instanceName || ''}-0:~`"

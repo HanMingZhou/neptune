@@ -1,6 +1,7 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden shadow-sm">
-    <div class="list-filter-bar border-b border-border-light p-4 dark:border-border-dark">
+  <TableCard>
+    <template #toolbar>
+      <div class="list-filter-bar">
       <div class="list-filter-field list-filter-field--compact max-w-[180px]">
         <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">http</span>
         <input
@@ -47,10 +48,11 @@
           {{ t('reset') }}
         </button>
       </div>
-    </div>
+      </div>
+    </template>
 
     <div class="overflow-x-auto" v-loading="loading">
-      <table class="w-full min-w-[1280px] text-left">
+      <table class="console-table w-full min-w-[1280px] text-left">
         <thead>
           <tr class="bg-slate-50 dark:bg-zinc-800/50 border-b border-border-light dark:border-border-dark text-slate-500 text-xs font-bold uppercase tracking-wider">
             <th class="px-6 py-4 w-12">
@@ -64,7 +66,7 @@
             <th class="px-6 py-4">{{ t('requestPath') }}</th>
             <th class="px-6 py-4">{{ t('requestBody') }}</th>
             <th class="px-6 py-4">{{ t('responseBody') }}</th>
-            <th class="px-6 py-4 text-right">{{ t('actions') }}</th>
+            <th class="px-6 py-4 console-actions-header">{{ t('actions') }}</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-border-light dark:divide-border-dark">
@@ -90,20 +92,16 @@
               />
             </td>
             <td class="px-6 py-4 text-sm">
-              <span class="font-medium">{{ row.user?.userName || '-' }}</span>
-              <span v-if="row.user?.nickName" class="text-slate-400">({{ row.user.nickName }})</span>
+              <span class="is-key">{{ row.user?.userName || '-' }}</span>
+              <span v-if="row.user?.nickName" class="is-muted">({{ row.user.nickName }})</span>
             </td>
             <td class="px-6 py-4 text-sm text-slate-500">{{ formatDate(row.CreatedAt) }}</td>
             <td class="px-6 py-4">
-              <span :class="getStatusClass(row.status)" class="px-2.5 py-1 rounded-full text-xs font-bold">
-                {{ row.status }}
-              </span>
+              <ListToneBadge :label="String(row.status)" :tone="getStatusTone(row.status)" />
             </td>
             <td class="px-6 py-4 text-sm font-mono text-slate-500">{{ row.ip }}</td>
             <td class="px-6 py-4">
-              <span :class="getMethodClass(row.method)" class="px-2 py-0.5 rounded text-xs font-bold">
-                {{ row.method }}
-              </span>
+              <ListToneBadge :label="row.method" :tone="getMethodTone(row.method)" />
             </td>
             <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 max-w-[220px] truncate" :title="row.path">
               {{ row.path }}
@@ -130,10 +128,10 @@
               </el-popover>
               <span v-else class="text-slate-400 text-sm">-</span>
             </td>
-            <td class="px-6 py-4 text-right">
-              <div class="flex justify-end items-center">
+            <td class="px-6 py-4 console-actions-cell">
+              <div class="list-row-actions">
                 <button
-                  class="bg-red-500/10 hover:bg-red-500/20 text-red-600 px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-1"
+                  class="list-row-button list-row-button--danger"
                   @click="$emit('delete', row)"
                 >
                   <span class="material-icons text-[16px]">delete</span>
@@ -146,25 +144,27 @@
       </table>
     </div>
 
-    <div class="px-6 py-4 bg-slate-50 dark:bg-zinc-800/30 flex items-center justify-between border-t border-border-light dark:border-border-dark">
-      <span class="text-xs text-slate-500">{{ t('totalRecords', { total }) }}</span>
-      <el-pagination
+    <template #footer>
+      <ListPaginationBar
         :current-page="page"
         :page-size="pageSize"
-        :page-sizes="[10, 30, 50, 100]"
         :total="total"
-        background
+        :total-text="t('totalRecords', { total })"
+        :page-sizes="[10, 30, 50, 100]"
         layout="sizes, prev, pager, next, jumper"
         @current-change="$emit('page-change', $event)"
         @size-change="$emit('size-change', $event)"
       />
-    </div>
-  </div>
+    </template>
+  </TableCard>
 </template>
 
 <script setup>
 import { inject } from 'vue'
+import ListToneBadge from '@/components/listPage/ListToneBadge.vue'
 import { formatDate } from '@/utils/format'
+import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
+import TableCard from '@/components/listPage/TableCard.vue'
 
 defineProps({
   allSelected: {
@@ -213,23 +213,23 @@ defineEmits([
 
 const t = inject('t', (key) => key)
 
-const getMethodClass = (method) => {
-  const classes = {
-    GET: 'bg-primary/10 text-primary',
-    POST: 'bg-emerald-500/10 text-emerald-500',
-    PUT: 'bg-amber-500/10 text-amber-500',
-    DELETE: 'bg-red-500/10 text-red-500'
+const getMethodTone = (method) => {
+  const tones = {
+    GET: 'info',
+    POST: 'success',
+    PUT: 'warning',
+    DELETE: 'danger'
   }
 
-  return classes[method] || 'bg-slate-500/10 text-slate-500'
+  return tones[method] || 'neutral'
 }
 
-const getStatusClass = (status) => {
+const getStatusTone = (status) => {
   if (Number(status) >= 400) {
-    return 'bg-red-500/10 text-red-500'
+    return 'danger'
   }
 
-  return 'bg-emerald-500/10 text-emerald-500'
+  return 'success'
 }
 
 const formatBody = (value) => {

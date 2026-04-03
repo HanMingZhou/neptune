@@ -21,7 +21,7 @@ export function useOrderUsage({ t }) {
   }
 
   const getChargeTypeStyle = (source) => (
-    source === '按量计费' ? 'bg-blue-500/10 text-blue-600' : 'bg-purple-500/10 text-purple-600'
+    source === '按量计费' ? 'order-tone-chip--consume' : 'order-tone-chip--warning'
   )
 
   const formatUsage = (item) => {
@@ -66,16 +66,16 @@ export function useOrderUsage({ t }) {
   const getStatusStyle = (item) => {
     if (item.source === '按量计费') {
       const map = {
-        1: 'bg-emerald-500/10 text-emerald-500',
-        2: 'bg-slate-500/10 text-slate-500',
-        3: 'bg-blue-500/10 text-blue-500'
+        1: 'order-tone-chip--recharge',
+        2: 'order-tone-chip--consume',
+        3: 'order-tone-chip--warning'
       }
-      return map[item.status] || 'bg-slate-500/10 text-slate-500'
+      return map[item.status] || 'order-tone-chip--consume'
     }
 
     return item.status === 1
-      ? 'bg-emerald-500/10 text-emerald-500'
-      : 'bg-amber-500/10 text-amber-500'
+      ? 'order-tone-chip--recharge'
+      : 'order-tone-chip--warning'
   }
 
   const filteredUsageItems = computed(() => {

@@ -1,6 +1,6 @@
 <template>
   <div class="console-page-container px-6 pb-4">
-    <div class="rounded-xl border border-border-light bg-surface-light px-2 dark:border-border-dark dark:bg-surface-dark md:px-3">
+    <div class="console-detail-card rounded-xl px-2 md:px-3">
       <div class="flex gap-1 overflow-x-auto">
         <button
           v-for="tab in tabs"

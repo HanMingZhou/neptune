@@ -1,4 +1,4 @@
-import { inject, onMounted, onUnmounted, ref, watch } from 'vue'
+import { inject, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { deleteNotebook, getNotebookList, startNotebook, stopNotebook } from '@/api/notebook'
@@ -19,7 +19,13 @@ export const useNotebookList = () => {
   const total = ref(0)
   const btnLoading = ref({})
 
-  let timer = null
+  const syncNotebooks = (nextList = []) => {
+    const currentMap = new Map(notebooks.value.map((item) => [item.id, item]))
+    notebooks.value = nextList.map((item) => {
+      const existing = currentMap.get(item.id)
+      return existing ? Object.assign(existing, item) : item
+    })
+  }
 
   const fetchNotebooks = async (silent = false) => {
     if (!silent) loading.value = true
@@ -31,7 +37,7 @@ export const useNotebookList = () => {
         status: statusFilter.value || undefined
       })
       if (res.code === 0) {
-        notebooks.value = res.data?.list || []
+        syncNotebooks(res.data?.list || [])
         total.value = res.data?.total || 0
       } else if (!silent) {
         ElMessage.error(res.msg || t('error'))
@@ -42,7 +48,7 @@ export const useNotebookList = () => {
         ElMessage.error(t('error'))
       }
     } finally {
-      if (!silent) loading.value = false
+      loading.value = false
     }
   }
 
@@ -62,20 +68,6 @@ export const useNotebookList = () => {
     fetchNotebooks()
   })
 
-  const startPolling = () => {
-    stopPolling()
-    timer = setInterval(() => {
-      fetchNotebooks(true)
-    }, 5000)
-  }
-
-  const stopPolling = () => {
-    if (timer) {
-      clearInterval(timer)
-      timer = null
-    }
-  }
-
   const handleDelete = async (item) => {
     if (btnLoading.value[item.id]) return
     try {
@@ -89,6 +81,7 @@ export const useNotebookList = () => {
       if (res.code === 0) {
         ElMessage.success(t('success'))
         item.status = 'DELETING'
+        await fetchNotebooks(true)
       } else {
         ElMessage.error(res.msg || t('operationFailed'))
       }
@@ -111,6 +104,7 @@ export const useNotebookList = () => {
       if (res.code === 0) {
         ElMessage.success(t('success'))
         item.status = 'PENDING'
+        await fetchNotebooks(true)
       } else {
         ElMessage.error(res.msg || t('error'))
       }
@@ -131,6 +125,7 @@ export const useNotebookList = () => {
       if (res.code === 0) {
         ElMessage.success(t('success'))
         item.status = 'STOPPED'
+        await fetchNotebooks(true)
       } else {
         ElMessage.error(res.msg || t('error'))
       }
@@ -180,28 +175,23 @@ export const useNotebookList = () => {
 
   const getStatusStyle = (status) => {
     const map = {
-      RUNNING: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
-      STOPPED: 'bg-slate-500/10 text-slate-500 border-slate-500/20',
-      CREATING: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
-      PENDING: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
-      FAILED: 'bg-red-500/10 text-red-500 border-red-500/20',
-      SUCCEEDED: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
-      DELETING: 'bg-red-500/10 text-red-500 border-red-500/20',
-      UPDATING: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
-      UPDATE_FAILED: 'bg-red-500/10 text-red-500 border-red-500/20',
-      DELETE_FAILED: 'bg-red-500/10 text-red-500 border-red-500/20',
-      UPDATED: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
+      RUNNING: 'console-badge--success',
+      STOPPED: 'console-badge--neutral',
+      CREATING: 'console-badge--info',
+      PENDING: 'console-badge--warning',
+      FAILED: 'console-badge--danger',
+      SUCCEEDED: 'console-badge--success',
+      DELETING: 'console-badge--danger',
+      UPDATING: 'console-badge--info',
+      UPDATE_FAILED: 'console-badge--danger',
+      DELETE_FAILED: 'console-badge--danger',
+      UPDATED: 'console-badge--success'
     }
-    return map[status] || 'bg-slate-500/10 text-slate-500'
+    return map[status] || 'console-badge--neutral'
   }
 
   onMounted(() => {
     fetchNotebooks()
-    startPolling()
-  })
-
-  onUnmounted(() => {
-    stopPolling()
   })
 
   return {

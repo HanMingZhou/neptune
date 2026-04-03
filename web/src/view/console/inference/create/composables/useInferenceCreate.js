@@ -5,13 +5,18 @@ import { getImageList } from '@/api/image'
 import { getAggregateProductList, getProductFilters } from '@/api/product'
 import { getVolumeList } from '@/api/volume'
 import {
+  getSubmitErrorMessage,
+  isResourceNameErrorMessage,
+  validateK8sResourceName
+} from '@/utils/resourceValidators'
+import {
   INFERENCE_AUTH_TYPES,
   INFERENCE_IMAGE_TABS,
   INFERENCE_PAY_TYPES
 } from '../constants'
 
 export const useInferenceCreate = ({ t, router }) => {
-  const translate = (key) => (typeof t === 'function' ? t(key) : key)
+  const translate = (key, params) => (typeof t === 'function' ? t(key, params) : key)
 
   const frameworks = computed(() => [
     { label: 'vLLM', value: 'VLLM', icon: 'auto_awesome' },
@@ -59,6 +64,9 @@ export const useInferenceCreate = ({ t, router }) => {
   const gpuModelsList = ref([])
   const activeTab = ref('base')
   const loading = ref(false)
+  const fieldErrors = reactive({
+    displayName: ''
+  })
 
   const imageTabs = computed(() =>
     INFERENCE_IMAGE_TABS.map((tab) => ({
@@ -88,7 +96,7 @@ export const useInferenceCreate = ({ t, router }) => {
   })
 
   const canCreate = computed(() => {
-    if (!form.displayName || !form.modelPvcId || !form.imageId || !form.productId) return false
+    if (!form.displayName.trim() || !form.modelPvcId || !form.imageId || !form.productId) return false
     if (!hasCommand.value) return false
     if (frameworkRequired.value && !form.framework) return false
     if (form.deployType === 'DISTRIBUTED' && form.workerCount < 2) return false
@@ -239,20 +247,65 @@ export const useInferenceCreate = ({ t, router }) => {
     form.envs.splice(index, 1)
   }
 
+  const updateFieldError = (field, message = '') => {
+    fieldErrors[field] = message
+  }
+
+  const updateField = ({ key, value }) => {
+    form[key] = value
+
+    if (key === 'displayName' && fieldErrors.displayName) {
+      updateFieldError('displayName')
+    }
+  }
+
+  const validateDisplayNameField = () => {
+    const error = validateK8sResourceName(form.displayName, {
+      t: translate,
+      fieldKey: 'name',
+      example: 'my-service'
+    })
+
+    updateFieldError('displayName', error || '')
+    return !error
+  }
+
+  const validateCreateForm = () => {
+    const isDisplayNameValid = validateDisplayNameField()
+    if (!isDisplayNameValid) {
+      return fieldErrors.displayName
+    }
+
+    if (!form.modelPvcId || !form.imageId || !form.productId || !hasCommand.value) {
+      return translate('fillAllFields')
+    }
+
+    if (frameworkRequired.value && !form.framework) {
+      return translate('fillAllFields')
+    }
+
+    if (form.deployType === 'DISTRIBUTED' && (form.workerCount < 2 || form.workerCount > maxDistributedCount.value)) {
+      return translate('fillAllFields')
+    }
+
+    return ''
+  }
+
   const handleCancel = () => {
     router.push({ name: 'inference' })
   }
 
   const handleSubmit = async () => {
-    if (!canCreate.value) {
-      ElMessage.warning('请填写完整信息')
+    const validationMessage = validateCreateForm()
+    if (validationMessage) {
+      ElMessage.warning(validationMessage)
       return
     }
 
     loading.value = true
     try {
       const params = {
-        name: form.displayName,
+        name: form.displayName.trim(),
         framework: form.framework || undefined,
         deployType: form.deployType,
         modelPvcId: form.modelPvcId,
@@ -298,10 +351,18 @@ export const useInferenceCreate = ({ t, router }) => {
         return
       }
 
-      ElMessage.error(res.msg || translate('error'))
+      const submitMessage = res.msg || translate('createFailed')
+      if (isResourceNameErrorMessage(submitMessage)) {
+        updateFieldError('displayName', submitMessage)
+      }
+      ElMessage.error(submitMessage)
     } catch (error) {
       console.error('创建失败', error)
-      ElMessage.error(translate('error'))
+      const submitMessage = getSubmitErrorMessage(error, translate('createFailed'))
+      if (isResourceNameErrorMessage(submitMessage)) {
+        updateFieldError('displayName', submitMessage)
+      }
+      ElMessage.error(submitMessage)
     } finally {
       loading.value = false
     }
@@ -324,6 +385,7 @@ export const useInferenceCreate = ({ t, router }) => {
     changeFilter,
     changeImageTab,
     deployTypes,
+    fieldErrors,
     filters,
     form,
     formatPrice,
@@ -342,6 +404,8 @@ export const useInferenceCreate = ({ t, router }) => {
     pvcs,
     removeEnv,
     removeMount,
-    totalPrice
+    totalPrice,
+    updateField,
+    validateDisplayNameField
   }
 }

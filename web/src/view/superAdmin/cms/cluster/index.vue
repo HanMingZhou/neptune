@@ -8,7 +8,7 @@
       <template #actions>
         <RefreshButton :loading="loading" @refresh="fetchClusters" />
         <button
-          class="bg-primary hover:bg-primary-hover text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 flex items-center gap-2 transition-all"
+          class="list-toolbar-button list-toolbar-button--primary"
           @click="openCreateDialog"
         >
           <span class="material-icons text-[20px]">add</span>
@@ -17,22 +17,26 @@
       </template>
     </PageIntro>
 
-    <ClusterFiltersBar
-      :filter-keyword="filterKeyword"
-      :filter-status="filterStatus"
-      @reset="handleResetFilters"
-      @search="fetchClusters"
-      @update:filter-keyword="filterKeyword = $event"
-      @update:filter-status="filterStatus = $event"
-    />
+    <ManagementListShell>
+      <template #filters>
+        <ClusterFiltersBar
+          :filter-keyword="filterKeyword"
+          :filter-status="filterStatus"
+          @reset="handleResetFilters"
+          @search="fetchClusters"
+          @update:filter-keyword="filterKeyword = $event"
+          @update:filter-status="filterStatus = $event"
+        />
+      </template>
 
-    <ClusterTableCard
-      :items="clusters"
-      :loading="loading"
-      @delete="handleDelete"
-      @edit="openEditDialog"
-      @view-kubeconfig="viewKubeConfig"
-    />
+      <ClusterTableCard
+        :items="clusters"
+        :loading="loading"
+        @delete="handleDelete"
+        @edit="openEditDialog"
+        @view-kubeconfig="viewKubeConfig"
+      />
+    </ManagementListShell>
 
     <ClusterEditorDialog
       v-model="showDialog"
@@ -56,6 +60,7 @@
 
 <script setup>
 import { inject, onMounted } from 'vue'
+import ManagementListShell from '@/components/listPage/ManagementListShell.vue'
 import RefreshButton from '@/components/RefreshButton/index.vue'
 import PageIntro from '@/components/listPage/PageIntro.vue'
 import ClusterEditorDialog from './components/ClusterEditorDialog.vue'

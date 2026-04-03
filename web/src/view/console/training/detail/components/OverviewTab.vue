@@ -1,182 +1,185 @@
 <template>
-  <div class="space-y-4 md:space-y-5">
-    <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-4 md:p-5">
-      <h3 class="mb-4 flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-        <span class="w-1 h-4 bg-primary rounded"></span>
-        {{ t('basicInfo') }}
-      </h3>
-      <div class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('displayName') }}</div>
-          <div class="text-sm font-medium">{{ job.displayName || '-' }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('taskName') }}</div>
-          <div class="text-sm font-medium font-mono">{{ job.jobName }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('framework') }}</div>
-          <div class="text-sm font-medium">{{ getFrameworkLabel(job.frameworkType) }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('status') }}</div>
-          <div class="text-sm font-medium">{{ getStatusLabel(job.status) }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('createdAt') }}</div>
-          <div class="text-sm font-medium">{{ formatTime(job.createdAt) }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('startedAt') }}</div>
-          <div class="text-sm font-medium">{{ formatTime(job.startedAt) || '-' }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('finishedAt') }}</div>
-          <div class="text-sm font-medium">{{ formatTime(job.finishedAt) || '-' }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('duration') }}</div>
-          <div class="text-sm font-medium">{{ job.duration || '-' }}</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-4 md:p-5">
-      <h3 class="mb-4 flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-        <span class="w-1 h-4 bg-primary rounded"></span>
-        {{ t('resourceConfig') }}
-      </h3>
-      <div class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('totalGpu') }}</div>
-          <div class="text-xl font-semibold text-primary">{{ job.totalGpuCount || 0 }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('workerCount') }}</div>
-          <div class="text-xl font-semibold text-primary">{{ job.workerCount || 1 }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('gpuType') }}</div>
-          <div class="text-sm font-medium">{{ job.gpuModel || job.gpuType || '-' }}</div>
-        </div>
-        <div class="col-span-2">
-          <div class="text-xs text-slate-500 mb-1">{{ t('image') }}</div>
-          <div class="text-xs font-mono bg-slate-100 dark:bg-zinc-800 px-2 py-1 rounded inline-flex break-all max-w-full leading-relaxed">
-            {{ job.imageName || job.image }}
+  <div class="space-y-3 md:space-y-4">
+    <div class="console-detail-card rounded-xl p-4 md:p-5 space-y-5">
+      <section class="space-y-3">
+        <h3 class="flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+          <span class="w-1 h-4 bg-primary rounded"></span>
+          {{ t('basicInfo') }}
+        </h3>
+        <div class="detail-info-grid detail-info-grid--flat">
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('displayName') }}</div>
+            <div class="detail-info-value">{{ job.displayName || '-' }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('taskName') }}</div>
+            <div class="detail-info-value detail-info-value--mono">{{ job.jobName }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('framework') }}</div>
+            <div class="detail-info-value">{{ getFrameworkLabel(job.frameworkType) }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('status') }}</div>
+            <div class="detail-info-value">{{ getStatusLabel(job.status) }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('createdAt') }}</div>
+            <div class="detail-info-value">{{ formatTime(job.createdAt) }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('startedAt') }}</div>
+            <div class="detail-info-value">{{ formatTime(job.startedAt) || '-' }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('finishedAt') }}</div>
+            <div class="detail-info-value">{{ formatTime(job.finishedAt) || '-' }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('duration') }}</div>
+            <div class="detail-info-value">{{ job.duration || '-' }}</div>
           </div>
         </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('nodeConfig') }}</div>
-          <div class="text-sm font-medium">{{ job.cpu }}{{ t('cpu') }} / {{ job.memory }}GB</div>
-        </div>
-        <div v-if="job.workerGpu > 0">
-          <div class="text-xs text-slate-500 mb-1">{{ t('gpuPerWorker') }}</div>
-          <div class="text-sm font-medium">{{ job.workerGpu }}</div>
-        </div>
-      </div>
-    </div>
+      </section>
 
-    <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-4 md:p-5">
-      <h3 class="mb-4 flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-        <span class="w-1 h-4 bg-primary rounded"></span>
-        {{ t('orderAndCluster') }}
-      </h3>
-      <div class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('clusterName') }}</div>
-          <div class="text-sm font-medium">{{ job.clusterName }}</div>
+      <section class="space-y-3 border-t border-border-light pt-5 dark:border-border-dark">
+        <h3 class="flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+          <span class="w-1 h-4 bg-primary rounded"></span>
+          {{ t('resourceConfig') }}
+        </h3>
+        <div class="detail-info-grid detail-info-grid--flat">
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('totalGpu') }}</div>
+            <div class="detail-info-value text-primary">{{ job.totalGpuCount || 0 }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('workerCount') }}</div>
+            <div class="detail-info-value text-primary">{{ job.workerCount || 1 }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('gpuType') }}</div>
+            <div class="detail-info-value">{{ job.gpuModel || job.gpuType || '-' }}</div>
+          </div>
+          <div class="detail-info-item detail-info-item--wide">
+            <div class="detail-info-label">{{ t('image') }}</div>
+            <div class="detail-inline-chip detail-info-value--mono break-all">{{ job.imageName || job.image }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('nodeConfig') }}</div>
+            <div class="detail-info-value">{{ job.cpu }}{{ t('cpu') }} / {{ job.memory }}GB</div>
+          </div>
+          <div v-if="job.workerGpu > 0" class="detail-info-item">
+            <div class="detail-info-label">{{ t('gpuPerWorker') }}</div>
+            <div class="detail-info-value">{{ job.workerGpu }}</div>
+          </div>
         </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('area') }}</div>
-          <div class="text-sm font-medium">{{ job.area || '-' }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('payType') }}</div>
-          <div class="text-sm font-medium">{{ getPayTypeLabel(job.payType) }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('unitPrice') }}</div>
-          <div class="text-sm font-semibold text-red-500">￥{{ job.price?.toFixed(4) || '0.0000' }} / {{ t('unitHour') }}</div>
-        </div>
-      </div>
-    </div>
+      </section>
 
-    <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-4 md:p-5">
-      <h3 class="mb-4 flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-        <span class="w-1 h-4 bg-primary rounded"></span>
-        {{ t('startupCommand') }}
-      </h3>
-      <div class="bg-zinc-900 rounded-lg p-3">
-        <pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap break-all">{{ job.startupCommand || '-' }}</pre>
-      </div>
-    </div>
-
-    <div v-if="job.enableTensorboard" class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-4 md:p-5">
-      <h3 class="mb-4 flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-        <span class="w-1 h-4 bg-primary rounded"></span>
-        TensorBoard
-      </h3>
-      <div class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('logPath') }}</div>
-          <div class="text-sm font-medium font-mono">{{ job.tensorboardLogPath || '-' }}</div>
+      <section class="space-y-3 border-t border-border-light pt-5 dark:border-border-dark">
+        <h3 class="flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+          <span class="w-1 h-4 bg-primary rounded"></span>
+          {{ t('orderAndCluster') }}
+        </h3>
+        <div class="detail-info-grid detail-info-grid--flat">
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('clusterName') }}</div>
+            <div class="detail-info-value">{{ job.clusterName }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('area') }}</div>
+            <div class="detail-info-value">{{ job.area || '-' }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('payType') }}</div>
+            <div class="detail-info-value">{{ getPayTypeLabel(job.payType) }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('unitPrice') }}</div>
+            <div class="detail-info-value text-red-500">￥{{ job.price?.toFixed(4) || '0.0000' }} / {{ t('unitHour') }}</div>
+          </div>
         </div>
-        <div v-if="job.tensorboardUrl">
-          <div class="text-xs text-slate-500 mb-1">{{ t('accessLink') }}</div>
-          <a :href="job.tensorboardUrl" target="_blank" class="text-sm text-primary hover:underline flex items-center gap-1">
-            <span class="material-icons text-base">open_in_new</span>
-            {{ t('openTensorboard') }}
-          </a>
+      </section>
+
+      <section class="space-y-3 border-t border-border-light pt-5 dark:border-border-dark">
+        <h3 class="flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+          <span class="w-1 h-4 bg-primary rounded"></span>
+          {{ t('startupCommand') }}
+        </h3>
+        <div class="detail-code-surface">
+          <pre class="text-sm whitespace-pre-wrap break-all">{{ job.startupCommand || '-' }}</pre>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-4 md:p-5">
-      <h3 class="mb-4 flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-        <span class="w-1 h-4 bg-primary rounded"></span>
-        {{ t('dataMount') }}
-      </h3>
-      <div v-if="job.mounts && job.mounts.length > 0" class="overflow-x-auto">
-        <table class="w-full text-left">
-          <thead>
-            <tr class="text-xs text-slate-400 font-bold uppercase tracking-wider border-b border-border-light dark:border-border-dark">
-              <th class="px-4 py-2.5">{{ t('storage') }}</th>
-              <th class="px-4 py-2.5">{{ t('mountPath') }}</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-border-light dark:divide-border-dark">
-            <tr v-for="(mount, index) in job.mounts" :key="index" class="text-sm">
-              <td class="px-4 py-2.5">{{ mount.pvcName || '-' }}</td>
-              <td class="px-4 py-2.5 font-mono">{{ mount.mountPath }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div v-else class="text-sm text-slate-400 text-center py-6">{{ t('noData') }}</div>
-    </div>
+      <section
+        v-if="job.enableTensorboard"
+        class="space-y-3 border-t border-border-light pt-5 dark:border-border-dark"
+      >
+        <h3 class="flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+          <span class="w-1 h-4 bg-primary rounded"></span>
+          TensorBoard
+        </h3>
+        <div class="detail-info-grid detail-info-grid--flat">
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('logPath') }}</div>
+            <div class="detail-info-value detail-info-value--mono">{{ job.tensorboardLogPath || '-' }}</div>
+          </div>
+          <div v-if="job.tensorboardUrl" class="detail-info-item">
+            <div class="detail-info-label">{{ t('accessLink') }}</div>
+            <a :href="job.tensorboardUrl" target="_blank" class="text-sm text-primary hover:underline flex items-center gap-1">
+              <span class="material-icons text-base">open_in_new</span>
+              {{ t('openTensorboard') }}
+            </a>
+          </div>
+        </div>
+      </section>
 
-    <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-4 md:p-5">
-      <h3 class="mb-4 flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-        <span class="w-1 h-4 bg-primary rounded"></span>
-        {{ t('environmentVariables') }}
-      </h3>
-      <div v-if="job.envs && job.envs.length > 0" class="overflow-x-auto">
-        <table class="w-full text-left">
-          <thead>
-            <tr class="text-xs text-slate-400 font-bold uppercase tracking-wider border-b border-border-light dark:border-border-dark">
-              <th class="px-4 py-2.5 w-1/3">{{ t('variableName') }}</th>
-              <th class="px-4 py-2.5">{{ t('variableValue') }}</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-border-light dark:divide-border-dark">
-            <tr v-for="(env, index) in job.envs" :key="index" class="text-sm">
-              <td class="px-4 py-2.5 font-mono text-primary font-bold">{{ env.name }}</td>
-              <td class="px-4 py-2.5 font-mono">{{ env.value }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div v-else class="text-sm text-slate-400 text-center py-6">{{ t('noData') }}</div>
+      <section class="space-y-3 border-t border-border-light pt-5 dark:border-border-dark">
+        <h3 class="flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+          <span class="w-1 h-4 bg-primary rounded"></span>
+          {{ t('dataMount') }}
+        </h3>
+        <div v-if="job.mounts && job.mounts.length > 0" class="detail-table-shell">
+          <table class="console-table">
+            <thead>
+              <tr>
+                <th>{{ t('storage') }}</th>
+                <th>{{ t('mountPath') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(mount, index) in job.mounts" :key="index">
+                <td>{{ mount.pvcName || '-' }}</td>
+                <td class="detail-info-value--mono">{{ mount.mountPath }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div v-else class="text-sm text-slate-400 text-center py-6">{{ t('noData') }}</div>
+      </section>
+
+      <section class="space-y-3 border-t border-border-light pt-5 dark:border-border-dark">
+        <h3 class="flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+          <span class="w-1 h-4 bg-primary rounded"></span>
+          {{ t('environmentVariables') }}
+        </h3>
+        <div v-if="job.envs && job.envs.length > 0" class="detail-table-shell">
+          <table class="console-table">
+            <thead>
+              <tr>
+                <th>{{ t('variableName') }}</th>
+                <th>{{ t('variableValue') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(env, index) in job.envs" :key="index">
+                <td class="detail-info-value--mono text-primary">{{ env.name }}</td>
+                <td class="detail-info-value--mono">{{ env.value }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div v-else class="text-sm text-slate-400 text-center py-6">{{ t('noData') }}</div>
+      </section>
     </div>
 
     <div v-if="job.errorMsg" class="bg-surface-light dark:bg-surface-dark border border-red-200 dark:border-red-900 rounded-xl p-4 md:p-5">
@@ -219,3 +222,4 @@ defineProps({
 
 const t = inject('t', (key) => key)
 </script>
+

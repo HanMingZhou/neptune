@@ -1,4 +1,4 @@
-import { inject, onMounted, onUnmounted, ref, watch } from 'vue'
+import { inject, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
@@ -23,7 +23,13 @@ export const useInferenceList = () => {
   const btnLoading = ref({})
   const isInitialLoad = ref(true)
 
-  let refreshTimer = null
+  const syncServices = (nextList = []) => {
+    const currentMap = new Map(services.value.map((item) => [item.id, item]))
+    services.value = nextList.map((item) => {
+      const existing = currentMap.get(item.id)
+      return existing ? Object.assign(existing, item) : item
+    })
+  }
 
   const fetchList = async (showLoading = false) => {
     if (showLoading || isInitialLoad.value) {
@@ -38,7 +44,7 @@ export const useInferenceList = () => {
         framework: filterFramework.value || undefined
       })
       if (res.code === 0) {
-        services.value = res.data?.list || []
+        syncServices(res.data?.list || [])
         total.value = res.data?.total || 0
       } else {
         ElMessage.error(res.msg || t('error'))
@@ -72,16 +78,16 @@ export const useInferenceList = () => {
 
   const getFrameworkStyle = (type) => {
     const map = {
-      SGLANG: 'bg-purple-500/10 text-purple-500 border-purple-500/20',
-      VLLM: 'bg-orange-500/10 text-orange-500 border-orange-500/20'
+      SGLANG: 'console-badge--neutral',
+      VLLM: 'console-badge--warning'
     }
-    return map[type] || 'bg-slate-500/10 text-slate-500 border-slate-500/20'
+    return map[type] || 'console-badge--neutral'
   }
 
   const getDeployTypeStyle = (type) => {
     return type === 'STANDALONE'
-      ? 'bg-blue-500/10 text-blue-500'
-      : 'bg-emerald-500/10 text-emerald-500'
+      ? 'console-badge--info'
+      : 'console-badge--success'
   }
 
   const getStatusLabel = (status) => {
@@ -90,15 +96,15 @@ export const useInferenceList = () => {
 
   const getStatusStyle = (status) => {
     const map = {
-      RUNNING: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
-      PENDING: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
-      CREATING: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
-      STOPPED: 'bg-slate-500/10 text-slate-500 border-slate-500/20',
-      FAILED: 'bg-red-500/10 text-red-500 border-red-500/20',
-      DELETING: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
-      RESTARTING: 'bg-blue-500/10 text-blue-500 border-blue-500/20'
+      RUNNING: 'console-badge--success',
+      PENDING: 'console-badge--warning',
+      CREATING: 'console-badge--warning',
+      STOPPED: 'console-badge--neutral',
+      FAILED: 'console-badge--danger',
+      DELETING: 'console-badge--info',
+      RESTARTING: 'console-badge--info'
     }
-    return map[status] || 'bg-slate-500/10 text-slate-500 border-slate-500/20'
+    return map[status] || 'console-badge--neutral'
   }
 
   const copyText = (text) => {
@@ -173,27 +179,8 @@ export const useInferenceList = () => {
     }
   }
 
-  const startPolling = () => {
-    stopPolling()
-    refreshTimer = setInterval(() => {
-      fetchList(false)
-    }, 10000)
-  }
-
-  const stopPolling = () => {
-    if (refreshTimer) {
-      clearInterval(refreshTimer)
-      refreshTimer = null
-    }
-  }
-
   onMounted(() => {
     fetchList()
-    startPolling()
-  })
-
-  onUnmounted(() => {
-    stopPolling()
   })
 
   return {

@@ -15,6 +15,7 @@
 
     <JobConfigSection
       :available-capacity="availableCapacity"
+      :field-errors="fieldErrors"
       :form="form"
       :framework-types="frameworkTypes"
       :max-worker-count="maxWorkerCount"
@@ -30,10 +31,12 @@
       @remove-env="removeEnv"
       @remove-mount="removeMount"
       @update:env="form.envs[$event.index][$event.key] = $event.value"
-      @update:field="form[$event.key] = $event.value"
+      @update:field="updateField($event)"
       @update:mount="form.mounts[$event.index][$event.key] = $event.value"
       @update:schedule-strategy="form.scheduleStrategy = $event || 'BALANCED'"
       @update:workerCount="form.workerCount = Math.max(2, Math.min($event || 2, maxWorkerCount))"
+      @validate:name="emit('validate:name')"
+      @validate:tensorboard-log-path="emit('validate:tensorboard-log-path')"
     />
   </div>
 </template>
@@ -71,6 +74,10 @@ const props = defineProps({
   filteredImages: {
     type: Array,
     default: () => []
+  },
+  fieldErrors: {
+    type: Object,
+    default: () => ({})
   },
   form: {
     type: Object,
@@ -119,8 +126,14 @@ const props = defineProps({
   showWorkerCount: {
     type: Boolean,
     default: false
+  },
+  updateField: {
+    type: Function,
+    required: true
   }
 })
+
+const emit = defineEmits(['validate:name', 'validate:tensorboard-log-path'])
 
 const t = inject('t', (key) => key)
 const imageDescription = computed(() => t(`${props.activeTab}ImageDesc`))

@@ -5,35 +5,34 @@
     :title="t('apiManage')"
   >
     <template #actions>
-      <RefreshButton :loading="loading" @refresh="emit('refresh-table')" />
+      <RefreshButton :loading="loading" @refresh="emit('refresh-table', $event)" />
       <button
-        class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-zinc-800 border border-border-light dark:border-border-dark rounded-lg text-sm font-medium hover:bg-slate-50"
+        class="list-toolbar-button list-toolbar-button--secondary"
         @click="emit('fresh-cache')"
       >
         <span class="material-icons text-[18px]">refresh</span>
         {{ t('refreshCache') }}
       </button>
       <button
-        class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-zinc-800 border border-border-light dark:border-border-dark rounded-lg text-sm font-medium hover:bg-slate-50"
+        class="list-toolbar-button list-toolbar-button--secondary"
         @click="emit('sync')"
       >
         <span class="material-icons text-[18px]">sync</span>
         {{ t('syncApi') }}
       </button>
       <button
-        class="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-medium transition-colors"
+        class="list-toolbar-button list-toolbar-button--danger"
         :disabled="!hasSelection"
-        :class="{ 'opacity-50 cursor-not-allowed': !hasSelection }"
         @click="emit('delete-selected')"
       >
         <span class="material-icons text-[18px]">delete</span>
         {{ t('delete') }}
       </button>
       <button
-        class="bg-primary hover:bg-primary-hover text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 flex items-center gap-2"
+        class="list-toolbar-button list-toolbar-button--primary"
         @click="emit('create')"
       >
-        <span class="material-icons">add</span>
+        <span class="material-icons text-[18px]">add</span>
         {{ t('addApi') }}
       </button>
     </template>

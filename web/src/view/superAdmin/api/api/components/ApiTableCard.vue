@@ -1,78 +1,80 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden shadow-sm">
-    <div class="list-filter-bar border-b border-border-light p-4 dark:border-border-dark">
-      <div class="list-filter-field list-filter-field--compact max-w-[160px]">
-        <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">link</span>
-        <input
-          v-model="searchPathModel"
-          type="text"
-          :placeholder="t('path')"
-          class="list-search-input !w-full"
-          @keyup.enter="$emit('search')"
-        />
-      </div>
+  <TableCard>
+    <template #toolbar>
+      <div class="list-filter-bar">
+        <div class="list-filter-field list-filter-field--compact max-w-[160px]">
+          <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">link</span>
+          <input
+            v-model="searchPathModel"
+            type="text"
+            :placeholder="t('path')"
+            class="list-search-input !w-full"
+            @keyup.enter="$emit('search')"
+          />
+        </div>
 
-      <div class="list-filter-field list-filter-field--compact max-w-[160px]">
-        <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">description</span>
-        <input
-          v-model="searchDescriptionModel"
-          type="text"
-          :placeholder="t('apiDesc')"
-          class="list-search-input !w-full"
-          @keyup.enter="$emit('search')"
-        />
-      </div>
+        <div class="list-filter-field list-filter-field--compact max-w-[160px]">
+          <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">description</span>
+          <input
+            v-model="searchDescriptionModel"
+            type="text"
+            :placeholder="t('apiDesc')"
+            class="list-search-input !w-full"
+            @keyup.enter="$emit('search')"
+          />
+        </div>
 
-      <el-select
-        v-model="searchApiGroupModel"
-        clearable
-        :placeholder="t('apiGroup')"
-        class="list-filter-select !w-[160px]"
-      >
-        <el-option
-          v-for="item in apiGroupOptions"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
-
-      <el-select
-        v-model="searchMethodModel"
-        clearable
-        :placeholder="t('method')"
-        class="list-filter-select !w-[140px]"
-      >
-        <el-option
-          v-for="item in methodOptions"
-          :key="item.value"
-          :label="`${item.label}(${item.value})`"
-          :value="item.value"
-        />
-      </el-select>
-
-      <div class="list-toolbar-actions">
-        <button
-          class="list-toolbar-button list-toolbar-button--primary"
-          @click="$emit('search')"
+        <el-select
+          v-model="searchApiGroupModel"
+          clearable
+          :placeholder="t('apiGroup')"
+          class="list-filter-select !w-[160px]"
         >
-          <span class="material-icons text-[18px]">search</span>
-          {{ t('searchQuery') }}
-        </button>
-        <button
-          class="list-toolbar-button list-toolbar-button--secondary"
-          @click="$emit('reset')"
+          <el-option
+            v-for="item in apiGroupOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+
+        <el-select
+          v-model="searchMethodModel"
+          clearable
+          :placeholder="t('method')"
+          class="list-filter-select !w-[140px]"
         >
-          <span class="material-icons text-[18px]">refresh</span>
-          {{ t('reset') }}
-        </button>
+          <el-option
+            v-for="item in methodOptions"
+            :key="item.value"
+            :label="`${item.label}(${item.value})`"
+            :value="item.value"
+          />
+        </el-select>
+
+        <div class="list-toolbar-actions">
+          <button
+            class="list-toolbar-button list-toolbar-button--primary"
+            @click="$emit('search')"
+          >
+            <span class="material-icons text-[18px]">search</span>
+            {{ t('searchQuery') }}
+          </button>
+          <button
+            class="list-toolbar-button list-toolbar-button--secondary"
+            @click="$emit('reset')"
+          >
+            <span class="material-icons text-[18px]">refresh</span>
+            {{ t('reset') }}
+          </button>
+        </div>
       </div>
-    </div>
+    </template>
 
     <div class="overflow-x-auto" v-loading="loading">
-      <table class="w-full text-left">
+      <table class="console-table w-full text-left">
         <thead>
-          <tr class="bg-slate-50 dark:bg-zinc-800/50 border-b border-border-light dark:border-border-dark text-slate-500 text-xs font-bold uppercase tracking-wider">
+          <tr>
             <th class="px-6 py-4 w-12">
               <input
                 type="checkbox"
@@ -86,7 +88,7 @@
             <th class="px-6 py-4">{{ t('apiGroup') }}</th>
             <th class="px-6 py-4">{{ t('apiDesc') }}</th>
             <th class="px-6 py-4">{{ t('method') }}</th>
-            <th class="px-6 py-4 text-right">{{ t('actions') }}</th>
+            <th class="px-6 py-4 console-actions-header">{{ t('actions') }}</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-border-light dark:divide-border-dark">
@@ -111,30 +113,30 @@
                 @change="$emit('toggle-select', row)"
               />
             </td>
-            <td class="px-6 py-4 text-sm text-slate-500 font-mono">{{ row.ID }}</td>
-            <td class="px-6 py-4 text-sm font-mono text-primary">{{ row.path }}</td>
+            <td class="px-6 py-4 text-sm is-secondary is-code">{{ row.ID }}</td>
+            <td class="px-6 py-4 text-sm is-primary is-code">{{ row.path }}</td>
             <td class="px-6 py-4">
               <span class="px-2 py-0.5 rounded text-xs font-bold bg-slate-100 dark:bg-zinc-700 text-slate-600 dark:text-slate-300">
                 {{ row.apiGroup }}
               </span>
             </td>
-            <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">{{ row.description }}</td>
+            <td class="px-6 py-4 text-sm is-secondary">{{ row.description }}</td>
             <td class="px-6 py-4">
               <span :class="getMethodClass(row.method)" class="px-2 py-0.5 rounded text-xs font-bold">
                 {{ row.method }}
               </span>
             </td>
-            <td class="px-6 py-4 text-right">
-              <div class="flex justify-end gap-3 items-center">
+            <td class="px-6 py-4 console-actions-cell">
+              <div class="list-row-actions">
                 <button
-                  class="bg-primary/10 hover:bg-primary/20 text-primary px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-1"
+                  class="list-row-button list-row-button--info"
                   @click="$emit('edit', row)"
                 >
                   <span class="material-icons text-[16px]">edit</span>
                   {{ t('edit') }}
                 </button>
                 <button
-                  class="bg-red-500/10 hover:bg-red-500/20 text-red-600 px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-1"
+                  class="list-row-button list-row-button--danger"
                   @click="$emit('delete', row)"
                 >
                   <span class="material-icons text-[16px]">delete</span>
@@ -147,24 +149,25 @@
       </table>
     </div>
 
-    <div class="px-6 py-4 bg-slate-50 dark:bg-zinc-800/30 flex items-center justify-between border-t border-border-light dark:border-border-dark">
-      <span class="text-xs text-slate-500">{{ t('totalRecords', { total }) }}</span>
-      <el-pagination
+    <template #footer>
+      <ListPaginationBar
         :current-page="page"
         :page-size="pageSize"
-        :page-sizes="[10, 30, 50, 100]"
         :total="total"
-        background
+        :total-text="t('totalRecords', { total })"
+        :page-sizes="[10, 30, 50, 100]"
         layout="sizes, prev, pager, next, jumper"
         @current-change="$emit('page-change', $event)"
         @size-change="$emit('size-change', $event)"
       />
-    </div>
-  </div>
+    </template>
+  </TableCard>
 </template>
 
 <script setup>
 import { computed, inject } from 'vue'
+import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
+import TableCard from '@/components/listPage/TableCard.vue'
 
 const props = defineProps({
   allSelected: {

@@ -5,7 +5,7 @@
         <RefreshButton :loading="loading" @refresh="fetchData" />
         <button
           disabled
-          class="bg-slate-300 dark:bg-zinc-600 text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 cursor-not-allowed opacity-60"
+          class="list-toolbar-button list-toolbar-button--secondary"
         >
           <span class="material-icons">add_circle</span>
           {{ t('order.applyInvoice') }}

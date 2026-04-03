@@ -17,7 +17,7 @@
           />
           <button
             :disabled="!newKeyName.trim()"
-            class="px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg text-sm font-bold disabled:opacity-50 flex items-center gap-1"
+            class="detail-header-action detail-header-action--primary disabled:opacity-50"
             @click="$emit('create')"
           >
             <span class="material-icons text-lg">add</span>

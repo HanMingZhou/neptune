@@ -8,7 +8,7 @@
       </div>
       <div class="flex gap-3">
         <button
-          class="rounded-lg bg-white px-6 py-2.5 text-sm font-bold text-primary shadow-sm transition-colors hover:bg-slate-50"
+          class="list-row-button list-row-button--neutral"
           @click="$emit('recharge')"
         >
           {{ t('rechargeNow') }}
@@ -43,7 +43,7 @@
         </span>
       </div>
       <p class="mb-8 text-[10px] text-slate-500">{{ t('orderPeriod') }}: {{ lastMonthSettlement.period }}</p>
-      <button class="flex items-center gap-1 text-xs font-bold text-primary hover:underline" @click="$emit('view-transactions')">
+      <button class="list-row-button list-row-button--info" @click="$emit('view-transactions')">
         {{ t('viewSettlementDetails') }}
         <span class="material-icons text-[14px]">arrow_forward</span>
       </button>

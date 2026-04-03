@@ -10,7 +10,7 @@ export function useImageManagement({ t }) {
   const images = ref([])
   const total = ref(0)
   const currentPage = ref(1)
-  const pageSize = 10
+  const pageSize = ref(10)
   const filterKeyword = ref('')
   const filterType = ref('')
   const filterUsageType = ref('')
@@ -52,7 +52,7 @@ export function useImageManagement({ t }) {
     try {
       const res = await getImageList({
         page: currentPage.value,
-        pageSize,
+        pageSize: pageSize.value,
         name: filterKeyword.value || undefined,
         type: filterType.value || undefined,
         usageType: filterUsageType.value || undefined
@@ -90,6 +90,12 @@ export function useImageManagement({ t }) {
   }
 
   const handlePageChange = () => {
+    fetchImages()
+  }
+
+  const handleSizeChange = (value) => {
+    pageSize.value = value
+    currentPage.value = 1
     fetchImages()
   }
 
@@ -181,6 +187,7 @@ export function useImageManagement({ t }) {
     handleRefresh,
     handleReset,
     handleSearch,
+    handleSizeChange,
     images,
     isEdit,
     loading,

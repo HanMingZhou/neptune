@@ -1,201 +1,213 @@
 <template>
-  <div class="space-y-4 md:space-y-5">
-    <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-4 md:p-5">
-      <h3 class="mb-4 flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-        <span class="w-1 h-4 bg-primary rounded"></span>
-        {{ t('basicInfo') }}
-      </h3>
-      <div class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('name') }}</div>
-          <div class="text-sm font-medium">{{ service.displayName || '-' }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('instanceName') }}</div>
-          <div class="text-sm font-medium font-mono">{{ service.instanceName }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('inference.framework') }}</div>
-          <div class="text-sm font-medium">{{ service.framework || t('inference.customCommandMode') }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('deployMode') }}</div>
-          <div class="text-sm font-medium">{{ service.deployType === 'STANDALONE' ? t('standalone') : t('distributed') }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('status') }}</div>
-          <div class="text-sm font-medium">{{ getStatusLabel(service.status) }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('inference.authType') }}</div>
-          <div class="text-sm font-medium">{{ service.authType === 1 ? 'JWT Token' : 'API Key' }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('createdAt') }}</div>
-          <div class="text-sm font-medium">{{ formatTime(service.createdAt) }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('startedAt') }}</div>
-          <div class="text-sm font-medium">{{ formatTime(service.startedAt) || '-' }}</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-4 md:p-5">
-      <h3 class="mb-4 flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-        <span class="w-1 h-4 bg-primary rounded"></span>
-        {{ t('resourceConfig') }}
-      </h3>
-      <div class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('gpu') }}</div>
-          <div class="text-xl font-semibold text-primary">{{ service.gpu || 0 }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('gpuModel') }}</div>
-          <div class="text-sm font-medium">{{ service.gpuModel || 'CPU Only' }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('cpu') }} / {{ t('memory') }}</div>
-          <div class="text-sm font-medium">{{ service.cpu }} Core / {{ service.memory }} GB</div>
-        </div>
-        <div class="col-span-2 md:col-span-1">
-          <div class="text-xs text-slate-500 mb-1">{{ t('image') }}</div>
-          <div class="text-xs font-mono bg-slate-100 dark:bg-zinc-800 px-2 py-1 rounded inline-flex break-all max-w-full leading-relaxed">
-            {{ service.imageName }}
+  <div class="space-y-3 md:space-y-4">
+    <div class="console-detail-card rounded-xl p-4 md:p-5 space-y-5">
+      <section class="space-y-3">
+        <h3 class="flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+          <span class="w-1 h-4 bg-primary rounded"></span>
+          {{ t('basicInfo') }}
+        </h3>
+        <div class="detail-info-grid detail-info-grid--flat">
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('name') }}</div>
+            <div class="detail-info-value">{{ service.displayName || '-' }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('instanceName') }}</div>
+            <div class="detail-info-value detail-info-value--mono">{{ service.instanceName }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('inference.framework') }}</div>
+            <div class="detail-info-value">{{ service.framework || t('inference.customCommandMode') }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('deployMode') }}</div>
+            <div class="detail-info-value">{{ service.deployType === 'STANDALONE' ? t('standalone') : t('distributed') }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('status') }}</div>
+            <div class="detail-info-value">{{ getStatusLabel(service.status) }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('inference.authType') }}</div>
+            <div class="detail-info-value">{{ service.authType === 1 ? 'JWT Token' : 'API Key' }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('createdAt') }}</div>
+            <div class="detail-info-value">{{ formatTime(service.createdAt) }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('startedAt') }}</div>
+            <div class="detail-info-value">{{ formatTime(service.startedAt) || '-' }}</div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-4 md:p-5">
-      <h3 class="mb-4 flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-        <span class="w-1 h-4 bg-primary rounded"></span>
-        {{ t('inference.serviceConfig') }}
-      </h3>
-      <div class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('inference.modelPath') }}</div>
-          <div class="text-sm font-medium font-mono">{{ service.modelMountPath || '/model' }}{{ service.modelPath }}</div>
+      <section class="space-y-3 border-t border-border-light pt-5 dark:border-border-dark">
+        <h3 class="flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+          <span class="w-1 h-4 bg-primary rounded"></span>
+          {{ t('resourceConfig') }}
+        </h3>
+        <div class="detail-info-grid detail-info-grid--flat">
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('gpu') }}</div>
+            <div class="detail-info-value text-primary">{{ service.gpu || 0 }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('gpuModel') }}</div>
+            <div class="detail-info-value">{{ service.gpuModel || 'CPU Only' }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('cpu') }} / {{ t('memory') }}</div>
+            <div class="detail-info-value">{{ service.cpu }} Core / {{ service.memory }} GB</div>
+          </div>
+          <div class="detail-info-item detail-info-item--wide">
+            <div class="detail-info-label">{{ t('image') }}</div>
+            <div class="detail-inline-chip detail-info-value--mono break-all">{{ service.imageName }}</div>
+          </div>
         </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('inference.servicePort') }}</div>
-          <div class="text-sm font-medium">{{ service.servicePort }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('inference.maxTokens') }}</div>
-          <div class="text-sm font-medium">{{ service.maxTokens }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('inference.maxConcurrency') }}</div>
-          <div class="text-sm font-medium">{{ service.maxConcurrency || t('inference.noLimit') }}</div>
-        </div>
-      </div>
-      <div v-if="service.deployType === 'DISTRIBUTED'" class="mt-4 pt-4 border-t border-border-light dark:border-border-dark grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('inference.workerCount') }}</div>
-          <div class="text-sm font-medium">{{ service.workerCount }}</div>
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 mb-1">{{ t('inference.autoRestart') }}</div>
-          <div class="text-sm font-medium">{{ service.autoRestart ? `${t('yes')} (${service.restartCount}/${service.maxRestarts})` : t('no') }}</div>
-        </div>
-      </div>
-      <div v-if="service.command?.length || service.args?.length || service.extraArgs?.length" class="mt-4 pt-4 border-t border-border-light dark:border-border-dark">
-        <div class="text-xs text-slate-400 mb-2">{{ t('inference.startupCommand') }}</div>
-        <div class="bg-zinc-900 rounded-lg p-3">
-          <code class="text-sm text-emerald-400 font-mono whitespace-pre-wrap break-all">{{ formatCommand(service) }}</code>
-        </div>
-      </div>
-    </div>
+      </section>
 
-    <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-4 md:p-5">
-      <h3 class="mb-4 flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-        <span class="w-1 h-4 bg-primary rounded"></span>
-        {{ t('inference.apiAccess') }}
-      </h3>
-      <div v-if="service.status !== 'RUNNING'" class="text-sm text-amber-500 bg-amber-50 dark:bg-amber-900/20 px-3 py-2 rounded-lg flex items-center gap-2">
-        <span class="material-icons text-base">info</span>
-        {{ t('inference.apiNotReady') }}
-      </div>
-      <template v-else>
-        <div class="bg-zinc-900 rounded-lg p-3 mb-4">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs text-slate-400">{{ t('inference.apiEndpoint') }}</span>
-            <button class="text-primary text-xs hover:underline flex items-center gap-1" @click="$emit('copy', apiEndpoint)">
-              <span class="material-icons text-sm">content_copy</span>
-              {{ t('copy') }}
+      <section class="space-y-3 border-t border-border-light pt-5 dark:border-border-dark">
+        <h3 class="flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+          <span class="w-1 h-4 bg-primary rounded"></span>
+          {{ t('inference.serviceConfig') }}
+        </h3>
+        <div class="detail-info-grid detail-info-grid--flat">
+          <div class="detail-info-item detail-info-item--wide">
+            <div class="detail-info-label">{{ t('inference.modelPath') }}</div>
+            <div class="detail-info-value detail-info-value--mono">{{ service.modelMountPath || '/model' }}{{ service.modelPath }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('inference.servicePort') }}</div>
+            <div class="detail-info-value">{{ service.servicePort }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('inference.maxTokens') }}</div>
+            <div class="detail-info-value">{{ service.maxTokens }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('inference.maxConcurrency') }}</div>
+            <div class="detail-info-value">{{ service.maxConcurrency || t('inference.noLimit') }}</div>
+          </div>
+        </div>
+        <div v-if="service.deployType === 'DISTRIBUTED'" class="detail-info-grid detail-info-grid--flat mt-4 border-t border-border-light pt-4 dark:border-border-dark">
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('inference.workerCount') }}</div>
+            <div class="detail-info-value">{{ service.workerCount }}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">{{ t('inference.autoRestart') }}</div>
+            <div class="detail-info-value">{{ service.autoRestart ? `${t('yes')} (${service.restartCount}/${service.maxRestarts})` : t('no') }}</div>
+          </div>
+        </div>
+        <div v-if="service.command?.length || service.args?.length || service.extraArgs?.length" class="mt-4 pt-4 border-t border-border-light dark:border-border-dark">
+          <div class="text-xs text-slate-400 mb-2">{{ t('inference.startupCommand') }}</div>
+          <div class="detail-code-surface">
+            <code class="text-sm whitespace-pre-wrap break-all">{{ formatCommand(service) }}</code>
+          </div>
+        </div>
+      </section>
+      <section class="space-y-3 border-t border-border-light pt-5 dark:border-border-dark">
+        <h3 class="flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+          <span class="w-1 h-4 bg-primary rounded"></span>
+          {{ t('inference.apiAccess') }}
+        </h3>
+        <div v-if="service.status !== 'RUNNING'" class="text-sm text-amber-500 bg-amber-50 dark:bg-amber-900/20 px-3 py-2 rounded-lg flex items-center gap-2">
+          <span class="material-icons text-base">info</span>
+          {{ t('inference.apiNotReady') }}
+        </div>
+        <template v-else>
+          <div class="detail-code-surface mb-4">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-slate-400">{{ t('inference.apiEndpoint') }}</span>
+              <button class="text-primary text-xs hover:underline flex items-center gap-1" @click="$emit('copy', apiEndpoint)">
+                <span class="material-icons text-sm">content_copy</span>
+                {{ t('copy') }}
+              </button>
+            </div>
+            <code class="text-sm break-all">{{ apiEndpoint }}</code>
+          </div>
+          <div class="detail-code-surface mb-4">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-slate-400">{{ t('inference.curlExample') }}</span>
+              <button class="text-primary text-xs hover:underline flex items-center gap-1" @click="$emit('copy', curlExample)">
+                <span class="material-icons text-sm">content_copy</span>
+                {{ t('copy') }}
+              </button>
+            </div>
+            <code class="text-xs whitespace-pre-wrap break-all">{{ curlExample }}</code>
+          </div>
+          <div class="flex gap-3">
+            <button
+              v-if="service.authType === 2"
+              class="list-toolbar-button list-toolbar-button--primary"
+              @click="$emit('manage-api-key')"
+            >
+              <span class="material-icons text-[18px]">vpn_key</span>
+              {{ t('inference.manageKey') }}
             </button>
           </div>
-          <code class="text-sm text-emerald-400 font-mono break-all">{{ apiEndpoint }}</code>
-        </div>
-        <div class="bg-zinc-900 rounded-lg p-3 mb-4">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs text-slate-400">{{ t('inference.curlExample') }}</span>
-            <button class="text-primary text-xs hover:underline flex items-center gap-1" @click="$emit('copy', curlExample)">
-              <span class="material-icons text-sm">content_copy</span>
-              {{ t('copy') }}
-            </button>
+        </template>
+      </section>
+
+      <section
+        v-if="service.mounts?.length || service.envs?.length"
+        class="space-y-5 border-t border-border-light pt-5 dark:border-border-dark"
+      >
+        <section v-if="service.mounts?.length" class="space-y-3">
+          <h3 class="flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+            <span class="w-1 h-4 bg-primary rounded"></span>
+            {{ t('inference.dataMount') }}
+          </h3>
+          <div class="detail-table-shell">
+            <table class="console-table">
+              <thead>
+                <tr>
+                  <th>PVC</th>
+                  <th>{{ t('inference.mountPath') }}</th>
+                  <th>{{ t('inference.subPath') }}</th>
+                  <th>{{ t('readOnly') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(mount, index) in service.mounts" :key="index">
+                  <td class="detail-info-value--mono">{{ mount.pvcName }}</td>
+                  <td class="detail-info-value--mono">{{ mount.mountPath }}</td>
+                  <td class="detail-info-value--mono">{{ mount.subPath || '-' }}</td>
+                  <td>{{ mount.readOnly ? t('yes') : t('no') }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <code class="text-xs text-slate-300 font-mono whitespace-pre-wrap break-all">{{ curlExample }}</code>
-        </div>
-        <div class="flex gap-3">
-          <button
-            v-if="service.authType === 2"
-            class="px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg text-sm font-bold flex items-center gap-2"
-            @click="$emit('manage-api-key')"
-          >
-            <span class="material-icons text-lg">vpn_key</span>
-            {{ t('inference.manageKey') }}
-          </button>
-        </div>
-      </template>
-    </div>
+        </section>
 
-    <div v-if="service.mounts?.length" class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-4 md:p-5">
-      <h3 class="mb-4 flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-        <span class="w-1 h-4 bg-primary rounded"></span>
-        {{ t('inference.dataMount') }}
-      </h3>
-      <table class="w-full text-left text-sm">
-        <thead>
-          <tr class="text-xs text-slate-400 font-bold border-b border-border-light dark:border-border-dark">
-            <th class="px-4 py-2.5">PVC</th>
-            <th class="px-4 py-2.5">{{ t('inference.mountPath') }}</th>
-            <th class="px-4 py-2.5">{{ t('inference.subPath') }}</th>
-            <th class="px-4 py-2.5">{{ t('readOnly') }}</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-border-light dark:divide-border-dark">
-          <tr v-for="(mount, index) in service.mounts" :key="index">
-            <td class="px-4 py-2.5 font-mono">{{ mount.pvcName }}</td>
-            <td class="px-4 py-2.5 font-mono">{{ mount.mountPath }}</td>
-            <td class="px-4 py-2.5 font-mono">{{ mount.subPath || '-' }}</td>
-            <td class="px-4 py-2.5">{{ mount.readOnly ? t('yes') : t('no') }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div v-if="service.envs?.length" class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-4 md:p-5">
-      <h3 class="mb-4 flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
-        <span class="w-1 h-4 bg-primary rounded"></span>
-        {{ t('envVars') }}
-      </h3>
-      <table class="w-full text-left text-sm">
-        <thead>
-          <tr class="text-xs text-slate-400 font-bold border-b border-border-light dark:border-border-dark">
-            <th class="px-4 py-2.5">{{ t('variableName') }}</th>
-            <th class="px-4 py-2.5">{{ t('variableValue') }}</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-border-light dark:divide-border-dark">
-          <tr v-for="(env, index) in service.envs" :key="index">
-            <td class="px-4 py-2.5 font-mono">{{ env.name }}</td>
-            <td class="px-4 py-2.5 font-mono">{{ env.value }}</td>
-          </tr>
-        </tbody>
-      </table>
+        <section
+          v-if="service.envs?.length"
+          class="space-y-3"
+          :class="service.mounts?.length ? 'border-t border-border-light pt-5 dark:border-border-dark' : ''"
+        >
+          <h3 class="flex items-center gap-2 text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+            <span class="w-1 h-4 bg-primary rounded"></span>
+            {{ t('envVars') }}
+          </h3>
+          <div class="detail-table-shell">
+            <table class="console-table">
+              <thead>
+                <tr>
+                  <th>{{ t('variableName') }}</th>
+                  <th>{{ t('variableValue') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(env, index) in service.envs" :key="index">
+                  <td class="detail-info-value--mono">{{ env.name }}</td>
+                  <td class="detail-info-value--mono">{{ env.value }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
     </div>
 
     <div v-if="service.errorMsg" class="bg-surface-light dark:bg-surface-dark border border-red-200 dark:border-red-900 rounded-xl p-4 md:p-5">
@@ -242,3 +254,4 @@ defineEmits(['copy', 'manage-api-key'])
 
 const t = inject('t', (key) => key)
 </script>
+

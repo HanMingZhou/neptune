@@ -1,9 +1,9 @@
 <template>
   <TableCard>
     <template #toolbar>
-      <div class="flex flex-wrap gap-4 items-center">
-        <div class="flex items-center gap-3 flex-1">
-          <div class="relative">
+      <div class="list-filter-bar">
+        <div class="list-toolbar-main">
+          <div class="list-search-field">
             <input
               :value="searchQuery"
               :placeholder="t('searchInstancePlaceholder')"
@@ -18,7 +18,7 @@
           <el-select
             :model-value="filterStatus"
             :placeholder="t('statusAll')"
-            class="list-filter-select"
+            class="list-filter-select !w-[168px]"
             clearable
             size="small"
             @update:model-value="$emit('status-change', $event)"
@@ -32,7 +32,7 @@
           <el-select
             :model-value="filterFramework"
             :placeholder="t('frameworkAll')"
-            class="list-filter-select"
+            class="list-filter-select !w-[168px]"
             clearable
             size="small"
             @update:model-value="$emit('framework-change', $event)"
@@ -45,19 +45,19 @@
     </template>
 
     <div class="overflow-x-auto">
-      <table class="w-full">
+      <table class="console-table console-table--resource-dense w-full min-w-[1180px]">
         <thead>
-          <tr class="bg-gray-50 dark:bg-zinc-900/50 border-b border-gray-100 dark:border-gray-800 text-slate-500 text-[11px] font-bold uppercase tracking-wider">
-            <th class="px-6 py-3">{{ t('name') }}</th>
-            <th class="px-6 py-3">{{ t('framework') }}</th>
-            <th class="px-6 py-3">{{ t('status') }}</th>
-            <th class="px-6 py-3">{{ t('gpu') }}</th>
-            <th class="px-6 py-3">{{ t('deployMode') }}</th>
-            <th class="px-6 py-3">{{ t('createdAt') }}</th>
-            <th class="px-6 py-3 text-center">{{ t('actions') }}</th>
+          <tr>
+            <th>{{ t('name') }}</th>
+            <th>{{ t('framework') }}</th>
+            <th>{{ t('status') }}</th>
+            <th>{{ t('gpu') }}</th>
+            <th>{{ t('deployMode') }}</th>
+            <th>{{ t('createdAt') }}</th>
+            <th class="console-actions-header">{{ t('actions') }}</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-gray-100 dark:divide-border-dark text-[13px]">
+        <tbody>
           <tr v-if="loading">
             <td colspan="7" class="px-6 py-10 text-center text-slate-400">
               <div class="flex items-center justify-center gap-2">
@@ -68,10 +68,10 @@
           </tr>
           <tr v-else-if="services.length === 0">
             <td colspan="7" class="px-6 py-10 text-center text-slate-400">
-              <div class="space-y-4 flex flex-col items-center">
-                <span class="material-icons text-6xl text-slate-200 dark:text-zinc-700">rocket_launch</span>
-                <p>{{ t('noData') }}</p>
-                <button class="text-primary hover:underline font-bold" @click="$emit('create')">{{ t('createInference') }}</button>
+              <div class="console-list-empty">
+                <span class="material-icons console-list-empty__icon">rocket_launch</span>
+                <p class="console-list-empty__text">{{ t('noData') }}</p>
+                <button class="list-row-button list-row-button--neutral" @click="$emit('create')">{{ t('createInference') }}</button>
               </div>
             </td>
           </tr>
@@ -79,65 +79,58 @@
             v-for="item in services"
             v-else
             :key="item.id"
-            class="hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors group"
+            class="group"
           >
-            <td class="px-6 py-3 text-center">
-              <div class="flex flex-col gap-1 items-center">
-                <span class="font-bold text-primary hover:underline cursor-pointer text-sm" @click="$emit('detail', item)">
-                  {{ item.displayName }}
-                </span>
-                <div class="flex items-center gap-1 group/copy">
-                  <span class="text-[11px] font-mono text-slate-400">{{ item.instanceName }}</span>
-                  <button
-                    :title="t('copy')"
-                    class="opacity-0 group-hover/copy:opacity-100 transition-opacity p-0.5 rounded hover:bg-slate-100 dark:hover:bg-zinc-700 text-slate-400 hover:text-primary"
-                    @click.stop="$emit('copy', item.instanceName)"
-                  >
-                    <span class="material-icons text-[12px]">content_copy</span>
-                  </button>
-                </div>
-              </div>
+            <td>
+              <ResourceIdentityCell
+                :copy-title="t('copy')"
+                :copy-value="item.instanceName"
+                :primary="item.displayName || item.instanceName"
+                :secondary="item.instanceName"
+                @copy="$emit('copy', $event)"
+                @primary-click="$emit('detail', item)"
+              />
             </td>
-            <td class="px-6 py-3 text-center">
-              <span v-if="item.framework" :class="getFrameworkStyle(item.framework)" class="px-2.5 py-1 rounded-full text-[11px] font-bold border border-transparent">
+            <td>
+              <span v-if="item.framework" :class="getFrameworkStyle(item.framework)" class="console-badge text-[11px] border border-transparent">
                 {{ item.framework }}
               </span>
-              <span v-else class="text-slate-400 text-[11px]">-</span>
+              <span v-else class="is-muted text-[11px]">-</span>
             </td>
-            <td class="px-6 py-3 text-center">
-              <div class="flex justify-center">
-                <span :class="getStatusStyle(item.status)" class="px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center gap-1.5 border border-transparent">
-                  <span v-if="item.status === 'RUNNING'" class="size-1.5 rounded-full animate-pulse bg-emerald-500"></span>
-                  {{ getStatusLabel(item.status) }}
-                </span>
-              </div>
+            <td>
+              <ResourceStatusCell
+                :label="getStatusLabel(item.status)"
+                :show-pulse="item.status === 'RUNNING'"
+                pulse-class="animate-pulse bg-emerald-500"
+                :status-class="getStatusStyle(item.status)"
+              />
             </td>
-            <td class="px-6 py-3 text-center">
-              <span v-if="item.gpu" class="bg-slate-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-[11px] font-mono font-bold">{{ item.gpu }} GPU</span>
-              <span v-else class="text-slate-400 text-[11px]">CPU ONLY</span>
+            <td>
+              <span v-if="item.gpu" class="console-badge console-badge--neutral is-code">{{ item.gpu }} GPU</span>
+              <span v-else class="is-muted text-[11px]">CPU ONLY</span>
             </td>
-            <td class="px-6 py-3 text-center">
-              <span :class="getDeployTypeStyle(item.deployType)" class="px-2 py-0.5 rounded text-[11px] font-bold">
+            <td>
+              <span :class="getDeployTypeStyle(item.deployType)" class="console-badge text-[11px]">
                 {{ item.deployType === 'STANDALONE' ? t('standalone') : t('distributed') }}
               </span>
             </td>
-            <td class="px-6 py-3 text-center text-slate-500 text-[12px] font-mono">
+            <td class="text-slate-500 text-[12px] font-mono is-secondary">
               {{ formatTime(item.createdAt) }}
             </td>
-            <td class="px-6 py-3 text-center">
-              <div class="flex justify-center gap-2 items-center">
-                <button class="bg-primary/10 hover:bg-primary/20 text-primary px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-1" @click="$emit('detail', item)">
+            <td class="console-actions-cell">
+              <div class="list-row-actions">
+                <button class="list-row-button list-row-button--neutral" @click="$emit('detail', item)">
                   <span class="material-icons text-[14px]">info</span>
                   {{ t('details') }}
                 </button>
-                <button class="bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-1" @click="$emit('logs', item)">
+                <button class="list-row-button list-row-button--info" @click="$emit('logs', item)">
                   <span class="material-icons text-[14px]">list_alt</span>
                   {{ t('logs') }}
                 </button>
                 <button
                   v-if="['RUNNING', 'PENDING'].includes(item.status)"
                   :disabled="btnLoading[item.id]"
-                  class="bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-1 disabled:opacity-50 w-[60px] justify-center"
+                  class="list-row-button list-row-button--warning disabled:opacity-50 min-w-[64px]"
                   @click="$emit('stop', item)"
                 >
                   <span class="material-icons text-[14px]">stop</span>
@@ -146,8 +139,7 @@
                 <button
                   v-else
                   :disabled="!['STOPPED', 'FAILED'].includes(item.status) || btnLoading[item.id]"
-                  :class="{ 'hover:bg-emerald-500/20': ['STOPPED', 'FAILED'].includes(item.status) && !btnLoading[item.id] }"
-                  class="bg-emerald-500/10 text-emerald-600 px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-1 disabled:opacity-30 disabled:cursor-not-allowed w-[60px] justify-center"
+                  class="list-row-button list-row-button--success disabled:opacity-30 disabled:cursor-not-allowed min-w-[64px]"
                   @click="$emit('start', item)"
                 >
                   <span class="material-icons text-[14px]">play_arrow</span>
@@ -155,8 +147,7 @@
                 </button>
                 <button
                   :disabled="!['STOPPED', 'FAILED'].includes(item.status) || btnLoading[item.id]"
-                  :class="{ 'hover:bg-red-500/20': ['STOPPED', 'FAILED'].includes(item.status) && !btnLoading[item.id] }"
-                  class="bg-red-500/10 text-red-600 px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-1 disabled:opacity-30 disabled:cursor-not-allowed w-[60px] justify-center"
+                  class="list-row-button list-row-button--danger disabled:opacity-30 disabled:cursor-not-allowed min-w-[64px]"
                   @click="$emit('delete', item)"
                 >
                   <span class="material-icons text-[14px]">delete</span>
@@ -170,26 +161,25 @@
     </div>
 
     <template #footer>
-      <div class="flex items-center justify-between text-xs text-slate-500">
-        <span>{{ t('totalRecords', { total }) }}</span>
-        <el-pagination
-          :current-page="page"
-          :page-size="pageSize"
-          :page-sizes="[10, 20, 50]"
-          :total="total"
-          class="!p-0"
-          layout="sizes, prev, pager, next"
-          size="small"
-          @current-change="$emit('page-change', $event)"
-          @size-change="$emit('size-change', $event)"
-        />
-      </div>
+      <ListPaginationBar
+        :current-page="page"
+        :page-size="pageSize"
+        :total="total"
+        :total-text="t('totalRecords', { total })"
+        :page-sizes="[10, 20, 50]"
+        layout="sizes, prev, pager, next, jumper"
+        @current-change="$emit('page-change', $event)"
+        @size-change="$emit('size-change', $event)"
+      />
     </template>
   </TableCard>
 </template>
 
 <script setup>
 import { inject } from 'vue'
+import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
+import ResourceIdentityCell from '@/components/listPage/ResourceIdentityCell.vue'
+import ResourceStatusCell from '@/components/listPage/ResourceStatusCell.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
 
 defineProps({

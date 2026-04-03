@@ -1,21 +1,21 @@
 <template>
   <TableCard>
     <div class="overflow-x-auto">
-      <table class="w-full">
+      <table class="console-table console-table--compact w-full min-w-[1180px]">
         <thead>
-          <tr class="bg-slate-50 dark:bg-zinc-800/50 border-b border-border-light dark:border-border-dark text-slate-500 text-xs font-bold uppercase tracking-wider">
-            <th class="px-6 py-4 text-left">{{ t('id') }}</th>
-            <th class="px-6 py-4 text-left">{{ t('name') }}</th>
-            <th class="px-6 py-4 text-center">{{ t('imageType') }}</th>
-            <th class="px-6 py-4 text-center">{{ t('imageUsageType') }}</th>
-            <th class="px-6 py-4 text-left">{{ t('imageAddr') }}</th>
-            <th class="px-6 py-4 text-left">{{ t('imageArea') }}</th>
-            <th class="px-6 py-4 text-left">{{ t('imageSize') }}</th>
-            <th class="px-6 py-4 text-left">{{ t('createdAt') }}</th>
-            <th class="px-6 py-4 text-center">{{ t('actions') }}</th>
+          <tr>
+            <th>{{ t('id') }}</th>
+            <th>{{ t('name') }}</th>
+            <th class="text-center">{{ t('imageType') }}</th>
+            <th class="text-center">{{ t('imageUsageType') }}</th>
+            <th>{{ t('imageAddr') }}</th>
+            <th>{{ t('imageArea') }}</th>
+            <th>{{ t('imageSize') }}</th>
+            <th>{{ t('createdAt') }}</th>
+            <th class="console-actions-header">{{ t('actions') }}</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-border-light dark:divide-border-dark">
+        <tbody>
           <tr v-if="loading">
             <td colspan="9" class="px-6 py-12 text-center text-slate-400">
               <div class="flex items-center justify-center gap-2">
@@ -27,55 +27,45 @@
           <tr v-else-if="items.length === 0">
             <td colspan="9" class="px-6 py-10 text-center text-slate-400 text-sm">{{ t('noData') }}</td>
           </tr>
-          <tr
-            v-for="row in items"
-            v-else
-            :key="row.id"
-            class="hover:bg-slate-50 dark:hover:bg-zinc-800/40 transition-colors"
-          >
-            <td class="px-6 py-4 text-sm font-mono text-slate-500">{{ row.id }}</td>
-            <td class="px-6 py-4">
-              <span class="text-sm font-bold text-primary">{{ row.name }}</span>
+          <tr v-for="row in items" v-else :key="row.id">
+            <td class="is-code text-slate-500">{{ row.id }}</td>
+            <td>
+              <span class="is-primary text-sm">{{ row.name }}</span>
             </td>
-            <td class="px-6 py-4 text-center">
-              <span
-                v-if="row.type === 1"
-                class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-500/10 text-blue-600"
-              >
-                {{ t('systemImage') }}
-              </span>
-              <span v-else class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600">
-                {{ t('customImage') }}
-              </span>
+            <td class="text-center">
+              <ListToneBadge
+                :label="row.type === 1 ? t('systemImage') : t('customImage')"
+                :tone="row.type === 1 ? 'info' : 'warning'"
+              />
             </td>
-            <td class="px-6 py-4 text-center">
-              <span :class="usageTypeBadgeClass(row.usageType)" class="px-2.5 py-1 rounded-full text-xs font-bold">
-                {{ usageTypeLabel(row.usageType) }}
-              </span>
+            <td class="text-center">
+              <ListToneBadge :label="usageTypeLabel(row.usageType)" :tone="usageTypeBadgeTone(row.usageType)" />
             </td>
-            <td class="px-6 py-4">
+            <td>
               <el-tooltip v-if="row.image" :content="row.image" placement="top" :show-after="300">
-                <code class="text-xs bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-slate-400 px-2 py-1 rounded font-mono truncate max-w-[260px] inline-block">
+                <code class="is-code is-secondary inline-block max-w-[260px] truncate">
                   {{ row.image }}
                 </code>
               </el-tooltip>
               <span v-else class="text-xs text-slate-400">-</span>
             </td>
-            <td class="px-6 py-4 text-sm text-slate-600">{{ row.area || '-' }}</td>
-            <td class="px-6 py-4 text-sm text-slate-600">{{ row.size || '-' }}</td>
-            <td class="px-6 py-4 text-sm text-slate-500">{{ row.createTime }}</td>
-            <td class="px-6 py-4 text-center">
-              <div class="flex justify-center gap-2 items-center">
+            <td>{{ row.area || '-' }}</td>
+            <td>{{ row.size || '-' }}</td>
+            <td class="is-secondary">{{ row.createTime }}</td>
+            <td class="console-actions-cell">
+              <div class="list-row-actions">
                 <button
-                  class="bg-primary/10 hover:bg-primary/20 text-primary px-2 py-1 rounded-sm text-xs font-bold transition-colors"
+                  class="list-row-button list-row-button--info"
                   @click="$emit('edit', row)"
                 >
+                  <span class="material-icons text-[14px]">edit</span>
                   {{ t('edit') }}
                 </button>
                 <button
-                  class="bg-red-500/10 hover:bg-red-500/20 text-red-600 px-2 py-1 rounded-sm text-xs font-bold transition-colors"
+                  class="list-row-button list-row-button--danger"
                   @click="$emit('delete', row)"
                 >
+                  <span class="material-icons text-[14px]">delete</span>
                   {{ t('delete') }}
                 </button>
               </div>
@@ -86,22 +76,25 @@
     </div>
 
     <template #footer>
-      <div v-if="total > 0" class="flex justify-end">
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="total"
-          :page-size="pageSize"
-          v-model:current-page="pageModel"
-          @current-change="$emit('page-change')"
-        />
-      </div>
+      <ListPaginationBar
+        v-model:current-page="pageModel"
+        v-model:page-size="pageSizeModel"
+        :total="total"
+        :total-text="t('totalRecords', { total })"
+        :page-sizes="[10, 20, 50, 100]"
+        layout="sizes, prev, pager, next, jumper"
+        :hide-when-empty="true"
+        @current-change="$emit('page-change')"
+        @size-change="$emit('size-change', $event)"
+      />
     </template>
   </TableCard>
 </template>
 
 <script setup>
 import { computed, inject } from 'vue'
+import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
+import ListToneBadge from '@/components/listPage/ListToneBadge.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
 
 const props = defineProps({
@@ -127,12 +120,17 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['delete', 'edit', 'page-change', 'update:current-page'])
+const emit = defineEmits(['delete', 'edit', 'page-change', 'size-change', 'update:current-page', 'update:page-size'])
 const t = inject('t', (key) => key)
 
 const pageModel = computed({
   get: () => props.currentPage,
   set: (value) => emit('update:current-page', value)
+})
+
+const pageSizeModel = computed({
+  get: () => props.pageSize,
+  set: (value) => emit('update:page-size', value)
 })
 
 const usageTypeLabel = (value) => {
@@ -145,13 +143,13 @@ const usageTypeLabel = (value) => {
   return labelMap[value] || '-'
 }
 
-const usageTypeBadgeClass = (value) => {
-  const classMap = {
-    1: 'bg-emerald-500/10 text-emerald-600',
-    2: 'bg-purple-500/10 text-purple-600',
-    3: 'bg-cyan-500/10 text-cyan-600'
+const usageTypeBadgeTone = (value) => {
+  const toneMap = {
+    1: 'success',
+    2: 'warning',
+    3: 'info'
   }
 
-  return classMap[value] || 'bg-slate-500/10 text-slate-500'
+  return toneMap[value] || 'neutral'
 }
 </script>

@@ -1,55 +1,60 @@
 <template>
-  <ProductToolbar
-    :active-tab="activeTab"
-    :areas="areas"
-    :clusters="clusters"
-    :filter-area="filterArea"
-    :filter-cluster-id="filterClusterId"
-    :filter-keyword="filterKeyword"
-    :loading="loading"
-    @create="emit('create')"
-    @refresh="emit('refresh')"
-    @reset="emit('reset')"
-    @search="emit('search')"
-    @update:active-tab="emit('update:active-tab', $event)"
-    @update:filter-area="emit('update:filter-area', $event)"
-    @update:filter-cluster-id="emit('update:filter-cluster-id', $event)"
-    @update:filter-keyword="emit('update:filter-keyword', $event)"
-  />
+  <ManagementListShell>
+    <template #filters>
+      <ProductToolbar
+        :active-tab="activeTab"
+        :areas="areas"
+        :clusters="clusters"
+        :filter-area="filterArea"
+        :filter-cluster-id="filterClusterId"
+        :filter-keyword="filterKeyword"
+        :loading="loading"
+        @create="emit('create')"
+        @refresh="emit('refresh', $event)"
+        @reset="emit('reset')"
+        @search="emit('search')"
+        @update:active-tab="emit('update:active-tab', $event)"
+        @update:filter-area="emit('update:filter-area', $event)"
+        @update:filter-cluster-id="emit('update:filter-cluster-id', $event)"
+        @update:filter-keyword="emit('update:filter-keyword', $event)"
+      />
+    </template>
 
-  <ComputeProductsTable
-    v-if="activeTab === 1"
-    :items="products"
-    :loading="loading"
-    :page="currentPage"
-    :page-size="pageSize"
-    :total="total"
-    @adjust-price="emit('adjust-price', $event)"
-    @delete="emit('delete', $event)"
-    @edit="emit('edit', $event)"
-    @page-change="emit('page-change', $event)"
-    @size-change="emit('size-change', $event)"
-    @update:page="emit('update:page', $event)"
-    @update:page-size="emit('update:page-size', $event)"
-  />
+    <ComputeProductsTable
+      v-if="activeTab === 1"
+      :items="products"
+      :loading="loading"
+      :page="currentPage"
+      :page-size="pageSize"
+      :total="total"
+      @adjust-price="emit('adjust-price', $event)"
+      @delete="emit('delete', $event)"
+      @edit="emit('edit', $event)"
+      @page-change="emit('page-change', $event)"
+      @size-change="emit('size-change', $event)"
+      @update:page="emit('update:page', $event)"
+      @update:page-size="emit('update:page-size', $event)"
+    />
 
-  <StorageProductsTable
-    v-else
-    :items="products"
-    :loading="loading"
-    :page="currentPage"
-    :page-size="pageSize"
-    :total="total"
-    @delete="emit('delete', $event)"
-    @edit="emit('edit', $event)"
-    @page-change="emit('page-change', $event)"
-    @size-change="emit('size-change', $event)"
-    @update:page="emit('update:page', $event)"
-    @update:page-size="emit('update:page-size', $event)"
-  />
+    <StorageProductsTable
+      v-else
+      :items="products"
+      :loading="loading"
+      :page="currentPage"
+      :page-size="pageSize"
+      :total="total"
+      @delete="emit('delete', $event)"
+      @edit="emit('edit', $event)"
+      @page-change="emit('page-change', $event)"
+      @size-change="emit('size-change', $event)"
+      @update:page="emit('update:page', $event)"
+      @update:page-size="emit('update:page-size', $event)"
+    />
+  </ManagementListShell>
 </template>
 
 <script setup>
+import ManagementListShell from '@/components/listPage/ManagementListShell.vue'
 import ComputeProductsTable from './ComputeProductsTable.vue'
 import ProductToolbar from './ProductToolbar.vue'
 import StorageProductsTable from './StorageProductsTable.vue'

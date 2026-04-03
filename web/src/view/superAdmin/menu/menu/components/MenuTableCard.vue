@@ -1,39 +1,41 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden shadow-sm">
-    <div class="list-filter-bar border-b border-border-light p-4 dark:border-border-dark">
-      <div class="list-filter-field max-w-[240px]">
-        <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
-        <input
-          v-model="searchKeywordModel"
-          type="text"
-          :placeholder="t('searchMenuDesc')"
-          class="list-search-input !w-full"
-          @keyup.enter="$emit('search')"
-        />
-      </div>
+  <TableCard>
+    <template #toolbar>
+      <div class="list-filter-bar">
+        <div class="list-filter-field max-w-[240px]">
+          <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+          <input
+            v-model="searchKeywordModel"
+            type="text"
+            :placeholder="t('searchMenuDesc')"
+            class="list-search-input !w-full"
+            @keyup.enter="$emit('search')"
+          />
+        </div>
 
-      <div class="list-toolbar-actions">
-        <button
-          class="list-toolbar-button list-toolbar-button--primary"
-          @click="$emit('search')"
-        >
-          <span class="material-icons text-[18px]">search</span>
-          {{ t('searchQuery') }}
-        </button>
-        <button
-          class="list-toolbar-button list-toolbar-button--secondary"
-          @click="$emit('reset')"
-        >
-          <span class="material-icons text-[18px]">refresh</span>
-          {{ t('reset') }}
-        </button>
+        <div class="list-toolbar-actions">
+          <button
+            class="list-toolbar-button list-toolbar-button--primary"
+            @click="$emit('search')"
+          >
+            <span class="material-icons text-[18px]">search</span>
+            {{ t('searchQuery') }}
+          </button>
+          <button
+            class="list-toolbar-button list-toolbar-button--secondary"
+            @click="$emit('reset')"
+          >
+            <span class="material-icons text-[18px]">refresh</span>
+            {{ t('reset') }}
+          </button>
+        </div>
       </div>
-    </div>
+    </template>
 
     <div class="overflow-x-auto" v-loading="loading">
-      <table class="w-full">
+      <table class="console-table console-table--compact w-full">
         <thead>
-          <tr class="bg-slate-50 dark:bg-zinc-800/50 border-b border-border-light dark:border-border-dark text-slate-500 text-xs font-bold uppercase tracking-wider">
+          <tr>
             <th class="px-3 py-3 whitespace-nowrap">{{ t('id') }}</th>
             <th class="px-3 py-3 whitespace-nowrap">{{ t('displayName') }}</th>
             <th class="px-3 py-3 whitespace-nowrap">{{ t('menuIcon') }}</th>
@@ -43,7 +45,7 @@
             <th class="px-3 py-3 whitespace-nowrap">{{ t('parentMenu') }}</th>
             <th class="px-3 py-3 whitespace-nowrap">{{ t('sort') }}</th>
             <th class="px-3 py-3 whitespace-nowrap">{{ t('componentPath') }}</th>
-            <th class="px-3 py-3 whitespace-nowrap text-center">{{ t('actions') }}</th>
+            <th class="console-actions-header px-3 py-3 whitespace-nowrap">{{ t('actions') }}</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-border-light dark:divide-border-dark">
@@ -60,37 +62,36 @@
               <td class="px-3 py-3 text-sm text-slate-600 dark:text-slate-400 font-mono whitespace-nowrap">{{ row.name }}</td>
               <td class="px-3 py-3 text-sm text-slate-600 dark:text-slate-400 font-mono whitespace-nowrap">{{ row.path }}</td>
               <td class="px-3 py-3 whitespace-nowrap">
-                <span v-if="row.hidden" class="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-500/10 text-slate-500">{{ t('hidden') }}</span>
-                <span v-else class="px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-500">{{ t('visible') }}</span>
+                <ListToneBadge
+                  :label="row.hidden ? t('hidden') : t('visible')"
+                  :tone="row.hidden ? 'neutral' : 'success'"
+                />
               </td>
               <td class="px-3 py-3 text-sm text-slate-500 whitespace-nowrap">{{ row.parentId }}</td>
               <td class="px-3 py-3 text-sm text-slate-500 whitespace-nowrap">{{ row.sort }}</td>
               <td class="px-3 py-3 text-xs text-slate-500 font-mono whitespace-nowrap max-w-[250px] truncate" :title="row.component">{{ row.component }}</td>
-              <td class="px-3 py-3 text-center whitespace-nowrap">
-                <div class="flex justify-center gap-2 items-center">
+              <td class="console-actions-cell px-3 py-3 whitespace-nowrap">
+                <div class="list-row-actions">
                   <button
-                    class="bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-0.5"
+                    class="list-row-button list-row-button--neutral"
                     :title="t('addChildMenu')"
                     @click="$emit('add', row.ID)"
                   >
-                    <span class="material-icons text-[14px]">add</span>
-                    <span class="hidden xl:inline">{{ t('add') }}</span>
+                    {{ t('add') }}
                   </button>
                   <button
-                    class="bg-primary/10 hover:bg-primary/20 text-primary px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-0.5"
+                    class="list-row-button list-row-button--info"
                     :title="t('edit')"
                     @click="$emit('edit', row.ID)"
                   >
-                    <span class="material-icons text-[14px]">edit</span>
-                    <span class="hidden xl:inline">{{ t('edit') }}</span>
+                    {{ t('edit') }}
                   </button>
                   <button
-                    class="bg-red-500/10 hover:bg-red-500/20 text-red-600 px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-0.5"
+                    class="list-row-button list-row-button--danger"
                     :title="t('delete')"
                     @click="$emit('delete', row.ID)"
                   >
-                    <span class="material-icons text-[14px]">delete</span>
-                    <span class="hidden xl:inline">{{ t('delete') }}</span>
+                    {{ t('delete') }}
                   </button>
                 </div>
               </td>
@@ -106,7 +107,7 @@
                   <span class="text-slate-300 dark:text-zinc-600 mr-1">└</span>
                   {{ child.ID }}
                 </td>
-                <td class="px-3 py-3 text-sm text-slate-600 dark:text-slate-400 whitespace-nowrap">{{ child.meta?.title }}</td>
+                <td class="px-3 py-3 text-sm is-primary whitespace-nowrap">{{ child.meta?.title }}</td>
                 <td class="px-3 py-3 whitespace-nowrap">
                   <div v-if="child.meta?.icon" class="flex items-center gap-1.5 text-sm text-slate-500">
                     <AppIcon :name="child.meta.icon" />
@@ -116,37 +117,36 @@
                 <td class="px-3 py-3 text-xs text-slate-500 font-mono whitespace-nowrap">{{ child.name }}</td>
                 <td class="px-3 py-3 text-xs text-slate-500 font-mono whitespace-nowrap">{{ child.path }}</td>
                 <td class="px-3 py-3 whitespace-nowrap">
-                  <span v-if="child.hidden" class="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-500/10 text-slate-500">{{ t('hidden') }}</span>
-                  <span v-else class="px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-500">{{ t('visible') }}</span>
+                  <ListToneBadge
+                    :label="child.hidden ? t('hidden') : t('visible')"
+                    :tone="child.hidden ? 'neutral' : 'success'"
+                  />
                 </td>
                 <td class="px-3 py-3 text-xs text-slate-500 whitespace-nowrap">{{ child.parentId }}</td>
                 <td class="px-3 py-3 text-xs text-slate-500 whitespace-nowrap">{{ child.sort }}</td>
                 <td class="px-3 py-3 text-xs text-slate-400 font-mono whitespace-nowrap max-w-[250px] truncate" :title="child.component">{{ child.component }}</td>
-                <td class="px-3 py-3 text-center whitespace-nowrap">
-                  <div class="flex justify-center gap-2 items-center">
+                <td class="console-actions-cell px-3 py-3 whitespace-nowrap">
+                  <div class="list-row-actions">
                     <button
-                      class="bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-0.5"
+                      class="list-row-button list-row-button--neutral"
                       :title="t('addChildMenu')"
                       @click="$emit('add', child.ID)"
                     >
-                      <span class="material-icons text-[14px]">add</span>
-                      <span class="hidden xl:inline">{{ t('add') }}</span>
+                      {{ t('add') }}
                     </button>
                     <button
-                      class="bg-primary/10 hover:bg-primary/20 text-primary px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-0.5"
+                      class="list-row-button list-row-button--info"
                       :title="t('edit')"
                       @click="$emit('edit', child.ID)"
                     >
-                      <span class="material-icons text-[14px]">edit</span>
-                      <span class="hidden xl:inline">{{ t('edit') }}</span>
+                      {{ t('edit') }}
                     </button>
                     <button
-                      class="bg-red-500/10 hover:bg-red-500/20 text-red-600 px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-0.5"
+                      class="list-row-button list-row-button--danger"
                       :title="t('delete')"
                       @click="$emit('delete', child.ID)"
                     >
-                      <span class="material-icons text-[14px]">delete</span>
-                      <span class="hidden xl:inline">{{ t('delete') }}</span>
+                      {{ t('delete') }}
                     </button>
                   </div>
                 </td>
@@ -156,12 +156,14 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </TableCard>
 </template>
 
 <script setup>
 import { computed, inject } from 'vue'
 import AppIcon from '@/components/AppIcon.vue'
+import ListToneBadge from '@/components/listPage/ListToneBadge.vue'
+import TableCard from '@/components/listPage/TableCard.vue'
 
 const props = defineProps({
   items: {

@@ -5,6 +5,12 @@ import { getImageList } from '@/api/image'
 import { getAggregateProductList, getProductFilters } from '@/api/product'
 import { getVolumeList } from '@/api/volume'
 import {
+  getSubmitErrorMessage,
+  isResourceNameErrorMessage,
+  validateK8sResourceName,
+  validateTensorBoardPath
+} from '@/utils/resourceValidators'
+import {
   TRAINING_FRAMEWORK_TYPES,
   TRAINING_IMAGE_TABS,
   TRAINING_PAY_TYPES
@@ -45,6 +51,10 @@ export const useTrainingCreate = ({ t, router }) => {
   const gpuModels = ref([])
   const cpuModels = ref([])
   const creating = ref(false)
+  const fieldErrors = reactive({
+    name: '',
+    tensorboardLogPath: ''
+  })
 
   const activeTab = ref('base')
   const payTypes = TRAINING_PAY_TYPES
@@ -133,7 +143,7 @@ export const useTrainingCreate = ({ t, router }) => {
   })
 
   const canCreate = computed(() => {
-    if (!form.name || !form.imageId || !form.startupCommand || !selectedProduct.value) {
+    if (!form.name.trim() || !form.imageId || !form.startupCommand.trim() || !selectedProduct.value) {
       return false
     }
 
@@ -252,6 +262,70 @@ export const useTrainingCreate = ({ t, router }) => {
     form.envs.splice(index, 1)
   }
 
+  const updateFieldError = (field, message = '') => {
+    fieldErrors[field] = message
+  }
+
+  const updateField = ({ key, value }) => {
+    form[key] = value
+
+    if (key === 'name' && fieldErrors.name) {
+      updateFieldError('name')
+    }
+
+    if (key === 'tensorboardLogPath' && fieldErrors.tensorboardLogPath) {
+      updateFieldError('tensorboardLogPath')
+    }
+
+    if (key === 'enableTensorboard' && !value && fieldErrors.tensorboardLogPath) {
+      updateFieldError('tensorboardLogPath')
+    }
+  }
+
+  const validateNameField = () => {
+    const error = validateK8sResourceName(form.name, {
+      t: translate,
+      fieldKey: 'jobName',
+      example: 'my-training'
+    })
+
+    updateFieldError('name', error || '')
+    return !error
+  }
+
+  const validateTensorboardLogPathField = () => {
+    const error = form.enableTensorboard
+      ? validateTensorBoardPath(form.tensorboardLogPath, translate)
+      : null
+
+    updateFieldError('tensorboardLogPath', error || '')
+    return !error
+  }
+
+  const validateCreateForm = () => {
+    const isNameValid = validateNameField()
+    const isTensorboardPathValid = validateTensorboardLogPathField()
+
+    if (!isNameValid) {
+      return fieldErrors.name
+    }
+
+    if (!form.imageId || !form.startupCommand.trim() || !selectedProduct.value) {
+      return translate('fillAllFields')
+    }
+
+    if (!isTensorboardPathValid) {
+      return fieldErrors.tensorboardLogPath
+    }
+
+    const requiredNodes = showWorkerCount.value ? form.workerCount : 1
+    if (requiredNodes > totalAllowedNodes.value || (showWorkerCount.value && form.workerCount < 2)) {
+      return translate('fillAllFields')
+    }
+
+    return ''
+  }
+
   const insertMpiExample = () => {
     const totalSlots = form.workerCount * form.gpuPerWorker
     const np = totalSlots > 0 ? totalSlots : form.workerCount
@@ -266,15 +340,16 @@ export const useTrainingCreate = ({ t, router }) => {
   const goBack = () => router.go(-1)
 
   const handleCreate = async () => {
-    if (!canCreate.value) {
-      ElMessage.warning(translate('fillAllFields'))
+    const validationMessage = validateCreateForm()
+    if (validationMessage) {
+      ElMessage.warning(validationMessage)
       return
     }
 
     creating.value = true
     try {
       const params = {
-        name: form.name,
+        name: form.name.trim(),
         frameworkType: form.frameworkType,
         imageId: form.imageId,
         startupCommand: form.startupCommand,
@@ -302,9 +377,21 @@ export const useTrainingCreate = ({ t, router }) => {
       if (res.code === 0) {
         ElMessage.success(translate('createSuccess'))
         router.go(-1)
+        return
       }
+
+      const submitMessage = res.msg || translate('createFailed')
+      if (isResourceNameErrorMessage(submitMessage)) {
+        updateFieldError('name', submitMessage)
+      }
+      ElMessage.error(submitMessage)
     } catch (error) {
       console.error('创建失败', error)
+      const submitMessage = getSubmitErrorMessage(error, translate('createFailed'))
+      if (isResourceNameErrorMessage(submitMessage)) {
+        updateFieldError('name', submitMessage)
+      }
+      ElMessage.error(submitMessage)
     } finally {
       creating.value = false
     }
@@ -329,6 +416,7 @@ export const useTrainingCreate = ({ t, router }) => {
     cpuModels,
     creating,
     decreaseWorker,
+    fieldErrors,
     filteredImages,
     filters,
     form,
@@ -353,6 +441,9 @@ export const useTrainingCreate = ({ t, router }) => {
     showWorkerCount,
     totalAllowedNodes,
     totalPrice,
-    totalResources
+    totalResources,
+    updateField,
+    validateNameField,
+    validateTensorboardLogPathField
   }
 }

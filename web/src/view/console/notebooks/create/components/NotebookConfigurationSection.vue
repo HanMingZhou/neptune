@@ -16,14 +16,18 @@
       :enable-ssh-password="enableSshPassword"
       :enable-tensorboard="enableTensorboard"
       :instance-name="instanceName"
+      :instance-name-error="fieldErrors.instanceName"
       :selected-ssh-key="selectedSshKey"
       :ssh-keys="sshKeys"
       :tensorboard-log-path="tensorboardLogPath"
+      :tensorboard-path-error="fieldErrors.tensorboardLogPath"
       @update:enable-ssh-password="emit('update:enable-ssh-password', $event)"
       @update:enable-tensorboard="emit('update:enable-tensorboard', $event)"
       @update:instance-name="emit('update:instance-name', $event)"
       @update:selected-ssh-key="emit('update:selected-ssh-key', $event)"
       @update:tensorboard-log-path="emit('update:tensorboard-log-path', $event)"
+      @validate:instance-name="emit('validate:instance-name')"
+      @validate:tensorboard-log-path="emit('validate:tensorboard-log-path')"
     />
   </div>
 </template>
@@ -53,6 +57,10 @@ const props = defineProps({
   filteredImages: {
     type: Array,
     default: () => []
+  },
+  fieldErrors: {
+    type: Object,
+    default: () => ({})
   },
   imageTabs: {
     type: Array,
@@ -86,7 +94,9 @@ const emit = defineEmits([
   'update:instance-name',
   'update:selected-image',
   'update:selected-ssh-key',
-  'update:tensorboard-log-path'
+  'update:tensorboard-log-path',
+  'validate:instance-name',
+  'validate:tensorboard-log-path'
 ])
 
 const t = inject('t', (key) => key)

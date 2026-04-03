@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-background-light dark:bg-background-dark pb-24">
+  <div class="console-create-page pb-24">
     <PageHeader title-key="createTrainingJob" @back="goBack" />
 
     <div class="console-page-container px-6 py-6 space-y-6">
@@ -28,6 +28,7 @@
         :available-capacity="availableCapacity"
         :change-image-tab="changeImageTab"
         :decrease-worker="decreaseWorker"
+        :field-errors="fieldErrors"
         :filtered-images="filteredImages"
         :form="form"
         :framework-types="frameworkTypes"
@@ -41,6 +42,9 @@
         :remove-mount="removeMount"
         :selected-product="selectedProduct"
         :show-worker-count="showWorkerCount"
+        :update-field="updateField"
+        @validate:name="validateNameField"
+        @validate:tensorboard-log-path="validateTensorboardLogPathField"
       />
     </div>
 
@@ -82,6 +86,7 @@ const {
   cpuModels,
   creating,
   decreaseWorker,
+  fieldErrors,
   filteredImages,
   filters,
   form,
@@ -105,6 +110,9 @@ const {
   selectedProduct,
   showWorkerCount,
   totalPrice,
-  totalResources
+  totalResources,
+  updateField,
+  validateNameField,
+  validateTensorboardLogPathField
 } = useTrainingCreate({ t, router })
 </script>

@@ -35,7 +35,7 @@
         <button
           v-if="isTerminal"
           :disabled="downloadLoading"
-          class="ml-auto px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg text-sm font-bold flex items-center gap-2 disabled:opacity-50"
+          class="detail-header-action detail-header-action--primary ml-auto disabled:opacity-50"
           @click="$emit('download')"
         >
           <span class="material-icons text-lg">download</span>

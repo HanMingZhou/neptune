@@ -1,9 +1,10 @@
 <template>
   <button 
     @click="handleManualRefresh" 
-    class="size-[42px] flex items-center justify-center bg-white dark:bg-zinc-800 border border-border-light dark:border-border-dark rounded-lg text-slate-400 hover:text-primary transition-colors shadow-sm disabled:opacity-50"
+    class="list-toolbar-button list-toolbar-button--secondary list-toolbar-button--icon"
     :disabled="loading"
     :title="t('refresh')"
+    type="button"
   >
     <span class="material-icons" :class="{ 'animate-spin': loading }">refresh</span>
   </button>

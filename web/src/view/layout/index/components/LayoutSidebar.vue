@@ -1,5 +1,5 @@
 <template>
-  <aside class="w-64 h-full border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark flex flex-col shrink-0 overflow-hidden shadow-2xl">
+  <aside class="w-64 h-full border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark flex flex-col shrink-0 overflow-hidden">
     <div class="p-6 pb-2 mb-2 sticky top-0 bg-surface-light dark:bg-surface-dark z-20">
       <div class="flex items-center gap-3 cursor-pointer group transition-all" @click="router.push({ path: '/' })">
         <div class="relative">
@@ -33,9 +33,9 @@
       </div>
     </nav>
 
-    <div class="shrink-0 p-4 border-t border-border-light dark:border-border-dark bg-slate-50/80 dark:bg-zinc-900/70 backdrop-blur-sm">
+    <div class="shrink-0 border-t border-border-light bg-surface-light p-4 dark:border-border-dark dark:bg-surface-dark">
       <button
-        class="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl border border-border-light/80 bg-white/80 text-xs font-bold uppercase tracking-wider text-slate-500 shadow-sm transition-colors hover:bg-slate-100 dark:border-border-dark dark:bg-zinc-800/80 dark:text-slate-400 dark:hover:bg-zinc-800"
+        class="w-full flex items-center justify-between gap-3 border border-border-light px-3 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-500 transition-colors hover:bg-slate-50 dark:border-border-dark dark:bg-surface-dark dark:text-slate-400 dark:hover:bg-zinc-800"
         @click="emit('toggle-theme')"
       >
         <span class="flex items-center gap-3">

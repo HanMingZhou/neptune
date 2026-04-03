@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden shadow-sm">
+  <TableCard>
     <div class="overflow-x-auto">
-      <table class="w-full min-w-[1180px]" v-loading="loading">
+      <table class="console-table min-w-[1180px]" v-loading="loading">
         <thead>
-          <tr class="bg-slate-50 dark:bg-zinc-800/50 border-b border-border-light dark:border-border-dark text-slate-500 text-xs font-bold uppercase tracking-wider">
+          <tr>
             <th class="px-6 py-4 text-left">{{ t('nodeName') }}</th>
             <th class="px-6 py-4 text-left">{{ t('internalIp') }}</th>
             <th class="px-6 py-4 text-left">{{ t('clusterName') }}</th>
@@ -11,7 +11,7 @@
             <th class="px-6 py-4 text-left">{{ t('area') }}</th>
             <th class="px-6 py-4 text-left">{{ t('spec') }} (可用/总量)</th>
             <th class="px-6 py-4 text-center">{{ t('status') }}</th>
-            <th class="px-6 py-4 text-center">{{ t('actions') }}</th>
+            <th class="px-6 py-4 console-actions-header">{{ t('actions') }}</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-border-light dark:divide-border-dark">
@@ -22,7 +22,7 @@
           >
             <td class="px-6 py-4">
               <div class="flex flex-col">
-                <code class="text-sm font-bold text-primary bg-primary/5 px-2 py-1 rounded w-fit">{{ row.nodeName }}</code>
+                <span class="console-badge console-badge--neutral is-code w-fit">{{ row.nodeName }}</span>
                 <span class="text-[10px] text-slate-400 mt-1">{{ row.area || '-' }}</span>
               </div>
             </td>
@@ -30,28 +30,18 @@
             <td class="px-6 py-4 text-sm text-slate-600">{{ row.clusterName || '-' }}</td>
             <td class="px-6 py-4">
               <span
-                v-if="row.nodeRole === 'master'"
-                class="px-2 py-0.5 rounded-full text-xs font-bold bg-blue-500/10 text-blue-600"
+                class="console-badge console-badge--neutral"
               >
-                {{ t('roleMaster') }}
-              </span>
-              <span
-                v-else
-                class="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-500/10 text-slate-500"
-              >
-                {{ t('roleWorker') }}
+                {{ row.nodeRole === 'master' ? t('roleMaster') : t('roleWorker') }}
               </span>
             </td>
             <td class="px-6 py-4 text-sm text-slate-600">{{ row.area || '-' }}</td>
             <td class="px-6 py-4">
               <div class="space-y-1.5">
                 <div v-if="row.gpuModel" class="flex items-center gap-2">
-                  <span class="text-[10px] bg-amber-500 text-white px-1 rounded font-bold leading-none">GPU</span>
-                  <span class="text-xs font-bold text-slate-700 dark:text-slate-200">{{ row.gpuModel }}</span>
-                  <span
-                    :class="row.gpuAvailable > 0 ? 'text-emerald-500' : 'text-slate-400'"
-                    class="text-xs font-mono"
-                  >
+                  <span class="rounded border border-border-light bg-slate-100 px-1.5 py-0.5 text-[10px] font-semibold leading-none text-slate-500 dark:border-border-dark dark:bg-zinc-800 dark:text-slate-300">GPU</span>
+                  <span class="is-primary">{{ row.gpuModel }}</span>
+                  <span class="is-code text-xs text-slate-500">
                     ({{ row.gpuAvailable }}/{{ row.gpuCount }})
                   </span>
                 </div>
@@ -69,26 +59,16 @@
               </div>
             </td>
             <td class="px-6 py-4 text-center">
-              <span
-                v-if="row.schedulable"
-                class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-500"
-              >
-                <span class="size-1.5 bg-emerald-500 rounded-full inline-block mr-1.5 mb-0.5"></span>
-                {{ t('schedulable') }}
-              </span>
-              <span
-                v-else
-                class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-500"
-              >
-                <span class="size-1.5 bg-amber-500 rounded-full inline-block mr-1.5 mb-0.5"></span>
-                {{ t('unschedulable') }}
-              </span>
+              <ListToneBadge
+                :label="row.schedulable ? t('schedulable') : t('unschedulable')"
+                :tone="row.schedulable ? 'success' : 'warning'"
+              />
             </td>
-            <td class="px-6 py-4 text-center">
-              <div class="flex justify-center gap-2 items-center">
+            <td class="px-6 py-4 console-actions-cell">
+              <div class="list-row-actions">
                 <button
                   v-if="!row.schedulable"
-                  class="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1"
+                  class="list-row-button list-row-button--success"
                   @click="$emit('uncordon', row)"
                 >
                   <span class="material-icons text-[16px]">login</span>
@@ -96,7 +76,7 @@
                 </button>
                 <button
                   v-if="row.schedulable"
-                  class="bg-red-500/10 hover:bg-red-500/20 text-red-600 px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1"
+                  class="list-row-button list-row-button--danger"
                   @click="$emit('drain', row)"
                 >
                   <span class="material-icons text-[16px]">logout</span>
@@ -113,11 +93,13 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </TableCard>
 </template>
 
 <script setup>
 import { inject } from 'vue'
+import ListToneBadge from '@/components/listPage/ListToneBadge.vue'
+import TableCard from '@/components/listPage/TableCard.vue'
 
 defineProps({
   items: {

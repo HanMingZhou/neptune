@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed bottom-0 left-0 right-0 bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur border-t border-border-light dark:border-border-dark py-4 z-50">
-    <div :class="['max-w-[1400px] mx-auto px-6 flex justify-end items-center', actionGapClass]">
+  <div class="fixed bottom-0 left-0 right-0 border-t border-border-light bg-surface-light py-4 z-50 dark:border-border-dark dark:bg-background-dark">
+    <div :class="['console-page-container flex justify-end items-center', actionGapClass]">
       <div class="flex items-baseline gap-2">
         <span :class="priceLabelClass">{{ t(priceLabelKey) }}:</span>
         <span :class="priceValueClass">¥{{ totalPrice }}</span>
@@ -8,7 +8,7 @@
       </div>
       <div class="flex gap-3">
         <button
-          class="px-6 py-2.5 border border-border-light dark:border-border-dark rounded-lg text-sm font-bold hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors"
+          class="px-6 py-2.5 border border-border-light bg-surface-light text-sm font-bold transition-colors hover:bg-slate-50 dark:border-border-dark dark:bg-surface-dark dark:hover:bg-zinc-800"
           @click="$emit('back')"
         >
           {{ t(cancelLabelKey) }}
@@ -51,7 +51,7 @@ defineProps({
   },
   enabledSubmitClass: {
     type: String,
-    default: 'bg-primary hover:bg-primary-hover text-white shadow-lg shadow-primary/20'
+    default: 'bg-primary hover:bg-primary-hover text-white'
   },
   loading: {
     type: Boolean,
@@ -83,7 +83,7 @@ defineProps({
   },
   submitBaseClass: {
     type: String,
-    default: 'px-6 py-2.5 rounded-lg text-sm font-bold transition-all'
+    default: 'px-6 py-2.5 text-sm font-bold transition-all'
   },
   submitLabelKey: {
     type: String,

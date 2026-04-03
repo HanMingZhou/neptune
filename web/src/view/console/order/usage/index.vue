@@ -3,7 +3,7 @@
     <PageIntro :title="t('order.usage')" :description="t('order.usageDesc')">
       <template #actions>
         <RefreshButton :loading="loading" @refresh="fetchData" />
-        <button disabled class="px-4 py-2 bg-slate-300 dark:bg-zinc-600 text-white rounded-lg text-xs font-bold flex items-center gap-2 cursor-not-allowed opacity-60">
+        <button disabled class="list-toolbar-button list-toolbar-button--secondary">
           <span class="material-icons text-sm">file_download</span>
           {{ t('order.exportOrder') }}
         </button>

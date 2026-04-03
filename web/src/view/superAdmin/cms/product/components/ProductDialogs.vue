@@ -3,21 +3,28 @@
     v-if="productForm.productType === 1"
     v-model="editorVisibleModel"
     :title="dialogTitle"
-    width="880px"
-    align-center
-    class="product-dialog"
+    width="840px"
+    class="product-dialog product-dialog--compute"
   >
-    <el-form ref="productFormRef" :model="productForm" label-width="100px" :rules="computeRules" class="product-form">
+    <el-form ref="productFormRef" :model="productForm" label-width="96px" :rules="computeRules" class="product-form">
       <div v-if="!isEdit" class="mb-6">
         <div class="section-header">
           <span class="material-icons text-primary text-[18px]">hub</span>
           <span>{{ t('selectCluster') }}</span>
         </div>
-        <el-form-item :label="t('cluster')" prop="clusterId" class="mt-4">
-          <el-select v-model="productForm.clusterId" :placeholder="t('selectCluster')" class="w-full" @change="emit('cluster-change', $event)">
-            <el-option v-for="cluster in clusters" :key="cluster.id" :label="cluster.name" :value="cluster.id" />
-          </el-select>
-        </el-form-item>
+        <div class="form-section form-section--compact">
+          <el-form-item prop="clusterId" class="compact-form-item !mb-0">
+            <div class="compact-field">
+              <div class="compact-field-label">
+                <span class="compact-field-required">*</span>
+                <span>{{ t('cluster') }}</span>
+              </div>
+              <el-select id="compute-cluster-id" v-model="productForm.clusterId" :placeholder="t('selectCluster')" class="w-full" @change="emit('cluster-change', $event)">
+                <el-option v-for="cluster in clusters" :key="cluster.id" :label="cluster.name" :value="cluster.id" />
+              </el-select>
+            </div>
+          </el-form-item>
+        </div>
       </div>
 
       <div v-if="productForm.clusterId && !isEdit" class="mb-6">
@@ -25,36 +32,38 @@
           <span class="material-icons text-violet-500 text-[18px]">dns</span>
           <span>{{ t('nodeList') }}</span>
         </div>
-        <el-form-item prop="nodeName" class="!m-0 !h-0 overflow-hidden">
-          <el-input v-model="productForm.nodeName" class="hidden" />
-        </el-form-item>
-        <div class="mt-4 grid max-h-[280px] grid-cols-2 gap-3 overflow-y-auto pr-1" v-loading="loadingNodes">
-          <div v-if="clusterNodes.length === 0" class="col-span-2 py-12 text-center text-sm text-slate-400">
-            <span class="material-icons mb-2 block text-3xl opacity-30">dns</span>
-            {{ t('noNodes') }}
-          </div>
-          <div
-            v-for="node in clusterNodes"
-            :key="node.nodeName"
-            class="node-card"
-            :class="{ 'is-selected': productForm.nodeName === node.nodeName }"
-            @click="emit('node-select', node)"
-          >
-            <div class="mb-2.5 flex items-center justify-between">
-              <span class="mr-2 truncate font-mono text-sm font-bold text-slate-800 dark:text-slate-200">{{ node.nodeName }}</span>
-              <span
-                class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold"
-                :class="node.schedulable ? 'bg-emerald-500/10 text-emerald-500' : 'bg-red-500/10 text-red-500'"
-              >
-                {{ node.schedulable ? t('schedulable') : t('unschedulable') }}
-              </span>
+        <div class="form-section form-section--compact">
+          <el-form-item prop="nodeName" class="!m-0 !h-0 overflow-hidden">
+            <el-input v-model="productForm.nodeName" class="hidden" />
+          </el-form-item>
+          <div class="grid max-h-[280px] grid-cols-1 2xl:grid-cols-2 gap-3 overflow-y-auto pr-1" v-loading="loadingNodes">
+            <div v-if="clusterNodes.length === 0" class="2xl:col-span-2 py-12 text-center text-sm text-slate-400">
+              <span class="material-icons mb-2 block text-3xl opacity-30">dns</span>
+              {{ t('noNodes') }}
             </div>
-            <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-500">
-              <span class="flex items-center gap-1"><span class="material-icons text-[12px] text-blue-400">memory</span>CPU: {{ node.cpu }}核</span>
-              <span class="flex items-center gap-1"><span class="material-icons text-[12px] text-cyan-400">sd_card</span>{{ node.memory }}GB</span>
-              <span v-if="node.gpuCount > 0" class="flex items-center gap-1 font-bold text-amber-600"><span class="material-icons text-[12px]">developer_board</span>{{ node.gpuModel || 'GPU' }} × {{ node.gpuCount }}</span>
-              <span v-if="node.vGpuNumber > 0" class="flex items-center gap-1 font-bold text-violet-600"><span class="material-icons text-[12px]">grid_view</span>vGPU: {{ node.vGpuNumber }}</span>
-              <span v-if="!node.gpuCount && !node.vGpuNumber" class="text-slate-400">CPU Only</span>
+            <div
+              v-for="node in clusterNodes"
+              :key="node.nodeName"
+              class="node-card"
+              :class="{ 'is-selected': productForm.nodeName === node.nodeName }"
+              @click="emit('node-select', node)"
+            >
+              <div class="mb-2.5 flex items-center justify-between">
+                <span class="mr-2 truncate font-mono text-sm font-bold text-slate-800 dark:text-slate-200">{{ node.nodeName }}</span>
+                <span
+                  class="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold"
+                  :class="node.schedulable ? 'bg-emerald-500/10 text-emerald-500' : 'bg-red-500/10 text-red-500'"
+                >
+                  {{ node.schedulable ? t('schedulable') : t('unschedulable') }}
+                </span>
+              </div>
+              <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-500">
+                <span class="flex items-center gap-1"><span class="material-icons text-[12px] text-blue-400">memory</span>CPU: {{ node.cpu }}核</span>
+                <span class="flex items-center gap-1"><span class="material-icons text-[12px] text-cyan-400">sd_card</span>{{ node.memory }}GB</span>
+                <span v-if="node.gpuCount > 0" class="flex items-center gap-1 font-bold text-amber-600"><span class="material-icons text-[12px]">developer_board</span>{{ node.gpuModel || 'GPU' }} × {{ node.gpuCount }}</span>
+                <span v-if="node.vGpuNumber > 0" class="flex items-center gap-1 font-bold text-violet-600"><span class="material-icons text-[12px]">grid_view</span>vGPU: {{ node.vGpuNumber }}</span>
+                <span v-if="!node.gpuCount && !node.vGpuNumber" class="text-slate-400">CPU Only</span>
+              </div>
             </div>
           </div>
         </div>
@@ -67,33 +76,33 @@
         </div>
         <div class="form-section">
           <el-row :gutter="20">
-            <el-col :span="12">
-              <el-form-item :label="t('productName')" prop="name">
-                <el-input v-model="productForm.name" class="w-full" />
+            <el-col :xs="24" :sm="12">
+              <el-form-item :label="t('productName')" prop="name" for="compute-name">
+                <el-input id="compute-name" v-model="productForm.name" class="w-full" />
               </el-form-item>
             </el-col>
-            <el-col :span="12">
-              <el-form-item :label="t('area')" prop="area">
-                <el-input v-model="productForm.area" class="w-full" />
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20">
-            <el-col :span="12">
-              <el-form-item :label="t('cpuCores')" prop="cpu">
-                <el-input-number v-model="productForm.cpu" :min="1" :max="nodeMaxCpu" class="w-full" />
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item :label="t('memoryGb')" prop="memory">
-                <el-input-number v-model="productForm.memory" :min="1" :max="nodeMaxMemory" class="w-full" />
+            <el-col :xs="24" :sm="12">
+              <el-form-item :label="t('area')" prop="area" for="compute-area">
+                <el-input id="compute-area" v-model="productForm.area" class="w-full" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20">
-            <el-col :span="12">
-              <el-form-item :label="t('cpuModel')">
-                <el-input v-model="productForm.cpuModel" class="w-full" />
+            <el-col :xs="24" :sm="12">
+              <el-form-item :label="t('cpuCores')" prop="cpu" for="compute-cpu">
+                <el-input-number id="compute-cpu" v-model="productForm.cpu" :min="1" :max="nodeMaxCpu" class="w-full" />
+              </el-form-item>
+            </el-col>
+            <el-col :xs="24" :sm="12">
+              <el-form-item :label="t('memoryGb')" prop="memory" for="compute-memory">
+                <el-input-number id="compute-memory" v-model="productForm.memory" :min="1" :max="nodeMaxMemory" class="w-full" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20">
+            <el-col :xs="24" :sm="12">
+              <el-form-item :label="t('cpuModel')" for="compute-cpu-model">
+                <el-input id="compute-cpu-model" v-model="productForm.cpuModel" class="w-full" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -104,8 +113,8 @@
           <span>{{ t('resourceType') }}</span>
         </div>
         <div class="form-section">
-          <el-form-item :label="t('resourceType')">
-            <el-radio-group v-model="resourceTypeModel" class="resource-type-group" @change="emit('resource-type-change', $event)">
+          <el-form-item :label="t('resourceType')" for="compute-resource-type">
+            <el-radio-group id="compute-resource-type" v-model="resourceTypeModel" class="resource-type-group" @change="emit('resource-type-change', $event)">
               <el-radio-button value="cpu">
                 <span class="flex items-center gap-1.5"><span class="material-icons text-[14px]">memory</span>CPU Only</span>
               </el-radio-button>
@@ -120,21 +129,21 @@
 
           <div v-show="resourceType === 'gpu'">
             <el-row :gutter="20">
-              <el-col :span="12">
-                <el-form-item :label="t('gpuModel')">
-                  <el-input v-model="productForm.gpuModel" class="w-full" />
+              <el-col :xs="24" :sm="12">
+                <el-form-item :label="t('gpuModel')" for="compute-gpu-model">
+                  <el-input id="compute-gpu-model" v-model="productForm.gpuModel" class="w-full" />
                 </el-form-item>
               </el-col>
-              <el-col :span="12">
-                <el-form-item :label="t('gpuCount')">
-                  <el-input-number v-model="productForm.gpuCount" :min="0" :max="nodeMaxGpuCount" class="w-full" />
+              <el-col :xs="24" :sm="12">
+                <el-form-item :label="t('gpuCount')" for="compute-gpu-count">
+                  <el-input-number id="compute-gpu-count" v-model="productForm.gpuCount" :min="0" :max="nodeMaxGpuCount" class="w-full" />
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row :gutter="20">
-              <el-col :span="12">
-                <el-form-item :label="t('gpuMemory')">
-                  <el-input-number v-model="productForm.gpuMemory" :min="0" :max="nodeMaxGpuMemory" class="w-full" />
+              <el-col :xs="24" :sm="12">
+                <el-form-item :label="t('gpuMemory')" for="compute-gpu-memory">
+                  <el-input-number id="compute-gpu-memory" v-model="productForm.gpuMemory" :min="0" :max="nodeMaxGpuMemory" class="w-full" />
                 </el-form-item>
               </el-col>
             </el-row>
@@ -142,21 +151,21 @@
 
           <div v-show="resourceType === 'vgpu'">
             <el-row :gutter="20">
-              <el-col :span="12">
-                <el-form-item :label="t('vGpuCount')">
-                  <el-input-number v-model="productForm.vGpuCount" :min="0" :max="nodeMaxVGpuCount" class="w-full" />
+              <el-col :xs="24" :sm="12">
+                <el-form-item :label="t('vGpuCount')" for="compute-vgpu-count">
+                  <el-input-number id="compute-vgpu-count" v-model="productForm.vGpuCount" :min="0" :max="nodeMaxVGpuCount" class="w-full" />
                 </el-form-item>
               </el-col>
-              <el-col :span="12">
-                <el-form-item :label="t('vGpuMemory')">
-                  <el-input-number v-model="productForm.vGpuMemory" :min="0" :max="nodeMaxVGpuMemory" class="w-full" />
+              <el-col :xs="24" :sm="12">
+                <el-form-item :label="t('vGpuMemory')" for="compute-vgpu-memory">
+                  <el-input-number id="compute-vgpu-memory" v-model="productForm.vGpuMemory" :min="0" :max="nodeMaxVGpuMemory" class="w-full" />
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row :gutter="20">
-              <el-col :span="12">
-                <el-form-item :label="t('vGpuCores')">
-                  <el-input-number v-model="productForm.vGpuCores" :min="0" :max="nodeMaxVGpuCores" class="w-full" />
+              <el-col :xs="24" :sm="12">
+                <el-form-item :label="t('vGpuCores')" for="compute-vgpu-cores">
+                  <el-input-number id="compute-vgpu-cores" v-model="productForm.vGpuCores" :min="0" :max="nodeMaxVGpuCores" class="w-full" />
                 </el-form-item>
               </el-col>
             </el-row>
@@ -169,26 +178,26 @@
         </div>
         <div class="form-section">
           <el-row :gutter="20">
-            <el-col :span="12">
-              <el-form-item :label="t('priceHourly')" prop="priceHourly">
-                <el-input-number v-model="productForm.priceHourly" :precision="2" :min="0" class="w-full" />
+            <el-col :xs="24" :sm="12">
+              <el-form-item :label="t('priceHourly')" prop="priceHourly" for="compute-price-hourly">
+                <el-input-number id="compute-price-hourly" v-model="productForm.priceHourly" :precision="2" :min="0" class="w-full" />
               </el-form-item>
             </el-col>
-            <el-col :span="12">
-              <el-form-item :label="t('priceDaily')">
-                <el-input-number v-model="productForm.priceDaily" :precision="2" :min="0" class="w-full" />
+            <el-col :xs="24" :sm="12">
+              <el-form-item :label="t('priceDaily')" for="compute-price-daily">
+                <el-input-number id="compute-price-daily" v-model="productForm.priceDaily" :precision="2" :min="0" class="w-full" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20">
-            <el-col :span="12">
-              <el-form-item :label="t('priceWeekly')">
-                <el-input-number v-model="productForm.priceWeekly" :precision="2" :min="0" class="w-full" />
+            <el-col :xs="24" :sm="12">
+              <el-form-item :label="t('priceWeekly')" for="compute-price-weekly">
+                <el-input-number id="compute-price-weekly" v-model="productForm.priceWeekly" :precision="2" :min="0" class="w-full" />
               </el-form-item>
             </el-col>
-            <el-col :span="12">
-              <el-form-item :label="t('priceMonthly')">
-                <el-input-number v-model="productForm.priceMonthly" :precision="2" :min="0" class="w-full" />
+            <el-col :xs="24" :sm="12">
+              <el-form-item :label="t('priceMonthly')" for="compute-price-monthly">
+                <el-input-number id="compute-price-monthly" v-model="productForm.priceMonthly" :precision="2" :min="0" class="w-full" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -199,11 +208,11 @@
           <span>{{ t('otherSettings') }}</span>
         </div>
         <div class="form-section">
-          <el-form-item :label="t('status')">
-            <el-switch v-model="productForm.status" :active-value="1" :inactive-value="0" :active-text="t('onShelf')" :inactive-text="t('offShelf')" />
+          <el-form-item :label="t('status')" for="compute-status">
+            <el-switch id="compute-status" v-model="productForm.status" :active-value="1" :inactive-value="0" :active-text="t('onShelf')" :inactive-text="t('offShelf')" />
           </el-form-item>
-          <el-form-item :label="t('paramDesc')" class="align-start">
-            <el-input v-model="productForm.description" type="textarea" :rows="3" :placeholder="t('inputProductDesc')" />
+          <el-form-item :label="t('paramDesc')" for="compute-description" class="align-start">
+            <el-input id="compute-description" v-model="productForm.description" type="textarea" :rows="3" :placeholder="t('inputProductDesc')" />
           </el-form-item>
         </div>
       </template>
@@ -225,20 +234,27 @@
     v-model="editorVisibleModel"
     :title="dialogTitle"
     width="600px"
-    align-center
-    class="product-dialog"
+    class="product-dialog product-dialog--storage"
   >
-    <el-form ref="productFormRef" :model="productForm" label-width="100px" :rules="storageRules" class="product-form">
+    <el-form ref="productFormRef" :model="productForm" label-width="96px" :rules="storageRules" class="product-form">
       <div v-if="!isEdit" class="mb-6">
         <div class="section-header">
           <span class="material-icons text-primary text-[18px]">hub</span>
           <span>{{ t('selectCluster') }}</span>
         </div>
-        <el-form-item :label="t('cluster')" prop="clusterId" class="mt-4">
-          <el-select v-model="productForm.clusterId" :placeholder="t('selectCluster')" class="w-full" @change="emit('storage-cluster-change', $event)">
-            <el-option v-for="cluster in clusters" :key="cluster.id" :label="cluster.name" :value="cluster.id" />
-          </el-select>
-        </el-form-item>
+        <div class="form-section form-section--compact">
+          <el-form-item prop="clusterId" class="compact-form-item !mb-0">
+            <div class="compact-field">
+              <div class="compact-field-label">
+                <span class="compact-field-required">*</span>
+                <span>{{ t('cluster') }}</span>
+              </div>
+              <el-select id="storage-cluster-id" v-model="productForm.clusterId" :placeholder="t('selectCluster')" class="w-full" @change="emit('storage-cluster-change', $event)">
+                <el-option v-for="cluster in clusters" :key="cluster.id" :label="cluster.name" :value="cluster.id" />
+              </el-select>
+            </div>
+          </el-form-item>
+        </div>
       </div>
 
       <template v-if="isEdit || productForm.clusterId">
@@ -248,26 +264,26 @@
         </div>
         <div class="form-section">
           <el-row :gutter="20">
-            <el-col :span="12">
-              <el-form-item :label="t('productName')" prop="name">
-                <el-input v-model="productForm.name" class="w-full" />
+            <el-col :xs="24" :sm="12">
+              <el-form-item :label="t('productName')" prop="name" for="storage-name">
+                <el-input id="storage-name" v-model="productForm.name" class="w-full" />
               </el-form-item>
             </el-col>
-            <el-col :span="12">
-              <el-form-item :label="t('area')" prop="area">
-                <el-input v-model="productForm.area" class="w-full" />
+            <el-col :xs="24" :sm="12">
+              <el-form-item :label="t('area')" prop="area" for="storage-area">
+                <el-input id="storage-area" v-model="productForm.area" class="w-full" />
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20">
-            <el-col :span="12">
-              <el-form-item :label="t('storageClass')" prop="storageClass">
-                <el-input v-model="productForm.storageClass" class="w-full" />
+            <el-col :xs="24" :sm="12">
+              <el-form-item :label="t('storageClass')" prop="storageClass" for="storage-class">
+                <el-input id="storage-class" v-model="productForm.storageClass" class="w-full" />
               </el-form-item>
             </el-col>
-            <el-col :span="12">
-              <el-form-item :label="t('storagePriceGb')" prop="storagePriceGb">
-                <el-input-number v-model="productForm.storagePriceGb" :precision="4" :min="0" class="w-full" />
+            <el-col :xs="24" :sm="12">
+              <el-form-item :label="t('storagePriceGb')" prop="storagePriceGb" for="storage-price-gb">
+                <el-input-number id="storage-price-gb" v-model="productForm.storagePriceGb" :precision="4" :min="0" class="w-full" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -278,11 +294,11 @@
           <span>{{ t('otherSettings') }}</span>
         </div>
         <div class="form-section">
-          <el-form-item :label="t('status')">
-            <el-switch v-model="productForm.status" :active-value="1" :inactive-value="0" :active-text="t('onShelf')" :inactive-text="t('offShelf')" />
+          <el-form-item :label="t('status')" for="storage-status">
+            <el-switch id="storage-status" v-model="productForm.status" :active-value="1" :inactive-value="0" :active-text="t('onShelf')" :inactive-text="t('offShelf')" />
           </el-form-item>
-          <el-form-item :label="t('paramDesc')" class="align-start">
-            <el-input v-model="productForm.description" type="textarea" :rows="3" :placeholder="t('inputProductDesc')" />
+          <el-form-item :label="t('paramDesc')" for="storage-description" class="align-start">
+            <el-input id="storage-description" v-model="productForm.description" type="textarea" :rows="3" :placeholder="t('inputProductDesc')" />
           </el-form-item>
         </div>
       </template>
@@ -303,36 +319,35 @@
     v-model="priceVisibleModel"
     :title="t('adjustPrice')"
     width="520px"
-    align-center
-    class="product-dialog"
+    class="product-dialog product-dialog--price"
   >
     <div class="product-form">
       <div class="section-header">
         <span class="material-icons text-amber-500 text-[18px]">payments</span>
         <span>{{ t('adjustPrice') }}</span>
       </div>
-      <el-form :model="priceForm" label-width="100px" class="form-section">
+      <el-form :model="priceForm" label-width="96px" class="form-section">
         <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item :label="t('priceHourly')">
-              <el-input-number v-model="priceForm.priceHourly" :precision="2" :min="0" class="w-full" />
+          <el-col :xs="24" :sm="12">
+            <el-form-item :label="t('priceHourly')" for="adjust-price-hourly">
+              <el-input-number id="adjust-price-hourly" v-model="priceForm.priceHourly" :precision="2" :min="0" class="w-full" />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item :label="t('priceDaily')">
-              <el-input-number v-model="priceForm.priceDaily" :precision="2" :min="0" class="w-full" />
+          <el-col :xs="24" :sm="12">
+            <el-form-item :label="t('priceDaily')" for="adjust-price-daily">
+              <el-input-number id="adjust-price-daily" v-model="priceForm.priceDaily" :precision="2" :min="0" class="w-full" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item :label="t('priceWeekly')">
-              <el-input-number v-model="priceForm.priceWeekly" :precision="2" :min="0" class="w-full" />
+          <el-col :xs="24" :sm="12">
+            <el-form-item :label="t('priceWeekly')" for="adjust-price-weekly">
+              <el-input-number id="adjust-price-weekly" v-model="priceForm.priceWeekly" :precision="2" :min="0" class="w-full" />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item :label="t('priceMonthly')">
-              <el-input-number v-model="priceForm.priceMonthly" :precision="2" :min="0" class="w-full" />
+          <el-col :xs="24" :sm="12">
+            <el-form-item :label="t('priceMonthly')" for="adjust-price-monthly">
+              <el-input-number id="adjust-price-monthly" v-model="priceForm.priceMonthly" :precision="2" :min="0" class="w-full" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -481,59 +496,77 @@ const submitProduct = async () => {
 }
 </script>
 
-<style scoped>
-:deep(.product-dialog .el-dialog) {
+<style>
+.product-dialog .el-dialog {
   border-radius: 16px;
   overflow: hidden;
   padding: 0;
+  margin: 24px auto !important;
+  max-width: calc(100vw - 64px);
 }
 
-:deep(.product-dialog .el-dialog__header) {
+.product-dialog--compute .el-dialog {
+  width: min(840px, calc(100vw - 64px)) !important;
+}
+
+.product-dialog--storage .el-dialog {
+  width: min(600px, calc(100vw - 64px)) !important;
+}
+
+.product-dialog--price .el-dialog {
+  width: min(520px, calc(100vw - 64px)) !important;
+}
+
+.product-dialog .el-dialog__header {
   margin: 0;
   padding: 20px 24px;
   border-bottom: 1px solid rgb(241 245 249);
   background: white;
 }
 
-:deep(.dark .product-dialog .el-dialog__header) {
+.dark .product-dialog .el-dialog__header {
   border-color: rgb(39 39 42);
   background: rgb(24 24 27);
 }
 
-:deep(.product-dialog .el-dialog__title) {
+.product-dialog .el-dialog__title {
   font-size: 16px;
   font-weight: 700;
   color: rgb(15 23 42);
 }
 
-:deep(.dark .product-dialog .el-dialog__title) {
+.dark .product-dialog .el-dialog__title {
   color: rgb(226 232 240);
 }
 
-:deep(.product-dialog .el-dialog__body) {
-  padding: 24px;
+.product-dialog .el-dialog__body {
+  padding: 24px 24px 14px;
   background: rgb(248 250 252);
   max-height: 70vh;
   overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
-:deep(.dark .product-dialog .el-dialog__body) {
+.dark .product-dialog .el-dialog__body {
   background: rgb(9 9 11);
 }
 
-:deep(.product-dialog .el-dialog__footer) {
-  padding: 16px 24px;
+.product-dialog .el-dialog__footer {
+  padding: 8px 24px 18px;
   margin: 0;
   border-top: 1px solid rgb(241 245 249);
   background: white;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
-:deep(.dark .product-dialog .el-dialog__footer) {
+.dark .product-dialog .el-dialog__footer {
   border-color: rgb(39 39 42);
   background: rgb(24 24 27);
 }
 
-.section-header {
+.product-dialog .section-header {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -545,48 +578,110 @@ const submitProduct = async () => {
   color: rgb(51 65 85);
 }
 
-:deep(.dark) .section-header {
+.dark .product-dialog .section-header {
   border-color: rgb(39 39 42);
   color: rgb(203 213 225);
 }
 
-.form-section {
-  margin-bottom: 20px;
+.product-dialog .form-section {
+  margin: 0 auto 14px;
   border: 1px solid rgb(241 245 249);
-  border-radius: 12px;
+  border-radius: 14px;
   background: white;
-  padding: 20px 16px 4px;
+  padding: 18px 18px 6px;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
 }
 
-:deep(.dark) .form-section {
+.product-dialog .form-section--compact {
+  padding: 18px 20px 16px;
+}
+
+.dark .product-dialog .form-section {
   border-color: rgb(39 39 42);
   background: rgb(24 24 27);
 }
 
-.product-form :deep(.el-form-item) {
-  margin-bottom: 18px;
+.product-dialog .product-form > .mb-6 {
+  margin-bottom: 14px;
+}
+
+.product-dialog .compact-form-item .el-form-item__content {
+  display: block;
+  width: 100% !important;
+  margin-left: 0 !important;
+}
+
+.product-dialog .compact-field {
+  width: 100%;
+}
+
+.product-dialog .compact-field-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 10px;
+  color: rgb(51 65 85);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.product-dialog .compact-field-required {
+  color: #f87171;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.product-dialog .product-form .el-form-item {
+  margin-bottom: 14px;
   align-items: center;
 }
 
-.product-form :deep(.el-form-item__label) {
+.product-dialog .product-form .el-row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.product-dialog .product-form .el-row > .el-col {
+  padding-left: 6px !important;
+  padding-right: 6px !important;
+}
+
+.product-dialog .product-form .el-form-item__content {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.product-dialog .product-form .el-form-item__label {
   font-size: 13px;
   font-weight: 600;
   color: rgb(71 85 105);
+  white-space: nowrap;
+  line-height: 40px;
+  padding-right: 10px;
 }
 
-:deep(.dark) .product-form :deep(.el-form-item__label) {
+.dark .product-dialog .product-form .el-form-item__label {
   color: rgb(148 163 184);
 }
 
-.product-form :deep(.el-form-item.align-start) {
+.dark .product-dialog .compact-field-label {
+  color: rgb(203 213 225);
+}
+
+.product-dialog .product-form .el-form-item.align-start {
   align-items: flex-start;
 }
 
-.product-form :deep(.el-form-item.align-start .el-form-item__label) {
+.product-dialog .product-form .el-form-item.align-start .el-form-item__label {
   padding-top: 6px;
 }
 
-.node-card {
+.product-dialog .node-card {
   padding: 14px;
   border: 1.5px solid rgb(226 232 240);
   border-radius: 12px;
@@ -595,33 +690,41 @@ const submitProduct = async () => {
   background: white;
 }
 
-:deep(.dark) .node-card {
+.dark .product-dialog .node-card {
   border-color: rgb(39 39 42);
   background: rgb(24 24 27);
 }
 
-.node-card:hover {
+.product-dialog .node-card:hover {
   border-color: var(--el-color-primary);
   box-shadow: 0 2px 12px rgba(59, 130, 246, 0.08);
 }
 
-.node-card.is-selected {
+.product-dialog .node-card.is-selected {
   border-color: var(--el-color-primary);
   background: rgba(59, 130, 246, 0.04);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-:deep(.dark) .node-card.is-selected {
+.dark .product-dialog .node-card.is-selected {
   background: rgba(59, 130, 246, 0.08);
 }
 
-.dialog-footer {
+.product-dialog .dialog-footer {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
 }
 
-.btn-cancel {
+.product-dialog .product-form {
+  margin-bottom: 0;
+}
+
+.product-dialog .product-form > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.product-dialog .btn-cancel {
   padding: 8px 20px;
   border-radius: 10px;
   border: 1px solid rgb(226 232 240);
@@ -633,21 +736,21 @@ const submitProduct = async () => {
   transition: all 0.15s;
 }
 
-:deep(.dark) .btn-cancel {
+.dark .product-dialog .btn-cancel {
   border-color: rgb(39 39 42);
   background: rgb(24 24 27);
   color: rgb(148 163 184);
 }
 
-.btn-cancel:hover {
+.product-dialog .btn-cancel:hover {
   background: rgb(248 250 252);
 }
 
-:deep(.dark) .btn-cancel:hover {
+.dark .product-dialog .btn-cancel:hover {
   background: rgb(39 39 42);
 }
 
-.btn-primary {
+.product-dialog .btn-primary {
   display: flex;
   align-items: center;
   padding: 8px 24px;
@@ -662,22 +765,72 @@ const submitProduct = async () => {
   transition: all 0.15s;
 }
 
-.btn-primary:hover:not(:disabled) {
+.product-dialog .btn-primary:hover:not(:disabled) {
   filter: brightness(1.1);
   box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
 }
 
-.btn-primary:disabled {
+.product-dialog .btn-primary:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.resource-type-group :deep(.el-radio-button__inner) {
+.product-dialog .resource-type-group .el-radio-button__inner {
   font-size: 13px;
   font-weight: 600;
 }
 
-.product-form :deep(.el-input-number) {
+.product-dialog .product-form .el-input,
+.product-dialog .product-form .el-input-number,
+.product-dialog .product-form .el-select,
+.product-dialog .product-form .el-textarea {
   width: 100% !important;
+  max-width: 100% !important;
+}
+
+.product-dialog .el-dialog__header,
+.product-dialog .el-dialog__body,
+.product-dialog .el-dialog__footer,
+.product-dialog .product-form,
+.product-dialog .product-form .el-form,
+.product-dialog .product-form .el-form-item,
+.product-dialog .product-form .el-form-item__label,
+.product-dialog .product-form .el-form-item__content,
+.product-dialog .product-form .el-row,
+.product-dialog .product-form .el-col {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.product-dialog .product-form .el-input-number {
+  --el-input-number-width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .product-dialog .el-row > .el-col[class*='el-col-sm-12'] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-dialog .el-dialog__body {
+    padding: 18px 16px 10px;
+  }
+
+  .product-dialog .form-section {
+    max-width: 100%;
+    padding: 14px 12px 4px;
+  }
+
+  .product-dialog .form-section--compact {
+    padding: 12px 12px 12px;
+  }
+
+  .product-dialog .product-form .el-row > .el-col {
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
 }
 </style>

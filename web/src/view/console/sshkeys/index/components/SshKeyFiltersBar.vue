@@ -1,5 +1,6 @@
 <template>
-  <div class="list-filter-bar rounded-[22px] border border-border-light bg-surface-light p-4 shadow-[0_24px_60px_-50px_rgba(15,23,42,0.52)] dark:border-border-dark dark:bg-surface-dark">
+  <div class="console-filter-card px-5 py-4">
+    <div class="list-filter-bar">
     <div class="list-filter-field min-w-[240px] max-w-sm">
       <input
         :value="searchName"
@@ -17,6 +18,7 @@
     >
       {{ t('search') }}
     </button>
+    </div>
   </div>
 </template>
 

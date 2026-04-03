@@ -1,6 +1,6 @@
 <template>
   <div class="console-page-container px-6 pt-5 pb-3">
-    <div class="rounded-xl border border-border-light bg-surface-light px-5 py-4 dark:border-border-dark dark:bg-surface-dark md:px-6">
+    <div class="console-detail-card rounded-xl px-5 py-4 md:px-6">
       <div class="flex flex-wrap items-center justify-between gap-4">
         <div class="flex min-w-0 items-center gap-3 md:gap-4">
           <button class="inline-flex shrink-0 items-center gap-1 text-sm text-slate-500 transition-colors hover:text-primary" @click="$emit('back')">
@@ -12,7 +12,7 @@
             {{ getStatusLabel(status) }}
           </span>
         </div>
-        <div class="flex flex-wrap items-center justify-end gap-2.5">
+        <div class="page-header-actions">
           <slot name="actions" />
         </div>
       </div>

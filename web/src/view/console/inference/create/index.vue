@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-background-light dark:bg-background-dark pb-32">
+  <div class="console-create-page pb-32">
     <PageHeader title-key="inference.createTitle" @back="handleCancel" />
 
     <div class="console-page-container px-6 py-6 space-y-6">
@@ -24,6 +24,7 @@
         :auth-types="authTypes"
         :change-image-tab="changeImageTab"
         :deploy-types="deployTypes"
+        :field-errors="fieldErrors"
         :form="form"
         :framework-required="frameworkRequired"
         :frameworks="frameworks"
@@ -34,8 +35,9 @@
         :remove-env="removeEnv"
         :remove-mount="removeMount"
         @update:env="form.envs[$event.index][$event.key] = $event.value"
-        @update:field="form[$event.key] = $event.value"
+        @update:field="updateField($event)"
         @update:mount="form.mounts[$event.index][$event.key] = $event.value"
+        @validate:display-name="validateDisplayNameField"
       />
     </div>
 
@@ -79,6 +81,7 @@ const {
   changeFilter,
   changeImageTab,
   deployTypes,
+  fieldErrors,
   filters,
   form,
   formatPrice,
@@ -97,7 +100,9 @@ const {
   pvcs,
   removeEnv,
   removeMount,
-  totalPrice
+  totalPrice,
+  updateField,
+  validateDisplayNameField
 } = useInferenceCreate({ t, router })
 </script>
 

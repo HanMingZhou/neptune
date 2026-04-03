@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden">
+  <div class="console-detail-card rounded-xl overflow-hidden">
     <div class="px-6 py-4 border-b border-border-light dark:border-border-dark flex items-center justify-between">
       <h3 class="font-bold">{{ t('instanceList') }}</h3>
       <button

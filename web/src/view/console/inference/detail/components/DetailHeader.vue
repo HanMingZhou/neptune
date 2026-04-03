@@ -10,7 +10,7 @@
       <button
         v-if="isStopped"
         :disabled="actionLoading"
-        class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg text-sm font-bold transition-colors disabled:opacity-50"
+        class="detail-header-action detail-header-action--primary"
         @click="$emit('start')"
       >
         {{ t('start') }}
@@ -18,7 +18,7 @@
       <button
         v-if="isRunningOrPending"
         :disabled="actionLoading"
-        class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-sm font-bold transition-colors disabled:opacity-50"
+        class="detail-header-action detail-header-action--warning"
         @click="$emit('stop')"
       >
         {{ t('stop') }}
@@ -26,7 +26,7 @@
       <button
         v-if="isTerminalState"
         :disabled="actionLoading"
-        class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-bold transition-colors disabled:opacity-50"
+        class="detail-header-action detail-header-action--danger"
         @click="$emit('delete')"
       >
         {{ t('delete') }}

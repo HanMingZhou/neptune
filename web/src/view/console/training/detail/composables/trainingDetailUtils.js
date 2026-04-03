@@ -58,7 +58,7 @@ export const resolveTrainingLogTaskName = (job = {}, pod = {}) => {
 export const getTrainingFrameworkLabel = (type) => {
   const map = {
     PYTORCH_DDP: 'PyTorch DDP',
-    STANDALONE: 'Standalone',
+    STANDALONE: 'StandAlone',
     MPI: 'MPI'
   }
 

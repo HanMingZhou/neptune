@@ -1,5 +1,11 @@
 <template>
-  <div>
+  <div class="console-page-container space-y-6">
+    <PageIntro
+      :breadcrumbs="[t('person')]"
+      :description="t('profileCenterDesc')"
+      :title="t('person')"
+    />
+
     <ProfileOverviewPanel
       :edit-flag="editFlag"
       :nick-name="nickName"
@@ -23,6 +29,7 @@
 
 <script setup>
 import { inject } from 'vue'
+import PageIntro from '@/components/listPage/PageIntro.vue'
 import ProfileDialogsHost from './components/ProfileDialogsHost.vue'
 import ProfileOverviewPanel from './components/ProfileOverviewPanel.vue'
 import { useAccountProfile } from './composables/useAccountProfile'

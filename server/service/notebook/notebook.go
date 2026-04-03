@@ -30,7 +30,6 @@ import (
 	"gin-vue-admin/service/pvc"
 	"gin-vue-admin/service/secret"
 	"gin-vue-admin/service/tensorboard"
-	terminalService "gin-vue-admin/service/terminal"
 	helper "gin-vue-admin/utils/k8s"
 	"gin-vue-admin/utils/password"
 	"gin-vue-admin/utils/ssh"
@@ -1478,6 +1477,8 @@ func refreshNotebookStatusFromPod(
 		allReady = false
 		if containerStatus.State.Waiting != nil {
 			item.Status = fmt.Sprintf("Waiting: %s", containerStatus.State.Waiting.Reason)
+		} else {
+			item.Status = consts.NotebookStatusPending
 		}
 		break
 	}
@@ -1657,21 +1658,34 @@ func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string) *nbv1.Notebook 
 
 // sshSetupScript 配置 sshd（密码认证、root 登录、密码设置、公钥安装）
 const sshSetupScript = `
-mkdir -p /run/sshd /root/.ssh 2>/dev/null
-sed -i 's/^#*\s*PasswordAuthentication\s*.*/PasswordAuthentication yes/;s/^#*\s*PermitRootLogin\s*.*/PermitRootLogin yes/' /etc/ssh/sshd_config 2>/dev/null
-grep -q "^PasswordAuthentication" /etc/ssh/sshd_config 2>/dev/null || echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
-grep -q "^PermitRootLogin" /etc/ssh/sshd_config 2>/dev/null || echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
-[ -f /etc/ssh-password/password ] && echo "root:$(cat /etc/ssh-password/password)" | chpasswd 2>/dev/null
-if [ -d /tmp/ssh-keys ]; then cat /tmp/ssh-keys/* > /root/.ssh/authorized_keys 2>/dev/null && chmod 700 /root/.ssh && chmod 600 /root/.ssh/authorized_keys; fi
+mkdir -p /run/sshd /root/.ssh >/dev/null 2>&1 || true
+if [ -f /etc/ssh/sshd_config ]; then
+  sed -i 's/^#*\s*PasswordAuthentication\s*.*/PasswordAuthentication yes/;s/^#*\s*PermitRootLogin\s*.*/PermitRootLogin yes/' /etc/ssh/sshd_config >/dev/null 2>&1 || true
+  grep -q "^PasswordAuthentication" /etc/ssh/sshd_config >/dev/null 2>&1 || echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config || true
+  grep -q "^PermitRootLogin" /etc/ssh/sshd_config >/dev/null 2>&1 || echo "PermitRootLogin yes" >> /etc/ssh/sshd_config || true
+fi
+if [ -f /etc/ssh-password/password ] && command -v chpasswd >/dev/null 2>&1; then
+  echo "root:$(cat /etc/ssh-password/password)" | chpasswd >/dev/null 2>&1 || true
+fi
+if [ -d /tmp/ssh-keys ]; then
+  cat /tmp/ssh-keys/* > /root/.ssh/authorized_keys 2>/dev/null || true
+  chmod 700 /root/.ssh >/dev/null 2>&1 || true
+  chmod 600 /root/.ssh/authorized_keys >/dev/null 2>&1 || true
+fi
 `
 
 // sshInstallScript 当镜像没有 sshd 时，后台安装 openssh-server 并启动
 const sshInstallScript = `
 export DEBIAN_FRONTEND=noninteractive
-apt-get update -qq >/dev/null 2>&1 && apt-get install -y -qq openssh-server >/dev/null 2>&1
-mkdir -p /var/run/sshd
-[ ! -f /etc/ssh/ssh_host_rsa_key ] && ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' >/dev/null 2>&1
-[ ! -f /etc/ssh/ssh_host_ed25519_key ] && ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N '' >/dev/null 2>&1
+if command -v apt-get >/dev/null 2>&1; then
+  apt-get update -qq >/dev/null 2>&1 || true
+  apt-get install -y -qq openssh-server >/dev/null 2>&1 || true
+fi
+mkdir -p /var/run/sshd >/dev/null 2>&1 || true
+if command -v ssh-keygen >/dev/null 2>&1; then
+  [ ! -f /etc/ssh/ssh_host_rsa_key ] && ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' >/dev/null 2>&1 || true
+  [ ! -f /etc/ssh/ssh_host_ed25519_key ] && ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N '' >/dev/null 2>&1 || true
+fi
 `
 
 // buildLifecycle 构建容器 PostStart 钩子，确保 sshd 可用
@@ -1682,14 +1696,45 @@ func buildLifecycle(nbRef *nbModel.Notebook) *corev1.Lifecycle {
 	}
 
 	script := fmt.Sprintf(`
-SSH_BIN=$(command -v sshd)
-if [ -n "$SSH_BIN" ]; then
-  %s
-  pkill -HUP -f sshd 2>/dev/null || s6-svc -h /var/run/s6/services/sshd 2>/dev/null || s6-svc -h /var/run/s6/services/ssh 2>/dev/null || true
-  ps aux | grep -v grep | grep -q sshd || ($SSH_BIN -D >/dev/null 2>&1 &)
-else
-  (%s %s nohup /usr/sbin/sshd -D >/dev/null 2>&1 &) &
-fi
+(
+  set +e
+  SSH_BIN="$(command -v sshd 2>/dev/null || true)"
+  HAS_PGREP=0
+  if command -v pgrep >/dev/null 2>&1; then
+    HAS_PGREP=1
+  fi
+  HAS_S6=0
+  if [ -d /run/s6 ] || [ -d /var/run/s6 ] || [ -d /etc/cont-init.d ] || [ -x /init ]; then
+    HAS_S6=1
+  fi
+
+  if [ -n "$SSH_BIN" ]; then
+    %s
+
+    # 已存在 sshd 时不重复拉起；非 s6 镜像可做轻量 HUP
+    if [ "$HAS_PGREP" = "1" ] && pgrep -x sshd >/dev/null 2>&1; then
+      if [ "$HAS_S6" != "1" ] && command -v pkill >/dev/null 2>&1; then
+        pkill -HUP -x sshd >/dev/null 2>&1 || true
+      fi
+    elif [ "$HAS_S6" = "1" ]; then
+      # s6 镜像由自身服务编排接管，不在 PostStart 里启动额外 sshd
+      :
+    else
+      "$SSH_BIN" -D >/dev/null 2>&1 &
+    fi
+  elif [ "$HAS_S6" = "1" ]; then
+    # s6 镜像且无 sshd 二进制：跳过安装/启动，避免与镜像初始化冲突
+    :
+  else
+    (
+      %s
+      %s
+      if [ -x /usr/sbin/sshd ]; then
+        nohup /usr/sbin/sshd -D >/dev/null 2>&1 &
+      fi
+    ) >/tmp/neptune-ssh-init.log 2>&1 &
+  fi
+) >/tmp/neptune-poststart.log 2>&1 || true
 exit 0`, sshSetupScript, sshInstallScript, sshSetupScript)
 
 	return &corev1.Lifecycle{
@@ -1750,23 +1795,73 @@ func (nb *NotebookService) GetNotebookPods(ctx context.Context, req *request.Get
 	if err := global.GVA_DB.Where("id = ?", req.ID).First(&dbNb).Error; err != nil {
 		return nil, errors.Wrap(err, "Notebook不存在")
 	}
-	labelSelector := fmt.Sprintf("app=%s", dbNb.InstanceName)
-	pods, err := terminalService.TerminalServiceApp.GetPodList(ctx, dbNb.ClusterID, dbNb.Namespace, labelSelector)
-	if err != nil {
-		return nil, err
+
+	cluster := global.GVA_K8S_CLUSTER_MANAGER.GetCluster(dbNb.ClusterID)
+	if cluster == nil {
+		return nil, errors.New("集群不存在")
 	}
-	result := make([]response.PodInfoResp, 0, len(pods))
-	for _, p := range pods {
+
+	labelSelector := fmt.Sprintf("app=%s", dbNb.InstanceName)
+	podList, err := cluster.ClientSet.CoreV1().Pods(dbNb.Namespace).List(ctx, metav1.ListOptions{
+		LabelSelector: labelSelector,
+	})
+	if err != nil {
+		return nil, errors.Wrap(err, "获取 Pod 列表失败")
+	}
+
+	result := make([]response.PodInfoResp, 0, len(podList.Items))
+	for _, pod := range podList.Items {
+		containers := make([]string, 0, len(pod.Spec.Containers))
+		for _, container := range pod.Spec.Containers {
+			containers = append(containers, container.Name)
+		}
+
 		result = append(result, response.PodInfoResp{
-			Name:       p.Name,
-			Namespace:  p.Namespace,
-			Status:     p.Status,
-			HostIP:     p.HostIP,
-			PodIP:      p.PodIP,
-			Containers: p.Containers,
+			Name:       pod.Name,
+			Namespace:  pod.Namespace,
+			Status:     getNotebookPodDisplayStatus(&pod),
+			HostIP:     pod.Status.HostIP,
+			PodIP:      pod.Status.PodIP,
+			Containers: containers,
 		})
 	}
 	return result, nil
+}
+
+func getNotebookPodDisplayStatus(pod *corev1.Pod) string {
+	if pod == nil {
+		return ""
+	}
+
+	if pod.Status.Phase != corev1.PodRunning {
+		return string(pod.Status.Phase)
+	}
+
+	if isNotebookPodReady(pod) {
+		return string(corev1.PodRunning)
+	}
+
+	return string(corev1.PodPending)
+}
+
+func isNotebookPodReady(pod *corev1.Pod) bool {
+	for _, condition := range pod.Status.Conditions {
+		if condition.Type == corev1.PodReady {
+			return condition.Status == corev1.ConditionTrue
+		}
+	}
+
+	if len(pod.Status.ContainerStatuses) == 0 {
+		return false
+	}
+
+	for _, containerStatus := range pod.Status.ContainerStatuses {
+		if !containerStatus.Ready {
+			return false
+		}
+	}
+
+	return true
 }
 
 // StartNotebook 启动Notebook

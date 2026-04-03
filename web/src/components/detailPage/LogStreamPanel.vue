@@ -1,6 +1,6 @@
 <template>
   <div class="h-[calc(100vh-220px)] flex flex-col">
-    <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full">
+    <div class="console-detail-card rounded-xl overflow-hidden flex flex-col h-full">
       <div class="px-4 py-3 border-b border-border-light dark:border-border-dark" :class="toolbarClass">
         <slot name="controls-prefix" />
         <button

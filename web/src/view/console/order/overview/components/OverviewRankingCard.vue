@@ -13,7 +13,7 @@
       </div>
     </div>
     <button
-      class="mt-8 w-full rounded-xl border border-slate-200 py-3 text-xs font-bold text-slate-600 transition-colors hover:bg-slate-50 dark:border-border-dark dark:text-slate-400 dark:hover:bg-zinc-800"
+      class="mt-8 w-full list-toolbar-button list-toolbar-button--secondary"
       @click="$emit('view-usage')"
     >
       {{ t('viewFullUsageDetails') }}

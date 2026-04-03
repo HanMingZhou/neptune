@@ -8,9 +8,8 @@
       <template #actions>
         <RefreshButton :loading="loading" @refresh="getTableData" />
         <button
-          class="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-medium transition-colors"
+          class="list-toolbar-button list-toolbar-button--danger"
           :disabled="!hasSelection"
-          :class="{ 'opacity-50 cursor-not-allowed': !hasSelection }"
           @click="deleteSelectedRecords"
         >
           <span class="material-icons text-[18px]">delete</span>

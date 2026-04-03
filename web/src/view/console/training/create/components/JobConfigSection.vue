@@ -14,9 +14,14 @@
             :value="form.name"
             :placeholder="t('enterJobName')"
             class="create-form-input"
+            :aria-invalid="fieldErrors.name ? 'true' : 'false'"
+            maxlength="63"
             type="text"
             @input="$emit('update:field', { key: 'name', value: $event.target.value })"
+            @blur="$emit('validate:name')"
           />
+          <p class="create-form-help">{{ t('resourceNameHint', { max: 63 }) }}</p>
+          <p v-if="fieldErrors.name" class="create-form-error">{{ fieldErrors.name }}</p>
         </div>
         <div>
           <label class="flex items-center gap-2 cursor-pointer">
@@ -33,9 +38,12 @@
               :value="form.tensorboardLogPath"
               :placeholder="t('enterLogPath')"
               class="create-form-input"
+              :aria-invalid="fieldErrors.tensorboardLogPath ? 'true' : 'false'"
               type="text"
               @input="$emit('update:field', { key: 'tensorboardLogPath', value: $event.target.value })"
+              @blur="$emit('validate:tensorboard-log-path')"
             />
+            <p v-if="fieldErrors.tensorboardLogPath" class="create-form-error">{{ fieldErrors.tensorboardLogPath }}</p>
           </div>
         </div>
       </div>
@@ -216,6 +224,10 @@ defineProps({
     type: Object,
     required: true
   },
+  fieldErrors: {
+    type: Object,
+    default: () => ({})
+  },
   frameworkTypes: {
     type: Array,
     default: () => []
@@ -251,7 +263,9 @@ defineEmits([
   'update:field',
   'update:mount',
   'update:schedule-strategy',
-  'update:workerCount'
+  'update:workerCount',
+  'validate:name',
+  'validate:tensorboard-log-path'
 ])
 
 const t = inject('t', (key) => key)

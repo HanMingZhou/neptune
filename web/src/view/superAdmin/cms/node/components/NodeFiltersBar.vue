@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden shadow-sm">
-    <div class="list-filter-bar border-b border-border-light p-4 dark:border-border-dark">
+  <div class="console-filter-card px-5 py-4">
+    <div class="list-filter-bar">
       <el-select
         v-model="clusterModel"
         :placeholder="t('cluster')"

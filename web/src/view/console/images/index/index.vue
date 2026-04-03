@@ -8,7 +8,7 @@
       <template #actions>
         <RefreshButton :loading="loading" @refresh="handleRefresh" />
         <button
-          class="bg-primary hover:bg-primary-hover text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 flex items-center gap-2 transition-all"
+          class="list-toolbar-button list-toolbar-button--primary"
           @click="openCreateDialog"
         >
           <span class="material-icons text-[20px]">add</span>
@@ -17,24 +17,29 @@
       </template>
     </PageIntro>
 
-    <ImageFiltersCard
-      v-model:filter-keyword="filterKeyword"
-      v-model:filter-type="filterType"
-      v-model:filter-usage-type="filterUsageType"
-      @reset="handleReset"
-      @search="handleSearch"
-    />
+    <ManagementListShell>
+      <template #filters>
+        <ImageFiltersCard
+          v-model:filter-keyword="filterKeyword"
+          v-model:filter-type="filterType"
+          v-model:filter-usage-type="filterUsageType"
+          @reset="handleReset"
+          @search="handleSearch"
+        />
+      </template>
 
-    <ImageTableCard
-      v-model:current-page="currentPage"
-      :items="images"
-      :loading="loading"
-      :page-size="pageSize"
-      :total="total"
-      @delete="handleDelete"
-      @edit="openEditDialog"
-      @page-change="handlePageChange"
-    />
+      <ImageTableCard
+        v-model:current-page="currentPage"
+        v-model:page-size="pageSize"
+        :items="images"
+        :loading="loading"
+        :total="total"
+        @delete="handleDelete"
+        @edit="openEditDialog"
+        @page-change="handlePageChange"
+        @size-change="handleSizeChange"
+      />
+    </ManagementListShell>
 
     <ImageDialog
       v-model="showDialog"
@@ -50,6 +55,7 @@
 
 <script setup>
 import { inject, onMounted } from 'vue'
+import ManagementListShell from '@/components/listPage/ManagementListShell.vue'
 import RefreshButton from '@/components/RefreshButton/index.vue'
 import PageIntro from '@/components/listPage/PageIntro.vue'
 import ImageDialog from './components/ImageDialog.vue'

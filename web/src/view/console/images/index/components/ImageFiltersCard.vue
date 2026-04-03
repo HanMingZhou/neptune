@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden shadow-sm">
-    <div class="p-4 border-b border-border-light dark:border-border-dark flex flex-wrap gap-4 items-center">
+  <div class="console-filter-card px-5 py-4">
+    <div class="list-filter-bar">
       <div class="relative flex-1 max-w-[160px]">
         <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">category</span>
         <el-select v-model="filterTypeModel" :placeholder="t('imageType')" clearable class="!w-full list-filter-select gva-custom-select">
@@ -31,7 +31,7 @@
         />
       </div>
 
-      <div class="flex gap-2">
+      <div class="list-toolbar-actions">
         <button
           class="list-toolbar-button list-toolbar-button--primary"
           @click="$emit('search')"

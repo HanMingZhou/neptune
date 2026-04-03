@@ -10,10 +10,15 @@ import {
   NOTEBOOK_IMAGE_TABS,
   NOTEBOOK_PAY_TYPES
 } from '../constants'
-import { validateTensorBoardPath } from '../validators'
+import {
+  getSubmitErrorMessage,
+  isResourceNameErrorMessage,
+  validateK8sResourceName,
+  validateTensorBoardPath
+} from '@/utils/resourceValidators'
 
 export const useNotebookCreate = ({ t, router }) => {
-  const translate = (key) => (typeof t === 'function' ? t(key) : key)
+  const translate = (key, params) => (typeof t === 'function' ? t(key, params) : key)
 
   const products = ref([])
   const selectedProduct = ref(null)
@@ -38,6 +43,10 @@ export const useNotebookCreate = ({ t, router }) => {
   const availableVolumes = ref([])
   const selectedVolumeId = ref(null)
   const volumeMountPath = ref(DEFAULT_VOLUME_MOUNT_PATH)
+  const fieldErrors = ref({
+    instanceName: '',
+    tensorboardLogPath: ''
+  })
 
   const payTypes = NOTEBOOK_PAY_TYPES
 
@@ -107,6 +116,66 @@ export const useNotebookCreate = ({ t, router }) => {
   const canCreate = computed(() =>
     Boolean(selectedProduct.value && selectedImage.value && instanceName.value.trim())
   )
+
+  const updateFieldError = (field, message = '') => {
+    fieldErrors.value = {
+      ...fieldErrors.value,
+      [field]: message
+    }
+  }
+
+  const updateInstanceName = (value) => {
+    instanceName.value = value
+    if (fieldErrors.value.instanceName) {
+      updateFieldError('instanceName')
+    }
+  }
+
+  const updateTensorboardLogPath = (value) => {
+    tensorboardLogPath.value = value
+    if (fieldErrors.value.tensorboardLogPath) {
+      updateFieldError('tensorboardLogPath')
+    }
+  }
+
+  const validateInstanceNameField = () => {
+    const error = validateK8sResourceName(instanceName.value, {
+      t: translate,
+      fieldKey: 'instanceName',
+      example: 'my-notebook'
+    })
+
+    updateFieldError('instanceName', error || '')
+    return !error
+  }
+
+  const validateTensorboardLogPathField = () => {
+    const error = enableTensorboard.value
+      ? validateTensorBoardPath(tensorboardLogPath.value, translate)
+      : null
+
+    updateFieldError('tensorboardLogPath', error || '')
+    return !error
+  }
+
+  const validateCreateForm = () => {
+    const isInstanceNameValid = validateInstanceNameField()
+    const isTensorboardPathValid = validateTensorboardLogPathField()
+
+    if (!isInstanceNameValid) {
+      return fieldErrors.value.instanceName
+    }
+
+    if (!selectedProduct.value || !selectedImage.value) {
+      return translate('fillAllFields')
+    }
+
+    if (!isTensorboardPathValid) {
+      return fieldErrors.value.tensorboardLogPath
+    }
+
+    return ''
+  }
 
   const syncSelectedProduct = (list) => {
     if (!list.length) {
@@ -246,17 +315,10 @@ export const useNotebookCreate = ({ t, router }) => {
   const goBack = () => router.go(-1)
 
   const handleCreate = async () => {
-    if (!canCreate.value) {
-      ElMessage.warning(translate('fillAllFields'))
+    const validationMessage = validateCreateForm()
+    if (validationMessage) {
+      ElMessage.warning(validationMessage)
       return
-    }
-
-    if (enableTensorboard.value && tensorboardLogPath.value) {
-      const pathError = validateTensorBoardPath(tensorboardLogPath.value, translate)
-      if (pathError) {
-        ElMessage.error(pathError)
-        return
-      }
     }
 
     try {
@@ -269,7 +331,7 @@ export const useNotebookCreate = ({ t, router }) => {
       }
 
       const params = {
-        displayName: instanceName.value,
+        displayName: instanceName.value.trim(),
         productId: selectedProduct.value.id,
         imageId: selectedImage.value,
         payType: payType.value,
@@ -287,10 +349,18 @@ export const useNotebookCreate = ({ t, router }) => {
         return
       }
 
-      ElMessage.error(res.msg || translate('createFailed'))
+      const submitMessage = res.msg || translate('createFailed')
+      if (isResourceNameErrorMessage(submitMessage)) {
+        updateFieldError('instanceName', submitMessage)
+      }
+      ElMessage.error(submitMessage)
     } catch (error) {
       console.error('创建失败', error)
-      ElMessage.error(translate('createFailed'))
+      const submitMessage = getSubmitErrorMessage(error, translate('createFailed'))
+      if (isResourceNameErrorMessage(submitMessage)) {
+        updateFieldError('instanceName', submitMessage)
+      }
+      ElMessage.error(submitMessage)
     }
   }
 
@@ -311,6 +381,7 @@ export const useNotebookCreate = ({ t, router }) => {
     cpuModels,
     enableSshPassword,
     enableTensorboard,
+    fieldErrors,
     filteredImages,
     filters,
     formatPrice,
@@ -321,6 +392,8 @@ export const useNotebookCreate = ({ t, router }) => {
     imageDescription,
     imageTabs,
     instanceName,
+    updateInstanceName,
+    updateTensorboardLogPath,
     onVolumeChange,
     payType,
     payTypes,
@@ -335,6 +408,8 @@ export const useNotebookCreate = ({ t, router }) => {
     sshKeys,
     tensorboardLogPath,
     totalPrice,
+    validateInstanceNameField,
+    validateTensorboardLogPathField,
     volumeMountPath
   }
 }

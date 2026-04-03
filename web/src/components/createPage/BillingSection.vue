@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6">
+  <div class="console-create-card bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6">
     <h3 class="text-base font-bold mb-4 flex items-center gap-2">
       <span class="w-1 h-4 bg-primary rounded"></span>
       {{ t(titleKey) }}

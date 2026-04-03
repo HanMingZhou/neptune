@@ -130,13 +130,26 @@ export const useCmsProductDialogs = ({ activeTab, clusters, fetchAreas, fetchPro
   }
 
   const handleResourceTypeChange = (type) => {
-    if (type !== 'gpu') {
+    const node = selectedNode.value
+
+    if (type === 'gpu') {
+      productForm.gpuModel = node?.gpuModel || ''
+      productForm.gpuCount = node?.gpuCount || 0
+      productForm.gpuMemory = node?.gpuMemory || 0
+      productForm.vGpuCount = 0
+      productForm.vGpuMemory = 0
+      productForm.vGpuCores = 0
+    } else if (type === 'vgpu') {
       productForm.gpuModel = ''
       productForm.gpuCount = 0
       productForm.gpuMemory = 0
-    }
-
-    if (type !== 'vgpu') {
+      productForm.vGpuCount = node?.vGpuNumber || 0
+      productForm.vGpuMemory = node?.vGpuMemory || 0
+      productForm.vGpuCores = node?.vGpuCores || 0
+    } else {
+      productForm.gpuModel = ''
+      productForm.gpuCount = 0
+      productForm.gpuMemory = 0
       productForm.vGpuCount = 0
       productForm.vGpuMemory = 0
       productForm.vGpuCores = 0

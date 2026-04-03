@@ -8,7 +8,7 @@
       <template #actions>
         <RefreshButton :loading="loading" @refresh="loadKeys" />
         <button
-          class="bg-primary hover:bg-primary-hover text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 flex items-center gap-2 transition-all"
+          class="list-toolbar-button list-toolbar-button--primary"
           @click="openCreateDialog"
         >
           <span class="material-icons text-[20px]">add</span>
@@ -17,19 +17,23 @@
       </template>
     </PageIntro>
 
-    <SshKeyFiltersBar
-      :search-name="searchName"
-      @search="searchKeys"
-      @update:search-name="searchName = $event"
-    />
+    <ManagementListShell>
+      <template #filters>
+        <SshKeyFiltersBar
+          :search-name="searchName"
+          @search="searchKeys"
+          @update:search-name="searchName = $event"
+        />
+      </template>
 
-    <SshKeyList
-      :items="keys"
-      :loading="loading"
-      @create="openCreateDialog"
-      @delete="handleDelete"
-      @set-default="setDefault"
-    />
+      <SshKeyList
+        :items="keys"
+        :loading="loading"
+        @create="openCreateDialog"
+        @delete="handleDelete"
+        @set-default="setDefault"
+      />
+    </ManagementListShell>
 
     <SshKeyCreateDialog
       v-model="showCreateDialog"
@@ -45,6 +49,7 @@
 <script setup>
 import { inject, onMounted } from 'vue'
 import RefreshButton from '@/components/RefreshButton/index.vue'
+import ManagementListShell from '@/components/listPage/ManagementListShell.vue'
 import PageIntro from '@/components/listPage/PageIntro.vue'
 import SshKeyCreateDialog from './components/SshKeyCreateDialog.vue'
 import SshKeyFiltersBar from './components/SshKeyFiltersBar.vue'

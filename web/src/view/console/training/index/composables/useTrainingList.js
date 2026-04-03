@@ -17,6 +17,14 @@ export const useTrainingList = () => {
   const btnLoading = ref({})
   const isInitialLoad = ref(true)
 
+  const syncJobs = (nextList = []) => {
+    const currentMap = new Map(jobs.value.map((item) => [item.id, item]))
+    jobs.value = nextList.map((item) => {
+      const existing = currentMap.get(item.id)
+      return existing ? Object.assign(existing, item) : item
+    })
+  }
+
   const fetchList = async (showLoading = false) => {
     if (showLoading || isInitialLoad.value) {
       loading.value = true
@@ -29,7 +37,7 @@ export const useTrainingList = () => {
         status: filterStatus.value || undefined
       })
       if (res.code === 0) {
-        jobs.value = res.data?.list || []
+        syncJobs(res.data?.list || [])
         total.value = res.data?.total || 0
       } else {
         ElMessage.error(res.msg || t('error'))
@@ -62,17 +70,17 @@ export const useTrainingList = () => {
   }
 
   const getFrameworkLabel = (type) => {
-    const map = { PYTORCH_DDP: 'PyTorch DDP', STANDALONE: 'Standalone', MPI: 'MPI' }
+    const map = { PYTORCH_DDP: 'PyTorchDDP', STANDALONE: 'StandAlone', MPI: 'MPI' }
     return map[type] || type
   }
 
   const getFrameworkStyle = (type) => {
     const map = {
-      PYTORCH_DDP: 'bg-orange-500/10 text-orange-500 border-orange-500/20',
-      STANDALONE: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
-      MPI: 'bg-purple-500/10 text-purple-500 border-purple-500/20'
+      PYTORCH_DDP: 'console-badge--warning',
+      STANDALONE: 'console-badge--info',
+      MPI: 'console-badge--neutral'
     }
-    return map[type] || 'bg-slate-500/10 text-slate-500 border-slate-500/20'
+    return map[type] || 'console-badge--neutral'
   }
 
   const getStatusLabel = (status) => {
@@ -81,13 +89,13 @@ export const useTrainingList = () => {
 
   const getStatusStyle = (status) => {
     const map = {
-      RUNNING: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
-      PENDING: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
-      SUCCEEDED: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
-      FAILED: 'bg-red-500/10 text-red-500 border-red-500/20',
-      KILLED: 'bg-slate-500/10 text-slate-500 border-slate-500/20'
+      RUNNING: 'console-badge--success',
+      PENDING: 'console-badge--warning',
+      SUCCEEDED: 'console-badge--info',
+      FAILED: 'console-badge--danger',
+      KILLED: 'console-badge--neutral'
     }
-    return map[status] || 'bg-slate-500/10 text-slate-500 border-slate-500/20'
+    return map[status] || 'console-badge--neutral'
   }
 
   const copyText = (text) => {

@@ -1,79 +1,62 @@
 <template>
-  <div class="overflow-hidden rounded-xl border border-border-light bg-surface-light shadow-sm dark:border-border-dark dark:bg-surface-dark">
+  <TableCard>
     <div class="overflow-x-auto">
-      <table class="w-full" v-loading="loading">
+      <table class="console-table console-table--compact w-full min-w-[1320px]" v-loading="loading">
         <thead>
-          <tr class="border-b border-border-light bg-slate-50 text-xs font-bold uppercase tracking-wider text-slate-500 dark:border-border-dark dark:bg-zinc-800/50">
-            <th class="px-4 py-3">{{ t('id') }}</th>
-            <th class="px-4 py-3">{{ t('productName') }}</th>
-            <th class="px-4 py-3">{{ t('nodeName') }}</th>
-            <th class="px-4 py-3">{{ t('area') }}</th>
-            <th class="px-4 py-3">{{ t('spec') }}</th>
-            <th class="px-4 py-3 text-center">{{ t('inventory') }}</th>
-            <th class="px-4 py-3">{{ t('prices') }}({{ t('priceHourly') }}/{{ t('priceDaily') }}/{{ t('priceWeekly') }}/{{ t('priceMonthly') }})</th>
-            <th class="px-4 py-3 text-center">{{ t('status') }}</th>
-            <th class="px-4 py-3 text-center">{{ t('actions') }}</th>
+          <tr>
+            <th>{{ t('id') }}</th>
+            <th>{{ t('productName') }}</th>
+            <th>{{ t('nodeName') }}</th>
+            <th>{{ t('area') }}</th>
+            <th>{{ t('spec') }}</th>
+            <th class="text-center">{{ t('inventory') }}</th>
+            <th>{{ t('prices') }}({{ t('priceHourly') }}/{{ t('priceDaily') }}/{{ t('priceWeekly') }}/{{ t('priceMonthly') }})</th>
+            <th class="text-center">{{ t('status') }}</th>
+            <th class="console-actions-header">{{ t('actions') }}</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-border-light dark:divide-border-dark">
           <tr v-for="row in items" :key="row.id" class="transition-colors hover:bg-slate-50 dark:hover:bg-zinc-800/40">
-            <td class="px-4 py-3 text-sm font-mono text-slate-500">{{ row.id }}</td>
-            <td class="px-4 py-3 text-sm font-bold text-primary">{{ row.name }}</td>
-            <td class="px-4 py-3">
-              <code class="rounded bg-primary/10 px-2 py-1 text-xs text-primary">{{ row.nodeName }}</code>
-            </td>
-            <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">{{ row.area }}</td>
-            <td class="px-4 py-3">
+            <td class="is-code is-secondary">{{ row.id }}</td>
+            <td><span class="is-primary">{{ row.name }}</span></td>
+            <td><span class="is-secondary is-code">{{ row.nodeName }}</span></td>
+            <td class="is-secondary">{{ row.area }}</td>
+            <td>
               <div class="text-sm">
-                <span v-if="row.gpuModel" class="font-bold text-amber-600">{{ row.gpuModel }} × {{ row.gpuCount }}</span>
-                <span v-else-if="row.vGpuCount > 0" class="font-bold text-amber-600">vGPU: {{ row.vGpuMemory }}GB / {{ row.vGpuCores }}%</span>
+                <span v-if="row.gpuModel" class="is-primary">{{ row.gpuModel }} × {{ row.gpuCount }}</span>
+                <span v-else-if="row.vGpuNumber > 0" class="is-primary">vGPU: {{ row.vGpuMemory }}GB / {{ row.vGpuCores }}%</span>
                 <span v-else class="text-slate-400">CPU ONLY</span>
                 <div class="mt-1 text-xs text-slate-500">{{ row.cpu }}核 / {{ row.memory }}GB</div>
               </div>
             </td>
-            <td class="px-4 py-3 text-center">
+            <td class="text-center">
               <div class="text-sm">
-                <template v-if="row.gpuCount > 0">
-                  <span class="font-bold text-emerald-600">{{ row.gpuCount - (row.usedGpu || 0) }}</span>
-                  <span class="mx-1 text-slate-300">/</span>
-                  <span class="text-slate-500">{{ row.gpuCount }}</span>
-                  <div class="text-xs text-slate-400">{{ t('gpu') }}</div>
-                </template>
-                <template v-else-if="row.vGpuCount > 0">
-                  <span class="font-bold text-emerald-600">{{ row.vGpuCount - (row.usedGpu || 0) }}</span>
-                  <span class="mx-1 text-slate-300">/</span>
-                  <span class="text-slate-500">{{ row.vGpuCount }}</span>
-                  <div class="text-xs text-slate-400">vGPU</div>
-                </template>
-                <template v-else>
-                  <span class="font-bold text-emerald-600">{{ (row.maxInstances || 0) - (row.usedGpu || 0) }}</span>
-                  <span class="mx-1 text-slate-300">/</span>
-                  <span class="text-slate-500">{{ row.maxInstances || 0 }}</span>
-                  <div class="text-xs text-slate-400">{{ t('instances') }}</div>
-                </template>
+                <span class="is-primary">{{ row.available ?? 0 }}</span>
+                <span class="mx-1 text-slate-300">/</span>
+                <span class="text-slate-500">{{ row.maxInstances || 0 }}</span>
+                <div class="text-xs text-slate-400">
+                  <template v-if="row.gpuCount > 0">{{ t('gpu') }}</template>
+                  <template v-else-if="row.vGpuNumber > 0">vGPU</template>
+                  <template v-else>{{ t('instances') }}</template>
+                </div>
               </div>
             </td>
-            <td class="px-4 py-3">
+            <td>
               <div class="text-xs text-slate-600 dark:text-slate-300">
-                <span class="font-bold text-amber-600">¥{{ row.priceHourly?.toFixed(2) || '0.00' }}</span> /
-                <span class="font-bold text-amber-600">¥{{ row.priceDaily?.toFixed(2) || '0.00' }}</span> /
-                <span class="font-bold text-amber-600">¥{{ row.priceWeekly?.toFixed(2) || '0.00' }}</span> /
-                <span class="font-bold text-amber-600">¥{{ row.priceMonthly?.toFixed(2) || '0.00' }}</span>
+                <span class="is-primary">¥{{ row.priceHourly?.toFixed(2) || '0.00' }}</span> /
+                <span class="is-primary">¥{{ row.priceDaily?.toFixed(2) || '0.00' }}</span> /
+                <span class="is-primary">¥{{ row.priceWeekly?.toFixed(2) || '0.00' }}</span> /
+                <span class="is-primary">¥{{ row.priceMonthly?.toFixed(2) || '0.00' }}</span>
               </div>
             </td>
-            <td class="px-4 py-3 text-center">
-              <span
-                class="rounded-full px-2.5 py-1 text-xs font-bold"
-                :class="row.status === 1 ? 'bg-emerald-500/10 text-emerald-500' : 'bg-slate-500/10 text-slate-500'"
-              >
-                {{ row.status === 1 ? t('onShelf') : t('offShelf') }}
-              </span>
+            <td class="text-center">
+              <ListToneBadge :label="row.status === 1 ? t('onShelf') : t('offShelf')" :tone="row.status === 1 ? 'success' : 'neutral'" />
             </td>
-            <td class="px-4 py-3 text-center">
-              <div class="flex items-center justify-center gap-2">
-                <button class="rounded-sm bg-primary/10 px-2 py-1 text-xs font-bold text-primary transition-colors hover:bg-primary/20" @click="$emit('edit', row)">{{ t('edit') }}</button>
-                <button class="rounded-sm bg-amber-500/10 px-2 py-1 text-xs font-bold text-amber-600 transition-colors hover:bg-amber-500/20" @click="$emit('adjust-price', row)">{{ t('prices') }}</button>
-                <button class="rounded-sm bg-red-500/10 px-2 py-1 text-xs font-bold text-red-600 transition-colors hover:bg-red-500/20" @click="$emit('delete', row)">{{ t('delete') }}</button>
+            <td class="console-actions-cell">
+              <div class="list-row-actions">
+                <button class="list-row-button list-row-button--info" @click="$emit('edit', row)">{{ t('edit') }}</button>
+                <button class="list-row-button list-row-button--warning" @click="$emit('adjust-price', row)">{{ t('prices') }}</button>
+                <button class="list-row-button list-row-button--danger" @click="$emit('delete', row)">{{ t('delete') }}</button>
               </div>
             </td>
           </tr>
@@ -84,23 +67,26 @@
       </table>
     </div>
 
-    <div class="flex items-center justify-between border-t border-border-light bg-slate-50 px-6 py-4 dark:border-border-dark dark:bg-zinc-800/30">
-      <span class="text-xs text-slate-500">{{ t('totalRecords', { total }) }}</span>
-      <el-pagination
+    <template #footer>
+      <ListPaginationBar
         v-model:current-page="pageModel"
         v-model:page-size="pageSizeModel"
         :total="total"
+        :total-text="t('totalRecords', { total })"
         :page-sizes="[10, 20, 50, 100]"
-        layout="sizes, prev, pager, next"
+        layout="sizes, prev, pager, next, jumper"
         @current-change="$emit('page-change', $event)"
         @size-change="$emit('size-change', $event)"
       />
-    </div>
-  </div>
+    </template>
+  </TableCard>
 </template>
 
 <script setup>
 import { computed, inject } from 'vue'
+import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
+import ListToneBadge from '@/components/listPage/ListToneBadge.vue'
+import TableCard from '@/components/listPage/TableCard.vue'
 
 const props = defineProps({
   items: {

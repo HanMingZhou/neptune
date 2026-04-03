@@ -2,12 +2,14 @@
   <div class="space-y-6">
     <EngineConfigSection
       :deploy-types="deployTypes"
+      :field-errors="fieldErrors"
       :form="form"
       :framework-required="frameworkRequired"
       :frameworks="frameworks"
       :pvcs="pvcs"
       @deploy-type-change="onDeployTypeChange"
       @update:field="emit('update:field', $event)"
+      @validate:display-name="emit('validate:display-name')"
     />
 
     <ImagePickerSection
@@ -70,6 +72,10 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
+  fieldErrors: {
+    type: Object,
+    default: () => ({})
+  },
   form: {
     type: Object,
     required: true
@@ -108,7 +114,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:env', 'update:field', 'update:mount'])
+const emit = defineEmits(['update:env', 'update:field', 'update:mount', 'validate:display-name'])
 
 const t = inject('t', (key) => key)
 const imageDescription = computed(() => t(`${props.activeTab}ImageDesc`))

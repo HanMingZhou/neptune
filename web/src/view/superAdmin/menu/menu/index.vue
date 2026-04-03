@@ -8,7 +8,7 @@
       <template #actions>
         <RefreshButton :loading="loading" @refresh="getTableData" />
         <button
-          class="bg-primary hover:bg-primary-hover text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 flex items-center gap-2"
+          class="list-toolbar-button list-toolbar-button--primary"
           @click="openCreateDialog(0)"
         >
           <span class="material-icons">add</span>

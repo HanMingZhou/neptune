@@ -41,6 +41,27 @@ export const useNotebookDetail = () => {
   let resizeObserver = null
   let ws = null
 
+  const normalizeStatus = (status) => `${status || ''}`.trim().toUpperCase()
+
+  const normalizeVolumeMounts = (volumeMounts) => {
+    if (Array.isArray(volumeMounts)) return volumeMounts
+    if (typeof volumeMounts === 'string' && volumeMounts.trim()) {
+      try {
+        const parsed = JSON.parse(volumeMounts)
+        return Array.isArray(parsed) ? parsed : []
+      } catch (error) {
+        console.warn('解析挂载卷数据失败', error)
+      }
+    }
+    return []
+  }
+
+  const normalizeNotebookDetail = (data = {}) => ({
+    ...data,
+    price: Number.isFinite(Number(data.price)) ? Number(data.price) : 0,
+    volumeMounts: normalizeVolumeMounts(data.volumeMounts)
+  })
+
   const setLogsRef = (element) => {
     logsRef.value = element
   }
@@ -50,15 +71,15 @@ export const useNotebookDetail = () => {
   }
 
   const isInstanceRunning = computed(() => {
-    const status = notebook.value.status?.toLowerCase()
-    return status === 'running' || status === 'ready'
+    const status = normalizeStatus(notebook.value.status)
+    return status === 'RUNNING' || status === 'READY'
   })
 
   const fetchDetail = async () => {
     try {
       const res = await getNotebookDetail({ id: route.query.id })
       if (res.code === 0) {
-        notebook.value = res.data || {}
+        notebook.value = normalizeNotebookDetail(res.data || {})
       }
     } catch (error) {
       console.error('获取详情失败', error)
@@ -324,16 +345,16 @@ export const useNotebookDetail = () => {
   const getStatusLabel = (status) => t(status) || status
 
   const getStatusClass = (status) => {
-    const normalized = status?.toLowerCase()
-    if (normalized === 'running' || normalized === 'ready') return 'bg-emerald-500/10 text-emerald-500'
-    if (normalized === 'pending' || normalized === 'creating') return 'bg-amber-500/10 text-amber-500'
-    if (normalized === 'failed' || normalized === 'error') return 'bg-red-500/10 text-red-500'
-    if (normalized === 'stopped') return 'bg-slate-500/10 text-slate-500'
+    const normalized = normalizeStatus(status)
+    if (normalized === 'RUNNING' || normalized === 'READY') return 'bg-emerald-500/10 text-emerald-500'
+    if (normalized === 'PENDING' || normalized === 'CREATING') return 'bg-amber-500/10 text-amber-500'
+    if (normalized === 'FAILED' || normalized === 'ERROR') return 'bg-red-500/10 text-red-500'
+    if (normalized === 'STOPPED') return 'bg-slate-500/10 text-slate-500'
     return 'bg-slate-500/10 text-slate-500'
   }
 
   const getPodStatusClass = (status) => {
-    const normalized = status?.toLowerCase()
+    const normalized = `${status || ''}`.trim().toLowerCase()
     const map = {
       running: 'bg-emerald-500/10 text-emerald-500',
       pending: 'bg-amber-500/10 text-amber-500',
@@ -348,7 +369,7 @@ export const useNotebookDetail = () => {
   }
 
   watch(activeTab, (tab) => {
-    if (tab === 'logs' && notebook.value.status === 'Running') {
+    if (tab === 'logs' && isInstanceRunning.value) {
       connectLogStream()
     } else if (tab !== 'logs') {
       disconnectLogStream()

@@ -6,19 +6,29 @@
       @refresh="fetchList"
     />
 
-    <StorageTableCard
-      v-model:page="pageInfo.page"
-      v-model:search-name="searchName"
-      v-model:search-status="searchStatus"
-      :btn-loading="btnLoading"
-      :items="volumeList"
-      :loading="loading"
-      :total="total"
-      @create="openCreateDialog"
-      @delete="handleDelete"
-      @expand="openExpandDialog"
-      @refresh="fetchList"
-    />
+    <ManagementListShell>
+      <template #filters>
+        <StorageFiltersBar
+          :search-name="searchName"
+          :search-status="searchStatus"
+          @refresh="fetchList"
+          @update:search-name="searchName = $event"
+          @update:search-status="searchStatus = $event"
+        />
+      </template>
+
+      <StorageTableCard
+        v-model:page="pageInfo.page"
+        :btn-loading="btnLoading"
+        :items="volumeList"
+        :loading="loading"
+        :total="total"
+        @create="openCreateDialog"
+        @delete="handleDelete"
+        @expand="openExpandDialog"
+        @refresh="fetchList"
+      />
+    </ManagementListShell>
 
     <StorageDialogsHost
       :cluster-options="clusterOptions"
@@ -40,7 +50,9 @@
 
 <script setup>
 import { inject, onMounted } from 'vue'
+import ManagementListShell from '@/components/listPage/ManagementListShell.vue'
 import StorageDialogsHost from './components/StorageDialogsHost.vue'
+import StorageFiltersBar from './components/StorageFiltersBar.vue'
 import StorageManagementHeader from './components/StorageManagementHeader.vue'
 import StorageTableCard from './components/StorageTableCard.vue'
 import { useStorageList } from './composables/useStorageList'

@@ -437,6 +437,7 @@ func (s *ProductService) GetProductList(req *cmsReq.GetProductListReq) (*product
 			StorageClass:   p.StorageClass,
 			StoragePriceGB: p.StoragePriceGB,
 			MaxInstances:   p.MaxInstances,
+			Available:      p.MaxInstances - p.UsedCapacity,
 		})
 	}
 	resp := &productRes.ProductListResponse{

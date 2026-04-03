@@ -1,6 +1,6 @@
 <template>
   <div class="h-[calc(100vh-220px)] flex flex-col gap-4">
-    <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl px-4 py-3 flex items-center justify-between shadow-sm">
+    <div class="console-detail-card rounded-xl px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-4">
         <slot name="controls-prefix" />
         <button
@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div class="flex-1 bg-[#1e1e1e] rounded-xl overflow-hidden shadow-2xl flex flex-col border border-border-light dark:border-zinc-700/50">
+    <div class="flex-1 rounded-xl overflow-hidden flex flex-col border border-border-light dark:border-zinc-700/50 bg-[#1e1e1e]">
       <div class="bg-[#2d2d2d] px-4 py-2 flex items-center justify-between select-none">
         <div class="flex gap-2 group">
           <button class="w-3 h-3 rounded-full bg-[#ff5f56] hover:bg-[#ff5f56]/80 flex items-center justify-center text-[8px] text-black/0 group-hover:text-black/50 transition-colors" title="Disconnect" @click="$emit('disconnect')">×</button>

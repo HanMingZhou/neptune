@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="w-full text-left">
+    <table class="console-table w-full">
       <thead>
         <tr class="bg-slate-50/50 dark:bg-zinc-800/30 text-slate-500 text-[10px] font-black uppercase tracking-widest border-b border-slate-100 dark:border-border-dark">
           <th class="px-8 py-5">{{ t('order.resourceType') }}</th>
@@ -12,7 +12,7 @@
           <th class="px-6 py-5">{{ t('status') }}</th>
           <th class="px-6 py-5">{{ t('order.createdAt') }}</th>
           <th class="px-6 py-5">{{ t('order.updatedAt') }}</th>
-          <th class="px-6 py-5 text-right">{{ t('order.subtotal') }}</th>
+          <th class="px-6 py-5">{{ t('order.subtotal') }}</th>
         </tr>
       </thead>
       <tbody class="divide-y divide-slate-100 dark:divide-border-dark">
@@ -27,7 +27,7 @@
             <span class="text-slate-500 dark:text-slate-400 text-xs font-mono">{{ item.orderNo || '-' }}</span>
           </td>
           <td class="px-6 py-5">
-            <span :class="getChargeTypeStyle(item.source)" class="px-2 py-0.5 rounded text-[10px] font-black">
+            <span :class="getChargeTypeStyle(item.source)" class="order-tone-chip">
               {{ item.chargeTypeName }}
             </span>
           </td>
@@ -36,14 +36,16 @@
             ¥{{ item.unitPrice.toFixed(6) }} / {{ getUnitText(item) }}
           </td>
           <td class="px-6 py-5">
-            <span :class="getStatusStyle(item)" class="px-2 py-0.5 rounded text-[10px] font-black">
+            <span :class="getStatusStyle(item)" class="order-tone-chip">
               {{ item.statusText }}
             </span>
           </td>
           <td class="px-6 py-5 text-xs text-slate-500 dark:text-slate-400">{{ item.createdAt || '-' }}</td>
           <td class="px-6 py-5 text-xs text-slate-500 dark:text-slate-400">{{ item.updatedAt || '-' }}</td>
-          <td class="px-6 py-5 text-right font-black">
-            <span class="text-slate-900 dark:text-white">¥{{ item.amount.toFixed(6) }}</span>
+          <td class="px-6 py-5">
+            <span class="console-amount-chip console-amount-chip--neutral font-mono">
+              ¥{{ item.amount.toFixed(6) }}
+            </span>
           </td>
         </tr>
         <tr v-if="items.length === 0">
@@ -55,18 +57,18 @@
       </tbody>
     </table>
 
-    <div class="px-6 py-4 flex items-center justify-between border-t border-slate-100 dark:border-border-dark bg-slate-50/50 dark:bg-zinc-800/20">
-      <div class="flex-1 flex justify-end">
-        <el-pagination
-          v-model:current-page="pageModel"
-          v-model:page-size="pageSizeModel"
-          :total="chargeFilter === 'all' ? total : items.length"
-          :page-sizes="[10, 20, 50, 100]"
-          layout="total, sizes, prev, pager, next, jumper"
-          @current-change="$emit('page-change', $event)"
-          @size-change="$emit('size-change', $event)"
-        />
-      </div>
+    <div class="console-list-footer">
+      <ListPaginationBar
+        v-model:current-page="pageModel"
+        v-model:page-size="pageSizeModel"
+        :total="chargeFilter === 'all' ? total : items.length"
+        :show-total="false"
+        justify="end"
+        :page-sizes="[10, 20, 50, 100]"
+        layout="total, sizes, prev, pager, next, jumper"
+        @current-change="$emit('page-change', $event)"
+        @size-change="$emit('size-change', $event)"
+      />
     </div>
 
     <div class="p-8 bg-slate-50/30 dark:bg-zinc-900/10 text-center">
@@ -77,6 +79,7 @@
 
 <script setup>
 import { computed, inject } from 'vue'
+import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
 
 const props = defineProps({
   chargeFilter: {

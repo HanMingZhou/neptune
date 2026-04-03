@@ -1,9 +1,9 @@
 <template>
   <TableCard>
     <template #toolbar>
-      <div class="flex flex-wrap gap-4 items-center">
-        <div class="flex items-center gap-3 flex-1">
-          <div class="relative w-[18rem] max-w-full">
+      <div class="list-filter-bar">
+        <div class="list-toolbar-main">
+          <div class="list-search-field">
             <input
               :value="searchQuery"
               :placeholder="t('searchInstancePlaceholder')"
@@ -18,7 +18,7 @@
           <el-select
             :model-value="statusFilter"
             :placeholder="`${t('status')}: ${t('all')}`"
-            class="list-filter-select"
+            class="list-filter-select !w-[168px]"
             clearable
             size="small"
             @update:model-value="$emit('status-change', $event)"
@@ -29,8 +29,8 @@
           </el-select>
         </div>
 
-        <div class="ml-auto flex gap-2">
-          <button class="p-2 text-slate-400 hover:text-primary transition-colors" @click="$emit('show-key-settings')">
+        <div class="list-toolbar-actions list-toolbar-actions--push">
+          <button class="list-toolbar-button list-toolbar-button--secondary list-toolbar-button--icon" @click="$emit('show-key-settings')">
             <span class="material-icons text-[20px]">vpn_key</span>
           </button>
         </div>
@@ -38,19 +38,19 @@
     </template>
 
     <div class="overflow-x-auto">
-      <table class="w-full">
+      <table class="console-table console-table--resource-dense w-full min-w-[1180px]">
         <thead>
-          <tr class="bg-gray-50 dark:bg-zinc-900/50 border-b border-gray-100 dark:border-gray-800 text-slate-500 text-[11px] font-bold uppercase tracking-wider">
-            <th class="px-6 py-3">{{ t('instanceId') }} / {{ t('name') }}</th>
-            <th class="px-6 py-3">{{ t('status') }}</th>
-            <th class="px-6 py-3">{{ t('spec') }}</th>
-            <th class="px-6 py-3">{{ t('gpu') }}</th>
-            <th class="px-6 py-3 text-center">{{ t('sshLogin') }}</th>
-            <th class="px-6 py-3 text-center">{{ t('quickTools') }}</th>
-            <th class="px-6 py-3 text-center">{{ t('actions') }}</th>
+          <tr>
+            <th>{{ t('instanceId') }} / {{ t('name') }}</th>
+            <th>{{ t('status') }}</th>
+            <th>{{ t('spec') }}</th>
+            <th>{{ t('gpu') }}</th>
+            <th class="text-center">{{ t('sshLogin') }}</th>
+            <th class="text-center">{{ t('quickTools') }}</th>
+            <th class="console-actions-header">{{ t('actions') }}</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-gray-100 dark:divide-border-dark text-[13px]">
+        <tbody>
           <tr v-if="loading">
             <td colspan="7" class="px-6 py-12 text-center text-slate-400">
               <div class="flex items-center justify-center gap-2">
@@ -61,10 +61,10 @@
           </tr>
           <tr v-else-if="notebooks.length === 0">
             <td colspan="7" class="px-6 py-12 text-center text-slate-400">
-              <div class="space-y-4 flex flex-col items-center">
-                <span class="material-icons text-6xl text-slate-200 dark:text-zinc-700">inbox</span>
-                <p>{{ t('noData') }}</p>
-                <button class="text-primary hover:underline font-bold" @click="$emit('create')">{{ t('create') }}{{ t('notebook') }}</button>
+              <div class="console-list-empty">
+                <span class="material-icons console-list-empty__icon">inbox</span>
+                <p class="console-list-empty__text">{{ t('noData') }}</p>
+                <button class="list-row-button list-row-button--neutral" @click="$emit('create')">{{ t('create') }}{{ t('notebook') }}</button>
               </div>
             </td>
           </tr>
@@ -72,47 +72,42 @@
             v-for="item in notebooks"
             v-else
             :key="item.id"
-            class="hover:bg-gray-50/80 dark:hover:bg-zinc-800/50 transition-colors group"
+            class="group"
           >
-            <td class="px-6 py-3 text-center">
-              <div class="flex flex-col gap-1 items-center">
-                <span class="font-bold text-primary hover:underline cursor-pointer text-sm" @click="$emit('detail', item)">{{ item.displayName || item.instanceName }}</span>
-                <div class="flex items-center gap-1 group/copy">
-                  <span class="text-[11px] font-mono text-slate-400">{{ item.instanceName }}</span>
-                  <button
-                    :title="t('copy')"
-                    class="opacity-0 group-hover/copy:opacity-100 transition-opacity p-0.5 rounded hover:bg-slate-100 dark:hover:bg-zinc-700 text-slate-400 hover:text-primary"
-                    @click.stop="$emit('copy', item.instanceName)"
-                  >
-                    <span class="material-icons text-[12px]">content_copy</span>
-                  </button>
-                </div>
-              </div>
+            <td>
+              <ResourceIdentityCell
+                :copy-title="t('copy')"
+                :copy-value="item.instanceName"
+                :primary="item.displayName || item.instanceName"
+                :secondary="item.instanceName"
+                @copy="$emit('copy', $event)"
+                @primary-click="$emit('detail', item)"
+              />
             </td>
-            <td class="px-6 py-3 text-center">
-              <div class="flex justify-center">
-                <span :class="getStatusStyle(item.status)" class="px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center gap-1.5 border border-transparent">
-                  <span :class="item.status === 'RUNNING' ? 'animate-pulse bg-emerald-500' : 'bg-current'" class="size-1.5 rounded-full"></span>
-                  {{ getStatusText(item.status) }}
-                </span>
-              </div>
+            <td>
+              <ResourceStatusCell
+                :label="getStatusText(item.status)"
+                show-pulse
+                :pulse-class="item.status === 'RUNNING' ? 'animate-pulse bg-emerald-500' : 'bg-current'"
+                :status-class="getStatusStyle(item.status)"
+              />
             </td>
-            <td class="px-6 py-3 text-center">
-              <div class="flex items-center justify-center gap-1">
+            <td>
+              <div class="flex items-center gap-1">
                 <span class="material-icons text-[14px] text-slate-400">memory</span>
-                <span>{{ item.cpu }} {{ t('cpu') }}</span>
+                <span class="is-metric">{{ item.cpu }} {{ t('cpu') }}</span>
                 <span class="text-slate-300 mx-1">|</span>
-                <span>{{ item.memory }} GB</span>
+                <span class="is-metric">{{ item.memory }} GB</span>
               </div>
             </td>
-            <td class="px-6 py-3 text-center">
-              <span v-if="item.gpu" class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[11px] font-mono font-bold">{{ item.gpu }}</span>
-              <span v-else class="text-slate-400 text-[11px] font-bold tracking-tight uppercase">{{ t('cpuOnly') }}</span>
+            <td>
+              <span v-if="item.gpu" class="console-badge console-badge--neutral is-code">{{ item.gpu }}</span>
+              <span v-else class="is-muted text-[11px]">{{ t('CPU ONLY') }}</span>
             </td>
-            <td class="px-6 py-3 text-center">
+            <td class="text-center">
               <button
                 v-if="item.status === 'RUNNING'"
-                class="whitespace-nowrap inline-flex items-center gap-1 text-[11px] font-bold text-slate-500 hover:text-primary transition-colors bg-gray-100 dark:bg-zinc-800 hover:bg-primary/10 px-2 py-1 rounded"
+                class="list-row-button list-row-button--neutral min-w-[88px]"
                 @click="$emit('show-ssh', item)"
               >
                 <span class="material-icons text-[14px]">terminal</span>
@@ -120,12 +115,12 @@
               </button>
               <span v-else class="text-slate-400 text-sm">-</span>
             </td>
-            <td class="px-6 py-3 text-center">
-              <div class="flex flex-col items-center gap-1.5">
+            <td class="text-center">
+              <div class="console-resource-tools">
                 <a
                   v-if="item.status === 'RUNNING' && item.jupyterUrl"
                   :href="item.jupyterUrl"
-                  class="whitespace-nowrap inline-flex items-center gap-1.5 text-[11px] font-bold text-orange-600 hover:text-orange-700 bg-orange-500/10 hover:bg-orange-500/20 px-2.5 py-1.5 rounded transition-colors w-[110px] justify-start"
+                  class="list-row-button list-row-button--warning min-w-[112px] justify-start"
                   target="_blank"
                 >
                   <span class="material-icons text-[14px]">science</span>
@@ -134,21 +129,21 @@
                 <a
                   v-if="item.status === 'RUNNING' && item.enableTensorboard && item.tensorboardUrl"
                   :href="item.tensorboardUrl"
-                  class="whitespace-nowrap inline-flex items-center gap-1.5 text-[11px] font-bold text-primary hover:text-primary-hover bg-primary/10 hover:bg-primary/20 px-2.5 py-1.5 rounded transition-colors w-[110px] justify-start"
+                  class="list-row-button list-row-button--info min-w-[112px] justify-start"
                   target="_blank"
                 >
                   <span class="material-icons text-[14px]">analytics</span>
                   <span class="flex-1 text-center pr-[14px]">TensorBoard</span>
                 </a>
-                <span v-if="item.status !== 'RUNNING' || (!item.jupyterUrl && !(item.enableTensorboard && item.tensorboardUrl))" class="text-slate-400 text-sm">-</span>
+                <span v-if="item.status !== 'RUNNING' || (!item.jupyterUrl && !(item.enableTensorboard && item.tensorboardUrl))" class="is-muted text-sm">-</span>
               </div>
             </td>
-            <td class="px-6 py-3 text-center">
-              <div class="flex justify-center gap-2 items-center">
+            <td class="console-actions-cell">
+              <div class="list-row-actions">
                 <button
                   v-if="item.status !== 'RUNNING' && item.status !== 'PENDING' && item.status !== 'CREATING' && item.status !== 'DELETING'"
                   :disabled="btnLoading[item.id]"
-                  class="bg-primary/10 hover:bg-primary/20 text-primary px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-1 disabled:opacity-50"
+                  class="list-row-button list-row-button--success disabled:opacity-50"
                   @click="$emit('start', item)"
                 >
                   <span class="material-icons text-[14px]">play_arrow</span>
@@ -157,7 +152,7 @@
                 <button
                   v-if="item.status === 'RUNNING'"
                   :disabled="btnLoading[item.id]"
-                  class="bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-1 disabled:opacity-50"
+                  class="list-row-button list-row-button--warning disabled:opacity-50"
                   @click="$emit('stop', item)"
                 >
                   <span class="material-icons text-[14px]">stop</span>
@@ -166,7 +161,7 @@
                 <button
                   v-if="item.status !== 'DELETING'"
                   :disabled="btnLoading[item.id]"
-                  class="bg-red-500/10 hover:bg-red-500/20 text-red-600 px-2 py-1 rounded-sm text-xs font-bold transition-colors flex items-center gap-1 disabled:opacity-50"
+                  class="list-row-button list-row-button--danger disabled:opacity-50"
                   @click="$emit('delete', item)"
                 >
                   <span class="material-icons text-[14px]">delete</span>
@@ -180,26 +175,25 @@
     </div>
 
     <template #footer>
-      <div class="flex items-center justify-between">
-        <span class="text-xs text-slate-500">{{ t('totalRecords', { total }) }}</span>
-        <el-pagination
-          :current-page="page"
-          :page-size="pageSize"
-          :page-sizes="[10, 20, 50, 100]"
-          :total="total"
-          class="!p-0"
-          layout="sizes, prev, pager, next"
-          size="small"
-          @current-change="$emit('page-change', $event)"
-          @size-change="$emit('size-change', $event)"
-        />
-      </div>
+      <ListPaginationBar
+        :current-page="page"
+        :page-size="pageSize"
+        :total="total"
+        :total-text="t('totalRecords', { total })"
+        :page-sizes="[10, 20, 50, 100]"
+        layout="sizes, prev, pager, next, jumper"
+        @current-change="$emit('page-change', $event)"
+        @size-change="$emit('size-change', $event)"
+      />
     </template>
   </TableCard>
 </template>
 
 <script setup>
 import { inject } from 'vue'
+import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
+import ResourceIdentityCell from '@/components/listPage/ResourceIdentityCell.vue'
+import ResourceStatusCell from '@/components/listPage/ResourceStatusCell.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
 
 defineProps({

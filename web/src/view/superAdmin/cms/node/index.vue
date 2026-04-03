@@ -10,28 +10,33 @@
       </template>
     </PageIntro>
 
-    <NodeFiltersBar
-      :clusters="clusters"
-      :current-cluster-area="currentClusterArea"
-      :filter-cluster-id="filterClusterId"
-      :filter-keyword="filterKeyword"
-      @reset="handleResetFilters"
-      @search="fetchNodes"
-      @update:filter-cluster-id="handleClusterChange"
-      @update:filter-keyword="filterKeyword = $event"
-    />
+    <ManagementListShell>
+      <template #filters>
+        <NodeFiltersBar
+          :clusters="clusters"
+          :current-cluster-area="currentClusterArea"
+          :filter-cluster-id="filterClusterId"
+          :filter-keyword="filterKeyword"
+          @reset="handleResetFilters"
+          @search="fetchNodes"
+          @update:filter-cluster-id="handleClusterChange"
+          @update:filter-keyword="filterKeyword = $event"
+        />
+      </template>
 
-    <NodeTableCard
-      :items="nodes"
-      :loading="loading"
-      @drain="handleDrain"
-      @uncordon="handleUncordon"
-    />
+      <NodeTableCard
+        :items="nodes"
+        :loading="loading"
+        @drain="handleDrain"
+        @uncordon="handleUncordon"
+      />
+    </ManagementListShell>
   </div>
 </template>
 
 <script setup>
 import { inject, onMounted } from 'vue'
+import ManagementListShell from '@/components/listPage/ManagementListShell.vue'
 import RefreshButton from '@/components/RefreshButton/index.vue'
 import PageIntro from '@/components/listPage/PageIntro.vue'
 import NodeFiltersBar from './components/NodeFiltersBar.vue'

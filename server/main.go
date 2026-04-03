@@ -47,8 +47,8 @@ func initializeSystem() {
 	//initialize.DBList()
 	initialize.SetupHandlers() // 注册全局函数
 	if global.GVA_DB != nil {
-		initialize.RegisterTables() // 初始化表
-		initialize.InitBaseData()   // 初始化基础数据（角色、菜单、管理员用户等）
+		//initialize.RegisterTables() // 初始化表
+		// initialize.InitBaseData()   // 初始化基础数据（角色、菜单、管理员用户等）
 	}
 	global.GVA_K8S_CLUSTER_MANAGER = initialize.InitK8sClusterManager() // 初始化多集群管理器（从数据库加载集群配置）
 	initialize.InitServiceDependencies()                                // 初始化服务间依赖（必须在所有服务初始化之后）
