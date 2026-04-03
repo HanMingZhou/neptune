@@ -35,6 +35,8 @@ import (
 	"gin-vue-admin/utils/ssh"
 	"gin-vue-admin/utils/validator"
 	"io"
+	"net"
+	"net/url"
 	"path"
 	"strings"
 
@@ -263,7 +265,7 @@ func (nb *NotebookService) CreateNotebook(ctx context.Context, req *request.AddN
 	)
 
 	// 8. 创建Apisix路由
-	return nb.createNotebookAccessRoute(ctx, state.nbRef, true)
+	return nb.createNotebookAccessRoute(ctx, state.nbRef, global.GVA_CONFIG.Apisix.Enabled)
 }
 
 func (nb *NotebookService) buildCreateNotebookState(ctx context.Context, req *request.AddNoteBookReq, cleanups *Cleanups) (*notebookCreateState, error) {
@@ -650,6 +652,10 @@ func (nb *NotebookService) updateNotebookOrderID(notebookID, orderID uint) error
 }
 
 func (nb *NotebookService) createNotebookAccessRoute(ctx context.Context, nbRef *nbModel.Notebook, required bool) error {
+	if !global.GVA_CONFIG.Apisix.Enabled {
+		return nil
+	}
+
 	if nb.apisixSvc == nil {
 		if required {
 			logx.Error("Apisix服务未初始化")
@@ -658,7 +664,7 @@ func (nb *NotebookService) createNotebookAccessRoute(ctx context.Context, nbRef 
 		return nil
 	}
 
-	baseDomain := strings.TrimSpace(global.GVA_CONFIG.Apisix.BaseDomain)
+	routeHost := normalizeApisixRouteHost(global.GVA_CONFIG.Apisix.BaseDomain)
 
 	authEnabled := global.GVA_CONFIG.Apisix.AuthEnabled
 	authUri := global.GVA_CONFIG.Apisix.AuthUri
@@ -671,7 +677,7 @@ func (nb *NotebookService) createNotebookAccessRoute(ctx context.Context, nbRef 
 		Name:        fmt.Sprintf("%s-%s", apisixModel.RoutePrefix, nbRef.InstanceName),
 		Namespace:   nbRef.Namespace,
 		ClusterId:   nbRef.ClusterID,
-		Host:        baseDomain,
+		Host:        routeHost,
 		Path:        fmt.Sprintf("/notebook/%s/%s/*", nbRef.Namespace, nbRef.InstanceName),
 		ServiceName: nbRef.InstanceName,
 		ServicePort: 80,
@@ -757,11 +763,15 @@ func (nb *NotebookService) createNotebookTensorboardResources(
 }
 
 func (nb *NotebookService) createTensorboardAccessRoute(ctx context.Context, nbRef *nbModel.Notebook) {
+	if !global.GVA_CONFIG.Apisix.Enabled {
+		return
+	}
+
 	if nb.apisixSvc == nil {
 		return
 	}
 
-	baseDomain := strings.TrimSpace(global.GVA_CONFIG.Apisix.BaseDomain)
+	routeHost := normalizeApisixRouteHost(global.GVA_CONFIG.Apisix.BaseDomain)
 
 	authEnabled := global.GVA_CONFIG.Apisix.AuthEnabled
 	authUri := global.GVA_CONFIG.Apisix.AuthUri
@@ -774,7 +784,7 @@ func (nb *NotebookService) createTensorboardAccessRoute(ctx context.Context, nbR
 		Name:          fmt.Sprintf("%s-tb-%s", apisixModel.RoutePrefix, nbRef.InstanceName),
 		Namespace:     nbRef.Namespace,
 		ClusterId:     nbRef.ClusterID,
-		Host:          baseDomain,
+		Host:          routeHost,
 		Path:          fmt.Sprintf("/tensorboard/%s/%s/*", nbRef.Namespace, nbRef.InstanceName),
 		RewriteRegex:  fmt.Sprintf("^/tensorboard/%s/%s/(.*)", nbRef.Namespace, nbRef.InstanceName),
 		RewriteTarget: "/$1",
@@ -795,6 +805,39 @@ func (nb *NotebookService) createTensorboardAccessRoute(ctx context.Context, nbR
 	}
 
 	logx.Info("创建TensorBoard Apisix路由成功")
+}
+
+func normalizeApisixRouteHost(raw string) string {
+	host := strings.TrimSpace(raw)
+	if host == "" {
+		return ""
+	}
+
+	parsedInput := host
+	if !strings.Contains(parsedInput, "://") {
+		parsedInput = "http://" + parsedInput
+	}
+
+	u, err := url.Parse(parsedInput)
+	if err == nil {
+		if normalized := strings.TrimSpace(u.Hostname()); normalized != "" {
+			host = normalized
+		}
+	}
+
+	switch strings.ToLower(host) {
+	case "localhost", "127.0.0.1", "::1":
+		// APISIX 网关通常通过 NodePort/Ingress 暴露，localhost 仅在本机自测有效。
+		// 这里返回空字符串，让路由不做 Host 过滤，避免错误回落到前端首页路由。
+		return ""
+	default:
+		// base-domain 配置为 IP 时，外部通常通过 NodePort/LB 访问，Host 头可能带端口或被代理改写。
+		// 为避免 Host 精确匹配导致路由漏匹配，这里对 IP 场景关闭 Host 过滤。
+		if net.ParseIP(host) != nil {
+			return ""
+		}
+		return host
+	}
 }
 
 func (nb *NotebookService) createNotebookSSHResources(
