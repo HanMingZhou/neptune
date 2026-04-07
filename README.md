@@ -81,38 +81,41 @@
 
 ```
 +------------------------------------------------------------------+
-|                    Browser / SSH Client                           |
-+---------------+----------------------------------+---------------+
-                |                                  |
-          HTTP (:80)                          SSH (:22)
-                |                                  |
-                v                                  v
-+---------------------+              +--------------------+
-|    Neptune Web      |              |   APISIX Gateway   |
-|   (Vue3 + Nginx)    |              |   HTTP + Stream    |
-+---------+-----------+              +------+-------+-----+
-          |                                 |       |
-          | /aiInfra                        |       |
-          v                                 |       v
-+-----------------------+                   |  +----------+
-|    Neptune Server     |<------------------+  | SSHPiper |
-|     (Go + Gin)        |                      +----+-----+
-|                       |                           |
-|  - Notebook API       |                           v
-|  - Training API       |                    +--------------+
-|  - Inference API      |                    | Notebook Pod |
-|  - APISIX Route API   |                    |  (sshd:22)   |
-|  - System Admin API   |                    +--------------+
-+---+-------------+-----+
-    |             |
-    v             v
-+-------+  +---------+   +------------------------------+
-| MySQL |  |  Redis  |   |       Kubernetes API         |
-+-------+  +---------+   |  - Kubeflow (Notebook/TB)    |
-                          |  - Volcano  (Training)      |
-                          |  - PVC      (Storage)       |
-                          +-----------------------------+
+|                    Browser / SSH Client                          |
++----------------------+-------------------------------+------------+
+                       |                               |
+                 HTTP / WS (:80)                 SSH (:22)
+                       |                               |
+                       v                               v
+                 +--------------------+         +--------------+
+                 |   APISIX Gateway   |         | APISIX Stream|
+                 |    (统一入口)      |         |  (K8s 模式)  |
+                 +---------+----------+         +------+-------+
+                           |                           |
+      +--------------------+--------------------+      |
+      |                                         |      v
+      | /                                       |  +----------+
+      v                                         v  | SSHPiper |
++---------------------+                +-----------------------+
+|    Neptune Web      |                |    Neptune Server     |
+|   (Vue3 + Nginx)    |                |      (Go + Gin)       |
++---------------------+                +----+-------------+-----+
+                                            |             |
+                                            v             v
+                                        +-------+     +---------+
+                                        | MySQL |     |  Redis  |
+                                        +-------+     +---------+
+                                                 \
+                                                  v
+                                      +---------------------------+
+                                      |      Kubernetes API       |
+                                      | Kubeflow / Volcano / PVC  |
+                                      +---------------------------+
 ```
+
+- HTTP 统一入口：`APISIX` 按路径转发，`/` 到前端，`/aiInfra/*` 到后端。
+- WebSocket（日志流/终端）同样走 APISIX 的 HTTP 网关链路。
+- SSH 流量链路（APISIX Stream -> SSHPiper）在 Kubernetes 部署中启用，Compose 主要覆盖 HTTP 网关场景。
 
 ### 技术栈
 
@@ -155,11 +158,18 @@ neptune/
 │   │   ├── view/            # 页面视图
 │   │   └── router/          # 前端路由
 │   ├── Dockerfile           # 前端镜像构建
-│   └── nginx.conf           # Nginx 反向代理配置
+│   ├── nginx.conf           # K8s 前端 Nginx 配置
+│   ├── nginx.compose.conf   # Compose 前端 Nginx 配置
+│   └── nginx.single.conf    # All-in-One 前端 Nginx 配置
 │
 ├── deploy/                  # 部署配置
 │   ├── docker/              # All-in-One Docker 构建
-│   ├── docker-compose/      # Docker Compose 部署
+│   ├── docker-compose/      # Docker Compose 部署（含 APISIX 网关）
+│   │   ├── docker-compose.yaml
+│   │   ├── config.yaml
+│   │   └── apisix/
+│   │       ├── config.yaml  # APISIX 运行配置（standalone）
+│   │       └── apisix.yaml  # APISIX 路由配置
 │   └── kubernetes/          # Kubernetes 部署
 │       ├── server/          # 后端 K8s 资源
 │       ├── web/             # 前端 K8s 资源
@@ -229,12 +239,15 @@ npm run dev
 
 ```bash
 # 在项目根目录执行
-docker-compose -f deploy/docker-compose/docker-compose.yaml up -d
+docker compose -f deploy/docker-compose/docker-compose.yaml up -d --build
 ```
 
 服务启动后：
-- **前端**: http://localhost
-- **后端 API**: http://localhost:8888/aiInfra
+- **统一网关入口（APISIX）**: http://localhost
+- **前端页面**: http://localhost
+- **前端页面（直连调试）**: http://localhost:8080
+- **后端 API（经 APISIX）**: http://localhost/aiInfra
+- **后端 API（直连排障）**: http://localhost:8888/aiInfra
 
 ---
 
@@ -259,10 +272,15 @@ docker-compose -f deploy/docker-compose/docker-compose.yaml up -d
 适用于**单机部署、测试环境**。
 
 ```bash
-docker-compose -f deploy/docker-compose/docker-compose.yaml up -d
+docker compose -f deploy/docker-compose/docker-compose.yaml up -d --build
 ```
 
-包含服务：Neptune Server、Neptune Web、MySQL、Redis
+包含服务：APISIX、Neptune Web、Neptune Server、MySQL、Redis
+
+路由关系：
+- `http://localhost/` -> `neptune-web:8080`
+- `http://localhost:8080/` -> `neptune-web:8080`（直连调试）
+- `http://localhost/aiInfra/*` -> `neptune-server:8888`
 
 > ⚠️ Docker Compose 模式不包含 Kubernetes 相关功能（Notebook、Training 等需要 K8s 集群支持）
 
@@ -298,6 +316,8 @@ kubectl apply -f deploy/kubernetes/web/
 | `server/config.dev.yaml` | 本地开发配置 |
 | `server/config.yaml` | 生产配置模板 |
 | `deploy/docker-compose/config.yaml` | Docker Compose 环境配置 |
+| `deploy/docker-compose/apisix/config.yaml` | Compose 下 APISIX 运行配置（standalone） |
+| `deploy/docker-compose/apisix/apisix.yaml` | Compose 下 APISIX 路由配置 |
 | `deploy/kubernetes/server/gva-server-configmap.yaml` | K8s 环境配置 |
 
 ### 关键配置项
@@ -316,7 +336,9 @@ redis:
 
 apisix:
   enabled: true             # 启用 APISIX 网关
-  auth-uri: "..."           # 认证回调地址
+  base-domain: "localhost"  # 网关访问域名
+  auth-uri: "http://neptune-server:8888/aiInfra/api/v1/apisix/auth"
+  http-port: 80
 
 sshpiper:
   host: "127.0.0.1"         # SSHPiper 地址

@@ -1,0 +1,34 @@
+routes:
+  - id: neptune-api
+    name: neptune-api
+    priority: 100
+    uri: /aiInfra/*
+    methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - OPTIONS
+    enable_websocket: true
+    upstream:
+      type: roundrobin
+      nodes:
+        "neptune-server:8888": 1
+
+  - id: neptune-web
+    name: neptune-web
+    priority: 10
+    uri: /*
+    methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - OPTIONS
+    enable_websocket: true
+    upstream:
+      type: roundrobin
+      nodes:
+        "neptune-web:8080": 1

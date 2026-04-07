@@ -42,8 +42,8 @@ COPY --from=server-builder /build/resource ./resource/
 # 复制前端产物
 COPY --from=web-builder /build/dist /usr/share/nginx/html
 
-# 复制 nginx 配置
-COPY web/nginx.conf /etc/nginx/conf.d/default.conf
+# 复制 nginx 配置（单容器模式）
+COPY web/nginx.single.conf /etc/nginx/conf.d/default.conf
 
 # 复制启动脚本
 COPY deploy/docker/entrypoint.sh .
