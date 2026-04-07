@@ -6,7 +6,7 @@
     :model="productForm"
     :rules="computeRules"
     form-class="product-form"
-    label-width="96px"
+    label-width="124px"
     :title="dialogTitle"
     :shell="false"
     width="840px"
@@ -230,7 +230,7 @@
           </el-radio-group>
         </el-form-item>
 
-        <div v-show="resourceType === 'gpu'">
+        <template v-if="resourceType === 'gpu'">
           <el-row :gutter="20">
             <el-col :xs="24" :sm="12">
               <el-form-item :label="t('gpuModel')" for="compute-gpu-model">
@@ -266,9 +266,9 @@
               </el-form-item>
             </el-col>
           </el-row>
-        </div>
+        </template>
 
-        <div v-show="resourceType === 'vgpu'">
+        <template v-else-if="resourceType === 'vgpu'">
           <el-row :gutter="20">
             <el-col :xs="24" :sm="12">
               <el-form-item :label="t('vGpuCount')" for="compute-vgpu-count">
@@ -306,7 +306,7 @@
               </el-form-item>
             </el-col>
           </el-row>
-        </div>
+        </template>
       </div>
 
       <div class="section-header">

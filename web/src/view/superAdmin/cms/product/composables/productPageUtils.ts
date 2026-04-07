@@ -135,6 +135,23 @@ export const buildProductFormFromRow = (
   storagePriceGb: row.storagePriceGb || 0
 })
 
+export const buildNodeContextFromProduct = (
+  product: Partial<CmsProductRow> = {}
+): CmsNodeRow => ({
+  nodeName: product.nodeName || '',
+  area: product.area || '',
+  cpu: product.cpu || 0,
+  memory: product.memory || 0,
+  cpuModel: product.cpuModel || '',
+  gpuModel: product.gpuModel || '',
+  gpuCount: product.gpuCount || 0,
+  gpuMemory: product.gpuMemory || 0,
+  vGpuNumber: product.vGpuCount || product.vGpuNumber || 0,
+  vGpuCount: product.vGpuCount || product.vGpuNumber || 0,
+  vGpuMemory: product.vGpuMemory || 0,
+  vGpuCores: product.vGpuCores || 0
+})
+
 export const getNodeSelectionState = (
   node: Partial<CmsNodeRow> = {}
 ): CmsNodeSelectionState => {

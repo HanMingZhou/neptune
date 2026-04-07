@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full max-w-md">
+  <div class="w-full max-w-md min-w-0">
     <router-link
       to="/"
       class="lg:hidden inline-flex items-center gap-4 mb-8 !no-underline group"
@@ -17,7 +17,7 @@
     </router-link>
 
     <div
-      class="relative backdrop-blur-xl rounded-3xl p-8 border transition-all duration-300 shadow-2xl bg-white/85 border-white/50 shadow-black/20"
+      class="login-auth-card relative rounded-3xl border bg-white/85 p-8 shadow-2xl shadow-black/20 transition-all duration-300 backdrop-blur-xl border-white/50"
     >
       <div class="mb-8">
         <h1 class="text-3xl font-bold mb-2 text-slate-900">
@@ -29,7 +29,7 @@
       </div>
 
       <form
-        class="space-y-5"
+        class="space-y-5 min-w-0"
         :aria-describedby="errorMsg ? 'auth-error' : undefined"
         @submit.prevent="emit('submit')"
       >
@@ -56,7 +56,7 @@
                   ? 'auth-error'
                   : undefined
             "
-            class="w-full px-4 py-3 rounded-xl text-base transition-all duration-200 border-none outline-none focus:ring-2 focus:ring-indigo-500 bg-slate-100 text-slate-900 placeholder-slate-400"
+            class="login-auth-field w-full rounded-xl border-none bg-slate-100 px-4 py-3 text-base text-slate-900 placeholder-slate-400 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500"
           />
           <p
             v-if="fieldErrors.username"
@@ -90,7 +90,7 @@
                   ? 'auth-error'
                   : undefined
             "
-            class="w-full px-4 py-3 rounded-xl text-base transition-all duration-200 border-none outline-none focus:ring-2 focus:ring-indigo-500 bg-slate-100 text-slate-900 placeholder-slate-400"
+            class="login-auth-field w-full rounded-xl border-none bg-slate-100 px-4 py-3 text-base text-slate-900 placeholder-slate-400 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500"
           />
           <p
             v-if="fieldErrors.email"
@@ -107,7 +107,7 @@
             for="login-password"
             >密码</label
           >
-          <div class="relative">
+          <div class="relative min-w-0">
             <input
               id="login-password"
               v-model="form.password"
@@ -123,11 +123,11 @@
                     ? 'auth-error'
                     : undefined
               "
-              class="w-full px-4 py-3 rounded-xl text-base transition-all duration-200 border-none outline-none focus:ring-2 focus:ring-indigo-500 pr-12 bg-slate-100 text-slate-900 placeholder-slate-400"
+              class="login-auth-field w-full rounded-xl border-none bg-slate-100 px-4 py-3 pr-12 text-base text-slate-900 placeholder-slate-400 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500"
             />
             <button
               type="button"
-              class="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded transition-colors text-slate-500 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 cursor-pointer"
+              class="login-auth-icon-button absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-slate-500 transition-colors hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
               :aria-label="showPassword ? '隐藏密码' : '显示密码'"
               :aria-pressed="showPassword ? 'true' : 'false'"
               @click="emit('update:showPassword', !showPassword)"
@@ -182,7 +182,7 @@
             for="login-captcha"
             >验证码</label
           >
-          <div class="flex gap-3">
+          <div class="flex min-w-0 gap-3">
             <input
               id="login-captcha"
               v-model="form.captcha"
@@ -200,11 +200,11 @@
                     ? 'auth-error'
                     : undefined
               "
-              class="flex-1 px-4 py-3 rounded-xl text-base transition-all duration-200 border-none outline-none focus:ring-2 focus:ring-indigo-500 bg-slate-100 text-slate-900 placeholder-slate-400"
+              class="login-auth-field min-w-0 flex-1 rounded-xl border-none bg-slate-100 px-4 py-3 text-base text-slate-900 placeholder-slate-400 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500"
             />
             <button
               type="button"
-              class="w-28 h-12 rounded-xl cursor-pointer overflow-hidden flex items-center justify-center bg-slate-100 border border-slate-200 transition-colors duration-200 hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+              class="login-auth-captcha flex h-12 w-28 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-slate-100 transition-colors duration-200 hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
               aria-label="刷新验证码"
               title="刷新验证码"
               @click="emit('refresh-captcha')"
@@ -269,7 +269,7 @@
                   ? 'auth-error'
                   : undefined
             "
-            class="w-full px-4 py-3 rounded-xl text-base transition-all duration-200 border-none outline-none focus:ring-2 focus:ring-indigo-500 bg-slate-100 text-slate-900 placeholder-slate-400 tracking-[0.3em] text-center font-mono text-lg"
+            class="login-auth-field w-full rounded-xl border-none bg-slate-100 px-4 py-3 text-center font-mono text-lg text-slate-900 placeholder-slate-400 outline-none transition-all duration-200 tracking-[0.3em] focus:ring-2 focus:ring-indigo-500"
             @input="
               emit(
                 'update:mfaCode',
@@ -303,7 +303,7 @@
           :aria-disabled="
             loading || (showMfaStep && mfaCode.length !== 6) ? 'true' : 'false'
           "
-          class="w-full py-4 rounded-xl text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 transition-all duration-200 shadow-lg shadow-indigo-500/30 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          class="login-auth-submit flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 py-4 text-base font-semibold text-white shadow-lg shadow-indigo-500/30 transition-all duration-200 hover:from-indigo-500 hover:to-cyan-500 disabled:cursor-not-allowed disabled:opacity-50"
         >
           <svg
             v-if="loading"
@@ -421,3 +421,26 @@ const submitText = computed(() => {
   return props.isRegister ? '注册' : '登录'
 })
 </script>
+
+<style scoped>
+.login-auth-card {
+  width: 100%;
+  max-width: 100%;
+}
+
+.login-auth-field,
+.login-auth-captcha,
+.login-auth-icon-button,
+.login-auth-submit {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.login-auth-field {
+  min-width: 0;
+}
+
+.login-auth-captcha {
+  flex: 0 0 7rem;
+}
+</style>

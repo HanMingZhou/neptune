@@ -762,7 +762,7 @@ func (nb *NotebookService) rollbackNotebookRuntime(ctx context.Context, dbNb *nb
 		}
 	}
 
-	if err := nb.cleanupNotebookResources(ctx, dbNb, cluster); err != nil {
+	if err := nb.cleanupNotebookResources(ctx, dbNb, cluster, true); err != nil {
 		logx.Error("回滚时清理Notebook关联资源失败", err)
 	}
 }
@@ -848,34 +848,100 @@ func (nb *NotebookService) createNotebookTensorboardResources(
 ) {
 	logsPath := nb.getNotebookTensorboardLogsPath(nbRef)
 	tbInstanceName := fmt.Sprintf("%s-tb", nbRef.InstanceName)
+	if tensorboardClient == nil {
+		logx.Error("Tensorboard客户端未初始化")
+		return
+	}
 	tbManager := tensorboard.NewTensorboardManager(tensorboardClient)
 	if err := tbManager.CreateTensorboard(ctx, &tensorboardReq.AddTensorBoardReq{
 		InstanceName:      tbInstanceName,
 		Namespace:         nbRef.Namespace,
 		LogsPath:          logsPath,
 		EnableTensorboard: true,
-	}); err != nil {
+	}); err != nil && !apierrors.IsAlreadyExists(err) {
 		logx.Error("创建Tensorboard失败", err)
+		return
 	}
 
-	tensorBoardRef := &tensorboardModel.Tensorboard{
-		InstanceName: tbInstanceName,
-		Namespace:    nbRef.Namespace,
-		OwnerType:    consts.NotebookInstance,
-		OwnerID:      nbRef.ID,
-		LogsPath:     logsPath,
-		Status:       consts.InferenceStatusCreating,
-		UserId:       nbRef.UserId,
-		ClusterID:    nbRef.ClusterID,
-	}
-	if err := global.GVA_DB.Create(tensorBoardRef).Error; err != nil {
+	tensorBoardRef, err := nb.upsertNotebookTensorboardRecord(nbRef, tbInstanceName, logsPath)
+	if err != nil {
 		logx.Error("保存Tensorboard失败", err)
+		return
 	}
 	if err := global.GVA_DB.Model(&nbModel.Notebook{}).Where("id = ?", nbRef.ID).Update("tensorboard_id", int64(tensorBoardRef.ID)).Error; err != nil {
 		logx.Error("更新Notebook TensorboardID失败", err)
 	}
 
 	nb.createTensorboardAccessRoute(ctx, nbRef)
+}
+
+func (nb *NotebookService) upsertNotebookTensorboardRecord(
+	nbRef *nbModel.Notebook,
+	tbInstanceName string,
+	logsPath string,
+) (*tensorboardModel.Tensorboard, error) {
+	buildUpdates := func() map[string]interface{} {
+		return map[string]interface{}{
+			"instance_name": tbInstanceName,
+			"namespace":     nbRef.Namespace,
+			"logs_path":     logsPath,
+			"status":        consts.InferenceStatusCreating,
+			"user_id":       nbRef.UserId,
+			"cluster_id":    nbRef.ClusterID,
+		}
+	}
+
+	var tensorBoardRef tensorboardModel.Tensorboard
+	if nbRef.TensorboardID > 0 {
+		err := global.GVA_DB.Where("id = ? AND owner_id = ? AND owner_type = ?", nbRef.TensorboardID, nbRef.ID, consts.NotebookInstance).First(&tensorBoardRef).Error
+		if err == nil {
+			if updateErr := global.GVA_DB.Model(&tensorBoardRef).Updates(buildUpdates()).Error; updateErr != nil {
+				return nil, updateErr
+			}
+			tensorBoardRef.InstanceName = tbInstanceName
+			tensorBoardRef.Namespace = nbRef.Namespace
+			tensorBoardRef.LogsPath = logsPath
+			tensorBoardRef.Status = consts.InferenceStatusCreating
+			tensorBoardRef.UserId = nbRef.UserId
+			tensorBoardRef.ClusterID = nbRef.ClusterID
+			return &tensorBoardRef, nil
+		}
+		if !errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, err
+		}
+	}
+
+	if err := global.GVA_DB.Where("owner_id = ? AND owner_type = ?", nbRef.ID, consts.NotebookInstance).Order("id DESC").First(&tensorBoardRef).Error; err != nil {
+		if !errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, err
+		}
+
+		tensorBoardRef = tensorboardModel.Tensorboard{
+			InstanceName: tbInstanceName,
+			Namespace:    nbRef.Namespace,
+			OwnerType:    consts.NotebookInstance,
+			OwnerID:      nbRef.ID,
+			LogsPath:     logsPath,
+			Status:       consts.InferenceStatusCreating,
+			UserId:       nbRef.UserId,
+			ClusterID:    nbRef.ClusterID,
+		}
+		if createErr := global.GVA_DB.Create(&tensorBoardRef).Error; createErr != nil {
+			return nil, createErr
+		}
+		return &tensorBoardRef, nil
+	}
+
+	if err := global.GVA_DB.Model(&tensorBoardRef).Updates(buildUpdates()).Error; err != nil {
+		return nil, err
+	}
+	tensorBoardRef.InstanceName = tbInstanceName
+	tensorBoardRef.Namespace = nbRef.Namespace
+	tensorBoardRef.LogsPath = logsPath
+	tensorBoardRef.Status = consts.InferenceStatusCreating
+	tensorBoardRef.UserId = nbRef.UserId
+	tensorBoardRef.ClusterID = nbRef.ClusterID
+	return &tensorBoardRef, nil
 }
 
 func (nb *NotebookService) createTensorboardAccessRoute(ctx context.Context, nbRef *nbModel.Notebook) {
@@ -1075,10 +1141,10 @@ func (nb *NotebookService) createNotebookSSHStreamRoute(ctx context.Context, nbR
 // cleanupNotebookResources 清理 Notebook 关联的可选 K8s 资源
 // 包括：TensorBoard、SSH Pipe、Apisix 路由、SSH Service
 // 被 DeleteNotebook 和 StopNotebook 共同调用
-func (nb *NotebookService) cleanupNotebookResources(ctx context.Context, dbNb *nbModel.Notebook, cluster *global.ClusterClientInfo) error {
+func (nb *NotebookService) cleanupNotebookResources(ctx context.Context, dbNb *nbModel.Notebook, cluster *global.ClusterClientInfo, deleteTensorboardRecord bool) error {
 	var errs []error
 
-	nb.appendCleanupError(&errs, nb.deleteNotebookTensorboardResources(ctx, dbNb, cluster.TensorboardClient))
+	nb.appendCleanupError(&errs, nb.deleteNotebookTensorboardResources(ctx, dbNb, cluster.TensorboardClient, deleteTensorboardRecord))
 	nb.appendCleanupError(&errs, nb.deleteNotebookSSHPipe(ctx, dbNb, cluster.RuntimeClient))
 	nb.appendCleanupError(&errs, nb.deleteNotebookAccessRoutes(ctx, dbNb))
 	nb.appendCleanupError(&errs, nb.deleteNotebookSSHService(ctx, dbNb, cluster.ClientSet))
@@ -1099,24 +1165,29 @@ func (nb *NotebookService) deleteNotebookTensorboardResources(
 	ctx context.Context,
 	dbNb *nbModel.Notebook,
 	tensorboardClient *global.TensorboardClient,
+	deleteRecord bool,
 ) error {
 	if !dbNb.EnableTensorboard {
 		return nil
 	}
 
 	var errs []error
-	tbMgr := tensorboard.NewTensorboardManager(tensorboardClient)
-	if err := tbMgr.DeleteTensorboard(ctx, &tensorboardReq.DeleteTensorBoardReq{
-		InstanceName: fmt.Sprintf("%s-tb", dbNb.InstanceName),
-		Namespace:    dbNb.Namespace,
-	}); err != nil && !apierrors.IsNotFound(err) {
-		logx.Error("删除TensorBoard K8s资源失败", err)
-		errs = append(errs, err)
+	if tensorboardClient != nil {
+		tbMgr := tensorboard.NewTensorboardManager(tensorboardClient)
+		if err := tbMgr.DeleteTensorboard(ctx, &tensorboardReq.DeleteTensorBoardReq{
+			InstanceName: fmt.Sprintf("%s-tb", dbNb.InstanceName),
+			Namespace:    dbNb.Namespace,
+		}); err != nil && !apierrors.IsNotFound(err) {
+			logx.Error("删除TensorBoard K8s资源失败", err)
+			errs = append(errs, err)
+		}
 	}
 
-	if err := global.GVA_DB.Where("owner_id = ? AND owner_type = ?", dbNb.ID, consts.NotebookInstance).Delete(&tensorboardModel.Tensorboard{}).Error; err != nil {
-		logx.Error("删除TensorBoard数据库记录失败", err)
-		errs = append(errs, err)
+	if deleteRecord {
+		if err := global.GVA_DB.Where("owner_id = ? AND owner_type = ?", dbNb.ID, consts.NotebookInstance).Delete(&tensorboardModel.Tensorboard{}).Error; err != nil {
+			logx.Error("删除TensorBoard数据库记录失败", err)
+			errs = append(errs, err)
+		}
 	}
 
 	if len(errs) > 0 {
@@ -1315,7 +1386,7 @@ func (nb *NotebookService) DeleteNotebook(ctx context.Context, req *request.Dele
 		}
 	}
 
-	if err = nb.cleanupNotebookResources(context.Background(), nbRef, cluster); err != nil {
+	if err = nb.cleanupNotebookResources(context.Background(), nbRef, cluster, true); err != nil {
 		logx.Error("清理 Notebook 关联资源失败", err)
 		nbRef.Status = consts.NotebookStatusDeleteFailed
 		_ = global.GVA_DB.Save(nbRef).Error
@@ -1561,6 +1632,7 @@ func convertDBModelToResponse(
 }
 
 func buildNotebookResponseItem(dbNb nbModel.Notebook, lookup notebookResponseLookup) *response.NotebookItem {
+	normalizedVolumeMounts := normalizeNotebookRuntimeVolumeMounts(&dbNb)
 	item := &response.NotebookItem{
 		ID:                 dbNb.ID,
 		DisplayName:        dbNb.DisplayName,
@@ -1577,7 +1649,7 @@ func buildNotebookResponseItem(dbNb nbModel.Notebook, lookup notebookResponseLoo
 		PayType:            dbNb.PayType,
 		EnableTensorboard:  dbNb.EnableTensorboard,
 		TensorboardLogPath: dbNb.TensorboardLogPath,
-		VolumeMounts:       dbNb.VolumeMounts,
+		VolumeMounts:       normalizedVolumeMounts,
 		CreatedAt:          dbNb.CreatedAt.Format("2006-01-02 15:04:05"),
 	}
 
@@ -1778,7 +1850,7 @@ func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string) *nbv1.Notebook 
 	var volumes []corev1.Volume
 
 	// 1. 处理所有挂载 (包括 workspace)
-	for _, m := range nbRef.VolumeMounts {
+	for _, m := range normalizeNotebookRuntimeVolumeMounts(nbRef) {
 		pvcName := m.PVCName
 		if pvcName == "" {
 			pvcName = fmt.Sprintf("%s-%s", nbRef.InstanceName, m.Name)
@@ -1908,6 +1980,80 @@ func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string) *nbv1.Notebook 
 			},
 		},
 	}
+}
+
+func normalizeNotebookRuntimeVolumeMounts(nbRef *nbModel.Notebook) []nbModel.NotebookVolume {
+	if nbRef == nil {
+		return nil
+	}
+
+	workspace := nbModel.NotebookVolume{
+		NotebookID: nbRef.ID,
+		Name:       nbModel.Workspace,
+		MountsPath: nbModel.DefaultWorkspacePath,
+		Size:       resolveNotebookWorkspaceSize(nbRef),
+		Type:       nbModel.Workspace,
+		PVCName:    fmt.Sprintf("%s-%s", nbRef.InstanceName, nbModel.Workspace),
+	}
+
+	normalized := []nbModel.NotebookVolume{workspace}
+	seenNames := map[string]struct{}{workspace.Name: {}}
+	seenMountPaths := map[string]struct{}{workspace.MountsPath: {}}
+
+	for _, mount := range nbRef.VolumeMounts {
+		if isWorkspaceNotebookVolume(mount) {
+			continue
+		}
+
+		mount.Name = strings.TrimSpace(mount.Name)
+		mount.MountsPath = strings.TrimSpace(mount.MountsPath)
+		mount.PVCName = strings.TrimSpace(mount.PVCName)
+		if mount.Name == "" {
+			mount.Name = mount.PVCName
+		}
+		if mount.Name == "" || mount.MountsPath == "" {
+			continue
+		}
+		if mount.PVCName == "" && mount.PVCId == 0 {
+			continue
+		}
+		if _, exists := seenNames[mount.Name]; exists {
+			continue
+		}
+		if _, exists := seenMountPaths[mount.MountsPath]; exists {
+			continue
+		}
+
+		mount.NotebookID = nbRef.ID
+		normalized = append(normalized, mount)
+		seenNames[mount.Name] = struct{}{}
+		seenMountPaths[mount.MountsPath] = struct{}{}
+	}
+
+	return normalized
+}
+
+func resolveNotebookWorkspaceSize(nbRef *nbModel.Notebook) int64 {
+	if nbRef == nil {
+		return nbModel.DefaultWorkspaceSize
+	}
+
+	size := nbRef.StorageSize
+	if size <= 0 {
+		size = nbModel.DefaultWorkspaceSize
+	}
+
+	expectedPVCName := fmt.Sprintf("%s-%s", nbRef.InstanceName, nbModel.Workspace)
+	for _, mount := range nbRef.VolumeMounts {
+		if isWorkspaceNotebookVolume(mount) && mount.Size > 0 && strings.TrimSpace(mount.PVCName) == expectedPVCName {
+			return mount.Size
+		}
+	}
+	return size
+}
+
+func isWorkspaceNotebookVolume(mount nbModel.NotebookVolume) bool {
+	return mount.Type == nbModel.Workspace || mount.Name == nbModel.Workspace || mount.MountsPath == nbModel.DefaultWorkspacePath
 }
 
 // sshSetupScript 配置 sshd（密码认证、root 登录、密码设置、公钥安装）
@@ -2362,7 +2508,7 @@ func (nb *NotebookService) StopNotebook(ctx context.Context, id uint) error {
 			return err
 		}
 
-		if err := nb.cleanupNotebookResources(context.Background(), &dbNb, cluster); err != nil {
+		if err := nb.cleanupNotebookResources(context.Background(), &dbNb, cluster, false); err != nil {
 			logx.Error("停止 Notebook 时清理关联资源失败", err)
 		}
 		return nil
@@ -2380,7 +2526,7 @@ func (nb *NotebookService) StopNotebook(ctx context.Context, id uint) error {
 		}
 	}
 
-	if err := nb.cleanupNotebookResources(context.Background(), &dbNb, cluster); err != nil {
+	if err := nb.cleanupNotebookResources(context.Background(), &dbNb, cluster, false); err != nil {
 		logx.Error("停止 Notebook 时清理关联资源失败", err)
 	}
 

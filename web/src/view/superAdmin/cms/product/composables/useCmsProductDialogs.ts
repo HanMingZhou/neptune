@@ -19,6 +19,7 @@ import type {
 } from '@/types/superAdmin'
 import type { ApiResponse } from '@/utils/request'
 import {
+  buildNodeContextFromProduct,
   buildProductFormFromRow,
   createComputeRules,
   createDefaultPriceForm,
@@ -146,6 +147,70 @@ export const useCmsProductDialogs = ({
     Object.assign(priceForm, createDefaultPriceForm())
   }
 
+  const syncMissingResourceFieldsFromNode = (
+    type: CmsProductResourceType,
+    node: CmsNodeRow | null
+  ): void => {
+    if (!node) {
+      return
+    }
+
+    if (type === 'gpu') {
+      if (!productForm.gpuModel) {
+        productForm.gpuModel = node.gpuModel || ''
+      }
+
+      if ((productForm.gpuCount || 0) === 0) {
+        productForm.gpuCount = node.gpuCount || 0
+      }
+
+      if ((productForm.gpuMemory || 0) === 0) {
+        productForm.gpuMemory = node.gpuMemory || 0
+      }
+
+      return
+    }
+
+    if (type === 'vgpu') {
+      if ((productForm.vGpuCount || 0) === 0) {
+        productForm.vGpuCount = node.vGpuNumber || node.vGpuCount || 0
+      }
+
+      if ((productForm.vGpuMemory || 0) === 0) {
+        productForm.vGpuMemory = node.vGpuMemory || 0
+      }
+
+      if ((productForm.vGpuCores || 0) === 0) {
+        productForm.vGpuCores = node.vGpuCores || 0
+      }
+    }
+  }
+
+  const hydrateEditNodeContext = async (
+    row: CmsProductRow
+  ): Promise<void> => {
+    if (row.productType !== 1 || !row.clusterId || !row.nodeName) {
+      return
+    }
+
+    await fetchClusterNodes(row.clusterId)
+
+    const matchedNode =
+      clusterNodes.value.find((node) => node.nodeName === row.nodeName) || null
+
+    if (
+      !matchedNode ||
+      !showProductDialog.value ||
+      !isEdit.value ||
+      productForm.id !== row.id
+    ) {
+      return
+    }
+
+    selectedNode.value = matchedNode
+    syncMissingResourceFieldsFromNode(resourceType.value, matchedNode)
+  }
+
   const openCreateDialog = (): void => {
     resetProductForm()
     isEdit.value = false
@@ -154,11 +219,13 @@ export const useCmsProductDialogs = ({
 
   const openEditDialog = (row: CmsProductRow): void => {
     Object.assign(productForm, buildProductFormFromRow(row, activeTab.value))
-    selectedNode.value = null
+    selectedNode.value = buildNodeContextFromProduct(row)
     clusterNodes.value = []
     isEdit.value = true
     resourceType.value = resolveProductResourceType(row)
     showProductDialog.value = true
+
+    void hydrateEditNodeContext(row)
   }
 
   const openPriceDialog = (row: CmsProductRow): void => {

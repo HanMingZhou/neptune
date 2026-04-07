@@ -201,7 +201,7 @@ func (f *PodGroupInformerFactory) Start(ctx context.Context) error {
 			}
 			return
 		}
-		logx.Info("PodGroup Informer 缓存同步完成,clusterId", f.clusterID)
+		logx.Infof("PodGroup Informer 缓存同步完成,clusterId: %v", f.clusterID)
 		wait.Until(f.runWorker, time.Second, f.stopCh)
 	}()
 
