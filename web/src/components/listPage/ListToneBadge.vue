@@ -4,21 +4,23 @@
   </span>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 
-const props = defineProps({
-  label: {
-    type: String,
-    default: ''
-  },
-  tone: {
-    type: String,
-    default: 'neutral'
-  }
-})
+type ListTone = 'neutral' | 'info' | 'success' | 'warning' | 'danger'
 
-const toneClassMap = {
+const props = withDefaults(
+  defineProps<{
+    label?: string
+    tone?: ListTone
+  }>(),
+  {
+    label: '',
+    tone: 'neutral'
+  }
+)
+
+const toneClassMap: Record<ListTone, string> = {
   neutral: 'console-badge--neutral',
   info: 'console-badge--info',
   success: 'console-badge--success',
@@ -26,5 +28,7 @@ const toneClassMap = {
   danger: 'console-badge--danger'
 }
 
-const resolvedClass = computed(() => toneClassMap[props.tone] || toneClassMap.neutral)
+const resolvedClass = computed(
+  () => toneClassMap[props.tone] || toneClassMap.neutral
+)
 </script>

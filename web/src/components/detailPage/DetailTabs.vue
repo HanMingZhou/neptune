@@ -13,7 +13,9 @@
           ]"
           @click="$emit('update:activeTab', tab.key)"
         >
-          <span class="material-icons text-base md:text-lg">{{ tab.icon }}</span>
+          <span class="material-icons text-base md:text-lg">{{
+            tab.icon
+          }}</span>
           {{ tab.label }}
         </button>
       </div>
@@ -21,17 +23,20 @@
   </div>
 </template>
 
-<script setup>
-defineProps({
-  activeTab: {
-    type: String,
-    required: true
-  },
-  tabs: {
-    type: Array,
-    default: () => []
-  }
-})
+<script setup lang="ts">
+import type { DetailTab } from '@/types/consoleResource'
 
-defineEmits(['update:activeTab'])
+withDefaults(
+  defineProps<{
+    activeTab: string
+    tabs?: DetailTab[]
+  }>(),
+  {
+    tabs: () => []
+  }
+)
+
+defineEmits<{
+  'update:activeTab': [key: string]
+}>()
 </script>

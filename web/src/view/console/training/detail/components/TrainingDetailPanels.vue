@@ -62,123 +62,59 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import PodsTab from '@/components/detailPage/PodsTab.vue'
 import LogsTab from './LogsTab.vue'
 import OverviewTab from './OverviewTab.vue'
 import TerminalTab from './TerminalTab.vue'
+import type { ConsolePod, ConsoleTrainingDetail } from '@/types/consoleResource'
 
-defineProps({
-  activeTab: {
-    type: String,
-    default: 'overview'
-  },
-  downloadLoading: {
-    type: Boolean,
-    default: false
-  },
-  formatTime: {
-    type: Function,
-    required: true
-  },
-  getFrameworkLabel: {
-    type: Function,
-    required: true
-  },
-  getPayTypeLabel: {
-    type: Function,
-    required: true
-  },
-  getPodStatusClass: {
-    type: Function,
-    required: true
-  },
-  getStatusLabel: {
-    type: Function,
-    required: true
-  },
-  isRunning: {
-    type: Boolean,
-    default: false
-  },
-  isTerminal: {
-    type: Boolean,
-    default: false
-  },
-  job: {
-    type: Object,
-    required: true
-  },
-  logs: {
-    type: String,
-    default: ''
-  },
-  logsConnected: {
-    type: Boolean,
-    default: false
-  },
-  logsLoading: {
-    type: Boolean,
-    default: false
-  },
-  logTaskName: {
-    type: String,
-    default: ''
-  },
-  masterTaskLabel: {
-    type: String,
-    default: ''
-  },
-  masterTaskName: {
-    type: String,
-    default: ''
-  },
-  podCount: {
-    type: Number,
-    default: 0
-  },
-  podIndex: {
-    type: Number,
-    default: 0
-  },
-  pods: {
-    type: Array,
-    default: () => []
-  },
-  podsLoading: {
-    type: Boolean,
-    default: false
-  },
-  setLogsRef: {
-    type: Function,
-    required: true
-  },
-  setTerminalRef: {
-    type: Function,
-    required: true
-  },
-  terminalConnected: {
-    type: Boolean,
-    default: false
-  },
-  terminalTaskName: {
-    type: String,
-    default: ''
-  }
-})
+type FormatTime = (value?: string | number | null) => string | null
+type StatusLabelGetter = (status?: string) => string
+type PayTypeLabelGetter = (type?: number | string) => string
+type StatusClassGetter = (status?: string) => string
+type TrainingFrameworkGetter = (type?: string) => string
+type ElementRefSetter = (element: HTMLElement | null) => void
 
-const emit = defineEmits([
-  'clear-logs',
-  'connect-logs',
-  'connect-terminal',
-  'disconnect-logs',
-  'disconnect-terminal',
-  'download-logs',
-  'fit-terminal',
-  'refresh-pods',
-  'update:log-task-name',
-  'update:pod-index',
-  'update:terminal-task-name',
-  'view-pod-logs'
-])
+defineProps<{
+  activeTab: string
+  downloadLoading: boolean
+  formatTime: FormatTime
+  getFrameworkLabel: TrainingFrameworkGetter
+  getPayTypeLabel: PayTypeLabelGetter
+  getPodStatusClass: StatusClassGetter
+  getStatusLabel: StatusLabelGetter
+  isRunning: boolean
+  isTerminal: boolean
+  job: Partial<ConsoleTrainingDetail>
+  logs: string
+  logsConnected: boolean
+  logsLoading: boolean
+  logTaskName: string
+  masterTaskLabel: string
+  masterTaskName: string
+  podCount: number
+  podIndex: number
+  pods: ConsolePod[]
+  podsLoading: boolean
+  setLogsRef: ElementRefSetter
+  setTerminalRef: ElementRefSetter
+  terminalConnected: boolean
+  terminalTaskName: string
+}>()
+
+const emit = defineEmits<{
+  'clear-logs': []
+  'connect-logs': []
+  'connect-terminal': []
+  'disconnect-logs': []
+  'disconnect-terminal': []
+  'download-logs': []
+  'fit-terminal': []
+  'refresh-pods': []
+  'update:log-task-name': [value: string]
+  'update:pod-index': [value: number]
+  'update:terminal-task-name': [value: string]
+  'view-pod-logs': [pod: ConsolePod]
+}>()
 </script>

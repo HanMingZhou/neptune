@@ -2,6 +2,6 @@
   <SshKeyManagementPage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import SshKeyManagementPage from './index/index.vue'
 </script>

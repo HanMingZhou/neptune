@@ -2,6 +2,8 @@ package product
 
 import (
 	"context"
+	"errors"
+	"fmt"
 	"sort"
 
 	"gin-vue-admin/global"
@@ -9,6 +11,7 @@ import (
 	"gin-vue-admin/model/consts"
 	productModel "gin-vue-admin/model/product"
 	productRes "gin-vue-admin/model/product/response"
+	redisUtils "gin-vue-admin/utils/redis"
 
 	"gorm.io/gorm"
 	corev1 "k8s.io/api/core/v1"
@@ -232,38 +235,60 @@ func (s *ProductService) DeleteResourceAllocations(ctx context.Context, instance
 }
 
 func (s *ProductService) ReleaseResourceAllocations(ctx context.Context, instanceType string, instanceID uint) (bool, error) {
-	var allocations []productModel.ResourceAllocation
-	if err := global.GVA_DB.WithContext(ctx).
-		Where("instance_type = ? AND instance_id = ?", instanceType, instanceID).
-		Find(&allocations).Error; err != nil {
+	lock, err := redisUtils.AcquireResourceLock(ctx, fmt.Sprintf("resource-allocation-release:%s", instanceType), instanceID)
+	if err != nil {
 		return false, err
 	}
-	if len(allocations) == 0 {
-		return false, nil
-	}
+	defer lock.Unlock(ctx)
 
-	counts := make(map[uint]int64)
-	ids := make([]uint, 0, len(allocations))
-	for _, item := range allocations {
-		counts[item.ProductID] += item.ReservedCount
-		ids = append(ids, item.ID)
-	}
-
-	productIDs := make([]uint, 0, len(counts))
-	for productID := range counts {
-		productIDs = append(productIDs, productID)
-	}
-	sort.Slice(productIDs, func(i, j int) bool { return productIDs[i] < productIDs[j] })
-	for _, productID := range productIDs {
-		if err := s.ReleaseCapacity(ctx, productID, counts[productID]); err != nil {
-			return false, err
+	released := false
+	err = global.GVA_DB.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
+		var allocations []productModel.ResourceAllocation
+		if err := tx.
+			Where("instance_type = ? AND instance_id = ?", instanceType, instanceID).
+			Order("id ASC").
+			Find(&allocations).Error; err != nil {
+			return err
 		}
-	}
+		if len(allocations) == 0 {
+			return nil
+		}
 
-	if err := global.GVA_DB.WithContext(ctx).Where("id IN ?", ids).Delete(&productModel.ResourceAllocation{}).Error; err != nil {
+		counts := make(map[uint]int64)
+		ids := make([]uint, 0, len(allocations))
+		for _, item := range allocations {
+			counts[item.ProductID] += item.ReservedCount
+			ids = append(ids, item.ID)
+		}
+
+		productIDs := make([]uint, 0, len(counts))
+		for productID := range counts {
+			productIDs = append(productIDs, productID)
+		}
+		sort.Slice(productIDs, func(i, j int) bool { return productIDs[i] < productIDs[j] })
+		for _, productID := range productIDs {
+			result := tx.Model(&productModel.Product{}).
+				Where("id = ? AND used_capacity >= ?", productID, counts[productID]).
+				Update("used_capacity", gorm.Expr("used_capacity - ?", counts[productID]))
+			if result.Error != nil {
+				return result.Error
+			}
+			if result.RowsAffected == 0 {
+				return errors.New("释放失败：产品不存在或可释放数量不足")
+			}
+		}
+
+		if err := tx.Where("id IN ?", ids).Delete(&productModel.ResourceAllocation{}).Error; err != nil {
+			return err
+		}
+
+		released = true
+		return nil
+	})
+	if err != nil {
 		return false, err
 	}
-	return true, nil
+	return released, nil
 }
 
 func (s *ProductService) buildProductListDB(ctx context.Context, productType int, filters AggregateProductFilters) *gorm.DB {

@@ -1,12 +1,20 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-5 shadow-sm">
-    <h3 class="text-xs font-black uppercase text-slate-400 mb-4">{{ t('security.akTitle') }}</h3>
+  <div
+    class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-5 shadow-sm"
+  >
+    <h3 class="text-xs font-black uppercase text-slate-400 mb-4">
+      {{ t('security.akTitle') }}
+    </h3>
     <p class="text-xs text-slate-500 mb-4">{{ t('security.akDesc') }}</p>
     <div class="space-y-3">
-      <div class="p-3 bg-slate-50 dark:bg-zinc-800 rounded-lg flex items-center justify-between border border-border-light dark:border-border-dark">
+      <div
+        class="p-3 bg-slate-50 dark:bg-zinc-800 rounded-lg flex items-center justify-between border border-border-light dark:border-border-dark"
+      >
         <div>
           <p class="text-[10px] font-bold text-slate-400">Access Key ID</p>
-          <p class="text-xs font-mono">{{ accessKeyId || t('security.notGenerated') }}</p>
+          <p class="text-xs font-mono">
+            {{ accessKeyId || t('security.notGenerated') }}
+          </p>
         </div>
         <button
           class="material-icons text-slate-400 text-sm hover:text-primary disabled:opacity-40"
@@ -31,21 +39,25 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type { Translator } from '@/types/consoleResource'
 
-defineProps({
-  accessKeyId: {
-    type: String,
-    default: ''
-  },
-  loading: {
-    type: Boolean,
-    default: false
+withDefaults(
+  defineProps<{
+    accessKeyId?: string
+    loading?: boolean
+  }>(),
+  {
+    accessKeyId: '',
+    loading: false
   }
-})
+)
 
-defineEmits(['generate', 'copy'])
+defineEmits<{
+  generate: []
+  copy: []
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

@@ -2,7 +2,11 @@
   <section class="console-detail-card rounded-xl p-5 md:p-6">
     <div class="flex flex-col gap-5 md:flex-row md:items-start">
       <div class="avatar-shell">
-        <el-avatar v-if="userInfo.headerImg" :src="userInfo.headerImg" :size="88" />
+        <el-avatar
+          v-if="userInfo.headerImg"
+          :src="userInfo.headerImg"
+          :size="88"
+        />
         <div v-else class="avatar-fallback">
           {{ userInitials }}
         </div>
@@ -10,13 +14,25 @@
 
       <div class="min-w-0 flex-1 space-y-4">
         <div class="space-y-2">
-          <p class="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">{{ t('person') }}</p>
+          <p
+            class="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500"
+          >
+            {{ t('person') }}
+          </p>
 
-          <div v-if="!editFlag" class="flex flex-col gap-3 md:flex-row md:items-center">
-            <h2 class="truncate text-[1.75rem] font-semibold tracking-tight text-slate-950 dark:text-slate-100">
+          <div
+            v-if="!editFlag"
+            class="flex flex-col gap-3 md:flex-row md:items-center"
+          >
+            <h2
+              class="truncate text-[1.75rem] font-semibold tracking-tight text-slate-950 dark:text-slate-100"
+            >
               {{ displayName }}
             </h2>
-            <button class="list-row-button list-row-button--neutral" @click="$emit('open-edit')">
+            <button
+              class="list-row-button list-row-button--neutral"
+              @click="$emit('open-edit')"
+            >
               <el-icon><Edit /></el-icon>
               {{ t('editNickname') }}
             </button>
@@ -25,10 +41,16 @@
           <div v-else class="flex flex-col gap-3 sm:flex-row sm:items-center">
             <el-input v-model="nickNameModel" class="max-w-sm" />
             <div class="flex gap-2">
-              <button class="list-toolbar-button list-toolbar-button--primary" @click="$emit('confirm-edit')">
+              <button
+                class="list-toolbar-button list-toolbar-button--primary"
+                @click="$emit('confirm-edit')"
+              >
                 {{ t('confirm') }}
               </button>
-              <button class="list-toolbar-button list-toolbar-button--secondary" @click="$emit('close-edit')">
+              <button
+                class="list-toolbar-button list-toolbar-button--secondary"
+                @click="$emit('close-edit')"
+              >
                 {{ t('cancel') }}
               </button>
             </div>
@@ -55,15 +77,24 @@
         </div>
 
         <div class="flex flex-wrap gap-2.5">
-          <button class="list-toolbar-button list-toolbar-button--primary" @click="$emit('change-password')">
+          <button
+            class="list-toolbar-button list-toolbar-button--primary"
+            @click="$emit('change-password')"
+          >
             <el-icon><Lock /></el-icon>
             {{ t('changePasswordTitle') }}
           </button>
-          <button class="list-toolbar-button list-toolbar-button--secondary" @click="$emit('change-email')">
+          <button
+            class="list-toolbar-button list-toolbar-button--secondary"
+            @click="$emit('change-email')"
+          >
             <el-icon><Message /></el-icon>
             {{ t('emailLabel') }}
           </button>
-          <button class="list-toolbar-button list-toolbar-button--secondary" @click="$emit('change-phone')">
+          <button
+            class="list-toolbar-button list-toolbar-button--secondary"
+            @click="$emit('change-phone')"
+          >
             <el-icon><Phone /></el-icon>
             {{ t('phoneLabel') }}
           </button>
@@ -73,41 +104,53 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject } from 'vue'
 import { Edit, Lock, Message, Phone, Postcard } from '@element-plus/icons-vue'
+import type { Translator } from '@/types/consoleResource'
 
-const props = defineProps({
-  userInfo: {
-    type: Object,
-    required: true
-  },
-  nickName: {
-    type: String,
-    default: ''
-  },
-  editFlag: {
-    type: Boolean,
-    default: false
+interface AccountUserInfo {
+  headerImg?: string
+  nickName?: string
+  phone?: string
+  email?: string
+  uuid?: string | number
+  id?: string | number
+  userName?: string
+  username?: string
+}
+
+const props = withDefaults(
+  defineProps<{
+    userInfo: AccountUserInfo
+    nickName?: string
+    editFlag?: boolean
+  }>(),
+  {
+    nickName: '',
+    editFlag: false
   }
-})
+)
 
-const emit = defineEmits([
-  'change-email',
-  'change-password',
-  'change-phone',
-  'open-edit',
-  'close-edit',
-  'confirm-edit',
-  'update:nick-name'
-])
+const emit = defineEmits<{
+  'change-email': []
+  'change-password': []
+  'change-phone': []
+  'open-edit': []
+  'close-edit': []
+  'confirm-edit': []
+  'update:nick-name': [value: string]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
-const displayName = computed(() => props.userInfo.nickName || t('nicknameEmpty'))
+const displayName = computed(
+  () => props.userInfo.nickName || t('nicknameEmpty')
+)
 
 const shortAccountId = computed(() => {
-  const accountId = props.userInfo.uuid || props.userInfo.id || props.userInfo.userName
+  const accountId =
+    props.userInfo.uuid || props.userInfo.id || props.userInfo.userName
   if (!accountId) {
     return t('notSet')
   }
@@ -117,7 +160,11 @@ const shortAccountId = computed(() => {
 })
 
 const userInitials = computed(() => {
-  const rawName = props.userInfo.nickName || props.userInfo.userName || props.userInfo.username || 'U'
+  const rawName =
+    props.userInfo.nickName ||
+    props.userInfo.userName ||
+    props.userInfo.username ||
+    'U'
   const text = String(rawName).trim()
 
   if (!text) {
@@ -129,7 +176,7 @@ const userInitials = computed(() => {
 
 const nickNameModel = computed({
   get: () => props.nickName,
-  set: (value) => {
+  set: (value: string) => {
     emit('update:nick-name', value)
   }
 })

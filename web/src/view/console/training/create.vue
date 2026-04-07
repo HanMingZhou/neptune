@@ -2,6 +2,6 @@
   <TrainingCreatePage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import TrainingCreatePage from './create/index.vue'
 </script>

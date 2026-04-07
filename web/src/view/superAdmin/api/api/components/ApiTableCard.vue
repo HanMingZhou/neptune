@@ -1,9 +1,12 @@
 <template>
   <TableCard>
     <template #toolbar>
-      <div class="list-filter-bar">
+      <BaseFilterBar plain>
         <div class="list-filter-field list-filter-field--compact max-w-[160px]">
-          <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">link</span>
+          <span
+            class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]"
+            >link</span
+          >
           <input
             v-model="searchPathModel"
             type="text"
@@ -14,7 +17,10 @@
         </div>
 
         <div class="list-filter-field list-filter-field--compact max-w-[160px]">
-          <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">description</span>
+          <span
+            class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]"
+            >description</span
+          >
           <input
             v-model="searchDescriptionModel"
             type="text"
@@ -52,7 +58,7 @@
           />
         </el-select>
 
-        <div class="list-toolbar-actions">
+        <template #actions>
           <button
             class="list-toolbar-button list-toolbar-button--primary"
             @click="$emit('search')"
@@ -67,8 +73,8 @@
             <span class="material-icons text-[18px]">refresh</span>
             {{ t('reset') }}
           </button>
-        </div>
-      </div>
+        </template>
+      </BaseFilterBar>
     </template>
 
     <div class="overflow-x-auto" v-loading="loading">
@@ -116,13 +122,20 @@
             <td class="px-6 py-4 text-sm is-secondary is-code">{{ row.ID }}</td>
             <td class="px-6 py-4 text-sm is-primary is-code">{{ row.path }}</td>
             <td class="px-6 py-4">
-              <span class="px-2 py-0.5 rounded text-xs font-bold bg-slate-100 dark:bg-zinc-700 text-slate-600 dark:text-slate-300">
+              <span
+                class="px-2 py-0.5 rounded text-xs font-bold bg-slate-100 dark:bg-zinc-700 text-slate-600 dark:text-slate-300"
+              >
                 {{ row.apiGroup }}
               </span>
             </td>
-            <td class="px-6 py-4 text-sm is-secondary">{{ row.description }}</td>
+            <td class="px-6 py-4 text-sm is-secondary">
+              {{ row.description }}
+            </td>
             <td class="px-6 py-4">
-              <span :class="getMethodClass(row.method)" class="px-2 py-0.5 rounded text-xs font-bold">
+              <span
+                :class="getMethodClass(row.method)"
+                class="px-2 py-0.5 rounded text-xs font-bold"
+              >
                 {{ row.method }}
               </span>
             </td>
@@ -164,86 +177,68 @@
   </TableCard>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject } from 'vue'
+import BaseFilterBar from '@/components/listPage/BaseFilterBar.vue'
 import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
+import type { ResourceId, Translator } from '@/types/consoleResource'
+import type {
+  ApiListItem,
+  ApiMethodOption,
+  LabelValueOption
+} from '@/types/superAdmin'
 
-const props = defineProps({
-  allSelected: {
-    type: Boolean,
-    default: false
-  },
-  apiGroupOptions: {
-    type: Array,
-    default: () => []
-  },
-  getMethodClass: {
-    type: Function,
-    required: true
-  },
-  items: {
-    type: Array,
-    default: () => []
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  methodOptions: {
-    type: Array,
-    default: () => []
-  },
-  page: {
-    type: Number,
-    default: 1
-  },
-  pageSize: {
-    type: Number,
-    default: 10
-  },
-  searchApiGroup: {
-    type: String,
-    default: ''
-  },
-  searchDescription: {
-    type: String,
-    default: ''
-  },
-  searchMethod: {
-    type: String,
-    default: ''
-  },
-  searchPath: {
-    type: String,
-    default: ''
-  },
-  selectedIds: {
-    type: Array,
-    default: () => []
-  },
-  total: {
-    type: Number,
-    default: 0
+const props = withDefaults(
+  defineProps<{
+    allSelected?: boolean
+    apiGroupOptions?: LabelValueOption[]
+    getMethodClass: (method?: string) => string
+    items?: ApiListItem[]
+    loading?: boolean
+    methodOptions?: ApiMethodOption[]
+    page?: number
+    pageSize?: number
+    searchApiGroup?: string
+    searchDescription?: string
+    searchMethod?: string
+    searchPath?: string
+    selectedIds?: ResourceId[]
+    total?: number
+  }>(),
+  {
+    allSelected: false,
+    apiGroupOptions: () => [],
+    items: () => [],
+    loading: false,
+    methodOptions: () => [],
+    page: 1,
+    pageSize: 10,
+    searchApiGroup: '',
+    searchDescription: '',
+    searchMethod: '',
+    searchPath: '',
+    selectedIds: () => [],
+    total: 0
   }
-})
+)
 
-const emit = defineEmits([
-  'delete',
-  'edit',
-  'page-change',
-  'reset',
-  'search',
-  'size-change',
-  'toggle-select',
-  'toggle-select-all',
-  'update:search-api-group',
-  'update:search-description',
-  'update:search-method',
-  'update:search-path'
-])
+const emit = defineEmits<{
+  delete: [row: ApiListItem]
+  edit: [row: ApiListItem]
+  'page-change': [page: number]
+  reset: []
+  search: []
+  'size-change': [pageSize: number]
+  'toggle-select': [row: ApiListItem]
+  'toggle-select-all': [checked: boolean]
+  'update:search-api-group': [value: string]
+  'update:search-description': [value: string]
+  'update:search-method': [value: string]
+  'update:search-path': [value: string]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const searchApiGroupModel = computed({
   get: () => props.searchApiGroup,
@@ -252,16 +247,16 @@ const searchApiGroupModel = computed({
 
 const searchDescriptionModel = computed({
   get: () => props.searchDescription,
-  set: (value) => emit('update:search-description', value)
+  set: (value: string) => emit('update:search-description', value)
 })
 
 const searchMethodModel = computed({
   get: () => props.searchMethod,
-  set: (value) => emit('update:search-method', value || '')
+  set: (value?: string) => emit('update:search-method', value || '')
 })
 
 const searchPathModel = computed({
   get: () => props.searchPath,
-  set: (value) => emit('update:search-path', value)
+  set: (value: string) => emit('update:search-path', value)
 })
 </script>

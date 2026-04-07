@@ -2,7 +2,7 @@
   <LayoutPage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import LayoutPage from './index/index.vue'
 
 defineOptions({

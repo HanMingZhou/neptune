@@ -1,9 +1,12 @@
 <template>
   <TableCard>
     <template #toolbar>
-      <div class="list-filter-bar">
+      <BaseFilterBar plain>
         <div class="list-filter-field list-filter-field--compact max-w-[180px]">
-          <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+          <span
+            class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]"
+            >search</span
+          >
           <input
             v-model="searchInfo.username"
             type="text"
@@ -13,9 +16,12 @@
           />
         </div>
         <div class="list-filter-field list-filter-field--compact max-w-[180px]">
-          <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">person</span>
+          <span
+            class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]"
+            >person</span
+          >
           <input
-            v-model="searchInfo.nickname"
+            v-model="searchInfo.nickName"
             type="text"
             :placeholder="t('nickname')"
             class="list-search-input !w-full"
@@ -23,7 +29,10 @@
           />
         </div>
         <div class="list-filter-field list-filter-field--compact max-w-[180px]">
-          <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">phone</span>
+          <span
+            class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]"
+            >phone</span
+          >
           <input
             v-model="searchInfo.phone"
             type="text"
@@ -33,7 +42,10 @@
           />
         </div>
         <div class="list-filter-field list-filter-field--compact max-w-[180px]">
-          <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">email</span>
+          <span
+            class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]"
+            >email</span
+          >
           <input
             v-model="searchInfo.email"
             type="text"
@@ -42,7 +54,7 @@
             @keyup.enter="$emit('search')"
           />
         </div>
-        <div class="list-toolbar-actions">
+        <template #actions>
           <button
             class="list-toolbar-button list-toolbar-button--primary"
             @click="$emit('search')"
@@ -57,8 +69,8 @@
             <span class="material-icons text-[18px]">refresh</span>
             {{ t('reset') }}
           </button>
-        </div>
-      </div>
+        </template>
+      </BaseFilterBar>
     </template>
 
     <div class="overflow-x-auto" v-loading="loading">
@@ -82,7 +94,9 @@
             class="hover:bg-slate-50 dark:hover:bg-zinc-800/40 transition-colors"
           >
             <td class="is-secondary is-code">{{ row.id || row.ID }}</td>
-            <td><span class="is-primary">{{ row.userName }}</span></td>
+            <td>
+              <span class="is-primary">{{ row.userName }}</span>
+            </td>
             <td class="is-secondary">{{ row.nickName }}</td>
             <td class="is-secondary">{{ row.phone || '-' }}</td>
             <td class="is-secondary">{{ row.email || '-' }}</td>
@@ -97,7 +111,9 @@
                   :clearable="false"
                   size="small"
                   @change="$emit('authority-dirty', row)"
-                  @visible-change="(flag) => $emit('change-authority', { row, flag })"
+                  @visible-change="
+                    (flag) => $emit('change-authority', { row, flag })
+                  "
                 />
               </div>
             </td>
@@ -157,56 +173,38 @@
   </TableCard>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import BaseFilterBar from '@/components/listPage/BaseFilterBar.vue'
 import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
+import type { Translator } from '@/types/consoleResource'
+import type { UserAuthority, UserRow, UserSearchInfo } from '@/types/superAdmin'
 
-defineProps({
-  authOptions: {
-    type: Array,
-    default: () => []
-  },
-  items: {
-    type: Array,
-    default: () => []
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  page: {
-    type: Number,
-    default: 1
-  },
-  pageSize: {
-    type: Number,
-    default: 10
-  },
-  searchInfo: {
-    type: Object,
-    required: true
-  },
-  total: {
-    type: Number,
-    default: 0
-  }
-})
+defineProps<{
+  authOptions?: UserAuthority[]
+  items?: UserRow[]
+  loading?: boolean
+  page?: number
+  pageSize?: number
+  searchInfo: UserSearchInfo
+  total?: number
+}>()
 
-defineEmits([
-  'authority-dirty',
-  'change-authority',
-  'delete',
-  'edit',
-  'page-change',
-  'reset',
-  'reset-password',
-  'search',
-  'size-change',
-  'switch-enable'
-])
+defineEmits<{
+  'authority-dirty': [row: UserRow]
+  'change-authority': [payload: { row: UserRow; flag: boolean }]
+  delete: [row: UserRow]
+  edit: [row: UserRow]
+  'page-change': [page: number]
+  reset: []
+  'reset-password': [row: UserRow]
+  search: []
+  'size-change': [pageSize: number]
+  'switch-enable': [payload: { row: UserRow; value: boolean | number | string }]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const cascaderProps = {
   multiple: true,
@@ -215,5 +213,5 @@ const cascaderProps = {
   value: 'authorityId',
   disabled: 'disabled',
   emitPath: false
-}
+} as const
 </script>

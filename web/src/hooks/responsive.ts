@@ -9,26 +9,26 @@ import { addEventListen, removeEventListen } from '@/utils/event'
 const WIDTH = 992
 
 function queryDevice(): boolean {
-    const rect = document.body.getBoundingClientRect()
-    return rect.width - 1 < WIDTH
+  const rect = document.body.getBoundingClientRect()
+  return rect.width - 1 < WIDTH
 }
 
 export default function useResponsive(immediate?: boolean): void {
-    const appStore = useAppStore()
-    function resizeHandler(): void {
-        if (!document.hidden) {
-            const isMobile = queryDevice()
-            appStore.toggleDevice(isMobile ? 'mobile' : 'desktop')
-        }
+  const appStore = useAppStore()
+  function resizeHandler(): void {
+    if (!document.hidden) {
+      const isMobile = queryDevice()
+      appStore.toggleDevice(isMobile ? 'mobile' : 'desktop')
     }
-    const debounceFn = useDebounceFn(resizeHandler, 100)
-    onMounted(() => {
-        if (immediate) debounceFn()
-    })
-    onBeforeMount(() => {
-        addEventListen(window, 'resize', debounceFn)
-    })
-    onBeforeUnmount(() => {
-        removeEventListen(window, 'resize', debounceFn)
-    })
+  }
+  const debounceFn = useDebounceFn(resizeHandler, 100)
+  onMounted(() => {
+    if (immediate) debounceFn()
+  })
+  onBeforeMount(() => {
+    addEventListen(window, 'resize', debounceFn)
+  })
+  onBeforeUnmount(() => {
+    removeEventListen(window, 'resize', debounceFn)
+  })
 }

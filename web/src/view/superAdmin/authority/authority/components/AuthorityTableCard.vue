@@ -1,19 +1,22 @@
 <template>
   <TableCard v-loading="loading">
     <template #toolbar>
-      <div class="list-filter-bar">
+      <BaseFilterBar plain>
         <div class="list-filter-field max-w-[240px]">
-          <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+          <span
+            class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]"
+            >search</span
+          >
           <input
             :value="searchKeyword"
             type="text"
             :placeholder="t('searchRoleDesc')"
             class="list-search-input !w-full"
-            @input="emit('update:searchKeyword', $event.target.value)"
+            @input="handleSearchInput"
             @keyup.enter="emit('search')"
           />
         </div>
-        <div class="list-toolbar-actions">
+        <template #actions>
           <button
             class="list-toolbar-button list-toolbar-button--primary"
             @click="emit('search')"
@@ -28,8 +31,8 @@
             <span class="material-icons text-[18px]">refresh</span>
             {{ t('reset') }}
           </button>
-        </div>
-      </div>
+        </template>
+      </BaseFilterBar>
     </template>
     <div class="overflow-x-auto">
       <table class="console-table console-table--compact w-full min-w-[840px]">
@@ -42,9 +45,13 @@
         </thead>
         <tbody class="divide-y divide-border-light dark:divide-border-dark">
           <template v-for="row in items" :key="row.authorityId">
-            <tr class="hover:bg-slate-50 dark:hover:bg-zinc-800/40 transition-colors">
+            <tr
+              class="hover:bg-slate-50 dark:hover:bg-zinc-800/40 transition-colors"
+            >
               <td class="is-code is-secondary">{{ row.authorityId }}</td>
-              <td><span class="is-primary">{{ row.authorityName }}</span></td>
+              <td>
+                <span class="is-primary">{{ row.authorityName }}</span>
+              </td>
               <td class="console-actions-cell">
                 <div class="list-row-actions">
                   <button
@@ -95,7 +102,9 @@
                 <span class="text-slate-300 dark:text-zinc-600 mr-2">└</span>
                 {{ child.authorityId }}
               </td>
-              <td><span class="is-secondary">{{ child.authorityName }}</span></td>
+              <td>
+                <span class="is-secondary">{{ child.authorityName }}</span>
+              </td>
               <td class="console-actions-cell">
                 <div class="list-row-actions">
                   <button
@@ -143,37 +152,42 @@
   </TableCard>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import BaseFilterBar from '@/components/listPage/BaseFilterBar.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
+import type { ResourceId, Translator } from '@/types/consoleResource'
+import type { AuthorityTreeNode } from '@/types/superAdmin'
 
-defineProps({
-  items: {
-    type: Array,
-    default: () => []
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  searchKeyword: {
-    type: String,
-    default: ''
+withDefaults(
+  defineProps<{
+    items?: AuthorityTreeNode[]
+    loading?: boolean
+    searchKeyword?: string
+  }>(),
+  {
+    items: () => [],
+    loading: false,
+    searchKeyword: ''
   }
-})
+)
 
-const emit = defineEmits([
-  'add-child',
-  'configure',
-  'copy',
-  'delete',
-  'edit',
-  'reset',
-  'search',
-  'update:searchKeyword'
-])
+const emit = defineEmits<{
+  'add-child': [authorityId: ResourceId]
+  configure: [row: AuthorityTreeNode]
+  copy: [row: AuthorityTreeNode]
+  delete: [row: AuthorityTreeNode]
+  edit: [row: AuthorityTreeNode]
+  reset: []
+  search: []
+  'update:searchKeyword': [value: string]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
+
+const handleSearchInput = (event: Event) => {
+  emit('update:searchKeyword', (event.target as HTMLInputElement).value)
+}
 
 const resetSearch = () => {
   emit('update:searchKeyword', '')

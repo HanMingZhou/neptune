@@ -1,8 +1,13 @@
 <template>
-  <header class="h-16 border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-8 flex items-center justify-between shrink-0 z-10">
+  <header
+    class="h-16 border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-8 flex items-center justify-between shrink-0 z-10"
+  >
     <div class="flex-1 max-w-lg">
       <div class="relative group">
-        <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+        <span
+          class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+          >search</span
+        >
         <input
           type="text"
           :placeholder="t('menuSearchPlaceholder')"
@@ -18,7 +23,11 @@
         <span class="material-icons text-[16px]">translate</span>
         {{ lang === 'en' ? 'EN' : 'CN' }}
       </button>
-      <button class="material-icons text-slate-400 hover:text-primary transition-colors">notifications</button>
+      <button
+        class="material-icons text-slate-400 hover:text-primary transition-colors"
+      >
+        notifications
+      </button>
 
       <LayoutUserPopover
         :user-balance="userBalance"
@@ -30,25 +39,42 @@
   </header>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type { ResourceId, Translator } from '@/types/consoleResource'
 import LayoutUserPopover from './LayoutUserPopover.vue'
 
-defineProps({
-  lang: {
-    type: String,
-    default: 'zh'
-  },
-  userBalance: {
-    type: Number,
-    default: 0
-  },
-  userInfo: {
-    type: Object,
-    default: () => ({})
+interface LayoutHeaderUserInfo {
+  nickName?: string
+  userName?: string
+  authorityId?: ResourceId
+  authority?: {
+    authorityId?: ResourceId
+    authorityName?: string
   }
-})
+  authorities?: Array<{
+    authorityId: ResourceId
+    authorityName?: string
+  }>
+}
 
-const emit = defineEmits(['change-user-auth', 'logout', 'toggle-lang'])
-const t = inject('t', (key) => key)
+withDefaults(
+  defineProps<{
+    lang?: string
+    userBalance?: number
+    userInfo?: LayoutHeaderUserInfo
+  }>(),
+  {
+    lang: 'zh',
+    userBalance: 0,
+    userInfo: () => ({})
+  }
+)
+
+const emit = defineEmits<{
+  'change-user-auth': [authorityId: ResourceId]
+  logout: []
+  'toggle-lang': []
+}>()
+const t = inject<Translator>('t', (key: string) => key)
 </script>

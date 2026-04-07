@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6">
+  <div
+    class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6"
+  >
     <h3 class="text-base font-bold mb-4 flex items-center gap-2">
       <span class="w-1 h-4 bg-primary rounded"></span>
       {{ t('otherConfig') }}
@@ -7,7 +9,9 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="space-y-4">
         <div>
-          <label class="block text-sm text-slate-500 mb-2">{{ t('instanceName') }}</label>
+          <label class="block text-sm text-slate-500 mb-2">{{
+            t('instanceName')
+          }}</label>
           <input
             :value="instanceName"
             :placeholder="t('enterInstanceName')"
@@ -18,8 +22,12 @@
             @input="$emit('update:instanceName', $event.target.value)"
             @blur="$emit('validate:instance-name')"
           />
-          <p class="create-form-help">{{ t('resourceNameHint', { max: 63 }) }}</p>
-          <p v-if="instanceNameError" class="create-form-error">{{ instanceNameError }}</p>
+          <p class="create-form-help">
+            {{ t('resourceNameHint', { max: 63 }) }}
+          </p>
+          <p v-if="instanceNameError" class="create-form-error">
+            {{ instanceNameError }}
+          </p>
         </div>
         <div>
           <label class="flex items-center gap-2 cursor-pointer">
@@ -41,14 +49,18 @@
               @input="$emit('update:tensorboardLogPath', $event.target.value)"
               @blur="$emit('validate:tensorboard-log-path')"
             />
-            <p v-if="tensorboardPathError" class="create-form-error">{{ tensorboardPathError }}</p>
+            <p v-if="tensorboardPathError" class="create-form-error">
+              {{ tensorboardPathError }}
+            </p>
           </div>
         </div>
       </div>
 
       <div class="space-y-4">
         <div>
-          <label class="block text-sm text-slate-500 mb-2">{{ t('sshKeyLogin') }}</label>
+          <label class="block text-sm text-slate-500 mb-2">{{
+            t('sshKeyLogin')
+          }}</label>
           <el-select
             :model-value="selectedSshKey"
             :placeholder="t('selectSshKey')"
@@ -74,60 +86,55 @@
             />
             <span class="text-sm">{{ t('enableSshPassword') }}</span>
           </label>
-          <p v-if="enableSshPassword" class="mt-2 text-xs text-slate-400">✓ {{ t('sshPasswordHint') }}</p>
+          <p v-if="enableSshPassword" class="mt-2 text-xs text-slate-400">
+            ✓ {{ t('sshPasswordHint') }}
+          </p>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type {
+  ConsoleSshKey,
+  ResourceId,
+  Translator
+} from '@/types/consoleResource'
 
-defineProps({
-  enableSshPassword: {
-    type: Boolean,
-    default: false
-  },
-  enableTensorboard: {
-    type: Boolean,
-    default: false
-  },
-  instanceName: {
-    type: String,
-    default: ''
-  },
-  instanceNameError: {
-    type: String,
-    default: ''
-  },
-  selectedSshKey: {
-    type: [Number, String],
-    default: null
-  },
-  sshKeys: {
-    type: Array,
-    default: () => []
-  },
-  tensorboardLogPath: {
-    type: String,
-    default: ''
-  },
-  tensorboardPathError: {
-    type: String,
-    default: ''
+withDefaults(
+  defineProps<{
+    enableSshPassword?: boolean
+    enableTensorboard?: boolean
+    instanceName?: string
+    instanceNameError?: string
+    selectedSshKey?: ResourceId | null
+    sshKeys?: ConsoleSshKey[]
+    tensorboardLogPath?: string
+    tensorboardPathError?: string
+  }>(),
+  {
+    enableSshPassword: false,
+    enableTensorboard: false,
+    instanceName: '',
+    instanceNameError: '',
+    selectedSshKey: null,
+    sshKeys: () => [],
+    tensorboardLogPath: '',
+    tensorboardPathError: ''
   }
-})
+)
 
-defineEmits([
-  'update:enableSshPassword',
-  'update:enableTensorboard',
-  'update:instanceName',
-  'update:selectedSshKey',
-  'update:tensorboardLogPath',
-  'validate:instance-name',
-  'validate:tensorboard-log-path'
-])
+defineEmits<{
+  'update:enableSshPassword': [value: boolean]
+  'update:enableTensorboard': [value: boolean]
+  'update:instanceName': [value: string]
+  'update:selectedSshKey': [value: ResourceId | null]
+  'update:tensorboardLogPath': [value: string]
+  'validate:instance-name': []
+  'validate:tensorboard-log-path': []
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

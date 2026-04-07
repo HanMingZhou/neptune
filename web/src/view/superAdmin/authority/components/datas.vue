@@ -7,11 +7,19 @@
     <div class="sticky top-0.5 z-10 my-4">
       <div class="flex flex-wrap items-center gap-3">
         <div class="flex flex-wrap gap-3">
-          <el-button type="primary" @click="all">{{ t('selectAll') }}</el-button>
-          <el-button type="primary" @click="self">{{ t('selfRole') }}</el-button>
-          <el-button type="primary" @click="selfAndChildren">{{ t('selfAndChildrenRole') }}</el-button>
+          <el-button type="primary" @click="all">{{
+            t('selectAll')
+          }}</el-button>
+          <el-button type="primary" @click="self">{{
+            t('selfRole')
+          }}</el-button>
+          <el-button type="primary" @click="selfAndChildren">{{
+            t('selfAndChildrenRole')
+          }}</el-button>
         </div>
-        <el-button class="sm:ml-auto" type="primary" @click="authDataEnter">{{ t('confirm') }}</el-button>
+        <el-button class="sm:ml-auto" type="primary" @click="authDataEnter">{{
+          t('confirm')
+        }}</el-button>
       </div>
     </div>
     <div class="pt-4">
@@ -27,119 +35,140 @@
   </div>
 </template>
 
-<script setup>
-  import { setDataAuthority } from '@/api/authority'
-  import WarningBar from '@/components/warningBar/warningBar.vue'
-  import { ref, inject } from 'vue'
-  import { ElMessage } from 'element-plus'
+<script setup lang="ts">
+import { setDataAuthority } from '@/api/authority'
+import WarningBar from '@/components/warningBar/warningBar.vue'
+import { ElMessage } from 'element-plus'
+import { inject, ref } from 'vue'
+import type { ResourceId, Translator } from '@/types/consoleResource'
+import type { AuthorityTreeNode } from '@/types/superAdmin'
 
-  const t = inject('t')
+defineOptions({
+  name: 'Datas'
+})
 
-  defineOptions({
-    name: 'Datas'
-  })
+interface AuthoritySelectionItem {
+  authorityId: ResourceId
+  authorityName: string
+}
 
-  const props = defineProps({
-    row: {
-      default: function () {
-        return {}
-      },
-      type: Object
-    },
-    authority: {
-      default: function () {
-        return []
-      },
-      type: Array
+interface AuthorityPermissionRow extends Partial<AuthorityTreeNode> {
+  authorityId?: ResourceId
+  dataAuthorityId?: AuthoritySelectionItem[]
+  children?: AuthorityTreeNode[]
+}
+
+const t = inject<Translator>('t', (key: string) => key)
+
+const props = withDefaults(
+  defineProps<{
+    authority?: AuthorityTreeNode[]
+    row?: AuthorityPermissionRow
+  }>(),
+  {
+    authority: () => [],
+    row: () => ({})
+  }
+)
+
+const authoritys = ref<AuthoritySelectionItem[]>([])
+const needConfirm = ref(false)
+const dataAuthorityId = ref<AuthoritySelectionItem[]>([])
+
+const roundAuthority = (authoritysData: AuthorityTreeNode[] = []): void => {
+  authoritysData.forEach((item) => {
+    authoritys.value.push({
+      authorityId: item.authorityId,
+      authorityName: item.authorityName
+    })
+
+    if (item.children?.length) {
+      roundAuthority(item.children)
     }
   })
+}
 
-  const authoritys = ref([])
-  const needConfirm = ref(false)
-  //   平铺角色
-  const roundAuthority = (authoritysData) => {
-    authoritysData &&
-      authoritysData.forEach((item) => {
-        const obj = {}
-        obj.authorityId = item.authorityId
-        obj.authorityName = item.authorityName
-        authoritys.value.push(obj)
-        if (item.children && item.children.length) {
-          roundAuthority(item.children)
-        }
-      })
-  }
+const init = (): void => {
+  authoritys.value = []
+  dataAuthorityId.value = []
+  roundAuthority(props.authority)
 
-  const dataAuthorityId = ref([])
-  const init = () => {
-    roundAuthority(props.authority)
-    props.row.dataAuthorityId &&
-      props.row.dataAuthorityId.forEach((item) => {
-        const obj =
-          authoritys.value &&
-          authoritys.value.filter(
-            (au) => au.authorityId === item.authorityId
-          ) &&
-          authoritys.value.filter(
-            (au) => au.authorityId === item.authorityId
-          )[0]
-        dataAuthorityId.value.push(obj)
-      })
-  }
-
-  init()
-
-  // 暴露给外层使用的切换拦截统一方法
-  const enterAndNext = () => {
-    authDataEnter()
-  }
-
-  const emit = defineEmits(['changeRow'])
-  const all = () => {
-    dataAuthorityId.value = [...authoritys.value]
-    emit('changeRow', 'dataAuthorityId', dataAuthorityId.value)
-    needConfirm.value = true
-  }
-  const self = () => {
-    dataAuthorityId.value = authoritys.value.filter(
-      (item) => item.authorityId === props.row.authorityId
+  props.row.dataAuthorityId?.forEach((item) => {
+    const selectedAuthority = authoritys.value.find(
+      (authority) => authority.authorityId === item.authorityId
     )
-    emit('changeRow', 'dataAuthorityId', dataAuthorityId.value)
-    needConfirm.value = true
-  }
-  const selfAndChildren = () => {
-    const arrBox = []
-    getChildrenId(props.row, arrBox)
-    dataAuthorityId.value = authoritys.value.filter(
-      (item) => arrBox.indexOf(item.authorityId) > -1
-    )
-    emit('changeRow', 'dataAuthorityId', dataAuthorityId.value)
-    needConfirm.value = true
-  }
-  const getChildrenId = (row, arrBox) => {
+    if (selectedAuthority) {
+      dataAuthorityId.value.push(selectedAuthority)
+    }
+  })
+}
+
+init()
+
+const emit = defineEmits<{
+  changeRow: [key: string, value: AuthoritySelectionItem[]]
+}>()
+
+const enterAndNext = (): void => {
+  void authDataEnter()
+}
+
+const all = (): void => {
+  dataAuthorityId.value = [...authoritys.value]
+  emit('changeRow', 'dataAuthorityId', dataAuthorityId.value)
+  needConfirm.value = true
+}
+
+const self = (): void => {
+  dataAuthorityId.value = authoritys.value.filter(
+    (item) => item.authorityId === props.row.authorityId
+  )
+  emit('changeRow', 'dataAuthorityId', dataAuthorityId.value)
+  needConfirm.value = true
+}
+
+const getChildrenId = (
+  row: AuthorityPermissionRow | AuthorityTreeNode,
+  arrBox: ResourceId[]
+): void => {
+  if (
+    row.authorityId !== undefined &&
+    row.authorityId !== null &&
+    row.authorityId !== ''
+  ) {
     arrBox.push(row.authorityId)
-    row.children &&
-      row.children.forEach((item) => {
-        getChildrenId(item, arrBox)
-      })
-  }
-  // 提交
-  const authDataEnter = async () => {
-    const res = await setDataAuthority(props.row)
-    if (res.code === 0) {
-      ElMessage({ type: 'success', message: t('resourceSetSuccess') })
-    }
   }
 
-  //   选择
-  const selectAuthority = () => {
-    dataAuthorityId.value = dataAuthorityId.value.filter((item) => item)
-    emit('changeRow', 'dataAuthorityId', dataAuthorityId.value)
-    needConfirm.value = true
-  }
-
-  defineExpose({
-    enterAndNext,
-    needConfirm
+  row.children?.forEach((item) => {
+    getChildrenId(item, arrBox)
   })
+}
+
+const selfAndChildren = (): void => {
+  const authorityIds: ResourceId[] = []
+  getChildrenId(props.row, authorityIds)
+  dataAuthorityId.value = authoritys.value.filter((item) =>
+    authorityIds.includes(item.authorityId)
+  )
+  emit('changeRow', 'dataAuthorityId', dataAuthorityId.value)
+  needConfirm.value = true
+}
+
+const authDataEnter = async (): Promise<void> => {
+  const res = await setDataAuthority(props.row)
+  if (res.code === 0) {
+    ElMessage({ type: 'success', message: t('resourceSetSuccess') })
+  }
+}
+
+const selectAuthority = (): void => {
+  dataAuthorityId.value = dataAuthorityId.value.filter(Boolean)
+  emit('changeRow', 'dataAuthorityId', dataAuthorityId.value)
+  needConfirm.value = true
+}
+
+defineExpose({
+  enterAndNext,
+  needConfirm
+})
 </script>

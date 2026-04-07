@@ -2,13 +2,13 @@
   <div />
 </template>
 
-<script setup>
-  import { useRouter } from 'vue-router'
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
 
-  defineOptions({
-    name: 'Reload'
-  })
+defineOptions({
+  name: 'Reload'
+})
 
-  const router = useRouter()
-  router.go(-1)
+const router = useRouter()
+router.go(-1)
 </script>

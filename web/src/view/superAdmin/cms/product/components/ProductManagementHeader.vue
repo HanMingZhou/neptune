@@ -1,14 +1,16 @@
 <template>
-  <PageIntro
+  <BaseTableToolbar
     :breadcrumbs="[t('admin'), t('productManage')]"
     :description="t('productManageDesc')"
+    :show-refresh="false"
     :title="t('productManage')"
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
+import type { Translator } from '@/types/consoleResource'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

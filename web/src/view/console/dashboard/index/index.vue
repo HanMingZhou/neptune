@@ -1,10 +1,18 @@
 <template>
   <div class="console-page-container w-full space-y-8">
-    <PageIntro :title="t('dashboardTitle')" :description="t('dashboardDesc')">
+    <BaseTableToolbar
+      :description="t('dashboardDesc')"
+      :show-refresh="false"
+      :title="t('dashboardTitle')"
+    >
       <template #actions>
-        <DashboardHeaderActions :loading="loading" @create="goToCreate" @refresh="fetchData" />
+        <DashboardHeaderActions
+          :loading="loading"
+          @create="goToCreate"
+          @refresh="fetchData"
+        />
       </template>
-    </PageIntro>
+    </BaseTableToolbar>
 
     <DashboardStatsGrid :items="statCards" />
 
@@ -28,9 +36,10 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+import type { Translator } from '@/types/consoleResource'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
 import DashboardHeaderActions from './components/DashboardHeaderActions.vue'
 import DashboardStatsGrid from './components/DashboardStatsGrid.vue'
 import QuotaCard from './components/QuotaCard.vue'
@@ -39,7 +48,7 @@ import RecentInstancesCard from './components/RecentInstancesCard.vue'
 import ResourceTrendCard from './components/ResourceTrendCard.vue'
 import { useDashboardPage } from './composables/useDashboardPage'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const {
   fetchData,
@@ -57,6 +66,6 @@ const {
 } = useDashboardPage({ t })
 
 onMounted(() => {
-  fetchData()
+  void fetchData()
 })
 </script>

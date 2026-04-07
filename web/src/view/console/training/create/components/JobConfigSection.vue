@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6">
+  <div
+    class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6"
+  >
     <h3 class="text-base font-bold mb-6 flex items-center gap-2">
       <span class="w-1 h-4 bg-primary rounded"></span>
       {{ t('jobConfig') }}
@@ -17,11 +19,17 @@
             :aria-invalid="fieldErrors.name ? 'true' : 'false'"
             maxlength="63"
             type="text"
-            @input="$emit('update:field', { key: 'name', value: $event.target.value })"
+            @input="
+              $emit('update:field', { key: 'name', value: $event.target.value })
+            "
             @blur="$emit('validate:name')"
           />
-          <p class="create-form-help">{{ t('resourceNameHint', { max: 63 }) }}</p>
-          <p v-if="fieldErrors.name" class="create-form-error">{{ fieldErrors.name }}</p>
+          <p class="create-form-help">
+            {{ t('resourceNameHint', { max: 63 }) }}
+          </p>
+          <p v-if="fieldErrors.name" class="create-form-error">
+            {{ fieldErrors.name }}
+          </p>
         </div>
         <div>
           <label class="flex items-center gap-2 cursor-pointer">
@@ -29,7 +37,12 @@
               :checked="form.enableTensorboard"
               class="rounded border-slate-300"
               type="checkbox"
-              @change="$emit('update:field', { key: 'enableTensorboard', value: $event.target.checked })"
+              @change="
+                $emit('update:field', {
+                  key: 'enableTensorboard',
+                  value: $event.target.checked
+                })
+              "
             />
             <span class="text-sm">{{ t('enableTensorBoard') }}</span>
           </label>
@@ -40,10 +53,17 @@
               class="create-form-input"
               :aria-invalid="fieldErrors.tensorboardLogPath ? 'true' : 'false'"
               type="text"
-              @input="$emit('update:field', { key: 'tensorboardLogPath', value: $event.target.value })"
+              @input="
+                $emit('update:field', {
+                  key: 'tensorboardLogPath',
+                  value: $event.target.value
+                })
+              "
               @blur="$emit('validate:tensorboard-log-path')"
             />
-            <p v-if="fieldErrors.tensorboardLogPath" class="create-form-error">{{ fieldErrors.tensorboardLogPath }}</p>
+            <p v-if="fieldErrors.tensorboardLogPath" class="create-form-error">
+              {{ fieldErrors.tensorboardLogPath }}
+            </p>
           </div>
         </div>
       </div>
@@ -56,7 +76,9 @@
           <el-select
             :model-value="form.frameworkType"
             class="w-full"
-            @update:model-value="$emit('update:field', { key: 'frameworkType', value: $event })"
+            @update:model-value="
+              $emit('update:field', { key: 'frameworkType', value: $event })
+            "
           >
             <el-option
               v-for="framework in frameworkTypes"
@@ -93,43 +115,85 @@
         :placeholder="t('enterStartupCommand')"
         class="create-form-textarea font-mono"
         rows="3"
-        @input="$emit('update:field', { key: 'startupCommand', value: $event.target.value })"
+        @input="
+          $emit('update:field', {
+            key: 'startupCommand',
+            value: $event.target.value
+          })
+        "
       ></textarea>
-      <div v-if="form.frameworkType === 'MPI'" class="mt-2 flex items-center justify-between">
-        <div class="flex items-center gap-2 text-sm text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-3 py-2 rounded-lg">
+      <div
+        v-if="form.frameworkType === 'MPI'"
+        class="mt-2 flex items-center justify-between"
+      >
+        <div
+          class="flex items-center gap-2 text-sm text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-3 py-2 rounded-lg"
+        >
           <span class="material-icons text-base">info</span>
           {{ t('mpiCommandHint') }}
         </div>
-        <button class="text-sm text-primary hover:underline" @click="$emit('insert-mpi-example')">{{ t('insertExample') }}</button>
+        <button
+          class="text-sm text-primary hover:underline"
+          @click="$emit('insert-mpi-example')"
+        >
+          {{ t('insertExample') }}
+        </button>
       </div>
-      <div v-if="form.frameworkType === 'PYTORCH_DDP'" class="mt-2 flex items-center justify-between">
-        <div class="flex items-center gap-2 text-sm text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-3 py-2 rounded-lg">
+      <div
+        v-if="form.frameworkType === 'PYTORCH_DDP'"
+        class="mt-2 flex items-center justify-between"
+      >
+        <div
+          class="flex items-center gap-2 text-sm text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-3 py-2 rounded-lg"
+        >
           <span class="material-icons text-base">info</span>
           {{ t('pytorchDdpHint') }}
         </div>
-        <button class="text-sm text-primary hover:underline" @click="$emit('insert-pytorch-example')">{{ t('insertExample') }}</button>
+        <button
+          class="text-sm text-primary hover:underline"
+          @click="$emit('insert-pytorch-example')"
+        >
+          {{ t('insertExample') }}
+        </button>
       </div>
     </div>
 
     <div class="mb-6">
-      <label class="block text-sm text-slate-500 mb-2">{{ t('dataMount') }}</label>
-      <div class="bg-slate-50 dark:bg-zinc-800/50 rounded-lg p-4 border border-border-light dark:border-border-dark">
+      <label class="block text-sm text-slate-500 mb-2">{{
+        t('dataMount')
+      }}</label>
+      <div
+        class="bg-slate-50 dark:bg-zinc-800/50 rounded-lg p-4 border border-border-light dark:border-border-dark"
+      >
         <div v-if="form.mounts.length > 0" class="mb-3">
-          <div class="grid grid-cols-12 gap-4 text-xs text-slate-400 font-medium mb-2 px-1">
+          <div
+            class="grid grid-cols-12 gap-4 text-xs text-slate-400 font-medium mb-2 px-1"
+          >
             <div class="col-span-4">{{ t('pvc') }}</div>
             <div class="col-span-5">{{ t('mountPath') }}</div>
             <div class="col-span-2 text-center">{{ t('readOnly') }}</div>
             <div class="col-span-1 text-center">{{ t('actions') }}</div>
           </div>
-          <div v-for="(mount, index) in form.mounts" :key="index" class="grid grid-cols-12 gap-4 items-center mb-2">
+          <div
+            v-for="(mount, index) in form.mounts"
+            :key="index"
+            class="grid grid-cols-12 gap-4 items-center mb-2"
+          >
             <div class="col-span-4">
               <el-select
                 :model-value="mount.pvcId"
                 :placeholder="t('selectPvc')"
                 class="w-full"
-                @update:model-value="$emit('update:mount', { index, key: 'pvcId', value: $event })"
+                @update:model-value="
+                  $emit('update:mount', { index, key: 'pvcId', value: $event })
+                "
               >
-                <el-option v-for="pvc in pvcs" :key="pvc.id" :label="pvc.name" :value="pvc.id" />
+                <el-option
+                  v-for="pvc in pvcs"
+                  :key="pvc.id"
+                  :label="pvc.name"
+                  :value="pvc.id"
+                />
               </el-select>
             </div>
             <div class="col-span-5">
@@ -138,17 +202,32 @@
                 :placeholder="t('enterMountPath')"
                 class="create-form-input"
                 type="text"
-                @input="$emit('update:mount', { index, key: 'mountPath', value: $event.target.value })"
+                @input="
+                  $emit('update:mount', {
+                    index,
+                    key: 'mountPath',
+                    value: $event.target.value
+                  })
+                "
               />
             </div>
             <div class="col-span-2 text-center">
               <el-checkbox
                 :model-value="mount.readOnly"
-                @update:model-value="$emit('update:mount', { index, key: 'readOnly', value: $event })"
+                @update:model-value="
+                  $emit('update:mount', {
+                    index,
+                    key: 'readOnly',
+                    value: $event
+                  })
+                "
               />
             </div>
             <div class="col-span-1 text-center">
-              <button class="text-red-500 hover:text-red-600" @click="$emit('remove-mount', index)">
+              <button
+                class="text-red-500 hover:text-red-600"
+                @click="$emit('remove-mount', index)"
+              >
                 <span class="material-icons text-lg">delete</span>
               </button>
             </div>
@@ -165,22 +244,38 @@
     </div>
 
     <div>
-      <label class="block text-sm text-slate-500 mb-2">{{ t('envVars') }}</label>
-      <div class="bg-slate-50 dark:bg-zinc-800/50 rounded-lg p-4 border border-border-light dark:border-border-dark">
+      <label class="block text-sm text-slate-500 mb-2">{{
+        t('envVars')
+      }}</label>
+      <div
+        class="bg-slate-50 dark:bg-zinc-800/50 rounded-lg p-4 border border-border-light dark:border-border-dark"
+      >
         <div v-if="form.envs.length > 0" class="mb-3">
-          <div class="grid grid-cols-12 gap-4 text-xs text-slate-400 font-medium mb-2 px-1">
+          <div
+            class="grid grid-cols-12 gap-4 text-xs text-slate-400 font-medium mb-2 px-1"
+          >
             <div class="col-span-4">{{ t('variableName') }}</div>
             <div class="col-span-7">{{ t('variableValue') }}</div>
             <div class="col-span-1 text-center">{{ t('actions') }}</div>
           </div>
-          <div v-for="(env, index) in form.envs" :key="index" class="grid grid-cols-12 gap-4 items-center mb-2">
+          <div
+            v-for="(env, index) in form.envs"
+            :key="index"
+            class="grid grid-cols-12 gap-4 items-center mb-2"
+          >
             <div class="col-span-4">
               <input
                 :value="env.name"
                 :placeholder="t('enterVariableName')"
                 class="create-form-input font-mono"
                 type="text"
-                @input="$emit('update:env', { index, key: 'name', value: $event.target.value })"
+                @input="
+                  $emit('update:env', {
+                    index,
+                    key: 'name',
+                    value: $event.target.value
+                  })
+                "
               />
             </div>
             <div class="col-span-7">
@@ -189,11 +284,20 @@
                 :placeholder="t('enterVariableValue')"
                 class="create-form-input"
                 type="text"
-                @input="$emit('update:env', { index, key: 'value', value: $event.target.value })"
+                @input="
+                  $emit('update:env', {
+                    index,
+                    key: 'value',
+                    value: $event.target.value
+                  })
+                "
               />
             </div>
             <div class="col-span-1 text-center">
-              <button class="text-red-500 hover:text-red-600" @click="$emit('remove-env', index)">
+              <button
+                class="text-red-500 hover:text-red-600"
+                @click="$emit('remove-env', index)"
+              >
                 <span class="material-icons text-lg">delete</span>
               </button>
             </div>
@@ -211,62 +315,84 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type {
+  ConsoleProduct,
+  ConsoleVolume,
+  Translator
+} from '@/types/consoleResource'
 import WorkerCountSection from './WorkerCountSection.vue'
+import type {
+  ScheduleStrategy,
+  TrainingCreateForm,
+  TrainingEnv,
+  TrainingFieldErrors,
+  TrainingFrameworkType,
+  TrainingMount,
+  UpdateTrainingFieldPayload
+} from '../composables/useTrainingCreate'
 
-defineProps({
-  availableCapacity: {
-    type: Number,
-    default: 0
-  },
-  form: {
-    type: Object,
-    required: true
-  },
-  fieldErrors: {
-    type: Object,
-    default: () => ({})
-  },
-  frameworkTypes: {
-    type: Array,
-    default: () => []
-  },
-  maxWorkerCount: {
-    type: Number,
-    default: 2
-  },
-  pvcs: {
-    type: Array,
-    default: () => []
-  },
-  selectedProduct: {
-    type: Object,
-    default: null
-  },
-  showWorkerCount: {
-    type: Boolean,
-    default: false
+interface TrainingFrameworkOption {
+  value: TrainingFrameworkType
+  label: string
+  hint?: string
+}
+
+interface TrainingEnvUpdatePayload {
+  index: number
+  key: keyof TrainingEnv
+  value: TrainingEnv[keyof TrainingEnv]
+}
+
+interface TrainingMountUpdatePayload {
+  index: number
+  key: keyof TrainingMount
+  value: TrainingMount[keyof TrainingMount]
+}
+
+withDefaults(
+  defineProps<{
+    availableCapacity?: number
+    fieldErrors?: TrainingFieldErrors
+    form: TrainingCreateForm
+    frameworkTypes?: TrainingFrameworkOption[]
+    maxWorkerCount?: number
+    pvcs?: ConsoleVolume[]
+    selectedProduct?: ConsoleProduct | null
+    showWorkerCount?: boolean
+  }>(),
+  {
+    availableCapacity: 0,
+    fieldErrors: () => ({
+      name: '',
+      tensorboardLogPath: ''
+    }),
+    frameworkTypes: () => [],
+    maxWorkerCount: 2,
+    pvcs: () => [],
+    selectedProduct: null,
+    showWorkerCount: false
   }
-})
+)
 
-defineEmits([
-  'add-env',
-  'add-mount',
-  'decrease-worker',
-  'insert-mpi-example',
-  'insert-pytorch-example',
-  'increase-worker',
-  'remove-env',
-  'remove-mount',
-  'update:env',
-  'update:field',
-  'update:mount',
-  'update:schedule-strategy',
-  'update:workerCount',
-  'validate:name',
-  'validate:tensorboard-log-path'
-])
+defineEmits<{
+  'add-env': []
+  'add-mount': []
+  'decrease-worker': []
+  'increase-worker': []
+  'insert-mpi-example': []
+  'insert-pytorch-example': []
+  'remove-env': [index: number]
+  'remove-mount': [index: number]
+  'update:env': [payload: TrainingEnvUpdatePayload]
+  'update:field': [payload: UpdateTrainingFieldPayload]
+  'update:mount': [payload: TrainingMountUpdatePayload]
+  'update:schedule-strategy': [value: ScheduleStrategy | undefined]
+  'update:workerCount': [value: number]
+  'validate:name': []
+  'validate:tensorboard-log-path': []
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

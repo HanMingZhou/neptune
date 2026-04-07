@@ -2,6 +2,6 @@
   <LandingPage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import LandingPage from './index/index.vue'
 </script>

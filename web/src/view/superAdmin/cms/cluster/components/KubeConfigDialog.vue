@@ -1,52 +1,56 @@
 <template>
-  <el-dialog
+  <BaseDialog
     v-model="visibleModel"
     :title="t('clusterKubeconfig')"
-    width="700px"
     align-center
-    :before-close="handleBeforeClose"
+    width="700px"
+    @close="emit('close')"
   >
-    <div class="bg-slate-50 dark:bg-zinc-900 border border-border-light dark:border-border-dark rounded-lg p-4 max-h-[500px] overflow-auto">
-      <pre class="text-xs font-mono text-slate-700 dark:text-slate-300 whitespace-pre-wrap break-all">{{ content || '-' }}</pre>
+    <div
+      class="bg-slate-50 dark:bg-zinc-900 border border-border-light dark:border-border-dark rounded-lg p-4 max-h-[500px] overflow-auto"
+    >
+      <pre
+        class="text-xs font-mono text-slate-700 dark:text-slate-300 whitespace-pre-wrap break-all"
+        >{{ content || '-' }}</pre
+      >
     </div>
 
-    <template #footer>
+    <template #footer="{ requestClose }">
       <div class="flex justify-end gap-3">
         <el-button @click="$emit('copy')">{{ t('copy') }}</el-button>
-        <el-button type="primary" @click="requestClose">{{ t('close') }}</el-button>
+        <el-button type="primary" @click="requestClose">{{
+          t('close')
+        }}</el-button>
       </div>
     </template>
-  </el-dialog>
+  </BaseDialog>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject } from 'vue'
+import BaseDialog from '@/components/base/BaseDialog.vue'
+import type { Translator } from '@/types/consoleResource'
 
-const props = defineProps({
-  content: {
-    type: String,
-    default: ''
-  },
-  modelValue: {
-    type: Boolean,
-    default: false
+const props = withDefaults(
+  defineProps<{
+    content?: string
+    modelValue?: boolean
+  }>(),
+  {
+    content: '',
+    modelValue: false
   }
-})
+)
 
-const emit = defineEmits(['close', 'copy', 'update:modelValue'])
-const t = inject('t', (key) => key)
+const emit = defineEmits<{
+  close: []
+  copy: []
+  'update:modelValue': [value: boolean]
+}>()
+const t = inject<Translator>('t', (key: string) => key)
 
 const visibleModel = computed({
   get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value)
+  set: (value: boolean) => emit('update:modelValue', value)
 })
-
-const requestClose = () => {
-  emit('close')
-}
-
-const handleBeforeClose = (done) => {
-  emit('close')
-  done()
-}
 </script>

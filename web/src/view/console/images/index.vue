@@ -2,7 +2,7 @@
   <ImagesPage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ImagesPage from './index/index.vue'
 
 defineOptions({

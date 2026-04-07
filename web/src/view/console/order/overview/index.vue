@@ -1,10 +1,11 @@
 <template>
   <div class="console-page-container space-y-8">
-    <PageIntro :title="t('overview')" :description="t('order.overviewDesc')">
-      <template #actions>
-        <RefreshButton :loading="loading" @refresh="fetchData" />
-      </template>
-    </PageIntro>
+    <BaseTableToolbar
+      :description="t('order.overviewDesc')"
+      :loading="loading"
+      :title="t('overview')"
+      @refresh="fetchData"
+    />
 
     <OverviewFinanceCards
       :balance="balance"
@@ -16,23 +17,29 @@
 
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
       <div class="lg:col-span-2">
-        <OverviewTrendChart v-model:trend-period="trendPeriod" :chart-data="chartData" />
+        <OverviewTrendChart
+          v-model:trend-period="trendPeriod"
+          :chart-data="chartData"
+        />
       </div>
       <OverviewRankingCard :items="rankingData" @view-usage="goToUsage" />
     </div>
   </div>
 </template>
 
-<script setup>
-import { inject, onMounted } from 'vue'
-import RefreshButton from '@/components/RefreshButton/index.vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+<script setup lang="ts">
+import { defineAsyncComponent, inject, onMounted } from 'vue'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
 import OverviewFinanceCards from './components/OverviewFinanceCards.vue'
 import OverviewRankingCard from './components/OverviewRankingCard.vue'
-import OverviewTrendChart from './components/OverviewTrendChart.vue'
 import { useOrderOverview } from './composables/useOrderOverview'
+import type { Translator } from '@/types/consoleResource'
 
-const t = inject('t', (key) => key)
+const OverviewTrendChart = defineAsyncComponent(
+  () => import('./components/OverviewTrendChart.vue')
+)
+
+const t = inject<Translator>('t', (key: string) => key)
 
 const {
   balance,
@@ -49,6 +56,6 @@ const {
 } = useOrderOverview({ t })
 
 onMounted(() => {
-  fetchData()
+  void fetchData()
 })
 </script>

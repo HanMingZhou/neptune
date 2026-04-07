@@ -66,7 +66,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
 import ProductDialogsHost from './components/ProductDialogsHost.vue'
 import ProductManagementHeader from './components/ProductManagementHeader.vue'
@@ -127,6 +127,6 @@ const {
 } = useCmsProductPage({ t })
 
 onMounted(() => {
-  initialize()
+  void initialize()
 })
 </script>

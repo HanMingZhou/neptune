@@ -1,5 +1,5 @@
 import { emitter } from '@/utils/bus'
 
 export const closeThisPage = () => {
-    emitter.emit('closeThisPage')
+  emitter.emit('closeThisPage')
 }

@@ -1,12 +1,13 @@
 <template>
   <div class="console-page-container space-y-6">
-    <PageIntro
+    <BaseTableToolbar
       :breadcrumbs="[t('admin'), t('menus')]"
       :description="t('manageMenusDesc')"
+      :loading="loading"
       :title="t('menus')"
+      @refresh="getTableData"
     >
       <template #actions>
-        <RefreshButton :loading="loading" @refresh="getTableData" />
         <button
           class="list-toolbar-button list-toolbar-button--primary"
           @click="openCreateDialog(0)"
@@ -15,7 +16,7 @@
           {{ t('addRootMenu') }}
         </button>
       </template>
-    </PageIntro>
+    </BaseTableToolbar>
 
     <MenuTableCard
       :items="filteredTableData"
@@ -49,10 +50,9 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
-import RefreshButton from '@/components/RefreshButton/index.vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
 import MenuEditorDrawer from './components/MenuEditorDrawer.vue'
 import MenuTableCard from './components/MenuTableCard.vue'
 import { useMenuManagementPage } from './composables/useMenuManagementPage'
@@ -88,6 +88,6 @@ const {
 } = useMenuManagementPage({ t })
 
 onMounted(() => {
-  initialize()
+  void initialize()
 })
 </script>

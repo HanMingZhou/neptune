@@ -22,110 +22,120 @@
   </div>
 </template>
 
-<script setup>
-  import { onMounted, ref, watch } from 'vue'
-  import pathInfo from '@/pathInfo.json'
+<script setup lang="ts">
+import { onMounted, ref, watch } from 'vue'
+import pathInfo from '@/pathInfo.json'
 
-  const props = defineProps({
-    component: {
-      type: String,
-      default: ''
-    }
-  })
+interface CascaderOption {
+  value: string
+  label: string
+  children?: CascaderOption[]
+}
 
-  const emits = defineEmits(['change'])
+const props = withDefaults(
+  defineProps<{
+    component?: string
+  }>(),
+  {
+    component: ''
+  }
+)
 
-  const pathOptions = ref([])
-  const tempPath = ref('')
-  const activeComponent = ref([])
-  const pathIsSelect = ref(true)
+const emits = defineEmits<{
+  change: [value: string]
+}>()
 
-  const togglePathIsSelect = () => {
-    if (pathIsSelect.value) {
-      tempPath.value = activeComponent.value?.join('/') || ''
-    } else {
-      activeComponent.value = tempPath.value?.split('/') || []
-    }
+const pathOptions = ref<CascaderOption[]>([])
+const tempPath = ref('')
+const activeComponent = ref<string[]>([])
+const pathIsSelect = ref(true)
 
-    pathIsSelect.value = !pathIsSelect.value
-    emitChange()
+const togglePathIsSelect = (): void => {
+  if (pathIsSelect.value) {
+    tempPath.value = activeComponent.value.join('/') || ''
+  } else {
+    activeComponent.value = tempPath.value.split('/').filter(Boolean)
   }
 
-  function convertToCascaderOptions(data) {
-    const result = []
+  pathIsSelect.value = !pathIsSelect.value
+  emitChange()
+}
 
-    for (const path in data) {
-      const label = data[path]
-      const parts = path.split('/').filter(Boolean)
+function convertToCascaderOptions(
+  data: Record<string, string>
+): CascaderOption[] {
+  const result: CascaderOption[] = []
 
-      // 如果第一个部分是 'src'，则从第二个部分开始处理
-      const startIndex = parts[0] === 'src' ? 1 : 0
+  for (const filePath in data) {
+    const label = data[filePath]
+    const parts = filePath.split('/').filter(Boolean)
+    const startIndex = parts[0] === 'src' ? 1 : 0
 
-      let currentLevel = result
+    let currentLevel = result
 
-      for (let i = startIndex; i < parts.length; i++) {
-        const part = parts[i]
-        let node = currentLevel.find((item) => item.value === part)
+    for (let i = startIndex; i < parts.length; i += 1) {
+      const part = parts[i]
+      let node = currentLevel.find((item) => item.value === part)
 
-        if (!node) {
-          node = {
-            value: part,
-            label: part,
-            children: []
-          }
-          currentLevel.push(node)
+      if (!node) {
+        node = {
+          value: part,
+          label: part,
+          children: []
         }
-
-        if (i === parts.length - 1) {
-          // 如果是路径的最后一部分，设置标签并移除 children
-          node.label = label
-          delete node.children
-        }
-
-        currentLevel = node.children || []
+        currentLevel.push(node)
       }
-    }
 
-    return result
+      if (i === parts.length - 1) {
+        node.label = label
+        delete node.children
+      }
+
+      currentLevel = node.children || []
+    }
   }
 
-  watch(
-    () => props.component,
-    (value) => {
-      initCascader(value)
-    }
+  return result
+}
+
+watch(
+  () => props.component,
+  (value) => {
+    initCascader(value)
+  }
+)
+
+onMounted(() => {
+  pathOptions.value = convertToCascaderOptions(
+    pathInfo as Record<string, string>
   )
+  initCascader(props.component)
+})
 
-  onMounted(() => {
-    pathOptions.value = convertToCascaderOptions(pathInfo)
-    initCascader(props.component)
-  })
-
-  const initCascader = (value) => {
-    // 新增的时候
-    if (value === '') {
-      pathIsSelect.value = true
-      return
-    }
-
-    // 编辑的时候，根据路径判断是选择框还是输入框
-    if (pathInfo[`/src/${value}`]) {
-      activeComponent.value = value.split('/').filter(Boolean)
-      tempPath.value = ''
-      pathIsSelect.value = true
-      return
-    }
-    tempPath.value = value
-    activeComponent.value = []
-    pathIsSelect.value = false
+const initCascader = (value: string): void => {
+  if (value === '') {
+    pathIsSelect.value = true
+    return
   }
 
-  const emitChange = () => {
-    emits(
-      'change',
-      pathIsSelect.value ? activeComponent.value?.join('/') : tempPath.value
-    )
+  if ((pathInfo as Record<string, string>)[`/src/${value}`]) {
+    activeComponent.value = value.split('/').filter(Boolean)
+    tempPath.value = ''
+    pathIsSelect.value = true
+    return
   }
+
+  tempPath.value = value
+  activeComponent.value = []
+  pathIsSelect.value = false
+}
+
+const emitChange = (): void => {
+  emits(
+    'change',
+    pathIsSelect.value ? activeComponent.value.join('/') : tempPath.value
+  )
+}
 </script>
 
 <style scoped></style>

@@ -1,14 +1,32 @@
 <template>
-  <div class="rounded-2xl border border-slate-200 bg-white p-8 dark:border-border-dark dark:bg-surface-dark">
-    <h3 class="mb-6 text-sm font-bold uppercase tracking-widest text-slate-400">{{ t('rankingMonthly') }}</h3>
+  <div
+    class="rounded-2xl border border-slate-200 bg-white p-8 dark:border-border-dark dark:bg-surface-dark"
+  >
+    <h3 class="mb-6 text-sm font-bold uppercase tracking-widest text-slate-400">
+      {{ t('rankingMonthly') }}
+    </h3>
     <div class="space-y-6">
       <div v-for="(item, index) in items" :key="item.name" class="space-y-2">
         <div class="flex justify-between text-xs font-bold">
-          <span class="text-slate-700 dark:text-slate-300">{{ item.name }}</span>
-          <span class="text-slate-900 dark:text-white">¥{{ item.amount.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</span>
+          <span class="text-slate-700 dark:text-slate-300">{{
+            item.name
+          }}</span>
+          <span class="text-slate-900 dark:text-white"
+            >¥{{
+              item.amount.toLocaleString(undefined, {
+                minimumFractionDigits: 2
+              })
+            }}</span
+          >
         </div>
-        <div class="h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-zinc-800">
-          <div :class="getRankColor(index)" class="h-full transition-all duration-500" :style="{ width: `${item.percent}%` }"></div>
+        <div
+          class="h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-zinc-800"
+        >
+          <div
+            :class="getRankColor(index)"
+            class="h-full transition-all duration-500"
+            :style="{ width: `${item.percent}%` }"
+          ></div>
         </div>
       </div>
     </div>
@@ -21,21 +39,32 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type { Translator } from '@/types/consoleResource'
+import type { OverviewRankingItem } from '@/types/order'
 
-defineProps({
-  items: {
-    type: Array,
-    default: () => []
+withDefaults(
+  defineProps<{
+    items?: OverviewRankingItem[]
+  }>(),
+  {
+    items: () => []
   }
-})
+)
 
-defineEmits(['view-usage'])
+defineEmits<{
+  'view-usage': []
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
-const rankColors = ['bg-primary', 'bg-amber-500', 'bg-purple-500', 'bg-slate-400']
+const rankColors = [
+  'bg-primary',
+  'bg-amber-500',
+  'bg-purple-500',
+  'bg-slate-400'
+]
 
-const getRankColor = (index) => rankColors[index] || 'bg-slate-400'
+const getRankColor = (index: number) => rankColors[index] || 'bg-slate-400'
 </script>

@@ -1,44 +1,50 @@
 <template>
   <TableCard>
     <template #toolbar>
-      <div class="list-filter-bar">
-        <div class="list-toolbar-main">
-          <div class="list-search-field">
-            <input
-              :value="searchQuery"
-              :placeholder="t('searchInstancePlaceholder')"
-              class="list-search-input !w-full"
-              type="text"
-              @input="$emit('search-change', $event.target.value)"
-              @keyup.enter="$emit('refresh')"
-            />
-            <span class="material-icons absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[16px]">search</span>
-          </div>
-
-          <el-select
-            :model-value="statusFilter"
-            :placeholder="`${t('status')}: ${t('all')}`"
-            class="list-filter-select !w-[168px]"
-            clearable
-            size="small"
-            @update:model-value="$emit('status-change', $event)"
+      <BaseFilterBar plain wrap-main actions-class="list-toolbar-actions--push">
+        <div class="list-search-field">
+          <input
+            :value="searchQuery"
+            :placeholder="t('searchInstancePlaceholder')"
+            class="list-search-input !w-full"
+            type="text"
+            @input="handleSearchInput"
+            @keyup.enter="$emit('refresh')"
+          />
+          <span
+            class="material-icons absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[16px]"
+            >search</span
           >
-            <el-option :label="t('RUNNING')" value="RUNNING" />
-            <el-option :label="t('STOPPED')" value="STOPPED" />
-            <el-option :label="t('CREATING')" value="CREATING" />
-          </el-select>
         </div>
 
-        <div class="list-toolbar-actions list-toolbar-actions--push">
-          <button class="list-toolbar-button list-toolbar-button--secondary list-toolbar-button--icon" @click="$emit('show-key-settings')">
+        <el-select
+          :model-value="statusFilter"
+          :placeholder="`${t('status')}: ${t('all')}`"
+          class="list-filter-select !w-[168px]"
+          clearable
+          size="small"
+          @update:model-value="$emit('status-change', $event)"
+        >
+          <el-option :label="t('RUNNING')" value="RUNNING" />
+          <el-option :label="t('STOPPED')" value="STOPPED" />
+          <el-option :label="t('CREATING')" value="CREATING" />
+        </el-select>
+
+        <template #actions>
+          <button
+            class="list-toolbar-button list-toolbar-button--secondary list-toolbar-button--icon"
+            @click="$emit('show-key-settings')"
+          >
             <span class="material-icons text-[20px]">vpn_key</span>
           </button>
-        </div>
-      </div>
+        </template>
+      </BaseFilterBar>
     </template>
 
     <div class="overflow-x-auto">
-      <table class="console-table console-table--resource-dense w-full min-w-[1180px]">
+      <table
+        class="console-table console-table--resource-dense w-full min-w-[1180px]"
+      >
         <thead>
           <tr>
             <th>{{ t('instanceId') }} / {{ t('name') }}</th>
@@ -54,7 +60,9 @@
           <tr v-if="loading">
             <td colspan="7" class="px-6 py-12 text-center text-slate-400">
               <div class="flex items-center justify-center gap-2">
-                <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
+                <div
+                  class="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"
+                ></div>
                 {{ t('loading') }}
               </div>
             </td>
@@ -62,18 +70,20 @@
           <tr v-else-if="notebooks.length === 0">
             <td colspan="7" class="px-6 py-12 text-center text-slate-400">
               <div class="console-list-empty">
-                <span class="material-icons console-list-empty__icon">inbox</span>
+                <span class="material-icons console-list-empty__icon"
+                  >inbox</span
+                >
                 <p class="console-list-empty__text">{{ t('noData') }}</p>
-                <button class="list-row-button list-row-button--neutral" @click="$emit('create')">{{ t('create') }}{{ t('notebook') }}</button>
+                <button
+                  class="list-row-button list-row-button--neutral"
+                  @click="$emit('create')"
+                >
+                  {{ t('create') }}{{ t('notebook') }}
+                </button>
               </div>
             </td>
           </tr>
-          <tr
-            v-for="item in notebooks"
-            v-else
-            :key="item.id"
-            class="group"
-          >
+          <tr v-for="item in notebooks" v-else :key="item.id" class="group">
             <td>
               <ResourceIdentityCell
                 :copy-title="t('copy')"
@@ -88,21 +98,34 @@
               <ResourceStatusCell
                 :label="getStatusText(item.status)"
                 show-pulse
-                :pulse-class="item.status === 'RUNNING' ? 'animate-pulse bg-emerald-500' : 'bg-current'"
+                :pulse-class="
+                  item.status === 'RUNNING'
+                    ? 'animate-pulse bg-emerald-500'
+                    : 'bg-current'
+                "
                 :status-class="getStatusStyle(item.status)"
               />
             </td>
             <td>
               <div class="flex items-center gap-1">
-                <span class="material-icons text-[14px] text-slate-400">memory</span>
+                <span class="material-icons text-[14px] text-slate-400"
+                  >memory</span
+                >
                 <span class="is-metric">{{ item.cpu }} {{ t('cpu') }}</span>
                 <span class="text-slate-300 mx-1">|</span>
                 <span class="is-metric">{{ item.memory }} GB</span>
               </div>
             </td>
             <td>
-              <span v-if="item.gpu" class="console-badge console-badge--neutral is-code">{{ item.gpu }}</span>
-              <span v-else class="is-muted text-[11px]">{{ t('CPU ONLY') }}</span>
+              <span
+                v-if="item.gpuCount > 0 || item.gpu > 0"
+                class="console-badge console-badge--neutral is-code"
+              >
+                {{ item.gpuCount || item.gpu }} × {{ item.gpuModel || 'GPU' }}
+              </span>
+              <span v-else class="is-muted text-[11px]">{{
+                t('CPU ONLY')
+              }}</span>
             </td>
             <td class="text-center">
               <button
@@ -127,7 +150,11 @@
                   <span class="flex-1 text-center">Jupyter</span>
                 </a>
                 <a
-                  v-if="item.status === 'RUNNING' && item.enableTensorboard && item.tensorboardUrl"
+                  v-if="
+                    item.status === 'RUNNING' &&
+                    item.enableTensorboard &&
+                    item.tensorboardUrl
+                  "
                   :href="item.tensorboardUrl"
                   class="list-row-button list-row-button--info min-w-[112px] justify-start"
                   target="_blank"
@@ -135,13 +162,21 @@
                   <span class="material-icons text-[14px]">analytics</span>
                   <span class="flex-1 text-center pr-[14px]">TensorBoard</span>
                 </a>
-                <span v-if="item.status !== 'RUNNING' || (!item.jupyterUrl && !(item.enableTensorboard && item.tensorboardUrl))" class="is-muted text-sm">-</span>
+                <span
+                  v-if="
+                    item.status !== 'RUNNING' ||
+                    (!item.jupyterUrl &&
+                      !(item.enableTensorboard && item.tensorboardUrl))
+                  "
+                  class="is-muted text-sm"
+                  >-</span
+                >
               </div>
             </td>
             <td class="console-actions-cell">
               <div class="list-row-actions">
                 <button
-                  v-if="item.status !== 'RUNNING' && item.status !== 'PENDING' && item.status !== 'CREATING' && item.status !== 'DELETING'"
+                  v-if="item.status === 'STOPPED'"
                   :disabled="btnLoading[item.id]"
                   class="list-row-button list-row-button--success disabled:opacity-50"
                   @click="$emit('start', item)"
@@ -189,71 +224,59 @@
   </TableCard>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import BaseFilterBar from '@/components/listPage/BaseFilterBar.vue'
 import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
 import ResourceIdentityCell from '@/components/listPage/ResourceIdentityCell.vue'
 import ResourceStatusCell from '@/components/listPage/ResourceStatusCell.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
+import type { ConsoleNotebook, Translator } from '@/types/consoleResource'
 
-defineProps({
-  btnLoading: {
-    type: Object,
-    default: () => ({})
-  },
-  getStatusStyle: {
-    type: Function,
-    required: true
-  },
-  getStatusText: {
-    type: Function,
-    required: true
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  notebooks: {
-    type: Array,
-    default: () => []
-  },
-  page: {
-    type: Number,
-    default: 1
-  },
-  pageSize: {
-    type: Number,
-    default: 20
-  },
-  searchQuery: {
-    type: String,
-    default: ''
-  },
-  statusFilter: {
-    type: String,
-    default: ''
-  },
-  total: {
-    type: Number,
-    default: 0
+withDefaults(
+  defineProps<{
+    btnLoading?: Record<string | number, boolean>
+    getStatusStyle: (status?: string) => string
+    getStatusText: (status?: string) => string
+    loading?: boolean
+    notebooks?: ConsoleNotebook[]
+    page?: number
+    pageSize?: number
+    searchQuery?: string
+    statusFilter?: string
+    total?: number
+  }>(),
+  {
+    btnLoading: () => ({}),
+    loading: false,
+    notebooks: () => [],
+    page: 1,
+    pageSize: 20,
+    searchQuery: '',
+    statusFilter: '',
+    total: 0
   }
-})
+)
 
-defineEmits([
-  'copy',
-  'create',
-  'delete',
-  'detail',
-  'page-change',
-  'refresh',
-  'search-change',
-  'show-key-settings',
-  'show-ssh',
-  'size-change',
-  'start',
-  'status-change',
-  'stop'
-])
+const emit = defineEmits<{
+  copy: [value: string]
+  create: []
+  delete: [item: ConsoleNotebook]
+  detail: [item: ConsoleNotebook]
+  'page-change': [page: number]
+  refresh: []
+  'search-change': [value: string]
+  'show-key-settings': []
+  'show-ssh': [item: ConsoleNotebook]
+  'size-change': [pageSize: number]
+  start: [item: ConsoleNotebook]
+  'status-change': [value?: string]
+  stop: [item: ConsoleNotebook]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
+
+const handleSearchInput = (event: Event) => {
+  emit('search-change', (event.target as HTMLInputElement).value)
+}
 </script>

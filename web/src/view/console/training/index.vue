@@ -2,6 +2,6 @@
   <TrainingListPage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import TrainingListPage from './index/index.vue'
 </script>

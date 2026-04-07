@@ -39,7 +39,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
 import AuthorityDialogsHost from './components/AuthorityDialogsHost.vue'
 import AuthorityManagementHeader from './components/AuthorityManagementHeader.vue'
@@ -78,6 +78,6 @@ const {
 } = useAuthorityManagementPage({ t })
 
 onMounted(() => {
-  initialize()
+  void initialize()
 })
 </script>

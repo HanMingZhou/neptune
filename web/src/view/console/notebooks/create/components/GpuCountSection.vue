@@ -25,21 +25,23 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type { ConsoleProduct, Translator } from '@/types/consoleResource'
 
-defineProps({
-  modelValue: {
-    type: Number,
-    required: true
-  },
-  selectedProduct: {
-    type: Object,
-    default: null
+withDefaults(
+  defineProps<{
+    modelValue: number
+    selectedProduct?: ConsoleProduct | null
+  }>(),
+  {
+    selectedProduct: null
   }
-})
+)
 
-defineEmits(['update:modelValue'])
+defineEmits<{
+  'update:modelValue': [value: number]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

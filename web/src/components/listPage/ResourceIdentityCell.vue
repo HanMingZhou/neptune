@@ -4,7 +4,11 @@
       :is="clickable ? 'button' : 'span'"
       :type="clickable ? 'button' : undefined"
       class="console-resource-summary__primary"
-      :class="clickable ? 'font-bold text-primary hover:underline cursor-pointer text-sm' : ''"
+      :class="
+        clickable
+          ? 'font-bold text-primary hover:underline cursor-pointer text-sm'
+          : ''
+      "
       @click="handlePrimaryClick"
     >
       {{ primary }}
@@ -24,37 +28,32 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 
-const props = defineProps({
-  clickable: {
-    type: Boolean,
-    default: true
-  },
-  copyTitle: {
-    type: String,
-    default: ''
-  },
-  copyValue: {
-    type: String,
-    default: ''
-  },
-  primary: {
-    type: String,
-    default: ''
-  },
-  secondary: {
-    type: String,
-    default: ''
-  },
-  showSecondaryWhenSame: {
-    type: Boolean,
-    default: false
+const props = withDefaults(
+  defineProps<{
+    clickable?: boolean
+    copyTitle?: string
+    copyValue?: string
+    primary?: string
+    secondary?: string
+    showSecondaryWhenSame?: boolean
+  }>(),
+  {
+    clickable: true,
+    copyTitle: '',
+    copyValue: '',
+    primary: '',
+    secondary: '',
+    showSecondaryWhenSame: false
   }
-})
+)
 
-const emit = defineEmits(['copy', 'primary-click'])
+const emit = defineEmits<{
+  copy: [value: string]
+  'primary-click': []
+}>()
 
 const resolvedSecondary = computed(() => {
   if (!props.secondary) {

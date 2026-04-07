@@ -1,12 +1,13 @@
 <template>
   <div class="console-page-container space-y-6">
-    <PageIntro
+    <BaseTableToolbar
       :breadcrumbs="[t('admin'), t('clusterManage')]"
       :description="t('clusterManageDesc')"
+      :loading="loading"
       :title="t('clusterManage')"
+      @refresh="fetchClusters"
     >
       <template #actions>
-        <RefreshButton :loading="loading" @refresh="fetchClusters" />
         <button
           class="list-toolbar-button list-toolbar-button--primary"
           @click="openCreateDialog"
@@ -15,7 +16,7 @@
           {{ t('clusterAdd') }}
         </button>
       </template>
-    </PageIntro>
+    </BaseTableToolbar>
 
     <ManagementListShell>
       <template #filters>
@@ -58,11 +59,10 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
 import ManagementListShell from '@/components/listPage/ManagementListShell.vue'
-import RefreshButton from '@/components/RefreshButton/index.vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
 import ClusterEditorDialog from './components/ClusterEditorDialog.vue'
 import ClusterFiltersBar from './components/ClusterFiltersBar.vue'
 import ClusterTableCard from './components/ClusterTableCard.vue'
@@ -98,6 +98,6 @@ const {
 } = useClusterManagementPage({ t })
 
 onMounted(() => {
-  initialize()
+  void initialize()
 })
 </script>

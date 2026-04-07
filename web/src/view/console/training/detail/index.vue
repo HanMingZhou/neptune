@@ -60,7 +60,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import DetailHeader from './components/DetailHeader.vue'
 import DetailTabs from '@/components/detailPage/DetailTabs.vue'
 import TrainingDetailPanels from './components/TrainingDetailPanels.vue'

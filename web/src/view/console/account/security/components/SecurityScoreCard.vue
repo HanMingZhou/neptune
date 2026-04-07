@@ -6,8 +6,13 @@
         {{ t('security.scoreTitle') }}：{{ levelLabel }}
       </h3>
     </div>
-    <div class="w-full bg-slate-200 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden mb-4">
-      <div class="bg-primary h-full transition-all duration-500" :style="{ width: `${score}%` }"></div>
+    <div
+      class="w-full bg-slate-200 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden mb-4"
+    >
+      <div
+        class="bg-primary h-full transition-all duration-500"
+        :style="{ width: `${score}%` }"
+      ></div>
     </div>
     <p class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
       {{ t('security.scoreExceed') }}
@@ -15,17 +20,20 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject } from 'vue'
+import type { Translator } from '@/types/consoleResource'
 
-const props = defineProps({
-  score: {
-    type: Number,
-    default: 0
+const props = withDefaults(
+  defineProps<{
+    score?: number
+  }>(),
+  {
+    score: 0
   }
-})
+)
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const levelLabel = computed(() => {
   if (props.score >= 80) {

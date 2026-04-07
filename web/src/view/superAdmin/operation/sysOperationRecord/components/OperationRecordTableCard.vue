@@ -1,62 +1,78 @@
 <template>
   <TableCard>
     <template #toolbar>
-      <div class="list-filter-bar">
-      <div class="list-filter-field list-filter-field--compact max-w-[180px]">
-        <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">http</span>
-        <input
-          v-model="searchInfo.method"
-          type="text"
-          :placeholder="t('method')"
-          class="list-search-input !w-full"
-          @keyup.enter="$emit('search')"
-        />
-      </div>
-      <div class="list-filter-field list-filter-field--compact max-w-[180px]">
-        <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">link</span>
-        <input
-          v-model="searchInfo.path"
-          type="text"
-          :placeholder="t('requestPath')"
-          class="list-search-input !w-full"
-          @keyup.enter="$emit('search')"
-        />
-      </div>
-      <div class="list-filter-field list-filter-field--compact max-w-[180px]">
-        <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">tag</span>
-        <input
-          v-model="searchInfo.status"
-          type="text"
-          :placeholder="t('statusCode')"
-          class="list-search-input !w-full"
-          @keyup.enter="$emit('search')"
-        />
-      </div>
-      <div class="list-toolbar-actions">
-        <button
-          class="list-toolbar-button list-toolbar-button--primary"
-          @click="$emit('search')"
-        >
-          <span class="material-icons text-[18px]">search</span>
-          {{ t('searchQuery') }}
-        </button>
-        <button
-          class="list-toolbar-button list-toolbar-button--secondary"
-          @click="$emit('reset')"
-        >
-          <span class="material-icons text-[18px]">refresh</span>
-          {{ t('reset') }}
-        </button>
-      </div>
-      </div>
+      <BaseFilterBar plain>
+        <div class="list-filter-field list-filter-field--compact max-w-[180px]">
+          <span
+            class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]"
+            >http</span
+          >
+          <input
+            v-model="searchInfo.method"
+            type="text"
+            :placeholder="t('method')"
+            class="list-search-input !w-full"
+            @keyup.enter="$emit('search')"
+          />
+        </div>
+        <div class="list-filter-field list-filter-field--compact max-w-[180px]">
+          <span
+            class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]"
+            >link</span
+          >
+          <input
+            v-model="searchInfo.path"
+            type="text"
+            :placeholder="t('requestPath')"
+            class="list-search-input !w-full"
+            @keyup.enter="$emit('search')"
+          />
+        </div>
+        <div class="list-filter-field list-filter-field--compact max-w-[180px]">
+          <span
+            class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]"
+            >tag</span
+          >
+          <input
+            v-model="searchInfo.status"
+            type="text"
+            :placeholder="t('statusCode')"
+            class="list-search-input !w-full"
+            @keyup.enter="$emit('search')"
+          />
+        </div>
+        <template #actions>
+          <button
+            class="list-toolbar-button list-toolbar-button--primary"
+            @click="$emit('search')"
+          >
+            <span class="material-icons text-[18px]">search</span>
+            {{ t('searchQuery') }}
+          </button>
+          <button
+            class="list-toolbar-button list-toolbar-button--secondary"
+            @click="$emit('reset')"
+          >
+            <span class="material-icons text-[18px]">refresh</span>
+            {{ t('reset') }}
+          </button>
+        </template>
+      </BaseFilterBar>
     </template>
 
     <div class="overflow-x-auto" v-loading="loading">
       <table class="console-table w-full min-w-[1280px] text-left">
         <thead>
-          <tr class="bg-slate-50 dark:bg-zinc-800/50 border-b border-border-light dark:border-border-dark text-slate-500 text-xs font-bold uppercase tracking-wider">
+          <tr
+            class="bg-slate-50 dark:bg-zinc-800/50 border-b border-border-light dark:border-border-dark text-slate-500 text-xs font-bold uppercase tracking-wider"
+          >
             <th class="px-6 py-4 w-12">
-              <input type="checkbox" :checked="allSelected" @change="$emit('toggle-select-all', $event.target.checked)" class="rounded" />
+              <input
+                type="checkbox"
+                :checked="allSelected"
+                @change="$emit('toggle-select-all', $event.target.checked)"
+                class="rounded"
+              />
             </th>
             <th class="px-6 py-4">{{ t('operator') }}</th>
             <th class="px-6 py-4">{{ t('date') }}</th>
@@ -93,37 +109,68 @@
             </td>
             <td class="px-6 py-4 text-sm">
               <span class="is-key">{{ row.user?.userName || '-' }}</span>
-              <span v-if="row.user?.nickName" class="is-muted">({{ row.user.nickName }})</span>
+              <span v-if="row.user?.nickName" class="is-muted"
+                >({{ row.user.nickName }})</span
+              >
             </td>
-            <td class="px-6 py-4 text-sm text-slate-500">{{ formatDate(row.CreatedAt) }}</td>
+            <td class="px-6 py-4 text-sm text-slate-500">
+              {{ formatDate(row.CreatedAt) }}
+            </td>
             <td class="px-6 py-4">
-              <ListToneBadge :label="String(row.status)" :tone="getStatusTone(row.status)" />
+              <ListToneBadge
+                :label="String(row.status)"
+                :tone="getStatusTone(row.status)"
+              />
             </td>
-            <td class="px-6 py-4 text-sm font-mono text-slate-500">{{ row.ip }}</td>
+            <td class="px-6 py-4 text-sm font-mono text-slate-500">
+              {{ row.ip }}
+            </td>
             <td class="px-6 py-4">
-              <ListToneBadge :label="row.method" :tone="getMethodTone(row.method)" />
+              <ListToneBadge
+                :label="row.method"
+                :tone="getMethodTone(row.method)"
+              />
             </td>
-            <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 max-w-[220px] truncate" :title="row.path">
+            <td
+              class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 max-w-[220px] truncate"
+              :title="row.path"
+            >
               {{ row.path }}
             </td>
             <td class="px-6 py-4">
               <el-popover v-if="row.body" placement="left-start" :width="444">
-                <div class="bg-slate-900 rounded-lg p-4 max-h-[400px] overflow-auto">
-                  <pre class="text-green-400 text-xs font-mono whitespace-pre-wrap">{{ formatBody(row.body) }}</pre>
+                <div
+                  class="bg-slate-900 rounded-lg p-4 max-h-[400px] overflow-auto"
+                >
+                  <pre
+                    class="text-green-400 text-xs font-mono whitespace-pre-wrap"
+                    >{{ formatBody(row.body) }}</pre
+                  >
                 </div>
                 <template #reference>
-                  <span class="material-icons text-primary cursor-pointer text-[18px]">visibility</span>
+                  <span
+                    class="material-icons text-primary cursor-pointer text-[18px]"
+                    >visibility</span
+                  >
                 </template>
               </el-popover>
               <span v-else class="text-slate-400 text-sm">-</span>
             </td>
             <td class="px-6 py-4">
               <el-popover v-if="row.resp" placement="left-start" :width="444">
-                <div class="bg-slate-900 rounded-lg p-4 max-h-[400px] overflow-auto">
-                  <pre class="text-green-400 text-xs font-mono whitespace-pre-wrap">{{ formatBody(row.resp) }}</pre>
+                <div
+                  class="bg-slate-900 rounded-lg p-4 max-h-[400px] overflow-auto"
+                >
+                  <pre
+                    class="text-green-400 text-xs font-mono whitespace-pre-wrap"
+                    >{{ formatBody(row.resp) }}</pre
+                  >
                 </div>
                 <template #reference>
-                  <span class="material-icons text-primary cursor-pointer text-[18px]">visibility</span>
+                  <span
+                    class="material-icons text-primary cursor-pointer text-[18px]"
+                    >visibility</span
+                  >
                 </template>
               </el-popover>
               <span v-else class="text-slate-400 text-sm">-</span>
@@ -159,61 +206,43 @@
   </TableCard>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import BaseFilterBar from '@/components/listPage/BaseFilterBar.vue'
 import ListToneBadge from '@/components/listPage/ListToneBadge.vue'
 import { formatDate } from '@/utils/format'
 import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
+import type { Translator } from '@/types/consoleResource'
+import type {
+  OperationRecordItem,
+  OperationRecordSearchInfo
+} from '@/types/superAdmin'
 
-defineProps({
-  allSelected: {
-    type: Boolean,
-    default: false
-  },
-  items: {
-    type: Array,
-    default: () => []
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  page: {
-    type: Number,
-    default: 1
-  },
-  pageSize: {
-    type: Number,
-    default: 10
-  },
-  searchInfo: {
-    type: Object,
-    required: true
-  },
-  selectedIds: {
-    type: Array,
-    default: () => []
-  },
-  total: {
-    type: Number,
-    default: 0
-  }
-})
+defineProps<{
+  allSelected?: boolean
+  items?: OperationRecordItem[]
+  loading?: boolean
+  page?: number
+  pageSize?: number
+  searchInfo: OperationRecordSearchInfo
+  selectedIds?: number[]
+  total?: number
+}>()
 
-defineEmits([
-  'delete',
-  'page-change',
-  'reset',
-  'search',
-  'size-change',
-  'toggle-select',
-  'toggle-select-all'
-])
+defineEmits<{
+  delete: [row: OperationRecordItem]
+  'page-change': [page: number]
+  reset: []
+  search: []
+  'size-change': [pageSize: number]
+  'toggle-select': [row: OperationRecordItem]
+  'toggle-select-all': [checked: boolean]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
-const getMethodTone = (method) => {
+const getMethodTone = (method?: string) => {
   const tones = {
     GET: 'info',
     POST: 'success',
@@ -224,7 +253,7 @@ const getMethodTone = (method) => {
   return tones[method] || 'neutral'
 }
 
-const getStatusTone = (status) => {
+const getStatusTone = (status?: number | string) => {
   if (Number(status) >= 400) {
     return 'danger'
   }
@@ -232,7 +261,11 @@ const getStatusTone = (status) => {
   return 'success'
 }
 
-const formatBody = (value) => {
+const formatBody = (value?: string) => {
+  if (!value) {
+    return ''
+  }
+
   try {
     return JSON.stringify(JSON.parse(value), null, 2)
   } catch {

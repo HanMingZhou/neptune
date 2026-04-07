@@ -1,6 +1,7 @@
 <template>
   <AccountPasswordDialog
     v-model="passwordDialog.visible"
+    dialog-class="account-security-dialog"
     :form="passwordDialog.form"
     :rules="passwordDialog.rules"
     :loading="passwordDialog.loading"
@@ -11,6 +12,7 @@
 
   <AccountPhoneDialog
     v-model="phoneDialog.visible"
+    dialog-class="account-security-dialog"
     :form="phoneDialog.form"
     :rules="phoneDialog.rules"
     :loading="phoneDialog.loading"
@@ -24,6 +26,7 @@
 
   <AccountEmailDialog
     v-model="emailDialog.visible"
+    dialog-class="account-security-dialog"
     :form="emailDialog.form"
     :rules="emailDialog.rules"
     :loading="emailDialog.loading"
@@ -57,69 +60,79 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { FormRules } from 'element-plus'
+import type {
+  AccountEmailForm,
+  AccountPasswordForm,
+  AccountPhoneForm
+} from '@/types/account'
 import AccountEmailDialog from '../../components/AccountEmailDialog.vue'
 import AccountPasswordDialog from '../../components/AccountPasswordDialog.vue'
 import AccountPhoneDialog from '../../components/AccountPhoneDialog.vue'
 import MfaDisableDialog from './MfaDisableDialog.vue'
 import MfaSetupDialog from './MfaSetupDialog.vue'
 
-defineProps({
-  emailDialog: {
-    type: Object,
-    required: true
-  },
-  mfaDisableDialog: {
-    type: Object,
-    required: true
-  },
-  mfaSetupDialog: {
-    type: Object,
-    required: true
-  },
-  passwordDialog: {
-    type: Object,
-    required: true
-  },
-  phoneDialog: {
-    type: Object,
-    required: true
-  }
-})
-</script>
-
-<style>
-.custom-dialog {
-  :deep(.el-dialog) {
-    @apply rounded-xl overflow-hidden;
-  }
-
-  :deep(.el-dialog__header) {
-    @apply m-0 p-6 border-b border-slate-100 dark:border-slate-800;
-  }
-
-  :deep(.el-dialog__title) {
-    @apply text-lg font-semibold text-slate-800 dark:text-slate-200;
-  }
-
-  :deep(.el-dialog__body) {
-    @apply p-6 bg-slate-50 dark:bg-slate-900/50;
-  }
-
-  :deep(.el-dialog__footer) {
-    @apply p-6 border-t border-slate-100 dark:border-slate-800 m-0 bg-white dark:bg-slate-900;
-  }
-
-  :deep(.el-form-item__label) {
-    @apply pb-2 font-medium text-slate-700 dark:text-slate-300;
-  }
-
-  :deep(.el-input__wrapper) {
-    @apply px-4 py-2 transition-all duration-200;
-  }
-
-  :deep(.el-input__wrapper.is-focus) {
-    @apply shadow-[0_0_0_2px_rgba(59,130,246,0.1)] dark:shadow-[0_0_0_2px_rgba(59,130,246,0.2)];
-  }
+interface PasswordDialogController {
+  visible: boolean
+  form: AccountPasswordForm
+  loading: boolean
+  rules: FormRules<AccountPasswordForm>
+  title: string
+  clear: () => void
+  submit: () => void | Promise<void>
 }
-</style>
+
+interface PhoneDialogController {
+  visible: boolean
+  form: AccountPhoneForm
+  loading: boolean
+  rules: FormRules<AccountPhoneForm>
+  disableRequestCode: boolean
+  requestCodeText: string
+  title: string
+  close: () => void
+  requestCode: () => void
+  submit: () => void | Promise<void>
+}
+
+interface EmailDialogController {
+  visible: boolean
+  form: AccountEmailForm
+  loading: boolean
+  rules: FormRules<AccountEmailForm>
+  disableRequestCode: boolean
+  requestCodeText: string
+  title: string
+  close: () => void
+  requestCode: () => void
+  submit: () => void | Promise<void>
+}
+
+interface MfaSetupDialogController {
+  visible: boolean
+  code: string
+  loading: boolean
+  qr: string
+  secret: string
+  close: () => void
+  confirm: () => void | Promise<void>
+  copySecret: () => void | Promise<void>
+}
+
+interface MfaDisableDialogController {
+  visible: boolean
+  code: string
+  loading: boolean
+  close: () => void
+  confirm: () => void | Promise<void>
+}
+
+defineProps<{
+  emailDialog: EmailDialogController
+  mfaDisableDialog: MfaDisableDialogController
+  mfaSetupDialog: MfaSetupDialogController
+  passwordDialog: PasswordDialogController
+  phoneDialog: PhoneDialogController
+}>()
+</script>

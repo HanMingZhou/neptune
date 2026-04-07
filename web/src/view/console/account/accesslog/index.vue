@@ -1,10 +1,11 @@
 <template>
   <div class="console-page-container space-y-6">
-    <PageIntro :title="t('audit.title')" :description="t('operationRecordDesc')">
-      <template #actions>
-        <RefreshButton :loading="loading" @refresh="handleRefresh" />
-      </template>
-    </PageIntro>
+    <BaseTableToolbar
+      :description="t('operationRecordDesc')"
+      :loading="loading"
+      :title="t('audit.title')"
+      @refresh="handleRefresh"
+    />
 
     <ActiveSessionsSection :sessions="activeSessions" @kill="handleKill" />
 
@@ -23,15 +24,15 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
-import RefreshButton from '@/components/RefreshButton/index.vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
 import ActiveSessionsSection from './components/ActiveSessionsSection.vue'
 import AccessLogTable from './components/AccessLogTable.vue'
 import { useAccessLog } from './composables/useAccessLog'
+import type { Translator } from '@/types/consoleResource'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const {
   activeSessions,
@@ -51,6 +52,6 @@ const {
 } = useAccessLog({ t })
 
 onMounted(() => {
-  fetchAll()
+  void fetchAll()
 })
 </script>

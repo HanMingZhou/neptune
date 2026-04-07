@@ -22,24 +22,38 @@
           >
             <td class="px-6 py-4">
               <div class="flex flex-col">
-                <span class="console-badge console-badge--neutral is-code w-fit">{{ row.nodeName }}</span>
-                <span class="text-[10px] text-slate-400 mt-1">{{ row.area || '-' }}</span>
+                <span
+                  class="console-badge console-badge--neutral is-code w-fit"
+                  >{{ row.nodeName }}</span
+                >
+                <span class="text-[10px] text-slate-400 mt-1">{{
+                  row.area || '-'
+                }}</span>
               </div>
             </td>
-            <td class="px-6 py-4 text-sm text-slate-600 font-mono">{{ row.internalIp || 'N/A' }}</td>
-            <td class="px-6 py-4 text-sm text-slate-600">{{ row.clusterName || '-' }}</td>
+            <td class="px-6 py-4 text-sm text-slate-600 font-mono">
+              {{ row.internalIp || 'N/A' }}
+            </td>
+            <td class="px-6 py-4 text-sm text-slate-600">
+              {{ row.clusterName || '-' }}
+            </td>
             <td class="px-6 py-4">
-              <span
-                class="console-badge console-badge--neutral"
-              >
-                {{ row.nodeRole === 'master' ? t('roleMaster') : t('roleWorker') }}
+              <span class="console-badge console-badge--neutral">
+                {{
+                  row.nodeRole === 'master' ? t('roleMaster') : t('roleWorker')
+                }}
               </span>
             </td>
-            <td class="px-6 py-4 text-sm text-slate-600">{{ row.area || '-' }}</td>
+            <td class="px-6 py-4 text-sm text-slate-600">
+              {{ row.area || '-' }}
+            </td>
             <td class="px-6 py-4">
               <div class="space-y-1.5">
                 <div v-if="row.gpuModel" class="flex items-center gap-2">
-                  <span class="rounded border border-border-light bg-slate-100 px-1.5 py-0.5 text-[10px] font-semibold leading-none text-slate-500 dark:border-border-dark dark:bg-zinc-800 dark:text-slate-300">GPU</span>
+                  <span
+                    class="rounded border border-border-light bg-slate-100 px-1.5 py-0.5 text-[10px] font-semibold leading-none text-slate-500 dark:border-border-dark dark:bg-zinc-800 dark:text-slate-300"
+                    >GPU</span
+                  >
                   <span class="is-primary">{{ row.gpuModel }}</span>
                   <span class="is-code text-xs text-slate-500">
                     ({{ row.gpuAvailable }}/{{ row.gpuCount }})
@@ -48,12 +62,24 @@
 
                 <div class="flex items-center gap-4">
                   <div class="flex items-center gap-1.5">
-                    <span class="material-icons text-[14px] text-slate-400">developer_board</span>
-                    <span class="text-xs text-slate-600 dark:text-slate-400 font-mono">{{ row.cpuAvailable }}/{{ row.cpuAllocatable }}核</span>
+                    <span class="material-icons text-[14px] text-slate-400"
+                      >developer_board</span
+                    >
+                    <span
+                      class="text-xs text-slate-600 dark:text-slate-400 font-mono"
+                      >{{ row.cpuAvailable }}/{{ row.cpuAllocatable }}核</span
+                    >
                   </div>
                   <div class="flex items-center gap-1.5">
-                    <span class="material-icons text-[14px] text-slate-400">memory</span>
-                    <span class="text-xs text-slate-600 dark:text-slate-400 font-mono">{{ row.memoryAvailable }}/{{ row.memoryAllocatable }}GB</span>
+                    <span class="material-icons text-[14px] text-slate-400"
+                      >memory</span
+                    >
+                    <span
+                      class="text-xs text-slate-600 dark:text-slate-400 font-mono"
+                      >{{ row.memoryAvailable }}/{{
+                        row.memoryAllocatable
+                      }}GB</span
+                    >
                   </div>
                 </div>
               </div>
@@ -86,7 +112,10 @@
             </td>
           </tr>
           <tr v-if="items.length === 0 && !loading">
-            <td colspan="8" class="px-6 py-10 text-center text-slate-400 text-sm">
+            <td
+              colspan="8"
+              class="px-6 py-10 text-center text-slate-400 text-sm"
+            >
               {{ t('noData') }}
             </td>
           </tr>
@@ -96,23 +125,28 @@
   </TableCard>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
 import ListToneBadge from '@/components/listPage/ListToneBadge.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
+import type { Translator } from '@/types/consoleResource'
+import type { CmsNodeRow } from '@/types/superAdmin'
 
-defineProps({
-  items: {
-    type: Array,
-    default: () => []
-  },
-  loading: {
-    type: Boolean,
-    default: false
+withDefaults(
+  defineProps<{
+    items?: CmsNodeRow[]
+    loading?: boolean
+  }>(),
+  {
+    items: () => [],
+    loading: false
   }
-})
+)
 
-defineEmits(['drain', 'uncordon'])
+defineEmits<{
+  drain: [row: CmsNodeRow]
+  uncordon: [row: CmsNodeRow]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

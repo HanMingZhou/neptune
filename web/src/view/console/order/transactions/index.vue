@@ -1,6 +1,10 @@
 <template>
   <div class="console-page-container space-y-8">
-    <PageIntro :title="t('transactions')" :description="t('transactionsDesc')">
+    <BaseTableToolbar
+      :description="t('transactionsDesc')"
+      :show-refresh="false"
+      :title="t('transactions')"
+    >
       <template #actions>
         <TransactionsHeaderActions
           :balance="balance"
@@ -11,9 +15,11 @@
           @recharge="openRechargeDialog"
         />
       </template>
-    </PageIntro>
+    </BaseTableToolbar>
 
-    <div class="bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl overflow-hidden shadow-sm">
+    <div
+      class="bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl overflow-hidden shadow-sm"
+    >
       <TransactionsFiltersBar
         v-model:search-query="searchQuery"
         v-model:filter-type="filterType"
@@ -43,16 +49,17 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
 import RechargeBalanceDialog from './components/RechargeBalanceDialog.vue'
 import TransactionsFiltersBar from './components/TransactionsFiltersBar.vue'
 import TransactionsHeaderActions from './components/TransactionsHeaderActions.vue'
 import TransactionsTableSection from './components/TransactionsTableSection.vue'
 import { useOrderTransactions } from './composables/useOrderTransactions'
+import type { Translator } from '@/types/consoleResource'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const {
   balance,
@@ -81,6 +88,6 @@ const {
 } = useOrderTransactions({ t })
 
 onMounted(() => {
-  fetchData()
+  void fetchData()
 })
 </script>

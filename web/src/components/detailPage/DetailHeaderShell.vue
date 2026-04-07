@@ -3,12 +3,24 @@
     <div class="console-detail-card rounded-xl px-5 py-4 md:px-6">
       <div class="flex flex-wrap items-center justify-between gap-4">
         <div class="flex min-w-0 items-center gap-3 md:gap-4">
-          <button class="inline-flex shrink-0 items-center gap-1 text-sm text-slate-500 transition-colors hover:text-primary" @click="$emit('back')">
+          <button
+            class="inline-flex shrink-0 items-center gap-1 text-sm text-slate-500 transition-colors hover:text-primary"
+            @click="$emit('back')"
+          >
             <span class="material-icons text-lg">arrow_back</span>
             {{ t('back') }}
           </button>
-          <h2 class="truncate text-lg font-semibold text-slate-900 dark:text-slate-100 md:text-xl">{{ title }}</h2>
-          <span :class="['shrink-0 rounded-full px-3 py-1 text-xs font-bold', getStatusClass(status)]">
+          <h2
+            class="truncate text-lg font-semibold text-slate-900 dark:text-slate-100 md:text-xl"
+          >
+            {{ title }}
+          </h2>
+          <span
+            :class="[
+              'shrink-0 rounded-full px-3 py-1 text-xs font-bold',
+              getStatusClass(status)
+            ]"
+          >
             {{ getStatusLabel(status) }}
           </span>
         </div>
@@ -20,29 +32,26 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type { Translator } from '@/types/consoleResource'
 
-defineProps({
-  getStatusClass: {
-    type: Function,
-    required: true
-  },
-  getStatusLabel: {
-    type: Function,
-    required: true
-  },
-  status: {
-    type: String,
-    default: ''
-  },
-  title: {
-    type: String,
-    default: ''
+withDefaults(
+  defineProps<{
+    getStatusClass: (status?: string) => string
+    getStatusLabel: (status?: string) => string
+    status?: string
+    title?: string
+  }>(),
+  {
+    status: '',
+    title: ''
   }
-})
+)
 
-defineEmits(['back'])
+defineEmits<{
+  back: []
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

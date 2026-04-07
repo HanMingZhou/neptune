@@ -2,7 +2,7 @@
   <OverviewPage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import OverviewPage from './overview/index.vue'
 
 defineOptions({

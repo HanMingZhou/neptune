@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/platform.png" width="200" alt="Neptune ML Platform" />
+  <img src="docs/readme/images/platform.png" width="200" alt="Neptune ML Platform" />
 </p>
 
 <h1 align="center">Neptune · 机器学习平台</h1>
@@ -25,6 +25,7 @@
 - [项目结构](#-项目结构)
 - [环境要求](#-环境要求)
 - [快速启动](#-快速启动)
+- [界面预览](#-界面预览)
 - [部署方式](#-部署方式)
 - [配置说明](#-配置说明)
 
@@ -237,6 +238,20 @@ docker-compose -f deploy/docker-compose/docker-compose.yaml up -d
 
 ---
 
+## 🖼️ 界面预览
+
+### 容器实例（Notebook）
+![容器实例示例 1](docs/readme/images/notebook-example-1.png)
+![容器实例示例 2](docs/readme/images/notebook-example-2.png)
+
+### 训练任务
+![训练任务示例 1](docs/readme/images/training-example-1.png)
+![训练任务示例 2](docs/readme/images/training-example-2.png)
+
+### 推理服务
+
+- 当前文档中暂无推理服务截图，后续可继续补充到 `./images/` 目录。
+
 ## 📦 部署方式
 
 ### Docker Compose 部署
@@ -313,3 +328,4 @@ sshpiper:
 ## 📄 License
 
 Proprietary - All Rights Reserved
+

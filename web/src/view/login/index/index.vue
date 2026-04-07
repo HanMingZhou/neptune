@@ -3,9 +3,15 @@
     class="min-h-screen flex items-start lg:items-center justify-center px-4 py-8 sm:p-6 relative overflow-hidden transition-colors duration-500 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900"
   >
     <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-indigo-500/20 blur-[120px] animate-blob"></div>
-      <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-cyan-500/20 blur-[100px] animate-blob animation-delay-2000"></div>
-      <div class="absolute top-1/2 left-1/2 w-72 h-72 rounded-full bg-purple-500/20 blur-[100px] animate-blob animation-delay-4000"></div>
+      <div
+        class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-indigo-500/20 blur-[120px] animate-blob"
+      ></div>
+      <div
+        class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-cyan-500/20 blur-[100px] animate-blob animation-delay-2000"
+      ></div>
+      <div
+        class="absolute top-1/2 left-1/2 w-72 h-72 rounded-full bg-purple-500/20 blur-[100px] animate-blob animation-delay-4000"
+      ></div>
     </div>
 
     <div class="relative z-10 w-full max-w-7xl mt-4 lg:mt-0">
@@ -33,7 +39,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted } from 'vue'
 import LoginAuthCard from './components/LoginAuthCard.vue'
 import LoginHeroPanel from './components/LoginHeroPanel.vue'
@@ -56,7 +62,7 @@ const {
 } = useLoginPage()
 
 onMounted(() => {
-  initialize()
+  void initialize()
 })
 </script>
 

@@ -5,53 +5,84 @@
       <div
         @click="navigateTo(item.routeName)"
         class="flex items-center gap-3 px-3 py-2 rounded transition-all text-[13px] font-semibold cursor-pointer"
-        :class="isActive ? 'sidebar-active shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800'"
+        :class="
+          isActive
+            ? 'sidebar-active shadow-sm'
+            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800'
+        "
         :style="{ paddingLeft: `${level * 16 + 12}px` }"
       >
-        <AppIcon v-if="item.icon" :name="item.icon" class="text-[18px] opacity-80" />
+        <AppIcon
+          v-if="item.icon"
+          :name="item.icon"
+          class="text-[18px] opacity-80"
+        />
         <span class="flex-1 truncate">{{ displayTitle }}</span>
       </div>
     </template>
-    
+
     <template v-else>
-      <div 
+      <div
         @click="handleClick"
         class="flex items-center gap-3 px-3 py-2 rounded transition-all text-[13px] font-bold cursor-pointer"
-        :class="hasActiveChild ? 'text-primary' : 'text-slate-500 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-zinc-800'"
+        :class="
+          hasActiveChild
+            ? 'text-primary'
+            : 'text-slate-500 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-zinc-800'
+        "
         :style="{ paddingLeft: `${level * 16 + 12}px` }"
       >
-        <AppIcon v-if="item.icon" :name="item.icon" class="text-[18px] opacity-80" />
+        <AppIcon
+          v-if="item.icon"
+          :name="item.icon"
+          class="text-[18px] opacity-80"
+        />
         <span class="flex-1 truncate">{{ displayTitle }}</span>
-        <span v-if="hasChildren" class="material-icons text-[16px] transition-transform duration-200" :class="{ '-rotate-90': !isOpen }">expand_more</span>
+        <span
+          v-if="hasChildren"
+          class="material-icons text-[16px] transition-transform duration-200"
+          :class="{ '-rotate-90': !isOpen }"
+          >expand_more</span
+        >
       </div>
     </template>
-    
+
     <!-- 递归渲染子菜单 -->
     <div v-if="hasChildren && isOpen" class="space-y-1">
-      <NavMenuItem 
-        v-for="child in item.children" 
-        :key="child.key" 
-        :item="child" 
-        :level="level + 1" 
+      <NavMenuItem
+        v-for="child in item.children"
+        :key="child.key"
+        :item="child"
+        :level="level + 1"
       />
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AppIcon from '@/components/AppIcon.vue'
+import type { Translator } from '@/types/consoleResource'
+import type { LayoutNavItem } from '@/types/layout'
 
-const props = defineProps({
-  item: Object,
-  level: { type: Number, default: 0 }
-})
+const props = withDefaults(
+  defineProps<{
+    item: LayoutNavItem
+    level?: number
+  }>(),
+  {
+    level: 0
+  }
+)
 
-const t = inject('t')
+const t = inject<Translator>('t', (key: string) => key)
 const route = useRoute()
 const router = useRouter()
 const isOpen = ref(true)
+const currentRouteName = computed(() =>
+  typeof route.name === 'string' ? route.name : ''
+)
 
 // 菜单标题：优先使用 i18n 翻译，fallback 到后端返回的 title
 const displayTitle = computed(() => {
@@ -65,17 +96,18 @@ const displayTitle = computed(() => {
   return props.item.title
 })
 
-const isActive = computed(() => props.item.routeName === route.name)
-const hasChildren = computed(() => props.item.children && props.item.children.length > 0)
+const isActive = computed(() => props.item.routeName === currentRouteName.value)
+const hasChildren = computed(() => (props.item.children?.length ?? 0) > 0)
 
 // 导航到指定路由
-const navigateTo = (routeName) => {
-  console.log('Navigating to:', routeName)
-  if (routeName) {
-    router.push({ name: routeName }).catch(err => {
-      console.error('Navigation failed:', err)
-    })
+const navigateTo = (routeName?: string) => {
+  if (!routeName) {
+    return
   }
+
+  void router.push({ name: routeName }).catch((error: unknown) => {
+    console.error('Navigation failed:', error)
+  })
 }
 
 // 点击处理（折叠/展开）
@@ -87,8 +119,17 @@ const handleClick = () => {
 
 // 判断是否有子项目处于激活状态
 const hasActiveChild = computed(() => {
-  if (!props.item.children) return false;
-  const check = (items) => items.some(i => i.routeName === route.name || (i.children && check(i.children)))
+  if (!props.item.children) {
+    return false
+  }
+
+  const check = (items: LayoutNavItem[]): boolean =>
+    items.some(
+      (candidate) =>
+        candidate.routeName === currentRouteName.value ||
+        (candidate.children ? check(candidate.children) : false)
+    )
+
   return check(props.item.children)
 })
 </script>

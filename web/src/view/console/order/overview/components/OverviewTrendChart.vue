@@ -1,7 +1,11 @@
 <template>
-  <div class="rounded-2xl border border-slate-200 bg-white p-8 dark:border-border-dark dark:bg-surface-dark">
+  <div
+    class="rounded-2xl border border-slate-200 bg-white p-8 dark:border-border-dark dark:bg-surface-dark"
+  >
     <div class="mb-8 flex items-center justify-between">
-      <h3 class="text-sm font-bold uppercase tracking-widest text-slate-400">{{ t('consumptionTrend') }} (CNY)</h3>
+      <h3 class="text-sm font-bold uppercase tracking-widest text-slate-400">
+        {{ t('consumptionTrend') }} (CNY)
+      </h3>
       <el-select v-model="trendPeriodModel" size="small" class="!w-32">
         <el-option :label="t('last7Days')" value="7" />
         <el-option :label="t('last30Days')" value="30" />
@@ -11,35 +15,40 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject, onMounted, onUnmounted, ref, watch } from 'vue'
 import * as echarts from 'echarts/core'
 import { BarChart } from 'echarts/charts'
 import { GridComponent, TooltipComponent } from 'echarts/components'
 import { CanvasRenderer } from 'echarts/renderers'
+import type { EChartsType } from 'echarts/core'
+import type { ConsumptionTrendPoint } from '@/types/order'
+import type { Translator } from '@/types/consoleResource'
 
 echarts.use([BarChart, GridComponent, TooltipComponent, CanvasRenderer])
 
-const props = defineProps({
-  chartData: {
-    type: Array,
-    default: () => []
-  },
-  trendPeriod: {
-    type: String,
-    default: '7'
+const props = withDefaults(
+  defineProps<{
+    chartData?: ConsumptionTrendPoint[]
+    trendPeriod?: string
+  }>(),
+  {
+    chartData: () => [],
+    trendPeriod: '7'
   }
-})
+)
 
-const emit = defineEmits(['update:trend-period'])
-const t = inject('t', (key) => key)
+const emit = defineEmits<{
+  'update:trend-period': [value: string]
+}>()
+const t = inject<Translator>('t', (key: string) => key)
 
-const chartRef = ref(null)
-let chartInstance = null
+const chartRef = ref<HTMLDivElement | null>(null)
+let chartInstance: EChartsType | null = null
 
 const trendPeriodModel = computed({
   get: () => props.trendPeriod,
-  set: (value) => emit('update:trend-period', value)
+  set: (value: string) => emit('update:trend-period', value)
 })
 
 const visibleChartData = computed(() => {
@@ -51,7 +60,7 @@ const visibleChartData = computed(() => {
   return props.chartData.slice(-limit)
 })
 
-const updateChart = () => {
+const updateChart = (): void => {
   if (!chartInstance) {
     return
   }
@@ -68,7 +77,7 @@ const updateChart = () => {
   })
 }
 
-const initChart = () => {
+const initChart = (): void => {
   if (!chartRef.value) {
     return
   }
@@ -116,7 +125,7 @@ const initChart = () => {
       borderWidth: 0,
       borderRadius: 12,
       textStyle: { color: '#fff' },
-      formatter: (params) => {
+      formatter: (params: Array<{ name: string; value: number | string }>) => {
         const item = params[0]
         return `<div class="p-2">
           <div class="text-xs text-slate-400 mb-1">${item.name}</div>
@@ -131,8 +140,10 @@ const initChart = () => {
         barWidth: 40,
         itemStyle: {
           borderRadius: [4, 4, 0, 0],
-          color: (params) => {
-            return params.dataIndex === visibleChartData.value.length - 1 ? '#165DFF' : 'rgba(22, 93, 255, 0.2)'
+          color: (params: { dataIndex: number }) => {
+            return params.dataIndex === visibleChartData.value.length - 1
+              ? '#165DFF'
+              : 'rgba(22, 93, 255, 0.2)'
           }
         },
         emphasis: {
@@ -145,13 +156,17 @@ const initChart = () => {
   })
 }
 
-const handleResize = () => {
+const handleResize = (): void => {
   chartInstance?.resize()
 }
 
-watch(visibleChartData, () => {
-  updateChart()
-}, { deep: true })
+watch(
+  visibleChartData,
+  () => {
+    updateChart()
+  },
+  { deep: true }
+)
 
 onMounted(() => {
   initChart()

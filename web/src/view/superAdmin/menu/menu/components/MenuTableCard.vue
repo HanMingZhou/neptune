@@ -1,9 +1,12 @@
 <template>
   <TableCard>
     <template #toolbar>
-      <div class="list-filter-bar">
+      <BaseFilterBar plain>
         <div class="list-filter-field max-w-[240px]">
-          <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+          <span
+            class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]"
+            >search</span
+          >
           <input
             v-model="searchKeywordModel"
             type="text"
@@ -13,7 +16,7 @@
           />
         </div>
 
-        <div class="list-toolbar-actions">
+        <template #actions>
           <button
             class="list-toolbar-button list-toolbar-button--primary"
             @click="$emit('search')"
@@ -28,8 +31,8 @@
             <span class="material-icons text-[18px]">refresh</span>
             {{ t('reset') }}
           </button>
-        </div>
-      </div>
+        </template>
+      </BaseFilterBar>
     </template>
 
     <div class="overflow-x-auto" v-loading="loading">
@@ -44,32 +47,66 @@
             <th class="px-3 py-3 whitespace-nowrap">{{ t('status') }}</th>
             <th class="px-3 py-3 whitespace-nowrap">{{ t('parentMenu') }}</th>
             <th class="px-3 py-3 whitespace-nowrap">{{ t('sort') }}</th>
-            <th class="px-3 py-3 whitespace-nowrap">{{ t('componentPath') }}</th>
-            <th class="console-actions-header px-3 py-3 whitespace-nowrap">{{ t('actions') }}</th>
+            <th class="px-3 py-3 whitespace-nowrap">
+              {{ t('componentPath') }}
+            </th>
+            <th class="console-actions-header px-3 py-3 whitespace-nowrap">
+              {{ t('actions') }}
+            </th>
           </tr>
         </thead>
         <tbody class="divide-y divide-border-light dark:divide-border-dark">
           <template v-for="row in items" :key="row.ID">
-            <tr class="hover:bg-slate-50 dark:hover:bg-zinc-800/40 transition-colors">
-              <td class="px-3 py-3 text-sm font-mono text-slate-500 whitespace-nowrap">{{ row.ID }}</td>
-              <td class="px-3 py-3 font-bold text-primary text-sm whitespace-nowrap">{{ row.meta?.title }}</td>
+            <tr
+              class="hover:bg-slate-50 dark:hover:bg-zinc-800/40 transition-colors"
+            >
+              <td
+                class="px-3 py-3 text-sm font-mono text-slate-500 whitespace-nowrap"
+              >
+                {{ row.ID }}
+              </td>
+              <td
+                class="px-3 py-3 font-bold text-primary text-sm whitespace-nowrap"
+              >
+                {{ row.meta?.title }}
+              </td>
               <td class="px-3 py-3 whitespace-nowrap">
-                <div v-if="row.meta?.icon" class="flex items-center gap-1.5 text-sm text-slate-600">
+                <div
+                  v-if="row.meta?.icon"
+                  class="flex items-center gap-1.5 text-sm text-slate-600"
+                >
                   <AppIcon :name="row.meta.icon" />
                   <span>{{ row.meta.icon }}</span>
                 </div>
               </td>
-              <td class="px-3 py-3 text-sm text-slate-600 dark:text-slate-400 font-mono whitespace-nowrap">{{ row.name }}</td>
-              <td class="px-3 py-3 text-sm text-slate-600 dark:text-slate-400 font-mono whitespace-nowrap">{{ row.path }}</td>
+              <td
+                class="px-3 py-3 text-sm text-slate-600 dark:text-slate-400 font-mono whitespace-nowrap"
+              >
+                {{ row.name }}
+              </td>
+              <td
+                class="px-3 py-3 text-sm text-slate-600 dark:text-slate-400 font-mono whitespace-nowrap"
+              >
+                {{ row.path }}
+              </td>
               <td class="px-3 py-3 whitespace-nowrap">
                 <ListToneBadge
                   :label="row.hidden ? t('hidden') : t('visible')"
                   :tone="row.hidden ? 'neutral' : 'success'"
                 />
               </td>
-              <td class="px-3 py-3 text-sm text-slate-500 whitespace-nowrap">{{ row.parentId }}</td>
-              <td class="px-3 py-3 text-sm text-slate-500 whitespace-nowrap">{{ row.sort }}</td>
-              <td class="px-3 py-3 text-xs text-slate-500 font-mono whitespace-nowrap max-w-[250px] truncate" :title="row.component">{{ row.component }}</td>
+              <td class="px-3 py-3 text-sm text-slate-500 whitespace-nowrap">
+                {{ row.parentId }}
+              </td>
+              <td class="px-3 py-3 text-sm text-slate-500 whitespace-nowrap">
+                {{ row.sort }}
+              </td>
+              <td
+                class="px-3 py-3 text-xs text-slate-500 font-mono whitespace-nowrap max-w-[250px] truncate"
+                :title="row.component"
+              >
+                {{ row.component }}
+              </td>
               <td class="console-actions-cell px-3 py-3 whitespace-nowrap">
                 <div class="list-row-actions">
                   <button
@@ -103,28 +140,52 @@
                 :key="child.ID"
                 class="hover:bg-slate-50 dark:hover:bg-zinc-800/40 transition-colors bg-slate-50/50 dark:bg-zinc-900/30"
               >
-                <td class="px-3 py-3 text-sm font-mono text-slate-400 pl-8 whitespace-nowrap">
+                <td
+                  class="px-3 py-3 text-sm font-mono text-slate-400 pl-8 whitespace-nowrap"
+                >
                   <span class="text-slate-300 dark:text-zinc-600 mr-1">└</span>
                   {{ child.ID }}
                 </td>
-                <td class="px-3 py-3 text-sm is-primary whitespace-nowrap">{{ child.meta?.title }}</td>
+                <td class="px-3 py-3 text-sm is-primary whitespace-nowrap">
+                  {{ child.meta?.title }}
+                </td>
                 <td class="px-3 py-3 whitespace-nowrap">
-                  <div v-if="child.meta?.icon" class="flex items-center gap-1.5 text-sm text-slate-500">
+                  <div
+                    v-if="child.meta?.icon"
+                    class="flex items-center gap-1.5 text-sm text-slate-500"
+                  >
                     <AppIcon :name="child.meta.icon" />
                     <span>{{ child.meta.icon }}</span>
                   </div>
                 </td>
-                <td class="px-3 py-3 text-xs text-slate-500 font-mono whitespace-nowrap">{{ child.name }}</td>
-                <td class="px-3 py-3 text-xs text-slate-500 font-mono whitespace-nowrap">{{ child.path }}</td>
+                <td
+                  class="px-3 py-3 text-xs text-slate-500 font-mono whitespace-nowrap"
+                >
+                  {{ child.name }}
+                </td>
+                <td
+                  class="px-3 py-3 text-xs text-slate-500 font-mono whitespace-nowrap"
+                >
+                  {{ child.path }}
+                </td>
                 <td class="px-3 py-3 whitespace-nowrap">
                   <ListToneBadge
                     :label="child.hidden ? t('hidden') : t('visible')"
                     :tone="child.hidden ? 'neutral' : 'success'"
                   />
                 </td>
-                <td class="px-3 py-3 text-xs text-slate-500 whitespace-nowrap">{{ child.parentId }}</td>
-                <td class="px-3 py-3 text-xs text-slate-500 whitespace-nowrap">{{ child.sort }}</td>
-                <td class="px-3 py-3 text-xs text-slate-400 font-mono whitespace-nowrap max-w-[250px] truncate" :title="child.component">{{ child.component }}</td>
+                <td class="px-3 py-3 text-xs text-slate-500 whitespace-nowrap">
+                  {{ child.parentId }}
+                </td>
+                <td class="px-3 py-3 text-xs text-slate-500 whitespace-nowrap">
+                  {{ child.sort }}
+                </td>
+                <td
+                  class="px-3 py-3 text-xs text-slate-400 font-mono whitespace-nowrap max-w-[250px] truncate"
+                  :title="child.component"
+                >
+                  {{ child.component }}
+                </td>
                 <td class="console-actions-cell px-3 py-3 whitespace-nowrap">
                   <div class="list-row-actions">
                     <button
@@ -159,32 +220,40 @@
   </TableCard>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject } from 'vue'
 import AppIcon from '@/components/AppIcon.vue'
+import BaseFilterBar from '@/components/listPage/BaseFilterBar.vue'
 import ListToneBadge from '@/components/listPage/ListToneBadge.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
+import type { Translator } from '@/types/consoleResource'
+import type { MenuTreeNode } from '@/types/superAdmin'
 
-const props = defineProps({
-  items: {
-    type: Array,
-    default: () => []
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  searchKeyword: {
-    type: String,
-    default: ''
+const props = withDefaults(
+  defineProps<{
+    items?: MenuTreeNode[]
+    loading?: boolean
+    searchKeyword?: string
+  }>(),
+  {
+    items: () => [],
+    loading: false,
+    searchKeyword: ''
   }
-})
+)
 
-const emit = defineEmits(['add', 'delete', 'edit', 'reset', 'search', 'update:search-keyword'])
-const t = inject('t', (key) => key)
+const emit = defineEmits<{
+  add: [id: number]
+  delete: [id: number]
+  edit: [id: number]
+  reset: []
+  search: []
+  'update:search-keyword': [value: string]
+}>()
+const t = inject<Translator>('t', (key: string) => key)
 
 const searchKeywordModel = computed({
   get: () => props.searchKeyword,
-  set: (value) => emit('update:search-keyword', value)
+  set: (value: string) => emit('update:search-keyword', value)
 })
 </script>

@@ -52,103 +52,56 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import PodsTab from '@/components/detailPage/PodsTab.vue'
 import LogsTab from './LogsTab.vue'
 import OverviewTab from './OverviewTab.vue'
 import TerminalTab from './TerminalTab.vue'
+import type {
+  ConsoleInferenceDetail,
+  ConsolePod
+} from '@/types/consoleResource'
 
-defineProps({
-  activeTab: {
-    type: String,
-    default: 'overview'
-  },
-  apiEndpoint: {
-    type: String,
-    default: ''
-  },
-  canConnectTerminal: {
-    type: Boolean,
-    default: false
-  },
-  curlExample: {
-    type: String,
-    default: ''
-  },
-  formatCommand: {
-    type: Function,
-    required: true
-  },
-  formatTime: {
-    type: Function,
-    required: true
-  },
-  getPodStatusClass: {
-    type: Function,
-    required: true
-  },
-  getStatusLabel: {
-    type: Function,
-    required: true
-  },
-  logs: {
-    type: String,
-    default: ''
-  },
-  logsConnected: {
-    type: Boolean,
-    default: false
-  },
-  logsLoading: {
-    type: Boolean,
-    default: false
-  },
-  pods: {
-    type: Array,
-    default: () => []
-  },
-  podsLoading: {
-    type: Boolean,
-    default: false
-  },
-  selectedPod: {
-    type: String,
-    default: ''
-  },
-  service: {
-    type: Object,
-    required: true
-  },
-  setLogsRef: {
-    type: Function,
-    required: true
-  },
-  setTerminalRef: {
-    type: Function,
-    required: true
-  },
-  terminalConnected: {
-    type: Boolean,
-    default: false
-  },
-  terminalPod: {
-    type: String,
-    default: ''
-  }
-})
+type FormatTime = (value?: string | number | null) => string
+type StatusLabelGetter = (status?: string) => string
+type StatusClassGetter = (status?: string) => string
+type FormatCommand = (service?: Partial<ConsoleInferenceDetail>) => string
+type ElementRefSetter = (element: HTMLElement | null) => void
 
-const emit = defineEmits([
-  'clear-logs',
-  'connect-logs',
-  'connect-terminal',
-  'copy',
-  'disconnect-logs',
-  'disconnect-terminal',
-  'fit-terminal',
-  'manage-api-key',
-  'refresh-pods',
-  'update:selected-pod',
-  'update:terminal-pod',
-  'view-pod-logs'
-])
+defineProps<{
+  activeTab: string
+  apiEndpoint: string
+  canConnectTerminal: boolean
+  curlExample: string
+  formatCommand: FormatCommand
+  formatTime: FormatTime
+  getPodStatusClass: StatusClassGetter
+  getStatusLabel: StatusLabelGetter
+  logs: string
+  logsConnected: boolean
+  logsLoading: boolean
+  pods: ConsolePod[]
+  podsLoading: boolean
+  selectedPod: string
+  service: Partial<ConsoleInferenceDetail>
+  setLogsRef: ElementRefSetter
+  setTerminalRef: ElementRefSetter
+  terminalConnected: boolean
+  terminalPod: string
+}>()
+
+const emit = defineEmits<{
+  'clear-logs': []
+  'connect-logs': []
+  'connect-terminal': []
+  copy: [value: string]
+  'disconnect-logs': []
+  'disconnect-terminal': []
+  'fit-terminal': []
+  'manage-api-key': []
+  'refresh-pods': []
+  'update:selected-pod': [value: string]
+  'update:terminal-pod': [value: string]
+  'view-pod-logs': [pod: ConsolePod]
+}>()
 </script>

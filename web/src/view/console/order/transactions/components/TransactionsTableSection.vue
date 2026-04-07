@@ -3,7 +3,9 @@
     <div class="overflow-x-auto">
       <table class="console-table w-full">
         <thead>
-          <tr class="bg-slate-50 dark:bg-zinc-800/50 border-b border-slate-100 dark:border-border-dark text-slate-500 text-xs font-bold uppercase tracking-wider">
+          <tr
+            class="bg-slate-50 dark:bg-zinc-800/50 border-b border-slate-100 dark:border-border-dark text-slate-500 text-xs font-bold uppercase tracking-wider"
+          >
             <th class="px-4 py-3">{{ t('transactionId') }}</th>
             <th class="px-4 py-3">{{ t('time') }}</th>
             <th class="px-4 py-3">{{ t('type') }}</th>
@@ -16,41 +18,82 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-slate-100 dark:divide-border-dark">
-          <tr v-for="tx in items" :key="tx.id" class="hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors">
-            <td class="px-4 py-3 text-xs font-mono text-slate-700 dark:text-slate-200 whitespace-nowrap">{{ tx.id }}</td>
-            <td class="px-4 py-3 text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">{{ tx.time }}</td>
+          <tr
+            v-for="tx in items"
+            :key="tx.id"
+            class="hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors"
+          >
+            <td
+              class="px-4 py-3 text-xs font-mono text-slate-700 dark:text-slate-200 whitespace-nowrap"
+            >
+              {{ tx.id }}
+            </td>
+            <td
+              class="px-4 py-3 text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap"
+            >
+              {{ tx.time }}
+            </td>
             <td class="px-4 py-3">
               <span :class="tx.typeStyle" class="order-tone-chip">
                 {{ tx.typeLabel }}
               </span>
             </td>
-            <td class="px-4 py-3 text-xs text-slate-700 dark:text-slate-200 whitespace-nowrap">
-              {{ tx.resourceName ? `${tx.resourceName} (${tx.resourceTypeText})` : '-' }}
+            <td
+              class="px-4 py-3 text-xs text-slate-700 dark:text-slate-200 whitespace-nowrap"
+            >
+              {{
+                tx.resourceName
+                  ? `${tx.resourceName} (${tx.resourceTypeText})`
+                  : '-'
+              }}
             </td>
-            <td class="px-4 py-3 text-xs font-mono text-slate-500 dark:text-slate-400 whitespace-nowrap">{{ tx.orderNo || '-' }}</td>
-            <td class="px-4 py-3 text-xs text-slate-500 dark:text-slate-400">{{ tx.remark || '-' }}</td>
+            <td
+              class="px-4 py-3 text-xs font-mono text-slate-500 dark:text-slate-400 whitespace-nowrap"
+            >
+              {{ tx.orderNo || '-' }}
+            </td>
+            <td class="px-4 py-3 text-xs text-slate-500 dark:text-slate-400">
+              {{ tx.remark || '-' }}
+            </td>
             <td class="px-4 py-3 whitespace-nowrap">
               <span
-                :class="tx.rawAmount > 0 ? 'console-amount-chip--positive' : 'console-amount-chip--neutral'"
+                :class="
+                  tx.rawAmount > 0
+                    ? 'console-amount-chip--positive'
+                    : 'console-amount-chip--neutral'
+                "
                 class="console-amount-chip font-mono"
               >
                 {{ tx.amount }}
               </span>
             </td>
             <td class="px-4 py-3 whitespace-nowrap">
-              <span class="console-amount-chip console-amount-chip--neutral font-mono">
+              <span
+                class="console-amount-chip console-amount-chip--neutral font-mono"
+              >
                 ¥{{ tx.balanceAfter.toFixed(2) }}
               </span>
             </td>
             <td class="px-4 py-3">
-              <span v-if="tx.statusText" :class="tx.statusStyle" class="order-tone-chip">
+              <span
+                v-if="tx.statusText"
+                :class="tx.statusStyle"
+                class="order-tone-chip"
+              >
                 {{ tx.statusText }}
               </span>
-              <span v-else class="text-emerald-500 material-icons text-[16px]">check_circle</span>
+              <span v-else class="text-emerald-500 material-icons text-[16px]"
+                >check_circle</span
+              >
             </td>
           </tr>
           <tr v-if="items.length === 0">
-            <td colspan="9" class="px-6 py-12 text-center text-slate-400 text-sm">{{ t('noData') }}</td>
+            <td
+              colspan="9"
+              class="px-6 py-12 text-center text-slate-400 text-sm"
+            >
+              {{ t('noData') }}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -72,39 +115,34 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject } from 'vue'
 import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
+import type { Translator } from '@/types/consoleResource'
+import type { TransactionRecord } from '@/types/order'
 
-const props = defineProps({
-  items: {
-    type: Array,
-    default: () => []
-  },
-  page: {
-    type: Number,
-    default: 1
-  },
-  pageSize: {
-    type: Number,
-    default: 10
-  },
-  total: {
-    type: Number,
-    default: 0
-  }
-})
+const props = defineProps<{
+  items: TransactionRecord[]
+  page: number
+  pageSize: number
+  total: number
+}>()
 
-const emit = defineEmits(['page-change', 'size-change', 'update:page', 'update:page-size'])
-const t = inject('t', (key) => key)
+const emit = defineEmits<{
+  'page-change': [value: number]
+  'size-change': [value: number]
+  'update:page': [value: number]
+  'update:page-size': [value: number]
+}>()
+const t = inject<Translator>('t', (key: string) => key)
 
 const pageModel = computed({
   get: () => props.page,
-  set: (value) => emit('update:page', value)
+  set: (value: number) => emit('update:page', value)
 })
 
 const pageSizeModel = computed({
   get: () => props.pageSize,
-  set: (value) => emit('update:page-size', value)
+  set: (value: number) => emit('update:page-size', value)
 })
 </script>

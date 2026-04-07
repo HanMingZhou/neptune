@@ -20,52 +20,56 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { FormRules } from 'element-plus'
 import AuthorityEditorDrawer from './AuthorityEditorDrawer.vue'
 import AuthorityPermissionDrawer from './AuthorityPermissionDrawer.vue'
+import type { ResourceId } from '@/types/consoleResource'
+import type {
+  AuthorityDialogType,
+  AuthorityForm,
+  AuthorityOption,
+  AuthorityTreeNode
+} from '@/types/superAdmin'
 
-defineProps({
-  activeRow: {
-    type: Object,
-    default: () => ({})
-  },
-  authorityFormVisible: {
-    type: Boolean,
-    default: false
-  },
-  authorityOptions: {
-    type: Array,
-    default: () => []
-  },
-  dialogTitle: {
-    type: String,
-    default: ''
-  },
-  dialogType: {
-    type: String,
-    default: 'add'
-  },
-  drawer: {
-    type: Boolean,
-    default: false
-  },
-  form: {
-    type: Object,
-    required: true
-  },
-  rules: {
-    type: Object,
-    required: true
-  },
-  submitting: {
-    type: Boolean,
-    default: false
-  },
-  tableData: {
-    type: Array,
-    default: () => []
+interface AuthorityPermissionRef {
+  authorityId: ResourceId
+}
+
+interface AuthorityPermissionRow extends AuthorityTreeNode {
+  dataAuthorityId?: AuthorityPermissionRef[]
+  defaultRouter?: string
+}
+
+withDefaults(
+  defineProps<{
+    activeRow?: AuthorityPermissionRow
+    authorityFormVisible?: boolean
+    authorityOptions?: AuthorityOption[]
+    dialogTitle?: string
+    dialogType?: AuthorityDialogType
+    drawer?: boolean
+    form: AuthorityForm
+    rules: FormRules<AuthorityForm>
+    submitting?: boolean
+    tableData?: AuthorityTreeNode[]
+  }>(),
+  {
+    activeRow: () => ({}) as AuthorityPermissionRow,
+    authorityFormVisible: false,
+    authorityOptions: () => [],
+    dialogTitle: '',
+    dialogType: 'add',
+    drawer: false,
+    submitting: false,
+    tableData: () => []
   }
-})
+)
 
-const emit = defineEmits(['change-row', 'close-authority-form', 'close-drawer', 'submit-authority-form'])
+const emit = defineEmits<{
+  'change-row': [key: string, value: unknown]
+  'close-authority-form': []
+  'close-drawer': []
+  'submit-authority-form': []
+}>()
 </script>

@@ -16,6 +16,7 @@ import (
 	trainingReq "gin-vue-admin/model/training/request"
 	trainingResp "gin-vue-admin/model/training/response"
 	orderService "gin-vue-admin/service/order"
+	podgroupService "gin-vue-admin/service/podgroup"
 	productService "gin-vue-admin/service/product"
 	terminalService "gin-vue-admin/service/terminal"
 	"gin-vue-admin/service/training/builder"
@@ -23,6 +24,7 @@ import (
 	"gin-vue-admin/utils/timer"
 	"gin-vue-admin/utils/validator"
 	"io"
+	"strings"
 	"time"
 
 	"github.com/pkg/errors"
@@ -750,12 +752,16 @@ func (s *TrainingJobService) buildJobSpec(ctx context.Context, job *trainingMode
 		Envs:         envs,
 		UseSHM:       true,
 		SHMSize:      product.Memory * computeNodes,
-		Labels: map[string]string{
-			consts.LabelApp:          consts.TrainingInstance,
-			consts.LabelInstanceType: consts.TrainingInstance,
-			consts.LabelJobID:        fmt.Sprintf("%d", job.ID),
-			"neptune.io/instance":    job.JobName,
-		},
+		Labels: func() map[string]string {
+			labels := podgroupService.BuildVolcanoLabels(
+				job.JobName,
+				consts.TrainingInstance,
+				consts.TrainingInstance,
+				job.ID,
+			)
+			labels["neptune.io/instance"] = job.JobName
+			return labels
+		}(),
 		MaxRetry: 3,
 	}
 }
@@ -1357,7 +1363,7 @@ func (s *TrainingJobService) updateJobStatus(jobId uint, status, errMsg string) 
 	global.GVA_DB.Model(&trainingModel.TrainingJob{}).Where("id = ?", jobId).Updates(updates)
 }
 
-// syncJobStatus 同步任务状态，确保 master pod 的运行状态能及时反映到界面上
+// syncJobStatus 同步任务状态，按任务下全部 Pod/容器状态做兜底判断
 // 注意：资源释放由 PodGroup Informer 自动处理，这里只同步状态
 func (s *TrainingJobService) syncJobStatus(ctx context.Context, job *trainingModel.TrainingJob) {
 	if job.Status == consts.TrainingStatusSucceeded || job.Status == consts.TrainingStatusFailed || job.Status == consts.TrainingStatusKilled {
@@ -1369,17 +1375,8 @@ func (s *TrainingJobService) syncJobStatus(ctx context.Context, job *trainingMod
 		return
 	}
 
-	taskName := ""
-	switch job.FrameworkType {
-	case consts.FrameworkStandalone:
-		taskName = consts.TaskSpecWorker
-	default:
-		taskName = consts.TaskSpecMaster
-	}
-
 	selector := labels.SelectorFromSet(labels.Set{
-		consts.LabelVolcanoJobName:  job.JobName,
-		consts.LabelVolcanoTaskSpec: taskName,
+		consts.LabelVolcanoJobName: job.JobName,
 	})
 
 	pods, err := cluster.PodLister.Pods(job.Namespace).List(selector)
@@ -1387,15 +1384,7 @@ func (s *TrainingJobService) syncJobStatus(ctx context.Context, job *trainingMod
 		return
 	}
 
-	// 取第一个 pod 检查状态
-	pod := pods[0]
-	newStatus := ""
-	switch pod.Status.Phase {
-	case corev1.PodSucceeded:
-		newStatus = consts.TrainingStatusSucceeded
-	case corev1.PodFailed:
-		newStatus = consts.TrainingStatusFailed
-	}
+	newStatus, errMsg := summarizeTrainingPodsStatus(pods)
 
 	if newStatus != "" && newStatus != job.Status {
 		job.Status = newStatus
@@ -1405,10 +1394,124 @@ func (s *TrainingJobService) syncJobStatus(ctx context.Context, job *trainingMod
 			"finished_at": now,
 		}
 		if newStatus == consts.TrainingStatusFailed {
-			updates["error_msg"] = pod.Status.Message
-			job.ErrorMsg = pod.Status.Message
+			if errMsg != "" {
+				updates["error_msg"] = errMsg
+				job.ErrorMsg = errMsg
+			}
 		}
 		job.FinishedAt = &now
 		global.GVA_DB.Model(&trainingModel.TrainingJob{}).Where("id = ?", job.ID).Updates(updates)
 	}
+}
+
+func summarizeTrainingPodsStatus(pods []*corev1.Pod) (string, string) {
+	if len(pods) == 0 {
+		return "", ""
+	}
+
+	hasRunningOrPending := false
+	hasFailed := false
+	hasSucceeded := false
+	allSucceeded := true
+	failureMsg := ""
+
+	for i := range pods {
+		pod := pods[i]
+		switch pod.Status.Phase {
+		case corev1.PodRunning, corev1.PodPending:
+			hasRunningOrPending = true
+			allSucceeded = false
+		case corev1.PodSucceeded:
+			hasSucceeded = true
+		case corev1.PodFailed:
+			hasFailed = true
+			allSucceeded = false
+			if failureMsg == "" {
+				failureMsg = extractTrainingPodFailureMessage(pod)
+			}
+		default:
+			allSucceeded = false
+		}
+
+		if msg, failed := hasFailedContainerState(pod); failed {
+			hasFailed = true
+			if failureMsg == "" {
+				failureMsg = msg
+			}
+		}
+	}
+
+	if hasFailed && !hasRunningOrPending {
+		return consts.TrainingStatusFailed, failureMsg
+	}
+	if hasSucceeded && allSucceeded {
+		return consts.TrainingStatusSucceeded, ""
+	}
+
+	return "", ""
+}
+
+func hasFailedContainerState(pod *corev1.Pod) (string, bool) {
+	if pod == nil {
+		return "", false
+	}
+
+	checkStatuses := func(statuses []corev1.ContainerStatus) (string, bool) {
+		for i := range statuses {
+			status := statuses[i]
+			terminated := status.State.Terminated
+			if terminated == nil {
+				continue
+			}
+			if terminated.ExitCode == 0 && !isTerminatedFailureReason(terminated.Reason) {
+				continue
+			}
+
+			msg := strings.TrimSpace(terminated.Message)
+			if msg == "" {
+				msg = strings.TrimSpace(terminated.Reason)
+			}
+			if msg == "" {
+				msg = fmt.Sprintf("容器 %s 退出，exitCode=%d", status.Name, terminated.ExitCode)
+			}
+			return msg, true
+		}
+		return "", false
+	}
+
+	if msg, failed := checkStatuses(pod.Status.InitContainerStatuses); failed {
+		return msg, true
+	}
+	if msg, failed := checkStatuses(pod.Status.ContainerStatuses); failed {
+		return msg, true
+	}
+
+	return "", false
+}
+
+func isTerminatedFailureReason(reason string) bool {
+	if reason == "" {
+		return false
+	}
+	normalized := strings.ToLower(strings.TrimSpace(reason))
+	return normalized == "error" ||
+		normalized == "oomkilled" ||
+		normalized == "containercannotrun" ||
+		normalized == "starterror"
+}
+
+func extractTrainingPodFailureMessage(pod *corev1.Pod) string {
+	if pod == nil {
+		return ""
+	}
+	if msg := strings.TrimSpace(pod.Status.Message); msg != "" {
+		return msg
+	}
+	if reason := strings.TrimSpace(pod.Status.Reason); reason != "" {
+		return reason
+	}
+	if msg, failed := hasFailedContainerState(pod); failed {
+		return msg
+	}
+	return ""
 }

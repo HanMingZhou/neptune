@@ -11,18 +11,24 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type { Translator } from '@/types/consoleResource'
 import RefreshButton from '@/components/RefreshButton/index.vue'
 
-defineProps({
-  loading: {
-    type: Boolean,
-    default: false
+withDefaults(
+  defineProps<{
+    loading?: boolean
+  }>(),
+  {
+    loading: false
   }
-})
+)
 
-defineEmits(['create', 'refresh'])
+defineEmits<{
+  create: []
+  refresh: [silent: boolean]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

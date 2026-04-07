@@ -1,12 +1,13 @@
 <template>
   <div class="console-page-container space-y-6">
-    <PageIntro
+    <BaseTableToolbar
       :breadcrumbs="[t('admin'), t('operationRecord')]"
       :description="t('operationRecordDesc')"
+      :loading="loading"
       :title="t('operationRecord')"
+      @refresh="getTableData"
     >
       <template #actions>
-        <RefreshButton :loading="loading" @refresh="getTableData" />
         <button
           class="list-toolbar-button list-toolbar-button--danger"
           :disabled="!hasSelection"
@@ -16,7 +17,7 @@
           {{ t('batchDelete') }}
         </button>
       </template>
-    </PageIntro>
+    </BaseTableToolbar>
 
     <OperationRecordTableCard
       :all-selected="isAllSelected"
@@ -38,10 +39,9 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
-import RefreshButton from '@/components/RefreshButton/index.vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
 import OperationRecordTableCard from './components/OperationRecordTableCard.vue'
 import { useOperationRecordPage } from './composables/useOperationRecordPage'
 
@@ -70,6 +70,6 @@ const {
 } = useOperationRecordPage({ t })
 
 onMounted(() => {
-  initialize()
+  void initialize()
 })
 </script>

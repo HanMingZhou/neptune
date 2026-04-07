@@ -2,6 +2,6 @@
   <NotebookCreatePage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import NotebookCreatePage from './create/index.vue'
 </script>

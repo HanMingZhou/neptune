@@ -1,12 +1,13 @@
 <template>
   <div class="console-page-container space-y-6">
-    <PageIntro
+    <BaseTableToolbar
       :breadcrumbs="[t('resources'), t('imageManage')]"
       :description="t('imageManageDesc')"
+      :loading="loading"
       :title="t('imageManage')"
+      @refresh="handleRefresh"
     >
       <template #actions>
-        <RefreshButton :loading="loading" @refresh="handleRefresh" />
         <button
           class="list-toolbar-button list-toolbar-button--primary"
           @click="openCreateDialog"
@@ -15,7 +16,7 @@
           {{ t('imageAdd') }}
         </button>
       </template>
-    </PageIntro>
+    </BaseTableToolbar>
 
     <ManagementListShell>
       <template #filters>
@@ -53,17 +54,17 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
+import type { Translator } from '@/types/consoleResource'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
 import ManagementListShell from '@/components/listPage/ManagementListShell.vue'
-import RefreshButton from '@/components/RefreshButton/index.vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
 import ImageDialog from './components/ImageDialog.vue'
 import ImageFiltersCard from './components/ImageFiltersCard.vue'
 import ImageTableCard from './components/ImageTableCard.vue'
 import { useImageManagement } from './composables/useImageManagement'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const {
   currentPage,
@@ -79,6 +80,7 @@ const {
   handleRefresh,
   handleReset,
   handleSearch,
+  handleSizeChange,
   images,
   isEdit,
   loading,
@@ -92,6 +94,6 @@ const {
 } = useImageManagement({ t })
 
 onMounted(() => {
-  fetchImages()
+  void fetchImages()
 })
 </script>

@@ -1,7 +1,9 @@
 <template>
   <div class="space-y-8">
     <header>
-      <h1 class="text-3xl font-black tracking-tight">{{ t('security.center') }}</h1>
+      <h1 class="text-3xl font-black tracking-tight">
+        {{ t('security.center') }}
+      </h1>
       <p class="text-slate-500 mt-2">{{ t('security.centerDesc') }}</p>
     </header>
 
@@ -23,7 +25,11 @@
             :desc="t('security.phoneDesc')"
             :status-text="phoneStatusText"
             :status-color="getStatusColor(accountInfo.phoneStatus)"
-            :action-text="accountInfo.phone ? t('security.changePhone') : t('security.bindNow')"
+            :action-text="
+              accountInfo.phone
+                ? t('security.changePhone')
+                : t('security.bindNow')
+            "
             @click="emit('change-phone')"
           />
           <SecurityItem
@@ -32,7 +38,11 @@
             :desc="t('security.emailDesc')"
             :status-text="emailStatusText"
             :status-color="getStatusColor(accountInfo.emailStatus)"
-            :action-text="accountInfo.email ? t('security.changeEmail') : t('security.bindNow')"
+            :action-text="
+              accountInfo.email
+                ? t('security.changeEmail')
+                : t('security.bindNow')
+            "
             @click="emit('change-email')"
           />
         </SecuritySection>
@@ -44,7 +54,11 @@
             :desc="t('security.mfaDesc')"
             :status-text="accountInfo.mfaStatus"
             :status-color="getStatusColor(accountInfo.mfaStatus)"
-            :action-text="accountInfo.mfaEnabled ? t('security.disable') : t('security.enableNow')"
+            :action-text="
+              accountInfo.mfaEnabled
+                ? t('security.disable')
+                : t('security.enableNow')
+            "
             :loading="mfaLoading"
             @click="emit('mfa-action')"
           />
@@ -86,48 +100,41 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject } from 'vue'
 import SecurityItem from '../../components/SecurityItem.vue'
 import AccessKeyCard from './AccessKeyCard.vue'
 import SecurityScoreCard from './SecurityScoreCard.vue'
 import SecuritySection from './SecuritySection.vue'
+import type { SecurityStatusData } from '@/types/account'
+import type { Translator } from '@/types/consoleResource'
 
-const props = defineProps({
-  accountInfo: {
-    type: Object,
-    required: true
-  },
-  akLoading: {
-    type: Boolean,
-    default: false
-  },
-  getStatusColor: {
-    type: Function,
-    required: true
-  },
-  maskString: {
-    type: Function,
-    required: true
-  },
-  mfaLoading: {
-    type: Boolean,
-    default: false
+const props = withDefaults(
+  defineProps<{
+    accountInfo: SecurityStatusData
+    akLoading?: boolean
+    getStatusColor: (status?: string) => string
+    maskString: (value?: string) => string | undefined
+    mfaLoading?: boolean
+  }>(),
+  {
+    akLoading: false,
+    mfaLoading: false
   }
-})
+)
 
-const emit = defineEmits([
-  'bind-github',
-  'change-email',
-  'change-password',
-  'change-phone',
-  'copy-access-key',
-  'generate-access-key',
-  'mfa-action',
-  'setup-notification'
-])
+const emit = defineEmits<{
+  'bind-github': []
+  'change-email': []
+  'change-password': []
+  'change-phone': []
+  'copy-access-key': []
+  'generate-access-key': []
+  'mfa-action': []
+  'setup-notification': []
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const phoneStatusText = computed(() =>
   props.accountInfo.phone

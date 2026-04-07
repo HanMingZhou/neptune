@@ -33,105 +33,73 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ProductDialogs from './ProductDialogs.vue'
+import type { FormRules } from 'element-plus'
+import type {
+  CmsClusterOption,
+  CmsNodeRow,
+  CmsProductForm,
+  CmsProductPriceForm,
+  CmsProductResourceType
+} from '@/types/superAdmin'
 
-defineProps({
-  canSubmit: {
-    type: Boolean,
-    default: false
-  },
-  clusterNodes: {
-    type: Array,
-    default: () => []
-  },
-  clusters: {
-    type: Array,
-    default: () => []
-  },
-  computeRules: {
-    type: Object,
-    default: () => ({})
-  },
-  dialogTitle: {
-    type: String,
-    default: ''
-  },
-  isEdit: {
-    type: Boolean,
-    default: false
-  },
-  loadingNodes: {
-    type: Boolean,
-    default: false
-  },
-  nodeMaxCpu: {
-    type: Number,
-    default: 0
-  },
-  nodeMaxGpuCount: {
-    type: Number,
-    default: 0
-  },
-  nodeMaxGpuMemory: {
-    type: Number,
-    default: 0
-  },
-  nodeMaxMemory: {
-    type: Number,
-    default: 0
-  },
-  nodeMaxVGpuCores: {
-    type: Number,
-    default: 0
-  },
-  nodeMaxVGpuCount: {
-    type: Number,
-    default: 0
-  },
-  nodeMaxVGpuMemory: {
-    type: Number,
-    default: 0
-  },
-  priceForm: {
-    type: Object,
-    required: true
-  },
-  productForm: {
-    type: Object,
-    required: true
-  },
-  resourceType: {
-    type: String,
-    default: 'cpu'
-  },
-  showPriceDialog: {
-    type: Boolean,
-    default: false
-  },
-  showProductDialog: {
-    type: Boolean,
-    default: false
-  },
-  storageRules: {
-    type: Object,
-    default: () => ({})
-  },
-  submitting: {
-    type: Boolean,
-    default: false
+withDefaults(
+  defineProps<{
+    canSubmit?: boolean
+    clusterNodes?: CmsNodeRow[]
+    clusters?: CmsClusterOption[]
+    computeRules?: FormRules<CmsProductForm>
+    dialogTitle?: string
+    isEdit?: boolean
+    loadingNodes?: boolean
+    nodeMaxCpu?: number
+    nodeMaxGpuCount?: number
+    nodeMaxGpuMemory?: number
+    nodeMaxMemory?: number
+    nodeMaxVGpuCores?: number
+    nodeMaxVGpuCount?: number
+    nodeMaxVGpuMemory?: number
+    priceForm: CmsProductPriceForm
+    productForm: CmsProductForm
+    resourceType?: CmsProductResourceType
+    showPriceDialog?: boolean
+    showProductDialog?: boolean
+    storageRules?: FormRules<CmsProductForm>
+    submitting?: boolean
+  }>(),
+  {
+    canSubmit: false,
+    clusterNodes: () => [],
+    clusters: () => [],
+    computeRules: () => ({}),
+    dialogTitle: '',
+    isEdit: false,
+    loadingNodes: false,
+    nodeMaxCpu: 0,
+    nodeMaxGpuCount: 0,
+    nodeMaxGpuMemory: 0,
+    nodeMaxMemory: 0,
+    nodeMaxVGpuCores: 0,
+    nodeMaxVGpuCount: 0,
+    nodeMaxVGpuMemory: 0,
+    resourceType: 'cpu',
+    showPriceDialog: false,
+    showProductDialog: false,
+    storageRules: () => ({}),
+    submitting: false
   }
-})
+)
 
-const emit = defineEmits([
-  'cluster-change',
-  'node-select',
-  'resource-type-change',
-  'storage-cluster-change',
-  'submit-price',
-  'submit-product',
-  'update:price-dialog-visible',
-  'update:product-dialog-visible',
-  'update:resource-type'
-])
+const emit = defineEmits<{
+  'cluster-change': [clusterId: CmsProductForm['clusterId']]
+  'node-select': [node: CmsNodeRow]
+  'resource-type-change': [type: CmsProductResourceType]
+  'storage-cluster-change': [clusterId: CmsProductForm['clusterId']]
+  'submit-price': []
+  'submit-product': []
+  'update:price-dialog-visible': [value: boolean]
+  'update:product-dialog-visible': [value: boolean]
+  'update:resource-type': [value: CmsProductResourceType]
+}>()
 </script>

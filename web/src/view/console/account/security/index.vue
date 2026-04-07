@@ -26,13 +26,14 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
 import SecurityDialogsHost from './components/SecurityDialogsHost.vue'
 import SecuritySettingsPanel from './components/SecuritySettingsPanel.vue'
 import { useAccountSecurity } from './composables/useAccountSecurity'
+import type { Translator } from '@/types/consoleResource'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const {
   accountInfo,

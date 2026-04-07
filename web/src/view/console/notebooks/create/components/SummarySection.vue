@@ -7,22 +7,32 @@
       <span class="w-1 h-4 bg-primary rounded"></span>
       {{ t('resourceSpecConfirm') }}
     </h3>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 p-4 bg-slate-50 dark:bg-zinc-800/50 rounded-lg">
+    <div
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 p-4 bg-slate-50 dark:bg-zinc-800/50 rounded-lg"
+    >
       <div>
         <div class="text-xs text-slate-400 mb-1">{{ t('hostId') }}</div>
-        <div class="text-sm font-bold">{{ selectedProduct.name || selectedProduct.nodeType }}</div>
+        <div class="text-sm font-bold">
+          {{ selectedProduct.name || selectedProduct.nodeType }}
+        </div>
       </div>
       <div>
         <div class="text-xs text-slate-400 mb-1">GPU</div>
         <div class="text-sm font-bold">
-          <template v-if="selectedProduct.gpuCount > 0">{{ selectedProduct.gpuModel }} × {{ gpuCount }}</template>
-          <template v-else-if="selectedProduct.vGpuCount > 0">vGPU ({{ selectedProduct.vGpuMemory }}GB)</template>
+          <template v-if="selectedProduct.gpuCount > 0"
+            >{{ selectedProduct.gpuModel }} × {{ gpuCount }}</template
+          >
+          <template v-else-if="selectedProduct.vGpuCount > 0"
+            >vGPU ({{ selectedProduct.vGpuMemory }}GB)</template
+          >
           <template v-else>CPU ONLY</template>
         </div>
       </div>
       <div>
         <div class="text-xs text-slate-400 mb-1">{{ t('cpuMemory') }}</div>
-        <div class="text-sm font-bold">{{ selectedProduct.cpu }} / {{ selectedProduct.memory }}GB</div>
+        <div class="text-sm font-bold">
+          {{ selectedProduct.cpu }} / {{ selectedProduct.memory }}GB
+        </div>
       </div>
       <div>
         <div class="text-xs text-slate-400 mb-1">{{ t('systemDisk') }}</div>
@@ -33,42 +43,31 @@
         <div class="text-sm font-bold">{{ selectedVolumeName }}</div>
       </div>
       <div>
-        <div class="text-xs text-slate-400 mb-1">{{ t('unitPrice') }}</div>
-        <div class="text-lg font-bold text-red-500">¥{{ totalPrice }}/{{ priceUnitText }}</div>
+        <div class="text-xs text-slate-400 mb-1">{{ t('totalPrice') }}</div>
+        <div class="text-lg font-bold text-red-500">
+          ¥{{ totalPrice }}/{{ priceUnitText }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type {
+  ConsoleProduct,
+  ResourceId,
+  Translator
+} from '@/types/consoleResource'
 
-defineProps({
-  gpuCount: {
-    type: Number,
-    required: true
-  },
-  priceUnitText: {
-    type: String,
-    required: true
-  },
-  selectedProduct: {
-    type: Object,
-    default: null
-  },
-  selectedVolumeId: {
-    type: [Number, String],
-    default: null
-  },
-  selectedVolumeName: {
-    type: String,
-    default: ''
-  },
-  totalPrice: {
-    type: String,
-    required: true
-  }
-})
+defineProps<{
+  gpuCount: number
+  priceUnitText: string
+  selectedProduct: ConsoleProduct | null
+  selectedVolumeId: ResourceId | null
+  selectedVolumeName: string
+  totalPrice: string
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

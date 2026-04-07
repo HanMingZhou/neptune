@@ -333,6 +333,10 @@ func (f *PodGroupInformerFactory) updateBusinessStatus(pg *vcv1beta1.PodGroup) {
 // identifyResource 从 PodGroup 的 Label 或 OwnerReferences 中识别关联的业务资源
 // 返回 resourceIdentity，调用方通过 .Found() 判断是否识别成功
 func (f *PodGroupInformerFactory) identifyResource(pg *vcv1beta1.PodGroup) resourceIdentity {
+	if pg == nil {
+		return resourceIdentity{}
+	}
+
 	// 优先使用 Label 中的显式标识（由平台创建资源时注入）
 	if labelType := pg.Labels[consts.LabelInstanceType]; labelType != "" {
 		if labelID := pg.Labels[consts.LabelJobID]; labelID != "" {
@@ -344,6 +348,14 @@ func (f *PodGroupInformerFactory) identifyResource(pg *vcv1beta1.PodGroup) resou
 					InstanceName: pg.Labels[consts.LabelApp],
 				}
 			}
+		}
+
+		if instanceName := firstNonEmpty(
+			pg.Labels["neptune.io/instance"],
+			pg.Labels[consts.LabelVolcanoJobName],
+			pg.Labels[consts.LabelApp],
+		); instanceName != "" {
+			return f.lookupResourceByInstanceName(labelType, instanceName)
 		}
 	}
 
@@ -376,6 +388,54 @@ func (f *PodGroupInformerFactory) identifyResource(pg *vcv1beta1.PodGroup) resou
 	return resourceIdentity{}
 }
 
+func (f *PodGroupInformerFactory) lookupResourceByInstanceName(instanceType, instanceName string) resourceIdentity {
+	switch instanceType {
+	case consts.NotebookInstance:
+		return f.lookupByInstanceName(tableNameNotebooks, "instance_name", instanceName, consts.NotebookInstance)
+	case consts.TrainingInstance:
+		return f.lookupByInstanceName(tableNameTrainingJobs, "job_name", instanceName, consts.TrainingInstance)
+	case consts.InferenceInstance:
+		return f.lookupByInstanceName(tableNameInferenceServices, "instance_name", instanceName, consts.InferenceInstance)
+	default:
+		return resourceIdentity{}
+	}
+}
+
+func (f *PodGroupInformerFactory) lookupResourceFromStoredPodGroup(pg *vcv1beta1.PodGroup) resourceIdentity {
+	if pg == nil || f.db == nil {
+		return resourceIdentity{}
+	}
+
+	var stored podgroupModel.PodGroup
+	if err := f.db.
+		Where("name = ? AND namespace = ?", pg.Name, pg.Namespace).
+		Select("instance_name", "instance_type", "owner_id").
+		First(&stored).Error; err != nil {
+		return resourceIdentity{}
+	}
+
+	if stored.OwnerID > 0 && stored.InstanceType != "" {
+		return resourceIdentity{
+			InstanceType: stored.InstanceType,
+			OwnerID:      stored.OwnerID,
+			InstanceName: stored.InstanceName,
+		}
+	}
+
+	if stored.InstanceType != "" && stored.InstanceName != "" {
+		return f.lookupResourceByInstanceName(stored.InstanceType, stored.InstanceName)
+	}
+
+	return resourceIdentity{}
+}
+
+func (f *PodGroupInformerFactory) resolveDeleteResource(pg *vcv1beta1.PodGroup) resourceIdentity {
+	if res := f.identifyResource(pg); res.Found() {
+		return res
+	}
+	return f.lookupResourceFromStoredPodGroup(pg)
+}
+
 // lookupByInstanceName 根据实例名称查询业务表，支持去掉 ReplicaSet hash 后缀重试
 func (f *PodGroupInformerFactory) lookupByInstanceName(table, column, ownerName, instanceType string) resourceIdentity {
 	var id uint
@@ -400,7 +460,7 @@ func (f *PodGroupInformerFactory) lookupByInstanceName(table, column, ownerName,
 }
 
 func (f *PodGroupInformerFactory) processDelete(pg *vcv1beta1.PodGroup) error {
-	res := f.identifyResource(pg)
+	res := f.resolveDeleteResource(pg)
 	config, ok := businessConfigs[res.InstanceType]
 
 	// 1. 停止计费
@@ -567,4 +627,14 @@ func parseUint(s string) uint {
 		n = n*10 + uint(c-'0')
 	}
 	return n
+}
+
+func firstNonEmpty(values ...string) string {
+	for _, value := range values {
+		trimmed := strings.TrimSpace(value)
+		if trimmed != "" {
+			return trimmed
+		}
+	}
+	return ""
 }

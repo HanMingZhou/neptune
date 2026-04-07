@@ -1,12 +1,13 @@
 <template>
   <div class="console-page-container space-y-6">
-    <PageIntro
+    <BaseTableToolbar
       :breadcrumbs="[t('management'), t('sshKeyManage')]"
       :description="t('sshKeyManageDesc')"
+      :loading="loading"
       :title="t('sshKeyManage')"
+      @refresh="loadKeys"
     >
       <template #actions>
-        <RefreshButton :loading="loading" @refresh="loadKeys" />
         <button
           class="list-toolbar-button list-toolbar-button--primary"
           @click="openCreateDialog"
@@ -15,7 +16,7 @@
           {{ t('newSshKey') }}
         </button>
       </template>
-    </PageIntro>
+    </BaseTableToolbar>
 
     <ManagementListShell>
       <template #filters>
@@ -46,17 +47,17 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
-import RefreshButton from '@/components/RefreshButton/index.vue'
+import type { Translator } from '@/types/consoleResource'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
 import ManagementListShell from '@/components/listPage/ManagementListShell.vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
 import SshKeyCreateDialog from './components/SshKeyCreateDialog.vue'
 import SshKeyFiltersBar from './components/SshKeyFiltersBar.vue'
 import SshKeyList from './components/SshKeyList.vue'
 import { useSshKeyManagementPage } from './composables/useSshKeyManagementPage'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const {
   closeCreateDialog,
@@ -77,6 +78,6 @@ const {
 } = useSshKeyManagementPage({ t })
 
 onMounted(() => {
-  initialize()
+  void initialize()
 })
 </script>

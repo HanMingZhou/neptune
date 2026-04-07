@@ -2,6 +2,6 @@
   <InferenceCreatePage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import InferenceCreatePage from './create/index.vue'
 </script>

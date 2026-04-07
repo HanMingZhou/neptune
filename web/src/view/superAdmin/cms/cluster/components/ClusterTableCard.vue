@@ -25,18 +25,29 @@
             :key="row.id"
             class="hover:bg-slate-50 dark:hover:bg-zinc-800/40 transition-colors"
           >
-            <td class="px-6 py-4 text-sm font-mono text-slate-500">{{ row.id }}</td>
+            <td class="px-6 py-4 text-sm font-mono text-slate-500">
+              {{ row.id }}
+            </td>
             <td class="px-6 py-4">
               <span class="is-primary">{{ row.name }}</span>
             </td>
             <td class="px-6 py-4 text-sm text-slate-500 max-w-[220px]">
-              <el-tooltip v-if="row.description" :content="row.description" placement="top" :show-after="300">
+              <el-tooltip
+                v-if="row.description"
+                :content="row.description"
+                placement="top"
+                :show-after="300"
+              >
                 <span class="line-clamp-2">{{ row.description }}</span>
               </el-tooltip>
               <span v-else>-</span>
             </td>
-            <td class="px-6 py-4 text-sm text-slate-600">{{ row.area || '-' }}</td>
-            <td class="px-6 py-4 text-sm text-slate-600 font-mono">{{ row.internalIp || '-' }}</td>
+            <td class="px-6 py-4 text-sm text-slate-600">
+              {{ row.area || '-' }}
+            </td>
+            <td class="px-6 py-4 text-sm text-slate-600 font-mono">
+              {{ row.internalIp || '-' }}
+            </td>
             <td class="px-6 py-4">
               <span
                 v-if="row.apiServer"
@@ -75,7 +86,10 @@
               <span v-else class="text-xs text-slate-400">-</span>
             </td>
             <td class="px-6 py-4 text-center">
-              <span class="text-sm font-bold text-slate-700 dark:text-slate-200">{{ row.nodeCount }}</span>
+              <span
+                class="text-sm font-bold text-slate-700 dark:text-slate-200"
+                >{{ row.nodeCount }}</span
+              >
             </td>
             <td class="px-6 py-4 text-center">
               <ListToneBadge
@@ -83,7 +97,9 @@
                 :tone="row.status === 1 ? 'success' : 'neutral'"
               />
             </td>
-            <td class="px-6 py-4 text-sm text-slate-500">{{ row.createdAt }}</td>
+            <td class="px-6 py-4 text-sm text-slate-500">
+              {{ row.createdAt }}
+            </td>
             <td class="px-6 py-4 console-actions-cell">
               <div class="list-row-actions">
                 <button
@@ -102,7 +118,10 @@
             </td>
           </tr>
           <tr v-if="items.length === 0 && !loading">
-            <td colspan="13" class="px-6 py-10 text-center text-slate-400 text-sm">
+            <td
+              colspan="13"
+              class="px-6 py-10 text-center text-slate-400 text-sm"
+            >
               {{ t('noData') }}
             </td>
           </tr>
@@ -112,23 +131,29 @@
   </TableCard>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
 import ListToneBadge from '@/components/listPage/ListToneBadge.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
+import type { Translator } from '@/types/consoleResource'
+import type { CmsClusterRow } from '@/types/superAdmin'
 
-defineProps({
-  items: {
-    type: Array,
-    default: () => []
-  },
-  loading: {
-    type: Boolean,
-    default: false
+withDefaults(
+  defineProps<{
+    items?: CmsClusterRow[]
+    loading?: boolean
+  }>(),
+  {
+    items: () => [],
+    loading: false
   }
-})
+)
 
-defineEmits(['delete', 'edit', 'view-kubeconfig'])
+defineEmits<{
+  delete: [row: CmsClusterRow]
+  edit: [row: CmsClusterRow]
+  'view-kubeconfig': [row: CmsClusterRow]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

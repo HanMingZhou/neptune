@@ -63,7 +63,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
 import ApiDialogsHost from './components/ApiDialogsHost.vue'
 import ApiManagementHeader from './components/ApiManagementHeader.vue'
@@ -120,6 +120,6 @@ const {
 } = useApiManagementPage({ t })
 
 onMounted(() => {
-  initialize()
+  void initialize()
 })
 </script>

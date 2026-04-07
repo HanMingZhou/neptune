@@ -1,6 +1,8 @@
 <template>
   <el-config-provider :locale="elLocale">
-    <div class="flex h-screen w-screen overflow-hidden text-slate-900 dark:text-slate-100 font-sans">
+    <div
+      class="flex h-screen w-screen overflow-hidden text-slate-900 dark:text-slate-100 font-sans"
+    >
       <LayoutSidebar
         :dynamic-navigation="dynamicNavigation"
         :is-dark="isDark"
@@ -17,7 +19,9 @@
           @toggle-lang="toggleLang"
         />
 
-        <main class="workspace-shell flex-1 overflow-y-auto custom-scrollbar py-6 lg:py-8 bg-background-light dark:bg-background-dark">
+        <main
+          class="workspace-shell flex-1 min-w-0 overflow-x-hidden overflow-y-auto custom-scrollbar py-6 lg:py-8 bg-background-light dark:bg-background-dark"
+        >
           <router-view v-slot="{ Component, route: currentRoute }">
             <keep-alive :include="routerStore.keepAliveRouters">
               <component :is="Component" :key="currentRoute.fullPath" />
@@ -29,8 +33,9 @@
   </el-config-provider>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, provide } from 'vue'
+import type { Translator } from '@/types/consoleResource'
 import LayoutHeaderBar from './components/LayoutHeaderBar.vue'
 import LayoutSidebar from './components/LayoutSidebar.vue'
 import { useAppLayout } from './composables/useAppLayout'
@@ -52,9 +57,9 @@ const {
 } = useAppLayout()
 
 provide('lang', lang)
-provide('t', t)
+provide<Translator>('t', t)
 
 onMounted(() => {
-  initialize()
+  void initialize()
 })
 </script>

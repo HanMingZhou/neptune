@@ -3,7 +3,11 @@
     :body-style="{ overscrollBehavior: 'contain' }"
     :can-connect="isInstanceRunning"
     :connected-label="'Gateway: 22'"
-    :disabled-status-text="!isInstanceRunning ? `${t('instanceStatus')}: ${notebook.status || '-'}` : ''"
+    :disabled-status-text="
+      !isInstanceRunning
+        ? `${t('instanceStatus')}: ${notebook.status || '-'}`
+        : ''
+    "
     :set-terminal-ref="setTerminalRef"
     :terminal-connected="terminalConnected"
     :terminal-title="`root@${notebook.instanceName || ''}-0:~`"
@@ -13,30 +17,30 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type { ConsoleNotebook, Translator } from '@/types/consoleResource'
 import TerminalShell from '@/components/detailPage/TerminalShell.vue'
 
-defineProps({
-  isInstanceRunning: {
-    type: Boolean,
-    default: false
-  },
-  notebook: {
-    type: Object,
-    default: () => ({})
-  },
-  setTerminalRef: {
-    type: Function,
-    required: true
-  },
-  terminalConnected: {
-    type: Boolean,
-    default: false
+withDefaults(
+  defineProps<{
+    isInstanceRunning?: boolean
+    notebook?: ConsoleNotebook
+    setTerminalRef: (element: HTMLElement | null) => void
+    terminalConnected?: boolean
+  }>(),
+  {
+    isInstanceRunning: false,
+    notebook: () => ({}),
+    terminalConnected: false
   }
-})
+)
 
-defineEmits(['connect', 'disconnect', 'fit'])
+defineEmits<{
+  connect: []
+  disconnect: []
+  fit: []
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

@@ -1,8 +1,9 @@
 <template>
   <div class="console-page-container space-y-6">
-    <PageIntro
+    <BaseTableToolbar
       :breadcrumbs="[t('person')]"
       :description="t('profileCenterDesc')"
+      :show-refresh="false"
       :title="t('person')"
     />
 
@@ -27,14 +28,15 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
 import ProfileDialogsHost from './components/ProfileDialogsHost.vue'
 import ProfileOverviewPanel from './components/ProfileOverviewPanel.vue'
 import { useAccountProfile } from './composables/useAccountProfile'
+import type { Translator } from '@/types/consoleResource'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const {
   closeEdit,

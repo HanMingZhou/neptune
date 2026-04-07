@@ -22,52 +22,51 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
+import type {
+  ConsoleProduct,
+  FilterOption,
+  ResourceId
+} from '@/types/consoleResource'
 import BillingSection from '@/components/createPage/BillingSection.vue'
 import FilterChipSection from '@/components/createPage/FilterChipSection.vue'
 import ProductTable from './ProductTable.vue'
+import type {
+  InferenceCreateForm,
+  InferenceFilters,
+  InferencePayType
+} from '../composables/useInferenceCreate'
 
-const props = defineProps({
-  areas: {
-    type: Array,
-    default: () => []
-  },
-  changeFilter: {
-    type: Function,
-    required: true
-  },
-  filters: {
-    type: Object,
-    required: true
-  },
-  form: {
-    type: Object,
-    required: true
-  },
-  formatPrice: {
-    type: Function,
-    required: true
-  },
-  gpuModelsList: {
-    type: Array,
-    default: () => []
-  },
-  payTypes: {
-    type: Array,
-    default: () => []
-  },
-  priceUnitText: {
-    type: String,
-    required: true
-  },
-  products: {
-    type: Array,
-    default: () => []
+interface PayTypeOption {
+  value: InferencePayType
+  labelKey: string
+}
+
+const props = withDefaults(
+  defineProps<{
+    areas?: string[]
+    changeFilter: (key: keyof InferenceFilters, value: string) => void
+    filters: InferenceFilters
+    form: InferenceCreateForm
+    formatPrice: (product: ConsoleProduct | null | undefined) => string
+    gpuModelsList?: FilterOption[]
+    payTypes?: PayTypeOption[]
+    priceUnitText: string
+    products?: ConsoleProduct[]
+  }>(),
+  {
+    areas: () => [],
+    gpuModelsList: () => [],
+    payTypes: () => [],
+    products: () => []
   }
-})
+)
 
-const emit = defineEmits(['update:pay-type', 'update:product-id'])
+const emit = defineEmits<{
+  'update:pay-type': [value: InferencePayType]
+  'update:product-id': [value: ResourceId]
+}>()
 
 const filterGroups = computed(() => [
   { key: 'area', labelKey: 'selectRegion', options: props.areas },

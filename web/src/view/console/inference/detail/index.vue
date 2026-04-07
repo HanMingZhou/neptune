@@ -69,7 +69,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import DetailHeader from './components/DetailHeader.vue'
 import InferenceDetailDialogsHost from './components/InferenceDetailDialogsHost.vue'
 import InferenceDetailPanels from './components/InferenceDetailPanels.vue'

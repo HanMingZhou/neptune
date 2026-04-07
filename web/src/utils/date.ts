@@ -5,47 +5,45 @@
 // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
 
 declare global {
-    interface Date {
-        Format(fmt: string): string
-    }
+  interface Date {
+    Format(fmt: string): string
+  }
 }
 
-// eslint-disable-next-line no-extend-native
 Date.prototype.Format = function (fmt: string) {
-    const o: { [key: string]: number } = {
-        'M+': this.getMonth() + 1, // 月份
-        'd+': this.getDate(), // 日
-        'h+': this.getHours(), // 小时
-        'm+': this.getMinutes(), // 分
-        's+': this.getSeconds(), // 秒
-        'q+': Math.floor((this.getMonth() + 3) / 3), // 季度
-        'S': this.getMilliseconds() // 毫秒
+  const o: { [key: string]: number } = {
+    'M+': this.getMonth() + 1, // 月份
+    'd+': this.getDate(), // 日
+    'h+': this.getHours(), // 小时
+    'm+': this.getMinutes(), // 分
+    's+': this.getSeconds(), // 秒
+    'q+': Math.floor((this.getMonth() + 3) / 3), // 季度
+    S: this.getMilliseconds() // 毫秒
+  }
+  const reg = /(y+)/
+  if (reg.test(fmt)) {
+    const t = reg.exec(fmt)![1]
+    fmt = fmt.replace(t, (this.getFullYear() + '').substring(4 - t.length))
+  }
+  for (const k in o) {
+    const regx = new RegExp('(' + k + ')')
+    if (regx.test(fmt)) {
+      const t = regx.exec(fmt)![1]
+      fmt = fmt.replace(
+        t,
+        t.length === 1
+          ? o[k].toString()
+          : ('00' + o[k]).substring(('' + o[k]).length)
+      )
     }
-    const reg = /(y+)/
-    if (reg.test(fmt)) {
-        const t = reg.exec(fmt)![1]
-        fmt = fmt.replace(
-            t,
-            (this.getFullYear() + '').substring(4 - t.length)
-        )
-    }
-    for (let k in o) {
-        const regx = new RegExp('(' + k + ')')
-        if (regx.test(fmt)) {
-            const t = regx.exec(fmt)![1]
-            fmt = fmt.replace(
-                t,
-                t.length === 1 ? o[k].toString() : ('00' + o[k]).substring(('' + o[k]).length)
-            )
-        }
-    }
-    return fmt
+  }
+  return fmt
 }
 
 export function formatTimeToStr(times: any, pattern?: string) {
-    let d = new Date(times).Format('yyyy-MM-dd hh:mm:ss')
-    if (pattern) {
-        d = new Date(times).Format(pattern)
-    }
-    return d.toLocaleString()
+  let d = new Date(times).Format('yyyy-MM-dd hh:mm:ss')
+  if (pattern) {
+    d = new Date(times).Format(pattern)
+  }
+  return d.toLocaleString()
 }

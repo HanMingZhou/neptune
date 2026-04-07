@@ -46,100 +46,72 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
+import type {
+  ConsoleProduct,
+  ConsoleVolume,
+  FilterOption,
+  ResourceId
+} from '@/types/consoleResource'
 import BillingSection from '@/components/createPage/BillingSection.vue'
 import FilterChipSection from '@/components/createPage/FilterChipSection.vue'
 import GpuCountSection from './GpuCountSection.vue'
 import ProductTable from './ProductTable.vue'
 import SummarySection from './SummarySection.vue'
 import VolumeMountSection from './VolumeMountSection.vue'
+import type {
+  NotebookFilters,
+  NotebookPayType
+} from '../composables/useNotebookCreate'
 
-const props = defineProps({
-  areas: {
-    type: Array,
-    default: () => []
-  },
-  availableVolumes: {
-    type: Array,
-    default: () => []
-  },
-  changeFilter: {
-    type: Function,
-    required: true
-  },
-  cpuModels: {
-    type: Array,
-    default: () => []
-  },
-  filters: {
-    type: Object,
-    required: true
-  },
-  formatPrice: {
-    type: Function,
-    required: true
-  },
-  gpuCount: {
-    type: Number,
-    required: true
-  },
-  gpuModels: {
-    type: Array,
-    default: () => []
-  },
-  onVolumeChange: {
-    type: Function,
-    required: true
-  },
-  payType: {
-    type: Number,
-    required: true
-  },
-  payTypes: {
-    type: Array,
-    default: () => []
-  },
-  priceUnitText: {
-    type: String,
-    required: true
-  },
-  products: {
-    type: Array,
-    default: () => []
-  },
-  selectedProduct: {
-    type: Object,
-    default: null
-  },
-  selectedVolumeId: {
-    type: [Number, String],
-    default: null
-  },
-  selectedVolumeName: {
-    type: String,
-    default: ''
-  },
-  selectProduct: {
-    type: Function,
-    required: true
-  },
-  totalPrice: {
-    type: String,
-    required: true
-  },
-  volumeMountPath: {
-    type: String,
-    default: ''
+interface PayTypeOption {
+  value: NotebookPayType
+  labelKey: string
+}
+
+const props = withDefaults(
+  defineProps<{
+    areas?: string[]
+    availableVolumes?: ConsoleVolume[]
+    changeFilter: (key: keyof NotebookFilters, value: string) => void
+    cpuModels?: FilterOption[]
+    filters: NotebookFilters
+    formatPrice: (product: ConsoleProduct | null | undefined) => string
+    gpuCount: number
+    gpuModels?: FilterOption[]
+    onVolumeChange: (value: ResourceId | null) => void
+    payType: NotebookPayType
+    payTypes?: PayTypeOption[]
+    priceUnitText: string
+    products?: ConsoleProduct[]
+    selectedProduct?: ConsoleProduct | null
+    selectedVolumeId?: ResourceId | null
+    selectedVolumeName?: string
+    selectProduct: (product: ConsoleProduct) => void
+    totalPrice: string
+    volumeMountPath?: string
+  }>(),
+  {
+    areas: () => [],
+    availableVolumes: () => [],
+    cpuModels: () => [],
+    gpuModels: () => [],
+    payTypes: () => [],
+    products: () => [],
+    selectedProduct: null,
+    selectedVolumeId: null,
+    selectedVolumeName: '',
+    volumeMountPath: ''
   }
-})
+)
 
-const emit = defineEmits([
-  'update:gpu-count',
-  'update:pay-type',
-  'update:selected-volume-id',
-  'update:volume-mount-path'
-])
+const emit = defineEmits<{
+  'update:gpu-count': [value: number]
+  'update:pay-type': [value: NotebookPayType]
+  'update:selected-volume-id': [value: ResourceId | null]
+  'update:volume-mount-path': [value: string]
+}>()
 
 const filterGroups = computed(() => [
   { key: 'area', labelKey: 'selectRegion', options: props.areas },

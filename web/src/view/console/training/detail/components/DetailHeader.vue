@@ -36,38 +36,36 @@
   </DetailHeaderShell>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type { ConsoleTrainingJob, Translator } from '@/types/consoleResource'
 import DetailHeaderShell from '@/components/detailPage/DetailHeaderShell.vue'
 
-defineProps({
-  actionLoading: {
-    type: Boolean,
-    default: false
-  },
-  getStatusClass: {
-    type: Function,
-    required: true
-  },
-  getStatusLabel: {
-    type: Function,
-    required: true
-  },
-  isRunning: {
-    type: Boolean,
-    default: false
-  },
-  isTerminal: {
-    type: Boolean,
-    default: false
-  },
-  job: {
-    type: Object,
-    default: () => ({})
+type StatusResolver = (status?: string) => string
+
+withDefaults(
+  defineProps<{
+    actionLoading?: boolean
+    getStatusClass: StatusResolver
+    getStatusLabel: StatusResolver
+    isRunning?: boolean
+    isTerminal?: boolean
+    job?: ConsoleTrainingJob
+  }>(),
+  {
+    actionLoading: false,
+    isRunning: false,
+    isTerminal: false,
+    job: () => ({ id: '' })
   }
-})
+)
 
-defineEmits(['back', 'delete', 'open-tensorboard', 'stop'])
+defineEmits<{
+  back: []
+  delete: []
+  'open-tensorboard': []
+  stop: []
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

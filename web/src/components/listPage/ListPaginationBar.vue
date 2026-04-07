@@ -20,75 +20,58 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 
-const props = defineProps({
-  background: {
-    type: Boolean,
-    default: true
-  },
-  currentPage: {
-    type: Number,
-    default: 1
-  },
-  hideWhenEmpty: {
-    type: Boolean,
-    default: false
-  },
-  justify: {
-    type: String,
-    default: 'between'
-  },
-  layout: {
-    type: String,
-    default: 'sizes, prev, pager, next, jumper'
-  },
-  pageSize: {
-    type: Number,
-    default: 10
-  },
-  pageSizes: {
-    type: Array,
-    default: () => [10, 20, 50, 100]
-  },
-  showTotal: {
-    type: Boolean,
-    default: true
-  },
-  showPagination: {
-    type: Boolean,
-    default: true
-  },
-  size: {
-    type: String,
-    default: ''
-  },
-  total: {
-    type: Number,
-    default: 0
-  },
-  totalText: {
-    type: String,
-    default: ''
-  }
-})
+type PaginationAlign = 'between' | 'end'
+type PaginationSize = '' | 'default' | 'small' | 'large'
 
-const emit = defineEmits([
-  'current-change',
-  'size-change',
-  'update:current-page',
-  'update:page-size'
-])
+const props = withDefaults(
+  defineProps<{
+    background?: boolean
+    currentPage?: number
+    hideWhenEmpty?: boolean
+    justify?: PaginationAlign
+    layout?: string
+    pageSize?: number
+    pageSizes?: number[]
+    showTotal?: boolean
+    showPagination?: boolean
+    size?: PaginationSize
+    total?: number
+    totalText?: string
+  }>(),
+  {
+    background: true,
+    currentPage: 1,
+    hideWhenEmpty: false,
+    justify: 'between',
+    layout: 'sizes, prev, pager, next, jumper',
+    pageSize: 10,
+    pageSizes: () => [10, 20, 50, 100],
+    showTotal: true,
+    showPagination: true,
+    size: '',
+    total: 0,
+    totalText: ''
+  }
+)
+
+const emit = defineEmits<{
+  'current-change': [value: number]
+  'size-change': [value: number]
+  'update:current-page': [value: number]
+  'update:page-size': [value: number]
+}>()
 
 const currentPageModel = computed({
   get: () => props.currentPage,
-  set: (value) => emit('update:current-page', value)
+  set: (value: number) => emit('update:current-page', value)
 })
 
 const pageSizeModel = computed({
   get: () => props.pageSize,
-  set: (value) => emit('update:page-size', value)
+  set: (value: number) => emit('update:page-size', value)
 })
 
 const resolvedLayout = computed(() => {
@@ -108,15 +91,15 @@ const resolvedLayout = computed(() => {
   return layoutItems.join(', ')
 })
 
-const resolvedTotalText = computed(() => (
-  props.totalText || `共 ${props.total} 条记录`
-))
+const resolvedTotalText = computed(
+  () => props.totalText || `共 ${props.total} 条记录`
+)
 
-const handleCurrentChange = (value) => {
+const handleCurrentChange = (value: number) => {
   emit('current-change', value)
 }
 
-const handleSizeChange = (value) => {
+const handleSizeChange = (value: number) => {
   emit('size-change', value)
 }
 </script>

@@ -35,42 +35,41 @@
   </DetailHeaderShell>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type {
+  ConsoleInferenceService,
+  Translator
+} from '@/types/consoleResource'
 import DetailHeaderShell from '@/components/detailPage/DetailHeaderShell.vue'
 
-defineProps({
-  actionLoading: {
-    type: Boolean,
-    default: false
-  },
-  getStatusClass: {
-    type: Function,
-    required: true
-  },
-  getStatusLabel: {
-    type: Function,
-    required: true
-  },
-  isRunningOrPending: {
-    type: Boolean,
-    default: false
-  },
-  isStopped: {
-    type: Boolean,
-    default: false
-  },
-  isTerminalState: {
-    type: Boolean,
-    default: false
-  },
-  service: {
-    type: Object,
-    default: () => ({})
+type StatusResolver = (status?: string) => string
+
+withDefaults(
+  defineProps<{
+    actionLoading?: boolean
+    getStatusClass: StatusResolver
+    getStatusLabel: StatusResolver
+    isRunningOrPending?: boolean
+    isStopped?: boolean
+    isTerminalState?: boolean
+    service?: ConsoleInferenceService
+  }>(),
+  {
+    actionLoading: false,
+    isRunningOrPending: false,
+    isStopped: false,
+    isTerminalState: false,
+    service: () => ({ id: '' })
   }
-})
+)
 
-defineEmits(['back', 'delete', 'start', 'stop'])
+defineEmits<{
+  back: []
+  delete: []
+  start: []
+  stop: []
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

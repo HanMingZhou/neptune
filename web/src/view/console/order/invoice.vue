@@ -2,7 +2,7 @@
   <InvoicePage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import InvoicePage from './invoice/index.vue'
 
 defineOptions({

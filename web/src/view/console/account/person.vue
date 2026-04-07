@@ -2,7 +2,7 @@
   <PersonPage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import PersonPage from './person/index.vue'
 
 defineOptions({

@@ -2,6 +2,6 @@
   <MenuIconPicker />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import MenuIconPicker from './icon/index.vue'
 </script>

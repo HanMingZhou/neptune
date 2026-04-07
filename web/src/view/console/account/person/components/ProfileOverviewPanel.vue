@@ -16,8 +16,14 @@
     <section class="console-detail-card rounded-xl p-5 md:p-6">
       <header class="mb-5 space-y-2">
         <div class="space-y-2">
-          <p class="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">{{ t('accountOverview') }}</p>
-          <h2 class="text-2xl font-semibold tracking-tight text-slate-950 dark:text-slate-100">
+          <p
+            class="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500"
+          >
+            {{ t('accountOverview') }}
+          </p>
+          <h2
+            class="text-2xl font-semibold tracking-tight text-slate-950 dark:text-slate-100"
+          >
             {{ t('person') }}
           </h2>
           <p class="max-w-3xl text-sm leading-6 text-slate-500">
@@ -34,17 +40,24 @@
         >
           <div class="flex items-start justify-between gap-4">
             <div class="flex min-w-0 items-start gap-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg border border-border-light bg-surface-light text-slate-500 dark:border-border-dark dark:bg-surface-dark">
-              <el-icon><component :is="item.icon" /></el-icon>
+              <div
+                class="flex h-10 w-10 items-center justify-center rounded-lg border border-border-light bg-surface-light text-slate-500 dark:border-border-dark dark:bg-surface-dark"
+              >
+                <el-icon><component :is="item.icon" /></el-icon>
               </div>
               <div class="min-w-0">
                 <p class="detail-info-label">{{ item.label }}</p>
                 <p class="detail-info-value">{{ item.value }}</p>
-                <p class="mt-1 text-sm leading-6 text-slate-500">{{ item.description }}</p>
+                <p class="mt-1 text-sm leading-6 text-slate-500">
+                  {{ item.description }}
+                </p>
               </div>
             </div>
 
-            <button class="list-row-button list-row-button--neutral shrink-0" @click="item.action()">
+            <button
+              class="list-row-button list-row-button--neutral shrink-0"
+              @click="item.action()"
+            >
               {{ t('edit') }}
             </button>
           </div>
@@ -54,40 +67,54 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject } from 'vue'
+import type { Component } from 'vue'
 import { Key, Message, Phone, User } from '@element-plus/icons-vue'
+import type { Translator } from '@/types/consoleResource'
 
 import ProfileHero from './ProfileHero.vue'
 
-const props = defineProps({
-  editFlag: {
-    type: Boolean,
-    default: false
-  },
-  nickName: {
-    type: String,
-    default: ''
-  },
-  userInfo: {
-    type: Object,
-    required: true
+interface AccountUserInfo {
+  nickName?: string
+  phone?: string
+  email?: string
+}
+
+interface OverviewItem {
+  key: string
+  icon: Component
+  label: string
+  value: string
+  description: string
+  action: () => void
+}
+
+const props = withDefaults(
+  defineProps<{
+    editFlag?: boolean
+    nickName?: string
+    userInfo: AccountUserInfo
+  }>(),
+  {
+    editFlag: false,
+    nickName: ''
   }
-})
+)
 
-const emit = defineEmits([
-  'change-email',
-  'change-password',
-  'change-phone',
-  'close-edit',
-  'confirm-edit',
-  'open-edit',
-  'update:nick-name'
-])
+const emit = defineEmits<{
+  'change-email': []
+  'change-password': []
+  'change-phone': []
+  'close-edit': []
+  'confirm-edit': []
+  'open-edit': []
+  'update:nick-name': [value: string]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
-const overviewItems = computed(() => [
+const overviewItems = computed<OverviewItem[]>(() => [
   {
     key: 'nickname',
     icon: User,
@@ -101,7 +128,9 @@ const overviewItems = computed(() => [
     icon: Phone,
     label: t('phoneLabel'),
     value: props.userInfo.phone || t('notSet'),
-    description: t(props.userInfo.phone ? 'phoneReadyHint' : 'phonePendingHint'),
+    description: t(
+      props.userInfo.phone ? 'phoneReadyHint' : 'phonePendingHint'
+    ),
     action: () => emit('change-phone')
   },
   {
@@ -109,7 +138,9 @@ const overviewItems = computed(() => [
     icon: Message,
     label: t('emailLabel'),
     value: props.userInfo.email || t('notSet'),
-    description: t(props.userInfo.email ? 'emailReadyHint' : 'emailPendingHint'),
+    description: t(
+      props.userInfo.email ? 'emailReadyHint' : 'emailPendingHint'
+    ),
     action: () => emit('change-email')
   },
   {

@@ -6,7 +6,7 @@ import { register } from './global'
 import type { App } from 'vue'
 
 export default {
-    install: (app: App) => {
-        register(app)
-    }
+  install: (app: App) => {
+    register(app)
+  }
 }

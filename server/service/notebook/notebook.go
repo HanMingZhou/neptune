@@ -39,6 +39,7 @@ import (
 	"net/url"
 	"path"
 	"strings"
+	"time"
 
 	nbv1 "github.com/kubeflow/kubeflow/components/notebook-controller/api/v1"
 	"github.com/pkg/errors"
@@ -224,12 +225,20 @@ func (nb *NotebookService) CreateNotebook(ctx context.Context, req *request.AddN
 		logx.Error("保存Notebook失败", err)
 		return err
 	}
+	cleanups.Add(func(ctx context.Context) {
+		if rollbackErr := nb.rollbackNotebookRecord(state.nbRef.ID); rollbackErr != nil {
+			logx.Error("回滚时删除Notebook数据库记录失败", rollbackErr)
+		}
+	})
 
 	// 6. 创建 K8s Notebook
 	if err = state.cluster.NotebookClient.Create(ctx, notebookObj); err != nil {
 		logx.Error("K8s创建Notebook失败", err)
 		return err
 	}
+	cleanups.Add(func(ctx context.Context) {
+		nb.rollbackNotebookRuntime(ctx, state.nbRef, state.cluster)
+	})
 
 	// 7. 创建订单（预付费在CreateOrder时已扣费，按量付费金额为0）
 	orderID, orderErr := nb.createNotebookOrder(ctx, notebookOrderSpec{
@@ -649,6 +658,113 @@ func (nb *NotebookService) updateNotebookOrderID(notebookID, orderID uint) error
 	return global.GVA_DB.Model(&nbModel.Notebook{}).
 		Where("id = ?", notebookID).
 		Update("order_id", orderID).Error
+}
+
+const (
+	notebookDeleteWaitTimeout  = 10 * time.Second
+	notebookDeletePollInterval = 200 * time.Millisecond
+)
+
+func (nb *NotebookService) rollbackNotebookOrderID(notebookID, orderID uint) error {
+	return global.GVA_DB.Model(&nbModel.Notebook{}).
+		Where("id = ?", notebookID).
+		Update("order_id", orderID).Error
+}
+
+func (nb *NotebookService) rollbackNotebookRecord(notebookID uint) error {
+	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {
+		if err := tx.Unscoped().
+			Where("notebook_id = ?", notebookID).
+			Delete(&nbModel.NotebookVolume{}).Error; err != nil {
+			return err
+		}
+
+		if err := tx.Unscoped().
+			Where("owner_id = ? AND owner_type = ?", notebookID, consts.NotebookInstance).
+			Delete(&tensorboardModel.Tensorboard{}).Error; err != nil {
+			return err
+		}
+
+		if err := tx.Unscoped().
+			Where("id = ?", notebookID).
+			Delete(&nbModel.Notebook{}).Error; err != nil {
+			return err
+		}
+
+		return nil
+	})
+}
+
+func (nb *NotebookService) deleteNotebookResource(ctx context.Context, notebookClient *global.NotebookClient, dbNb *nbModel.Notebook) error {
+	if notebookClient == nil || dbNb == nil {
+		return nil
+	}
+
+	notebook := &nbv1.Notebook{
+		ObjectMeta: metav1.ObjectMeta{
+			Name:      dbNb.InstanceName,
+			Namespace: dbNb.Namespace,
+		},
+	}
+	if err := notebookClient.Delete(ctx, notebook, &ctrlclient.DeleteOptions{
+		PropagationPolicy: func() *metav1.DeletionPropagation { p := metav1.DeletePropagationBackground; return &p }(),
+	}); err != nil && !apierrors.IsNotFound(err) {
+		return errors.Wrap(err, "删除Notebook CR失败")
+	}
+
+	return nil
+}
+
+func (nb *NotebookService) waitNotebookResourceDeleted(ctx context.Context, dbNb *nbModel.Notebook, notebookClient *global.NotebookClient) (bool, error) {
+	if notebookClient == nil || dbNb == nil {
+		return false, nil
+	}
+
+	ticker := time.NewTicker(notebookDeletePollInterval)
+	defer ticker.Stop()
+
+	for {
+		_, exists, err := resolveNotebookResourceStatus(ctx, *dbNb, notebookClient)
+		if err != nil {
+			return false, err
+		}
+		if !exists {
+			return true, nil
+		}
+
+		select {
+		case <-ctx.Done():
+			if ctx.Err() == context.DeadlineExceeded {
+				return false, nil
+			}
+			return false, ctx.Err()
+		case <-ticker.C:
+		}
+	}
+}
+
+func (nb *NotebookService) rollbackNotebookRuntime(ctx context.Context, dbNb *nbModel.Notebook, cluster *global.ClusterClientInfo) {
+	if dbNb == nil || cluster == nil {
+		return
+	}
+
+	if err := nb.deleteNotebookResource(ctx, cluster.NotebookClient, dbNb); err != nil {
+		logx.Error("回滚时删除Notebook CR失败", err)
+	} else if cluster.NotebookClient != nil {
+		waitCtx, cancel := context.WithTimeout(ctx, notebookDeleteWaitTimeout)
+		defer cancel()
+
+		deleted, waitErr := nb.waitNotebookResourceDeleted(waitCtx, dbNb, cluster.NotebookClient)
+		if waitErr != nil {
+			logx.Error("回滚时等待Notebook CR删除失败", waitErr)
+		} else if !deleted {
+			logx.Error("回滚时等待Notebook CR删除超时", logx.Field("instance", dbNb.InstanceName))
+		}
+	}
+
+	if err := nb.cleanupNotebookResources(ctx, dbNb, cluster); err != nil {
+		logx.Error("回滚时清理Notebook关联资源失败", err)
+	}
 }
 
 func (nb *NotebookService) createNotebookAccessRoute(ctx context.Context, nbRef *nbModel.Notebook, required bool) error {
@@ -1073,6 +1189,75 @@ func (nb *NotebookService) deleteNotebookSSHService(
 	return nil
 }
 
+func (nb *NotebookService) deleteNotebookPersistentResources(ctx context.Context, dbNb *nbModel.Notebook, cluster *global.ClusterClientInfo) error {
+	if dbNb == nil || cluster == nil {
+		return nil
+	}
+
+	var errs []error
+
+	pvcMgr := pvc.NewK8sPVCManager(cluster.ClientSet)
+	if err := pvcMgr.DeletePVCs(ctx, &pvcModel.DeletePVCReq{
+		InstanceName: dbNb.InstanceName,
+		Namespace:    dbNb.Namespace,
+	}, consts.NotebookInstance); err != nil {
+		logx.Error("删除Notebook PVC失败", err)
+		errs = append(errs, err)
+	}
+
+	secretMgr := secret.NewK8sSecretManager(cluster.ClientSet)
+	if dbNb.SSHKeyId > 0 {
+		if err := secretMgr.DeleteSSHSecret(ctx, &secretModel.DeleteSecretReq{
+			InstanceName: dbNb.InstanceName,
+			Namespace:    dbNb.Namespace,
+		}); err != nil {
+			logx.Error("删除Notebook SSH公钥Secret失败", err)
+			errs = append(errs, err)
+		}
+
+		if err := secretMgr.DeleteSSHPrivateKeySecret(ctx, &secretModel.DeleteSecretReq{
+			InstanceName: dbNb.InstanceName,
+			Namespace:    consts.SSHPiperNamespace,
+		}); err != nil {
+			logx.Error("删除Notebook SSH私钥Secret失败", err)
+			errs = append(errs, err)
+		}
+	}
+
+	if dbNb.EnableSSHPassword {
+		if err := secretMgr.DeleteSSHPasswordSecret(ctx, &secretModel.DeleteSecretReq{
+			InstanceName: dbNb.InstanceName,
+			Namespace:    dbNb.Namespace,
+		}); err != nil {
+			logx.Error("删除Notebook SSH密码Secret失败", err)
+			errs = append(errs, err)
+		}
+	}
+
+	if len(errs) > 0 {
+		return fmt.Errorf("delete notebook persistent resources failed with %d errors", len(errs))
+	}
+	return nil
+}
+
+func (nb *NotebookService) softDeleteNotebookRecord(notebookID uint) error {
+	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {
+		if err := tx.
+			Where("notebook_id = ?", notebookID).
+			Delete(&nbModel.NotebookVolume{}).Error; err != nil {
+			return err
+		}
+
+		if err := tx.
+			Where("id = ?", notebookID).
+			Delete(&nbModel.Notebook{}).Error; err != nil {
+			return err
+		}
+
+		return nil
+	})
+}
+
 // DeleteNotebook 删除Notebook（彻底销毁，包括 PVC、Secret 和 DB 记录）
 // 注意：按量计费的结算由 PodGroup Informer 自动处理
 // 删除 Notebook CR 会触发 PodGroup 删除，Informer 会捕获该事件并调用 StopOrder
@@ -1092,70 +1277,63 @@ func (nb *NotebookService) DeleteNotebook(ctx context.Context, req *request.Dele
 		return errors.New("没有可用的K8s集群")
 	}
 
-	// 资源清理器：使用 Background Context 确保即使请求取消也能完成清理
-	defer func() {
-		cleanupCtx := context.Background()
-
-		// 清理关联资源（TensorBoard、SSH Pipe、Apisix 路由、SSH Service）
-		if err := nb.cleanupNotebookResources(cleanupCtx, nbRef, cluster); err != nil {
-			logx.Error("清理 Notebook 关联资源失败", err)
-		}
-
-		// 注意：资源配额释放由 PodGroup Informer 的 processDelete 统一处理
-		// 删除 Notebook CR → PodGroup 被删除 → Informer 捕获 → ReleaseCapacity
-	}()
-
-	// 删除 PVCs（Stop 时保留，Delete 时彻底删除）
-	pvcMgr := pvc.NewK8sPVCManager(cluster.ClientSet)
-	_ = pvcMgr.DeletePVCs(ctx, &pvcModel.DeletePVCReq{
-		InstanceName: nbRef.InstanceName,
-		Namespace:    nbRef.Namespace,
-	}, consts.NotebookInstance)
-
-	// 删除 SSH Secret（Stop 时保留，Delete 时彻底删除）
-	secretMgr := secret.NewK8sSecretManager(cluster.ClientSet)
-	if nbRef.SSHKeyId > 0 {
-		_ = secretMgr.DeleteSSHSecret(ctx, &secretModel.DeleteSecretReq{
-			InstanceName: nbRef.InstanceName,
-			Namespace:    nbRef.Namespace,
-		})
-		_ = secretMgr.DeleteSSHPrivateKeySecret(ctx, &secretModel.DeleteSecretReq{
-			InstanceName: nbRef.InstanceName,
-			Namespace:    consts.SSHPiperNamespace,
-		})
-	}
-	if nbRef.EnableSSHPassword {
-		_ = secretMgr.DeleteSSHPasswordSecret(ctx, &secretModel.DeleteSecretReq{
-			InstanceName: nbRef.InstanceName,
-			Namespace:    nbRef.Namespace,
-		})
-	}
-
-	// 更新 DB 状态为 Deleting
-	nbRef.Status = consts.NotebookStatusDeleting
-	if err = global.GVA_DB.Save(nbRef).Error; err != nil {
-		logx.Error("更新数据库状态失败", err)
+	resourceStatus, exists, err := resolveNotebookResourceStatus(ctx, *nbRef, cluster.NotebookClient)
+	if err != nil {
 		return err
 	}
 
-	// 删除 K8s Notebook CR
-	notebook := &nbv1.Notebook{}
-	notebook.Name = nbRef.InstanceName
-	notebook.Namespace = nbRef.Namespace
-	if err = cluster.NotebookClient.Delete(ctx, notebook, &ctrlclient.DeleteOptions{
-		PropagationPolicy: func() *metav1.DeletionPropagation { p := metav1.DeletePropagationBackground; return &p }(),
-	}); err != nil {
-		if !apierrors.IsNotFound(err) {
-			logx.Error("K8s删除Notebook失败", err)
-			nbRef.Status = consts.NotebookStatusDeleteFailed
-			_ = global.GVA_DB.Save(nbRef).Error
-			return err
+	if exists {
+		if nbRef.Status != consts.NotebookStatusDeleting {
+			nbRef.Status = consts.NotebookStatusDeleting
+			if err = global.GVA_DB.Save(nbRef).Error; err != nil {
+				logx.Error("更新Notebook状态为DELETING失败", err)
+				return err
+			}
+		}
+
+		if resourceStatus != consts.NotebookStatusDeleting {
+			if err = nb.deleteNotebookResource(ctx, cluster.NotebookClient, nbRef); err != nil {
+				logx.Error("K8s删除Notebook失败", err)
+				nbRef.Status = consts.NotebookStatusDeleteFailed
+				_ = global.GVA_DB.Save(nbRef).Error
+				return err
+			}
 		}
 	}
 
-	// 从数据库软删除（使用主键ID，避免DisplayName重复导致误删）
-	if err = global.GVA_DB.Where("id = ?", nbRef.ID).Delete(&nbModel.Notebook{}).Error; err != nil {
-		logx.Error("数据库删除失败", err)
+	if exists {
+		waitCtx, cancel := context.WithTimeout(context.Background(), notebookDeleteWaitTimeout)
+		defer cancel()
+
+		deleted, waitErr := nb.waitNotebookResourceDeleted(waitCtx, nbRef, cluster.NotebookClient)
+		if waitErr != nil {
+			logx.Error("等待Notebook CR删除失败", waitErr)
+			return waitErr
+		}
+		if !deleted {
+			return errors.New("Notebook资源仍在删除中，请稍后重试")
+		}
+	}
+
+	if err = nb.cleanupNotebookResources(context.Background(), nbRef, cluster); err != nil {
+		logx.Error("清理 Notebook 关联资源失败", err)
+		nbRef.Status = consts.NotebookStatusDeleteFailed
+		_ = global.GVA_DB.Save(nbRef).Error
+		return err
+	}
+
+	if err = nb.deleteNotebookPersistentResources(context.Background(), nbRef, cluster); err != nil {
+		logx.Error("清理 Notebook 持久化资源失败", err)
+		nbRef.Status = consts.NotebookStatusDeleteFailed
+		_ = global.GVA_DB.Save(nbRef).Error
+		return err
+	}
+
+	// 注意：资源配额释放由 PodGroup Informer 的 processDelete 统一处理
+	// 删除 Notebook CR → PodGroup 被删除 → Informer 捕获 → ReleaseCapacity
+
+	if err = nb.softDeleteNotebookRecord(nbRef.ID); err != nil {
+		logx.Error("软删除Notebook数据库记录失败", err)
 		return err
 	}
 
@@ -1232,8 +1410,8 @@ func (nb *NotebookService) GetNotebookList(ctx context.Context, req *request.Get
 	lookup := nb.loadNotebookResponseLookup(ctx, dbNotebooks)
 	notebooks := make([]response.NotebookItem, 0, len(dbNotebooks))
 	for _, dbNb := range dbNotebooks {
-		stsLister, podLister := nb.getNotebookClusterListers(dbNb.ClusterID)
-		item, convertErr := convertDBModelToResponse(dbNb, lookup, stsLister, podLister)
+		stsLister, podLister, notebookClient := nb.getNotebookClusterRuntime(dbNb.ClusterID)
+		item, convertErr := convertDBModelToResponse(ctx, dbNb, lookup, stsLister, podLister, notebookClient)
 		if convertErr != nil {
 			logx.Error("转换Notebook失败, 使用数据库状态", convertErr)
 		}
@@ -1358,23 +1536,25 @@ func collectNotebookRelationIDs(notebooks []nbModel.Notebook, getID func(nbModel
 	return ids
 }
 
-func (nb *NotebookService) getNotebookClusterListers(clusterID uint) (v1lister.StatefulSetLister, v1podlister.PodLister) {
+func (nb *NotebookService) getNotebookClusterRuntime(clusterID uint) (v1lister.StatefulSetLister, v1podlister.PodLister, *global.NotebookClient) {
 	cluster := global.GVA_K8S_CLUSTER_MANAGER.GetCluster(clusterID)
 	if cluster == nil {
-		return nil, nil
+		return nil, nil, nil
 	}
-	return cluster.StsLister, cluster.PodLister
+	return cluster.StsLister, cluster.PodLister, cluster.NotebookClient
 }
 
 // convertDBModelToResponse 将数据库模型转换为响应结构,补充实时状态
 func convertDBModelToResponse(
+	ctx context.Context,
 	dbNb nbModel.Notebook,
 	lookup notebookResponseLookup,
 	stsLister v1lister.StatefulSetLister,
 	podLister v1podlister.PodLister,
+	notebookClient *global.NotebookClient,
 ) (*response.NotebookItem, error) {
 	item := buildNotebookResponseItem(dbNb, lookup)
-	if err := refreshNotebookRuntimeStatus(item, dbNb, stsLister, podLister); err != nil {
+	if err := refreshNotebookRuntimeStatus(ctx, item, dbNb, stsLister, podLister, notebookClient); err != nil {
 		return item, err
 	}
 	return item, nil
@@ -1389,6 +1569,7 @@ func buildNotebookResponseItem(dbNb nbModel.Notebook, lookup notebookResponseLoo
 		Image:              dbNb.Image,
 		CPU:                dbNb.CPU,
 		Memory:             dbNb.Memory,
+		GPU:                dbNb.GPU,
 		CreationTimestamp:  dbNb.CreatedAt.Format("2006-01-02T15:04:05Z"),
 		Status:             dbNb.Status,
 		GPUCount:           dbNb.GPU,
@@ -1445,19 +1626,26 @@ func enrichNotebookAccessInfo(item *response.NotebookItem, dbNb nbModel.Notebook
 }
 
 func refreshNotebookRuntimeStatus(
+	ctx context.Context,
 	item *response.NotebookItem,
 	dbNb nbModel.Notebook,
 	stsLister v1lister.StatefulSetLister,
 	podLister v1podlister.PodLister,
+	notebookClient *global.NotebookClient,
 ) error {
 	if stsLister == nil {
-		return nil
+		if notebookClient == nil {
+			return nil
+		}
+		return refreshNotebookStatusFromResource(ctx, item, dbNb, notebookClient)
 	}
 
 	sts, err := stsLister.StatefulSets(dbNb.Namespace).Get(dbNb.InstanceName)
 	if apierrors.IsNotFound(err) {
-		logx.Info("StatefulSet不存在，使用数据库状态")
-		return nil
+		if notebookClient == nil {
+			return nil
+		}
+		return refreshNotebookStatusFromResource(ctx, item, dbNb, notebookClient)
 	}
 	if err != nil {
 		logx.Error("获取StatefulSet失败", err)
@@ -1471,9 +1659,32 @@ func refreshNotebookRuntimeStatus(
 	if sts.Status.Replicas > 0 {
 		item.Status = consts.NotebookStatusPending
 	} else {
-		item.Status = consts.NotebookStatusStopped
+		if notebookClient == nil {
+			item.Status = consts.NotebookStatusStopped
+			return nil
+		}
+		return refreshNotebookStatusFromResource(ctx, item, dbNb, notebookClient)
 	}
 
+	return nil
+}
+
+func refreshNotebookStatusFromResource(
+	ctx context.Context,
+	item *response.NotebookItem,
+	dbNb nbModel.Notebook,
+	notebookClient *global.NotebookClient,
+) error {
+	status, exists, err := resolveNotebookResourceStatus(ctx, dbNb, notebookClient)
+	if err != nil {
+		return err
+	}
+	if !exists {
+		item.Status = consts.NotebookStatusStopped
+		return nil
+	}
+
+	item.Status = status
 	return nil
 }
 
@@ -1797,8 +2008,8 @@ func (nb *NotebookService) GetNotebookDetail(ctx context.Context, req *request.G
 	}
 
 	lookup := nb.loadNotebookResponseLookup(ctx, []nbModel.Notebook{dbNb})
-	stsLister, podLister := nb.getNotebookClusterListers(dbNb.ClusterID)
-	return convertDBModelToResponse(dbNb, lookup, stsLister, podLister)
+	stsLister, podLister, notebookClient := nb.getNotebookClusterRuntime(dbNb.ClusterID)
+	return convertDBModelToResponse(ctx, dbNb, lookup, stsLister, podLister, notebookClient)
 }
 
 // GetNotebookLogs 获取Notebook日志
@@ -1907,15 +2118,132 @@ func isNotebookPodReady(pod *corev1.Pod) bool {
 	return true
 }
 
+func normalizeNotebookStatus(status string) string {
+	normalized := strings.ToUpper(strings.TrimSpace(status))
+	if normalized == "" {
+		return ""
+	}
+	if strings.HasPrefix(normalized, "WAITING:") {
+		return consts.NotebookStatusPending
+	}
+	if normalized == "READY" {
+		return consts.NotebookStatusRunning
+	}
+	return normalized
+}
+
+func resolveNotebookResourceStatus(ctx context.Context, dbNb nbModel.Notebook, notebookClient *global.NotebookClient) (string, bool, error) {
+	if notebookClient == nil {
+		return "", false, nil
+	}
+
+	notebookObj, err := notebookClient.Get(ctx, dbNb.Namespace, dbNb.InstanceName)
+	if apierrors.IsNotFound(err) {
+		return "", false, nil
+	}
+	if err != nil {
+		logx.Error("获取Notebook资源失败", logx.Field("err", err), logx.Field("instance", dbNb.InstanceName))
+		return "", false, err
+	}
+
+	return notebookStatusFromResource(notebookObj), true, nil
+}
+
+func notebookStatusFromResource(notebookObj *nbv1.Notebook) string {
+	if notebookObj == nil {
+		return ""
+	}
+	if notebookObj.DeletionTimestamp != nil {
+		return consts.NotebookStatusDeleting
+	}
+
+	if notebookObj.Status.ContainerState.Waiting != nil {
+		reason := strings.TrimSpace(notebookObj.Status.ContainerState.Waiting.Reason)
+		if reason != "" {
+			return fmt.Sprintf("Waiting: %s", reason)
+		}
+		return consts.NotebookStatusPending
+	}
+	if notebookObj.Status.ContainerState.Running != nil || notebookObj.Status.ReadyReplicas > 0 {
+		return consts.NotebookStatusRunning
+	}
+	if notebookObj.Status.ContainerState.Terminated != nil {
+		if notebookObj.Status.ContainerState.Terminated.ExitCode == 0 {
+			return consts.NotebookStatusSucceeded
+		}
+		return consts.NotebookStatusFailed
+	}
+
+	for _, condition := range notebookObj.Status.Conditions {
+		if !strings.EqualFold(condition.Status, string(corev1.ConditionTrue)) {
+			continue
+		}
+
+		switch strings.ToUpper(strings.TrimSpace(condition.Type)) {
+		case "RUNNING":
+			return consts.NotebookStatusRunning
+		case "WAITING":
+			reason := strings.TrimSpace(condition.Reason)
+			if reason != "" {
+				return fmt.Sprintf("Waiting: %s", reason)
+			}
+			return consts.NotebookStatusPending
+		case "TERMINATED":
+			if strings.EqualFold(condition.Reason, "Completed") {
+				return consts.NotebookStatusSucceeded
+			}
+			return consts.NotebookStatusFailed
+		}
+	}
+
+	return consts.NotebookStatusPending
+}
+
+func (nb *NotebookService) resolveNotebookRuntimeStatus(ctx context.Context, dbNb nbModel.Notebook) (string, error) {
+	status := normalizeNotebookStatus(dbNb.Status)
+	stsLister, podLister, notebookClient := nb.getNotebookClusterRuntime(dbNb.ClusterID)
+	if stsLister == nil && notebookClient == nil {
+		return status, nil
+	}
+
+	item := &response.NotebookItem{Status: dbNb.Status}
+	if err := refreshNotebookRuntimeStatus(ctx, item, dbNb, stsLister, podLister, notebookClient); err != nil {
+		return status, err
+	}
+
+	normalized := normalizeNotebookStatus(item.Status)
+	if normalized == "" {
+		return status, nil
+	}
+	return normalized, nil
+}
+
 // StartNotebook 启动Notebook
 func (nb *NotebookService) StartNotebook(ctx context.Context, id uint) (err error) {
 	var dbNb nbModel.Notebook
 	if err = global.GVA_DB.Preload("VolumeMounts").Where("id = ?", id).First(&dbNb).Error; err != nil {
 		return errors.Wrap(err, "Notebook不存在")
 	}
+	previousOrderID := dbNb.OrderId
 
-	if dbNb.Status != consts.NotebookStatusStopped {
-		return errors.New("Notebook不是停止状态，无法启动")
+	runtimeStatus, statusErr := nb.resolveNotebookRuntimeStatus(ctx, dbNb)
+	if statusErr != nil {
+		logx.Error("获取Notebook实时状态失败，回退使用数据库状态", logx.Field("err", statusErr), logx.Field("instance", dbNb.InstanceName))
+		runtimeStatus = normalizeNotebookStatus(dbNb.Status)
+	}
+	if runtimeStatus == "" {
+		runtimeStatus = normalizeNotebookStatus(dbNb.Status)
+	}
+	if runtimeStatus != consts.NotebookStatusStopped {
+		return errors.Errorf("Notebook当前状态为%s，无法启动", runtimeStatus)
+	}
+
+	if normalizeNotebookStatus(dbNb.Status) != consts.NotebookStatusStopped {
+		if updateErr := global.GVA_DB.Model(&dbNb).Update("status", consts.NotebookStatusStopped).Error; updateErr != nil {
+			logx.Error("同步Notebook状态为STOPPED失败", logx.Field("err", updateErr), logx.Field("instance", dbNb.InstanceName))
+		} else {
+			dbNb.Status = consts.NotebookStatusStopped
+		}
 	}
 
 	cluster := global.GVA_K8S_CLUSTER_MANAGER.GetCluster(dbNb.ClusterID)
@@ -1968,6 +2296,11 @@ func (nb *NotebookService) StartNotebook(ctx context.Context, id uint) (err erro
 			logx.Error("更新Notebook订单ID失败", err)
 			return errors.Wrap(err, "更新Notebook订单ID失败")
 		}
+		cleanups.Add(func(ctx context.Context) {
+			if rollbackErr := nb.rollbackNotebookOrderID(dbNb.ID, previousOrderID); rollbackErr != nil {
+				logx.Error("回滚时恢复Notebook订单ID失败", rollbackErr)
+			}
+		})
 		dbNb.OrderId = orderID
 	}
 
@@ -1980,10 +2313,14 @@ func (nb *NotebookService) StartNotebook(ctx context.Context, id uint) (err erro
 	// 4. 构建并创建 Notebook CR
 	notebookObj := buildNotebook(&dbNb, sshPublicKey)
 	if err = cluster.NotebookClient.Create(ctx, notebookObj); err != nil {
+		if apierrors.IsAlreadyExists(err) {
+			return errors.New("Notebook资源已存在，请先停止后再启动")
+		}
 		return errors.Wrap(err, "创建Notebook失败")
 	}
-	// 如果需要，可以在这里添加删除 Notebook CR 的回滚逻辑
-	// 但由于后续步骤（可选资源、Apisix）失败通常不阻断流程，所以这里暂时不需要
+	cleanups.Add(func(ctx context.Context) {
+		nb.rollbackNotebookRuntime(ctx, &dbNb, cluster)
+	})
 
 	// 5. 创建可选资源
 	var privKeySecretName string
@@ -2010,46 +2347,59 @@ func (nb *NotebookService) StopNotebook(ctx context.Context, id uint) error {
 		return errors.Wrap(err, "Notebook不存在")
 	}
 
-	if dbNb.Status == consts.NotebookStatusStopped {
-		return nil
-	}
-
 	cluster := global.GVA_K8S_CLUSTER_MANAGER.GetCluster(dbNb.ClusterID)
 	if cluster == nil {
 		return errors.New("集群不存在")
 	}
-
-	// 资源清理器：使用 Background Context 确保即使请求取消也能完成清理
-	defer func() {
-		cleanupCtx := context.Background()
-
-		// 清理关联资源（TensorBoard、SSH Pipe、Apisix 路由、SSH Service）
-		if err := nb.cleanupNotebookResources(cleanupCtx, &dbNb, cluster); err != nil {
-			logx.Error("停止 Notebook 时清理关联资源失败", err)
-		}
-
-		// 注意：资源配额释放由 PodGroup Informer 的 processDelete 统一处理
-		// 删除 Notebook CR → PodGroup 被删除 → Informer 捕获 → ReleaseCapacity
-	}()
-
-	// 更新数据库状态
-	if err := global.GVA_DB.Model(&dbNb).Update("status", consts.NotebookStatusStopped).Error; err != nil {
-		logx.Error("更新数据库状态失败", err)
+	resourceStatus, exists, err := resolveNotebookResourceStatus(ctx, dbNb, cluster.NotebookClient)
+	if err != nil {
 		return err
 	}
 
-	// 删除 K8s Notebook CR
-	notebook := &nbv1.Notebook{
-		ObjectMeta: metav1.ObjectMeta{
-			Name:      dbNb.InstanceName,
-			Namespace: dbNb.Namespace,
-		},
+	if !exists {
+		if err := global.GVA_DB.Model(&dbNb).Update("status", consts.NotebookStatusStopped).Error; err != nil {
+			logx.Error("同步Notebook状态为STOPPED失败", err)
+			return err
+		}
+
+		if err := nb.cleanupNotebookResources(context.Background(), &dbNb, cluster); err != nil {
+			logx.Error("停止 Notebook 时清理关联资源失败", err)
+		}
+		return nil
 	}
-	if err := cluster.NotebookClient.Delete(ctx, notebook, &ctrlclient.DeleteOptions{
-		PropagationPolicy: func() *metav1.DeletionPropagation { p := metav1.DeletePropagationBackground; return &p }(),
-	}); err != nil && !apierrors.IsNotFound(err) {
-		logx.Error("删除Notebook CR失败", err)
-		return errors.Wrap(err, "停止Notebook失败")
+
+	if resourceStatus != consts.NotebookStatusDeleting {
+		if err := global.GVA_DB.Model(&dbNb).Update("status", consts.NotebookStatusDeleting).Error; err != nil {
+			logx.Error("更新Notebook状态为DELETING失败", err)
+			return err
+		}
+
+		if err := nb.deleteNotebookResource(ctx, cluster.NotebookClient, &dbNb); err != nil {
+			logx.Error("删除Notebook CR失败", err)
+			return errors.Wrap(err, "停止Notebook失败")
+		}
+	}
+
+	if err := nb.cleanupNotebookResources(context.Background(), &dbNb, cluster); err != nil {
+		logx.Error("停止 Notebook 时清理关联资源失败", err)
+	}
+
+	waitCtx, cancel := context.WithTimeout(context.Background(), notebookDeleteWaitTimeout)
+	defer cancel()
+
+	deleted, waitErr := nb.waitNotebookResourceDeleted(waitCtx, &dbNb, cluster.NotebookClient)
+	finalStatus := consts.NotebookStatusDeleting
+	if deleted {
+		finalStatus = consts.NotebookStatusStopped
+	}
+
+	if err := global.GVA_DB.Model(&dbNb).Update("status", finalStatus).Error; err != nil {
+		logx.Error("更新Notebook停止后的最终状态失败", err)
+		return err
+	}
+
+	if waitErr != nil {
+		return waitErr
 	}
 
 	return nil

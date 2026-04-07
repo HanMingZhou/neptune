@@ -1,34 +1,46 @@
 <template>
-  <button 
-    @click="handleManualRefresh" 
+  <button
+    @click="handleManualRefresh"
     class="list-toolbar-button list-toolbar-button--secondary list-toolbar-button--icon"
     :disabled="loading"
     :title="t('refresh')"
     type="button"
   >
-    <span class="material-icons" :class="{ 'animate-spin': loading }">refresh</span>
+    <span class="material-icons" :class="{ 'animate-spin': loading }"
+      >refresh</span
+    >
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, onUnmounted, inject } from 'vue'
 import { REFRESH_INTERVAL } from '@/utils/constants'
+import type { Translator } from '@/types/consoleResource'
 
-const props = defineProps({
-  loading: Boolean
-})
+const props = withDefaults(
+  defineProps<{
+    loading?: boolean
+  }>(),
+  {
+    loading: false
+  }
+)
 
-const emit = defineEmits(['refresh'])
-const t = inject('t')
+const emit = defineEmits<{
+  refresh: [silent: boolean]
+}>()
+const t = inject<Translator>('t', (key: string) => key)
 
-let timer = null
+let timer: ReturnType<typeof setInterval> | null = null
 
-const handleManualRefresh = () => {
+const handleManualRefresh = (): void => {
   emit('refresh', false) // false means NOT silent
 }
 
-const startTimer = () => {
-  if (timer) clearInterval(timer)
+const startTimer = (): void => {
+  if (timer) {
+    clearInterval(timer)
+  }
   timer = setInterval(() => {
     if (!props.loading) {
       emit('refresh', true) // true means silent
@@ -41,7 +53,9 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  if (timer) clearInterval(timer)
+  if (timer) {
+    clearInterval(timer)
+  }
 })
 </script>
 
@@ -51,7 +65,11 @@ onUnmounted(() => {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

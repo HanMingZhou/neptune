@@ -48,8 +48,9 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
+import type { Translator } from '@/types/consoleResource'
 import ManagementListShell from '@/components/listPage/ManagementListShell.vue'
 import StorageDialogsHost from './components/StorageDialogsHost.vue'
 import StorageFiltersBar from './components/StorageFiltersBar.vue'
@@ -57,7 +58,7 @@ import StorageManagementHeader from './components/StorageManagementHeader.vue'
 import StorageTableCard from './components/StorageTableCard.vue'
 import { useStorageList } from './composables/useStorageList'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const {
   btnLoading,
@@ -86,7 +87,7 @@ const {
 } = useStorageList({ t })
 
 onMounted(() => {
-  fetchList()
-  fetchAreas()
+  void fetchList()
+  void fetchAreas()
 })
 </script>

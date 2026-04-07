@@ -29,80 +29,61 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ApiTableCard from './ApiTableCard.vue'
+import type { ResourceId } from '@/types/consoleResource'
+import type {
+  ApiListItem,
+  ApiMethodOption,
+  LabelValueOption
+} from '@/types/superAdmin'
 
-defineProps({
-  allSelected: {
-    type: Boolean,
-    default: false
-  },
-  apiGroupOptions: {
-    type: Array,
-    default: () => []
-  },
-  getMethodClass: {
-    type: Function,
-    required: true
-  },
-  items: {
-    type: Array,
-    default: () => []
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  methodOptions: {
-    type: Array,
-    default: () => []
-  },
-  page: {
-    type: Number,
-    default: 1
-  },
-  pageSize: {
-    type: Number,
-    default: 10
-  },
-  searchApiGroup: {
-    type: String,
-    default: ''
-  },
-  searchDescription: {
-    type: String,
-    default: ''
-  },
-  searchMethod: {
-    type: String,
-    default: ''
-  },
-  searchPath: {
-    type: String,
-    default: ''
-  },
-  selectedIds: {
-    type: Array,
-    default: () => []
-  },
-  total: {
-    type: Number,
-    default: 0
+withDefaults(
+  defineProps<{
+    allSelected?: boolean
+    apiGroupOptions?: LabelValueOption[]
+    getMethodClass: (method?: string) => string
+    items?: ApiListItem[]
+    loading?: boolean
+    methodOptions?: ApiMethodOption[]
+    page?: number
+    pageSize?: number
+    searchApiGroup?: string
+    searchDescription?: string
+    searchMethod?: string
+    searchPath?: string
+    selectedIds?: ResourceId[]
+    total?: number
+  }>(),
+  {
+    allSelected: false,
+    apiGroupOptions: () => [],
+    items: () => [],
+    loading: false,
+    methodOptions: () => [],
+    page: 1,
+    pageSize: 10,
+    searchApiGroup: '',
+    searchDescription: '',
+    searchMethod: '',
+    searchPath: '',
+    selectedIds: () => [],
+    total: 0
   }
-})
+)
 
-const emit = defineEmits([
-  'delete',
-  'edit',
-  'page-change',
-  'reset',
-  'search',
-  'size-change',
-  'toggle-select',
-  'toggle-select-all',
-  'update:search-api-group',
-  'update:search-description',
-  'update:search-method',
-  'update:search-path'
-])
+const emit = defineEmits<{
+  delete: [row: ApiListItem]
+  edit: [row: ApiListItem]
+  'page-change': [page: number]
+  reset: []
+  search: []
+  'size-change': [pageSize: number]
+  'toggle-select': [row: ApiListItem]
+  'toggle-select-all': [checked: boolean]
+  'update:search-api-group': [value: string]
+  'update:search-description': [value: string]
+  'update:search-method': [value: string]
+  'update:search-path': [value: string]
+}>()
 </script>

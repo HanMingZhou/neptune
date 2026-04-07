@@ -52,7 +52,7 @@
       :can-submit="canCreate"
       :loading="creating"
       :loading-label-key="'submitting'"
-      :price-label-key="'configPrice'"
+      :price-label-key="'totalPrice'"
       :price-unit-text="priceUnitText"
       :submit-label-key="'submitOrder'"
       :total-price="totalPrice"
@@ -62,7 +62,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
 import { useRouter } from 'vue-router'
 import PageHeader from '@/components/createPage/PageHeader.vue'
@@ -70,8 +70,9 @@ import StickyActionBar from '@/components/createPage/StickyActionBar.vue'
 import TrainingConfigurationSection from './components/TrainingConfigurationSection.vue'
 import TrainingResourceSelectionSection from './components/TrainingResourceSelectionSection.vue'
 import { useTrainingCreate } from './composables/useTrainingCreate'
+import type { Translator } from '@/types/consoleResource'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 const router = useRouter()
 
 const {

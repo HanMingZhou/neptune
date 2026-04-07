@@ -34,31 +34,35 @@
   </DetailHeaderShell>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject } from 'vue'
+import type { ConsoleNotebook, Translator } from '@/types/consoleResource'
 import DetailHeaderShell from '@/components/detailPage/DetailHeaderShell.vue'
 
-defineEmits(['back', 'delete', 'start', 'stop'])
+type StatusResolver = (status?: string) => string
 
-const t = inject('t', (key) => key)
-const props = defineProps({
-  actionLoading: {
-    type: Boolean,
-    default: false
-  },
-  getStatusClass: {
-    type: Function,
-    required: true
-  },
-  getStatusLabel: {
-    type: Function,
-    required: true
-  },
-  notebook: {
-    type: Object,
-    default: () => ({})
+defineEmits<{
+  back: []
+  delete: []
+  start: []
+  stop: []
+}>()
+
+const t = inject<Translator>('t', (key: string) => key)
+const props = withDefaults(
+  defineProps<{
+    actionLoading?: boolean
+    getStatusClass: StatusResolver
+    getStatusLabel: StatusResolver
+    notebook?: ConsoleNotebook
+  }>(),
+  {
+    actionLoading: false,
+    notebook: () => ({})
   }
-})
+)
 
-const normalizedStatus = computed(() => `${props.notebook.status || ''}`.trim().toUpperCase())
+const normalizedStatus = computed(() =>
+  `${props.notebook.status || ''}`.trim().toUpperCase()
+)
 </script>

@@ -2,6 +2,6 @@
   <InferenceDetailPage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import InferenceDetailPage from './detail/index.vue'
 </script>

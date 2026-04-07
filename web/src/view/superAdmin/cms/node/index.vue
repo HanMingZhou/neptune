@@ -1,14 +1,12 @@
 <template>
   <div class="console-page-container space-y-6">
-    <PageIntro
+    <BaseTableToolbar
       :breadcrumbs="[t('admin'), t('nodeManage')]"
       :description="t('nodeManageDesc')"
+      :loading="loading"
       :title="t('nodeManage')"
-    >
-      <template #actions>
-        <RefreshButton :loading="loading" @refresh="refreshData" />
-      </template>
-    </PageIntro>
+      @refresh="refreshData"
+    />
 
     <ManagementListShell>
       <template #filters>
@@ -34,11 +32,10 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
 import ManagementListShell from '@/components/listPage/ManagementListShell.vue'
-import RefreshButton from '@/components/RefreshButton/index.vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
 import NodeFiltersBar from './components/NodeFiltersBar.vue'
 import NodeTableCard from './components/NodeTableCard.vue'
 import { useNodeManagementPage } from './composables/useNodeManagementPage'
@@ -62,6 +59,6 @@ const {
 } = useNodeManagementPage({ t })
 
 onMounted(() => {
-  initialize()
+  void initialize()
 })
 </script>

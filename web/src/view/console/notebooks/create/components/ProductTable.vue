@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden">
+  <div
+    class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden"
+  >
     <div class="p-6 border-b border-border-light dark:border-border-dark">
       <h3 class="text-base font-bold flex items-center gap-2">
         <span class="w-1 h-4 bg-primary rounded"></span>
@@ -9,7 +11,9 @@
     <div class="overflow-x-auto">
       <table class="w-full text-left">
         <thead>
-          <tr class="bg-slate-50 dark:bg-zinc-800/50 border-b border-border-light dark:border-border-dark text-slate-500 text-xs font-bold uppercase tracking-wider">
+          <tr
+            class="bg-slate-50 dark:bg-zinc-800/50 border-b border-border-light dark:border-border-dark text-slate-500 text-xs font-bold uppercase tracking-wider"
+          >
             <th class="px-6 py-4 w-12"></th>
             <th class="px-6 py-4">{{ t('hostId') }}</th>
             <th class="px-6 py-4">{{ t('gpuConfig') }}</th>
@@ -41,30 +45,45 @@
                     : 'border-slate-300 dark:border-zinc-600'
                 ]"
               >
-                <div v-if="selectedProductId === product.id" class="w-2 h-2 rounded-full bg-primary"></div>
+                <div
+                  v-if="selectedProductId === product.id"
+                  class="w-2 h-2 rounded-full bg-primary"
+                ></div>
               </div>
             </td>
             <td class="px-6 py-4">
               <div class="font-bold text-sm">{{ product.id }}</div>
-              <div class="text-xs text-slate-400 mt-1">{{ product.name || product.nodeType }}</div>
+              <div class="text-xs text-slate-400 mt-1">
+                {{ product.name || product.nodeType }}
+              </div>
             </td>
             <td class="px-6 py-4">
               <div v-if="product.gpuCount > 0">
-                <div class="font-bold text-primary text-sm">{{ product.gpuModel }}</div>
-                <div class="text-xs text-slate-400 mt-1">{{ product.gpuMemory }}GB × {{ product.gpuCount }}</div>
+                <div class="font-bold text-primary text-sm">
+                  {{ product.gpuModel }}
+                </div>
+                <div class="text-xs text-slate-400 mt-1">
+                  {{ product.gpuMemory }}GB × {{ product.gpuCount }}
+                </div>
               </div>
               <div v-else-if="product.vGpuCount > 0">
                 <div class="font-bold text-sm">vGPU</div>
-                <div class="text-xs text-slate-400 mt-1">{{ product.vGpuMemory }}GB / {{ product.vGpuCores }}%</div>
+                <div class="text-xs text-slate-400 mt-1">
+                  {{ product.vGpuMemory }}GB / {{ product.vGpuCores }}%
+                </div>
               </div>
               <div v-else class="text-slate-400 text-sm">CPU ONLY</div>
             </td>
-            <td class="px-6 py-4 text-sm">{{ product.cpu }} / {{ product.memory }}GB</td>
+            <td class="px-6 py-4 text-sm">
+              {{ product.cpu }} / {{ product.memory }}GB
+            </td>
             <td class="px-6 py-4">
               <span
                 :class="[
                   'font-bold text-sm',
-                  (product.available || 0) <= 0 ? 'text-red-500' : 'text-emerald-500'
+                  (product.available || 0) <= 0
+                    ? 'text-red-500'
+                    : 'text-emerald-500'
                 ]"
               >
                 {{ product.available || 0 }}
@@ -77,12 +96,16 @@
               <div>CUDA {{ product.cudaVersion || '-' }}</div>
             </td>
             <td class="px-6 py-4">
-              <div class="text-lg font-bold text-red-500">¥{{ formatPrice(product) }}</div>
+              <div class="text-lg font-bold text-red-500">
+                ¥{{ formatPrice(product) }}
+              </div>
               <div class="text-xs text-slate-400">/{{ priceUnitText }}</div>
             </td>
           </tr>
           <tr v-if="products.length === 0">
-            <td colspan="8" class="px-6 py-12 text-center text-slate-400">{{ t('noData') }}</td>
+            <td colspan="8" class="px-6 py-12 text-center text-slate-400">
+              {{ t('noData') }}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -90,29 +113,30 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type {
+  ConsoleProduct,
+  ResourceId,
+  Translator
+} from '@/types/consoleResource'
 
-defineProps({
-  formatPrice: {
-    type: Function,
-    required: true
-  },
-  priceUnitText: {
-    type: String,
-    required: true
-  },
-  products: {
-    type: Array,
-    default: () => []
-  },
-  selectedProductId: {
-    type: [Number, String],
-    default: null
+withDefaults(
+  defineProps<{
+    formatPrice: (product: ConsoleProduct | null | undefined) => string
+    priceUnitText: string
+    products?: ConsoleProduct[]
+    selectedProductId?: ResourceId | null
+  }>(),
+  {
+    products: () => [],
+    selectedProductId: null
   }
-})
+)
 
-defineEmits(['select-product'])
+defineEmits<{
+  'select-product': [product: ConsoleProduct]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>

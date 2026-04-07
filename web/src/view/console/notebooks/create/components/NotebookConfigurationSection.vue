@@ -32,73 +32,71 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject } from 'vue'
+import type {
+  ConsoleImage,
+  ConsoleSshKey,
+  ResourceId,
+  Translator
+} from '@/types/consoleResource'
 import ImagePickerSection from '@/components/createPage/ImagePickerSection.vue'
 import OtherConfigSection from './OtherConfigSection.vue'
+import type {
+  NotebookFieldErrors,
+  NotebookImageTab
+} from '../composables/useNotebookCreate'
 
-const props = defineProps({
-  activeTab: {
-    type: String,
-    required: true
-  },
-  changeImageTab: {
-    type: Function,
-    required: true
-  },
-  enableSshPassword: {
-    type: Boolean,
-    default: false
-  },
-  enableTensorboard: {
-    type: Boolean,
-    default: false
-  },
-  filteredImages: {
-    type: Array,
-    default: () => []
-  },
-  fieldErrors: {
-    type: Object,
-    default: () => ({})
-  },
-  imageTabs: {
-    type: Array,
-    default: () => []
-  },
-  instanceName: {
-    type: String,
-    default: ''
-  },
-  selectedImage: {
-    type: [Number, String],
-    default: null
-  },
-  selectedSshKey: {
-    type: [Number, String],
-    default: null
-  },
-  sshKeys: {
-    type: Array,
-    default: () => []
-  },
-  tensorboardLogPath: {
-    type: String,
-    default: ''
+interface NotebookImageTabOption {
+  value: NotebookImageTab
+  label: string
+}
+
+type SelectableId = ResourceId | '' | null
+
+const props = withDefaults(
+  defineProps<{
+    activeTab: NotebookImageTab
+    changeImageTab: (tab: NotebookImageTab) => void
+    enableSshPassword?: boolean
+    enableTensorboard?: boolean
+    fieldErrors?: NotebookFieldErrors
+    filteredImages?: ConsoleImage[]
+    imageTabs?: NotebookImageTabOption[]
+    instanceName?: string
+    selectedImage?: SelectableId
+    selectedSshKey?: ResourceId | null
+    sshKeys?: ConsoleSshKey[]
+    tensorboardLogPath?: string
+  }>(),
+  {
+    enableSshPassword: false,
+    enableTensorboard: false,
+    fieldErrors: () => ({
+      instanceName: '',
+      tensorboardLogPath: ''
+    }),
+    filteredImages: () => [],
+    imageTabs: () => [],
+    instanceName: '',
+    selectedImage: null,
+    selectedSshKey: null,
+    sshKeys: () => [],
+    tensorboardLogPath: ''
   }
-})
+)
 
-const emit = defineEmits([
-  'update:enable-ssh-password',
-  'update:enable-tensorboard',
-  'update:instance-name',
-  'update:selected-image',
-  'update:selected-ssh-key',
-  'update:tensorboard-log-path',
-  'validate:instance-name',
-  'validate:tensorboard-log-path'
-])
+const emit = defineEmits<{
+  'update:enable-ssh-password': [value: boolean]
+  'update:enable-tensorboard': [value: boolean]
+  'update:instance-name': [value: string]
+  'update:selected-image': [value: ResourceId]
+  'update:selected-ssh-key': [value: ResourceId | null]
+  'update:tensorboard-log-path': [value: string]
+  'validate:instance-name': []
+  'validate:tensorboard-log-path': []
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 const imageDescription = computed(() => t(`${props.activeTab}ImageDesc`))
 </script>

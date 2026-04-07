@@ -1,21 +1,21 @@
-import path from 'path';
-import { defineConfig, loadEnv } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import UnoCSS from 'unocss/vite';
+import path from 'path'
+import { defineConfig, loadEnv } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import UnoCSS from 'unocss/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
-// 空模块用于替换不兼容的 form-create 包
-const emptyModule = 'export default {}; export const install = () => {};';
-const normalizeModuleId = (id: string) => id.replace(/\\/g, '/');
+const normalizeModuleId = (id: string) => id.replace(/\\/g, '/')
 
 const manualChunks = (id: string) => {
-  const moduleId = normalizeModuleId(id);
+  const moduleId = normalizeModuleId(id)
 
   if (!moduleId.includes('/node_modules/')) {
-    return;
+    return
   }
 
   if (moduleId.includes('/@element-plus/icons-vue/')) {
-    return 'vendor-element-icons';
+    return 'vendor-element-icons'
   }
 
   // Keep Element Plus and its tightly coupled runtime dependencies in one
@@ -27,19 +27,22 @@ const manualChunks = (id: string) => {
     moduleId.includes('/async-validator/') ||
     moduleId.includes('/dayjs/')
   ) {
-    return 'vendor-element-plus';
+    return 'vendor-element-plus'
   }
 
   if (moduleId.includes('/echarts/')) {
-    return 'vendor-echarts';
+    return 'vendor-echarts'
   }
 
   if (moduleId.includes('/@xterm/')) {
-    return 'vendor-xterm';
+    return 'vendor-xterm'
   }
 
-  if (moduleId.includes('/ace-builds/') || moduleId.includes('/vue3-ace-editor/')) {
-    return 'vendor-editor';
+  if (
+    moduleId.includes('/ace-builds/') ||
+    moduleId.includes('/vue3-ace-editor/')
+  ) {
+    return 'vendor-editor'
   }
 
   if (
@@ -47,7 +50,7 @@ const manualChunks = (id: string) => {
     moduleId.includes('/marked-highlight/') ||
     moduleId.includes('/highlight.js/')
   ) {
-    return 'vendor-markdown';
+    return 'vendor-markdown'
   }
 
   if (
@@ -57,14 +60,14 @@ const manualChunks = (id: string) => {
     moduleId.includes('/pinia/') ||
     moduleId.includes('/@vueuse/')
   ) {
-    return 'vendor-vue';
+    return 'vendor-vue'
   }
 
-  return 'vendor';
-};
+  return 'vendor'
+}
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd());
+  const env = loadEnv(mode, process.cwd())
 
   return {
     server: {
@@ -81,24 +84,18 @@ export default defineConfig(({ mode }) => {
     plugins: [
       vue(),
       UnoCSS(),
-      // 虚拟模块插件：替换不兼容的包
-      {
-        name: 'vite-plugin-form-create-stub',
-        resolveId(id) {
-          if (id === '@form-create/designer' || id === '@form-create/element-ui') {
-            return '\0' + id;
-          }
-        },
-        load(id) {
-          if (id === '\0@form-create/designer' || id === '\0@form-create/element-ui') {
-            return emptyModule;
-          }
-        }
-      }
+      Components({
+        dts: false,
+        resolvers: [
+          ElementPlusResolver({
+            importStyle: false
+          })
+        ]
+      })
     ],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        '@': path.resolve(__dirname, './src')
       }
     },
     build: {
@@ -107,28 +104,18 @@ export default defineConfig(({ mode }) => {
         transformMixedEsModules: true
       },
       rollupOptions: {
-        onwarn(warning, warn) {
-          // 忽略 form-create 相关的警告
-          if (warning.code === 'MISSING_EXPORT' && warning.exporter?.includes('form-create')) {
-            return;
-          }
-          warn(warning);
-        },
         output: {
           manualChunks
-        },
-        // 将 form-create 包标记为外部依赖
-        external: [/@form-create\/.*/]
+        }
       }
     },
     optimizeDeps: {
       include: ['vue'],
-      exclude: ['@form-create/designer', '@form-create/element-ui'],
       esbuildOptions: {
         define: {
           global: 'globalThis'
         }
       }
     }
-  };
-});
+  }
+})

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="sticky top-0.5 z-10 flex flex-col gap-3 bg-surface-light pb-2 dark:bg-surface-dark">
+    <div
+      class="sticky top-0.5 z-10 flex flex-col gap-3 bg-surface-light pb-2 dark:bg-surface-dark"
+    >
       <div class="flex flex-wrap items-center gap-3">
         <el-input
           v-model="filterTextName"
@@ -12,12 +14,18 @@
           class="min-w-[180px] flex-1"
           :placeholder="t('filterPath')"
         />
-        <el-button class="shrink-0" type="primary" @click="authApiEnter">{{ t('confirm') }}</el-button>
+        <el-button class="shrink-0" type="primary" @click="authApiEnter">{{
+          t('confirm')
+        }}</el-button>
       </div>
       <div class="flex justify-between items-center">
         <div class="flex flex-wrap gap-2">
-          <el-button size="small" @click="expandAll">{{ isAllExpanded ? t('collapseAll') : t('expandAll') }}</el-button>
-          <el-button size="small" @click="selectAll">{{ isAllSelected ? t('deselectAll') : t('selectAll') }}</el-button>
+          <el-button size="small" @click="expandAll">{{
+            isAllExpanded ? t('collapseAll') : t('expandAll')
+          }}</el-button>
+          <el-button size="small" @click="selectAll">{{
+            isAllSelected ? t('deselectAll') : t('selectAll')
+          }}</el-button>
         </div>
       </div>
     </div>
@@ -35,7 +43,7 @@
           :filter-node-method="filterNode"
           @check="nodeChange"
         >
-          <template #default="{ _, data }">
+          <template #default="{ data }">
             <div class="flex items-center justify-between w-full pr-1">
               <span>{{ data.description }} </span>
               <el-tooltip :content="data.path">
@@ -52,168 +60,228 @@
   </div>
 </template>
 
-<script setup>
-  import { getAllApis } from '@/api/api'
-  import { UpdateCasbin, getPolicyPathByAuthorityId } from '@/api/casbin'
-  import { ref, watch, inject, nextTick } from 'vue'
-  import { ElMessage } from 'element-plus'
+<script setup lang="ts">
+import { getAllApis } from '@/api/api'
+import { UpdateCasbin, getPolicyPathByAuthorityId } from '@/api/casbin'
+import { ElMessage } from 'element-plus'
+import type { TreeInstance } from 'element-plus'
+import { inject, nextTick, ref, watch } from 'vue'
+import type { ResourceId, Translator } from '@/types/consoleResource'
+import type { ApiListItem, AuthorityTreeNode } from '@/types/superAdmin'
+import type { ApiResponse } from '@/utils/request'
 
-  const t = inject('t')
+defineOptions({
+  name: 'Apis'
+})
 
-  defineOptions({
-    name: 'Apis'
-  })
+interface AuthorityPermissionRow extends Partial<AuthorityTreeNode> {
+  authorityId?: ResourceId
+}
 
-  const props = defineProps({
-    row: {
-      default: function () {
-        return {}
-      },
-      type: Object
+interface ApiTreeLeaf extends ApiListItem {
+  onlyId: string
+}
+
+interface ApiTreeGroupNode {
+  ID: string
+  onlyId: string
+  description: string
+  children: ApiTreeLeaf[]
+}
+
+type ApiTreeNode = ApiTreeGroupNode | ApiTreeLeaf
+
+interface CasbinInfo {
+  path: string
+  method: string
+}
+
+interface TreeStoreNode {
+  expanded: boolean
+}
+
+const t = inject<Translator>('t', (key: string) => key)
+
+const props = withDefaults(
+  defineProps<{
+    row?: AuthorityPermissionRow
+  }>(),
+  {
+    row: () => ({})
+  }
+)
+
+const apiDefaultProps = {
+  children: 'children',
+  label: 'description'
+}
+
+const filterTextName = ref('')
+const filterTextPath = ref('')
+const apiTreeData = ref<ApiTreeGroupNode[]>([])
+const apiTreeIds = ref<string[]>([])
+const activeUserId = ref<ResourceId | ''>('')
+const needConfirm = ref(false)
+const apiTree = ref<TreeInstance | null>(null)
+const isAllExpanded = ref(true)
+const isAllSelected = ref(false)
+
+const buildApiTree = (apis: ApiListItem[] = []): ApiTreeGroupNode[] => {
+  const apiGroups: Record<string, ApiTreeLeaf[]> = {}
+
+  apis.forEach((item) => {
+    const normalizedItem: ApiTreeLeaf = {
+      ...item,
+      onlyId: `p:${item.path}m:${item.method}`
     }
+
+    if (Object.prototype.hasOwnProperty.call(apiGroups, item.apiGroup)) {
+      apiGroups[item.apiGroup].push(normalizedItem)
+      return
+    }
+
+    apiGroups[item.apiGroup] = [normalizedItem]
   })
 
-  const apiDefaultProps = ref({
-    children: 'children',
-    label: 'description'
-  })
-  const filterTextName = ref('')
-  const filterTextPath = ref('')
-  const apiTreeData = ref([])
-  const apiTreeIds = ref([])
-  const activeUserId = ref('')
-  const init = async () => {
-    const res2 = await getAllApis()
-    const apis = res2.data.apis
+  return Object.keys(apiGroups).map((key) => ({
+    ID: key,
+    onlyId: key,
+    description: `${key} ${t('group')}`,
+    children: apiGroups[key]
+  }))
+}
 
-    apiTreeData.value = buildApiTree(apis)
-    const res = await getPolicyPathByAuthorityId({
-      authorityId: props.row.authorityId
-    })
-    activeUserId.value = props.row.authorityId
+const init = async (): Promise<void> => {
+  const allApisRes = (await getAllApis()) as ApiResponse<{
+    apis?: ApiListItem[]
+  }>
+  apiTreeData.value = buildApiTree(allApisRes.data?.apis ?? [])
+
+  if (
+    props.row.authorityId === undefined ||
+    props.row.authorityId === null ||
+    props.row.authorityId === ''
+  ) {
+    activeUserId.value = ''
     apiTreeIds.value = []
-    res.data.paths &&
-      res.data.paths.forEach((item) => {
-        apiTreeIds.value.push('p:' + item.path + 'm:' + item.method)
-      })
+    return
   }
 
-  init()
+  const policyRes = (await getPolicyPathByAuthorityId({
+    authorityId: props.row.authorityId
+  })) as ApiResponse<{ paths?: CasbinInfo[] }>
 
-  const needConfirm = ref(false)
-  const nodeChange = () => {
-    needConfirm.value = true
-  }
-  // 暴露给外层使用的切换拦截统一方法
-  const enterAndNext = () => {
-    authApiEnter()
-  }
+  activeUserId.value = props.row.authorityId
+  apiTreeIds.value = (policyRes.data?.paths ?? []).map(
+    (item) => `p:${item.path}m:${item.method}`
+  )
+}
 
-  // 创建api树方法
-  const buildApiTree = (apis) => {
-    const apiObj = {}
-    apis &&
-      apis.forEach((item) => {
-        item.onlyId = 'p:' + item.path + 'm:' + item.method
-        if (Object.prototype.hasOwnProperty.call(apiObj, item.apiGroup)) {
-          apiObj[item.apiGroup].push(item)
-        } else {
-          Object.assign(apiObj, { [item.apiGroup]: [item] })
-        }
-      })
-    const apiTree = []
-    for (const key in apiObj) {
-      const treeNode = {
-        ID: key,
-        onlyId: key,
-        description: key + ' ' + t('group'),
-        children: apiObj[key]
-      }
-      apiTree.push(treeNode)
-    }
-    return apiTree
+void init()
+
+const nodeChange = (): void => {
+  needConfirm.value = true
+}
+
+const enterAndNext = (): void => {
+  void authApiEnter()
+}
+
+const authApiEnter = async (): Promise<void> => {
+  if (!apiTree.value || activeUserId.value === '') {
+    return
   }
 
-  // 关联关系确定
-  const apiTree = ref(null)
-  const authApiEnter = async () => {
-    const checkArr = apiTree.value.getCheckedNodes(true)
-    var casbinInfos = []
-    checkArr &&
-      checkArr.forEach((item) => {
-        var casbinInfo = {
-          path: item.path,
-          method: item.method
-        }
-        casbinInfos.push(casbinInfo)
-      })
-    const res = await UpdateCasbin({
-      authorityId: activeUserId.value,
-      casbinInfos
-    })
-    if (res.code === 0) {
-      ElMessage({ type: 'success', message: t('apiSetSuccess') })
-    }
-  }
+  const checkedNodes = (apiTree.value.getCheckedNodes(true) ??
+    []) as ApiTreeLeaf[]
+  const casbinInfos: CasbinInfo[] = checkedNodes
+    .filter((item) => Boolean(item.path) && Boolean(item.method))
+    .map((item) => ({
+      path: item.path,
+      method: item.method
+    }))
 
-  defineExpose({
-    needConfirm,
-    enterAndNext
+  const res = await UpdateCasbin({
+    authorityId: activeUserId.value,
+    casbinInfos
   })
 
-  const filterNode = (value, data) => {
-    if (!filterTextName.value && !filterTextPath.value) return true
-    let matchesName, matchesPath
-    if (!filterTextName.value) {
-      matchesName = true
-    } else {
-      matchesName =
-        data.description && data.description.includes(filterTextName.value)
-    }
-    if (!filterTextPath.value) {
-      matchesPath = true
-    } else {
-      matchesPath = data.path && data.path.includes(filterTextPath.value)
-    }
-    return matchesName && matchesPath
+  if (res.code === 0) {
+    ElMessage({ type: 'success', message: t('apiSetSuccess') })
   }
-  watch([filterTextName, filterTextPath], () => {
-    apiTree.value.filter('')
+}
+
+defineExpose({
+  needConfirm,
+  enterAndNext
+})
+
+const filterNode = (_value: string, data: ApiTreeNode): boolean => {
+  if (!filterTextName.value && !filterTextPath.value) {
+    return true
+  }
+
+  const matchesName =
+    !filterTextName.value ||
+    String(data.description || '').includes(filterTextName.value)
+  const matchesPath =
+    !filterTextPath.value ||
+    String((data as ApiTreeLeaf).path || '').includes(filterTextPath.value)
+
+  return matchesName && matchesPath
+}
+
+watch([filterTextName, filterTextPath], () => {
+  apiTree.value?.filter('')
+})
+
+const expandAll = (): void => {
+  isAllExpanded.value = !isAllExpanded.value
+
+  nextTick(() => {
+    const store = (
+      apiTree.value as
+        | (TreeInstance & {
+            store?: {
+              _getAllNodes?: () => TreeStoreNode[]
+            }
+          })
+        | null
+    )?.store
+
+    const nodes = store?._getAllNodes?.() ?? []
+    nodes.forEach((node) => {
+      node.expanded = isAllExpanded.value
+    })
   })
+}
 
-  const isAllExpanded = ref(true)
-  const expandAll = () => {
-    isAllExpanded.value = !isAllExpanded.value
-    nextTick(() => {
-      if (apiTree.value) {
-        const nodes = apiTree.value.store._getAllNodes()
-        nodes.forEach(node => {
-          node.expanded = isAllExpanded.value
-        })
-      }
-    })
-  }
+const extractApiTreeKeys = (nodes: ApiTreeNode[], keys: string[]): void => {
+  nodes.forEach((node) => {
+    keys.push(node.onlyId)
+    if ('children' in node && Array.isArray(node.children)) {
+      extractApiTreeKeys(node.children, keys)
+    }
+  })
+}
 
-  const isAllSelected = ref(false)
-  const selectAll = () => {
-    isAllSelected.value = !isAllSelected.value
-    nextTick(() => {
-      if (apiTree.value) {
-        if (isAllSelected.value) {
-          const allKeys = []
-          const extractKeys = (nodes) => {
-            nodes.forEach(node => {
-              allKeys.push(node.onlyId)
-              if (node.children) extractKeys(node.children)
-            })
-          }
-          extractKeys(apiTreeData.value)
-          apiTree.value.setCheckedKeys(allKeys)
-        } else {
-          apiTree.value.setCheckedKeys([])
-        }
-        nodeChange()
-      }
-    })
-  }
+const selectAll = (): void => {
+  isAllSelected.value = !isAllSelected.value
+
+  nextTick(() => {
+    if (!apiTree.value) {
+      return
+    }
+
+    if (isAllSelected.value) {
+      const allKeys: string[] = []
+      extractApiTreeKeys(apiTreeData.value, allKeys)
+      apiTree.value.setCheckedKeys(allKeys)
+    } else {
+      apiTree.value.setCheckedKeys([])
+    }
+
+    nodeChange()
+  })
+}
 </script>

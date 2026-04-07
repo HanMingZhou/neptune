@@ -5,15 +5,17 @@ import { computed, type ComputedRef } from 'vue'
 import { useAppStore } from '@/pinia'
 import type { EChartsOption } from 'echarts'
 
-export default function useChartOption(sourceOption: (isDark: boolean) => EChartsOption): { chartOption: ComputedRef<EChartsOption> } {
-    const appStore = useAppStore()
-    const isDark = computed(() => {
-        return appStore.isDark
-    })
-    const chartOption = computed(() => {
-        return sourceOption(isDark.value)
-    })
-    return {
-        chartOption
-    }
+export default function useChartOption(
+  sourceOption: (isDark: boolean) => EChartsOption
+): { chartOption: ComputedRef<EChartsOption> } {
+  const appStore = useAppStore()
+  const isDark = computed(() => {
+    return appStore.isDark
+  })
+  const chartOption = computed(() => {
+    return sourceOption(isDark.value)
+  })
+  return {
+    chartOption
+  }
 }

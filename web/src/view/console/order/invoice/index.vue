@@ -1,8 +1,12 @@
 <template>
   <div class="console-page-container space-y-8">
-    <PageIntro :title="t('order.invoice')" :description="t('order.invoiceDesc')">
+    <BaseTableToolbar
+      :description="t('order.invoiceDesc')"
+      :loading="loading"
+      :title="t('order.invoice')"
+      @refresh="fetchData"
+    >
       <template #actions>
-        <RefreshButton :loading="loading" @refresh="fetchData" />
         <button
           disabled
           class="list-toolbar-button list-toolbar-button--secondary"
@@ -11,7 +15,7 @@
           {{ t('order.applyInvoice') }}
         </button>
       </template>
-    </PageIntro>
+    </BaseTableToolbar>
 
     <InvoiceStatsCards />
 
@@ -28,16 +32,16 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
-import RefreshButton from '@/components/RefreshButton/index.vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
 import ApplyInvoiceDialog from './components/ApplyInvoiceDialog.vue'
 import InvoiceStatsCards from './components/InvoiceStatsCards.vue'
 import InvoiceTabsCard from './components/InvoiceTabsCard.vue'
 import { useInvoicePage } from './composables/useInvoicePage'
+import type { Translator } from '@/types/consoleResource'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const {
   activeTab,
@@ -53,6 +57,6 @@ const {
 } = useInvoicePage({ t })
 
 onMounted(() => {
-  fetchData()
+  void fetchData()
 })
 </script>

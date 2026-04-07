@@ -43,7 +43,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from 'vue'
 import UserDialogsHost from './components/UserDialogsHost.vue'
 import UserManagementHeader from './components/UserManagementHeader.vue'
@@ -87,6 +87,6 @@ const {
 } = useUserManagementPage({ t })
 
 onMounted(() => {
-  initialize()
+  void initialize()
 })
 </script>

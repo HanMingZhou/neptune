@@ -19,13 +19,20 @@
           <tr v-if="loading">
             <td colspan="9" class="px-6 py-12 text-center text-slate-400">
               <div class="flex items-center justify-center gap-2">
-                <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
+                <div
+                  class="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"
+                ></div>
                 {{ t('loading') }}
               </div>
             </td>
           </tr>
           <tr v-else-if="items.length === 0">
-            <td colspan="9" class="px-6 py-10 text-center text-slate-400 text-sm">{{ t('noData') }}</td>
+            <td
+              colspan="9"
+              class="px-6 py-10 text-center text-slate-400 text-sm"
+            >
+              {{ t('noData') }}
+            </td>
           </tr>
           <tr v-for="row in items" v-else :key="row.id">
             <td class="is-code text-slate-500">{{ row.id }}</td>
@@ -39,11 +46,21 @@
               />
             </td>
             <td class="text-center">
-              <ListToneBadge :label="usageTypeLabel(row.usageType)" :tone="usageTypeBadgeTone(row.usageType)" />
+              <ListToneBadge
+                :label="usageTypeLabel(row.usageType)"
+                :tone="usageTypeBadgeTone(row.usageType)"
+              />
             </td>
             <td>
-              <el-tooltip v-if="row.image" :content="row.image" placement="top" :show-after="300">
-                <code class="is-code is-secondary inline-block max-w-[260px] truncate">
+              <el-tooltip
+                v-if="row.image"
+                :content="row.image"
+                placement="top"
+                :show-after="300"
+              >
+                <code
+                  class="is-code is-secondary inline-block max-w-[260px] truncate"
+                >
                   {{ row.image }}
                 </code>
               </el-tooltip>
@@ -91,50 +108,53 @@
   </TableCard>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject } from 'vue'
+import type { Translator } from '@/types/consoleResource'
+import type { ImageListItem } from '@/types/image'
 import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
 import ListToneBadge from '@/components/listPage/ListToneBadge.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
 
-const props = defineProps({
-  currentPage: {
-    type: Number,
-    default: 1
-  },
-  items: {
-    type: Array,
-    default: () => []
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  pageSize: {
-    type: Number,
-    default: 10
-  },
-  total: {
-    type: Number,
-    default: 0
+const props = withDefaults(
+  defineProps<{
+    currentPage?: number
+    items?: ImageListItem[]
+    loading?: boolean
+    pageSize?: number
+    total?: number
+  }>(),
+  {
+    currentPage: 1,
+    items: () => [],
+    loading: false,
+    pageSize: 10,
+    total: 0
   }
-})
+)
 
-const emit = defineEmits(['delete', 'edit', 'page-change', 'size-change', 'update:current-page', 'update:page-size'])
-const t = inject('t', (key) => key)
+const emit = defineEmits<{
+  delete: [row: ImageListItem]
+  edit: [row: ImageListItem]
+  'page-change': []
+  'size-change': [value: number]
+  'update:current-page': [value: number]
+  'update:page-size': [value: number]
+}>()
+const t = inject<Translator>('t', (key: string) => key)
 
 const pageModel = computed({
   get: () => props.currentPage,
-  set: (value) => emit('update:current-page', value)
+  set: (value: number) => emit('update:current-page', value)
 })
 
 const pageSizeModel = computed({
   get: () => props.pageSize,
-  set: (value) => emit('update:page-size', value)
+  set: (value: number) => emit('update:page-size', value)
 })
 
-const usageTypeLabel = (value) => {
-  const labelMap = {
+const usageTypeLabel = (value?: number): string => {
+  const labelMap: Record<number, string> = {
     1: t('usageNotebook'),
     2: t('usageTrain'),
     3: t('usageInfer')
@@ -143,8 +163,10 @@ const usageTypeLabel = (value) => {
   return labelMap[value] || '-'
 }
 
-const usageTypeBadgeTone = (value) => {
-  const toneMap = {
+const usageTypeBadgeTone = (
+  value?: number
+): 'success' | 'warning' | 'info' | 'neutral' => {
+  const toneMap: Record<number, 'success' | 'warning' | 'info'> = {
     1: 'success',
     2: 'warning',
     3: 'info'

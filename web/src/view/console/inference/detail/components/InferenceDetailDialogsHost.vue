@@ -13,37 +13,31 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ApiKeyDialog from './ApiKeyDialog.vue'
+import type { InferenceApiKey } from '@/types/consoleResource'
 
-defineProps({
-  apiKeys: {
-    type: Array,
-    default: () => []
-  },
-  formatTime: {
-    type: Function,
-    required: true
-  },
-  newKeyName: {
-    type: String,
-    default: ''
-  },
-  newlyCreatedKey: {
-    type: Object,
-    default: null
-  },
-  showApiKeyDialog: {
-    type: Boolean,
-    default: false
+withDefaults(
+  defineProps<{
+    apiKeys?: InferenceApiKey[]
+    formatTime: (value?: string | number) => string
+    newKeyName?: string
+    newlyCreatedKey?: string
+    showApiKeyDialog?: boolean
+  }>(),
+  {
+    apiKeys: () => [],
+    newKeyName: '',
+    newlyCreatedKey: '',
+    showApiKeyDialog: false
   }
-})
+)
 
-const emit = defineEmits([
-  'close-api-key-dialog',
-  'copy',
-  'create-api-key',
-  'delete-api-key',
-  'update:new-key-name'
-])
+const emit = defineEmits<{
+  'close-api-key-dialog': []
+  copy: [text: string]
+  'create-api-key': []
+  'delete-api-key': [apiKey: InferenceApiKey]
+  'update:new-key-name': [value: string]
+}>()
 </script>

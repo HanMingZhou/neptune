@@ -63,7 +63,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
 import { useRouter } from 'vue-router'
 import PageHeader from '@/components/createPage/PageHeader.vue'
@@ -71,8 +71,9 @@ import StickyActionBar from '@/components/createPage/StickyActionBar.vue'
 import NotebookConfigurationSection from './components/NotebookConfigurationSection.vue'
 import NotebookResourceSelectionSection from './components/NotebookResourceSelectionSection.vue'
 import { useNotebookCreate } from './composables/useNotebookCreate'
+import type { Translator } from '@/types/consoleResource'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 const router = useRouter()
 
 const {

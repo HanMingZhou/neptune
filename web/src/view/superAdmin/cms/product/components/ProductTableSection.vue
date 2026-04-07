@@ -53,74 +53,58 @@
   </ManagementListShell>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ManagementListShell from '@/components/listPage/ManagementListShell.vue'
 import ComputeProductsTable from './ComputeProductsTable.vue'
 import ProductToolbar from './ProductToolbar.vue'
 import StorageProductsTable from './StorageProductsTable.vue'
+import type { ResourceId } from '@/types/consoleResource'
+import type { CmsClusterOption, CmsProductRow } from '@/types/superAdmin'
 
-defineProps({
-  activeTab: {
-    type: Number,
-    default: 1
-  },
-  areas: {
-    type: Array,
-    default: () => []
-  },
-  clusters: {
-    type: Array,
-    default: () => []
-  },
-  currentPage: {
-    type: Number,
-    default: 1
-  },
-  filterArea: {
-    type: [String, Number],
-    default: ''
-  },
-  filterClusterId: {
-    type: [String, Number],
-    default: ''
-  },
-  filterKeyword: {
-    type: String,
-    default: ''
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  pageSize: {
-    type: Number,
-    default: 20
-  },
-  products: {
-    type: Array,
-    default: () => []
-  },
-  total: {
-    type: Number,
-    default: 0
+withDefaults(
+  defineProps<{
+    activeTab?: number
+    areas?: string[]
+    clusters?: CmsClusterOption[]
+    currentPage?: number
+    filterArea?: ResourceId | ''
+    filterClusterId?: ResourceId | ''
+    filterKeyword?: string
+    loading?: boolean
+    pageSize?: number
+    products?: CmsProductRow[]
+    total?: number
+  }>(),
+  {
+    activeTab: 1,
+    areas: () => [],
+    clusters: () => [],
+    currentPage: 1,
+    filterArea: '',
+    filterClusterId: '',
+    filterKeyword: '',
+    loading: false,
+    pageSize: 20,
+    products: () => [],
+    total: 0
   }
-})
+)
 
-const emit = defineEmits([
-  'adjust-price',
-  'create',
-  'delete',
-  'edit',
-  'page-change',
-  'refresh',
-  'reset',
-  'search',
-  'size-change',
-  'update:active-tab',
-  'update:filter-area',
-  'update:filter-cluster-id',
-  'update:filter-keyword',
-  'update:page',
-  'update:page-size'
-])
+const emit = defineEmits<{
+  'adjust-price': [row: CmsProductRow]
+  create: []
+  delete: [row: CmsProductRow]
+  edit: [row: CmsProductRow]
+  'page-change': [page: number]
+  refresh: [silent?: boolean]
+  reset: []
+  search: []
+  'size-change': [pageSize: number]
+  'update:active-tab': [value: number]
+  'update:filter-area': [value: ResourceId | '']
+  'update:filter-cluster-id': [value: ResourceId | '']
+  'update:filter-keyword': [value: string]
+  'update:page': [value: number]
+  'update:page-size': [value: number]
+}>()
 </script>

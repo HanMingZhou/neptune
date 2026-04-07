@@ -26,62 +26,57 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { FormRules } from 'element-plus'
 import ApiEditorDrawer from './ApiEditorDrawer.vue'
 import SyncApiDrawer from './SyncApiDrawer.vue'
+import type {
+  ApiForm,
+  ApiListItem,
+  ApiMethodOption,
+  ApiSyncData,
+  LabelValueOption
+} from '@/types/superAdmin'
 
-defineProps({
-  apiCompletionLoading: {
-    type: Boolean,
-    default: false
-  },
-  apiGroupOptions: {
-    type: Array,
-    default: () => []
-  },
-  dialogFormVisible: {
-    type: Boolean,
-    default: false
-  },
-  dialogTitle: {
-    type: String,
-    default: ''
-  },
-  form: {
-    type: Object,
-    required: true
-  },
-  methodOptions: {
-    type: Array,
-    default: () => []
-  },
-  rules: {
-    type: Object,
-    default: () => ({})
-  },
-  syncApiData: {
-    type: Object,
-    required: true
-  },
-  syncApiFlag: {
-    type: Boolean,
-    default: false
-  },
-  syncing: {
-    type: Boolean,
-    default: false
+interface SyncIgnorePayload {
+  row: ApiListItem
+  flag: boolean
+}
+
+withDefaults(
+  defineProps<{
+    apiCompletionLoading?: boolean
+    apiGroupOptions?: LabelValueOption[]
+    dialogFormVisible?: boolean
+    dialogTitle?: string
+    form: ApiForm
+    methodOptions?: ApiMethodOption[]
+    rules?: FormRules<ApiForm>
+    syncApiData: ApiSyncData
+    syncApiFlag?: boolean
+    syncing?: boolean
+  }>(),
+  {
+    apiCompletionLoading: false,
+    apiGroupOptions: () => [],
+    dialogFormVisible: false,
+    dialogTitle: '',
+    methodOptions: () => [],
+    rules: () => ({}),
+    syncApiFlag: false,
+    syncing: false
   }
-})
+)
 
-const emit = defineEmits([
-  'add-one',
-  'ai-completion',
-  'close-dialog',
-  'close-sync',
-  'ignore',
-  'submit-dialog',
-  'submit-sync',
-  'update-dialog-visible',
-  'update-sync-visible'
-])
+const emit = defineEmits<{
+  'add-one': [row: ApiListItem]
+  'ai-completion': []
+  'close-dialog': []
+  'close-sync': []
+  ignore: [payload: SyncIgnorePayload]
+  'submit-dialog': []
+  'submit-sync': []
+  'update-dialog-visible': [value: boolean]
+  'update-sync-visible': [value: boolean]
+}>()
 </script>

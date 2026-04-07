@@ -43,87 +43,46 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import PodsTab from '@/components/detailPage/PodsTab.vue'
 import LogsTab from './LogsTab.vue'
 import OverviewTab from './OverviewTab.vue'
 import TerminalTab from './TerminalTab.vue'
+import type { ConsoleNotebookDetail, ConsolePod } from '@/types/consoleResource'
 
-defineProps({
-  activeTab: {
-    type: String,
-    default: 'overview'
-  },
-  formatTime: {
-    type: Function,
-    required: true
-  },
-  getPayTypeLabel: {
-    type: Function,
-    required: true
-  },
-  getPodStatusClass: {
-    type: Function,
-    required: true
-  },
-  getStatusLabel: {
-    type: Function,
-    required: true
-  },
-  getUnitPriceLabel: {
-    type: Function,
-    required: true
-  },
-  isInstanceRunning: {
-    type: Boolean,
-    default: false
-  },
-  logs: {
-    type: String,
-    default: ''
-  },
-  logsConnected: {
-    type: Boolean,
-    default: false
-  },
-  logsLoading: {
-    type: Boolean,
-    default: false
-  },
-  notebook: {
-    type: Object,
-    required: true
-  },
-  pods: {
-    type: Array,
-    default: () => []
-  },
-  podsLoading: {
-    type: Boolean,
-    default: false
-  },
-  setLogsRef: {
-    type: Function,
-    required: true
-  },
-  setTerminalRef: {
-    type: Function,
-    required: true
-  },
-  terminalConnected: {
-    type: Boolean,
-    default: false
-  }
-})
+type FormatTime = (value?: string | number | null) => string
+type StatusLabelGetter = (status?: string) => string
+type PayTypeLabelGetter = (type?: number | string) => string
+type StatusClassGetter = (status?: string) => string
+type ElementRefSetter = (element: HTMLElement | null) => void
 
-const emit = defineEmits([
-  'clear-logs',
-  'connect-logs',
-  'connect-terminal',
-  'disconnect-logs',
-  'disconnect-terminal',
-  'fit-terminal',
-  'refresh-pods',
-  'view-pod-logs'
-])
+defineProps<{
+  activeTab: string
+  formatTime: FormatTime
+  getPayTypeLabel: PayTypeLabelGetter
+  getPodStatusClass: StatusClassGetter
+  getStatusLabel: StatusLabelGetter
+  getUnitPriceLabel: PayTypeLabelGetter
+  isInstanceRunning: boolean
+  logs: string
+  logsConnected: boolean
+  logsLoading: boolean
+  notebook: Partial<ConsoleNotebookDetail>
+  pods: ConsolePod[]
+  podsLoading: boolean
+  setLogsRef: ElementRefSetter
+  setTerminalRef: ElementRefSetter
+  terminalConnected: boolean
+}>()
+
+const emit = defineEmits<{
+  'clear-logs': []
+  'connect-logs': []
+  'connect-terminal': []
+  'disconnect-logs': []
+  'disconnect-terminal': []
+  'fit-terminal': []
+  'refresh-pods': []
+  'view-pod-logs': [pod: ConsolePod]
+}>()
 </script>

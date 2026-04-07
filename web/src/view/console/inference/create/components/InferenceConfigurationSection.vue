@@ -23,7 +23,9 @@
       :tabs="imageTabs"
       :uppercase-label="true"
       @change-tab="changeImageTab"
-      @update:selected-value="emit('update:field', { key: 'imageId', value: $event })"
+      @update:selected-value="
+        emit('update:field', { key: 'imageId', value: $event })
+      "
     />
 
     <ServiceAdvancedSection
@@ -41,81 +43,107 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject } from 'vue'
+import type {
+  ConsoleVolume,
+  ResourceId,
+  Translator
+} from '@/types/consoleResource'
 import ImagePickerSection from '@/components/createPage/ImagePickerSection.vue'
 import EngineConfigSection from './EngineConfigSection.vue'
 import ServiceAdvancedSection from './ServiceAdvancedSection.vue'
+import type {
+  InferenceAuthType,
+  InferenceCreateForm,
+  InferenceDeployType,
+  InferenceEnv,
+  InferenceFieldErrors,
+  InferenceFramework,
+  InferenceImageTab,
+  InferenceMount,
+  UpdateInferenceFieldPayload
+} from '../composables/useInferenceCreate'
 
-const props = defineProps({
-  activeTab: {
-    type: String,
-    required: true
-  },
-  addEnv: {
-    type: Function,
-    required: true
-  },
-  addMount: {
-    type: Function,
-    required: true
-  },
-  authTypes: {
-    type: Array,
-    default: () => []
-  },
-  changeImageTab: {
-    type: Function,
-    required: true
-  },
-  deployTypes: {
-    type: Array,
-    default: () => []
-  },
-  fieldErrors: {
-    type: Object,
-    default: () => ({})
-  },
-  form: {
-    type: Object,
-    required: true
-  },
-  frameworkRequired: {
-    type: Boolean,
-    default: false
-  },
-  frameworks: {
-    type: Array,
-    default: () => []
-  },
-  imageOptions: {
-    type: Array,
-    default: () => []
-  },
-  imageTabs: {
-    type: Array,
-    default: () => []
-  },
-  onDeployTypeChange: {
-    type: Function,
-    required: true
-  },
-  pvcs: {
-    type: Array,
-    default: () => []
-  },
-  removeEnv: {
-    type: Function,
-    required: true
-  },
-  removeMount: {
-    type: Function,
-    required: true
+interface AuthTypeOption {
+  label: string
+  value: InferenceAuthType
+}
+
+interface DeployTypeOption {
+  label: string
+  value: InferenceDeployType
+}
+
+interface FrameworkOption {
+  icon: string
+  label: string
+  value: Exclude<InferenceFramework, ''>
+}
+
+interface ImageOption {
+  desc?: string
+  label: string
+  value: ResourceId
+}
+
+interface ImageTabOption {
+  value: InferenceImageTab
+  label: string
+}
+
+interface InferenceEnvUpdatePayload {
+  index: number
+  key: keyof InferenceEnv
+  value: InferenceEnv[keyof InferenceEnv]
+}
+
+interface InferenceMountUpdatePayload {
+  index: number
+  key: keyof InferenceMount
+  value: InferenceMount[keyof InferenceMount]
+}
+
+const props = withDefaults(
+  defineProps<{
+    activeTab: InferenceImageTab
+    addEnv: () => void
+    addMount: () => void
+    authTypes?: AuthTypeOption[]
+    changeImageTab: (tab: InferenceImageTab) => void
+    deployTypes?: DeployTypeOption[]
+    fieldErrors?: InferenceFieldErrors
+    form: InferenceCreateForm
+    frameworkRequired?: boolean
+    frameworks?: FrameworkOption[]
+    imageOptions?: ImageOption[]
+    imageTabs?: ImageTabOption[]
+    onDeployTypeChange: (value: InferenceDeployType) => void
+    pvcs?: ConsoleVolume[]
+    removeEnv: (index: number) => void
+    removeMount: (index: number) => void
+  }>(),
+  {
+    authTypes: () => [],
+    deployTypes: () => [],
+    fieldErrors: () => ({
+      displayName: ''
+    }),
+    frameworkRequired: false,
+    frameworks: () => [],
+    imageOptions: () => [],
+    imageTabs: () => [],
+    pvcs: () => []
   }
-})
+)
 
-const emit = defineEmits(['update:env', 'update:field', 'update:mount', 'validate:display-name'])
+const emit = defineEmits<{
+  'update:env': [payload: InferenceEnvUpdatePayload]
+  'update:field': [payload: UpdateInferenceFieldPayload]
+  'update:mount': [payload: InferenceMountUpdatePayload]
+  'validate:display-name': []
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 const imageDescription = computed(() => t(`${props.activeTab}ImageDesc`))
 </script>

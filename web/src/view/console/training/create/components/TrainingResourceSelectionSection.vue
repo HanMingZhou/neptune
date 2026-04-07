@@ -30,72 +30,53 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
+import type { ConsoleProduct, FilterOption } from '@/types/consoleResource'
 import BillingSection from '@/components/createPage/BillingSection.vue'
 import FilterChipSection from '@/components/createPage/FilterChipSection.vue'
 import ProductTable from './ProductTable.vue'
 import StorageHintSection from './StorageHintSection.vue'
 import SummarySection from './SummarySection.vue'
+import type {
+  TrainingCreateForm,
+  TrainingFilters,
+  TrainingPayType,
+  TrainingTotalResources
+} from '../composables/useTrainingCreate'
 
-const props = defineProps({
-  areas: {
-    type: Array,
-    default: () => []
-  },
-  changeFilter: {
-    type: Function,
-    required: true
-  },
-  cpuModels: {
-    type: Array,
-    default: () => []
-  },
-  filters: {
-    type: Object,
-    required: true
-  },
-  form: {
-    type: Object,
-    required: true
-  },
-  formatPrice: {
-    type: Function,
-    required: true
-  },
-  gpuModels: {
-    type: Array,
-    default: () => []
-  },
-  payTypes: {
-    type: Array,
-    default: () => []
-  },
-  priceUnitText: {
-    type: String,
-    required: true
-  },
-  products: {
-    type: Array,
-    default: () => []
-  },
-  selectProduct: {
-    type: Function,
-    required: true
-  },
-  selectedProduct: {
-    type: Object,
-    default: null
-  },
-  totalPrice: {
-    type: String,
-    required: true
-  },
-  totalResources: {
-    type: Object,
-    default: null
+interface PayTypeOption {
+  value: TrainingPayType
+  labelKey: string
+}
+
+const props = withDefaults(
+  defineProps<{
+    areas?: string[]
+    changeFilter: (key: keyof TrainingFilters, value: string) => void
+    cpuModels?: FilterOption[]
+    filters: TrainingFilters
+    form: TrainingCreateForm
+    formatPrice: (product: ConsoleProduct | null | undefined) => string
+    gpuModels?: FilterOption[]
+    payTypes?: PayTypeOption[]
+    priceUnitText: string
+    products?: ConsoleProduct[]
+    selectProduct: (product: ConsoleProduct) => void
+    selectedProduct?: ConsoleProduct | null
+    totalPrice: string
+    totalResources?: TrainingTotalResources | null
+  }>(),
+  {
+    areas: () => [],
+    cpuModels: () => [],
+    gpuModels: () => [],
+    payTypes: () => [],
+    products: () => [],
+    selectedProduct: null,
+    totalResources: null
   }
-})
+)
 
 const filterGroups = computed(() => [
   { key: 'area', labelKey: 'selectRegion', options: props.areas },

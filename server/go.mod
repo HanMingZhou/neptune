@@ -3,6 +3,7 @@ module gin-vue-admin
 go 1.24.0
 
 require (
+	github.com/alicebob/miniredis/v2 v2.35.0
 	github.com/aliyun/aliyun-oss-go-sdk v3.0.2+incompatible
 	github.com/apache/apisix-ingress-controller v1.8.4
 	github.com/aws/aws-sdk-go v1.55.6
@@ -83,6 +84,7 @@ require (
 	github.com/prometheus/procfs v0.16.1 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
+	github.com/yuin/gopher-lua v1.1.1 // indirect
 	go.opentelemetry.io/otel v1.35.0 // indirect
 	go.opentelemetry.io/otel/trace v1.35.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.2 // indirect

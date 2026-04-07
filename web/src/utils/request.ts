@@ -1,6 +1,15 @@
-import axios, { type AxiosInstance, type AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios'
-import { ElMessage, type MessageHandler } from 'element-plus'
+import axios, {
+  type AxiosInstance,
+  type AxiosError,
+  type AxiosResponse,
+  type InternalAxiosRequestConfig
+} from 'axios'
+import { ElMessage } from 'element-plus'
 import { useUserStore } from '@/pinia/modules/user'
+
+type RequestConfigWithLoading = InternalAxiosRequestConfig & {
+  donNotShowLoading?: boolean
+}
 
 const service: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_API,
@@ -35,8 +44,9 @@ const closeLoading = () => {
 // http request 拦截器
 service.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    // @ts-ignore - donNotShowLoading is a custom property
-    if (!config.donNotShowLoading) {
+    const requestConfig = config as RequestConfigWithLoading
+
+    if (!requestConfig.donNotShowLoading) {
       showLoading()
     }
     const userStore = useUserStore()
@@ -45,7 +55,7 @@ service.interceptors.request.use(
     config.headers['x-token'] = userStore.token
     config.headers['x-user-id'] = userStore.userInfo?.ID || ''
 
-    return config
+    return requestConfig
   },
   (error: AxiosError) => {
     closeLoading()
@@ -66,7 +76,10 @@ service.interceptors.response.use(
       const userStore = useUserStore()
       userStore.setToken(response.headers['new-token'])
     }
-    if (response.config.responseType === 'blob' || response.config.responseType === 'arraybuffer') {
+    if (
+      response.config.responseType === 'blob' ||
+      response.config.responseType === 'arraybuffer'
+    ) {
       return response.data
     }
     if (response.data.code === 0 || response.headers.success === 'true') {
@@ -77,7 +90,9 @@ service.interceptors.response.use(
     } else {
       ElMessage({
         showClose: true,
-        message: response.data.msg || (response.headers.msg ? decodeURI(response.headers.msg) : '未知错误'),
+        message:
+          response.data.msg ||
+          (response.headers.msg ? decodeURI(response.headers.msg) : '未知错误'),
         type: 'error'
       })
       if (response.data.data && response.data.data.reload) {
@@ -94,7 +109,8 @@ service.interceptors.response.use(
     if (!error.response) {
       ElMessage({
         showClose: true,
-        message: error.message === 'Network Error' ? '网络连接失败' : error.message,
+        message:
+          error.message === 'Network Error' ? '网络连接失败' : error.message,
         type: 'error'
       })
       return Promise.reject(error)

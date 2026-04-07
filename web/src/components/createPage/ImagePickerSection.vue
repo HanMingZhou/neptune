@@ -1,5 +1,7 @@
 <template>
-  <div class="console-create-card bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6">
+  <div
+    class="console-create-card bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6"
+  >
     <h3 class="text-base font-bold mb-4 flex items-center gap-2">
       <span class="w-1 h-4 bg-primary rounded"></span>
       {{ t(titleKey) }}
@@ -17,13 +19,18 @@
         @click="$emit('change-tab', tab.value)"
       >
         {{ tab.label }}
-        <span v-if="showHotTag && tab.value === hotTabValue" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] px-1.5 rounded">
+        <span
+          v-if="showHotTag && tab.value === hotTabValue"
+          class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] px-1.5 rounded"
+        >
           {{ t(hotLabelKey) }}
         </span>
       </button>
     </div>
     <p :class="descriptionClass">{{ descriptionText }}</p>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+    >
       <div
         v-for="item in items"
         :key="getItemValue(item)"
@@ -39,12 +46,24 @@
           <div class="flex items-center gap-2 overflow-hidden mr-2">
             <span class="text-xl flex-shrink-0">📦</span>
             <el-tooltip :content="getItemLabel(item)" placement="top">
-              <span :class="['font-bold text-sm truncate', uppercaseLabel ? 'uppercase' : '']">{{ getItemLabel(item) }}</span>
+              <span
+                :class="[
+                  'font-bold text-sm truncate',
+                  uppercaseLabel ? 'uppercase' : ''
+                ]"
+                >{{ getItemLabel(item) }}</span
+              >
             </el-tooltip>
           </div>
-          <span v-if="selectedValue === getItemValue(item)" class="text-primary font-bold flex-shrink-0">✓</span>
+          <span
+            v-if="selectedValue === getItemValue(item)"
+            class="text-primary font-bold flex-shrink-0"
+            >✓</span
+          >
         </div>
-        <p class="text-xs text-slate-500 line-clamp-2">{{ getItemDescription(item) || t('noData') }}</p>
+        <p class="text-xs text-slate-500 line-clamp-2">
+          {{ getItemDescription(item) || t('noData') }}
+        </p>
       </div>
       <div v-if="items.length === 0" :class="emptyStateClass">
         {{ t('noData') }}
@@ -53,77 +72,64 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type { ResourceId, Translator } from '@/types/consoleResource'
 
-const props = defineProps({
-  activeTab: {
-    type: String,
-    required: true
-  },
-  descriptionClass: {
-    type: String,
-    default: 'text-sm text-slate-500 mb-4'
-  },
-  descriptionKey: {
-    type: String,
-    default: 'description'
-  },
-  descriptionText: {
-    type: String,
-    default: ''
-  },
-  emptyStateClass: {
-    type: String,
-    default: 'col-span-full text-center py-8 text-slate-400'
-  },
-  hotLabelKey: {
-    type: String,
-    default: 'hot'
-  },
-  hotTabValue: {
-    type: String,
-    default: 'base'
-  },
-  items: {
-    type: Array,
-    default: () => []
-  },
-  labelKey: {
-    type: String,
-    default: 'label'
-  },
-  selectedValue: {
-    type: [Number, String],
-    default: ''
-  },
-  showHotTag: {
-    type: Boolean,
-    default: true
-  },
-  tabs: {
-    type: Array,
-    default: () => []
-  },
-  titleKey: {
-    type: String,
-    default: 'selectImage'
-  },
-  uppercaseLabel: {
-    type: Boolean,
-    default: false
-  },
-  valueKey: {
-    type: String,
-    default: 'value'
+interface ImagePickerTab {
+  value: string
+  label: string
+}
+
+type PickerItem = Record<string, unknown>
+
+const props = withDefaults(
+  defineProps<{
+    activeTab: string
+    descriptionClass?: string
+    descriptionKey?: string
+    descriptionText?: string
+    emptyStateClass?: string
+    hotLabelKey?: string
+    hotTabValue?: string
+    items?: PickerItem[]
+    labelKey?: string
+    selectedValue?: ResourceId | ''
+    showHotTag?: boolean
+    tabs?: ImagePickerTab[]
+    titleKey?: string
+    uppercaseLabel?: boolean
+    valueKey?: string
+  }>(),
+  {
+    descriptionClass: 'text-sm text-slate-500 mb-4',
+    descriptionKey: 'description',
+    descriptionText: '',
+    emptyStateClass: 'col-span-full text-center py-8 text-slate-400',
+    hotLabelKey: 'hot',
+    hotTabValue: 'base',
+    items: () => [],
+    labelKey: 'label',
+    selectedValue: '',
+    showHotTag: true,
+    tabs: () => [],
+    titleKey: 'selectImage',
+    uppercaseLabel: false,
+    valueKey: 'value'
   }
-})
+)
 
-defineEmits(['change-tab', 'update:selectedValue'])
+defineEmits<{
+  'change-tab': [value: string]
+  'update:selectedValue': [value: ResourceId]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
-const getItemValue = (item) => item?.[props.valueKey]
-const getItemLabel = (item) => item?.[props.labelKey]
-const getItemDescription = (item) => item?.[props.descriptionKey]
+const getItemValue = (item: PickerItem): ResourceId | undefined =>
+  item?.[props.valueKey] as ResourceId | undefined
+const getItemLabel = (item: PickerItem): string | undefined =>
+  item?.[props.labelKey] as string | undefined
+const getItemDescription = (item: PickerItem): string | undefined =>
+  item?.[props.descriptionKey] as string | undefined
 </script>

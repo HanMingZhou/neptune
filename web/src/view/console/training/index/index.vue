@@ -1,18 +1,22 @@
 <template>
   <div class="console-page-container space-y-6">
-    <PageIntro
+    <BaseTableToolbar
       :breadcrumbs="[t('compute'), t('training')]"
       :description="t('trainingDesc')"
+      :loading="loading"
       :title="`${t('training')}${t('admin')}`"
+      @refresh="handleRefresh"
     >
       <template #actions>
-        <RefreshButton :loading="loading" @refresh="handleRefresh" />
-        <button class="list-toolbar-button list-toolbar-button--primary" @click="goToCreate">
+        <button
+          class="list-toolbar-button list-toolbar-button--primary"
+          @click="goToCreate"
+        >
           <span class="material-icons text-[20px]">add</span>
           {{ t('createTraining') }}
         </button>
       </template>
-    </PageIntro>
+    </BaseTableToolbar>
 
     <TrainingTableCard
       :btn-loading="btnLoading"
@@ -43,14 +47,14 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
-import RefreshButton from '@/components/RefreshButton/index.vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
+import type { Translator } from '@/types/consoleResource'
 import TrainingTableCard from './components/TrainingTableCard.vue'
 import { useTrainingList } from './composables/useTrainingList'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const {
   btnLoading,

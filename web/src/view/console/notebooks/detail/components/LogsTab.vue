@@ -10,27 +10,26 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import LogStreamPanel from '@/components/detailPage/LogStreamPanel.vue'
 
-defineProps({
-  logs: {
-    type: String,
-    default: ''
-  },
-  logsConnected: {
-    type: Boolean,
-    default: false
-  },
-  logsLoading: {
-    type: Boolean,
-    default: false
-  },
-  setLogsRef: {
-    type: Function,
-    required: true
+withDefaults(
+  defineProps<{
+    logs?: string
+    logsConnected?: boolean
+    logsLoading?: boolean
+    setLogsRef: (element: HTMLElement | null) => void
+  }>(),
+  {
+    logs: '',
+    logsConnected: false,
+    logsLoading: false
   }
-})
+)
 
-defineEmits(['clear', 'connect', 'disconnect'])
+defineEmits<{
+  clear: []
+  connect: []
+  disconnect: []
+}>()
 </script>

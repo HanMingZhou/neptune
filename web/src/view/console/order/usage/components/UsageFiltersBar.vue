@@ -1,7 +1,12 @@
 <template>
-  <div class="p-4 border-b border-slate-100 dark:border-border-dark flex flex-wrap items-center gap-4">
+  <div
+    class="p-4 border-b border-slate-100 dark:border-border-dark flex flex-wrap items-center gap-4"
+  >
     <div class="relative max-w-md">
-      <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+      <span
+        class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"
+        >search</span
+      >
       <input
         v-model="searchQueryModel"
         type="text"
@@ -12,9 +17,24 @@
     </div>
 
     <div class="list-tab-group">
-      <button @click="chargeFilterModel = 'all'" :class="{ 'is-active': chargeFilter === 'all' }">{{ t('all') }}</button>
-      <button @click="chargeFilterModel = '按量计费'" :class="{ 'is-active': chargeFilter === '按量计费' }">{{ t('payHourly') }}</button>
-      <button @click="chargeFilterModel = '预付费'" :class="{ 'is-active': chargeFilter === '预付费' }">{{ t('order.prepaid') }}</button>
+      <button
+        @click="chargeFilterModel = 'all'"
+        :class="{ 'is-active': chargeFilter === 'all' }"
+      >
+        {{ t('all') }}
+      </button>
+      <button
+        @click="chargeFilterModel = '按量计费'"
+        :class="{ 'is-active': chargeFilter === '按量计费' }"
+      >
+        {{ t('payHourly') }}
+      </button>
+      <button
+        @click="chargeFilterModel = '预付费'"
+        :class="{ 'is-active': chargeFilter === '预付费' }"
+      >
+        {{ t('order.prepaid') }}
+      </button>
     </div>
 
     <OrderDateRangePicker
@@ -26,40 +46,47 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, inject } from 'vue'
 import OrderDateRangePicker from '@/components/orderPage/OrderDateRangePicker.vue'
+import type { Translator } from '@/types/consoleResource'
 
-const props = defineProps({
-  chargeFilter: {
-    type: String,
-    default: 'all'
-  },
-  dateRange: {
-    type: Array,
-    default: () => []
-  },
-  searchQuery: {
-    type: String,
-    default: ''
+type DateRangeValue = Array<string | number | Date>
+
+const props = withDefaults(
+  defineProps<{
+    chargeFilter?: string
+    dateRange?: DateRangeValue
+    searchQuery?: string
+  }>(),
+  {
+    chargeFilter: 'all',
+    dateRange: () => [],
+    searchQuery: ''
   }
-})
+)
 
-const emit = defineEmits(['date-change', 'search', 'update:charge-filter', 'update:date-range', 'update:search-query'])
-const t = inject('t', (key) => key)
+const emit = defineEmits<{
+  'date-change': []
+  search: []
+  'update:charge-filter': [value: string]
+  'update:date-range': [value: DateRangeValue]
+  'update:search-query': [value: string]
+}>()
+const t = inject<Translator>('t', (key: string) => key)
 
 const searchQueryModel = computed({
   get: () => props.searchQuery,
-  set: (value) => emit('update:search-query', value)
+  set: (value: string) => emit('update:search-query', value)
 })
 
 const chargeFilterModel = computed({
   get: () => props.chargeFilter,
-  set: (value) => emit('update:charge-filter', value)
+  set: (value: string) => emit('update:charge-filter', value)
 })
 
 const dateRangeModel = computed({
   get: () => props.dateRange,
-  set: (value) => emit('update:date-range', value)
+  set: (value: DateRangeValue) => emit('update:date-range', value)
 })
 </script>

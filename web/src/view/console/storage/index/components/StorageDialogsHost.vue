@@ -19,61 +19,42 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type {
+  StorageClusterOption,
+  StorageCreateForm,
+  StorageExpandForm,
+  StorageProductOption
+} from '@/types/storage'
 import CreateStorageDialog from './CreateStorageDialog.vue'
 import ExpandStorageDialog from './ExpandStorageDialog.vue'
 
-defineProps({
-  clusterOptions: {
-    type: Array,
-    default: () => []
-  },
-  createForm: {
-    type: Object,
-    required: true
-  },
-  creating: {
-    type: Boolean,
-    default: false
-  },
-  expanding: {
-    type: Boolean,
-    default: false
-  },
-  expandForm: {
-    type: Object,
-    required: true
-  },
-  showCreateDialog: {
-    type: Boolean,
-    default: false
-  },
-  showExpandDialog: {
-    type: Boolean,
-    default: false
-  },
-  storageProducts: {
-    type: Array,
-    default: () => []
+withDefaults(
+  defineProps<{
+    clusterOptions?: StorageClusterOption[]
+    createForm: StorageCreateForm
+    creating?: boolean
+    expanding?: boolean
+    expandForm: StorageExpandForm
+    showCreateDialog?: boolean
+    showExpandDialog?: boolean
+    storageProducts?: StorageProductOption[]
+  }>(),
+  {
+    clusterOptions: () => [],
+    creating: false,
+    expanding: false,
+    showCreateDialog: false,
+    showExpandDialog: false,
+    storageProducts: () => []
   }
-})
+)
 
-const emit = defineEmits([
-  'cluster-change',
-  'submit-create',
-  'submit-expand',
-  'update:create-visible',
-  'update:expand-visible'
-])
+const emit = defineEmits<{
+  'cluster-change': [clusterId: StorageCreateForm['clusterId']]
+  'submit-create': []
+  'submit-expand': []
+  'update:create-visible': [value: boolean]
+  'update:expand-visible': [value: boolean]
+}>()
 </script>
-
-<style scoped>
-:deep(.custom-select .el-input__wrapper) {
-  background-color: transparent !important;
-  box-shadow: 0 0 0 1px var(--el-border-color) inset !important;
-}
-
-:deep(.custom-select .el-input__wrapper.is-focus) {
-  box-shadow: 0 0 0 1px var(--el-color-primary) inset !important;
-}
-</style>

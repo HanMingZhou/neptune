@@ -2,6 +2,6 @@
   <NotebookListPage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import NotebookListPage from './index/index.vue'
 </script>

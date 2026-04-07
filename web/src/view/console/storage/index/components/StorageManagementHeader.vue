@@ -1,11 +1,12 @@
 <template>
-  <PageIntro
+  <BaseTableToolbar
     :breadcrumbs="[t('compute'), t('storage')]"
     :description="t('storageDesc')"
+    :loading="loading"
     :title="`${t('storage')}${t('admin')}`"
+    @refresh="emit('refresh', $event)"
   >
     <template #actions>
-      <RefreshButton :loading="loading" @refresh="emit('refresh', $event)" />
       <button
         class="list-toolbar-button list-toolbar-button--primary"
         @click="emit('create')"
@@ -14,24 +15,30 @@
         {{ t('create') }}{{ t('storage') }}
       </button>
     </template>
-  </PageIntro>
 
-  <StorageHintBanner />
+    <StorageHintBanner />
+  </BaseTableToolbar>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
-import RefreshButton from '@/components/RefreshButton/index.vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+import type { Translator } from '@/types/consoleResource'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
 import StorageHintBanner from './StorageHintBanner.vue'
 
-defineProps({
-  loading: {
-    type: Boolean,
-    default: false
+withDefaults(
+  defineProps<{
+    loading?: boolean
+  }>(),
+  {
+    loading: false
   }
-})
+)
 
-const emit = defineEmits(['create', 'refresh'])
-const t = inject('t', (key) => key)
+const emit = defineEmits<{
+  create: []
+  refresh: [silent: boolean]
+}>()
+
+const t = inject<Translator>('t', (key: string) => key)
 </script>

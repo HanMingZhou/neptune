@@ -2,6 +2,6 @@
   <MenuPage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import MenuPage from './menu/index.vue'
 </script>

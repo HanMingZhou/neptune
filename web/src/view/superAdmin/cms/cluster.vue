@@ -2,6 +2,6 @@
   <ClusterPage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ClusterPage from './cluster/index.vue'
 </script>

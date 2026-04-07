@@ -26,7 +26,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
 import AppIcon from '@/components/AppIcon.vue'
 import { useMenuIconOptions } from './composables/useMenuIconOptions'

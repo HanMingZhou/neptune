@@ -2,7 +2,7 @@
   <AccessLogPage />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AccessLogPage from './accesslog/index.vue'
 
 defineOptions({

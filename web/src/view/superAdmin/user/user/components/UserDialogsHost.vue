@@ -18,46 +18,39 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { FormRules } from 'element-plus'
 import ResetPasswordDialog from './ResetPasswordDialog.vue'
 import UserEditorDrawer from './UserEditorDrawer.vue'
+import type {
+  UserAuthority,
+  UserForm,
+  UserResetPasswordForm
+} from '@/types/superAdmin'
 
-defineProps({
-  addUserDialog: {
-    type: Boolean,
-    default: false
-  },
-  authOptions: {
-    type: Array,
-    default: () => []
-  },
-  dialogFlag: {
-    type: String,
-    default: 'add'
-  },
-  resetPwdDialog: {
-    type: Boolean,
-    default: false
-  },
-  resetPwdInfo: {
-    type: Object,
-    required: true
-  },
-  rules: {
-    type: Object,
-    required: true
-  },
-  userInfo: {
-    type: Object,
-    required: true
+withDefaults(
+  defineProps<{
+    addUserDialog?: boolean
+    authOptions?: UserAuthority[]
+    dialogFlag?: 'add' | 'edit'
+    resetPwdDialog?: boolean
+    resetPwdInfo: UserResetPasswordForm
+    rules: FormRules<UserForm>
+    userInfo: UserForm
+  }>(),
+  {
+    addUserDialog: false,
+    authOptions: () => [],
+    dialogFlag: 'add',
+    resetPwdDialog: false
   }
-})
+)
 
-const emit = defineEmits([
-  'close-add-user',
-  'close-reset-password',
-  'generate-password',
-  'submit-reset-password',
-  'submit-user'
-])
+const emit = defineEmits<{
+  'close-add-user': []
+  'close-reset-password': []
+  'generate-password': []
+  'submit-reset-password': []
+  'submit-user': []
+}>()
 </script>

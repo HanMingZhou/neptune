@@ -9,9 +9,7 @@ import { useParamsStore } from '@/pinia/modules/params'
  *   fun()
  */
 export const getParams = async (key: string) => {
-    const paramsStore = useParamsStore()
-    // @ts-ignore
-    await paramsStore.getParams(key)
-    // @ts-ignore
-    return paramsStore.paramsMap[key]
+  const paramsStore = useParamsStore()
+  await paramsStore.getParams(key)
+  return paramsStore.paramsMap[key]
 }

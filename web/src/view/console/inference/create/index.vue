@@ -46,6 +46,7 @@
       :can-submit="canCreate"
       :loading="loading"
       :price-label-class="'text-sm text-slate-500 font-medium'"
+      :price-label-key="'totalPrice'"
       :price-unit-text="priceUnitText"
       :price-value-class="'text-2xl font-black text-red-500'"
       :show-spinner="true"
@@ -59,7 +60,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
 import { useRouter } from 'vue-router'
 import PageHeader from '@/components/createPage/PageHeader.vue'
@@ -67,8 +68,9 @@ import StickyActionBar from '@/components/createPage/StickyActionBar.vue'
 import InferenceConfigurationSection from './components/InferenceConfigurationSection.vue'
 import InferenceResourceSelectionSection from './components/InferenceResourceSelectionSection.vue'
 import { useInferenceCreate } from './composables/useInferenceCreate'
+import type { Translator } from '@/types/consoleResource'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 const router = useRouter()
 
 const {
@@ -105,21 +107,3 @@ const {
   validateDisplayNameField
 } = useInferenceCreate({ t, router })
 </script>
-
-<style scoped>
-:deep(.el-form-item__label) {
-  @apply text-slate-500 font-medium mb-1 !important;
-}
-
-:deep(.el-select-dropdown__item) {
-  @apply py-2 h-auto leading-normal !important;
-}
-
-:deep(.el-select-dropdown__item.selected) {
-  @apply font-bold !important;
-}
-
-:deep(.el-input-number) {
-  @apply w-full !important;
-}
-</style>

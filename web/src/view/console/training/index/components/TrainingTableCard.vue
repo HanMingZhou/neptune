@@ -1,40 +1,43 @@
 <template>
   <TableCard>
     <template #toolbar>
-      <div class="list-filter-bar">
-        <div class="list-toolbar-main">
-          <div class="list-search-field">
-            <input
-              :value="searchQuery"
-              :placeholder="t('searchInstancePlaceholder')"
-              class="list-search-input"
-              type="text"
-              @input="$emit('search-change', $event.target.value)"
-              @keyup.enter="$emit('refresh')"
-            />
-            <span class="material-icons absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[16px]">search</span>
-          </div>
-
-          <el-select
-            :model-value="filterStatus"
-            :placeholder="`${t('status')}: ${t('all')}`"
-            class="list-filter-select !w-[168px]"
-            clearable
-            size="small"
-            @update:model-value="$emit('status-change', $event)"
+      <BaseFilterBar plain wrap-main>
+        <div class="list-search-field">
+          <input
+            :value="searchQuery"
+            :placeholder="t('searchInstancePlaceholder')"
+            class="list-search-input"
+            type="text"
+            @input="handleSearchInput"
+            @keyup.enter="$emit('refresh')"
+          />
+          <span
+            class="material-icons absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[16px]"
+            >search</span
           >
-            <el-option :label="t('Running')" value="RUNNING" />
-            <el-option :label="t('Pending')" value="PENDING" />
-            <el-option :label="t('Succeeded')" value="SUCCEEDED" />
-            <el-option :label="t('Failed')" value="FAILED" />
-            <el-option :label="t('Stopped')" value="KILLED" />
-          </el-select>
         </div>
-      </div>
+
+        <el-select
+          :model-value="filterStatus"
+          :placeholder="`${t('status')}: ${t('all')}`"
+          class="list-filter-select !w-[168px]"
+          clearable
+          size="small"
+          @update:model-value="$emit('status-change', $event)"
+        >
+          <el-option :label="t('Running')" value="RUNNING" />
+          <el-option :label="t('Pending')" value="PENDING" />
+          <el-option :label="t('Succeeded')" value="SUCCEEDED" />
+          <el-option :label="t('Failed')" value="FAILED" />
+          <el-option :label="t('Stopped')" value="KILLED" />
+        </el-select>
+      </BaseFilterBar>
     </template>
 
     <div class="overflow-x-auto">
-      <table class="console-table console-table--resource-dense w-full min-w-[1180px]">
+      <table
+        class="console-table console-table--resource-dense w-full min-w-[1180px]"
+      >
         <thead>
           <tr>
             <th>{{ t('name') }}</th>
@@ -51,7 +54,9 @@
           <tr v-if="loading">
             <td colspan="8" class="px-6 py-10 text-center text-slate-400">
               <div class="flex items-center justify-center gap-2">
-                <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
+                <div
+                  class="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"
+                ></div>
                 {{ t('loading') }}
               </div>
             </td>
@@ -59,22 +64,28 @@
           <tr v-else-if="jobs.length === 0">
             <td colspan="8" class="px-6 py-10 text-center text-slate-400">
               <div class="console-list-empty">
-                <span class="material-icons console-list-empty__icon">model_training</span>
+                <span class="material-icons console-list-empty__icon"
+                  >model_training</span
+                >
                 <p class="console-list-empty__text">{{ t('noData') }}</p>
-                <button class="list-row-button list-row-button--neutral" @click="$emit('create')">{{ t('createTraining') }}</button>
+                <button
+                  class="list-row-button list-row-button--neutral"
+                  @click="$emit('create')"
+                >
+                  {{ t('createTraining') }}
+                </button>
               </div>
             </td>
           </tr>
-          <tr
-            v-for="item in jobs"
-            v-else
-            :key="item.id"
-            class="group"
-          >
+          <tr v-for="item in jobs" v-else :key="item.id" class="group">
             <td>
               <ResourceIdentityCell
                 :copy-title="t('copy')"
-                :copy-value="item.displayName && item.displayName !== item.jobName ? item.jobName : ''"
+                :copy-value="
+                  item.displayName && item.displayName !== item.jobName
+                    ? item.jobName
+                    : ''
+                "
                 :primary="item.displayName || item.jobName"
                 :secondary="item.jobName"
                 @copy="$emit('copy', $event)"
@@ -82,7 +93,10 @@
               />
             </td>
             <td>
-              <span :class="getFrameworkStyle(item.frameworkType)" class="console-badge text-[11px] border border-transparent">
+              <span
+                :class="getFrameworkStyle(item.frameworkType)"
+                class="console-badge text-[11px] border border-transparent"
+              >
                 {{ getFrameworkLabel(item.frameworkType) }}
               </span>
             </td>
@@ -95,8 +109,14 @@
               />
             </td>
             <td>
-              <span v-if="item.totalGpuCount" class="console-badge console-badge--neutral is-code">{{ item.totalGpuCount }} GPU</span>
-              <span v-else class="is-muted text-[11px]">{{ t('CPU ONLY') }}</span>
+              <span
+                v-if="item.totalGpuCount"
+                class="console-badge console-badge--neutral is-code"
+                >{{ item.totalGpuCount }} GPU</span
+              >
+              <span v-else class="is-muted text-[11px]">{{
+                t('CPU ONLY')
+              }}</span>
             </td>
             <td class="font-mono text-xs is-metric">
               {{ item.workerCount || 1 }}x
@@ -109,11 +129,17 @@
             </td>
             <td class="console-actions-cell">
               <div class="list-row-actions">
-                <button class="list-row-button list-row-button--neutral" @click="$emit('detail', item)">
+                <button
+                  class="list-row-button list-row-button--neutral"
+                  @click="$emit('detail', item)"
+                >
                   <span class="material-icons text-[14px]">info</span>
                   {{ t('details') }}
                 </button>
-                <button class="list-row-button list-row-button--info" @click="$emit('logs', item)">
+                <button
+                  class="list-row-button list-row-button--info"
+                  @click="$emit('logs', item)"
+                >
                   <span class="material-icons text-[14px]">list_alt</span>
                   {{ t('logs') }}
                 </button>
@@ -127,7 +153,9 @@
                   TensorBoard
                 </button>
                 <button
-                  v-if="['RUNNING', 'PENDING', 'CREATING'].includes(item.status)"
+                  v-if="
+                    ['RUNNING', 'PENDING', 'CREATING'].includes(item.status)
+                  "
                   :disabled="btnLoading[item.id]"
                   class="list-row-button list-row-button--warning disabled:opacity-50"
                   @click="$emit('stop', item)"
@@ -166,83 +194,68 @@
   </TableCard>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import BaseFilterBar from '@/components/listPage/BaseFilterBar.vue'
 import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
 import ResourceIdentityCell from '@/components/listPage/ResourceIdentityCell.vue'
 import ResourceStatusCell from '@/components/listPage/ResourceStatusCell.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
+import type { ConsoleTrainingJob, Translator } from '@/types/consoleResource'
 
-defineProps({
-  btnLoading: {
-    type: Object,
-    default: () => ({})
-  },
-  filterStatus: {
-    type: String,
-    default: ''
-  },
-  getFrameworkLabel: {
-    type: Function,
-    required: true
-  },
-  getFrameworkStyle: {
-    type: Function,
-    required: true
-  },
-  getStatusLabel: {
-    type: Function,
-    required: true
-  },
-  getStatusStyle: {
-    type: Function,
-    required: true
-  },
-  jobs: {
-    type: Array,
-    default: () => []
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  page: {
-    type: Number,
-    default: 1
-  },
-  pageSize: {
-    type: Number,
-    default: 20
-  },
-  searchQuery: {
-    type: String,
-    default: ''
-  },
-  total: {
-    type: Number,
-    default: 0
+withDefaults(
+  defineProps<{
+    btnLoading?: Record<string | number, boolean>
+    filterStatus?: string
+    getFrameworkLabel: (frameworkType?: string) => string
+    getFrameworkStyle: (frameworkType?: string) => string
+    getStatusLabel: (status?: string) => string
+    getStatusStyle: (status?: string) => string
+    jobs?: ConsoleTrainingJob[]
+    loading?: boolean
+    page?: number
+    pageSize?: number
+    searchQuery?: string
+    total?: number
+  }>(),
+  {
+    btnLoading: () => ({}),
+    filterStatus: '',
+    jobs: () => [],
+    loading: false,
+    page: 1,
+    pageSize: 20,
+    searchQuery: '',
+    total: 0
   }
-})
+)
 
-defineEmits([
-  'copy',
-  'create',
-  'delete',
-  'detail',
-  'logs',
-  'open-tensorboard',
-  'page-change',
-  'refresh',
-  'search-change',
-  'size-change',
-  'status-change',
-  'stop'
-])
+const emit = defineEmits<{
+  copy: [value: string]
+  create: []
+  delete: [item: ConsoleTrainingJob]
+  detail: [item: ConsoleTrainingJob]
+  logs: [item: ConsoleTrainingJob]
+  'open-tensorboard': [item: ConsoleTrainingJob]
+  'page-change': [page: number]
+  refresh: []
+  'search-change': [value: string]
+  'size-change': [pageSize: number]
+  'status-change': [value?: string]
+  stop: [item: ConsoleTrainingJob]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
-const formatTime = (time) => {
-  if (!time) return '-'
+const handleSearchInput = (event: Event) => {
+  emit('search-change', (event.target as HTMLInputElement).value)
+}
+
+const formatTime = (time?: string | number) => {
+  if (!time) {
+    return '-'
+  }
+
   const date = new Date(time)
   return `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`
 }

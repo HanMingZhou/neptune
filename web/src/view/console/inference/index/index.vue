@@ -1,18 +1,22 @@
 <template>
   <div class="console-page-container space-y-6">
-    <PageIntro
+    <BaseTableToolbar
       :breadcrumbs="[t('compute'), t('inference')]"
       :description="t('inferenceDesc')"
+      :loading="loading"
       :title="t('inference')"
+      @refresh="handleRefresh"
     >
       <template #actions>
-        <RefreshButton :loading="loading" @refresh="handleRefresh" />
-        <button class="list-toolbar-button list-toolbar-button--primary" @click="goToCreate">
+        <button
+          class="list-toolbar-button list-toolbar-button--primary"
+          @click="goToCreate"
+        >
           <span class="material-icons text-[20px]">add</span>
           {{ t('createInference') }}
         </button>
       </template>
-    </PageIntro>
+    </BaseTableToolbar>
 
     <InferenceTableCard
       :btn-loading="btnLoading"
@@ -45,14 +49,14 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
-import RefreshButton from '@/components/RefreshButton/index.vue'
-import PageIntro from '@/components/listPage/PageIntro.vue'
+import BaseTableToolbar from '@/components/listPage/BaseTableToolbar.vue'
+import type { Translator } from '@/types/consoleResource'
 import InferenceTableCard from './components/InferenceTableCard.vue'
 import { useInferenceList } from './composables/useInferenceList'
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 
 const {
   btnLoading,

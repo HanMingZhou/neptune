@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6">
+  <div
+    class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6"
+  >
     <h3 class="text-base font-bold mb-4 flex items-center gap-2">
       <span class="w-1 h-4 bg-primary rounded"></span>
       {{ t('mountExistingData') }}
@@ -23,7 +25,9 @@
       />
     </el-select>
     <div v-if="selectedVolumeId" class="mt-4">
-      <label class="block text-sm text-slate-500 mb-2">{{ t('mountPath') }}</label>
+      <label class="block text-sm text-slate-500 mb-2">{{
+        t('mountPath')
+      }}</label>
       <input
         :value="volumeMountPath"
         :placeholder="t('enterMountPath')"
@@ -35,25 +39,32 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
+import type {
+  ConsoleVolume,
+  ResourceId,
+  Translator
+} from '@/types/consoleResource'
 
-defineProps({
-  availableVolumes: {
-    type: Array,
-    default: () => []
-  },
-  selectedVolumeId: {
-    type: [Number, String],
-    default: null
-  },
-  volumeMountPath: {
-    type: String,
-    default: ''
+withDefaults(
+  defineProps<{
+    availableVolumes?: ConsoleVolume[]
+    selectedVolumeId?: ResourceId | null
+    volumeMountPath?: string
+  }>(),
+  {
+    availableVolumes: () => [],
+    selectedVolumeId: null,
+    volumeMountPath: ''
   }
-})
+)
 
-defineEmits(['update:selectedVolumeId', 'update:volumeMountPath', 'volume-change'])
+defineEmits<{
+  'update:selectedVolumeId': [value: ResourceId | null]
+  'update:volumeMountPath': [value: string]
+  'volume-change': [value: ResourceId | null]
+}>()
 
-const t = inject('t', (key) => key)
+const t = inject<Translator>('t', (key: string) => key)
 </script>
