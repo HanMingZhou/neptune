@@ -1300,7 +1300,6 @@ func (nb *NotebookService) deleteNotebookAccessRoutes(ctx context.Context, dbNb 
 		ClusterId: dbNb.ClusterID,
 	}); err != nil && !apierrors.IsNotFound(err) {
 		logx.Error("删除Notebook Apisix路由失败", err)
-		errs = append(errs, err)
 	}
 
 	if dbNb.EnableTensorboard {
@@ -1310,7 +1309,6 @@ func (nb *NotebookService) deleteNotebookAccessRoutes(ctx context.Context, dbNb 
 			ClusterId: dbNb.ClusterID,
 		}); err != nil && !apierrors.IsNotFound(err) {
 			logx.Error("删除TensorBoard Apisix路由失败", err)
-			errs = append(errs, err)
 		}
 	}
 
@@ -1330,7 +1328,6 @@ func (nb *NotebookService) deleteNotebookSSHService(
 		PropagationPolicy: func() *metav1.DeletionPropagation { p := metav1.DeletePropagationBackground; return &p }(),
 	}); err != nil && !apierrors.IsNotFound(err) {
 		logx.Error("删除SSH Service失败", err)
-		return err
 	}
 	return nil
 }
@@ -1349,7 +1346,6 @@ func (nb *NotebookService) deleteNotebookPersistentResources(ctx context.Context
 			Namespace:    dbNb.Namespace,
 		}); err != nil {
 			logx.Error("删除Notebook SSH公钥Secret失败", err)
-			errs = append(errs, err)
 		}
 
 		if err := secretMgr.DeleteSSHPrivateKeySecret(ctx, &secretModel.DeleteSecretReq{
@@ -1357,7 +1353,6 @@ func (nb *NotebookService) deleteNotebookPersistentResources(ctx context.Context
 			Namespace:    consts.SSHPiperNamespace,
 		}); err != nil {
 			logx.Error("删除Notebook SSH私钥Secret失败", err)
-			errs = append(errs, err)
 		}
 	}
 
@@ -1367,7 +1362,6 @@ func (nb *NotebookService) deleteNotebookPersistentResources(ctx context.Context
 			Namespace:    dbNb.Namespace,
 		}); err != nil {
 			logx.Error("删除Notebook SSH密码Secret失败", err)
-			errs = append(errs, err)
 		}
 	}
 
