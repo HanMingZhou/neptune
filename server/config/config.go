@@ -43,4 +43,7 @@ type Server struct {
 
 	// SSHPiper 配置
 	SSHPiper SSHPiper `mapstructure:"sshpiper" json:"sshpiper" yaml:"sshpiper"`
+
+	// Notebook 运行时配置
+	Notebook Notebook `mapstructure:"notebook" json:"notebook" yaml:"notebook"`
 }

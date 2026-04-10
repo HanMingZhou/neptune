@@ -8,16 +8,17 @@ import (
 
 // Default 默认值
 const (
-	Workspace               = "workspace"
-	DefaultNamespace        = "default"
-	DefaultImage            = "kubeflownotebookswg/jupyter-scipy:v1.9.2"
-	DefaultCPU              = "1"
-	DefaultMemory           = "2Gi"
-	DefaultWorkspaceSize    = 10
-	DefaultWorkspacePath    = "/home/system"
-	DefaultStorageClass     = "standard"
-	DefaultTensorboardImage = "tensorflow/tensorflow:2.1.0"
-	DefaultDataMountPath    = "/home/notebook/neptune"
+	Workspace                           = "workspace"
+	DefaultNamespace                    = "default"
+	DefaultImage                        = "kubeflownotebookswg/jupyter-scipy:v1.9.2"
+	DefaultCPU                          = "1"
+	DefaultMemory                       = "2Gi"
+	DefaultWorkspaceSize                = 10
+	DefaultWorkspacePath                = "/home/workspace"
+	DefaultStorageClass                 = "standard"
+	DefaultTensorboardImage             = "tensorflow/tensorflow:2.1.0"
+	DefaultDataMountPath                = "/home/notebook/neptune"
+	DefaultNotebookEphemeralStorageSize = "50Gi"
 )
 
 // 卷类型常量

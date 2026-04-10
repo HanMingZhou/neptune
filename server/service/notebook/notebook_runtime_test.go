@@ -6,6 +6,7 @@ import (
 	nbModel "gin-vue-admin/model/notebook"
 
 	"github.com/stretchr/testify/require"
+	corev1 "k8s.io/api/core/v1"
 )
 
 func TestBuildNotebookNormalizesDuplicateVolumeMounts(t *testing.T) {
@@ -60,7 +61,11 @@ func TestBuildNotebookNormalizesDuplicateVolumeMounts(t *testing.T) {
 	container := notebookObj.Spec.Template.Spec.Containers[0]
 
 	volumeClaims := make(map[string]string)
+	workspaceVolume := corev1.Volume{}
 	for _, volume := range notebookObj.Spec.Template.Spec.Volumes {
+		if volume.Name == nbModel.Workspace {
+			workspaceVolume = volume
+		}
 		if volume.PersistentVolumeClaim == nil {
 			continue
 		}
@@ -72,12 +77,41 @@ func TestBuildNotebookNormalizesDuplicateVolumeMounts(t *testing.T) {
 		mountPaths[mount.Name] = mount.MountPath
 	}
 
-	require.Equal(t, "notebook-a42a9b-workspace", volumeClaims[nbModel.Workspace])
+	require.NotNil(t, workspaceVolume.EmptyDir)
+	require.NotNil(t, workspaceVolume.EmptyDir.SizeLimit)
+	require.Equal(t, "20Gi", workspaceVolume.EmptyDir.SizeLimit.String())
 	require.Equal(t, nbModel.DefaultWorkspacePath, mountPaths[nbModel.Workspace])
 	require.Equal(t, "vol-1767888821-dqcm", volumeClaims["hmz"])
 	require.Equal(t, "/home/notebook/123", mountPaths["hmz"])
 	require.Equal(t, "vol-1775182658-plxm", volumeClaims["111"])
 	require.Equal(t, "/home/notebook/neptune", mountPaths["111"])
-	require.Len(t, volumeClaims, 3)
+	require.Len(t, volumeClaims, 2)
 	require.Len(t, mountPaths, 4)
+}
+
+func TestGetNotebookTensorboardLogsPathRequiresPersistentMount(t *testing.T) {
+	svc := &NotebookService{}
+	nbRef := &nbModel.Notebook{
+		VolumeMounts: []nbModel.NotebookVolume{
+			{
+				Name:       nbModel.Workspace,
+				MountsPath: nbModel.DefaultWorkspacePath,
+				Type:       nbModel.Workspace,
+				Size:       50,
+			},
+			{
+				Name:       "dataset",
+				MountsPath: "/data",
+				Type:       nbModel.VolumeTypeDataset,
+				PVCId:      1,
+				PVCName:    "vol-1",
+			},
+		},
+	}
+
+	nbRef.TensorboardLogPath = "logs"
+	require.Equal(t, "", svc.getNotebookTensorboardLogsPath(nbRef))
+
+	nbRef.TensorboardLogPath = "/data/tensorboard/run1"
+	require.Equal(t, "pvc://vol-1/tensorboard/run1", svc.getNotebookTensorboardLogsPath(nbRef))
 }

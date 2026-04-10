@@ -17,7 +17,6 @@ import (
 	productModel "gin-vue-admin/model/product"
 	productRes "gin-vue-admin/model/product/response"
 	pvcModelPkg "gin-vue-admin/model/pvc"
-	pvcModel "gin-vue-admin/model/pvc/request"
 	secretModelPkg "gin-vue-admin/model/secret"
 	secretModel "gin-vue-admin/model/secret/request"
 	systemModel "gin-vue-admin/model/system"
@@ -27,7 +26,6 @@ import (
 	"gin-vue-admin/service/piper"
 	"gin-vue-admin/service/podgroup"
 	"gin-vue-admin/service/product"
-	"gin-vue-admin/service/pvc"
 	"gin-vue-admin/service/secret"
 	"gin-vue-admin/service/tensorboard"
 	helper "gin-vue-admin/utils/k8s"
@@ -37,7 +35,6 @@ import (
 	"io"
 	"net"
 	"net/url"
-	"path"
 	"strings"
 	"time"
 
@@ -47,6 +44,7 @@ import (
 	"gorm.io/gorm"
 	corev1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
+	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
 	"k8s.io/client-go/kubernetes"
@@ -90,7 +88,6 @@ type notebookCreateState struct {
 	imageAddr         string
 	sshPublicKey      string
 	cluster           *global.ClusterClientInfo
-	pvcManager        *pvc.K8sPVCService
 	secretManager     *secret.K8sSecretService
 	nbRef             *nbModel.Notebook
 	privKeySecretName string
@@ -144,14 +141,26 @@ func (nb *NotebookService) validateCreateRequest(req *request.AddNoteBookReq) er
 	mountsPaths[nbModel.DefaultWorkspacePath] = true
 
 	for _, mount := range req.VolumeMounts {
-		// 如果用户没有填写，默认挂载到 /home/notebook/neptune-fs
+		// 如果用户没有填写，默认挂载到 /home/notebook/neptune
 		if mount.MountsPath == "" {
 			mount.MountsPath = nbModel.DefaultDataMountPath
 		}
-		// 如果是相对路径（不以 / 开头），加上 workspace 前缀
+
+		// 校验挂载路径是否包含系统盘路径
+		if strings.Contains(mount.MountsPath, nbModel.DefaultWorkspacePath) {
+			return errors.New("Workspace 系统盘不能被挂载")
+		}
+
+		// 如果是相对路径（不以 / 开头），加上 DefaultDataMountPath 前缀
 		// 如果是绝对路径（以 / 开头），则保持原样，尊重用户的选择
 		if !strings.HasPrefix(mount.MountsPath, "/") {
-			mount.MountsPath = path.Join(nbModel.DefaultWorkspacePath, mount.MountsPath)
+			paths := strings.TrimPrefix(nbModel.DefaultDataMountPath, "/")
+			splits := strings.Split(paths, "/")
+			if len(splits) >= 3 {
+				mount.MountsPath = splits[0] + splits[1] + "/" + mount.MountsPath
+			} else {
+				mount.MountsPath = nbModel.DefaultDataMountPath + "/" + mount.MountsPath
+			}
 		}
 
 		// 1. 调用通用路径验证器
@@ -167,7 +176,7 @@ func (nb *NotebookService) validateCreateRequest(req *request.AddNoteBookReq) er
 		}
 		mountsPaths[mount.MountsPath] = true
 	}
-	// 验证TensorBoard日志路径安全性（相对路径）
+	// 验证TensorBoard日志路径安全性
 	if req.TensorBoard && req.TensorBoardLogPath != "" {
 		if err := validator.ValidateSubPath(req.TensorBoardLogPath); err != nil {
 			logx.Error("TensorBoard路径验证失败", err)
@@ -205,10 +214,6 @@ func (nb *NotebookService) CreateNotebook(ctx context.Context, req *request.AddN
 	}
 
 	if err = nb.ensureNotebookNamespace(ctx, state.cluster.ClientSet, state.nbRef.Namespace); err != nil {
-		return err
-	}
-
-	if err = nb.createNotebookPVCResources(ctx, state, &cleanups); err != nil {
 		return err
 	}
 
@@ -310,7 +315,7 @@ func (nb *NotebookService) buildCreateNotebookState(ctx context.Context, req *re
 		return nil, err
 	}
 
-	volumeMounts, err := nb.buildNotebookVolumeMounts(req, nbRef.InstanceName)
+	volumeMounts, err := nb.buildNotebookVolumeMounts(ctx, req, cluster, nbRef.Namespace, nbRef.ClusterID)
 	if err != nil {
 		return nil, err
 	}
@@ -323,7 +328,6 @@ func (nb *NotebookService) buildCreateNotebookState(ctx context.Context, req *re
 		imageAddr:     imageAddr,
 		sshPublicKey:  sshPublicKey,
 		cluster:       cluster,
-		pvcManager:    pvc.NewK8sPVCManager(cluster.ClientSet),
 		secretManager: secret.NewK8sSecretManager(cluster.ClientSet),
 		nbRef:         nbRef,
 	}, nil
@@ -421,7 +425,7 @@ func (nb *NotebookService) buildNotebookRecord(
 		VGPUNumber:         productInfo.VGPUNumber,
 		VGPUMemory:         productInfo.VGPUMemory,
 		VGPUCores:          productInfo.VGPUCores,
-		StorageSize:        nbModel.DefaultWorkspaceSize,
+		StorageSize:        notebookEphemeralStorageSizeGi(),
 		Status:             consts.NotebookStatusCreating,
 		UserId:             req.UserId,
 		ClusterID:          productInfo.ClusterId,
@@ -446,14 +450,19 @@ func (nb *NotebookService) buildNotebookRecord(
 	return nbRef, nil
 }
 
-func (nb *NotebookService) buildNotebookVolumeMounts(req *request.AddNoteBookReq, instanceName string) ([]nbModel.NotebookVolume, error) {
+func (nb *NotebookService) buildNotebookVolumeMounts(
+	ctx context.Context,
+	req *request.AddNoteBookReq,
+	cluster *global.ClusterClientInfo,
+	namespace string,
+	clusterID uint,
+) ([]nbModel.NotebookVolume, error) {
 	dbVolumeMounts := []nbModel.NotebookVolume{
 		{
 			Name:       nbModel.Workspace,
 			MountsPath: nbModel.DefaultWorkspacePath,
-			Size:       nbModel.DefaultWorkspaceSize,
+			Size:       notebookEphemeralStorageSizeGi(),
 			Type:       nbModel.Workspace,
-			PVCName:    fmt.Sprintf("%s-%s", instanceName, nbModel.Workspace),
 		},
 	}
 
@@ -462,10 +471,9 @@ func (nb *NotebookService) buildNotebookVolumeMounts(req *request.AddNoteBookReq
 			continue
 		}
 
-		var vol pvcModelPkg.Volume
-		if err := global.GVA_DB.Where("id = ?", mount.PVCId).First(&vol).Error; err != nil {
-			logx.Error("数据盘不存在", err)
-			return nil, errors.New("数据盘不存在")
+		vol, err := nb.loadValidatedNotebookPersistentVolume(ctx, cluster, namespace, clusterID, mount.PVCId)
+		if err != nil {
+			return nil, err
 		}
 
 		dbVolumeMounts = append(dbVolumeMounts, nbModel.NotebookVolume{
@@ -481,6 +489,90 @@ func (nb *NotebookService) buildNotebookVolumeMounts(req *request.AddNoteBookReq
 	return dbVolumeMounts, nil
 }
 
+func (nb *NotebookService) loadValidatedNotebookPersistentVolume(
+	ctx context.Context,
+	cluster *global.ClusterClientInfo,
+	namespace string,
+	clusterID uint,
+	volumeID uint,
+) (*pvcModelPkg.Volume, error) {
+	var vol pvcModelPkg.Volume
+	if err := global.GVA_DB.Where("id = ?", volumeID).First(&vol).Error; err != nil {
+		logx.Error("数据盘不存在", err)
+		return nil, errors.New("数据盘不存在")
+	}
+
+	if vol.ClusterId != clusterID {
+		return nil, errors.New("所选数据盘与容器实例集群不匹配")
+	}
+	if strings.TrimSpace(vol.Namespace) != strings.TrimSpace(namespace) {
+		return nil, errors.New("所选数据盘与容器实例命名空间不匹配")
+	}
+	if strings.TrimSpace(vol.PVCName) == "" {
+		return nil, errors.New("所选数据盘缺少PVC信息")
+	}
+	if cluster == nil || cluster.ClientSet == nil {
+		return nil, errors.New("集群不可用")
+	}
+	if _, err := cluster.ClientSet.CoreV1().PersistentVolumeClaims(namespace).Get(ctx, vol.PVCName, metav1.GetOptions{}); err != nil {
+		if apierrors.IsNotFound(err) {
+			return nil, errors.Errorf("挂载的数据盘不存在: %s (PVC: %s)", vol.Name, vol.PVCName)
+		}
+		return nil, errors.Wrap(err, "校验数据盘失败")
+	}
+
+	return &vol, nil
+}
+
+func (nb *NotebookService) validateAndNormalizeNotebookPersistentVolumeMounts(
+	ctx context.Context,
+	dbNb *nbModel.Notebook,
+	cluster *global.ClusterClientInfo,
+) error {
+	if dbNb == nil {
+		return nil
+	}
+	if cluster == nil || cluster.ClientSet == nil {
+		return errors.New("集群不可用")
+	}
+
+	normalized := make([]nbModel.NotebookVolume, 0, len(dbNb.VolumeMounts))
+	for _, mount := range dbNb.VolumeMounts {
+		if isWorkspaceNotebookVolume(mount) {
+			normalized = append(normalized, mount)
+			continue
+		}
+
+		if mount.PVCId == 0 {
+			if strings.TrimSpace(mount.PVCName) == "" {
+				return errors.Errorf("挂载的数据盘缺少PVC信息: %s", mount.Name)
+			}
+			if _, err := cluster.ClientSet.CoreV1().PersistentVolumeClaims(dbNb.Namespace).Get(ctx, mount.PVCName, metav1.GetOptions{}); err != nil {
+				if apierrors.IsNotFound(err) {
+					return errors.Errorf("挂载的数据盘不存在: %s (PVC: %s)", mount.Name, mount.PVCName)
+				}
+				return errors.Wrap(err, "校验数据盘失败")
+			}
+			normalized = append(normalized, mount)
+			continue
+		}
+
+		vol, err := nb.loadValidatedNotebookPersistentVolume(ctx, cluster, dbNb.Namespace, dbNb.ClusterID, mount.PVCId)
+		if err != nil {
+			return err
+		}
+
+		mount.Name = vol.Name
+		mount.Size = vol.Size
+		mount.Type = pvcModelPkg.VolumeTypeToString[vol.Type]
+		mount.PVCName = vol.PVCName
+		normalized = append(normalized, mount)
+	}
+
+	dbNb.VolumeMounts = normalized
+	return nil
+}
+
 func (nb *NotebookService) ensureNotebookNamespace(ctx context.Context, clientSet *kubernetes.Clientset, namespace string) error {
 	if _, err := clientSet.CoreV1().Namespaces().Get(ctx, namespace, metav1.GetOptions{}); err != nil {
 		if !apierrors.IsNotFound(err) {
@@ -492,43 +584,6 @@ func (nb *NotebookService) ensureNotebookNamespace(ctx context.Context, clientSe
 			return err
 		}
 	}
-	return nil
-}
-
-func (nb *NotebookService) createNotebookPVCResources(ctx context.Context, state *notebookCreateState, cleanups *Cleanups) error {
-	var pvcMounts []*pvcModel.VolumeMountReq
-	for _, mount := range state.nbRef.VolumeMounts {
-		if mount.Type != nbModel.Workspace {
-			continue
-		}
-		pvcMounts = append(pvcMounts, &pvcModel.VolumeMountReq{
-			Name:       mount.Name,
-			MountsPath: mount.MountsPath,
-			Size:       mount.Size,
-			PVCId:      0,
-			Type:       mount.Type,
-			PVCName:    mount.PVCName,
-		})
-	}
-
-	pvcReq := &pvcModel.AddPVCReq{
-		InstanceName: state.nbRef.InstanceName,
-		Namespace:    state.nbRef.Namespace,
-		ClusterId:    state.nbRef.ClusterID,
-		VolumeMounts: pvcMounts,
-	}
-	if err := state.pvcManager.CreatePVCs(ctx, pvcReq, consts.NotebookInstance); err != nil {
-		logx.Error("创建PVC失败", err)
-		return err
-	}
-
-	cleanups.Add(func(cleanupCtx context.Context) {
-		_ = state.pvcManager.DeletePVCs(cleanupCtx, &pvcModel.DeletePVCReq{
-			InstanceName: state.nbRef.InstanceName,
-			Namespace:    state.nbRef.Namespace,
-		}, consts.NotebookInstance)
-	})
-
 	return nil
 }
 
@@ -815,11 +870,27 @@ func (nb *NotebookService) createNotebookAccessRoute(ctx context.Context, nbRef 
 }
 
 func (nb *NotebookService) getNotebookTensorboardLogsPath(nbRef *nbModel.Notebook) string {
-	subPath := strings.TrimPrefix(nbRef.TensorboardLogPath, "/")
-	if subPath == "" {
-		subPath = consts.DefaultTensorBoardLogsPath
+	logPath := strings.TrimSpace(nbRef.TensorboardLogPath)
+	if !strings.HasPrefix(logPath, "/") {
+		return ""
 	}
-	return fmt.Sprintf("pvc://%s-%s/%s", nbRef.InstanceName, nbModel.Workspace, subPath)
+
+	for _, mount := range normalizeNotebookRuntimeVolumeMounts(nbRef) {
+		if isWorkspaceNotebookVolume(mount) || strings.TrimSpace(mount.PVCName) == "" {
+			continue
+		}
+		if !strings.HasPrefix(logPath, mount.MountsPath) {
+			continue
+		}
+
+		subPath := strings.Trim(strings.TrimPrefix(logPath, mount.MountsPath), "/")
+		if subPath == "" {
+			subPath = consts.DefaultTensorBoardLogsPath
+		}
+		return fmt.Sprintf("pvc://%s/%s", mount.PVCName, subPath)
+	}
+
+	return ""
 }
 
 // createOptionalResources 创建可选资源（Tensorboard、SSH Pipe），失败不影响主流程
@@ -847,6 +918,10 @@ func (nb *NotebookService) createNotebookTensorboardResources(
 	tensorboardClient *global.TensorboardClient,
 ) {
 	logsPath := nb.getNotebookTensorboardLogsPath(nbRef)
+	if logsPath == "" {
+		logx.Error("Notebook TensorBoard 需要使用持久化数据卷上的绝对日志路径，当前默认临时工作区不支持")
+		return
+	}
 	tbInstanceName := fmt.Sprintf("%s-tb", nbRef.InstanceName)
 	if tensorboardClient == nil {
 		logx.Error("Tensorboard客户端未初始化")
@@ -1266,15 +1341,6 @@ func (nb *NotebookService) deleteNotebookPersistentResources(ctx context.Context
 	}
 
 	var errs []error
-
-	pvcMgr := pvc.NewK8sPVCManager(cluster.ClientSet)
-	if err := pvcMgr.DeletePVCs(ctx, &pvcModel.DeletePVCReq{
-		InstanceName: dbNb.InstanceName,
-		Namespace:    dbNb.Namespace,
-	}, consts.NotebookInstance); err != nil {
-		logx.Error("删除Notebook PVC失败", err)
-		errs = append(errs, err)
-	}
 
 	secretMgr := secret.NewK8sSecretManager(cluster.ClientSet)
 	if dbNb.SSHKeyId > 0 {
@@ -1851,15 +1917,20 @@ func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string) *nbv1.Notebook 
 
 	// 1. 处理所有挂载 (包括 workspace)
 	for _, m := range normalizeNotebookRuntimeVolumeMounts(nbRef) {
-		pvcName := m.PVCName
-		if pvcName == "" {
-			pvcName = fmt.Sprintf("%s-%s", nbRef.InstanceName, m.Name)
+		if isWorkspaceNotebookVolume(m) {
+			volumes = append(volumes, buildNotebookWorkspaceVolume(nbRef))
+			volumeMounts = append(volumeMounts, corev1.VolumeMount{
+				Name:      nbModel.Workspace,
+				MountPath: nbModel.DefaultWorkspacePath,
+			})
+			continue
 		}
+
 		volumes = append(volumes, corev1.Volume{
 			Name: m.Name,
 			VolumeSource: corev1.VolumeSource{
 				PersistentVolumeClaim: &corev1.PersistentVolumeClaimVolumeSource{
-					ClaimName: pvcName,
+					ClaimName: m.PVCName,
 				},
 			},
 		})
@@ -1933,6 +2004,9 @@ func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string) *nbv1.Notebook 
 		VGPUCores:  nbRef.VGPUCores,
 	}
 	resourceReqs := helper.BuildResources(productSpec)
+	ephemeralQty := notebookEphemeralStorageQuantity()
+	resourceReqs.Limits[corev1.ResourceEphemeralStorage] = ephemeralQty
+	resourceReqs.Requests[corev1.ResourceEphemeralStorage] = ephemeralQty
 
 	// 构建 Labels
 	labels := podgroup.BuildVolcanoLabels(
@@ -1993,7 +2067,6 @@ func normalizeNotebookRuntimeVolumeMounts(nbRef *nbModel.Notebook) []nbModel.Not
 		MountsPath: nbModel.DefaultWorkspacePath,
 		Size:       resolveNotebookWorkspaceSize(nbRef),
 		Type:       nbModel.Workspace,
-		PVCName:    fmt.Sprintf("%s-%s", nbRef.InstanceName, nbModel.Workspace),
 	}
 
 	normalized := []nbModel.NotebookVolume{workspace}
@@ -2035,17 +2108,21 @@ func normalizeNotebookRuntimeVolumeMounts(nbRef *nbModel.Notebook) []nbModel.Not
 
 func resolveNotebookWorkspaceSize(nbRef *nbModel.Notebook) int64 {
 	if nbRef == nil {
-		return nbModel.DefaultWorkspaceSize
+		return notebookEphemeralStorageSizeGi()
 	}
 
 	size := nbRef.StorageSize
 	if size <= 0 {
-		size = nbModel.DefaultWorkspaceSize
+		size = notebookEphemeralStorageSizeGi()
 	}
 
-	expectedPVCName := fmt.Sprintf("%s-%s", nbRef.InstanceName, nbModel.Workspace)
 	for _, mount := range nbRef.VolumeMounts {
-		if isWorkspaceNotebookVolume(mount) && mount.Size > 0 && strings.TrimSpace(mount.PVCName) == expectedPVCName {
+		if mount.MountsPath == nbModel.DefaultWorkspacePath && mount.Size > 0 {
+			return mount.Size
+		}
+	}
+	for _, mount := range nbRef.VolumeMounts {
+		if isWorkspaceNotebookVolume(mount) && mount.Size > 0 {
 			return mount.Size
 		}
 	}
@@ -2054,6 +2131,43 @@ func resolveNotebookWorkspaceSize(nbRef *nbModel.Notebook) int64 {
 
 func isWorkspaceNotebookVolume(mount nbModel.NotebookVolume) bool {
 	return mount.Type == nbModel.Workspace || mount.Name == nbModel.Workspace || mount.MountsPath == nbModel.DefaultWorkspacePath
+}
+
+func buildNotebookWorkspaceVolume(nbRef *nbModel.Notebook) corev1.Volume {
+	sizeLimit := resource.MustParse(fmt.Sprintf("%dGi", resolveNotebookWorkspaceSize(nbRef)))
+	return corev1.Volume{
+		Name: nbModel.Workspace,
+		VolumeSource: corev1.VolumeSource{
+			EmptyDir: &corev1.EmptyDirVolumeSource{
+				SizeLimit: &sizeLimit,
+			},
+		},
+	}
+}
+
+func notebookEphemeralStorageSize() string {
+	size := strings.TrimSpace(global.GVA_CONFIG.Notebook.EphemeralStorageSize)
+	if size == "" {
+		return nbModel.DefaultNotebookEphemeralStorageSize
+	}
+	if _, err := resource.ParseQuantity(size); err != nil {
+		logx.Error("Notebook ephemeral-storage-size 配置非法，回退默认值", logx.Field("value", size), logx.Field("err", err))
+		return nbModel.DefaultNotebookEphemeralStorageSize
+	}
+	return size
+}
+
+func notebookEphemeralStorageQuantity() resource.Quantity {
+	return resource.MustParse(notebookEphemeralStorageSize())
+}
+
+func notebookEphemeralStorageSizeGi() int64 {
+	quantity := notebookEphemeralStorageQuantity()
+	sizeGi := quantity.Value() / (1024 * 1024 * 1024)
+	if sizeGi <= 0 {
+		return 50
+	}
+	return sizeGi
 }
 
 // sshSetupScript 配置 sshd（密码认证、root 登录、密码设置、公钥安装）
@@ -2395,6 +2509,9 @@ func (nb *NotebookService) StartNotebook(ctx context.Context, id uint) (err erro
 	cluster := global.GVA_K8S_CLUSTER_MANAGER.GetCluster(dbNb.ClusterID)
 	if cluster == nil {
 		return errors.New("集群不存在")
+	}
+	if err = nb.validateAndNormalizeNotebookPersistentVolumeMounts(ctx, &dbNb, cluster); err != nil {
+		return err
 	}
 
 	// 定义清理函数栈，用于发生错误时回滚

@@ -90,6 +90,9 @@ system:
     #  禁用自动迁移数据库表结构，生产环境建议设为true，手动迁移
     disable-auto-migrate: false
 
+notebook:
+    ephemeral-storage-size: 50Gi
+
 # captcha configuration
 captcha:
     key-long: 6

@@ -88,6 +88,9 @@ system:
     #  严格角色模式 打开后权限将会存在上下级关系
     use-strict-auth: false
 
+notebook:
+    ephemeral-storage-size: 50Gi
+
 # captcha configuration
 captcha:
     key-long: 6
