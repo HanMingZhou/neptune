@@ -31,7 +31,8 @@ USER root
 RUN rm /etc/nginx/conf.d/default.conf
 
 COPY --from=builder /build/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# 默认部署配置；docker compose 会复用同一份，K8s 运行时由 ConfigMap 覆盖
+COPY nginx.deploy.conf /etc/nginx/conf.d/default.conf
 
 RUN chown -R 101:0 /usr/share/nginx/html /etc/nginx/conf.d \
     && chmod -R g=u /usr/share/nginx/html /etc/nginx/conf.d

@@ -41,7 +41,7 @@ services:
     ports:
       - '8080:8080'
     volumes:
-      - ../../web/nginx.compose.conf:/etc/nginx/conf.d/default.conf:ro
+      - ../../web/nginx.deploy.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
       neptune-net:
         ipv4_address: 177.7.0.11

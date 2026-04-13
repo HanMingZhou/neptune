@@ -25,7 +25,7 @@ spec:
       containers:
         - name: neptune-server
           # 请替换为您实际的镜像仓库地址
-          image: your-registry.com/neptune/server:latest
+          image: hanhuohuo/neptune-server:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8888

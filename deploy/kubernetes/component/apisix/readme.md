@@ -31,8 +31,8 @@ APISIX 在本系统中承担**统一网关**的角色，处理所有进入集群
           │                     │
           ▼                     ▼
   Notebook Service         SSHPiper
-  (JupyterLab / TB)      (SSH 路由分发)
-                                │
+  (JupyterLab/ )         (SSH 路由分发)
+   TensorBoard                  │
                                 ▼
                           Notebook Pod
                            (sshd:22)
@@ -96,7 +96,7 @@ APISIX 在本系统中承担**统一网关**的角色，处理所有进入集群
                          │
                          ▼
    ② proxy-rewrite 插件（路径重写）
-   /tensorboard/cai xu kun/notebook-xxx/(.*) → /$1
+   /tensorboard/caixukun/notebook-xxx/(.*) → /$1
                          │
                          ▼
    ③ 转发到后端
@@ -133,7 +133,7 @@ APISIX 在 SSH 链路中只扮演**入口**角色 —— 把集群外的 TCP 流
                   1 个 Stream Route              N 个 Pipe（每个 Notebook 一个）
                  ┌──────────────┐          ┌──────────────────────────────────┐
                  │              │          │                                  │
-外部 :22 ──TCP→ APISIX ──TCP→ SSHPiper ──┬──. Pipe: user=caixukun-nb-aaa → Pod-A    │
+外部 :22 ──TCP→ APISIX ──TCP→ SSHPiper ──┬─ Pipe: user=caixukun-nb-aaa → Pod-A    │
                  │              │          ├── Pipe: user=caixukun-nb-bbb → Pod-B  │
                  │              │          └── Pipe: user=dev-nb-ccc → Pod-C  │
                  └──────────────┘          └──────────────────────────────────┘

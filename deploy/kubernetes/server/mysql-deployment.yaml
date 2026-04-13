@@ -7,7 +7,7 @@ metadata:
     app: neptune-mysql
     app.kubernetes.io/name: neptune-mysql
     app.kubernetes.io/component: database
-    app.kubernetes.io/version: "9.6.0"
+    app.kubernetes.io/version: "8.0"
 spec:
   replicas: 1
   strategy:
@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: mysql:9.6.0
+          image: mysql:8.0
           imagePullPolicy: IfNotPresent
           args:
             - "--character-set-server=utf8mb4"

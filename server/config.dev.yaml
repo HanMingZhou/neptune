@@ -23,8 +23,8 @@ redis:
     #是否使用redis集群模式
     useCluster: false
     #使用集群模式addr和db默认无效
-    addr: 10.255.141.8:30031
-    password: ""
+    addr: 127.0.0.1:6379
+    password: "123456"
     db: 0
     clusterAddrs:
         - "172.21.0.3:7000"
@@ -35,8 +35,8 @@ redis:
 redis-list:
     - name: cache           # 数据库的名称,注意: name 需要在 redis-list 中唯一
       useCluster: false     # 是否使用redis集群模式
-      addr: 10.255.141.8:30031  # 使用集群模式addr和db默认无效
-      password: ""
+      addr: 127.0.0.1:6379  # 使用集群模式addr和db默认无效
+      password: "123456"
       db: 0
       clusterAddrs:
           - "172.21.0.3:7000"
@@ -104,8 +104,8 @@ captcha:
 # mysql connect configuration
 # 未初始化之前请勿手动修改数据库信息！！！如果一定要手动初始化请看（https://gin-vue-admin.com/docs/first_master）
 mysql:
-    path: "10.255.141.8"
-    port: "30030"
+    path: "127.0.0.1"
+    port: "3306"
     config: "charset=utf8mb4&parseTime=True&loc=Local"
     db-name: "aiInfra"
     username: "root"

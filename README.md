@@ -158,12 +158,9 @@ neptune/
 │   │   ├── view/            # 页面视图
 │   │   └── router/          # 前端路由
 │   ├── Dockerfile           # 前端镜像构建
-│   ├── nginx.conf           # K8s 前端 Nginx 配置
-│   ├── nginx.compose.conf   # Compose 前端 Nginx 配置
-│   └── nginx.single.conf    # All-in-One 前端 Nginx 配置
+│   └── nginx.deploy.conf    # 部署态前端 Nginx 配置（docker compose/容器直连调试）
 │
 ├── deploy/                  # 部署配置
-│   ├── docker/              # All-in-One Docker 构建
 │   ├── docker-compose/      # Docker Compose 部署（含 APISIX 网关）
 │   │   ├── docker-compose.yaml
 │   │   ├── config.yaml
@@ -288,6 +285,8 @@ docker compose -f deploy/docker-compose/docker-compose.yaml up -d --build
 
 适用于**生产环境**。
 
+`deploy_all.sh` 只负责部署基础组件，不会自动部署 Neptune 平台自己的前后端服务和平台入口路由。
+
 **1. 部署依赖组件**
 
 ```bash
@@ -295,14 +294,28 @@ docker compose -f deploy/docker-compose/docker-compose.yaml up -d --build
 bash deploy/kubernetes/component/deploy_all.sh
 ```
 
-**2. 部署 Neptune 服务**
+**2. 创建 Neptune 命名空间**
 
 ```bash
-# 部署后端
-kubectl apply -f deploy/kubernetes/server/
+kubectl apply -f deploy/kubernetes/namespace.yaml
+```
 
-# 部署前端
+**3. 部署后端**
+
+```bash
+kubectl apply -f deploy/kubernetes/server/
+```
+
+**4. 部署前端**
+
+```bash
 kubectl apply -f deploy/kubernetes/web/
+```
+
+**5. 部署平台 APISIX 入口路由**
+
+```bash
+kubectl apply -f deploy/kubernetes/component/apisix/neptune-platform-route.yaml
 ```
 
 > 📝 部署前请修改 Deployment 中的镜像地址和 Ingress 域名
@@ -319,6 +332,9 @@ kubectl apply -f deploy/kubernetes/web/
 | `deploy/docker-compose/apisix/config.yaml` | Compose 下 APISIX 运行配置（standalone） |
 | `deploy/docker-compose/apisix/apisix.yaml` | Compose 下 APISIX 路由配置 |
 | `deploy/kubernetes/server/gva-server-configmap.yaml` | K8s 环境配置 |
+| `deploy/kubernetes/web/neptune-web-nginx-configmap.yaml` | K8s 前端 Nginx 配置 |
+
+> 本地开发默认走 Vite dev server，不使用 Nginx。
 
 ### 关键配置项
 
@@ -350,4 +366,3 @@ sshpiper:
 ## 📄 License
 
 Proprietary - All Rights Reserved
-

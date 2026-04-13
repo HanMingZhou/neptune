@@ -23,7 +23,7 @@ spec:
       containers:
         - name: neptune-web
           # 请替换为您实际的镜像仓库地址
-          image: your-registry.com/neptune/web:latest
+          image: hanhuohuo/neptune-web:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

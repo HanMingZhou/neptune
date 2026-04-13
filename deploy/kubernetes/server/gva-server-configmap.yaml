@@ -118,6 +118,7 @@ data:
     # apisix configuration
     apisix:
         enabled: true
+        # APISIX 对外访问域名或地址；如果部署前未知，可先留空，待网关地址确定后回填
         base-domain: ""
         gateway-namespace: "apisix"
         auth-enabled: true
@@ -126,5 +127,7 @@ data:
 
     # sshpiper configuration
     sshpiper:
-        host: ""
-        port: 0
+        # SSH 对外访问地址；留空时回退到 apisix.base-domain
+        host: "127.0.0.1"
+        # SSH 统一经 APISIX 对外暴露时，通常使用 22 端口
+        port: 2222

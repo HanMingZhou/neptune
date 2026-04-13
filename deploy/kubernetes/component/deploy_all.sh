@@ -56,8 +56,13 @@ DEPLOY_KUBEFLOW="${DEPLOY_KUBEFLOW:-}"
 DEPLOY_APISIX="${DEPLOY_APISIX:-}"
 DEPLOY_SSHPIPER="${DEPLOY_SSHPIPER:-}"
 
+function to_lower() {
+    printf '%s' "$1" | tr '[:upper:]' '[:lower:]'
+}
+
 function is_truthy() {
-    local value="${1,,}"
+    local value
+    value="$(to_lower "$1")"
     case "$value" in
         1|true|yes|y|on)
             return 0
@@ -69,7 +74,8 @@ function is_truthy() {
 }
 
 function is_falsy() {
-    local value="${1,,}"
+    local value
+    value="$(to_lower "$1")"
     case "$value" in
         0|false|no|n|off)
             return 0
@@ -124,7 +130,7 @@ function prompt_component_selection() {
 
     while true; do
         read -r -p "是否部署 ${component_name} ? [y/n]: " answer
-        case "${answer,,}" in
+        case "$(to_lower "$answer")" in
             y|yes)
                 printf -v "$env_name" '%s' "true"
                 return 0
