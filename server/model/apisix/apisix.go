@@ -13,15 +13,6 @@ const (
 
 	// DefaultSSHIngressPort Apisix stream proxy 在 Pod 内部监听的 SSH 入口端口
 	DefaultSSHIngressPort = 9100
-
-	// DefaultAdminServiceName APISIX Admin API 在集群内的默认 Service 名称
-	DefaultAdminServiceName = "apisix-admin"
-
-	// DefaultAdminServicePort APISIX Admin API 在集群内的默认 Service 端口
-	DefaultAdminServicePort = 9180
-
-	// DefaultAdminKey APISIX Admin API 默认管理密钥
-	DefaultAdminKey = "edd1c9f034335f136f87ad84b625c8f1"
 )
 
 // ApisixConfig Apisix 配置
