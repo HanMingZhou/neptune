@@ -269,7 +269,7 @@ func (m *ApisixService) CreateStreamRoute(ctx context.Context, req *apisixReq.Cr
 			Labels:    req.Labels,
 		},
 		Spec: apisixv2.ApisixRouteSpec{
-			IngressClassName: "Apisix",
+			IngressClassName: "apisix", // Keep consistent with working HTTP routes
 			Stream:           []apisixv2.ApisixRouteStream{streamRoute},
 		},
 	}
@@ -287,7 +287,7 @@ func (m *ApisixService) CreateStreamRoute(ctx context.Context, req *apisixReq.Cr
 		}
 
 		existing.Labels = req.Labels
-		existing.Spec.IngressClassName = "Apisix"
+		existing.Spec.IngressClassName = "apisix"
 		existing.Spec.Stream = []apisixv2.ApisixRouteStream{streamRoute}
 		if _, updateErr := cluster.ApisixClient.ApisixV2().ApisixRoutes(req.Namespace).Update(ctx, existing, metav1.UpdateOptions{}); updateErr != nil {
 			return errors.Errorf("更新 ApisixRoute (Stream) 失败: %v", updateErr)
