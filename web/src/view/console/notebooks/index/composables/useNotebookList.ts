@@ -20,6 +20,29 @@ type ButtonLoadingState = Partial<Record<ResourceId, boolean>>
 const normalizeStatus = (status: unknown): string =>
   `${status || ''}`.trim().toUpperCase()
 
+const fallbackCopyText = (text: string): boolean => {
+  if (typeof document === 'undefined') return false
+
+  const textarea = document.createElement('textarea')
+  textarea.value = text
+  textarea.setAttribute('readonly', 'true')
+  textarea.style.position = 'fixed'
+  textarea.style.top = '-9999px'
+  textarea.style.left = '-9999px'
+
+  document.body.appendChild(textarea)
+  textarea.focus()
+  textarea.select()
+
+  try {
+    return document.execCommand('copy')
+  } catch {
+    return false
+  } finally {
+    document.body.removeChild(textarea)
+  }
+}
+
 export const useNotebookList = () => {
   const t = inject<Translator>('t', (key) => key)
   const router = useRouter()
@@ -183,17 +206,25 @@ export const useNotebookList = () => {
     showSSHDialog.value = true
   }
 
-  const copyText = (text?: string): void => {
+  const copyText = async (text?: string): Promise<void> => {
     if (!text) return
 
-    void navigator.clipboard
-      .writeText(text)
-      .then(() => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(text)
         ElMessage.success(t('copied'))
-      })
-      .catch(() => {
-        ElMessage.error(t('copyFailed'))
-      })
+        return
+      } catch {
+        // Fallback below for insecure contexts or blocked clipboard access.
+      }
+    }
+
+    if (fallbackCopyText(text)) {
+      ElMessage.success(t('copied'))
+      return
+    }
+
+    ElMessage.error(t('copyFailed'))
   }
 
   const showKeySettings = (): void => {
