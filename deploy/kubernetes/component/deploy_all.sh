@@ -47,6 +47,12 @@ VOLCANO_CHART_FILE="${VOLCANO_CHART_FILE:-}"
 APISIX_CHART_VERSION="${APISIX_CHART_VERSION:-2.13.0}"
 APISIX_CHART_FILE="${APISIX_CHART_FILE:-}"
 APISIX_ADMIN_KEY="${APISIX_ADMIN_KEY:-edd1c9f034335f136f87ad84b625c8f1}"
+APISIX_IMAGE_REPOSITORY="${APISIX_IMAGE_REPOSITORY:-apache/apisix}"
+APISIX_IMAGE_TAG="${APISIX_IMAGE_TAG:-3.15.0-ubuntu}"
+APISIX_INGRESS_CONTROLLER_IMAGE_REPOSITORY="${APISIX_INGRESS_CONTROLLER_IMAGE_REPOSITORY:-apache/apisix-ingress-controller}"
+APISIX_INGRESS_CONTROLLER_IMAGE_TAG="${APISIX_INGRESS_CONTROLLER_IMAGE_TAG:-2.0.1}"
+APISIX_ADC_IMAGE_REPOSITORY="${APISIX_ADC_IMAGE_REPOSITORY:-ghcr.io/api7/adc}"
+APISIX_ADC_IMAGE_TAG="${APISIX_ADC_IMAGE_TAG:-0.24.2}"
 KUBEFLOW_MANIFESTS_REPO="${KUBEFLOW_MANIFESTS_REPO:-https://github.com/kubeflow/manifests.git}"
 KUBEFLOW_MANIFESTS_REF="${KUBEFLOW_MANIFESTS_REF:-v1.10.0}"
 SSHPIPER_CRD_URL="${SSHPIPER_CRD_URL:-https://raw.githubusercontent.com/tg123/sshpiper/7ce7b52e6a71f167ee78fd439a19d016e610d1d2/plugin/kubernetes/crd.yaml}"
@@ -593,12 +599,19 @@ if is_truthy "$DEPLOY_APISIX"; then
     log_info "正在部署 APISIX..."
     prepare_helm_repo_if_needed "apisix" "https://apache.github.io/apisix-helm-chart" "$APISIX_CHART_FILE" "APISIX"
     cleanup_legacy_apisix_gatewayproxy_conflict
+    log_info "APISIX 镜像版本: apisix=${APISIX_IMAGE_REPOSITORY}:${APISIX_IMAGE_TAG}, ingress-controller=${APISIX_INGRESS_CONTROLLER_IMAGE_REPOSITORY}:${APISIX_INGRESS_CONTROLLER_IMAGE_TAG}, adc=${APISIX_ADC_IMAGE_REPOSITORY}:${APISIX_ADC_IMAGE_TAG}"
 
     helm_upgrade_install_with_retry "apisix" "apisix" "apisix/apisix" "$APISIX_CHART_VERSION" "$APISIX_CHART_FILE" \
       --create-namespace \
       --namespace apisix \
       --set global.security.allowInsecureImages=true \
+      --set image.repository="$APISIX_IMAGE_REPOSITORY" \
+      --set image.tag="$APISIX_IMAGE_TAG" \
       --set ingress-controller.enabled=true \
+      --set ingress-controller.image.repository="$APISIX_INGRESS_CONTROLLER_IMAGE_REPOSITORY" \
+      --set ingress-controller.image.tag="$APISIX_INGRESS_CONTROLLER_IMAGE_TAG" \
+      --set ingress-controller.adcContainer.image.repository="$APISIX_ADC_IMAGE_REPOSITORY" \
+      --set ingress-controller.adcContainer.image.tag="$APISIX_ADC_IMAGE_TAG" \
       --set ingress-controller.gatewayProxy.createDefault=true \
       --set ingress-controller.gatewayProxy.provider.controlPlane.service.name=apisix-admin \
       --set ingress-controller.gatewayProxy.provider.controlPlane.service.port=9180 \

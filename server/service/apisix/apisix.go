@@ -17,6 +17,7 @@ import (
 	apisixv2 "github.com/apache/apisix-ingress-controller/pkg/kube/apisix/apis/config/v2"
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
+	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
 )
@@ -273,10 +274,24 @@ func (m *ApisixService) CreateStreamRoute(ctx context.Context, req *apisixReq.Cr
 		},
 	}
 
-	// 创建 ApisixRoute CRD
+	// 创建或更新 ApisixRoute CRD
 	_, err := cluster.ApisixClient.ApisixV2().ApisixRoutes(req.Namespace).Create(ctx, route, metav1.CreateOptions{})
 	if err != nil {
-		return errors.Errorf("创建 ApisixRoute (Stream) 失败: %v", err)
+		if !apierrors.IsAlreadyExists(err) {
+			return errors.Errorf("创建 ApisixRoute (Stream) 失败: %v", err)
+		}
+
+		existing, getErr := cluster.ApisixClient.ApisixV2().ApisixRoutes(req.Namespace).Get(ctx, req.Name, metav1.GetOptions{})
+		if getErr != nil {
+			return errors.Errorf("获取已存在的 ApisixRoute (Stream) 失败: %v", getErr)
+		}
+
+		existing.Labels = req.Labels
+		existing.Spec.IngressClassName = "Apisix"
+		existing.Spec.Stream = []apisixv2.ApisixRouteStream{streamRoute}
+		if _, updateErr := cluster.ApisixClient.ApisixV2().ApisixRoutes(req.Namespace).Update(ctx, existing, metav1.UpdateOptions{}); updateErr != nil {
+			return errors.Errorf("更新 ApisixRoute (Stream) 失败: %v", updateErr)
+		}
 	}
 
 	logx.Info("创建 Apisix TCP Stream 路由成功")
