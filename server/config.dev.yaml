@@ -301,6 +301,9 @@ apisix:
     auth-uri: "http://localhost:8001/aiInfra/api/v1/apisix/auth"
     # APISIX 网关对外暴露的 HTTP 入口端口（Jupyter、TensorBoard、Inference 共用同一入口）
     http-port: 8888
+    # APISIX stream proxy 在 Pod 内部监听的 SSH 入口端口
+    # 注意：这里应填写内部端口（通常 9100），不是用户 ssh 时看到的外部 22
+    ssh-ingress-port: 9100
 
 # sshpiper configuration
 sshpiper:

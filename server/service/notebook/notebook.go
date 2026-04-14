@@ -1183,16 +1183,16 @@ func (nb *NotebookService) createNotebookSSHStreamRoute(ctx context.Context, nbR
 		return
 	}
 
-	defaultPort := global.GVA_CONFIG.SSHPiper.Port
-	if defaultPort == 0 {
-		defaultPort = apisixModel.DefaultSSHIngressPort
+	ingressPort := global.GVA_CONFIG.Apisix.SSHIngressPort
+	if ingressPort == 0 {
+		ingressPort = apisixModel.DefaultSSHIngressPort
 	}
 
 	streamRouteReq := &apisixReq.CreateStreamRouteReq{
 		Name:             fmt.Sprintf("%s-sshpiper", apisixModel.StreamRoutePrefix),
 		Namespace:        consts.SSHPiperNamespace,
 		ClusterId:        nbRef.ClusterID,
-		IngressPort:      defaultPort,
+		IngressPort:      ingressPort,
 		ServiceName:      "sshpiper",
 		ServiceNamespace: "",
 		ServicePort:      22,
@@ -1208,7 +1208,7 @@ func (nb *NotebookService) createNotebookSSHStreamRoute(ctx context.Context, nbR
 	}
 
 	logx.Info("创建Apisix SSH Stream Route成功",
-		logx.Field("ingressPort", defaultPort),
+		logx.Field("ingressPort", ingressPort),
 		logx.Field("backend", "sshpiper"),
 	)
 }

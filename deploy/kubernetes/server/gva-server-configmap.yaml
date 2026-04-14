@@ -124,10 +124,13 @@ data:
         auth-enabled: true
         auth-uri: "http://neptune-server.neptune.svc.cluster.local:8888/aiInfra/api/v1/apisix/auth"
         http-port: 0
+        # APISIX stream proxy 在 Pod 内部监听的 SSH 入口端口
+        # 注意：这里填写的是 APISIX 内部端口（通常为 9100），不是用户实际连接时看到的外部 22
+        ssh-ingress-port: 9100
 
     # sshpiper configuration
     sshpiper:
-        # SSH 对外访问地址；留空时回退到 apisix.base-domain
+        # SSH 对外访问地址；开发环境可填 127.0.0.1，生产环境建议改成网关域名或留空回退到 apisix.base-domain
         host: "127.0.0.1"
-        # SSH 统一经 APISIX 对外暴露时，通常使用 22 端口
-        port: 2222
+        # SSH 对外暴露给用户访问的端口；统一经 APISIX 暴露时通常是 22，而不是 sshpiper Pod 内部的 2222
+        port: 22

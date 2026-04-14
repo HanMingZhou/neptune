@@ -39,7 +39,7 @@ type Server struct {
 	MCP MCP `mapstructure:"mcp" json:"mcp" yaml:"mcp"`
 
 	// Apisix 网关配置
-	Apisix Apisix `mapstructure:"Apisix" json:"Apisix" yaml:"Apisix"`
+	Apisix Apisix `mapstructure:"apisix" json:"apisix" yaml:"apisix"`
 
 	// SSHPiper 配置
 	SSHPiper SSHPiper `mapstructure:"sshpiper" json:"sshpiper" yaml:"sshpiper"`
