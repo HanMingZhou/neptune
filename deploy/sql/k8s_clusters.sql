@@ -1,54 +1,19 @@
-create table k8s_clusters
-(
-    id            bigint unsigned auto_increment
-        primary key,
-    created_at    datetime(3)      null,
-    updated_at    datetime(3)      null,
-    deleted_at    datetime(3)      null,
-    name          varchar(100)     null comment '集群名称',
-    area          varchar(50)      null comment '地域区域',
-    description   varchar(500)     null comment '描述',
-    kubeconfig    text             null comment 'kubeconfig内容',
-    api_server    varchar(200)     null comment 'API Server地址',
-    status        bigint default 1 null comment '状态(1-启用 0-停用)',
-    harbor_addr   varchar(191)     null comment 'Harbor地址',
-    storage_class varchar(100)     null comment 'K8s StorageClass名称',
-    constraint idx_k8s_clusters_name
-        unique (name)
-);
-
-create index idx_k8s_clusters_deleted_at
-    on k8s_clusters (deleted_at);
-
-INSERT INTO aiInfra.k8s_clusters (id, created_at, updated_at, deleted_at, name, area, description, kubeconfig, api_server, status, harbor_addr, storage_class) VALUES (1, '2025-12-23 00:33:07.000', '2026-03-28 18:55:07.455', null, 'minikube', '上海', 'local', 'apiVersion: v1
+UPDATE aiInfra.k8s_clusters SET created_at = '2025-12-23 00:33:07.000', updated_at = '2026-04-16 17:16:48.394', deleted_at = null, name = '3090', area = '北京', description = '3090', kubeconfig = 'apiVersion: v1
 clusters:
 - cluster:
-    certificate-authority: /Users/jerrytom/.minikube/ca.crt
-    extensions:
-    - extension:
-        last-update: Wed, 25 Mar 2026 21:09:14 CST
-        provider: minikube.sigs.k8s.io
-        version: v1.36.0
-      name: cluster_info
-    server: https://127.0.0.1:63868
-  name: minikube
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJWmpJUldKZ1R3dnN3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TmpBek1qWXdOVEkyTURGYUZ3MHpOakF6TWpNd05UTXhNREZhTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUUNxU0RqUS9IbFkxRk1RSWlibXFNdjBsN1JUT3F3aUpjeTdlamhEMTRnekpsL011SGZIREV1YytLMnUKUGU4U0NNZkZLdkFiK0tiUHQxWHl0b1NlRGJNc3JiWEZpRUVyYzVCenNaWE9wMXhEaTlNNERtbDlPMkZmVm5NbgpRTWRLOWlJcEhRZC9JeVVNY3FLZWlNaEtnZlBpbnFNbElvL0thT0RjT1h6Mm1ZVUdsM2M0ZE9adXA2dkhiNmhDCkNnVldwbjNtazNpejRCNkI4UjEwVGJvYzBLRnU3ZmR2Y3N1Q2xyMDVPTGdKdFB5NUVhWXpMNG5uNmtVekhReDQKWCttQVd3cFBVdEtEZ1ZXQmJnNHJXUUY5eUsya0pJbHpRcmFncUFFRHVSanE0azVVTlhycERXQ0lUZEw4eHg1cgpReTM4YmlnNUJDWFJRa0hCa21LajZ6OGlQRlp4QWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJTZy9oUkxmVTJiU0F0SkxQRSt4UEI4R3R3Z1R6QVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQ1JXS1hxZHpKRgovbTgranpsQ2luSTlXM3crVkN0Z3duZ2ZZVk82QURUSzlqUlo5cVJ2ZGVQV0tnblVJa2pLWDRYYVl5d0hwWUVHCmc4YWFubHZOTzhXNnRNYlFub0hZN1dOdFZPUXhuZnpIZkcyOEg3bUlnNzJxY1kvRGVOdWdON3JRWE5xUk4waTQKVlFaWDU3TVMwcmtHNmZMNVIxNitjdkNQODNwM1ZIRjN2OWNERzBxbkVmaW5VRTF1YVVoTFlCeGN1SnRrWHZobwpMQVdPMitFSWFkWUZhQ2NNdFcvcWtiRS91Sm4wektzMHB3Mzc5YUhpMjl0VXE3WnVZUmZQQk5YRGFXelV1N0NlClRUY2dTYjNYQ05ocFdhL1E4Uk5TNFdBbGN4cmlFeENjOWdYNzlaVi82V3NqQXg2cmVlY3VxNHdRQUlPREtHU1AKZzJyK1F1NE1NYlZwCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    server: https://10.255.141.8:6443
+  name: cluster.local
 contexts:
 - context:
-    cluster: minikube
-    extensions:
-    - extension:
-        last-update: Wed, 25 Mar 2026 21:09:14 CST
-        provider: minikube.sigs.k8s.io
-        version: v1.36.0
-      name: context_info
-    namespace: default
-    user: minikube
-  name: minikube
-current-context: minikube
+    cluster: cluster.local
+    user: kubernetes-admin
+  name: kubernetes-admin@cluster.local
+current-context: kubernetes-admin@cluster.local
 kind: Config
 preferences: {}
 users:
-- name: minikube
+- name: kubernetes-admin
   user:
-    client-certificate: /Users/jerrytom/.minikube/profiles/minikube/client.crt
-    client-key: /Users/jerrytom/.minikube/profiles/minikube/client.key', 'https://127.0.0.1:63868', 1, 'https://hub.docker.com/', 'standard');
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURLVENDQWhHZ0F3SUJBZ0lJUkV2VURVQ3l0R1l3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TmpBek1qWXdOVEkyTURGYUZ3MHlOekF6TWpZd05UTXhNREZhTUR3eApIekFkQmdOVkJBb1RGbXQxWW1WaFpHMDZZMngxYzNSbGNpMWhaRzFwYm5NeEdUQVhCZ05WQkFNVEVHdDFZbVZ5CmJtVjBaWE10WVdSdGFXNHdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUtBb0lCQVFEekt2YjQKWXcvN1FhN1dremZWVkdiTXo3L0hQZysweWdETlVybzdLQk1xSHgrMWdSTW9PTCtFMk5QT2F4dmxhd20rd3o0Rwpqd2hZTTRjaUhJc1hyMmFaWk9vaHlVdzFFYTVUa0RaSDlleExKWDU4d2JOWCtsT1VEUGM3OTVOeElUZE02ZEkyCndkdDExM3dqV2RESDk0Qm44TC80azArNXA4cHhHT2EvYWJrR2tRU0M3aE16dk9JUkpDdGRmQlkwcG9UdThmS0sKUERlajZvbWpHbkppQndmQ2JWZXR3aEx5dGI4dC84bk83ZWU1b2xaY2U3UXdOT202U01GbmlLWWpnMTM0SUg3SApSRkFKaUR6SmUrMkRNQ2IvdlhONzZPV3Nxc1I3RklBeVZXa2JJMHJnRTVPS0VqUDZFZkpwU0UwTWRYUlczRjQ3CnhlbVVWZE5xb2c2SVJTQlpBZ01CQUFHalZqQlVNQTRHQTFVZER3RUIvd1FFQXdJRm9EQVRCZ05WSFNVRUREQUsKQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZEl3UVlNQmFBRktEK0ZFdDlUWnRJQzBrcwo4VDdFOEh3YTNDQlBNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUJobEg0MG5RdktjSytsSVExb1luWHAzMXRNClJYQ1R3emw2bTI5TXJIaG5lakFkbHU2dms2TTdDN3A1Y2MyRkZJalF2MmxtaC9pWERNTGl4cVF6bllOZHd3ejEKUUhRTUpFREVJaWIzdUlrRitxaVU2dWpDV1RqR3RXVW1BSnNoMksxRmM0bnhBbmkzM09LbGxGT3RxbjhOTWhGdwpZWkFXVUtTaEloU3I4bjRWVW5ULy9WSFZxRVRrYkt4enNOaXVKeWljcXNEb1ZRSGZtVVFTaGtNSFB2akRoYTc3CkIwTEtJNXk3bEV2RE04ZnJCc3FrUmMxdDBLSDBWUDB4ZkRJN2phVC9jbXVBbmhHbVdlTWFkYkJsaXp5ekFYVEwKeEp6YmRSN1R5NXhwelFJWk00UWQxcGs0TktqaCs3YW5JcDVYTVRxTlZDdWNwZi95Z2NkbkdpWS9xK1lVCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBOHlyMitHTVArMEd1MXBNMzFWUm16TSsveHo0UHRNb0F6Vks2T3lnVEtoOGZ0WUVUCktEaS9oTmpUem1zYjVXc0p2c00rQm84SVdET0hJaHlMRjY5bW1XVHFJY2xNTlJHdVU1QTJSL1hzU3lWK2ZNR3oKVi9wVGxBejNPL2VUY1NFM1RPblNOc0hiZGRkOEkxblF4L2VBWi9DLytKTlB1YWZLY1JqbXYybTVCcEVFZ3U0VApNN3ppRVNRclhYd1dOS2FFN3ZIeWlqdzNvK3FKb3hweVlnY0h3bTFYcmNJUzhyVy9MZi9KenUzbnVhSldYSHUwCk1EVHB1a2pCWjRpbUk0TmQrQ0IreDBSUUNZZzh5WHZ0Z3pBbS83MXplK2pscktyRWV4U0FNbFZwR3lOSzRCT1QKaWhJeitoSHlhVWhOREhWMFZ0eGVPOFhwbEZYVGFxSU9pRVVnV1FJREFRQUJBb0lCQUFPanZxSW4xcEhtSEpGVApNOGM4dUQxNFoyNFY4amZPdkRmbzBKVHJZSkRwNTZHR1dTRWc2eXhjNzFLbmpNS3kwQlowOEdDb0NoK1QxNVFyClY2RlhEZExkelZBdzNLSEoyNzhMdThEVWFTRVVQZkkyTzdjSjVPK2trbE1OOUdHQm1yS21nOTJkaGFCUy9Fb0oKdk9ZTG5EOTdLem9oZDNrWGpqS211L3FUbkhTVFVjVUxkdnF5eHROUmdCZFo4ZCthMVcxM3laeGFaczR5Y202eApjZHZpcHF3amt1VXdaV3dFWGNUWXh3QTdBdk1NM3haYkV2cHFyY2VYYlBpa0JRbE5VRVNiU1M4U0ZqNXFDTERRCnVkb3VTUlkxaGc0cU9iYzBFSWVzSDRTa2lKMDVQM2F6UG1yUHErbG1lcEErSTFSQUhSRXdhS2h5TUFRaXE0UkYKL05UT1REY0NnWUVBKzlESnc0Q1hSMXp6d1BXZkt0ZkREbnNZME1SM2RtWG5FL0JhWXQvZEIyNkI4bkQrdGw2TApxR0xqK0lwRnl3NTJkemhQdmx4QktITlFieW14bUNJR3lnTk55bWRad0tnbktLUExVbjh1UWw1KzRreWRIV0RGClpySkxJODFMOGNoU3lJaGxIK0dKdmZ1T2ExVXBodStQQzRBTnJvUldMcnJxSHZDcEVSK01IT01DZ1lFQTl6VmoKdERCNnlkd3FBZzIwWHpsSkg1NFd4czNNdXF4bG0venY1aWFPOXpyUjhQV1c1RmpLbTh5RGFNTnV0THBIdmQwRApaeXREbE5jdVR2c05CK0hSTEJidzY3aDhFT1k4d2NGS2sxd2JiN0hoZnoxdFo3S1N3eGZ2UHdDdGYzQ2FGWFE1CkV4bmVBTlYrajFXMEVrWFZIdXdWVWhVT1E4Y3RwVnJFSFZ1dGJwTUNnWUFlTmx1dXlDUGVYUW1sMGhKcHVuOWQKb21sRXl2Mm1SKzJrbDhiUWJCbUJ4Y0Z6akJrVFdsNlpNbHcxdXFsTEJvNHlHYUIvcjJQbDdZZnQvbXVmWEIzQwphUWtSU3JzYkFWSEpiM1Y2aldYSWNydjRmTWF3K3FaVWZ2bkM3dU80dTVjckZpcEQyL1NCeGNlOW12Y2ppR1I2Ck5iL3VlMVEzd1JkTDVRWHoxdndoandLQmdDdEh5NmIyZmVqdGhPVkxKUE12QW1Cb3V6QWZRK0xDNEI5SlQyOEoKL1NuSHdJM2hVWU8xRC9QckFHN05HSXJIdWx2QllDRWw3L1VWSDJSd2k3MS9pYkdnYXBtNmVPNDBnUnFqRHIxeAorTk83WHZGNS9iZVVDaUhpQk44UTdVOU1sWTJBQmFZVWQwdktGUmhmTnVHa0hFWUhxMHZ0cDh1eUNZblR0RlkzCmdNdkZBb0dBR29ZZGcwWWpNTm9ycTVyTzFHMTlsdVRFMTdRcEhyUEpwZ1JEOHYvMCtZVjFnM1owaDFiTFY4RjAKbnNKMnhhYjVlaElJQ3diTjBBaWN2N0E0aldDWWtSSi80Z3Q1NjhhL3BuSEwvU013dnlBZFFmbkJoNTRSTE9TUgpTK1NhOWk5Y3JIU3I4cWJTMzFXY25rclY2dlRtdFZraWdhcXZGdEk4Zmw1Mk9UQ29zQkE9Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==', api_server = '10.255.141.8:6443', status = 1, harbor_addr = 'dockerhub.kubekey.local', storage_class = 'standard' WHERE id = 1;
