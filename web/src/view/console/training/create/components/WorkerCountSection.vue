@@ -4,14 +4,14 @@
     :class="
       embedded
         ? 'rounded-xl border border-blue-200/70 bg-blue-50/70 p-4 dark:border-blue-800/60 dark:bg-blue-950/20'
-        : 'bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6'
+        : 'console-create-card console-create-card--section w-full'
     "
   >
     <h3
       v-if="!embedded"
-      class="text-base font-bold mb-4 flex items-center gap-2"
+      class="console-create-card__title mb-4"
     >
-      <span class="w-1 h-4 bg-primary rounded"></span>
+      <span class="console-create-card__title-marker"></span>
       {{ t('workerNodes') }}
     </h3>
     <div
@@ -72,7 +72,7 @@
         {{
           t('availableCapacity', {
             count: availableCapacity,
-            unit: selectedProduct.gpuCount > 0 ? 'GPU' : t('instance')
+            unit: t('instance')
           })
         }}
       </p>

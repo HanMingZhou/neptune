@@ -84,8 +84,10 @@ const filterGroups = computed(() => [
     key: 'gpuModel',
     labelKey: 'selectGpuModel',
     options: props.gpuModels,
-    optionValueKey: 'model',
-    optionLabelKey: 'model',
+    optionMetaKey: 'meta',
+    optionMetaFieldsKey: 'metaFields',
+    optionValueKey: 'key',
+    optionLabelKey: 'label',
     optionCountKey: 'available'
   },
   {

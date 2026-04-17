@@ -1,5 +1,5 @@
 <template>
-  <TableCard>
+  <TableCard scrollable>
     <div class="flex border-b border-slate-100 dark:border-border-dark">
       <button
         v-for="tab in tabs"
@@ -16,7 +16,10 @@
       </button>
     </div>
 
-    <div v-if="activeTab === 'records'" class="overflow-x-auto">
+    <div
+      v-if="activeTab === 'records'"
+      class="console-table-scroll console-table-scroll--fill overflow-x-auto"
+    >
       <table class="w-full text-left">
         <thead>
           <tr
@@ -99,8 +102,11 @@
         </tbody>
       </table>
     </div>
-    <div v-else class="p-20 text-center text-slate-400">
-      <span class="material-icons text-6xl opacity-20 mb-4">construction</span>
+    <div
+      v-else
+      class="flex min-h-0 flex-1 flex-col items-center justify-center p-20 text-center text-slate-400"
+    >
+      <span class="material-icons mb-4 text-6xl opacity-20">construction</span>
       <p>{{ t('order.comingSoon') }}</p>
     </div>
   </TableCard>

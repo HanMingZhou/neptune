@@ -8,28 +8,44 @@
           <span class="w-1 h-4 bg-primary rounded"></span>
           {{ t('basicInfo') }}
         </h3>
-        <div class="detail-info-grid detail-info-grid--flat">
+        <div class="detail-info-grid detail-info-grid--flat detail-info-grid--inline">
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('name') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="service.displayName || '-'"
+              class="detail-info-value"
+            >
               {{ service.displayName || '-' }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('instanceName') }}</div>
-            <div class="detail-info-value detail-info-value--mono">
-              {{ service.instanceName }}
+            <div
+              :title="service.instanceName || '-'"
+              class="detail-info-value detail-info-value--important detail-info-value--mono"
+            >
+              {{ service.instanceName || '-' }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('inference.framework') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="service.framework || t('inference.customCommandMode')"
+              class="detail-info-value"
+            >
               {{ service.framework || t('inference.customCommandMode') }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('deployMode') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="
+                service.deployType === 'STANDALONE'
+                  ? t('standalone')
+                  : t('distributed')
+              "
+              class="detail-info-value"
+            >
               {{
                 service.deployType === 'STANDALONE'
                   ? t('standalone')
@@ -39,25 +55,37 @@
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('status') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="getStatusLabel(service.status)"
+              class="detail-info-value detail-info-value--important"
+            >
               {{ getStatusLabel(service.status) }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('inference.authType') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="service.authType === 1 ? 'JWT Token' : 'API Key'"
+              class="detail-info-value"
+            >
               {{ service.authType === 1 ? 'JWT Token' : 'API Key' }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('createdAt') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="formatTime(service.createdAt) || '-'"
+              class="detail-info-value"
+            >
               {{ formatTime(service.createdAt) }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('startedAt') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="formatTime(service.startedAt) || '-'"
+              class="detail-info-value"
+            >
               {{ formatTime(service.startedAt) || '-' }}
             </div>
           </div>
@@ -73,31 +101,49 @@
           <span class="w-1 h-4 bg-primary rounded"></span>
           {{ t('resourceConfig') }}
         </h3>
-        <div class="detail-info-grid detail-info-grid--flat">
+        <div
+          class="detail-info-grid detail-info-grid--flat detail-info-grid--inline"
+        >
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('gpu') }}</div>
-            <div class="detail-info-value text-primary">
+            <div
+              :title="String(service.gpu || 0)"
+              class="detail-info-value detail-info-value--important"
+            >
               {{ service.gpu || 0 }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('gpuModel') }}</div>
-            <div class="detail-info-value">
-              {{ service.gpuModel || 'CPU Only' }}
+            <div
+              :title="service.gpuModel || 'CPU ONLY'"
+              class="detail-info-value"
+            >
+              {{ service.gpuModel || 'CPU ONLY' }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">
               {{ t('cpu') }} / {{ t('memory') }}
             </div>
-            <div class="detail-info-value">
+            <div
+              :title="`${service.cpu || 0} Core / ${service.memory || 0} GB`"
+              class="detail-info-value"
+            >
               {{ service.cpu }} Core / {{ service.memory }} GB
             </div>
           </div>
-          <div class="detail-info-item detail-info-item--wide">
+          <div class="detail-info-item detail-info-item--wide detail-info-item--stack">
             <div class="detail-info-label">{{ t('image') }}</div>
-            <div class="detail-inline-chip detail-info-value--mono break-all">
-              {{ service.imageName }}
+            <div
+              class="detail-code-surface detail-code-surface--soft detail-code-surface--single"
+            >
+              <code
+                :title="service.imageName || '-'"
+                class="detail-info-value--mono"
+              >
+                {{ service.imageName || '-' }}
+              </code>
             </div>
           </div>
         </div>
@@ -112,47 +158,81 @@
           <span class="w-1 h-4 bg-primary rounded"></span>
           {{ t('inference.serviceConfig') }}
         </h3>
-        <div class="detail-info-grid detail-info-grid--flat">
-          <div class="detail-info-item detail-info-item--wide">
+        <div
+          class="detail-info-grid detail-info-grid--flat detail-info-grid--inline"
+        >
+          <div class="detail-info-item detail-info-item--wide detail-info-item--stack">
             <div class="detail-info-label">{{ t('inference.modelPath') }}</div>
-            <div class="detail-info-value detail-info-value--mono">
-              {{ service.modelMountPath || '/model' }}{{ service.modelPath }}
+            <div
+              class="detail-code-surface detail-code-surface--soft detail-code-surface--single"
+            >
+              <code
+                :title="`${service.modelMountPath || '/model'}${service.modelPath || ''}`"
+                class="detail-info-value--mono"
+              >
+                {{ service.modelMountPath || '/model' }}{{ service.modelPath }}
+              </code>
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">
               {{ t('inference.servicePort') }}
             </div>
-            <div class="detail-info-value">{{ service.servicePort }}</div>
+            <div
+              :title="String(service.servicePort || '-')"
+              class="detail-info-value"
+            >
+              {{ service.servicePort || '-' }}
+            </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('inference.maxTokens') }}</div>
-            <div class="detail-info-value">{{ service.maxTokens }}</div>
+            <div
+              :title="String(service.maxTokens || '-')"
+              class="detail-info-value"
+            >
+              {{ service.maxTokens || '-' }}
+            </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">
               {{ t('inference.maxConcurrency') }}
             </div>
-            <div class="detail-info-value">
+            <div
+              :title="String(service.maxConcurrency || t('inference.noLimit'))"
+              class="detail-info-value"
+            >
               {{ service.maxConcurrency || t('inference.noLimit') }}
             </div>
           </div>
         </div>
         <div
           v-if="service.deployType === 'DISTRIBUTED'"
-          class="detail-info-grid detail-info-grid--flat mt-4 border-t border-border-light pt-4 dark:border-border-dark"
+          class="detail-info-grid detail-info-grid--flat detail-info-grid--inline mt-4 border-t border-border-light pt-4 dark:border-border-dark"
         >
           <div class="detail-info-item">
             <div class="detail-info-label">
               {{ t('inference.workerCount') }}
             </div>
-            <div class="detail-info-value">{{ service.workerCount }}</div>
+            <div
+              :title="String(service.workerCount || '-')"
+              class="detail-info-value"
+            >
+              {{ service.workerCount }}
+            </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">
               {{ t('inference.autoRestart') }}
             </div>
-            <div class="detail-info-value">
+            <div
+              :title="
+                service.autoRestart
+                  ? `${t('yes')} (${service.restartCount}/${service.maxRestarts})`
+                  : t('no')
+              "
+              class="detail-info-value"
+            >
               {{
                 service.autoRestart
                   ? `${t('yes')} (${service.restartCount}/${service.maxRestarts})`
@@ -172,7 +252,7 @@
           <div class="text-xs text-slate-400 mb-2">
             {{ t('inference.startupCommand') }}
           </div>
-          <div class="detail-code-surface">
+          <div class="detail-code-surface detail-code-surface--soft">
             <code class="text-sm whitespace-pre-wrap break-all">{{
               formatCommand(service)
             }}</code>
@@ -256,7 +336,8 @@
             <table class="console-table">
               <thead>
                 <tr>
-                  <th>PVC</th>
+                  <th>{{ t('storage') }}</th>
+                  <th>{{ t('pvc') }}</th>
                   <th>{{ t('inference.mountPath') }}</th>
                   <th>{{ t('inference.subPath') }}</th>
                   <th>{{ t('readOnly') }}</th>
@@ -264,7 +345,10 @@
               </thead>
               <tbody>
                 <tr v-for="(mount, index) in service.mounts" :key="index">
-                  <td class="detail-info-value--mono">{{ mount.pvcName }}</td>
+                  <td>{{ mount.name || '-' }}</td>
+                  <td class="detail-info-value--mono">
+                    {{ mount.pvcName || '-' }}
+                  </td>
                   <td class="detail-info-value--mono">{{ mount.mountPath }}</td>
                   <td class="detail-info-value--mono">
                     {{ mount.subPath || '-' }}

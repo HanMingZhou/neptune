@@ -23,7 +23,7 @@ export function useOrderUsage({ t }: UseOrderUsageOptions = {}) {
   const mainItem = ref<UsageMainItem>({ name: translate('noData'), percent: 0 })
   const usageItems = ref<UsageListItem[]>([])
   const page = ref(1)
-  const pageSize = ref(10)
+  const pageSize = ref(15)
   const total = ref(0)
 
   const getResourceTypeText = (type?: number): string => {
@@ -208,3 +208,4 @@ export function useOrderUsage({ t }: UseOrderUsageOptions = {}) {
     totalExpenditure
   }
 }
+

@@ -10,6 +10,10 @@
     letter-spacing: 0.01em;
   }
 
+  :where(h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd) {
+    margin: 0;
+  }
+
   #app {
     width: 100%;
     min-height: 100vh;
@@ -478,6 +482,8 @@
 
 .console-create-card {
   width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   border: 1px solid var(--color-border-light);
   border-radius: 14px;
   background: var(--color-surface-light);
@@ -490,21 +496,54 @@
   box-shadow: none;
 }
 
-.console-create-page
-  :is(
-    div,
-    section
-  )[class*='bg-surface-light'][class*='border-border-light'][class*='rounded-xl'] {
-  box-shadow: 0 14px 32px -28px rgba(15, 23, 42, 0.24);
+.console-create-card--section {
+  padding: 1.5rem;
 }
 
-.dark
-  .console-create-page
-  :is(
-    div,
-    section
-  )[class*='bg-surface-light'][class*='border-border-light'][class*='rounded-xl'] {
-  box-shadow: none;
+.console-create-card--table {
+  overflow: hidden;
+}
+
+.console-create-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.dark .console-create-card__header {
+  border-bottom-color: var(--color-border-dark);
+}
+
+.console-create-card__body {
+  min-width: 0;
+  padding: 1.5rem;
+}
+
+.console-create-card__title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+  color: var(--color-ink-strong);
+}
+
+.console-create-card__title-marker {
+  width: 4px;
+  height: 16px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  background: var(--color-primary);
+}
+
+.console-create-card__table-scroll {
+  min-width: 0;
+  overflow-x: auto;
 }
 
 /* 控制台工作区在大屏上采用全宽工作台布局，而不是居中卡片布局 */
@@ -538,6 +577,9 @@
 }
 
 .console-workspace-panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
   border: 1px solid var(--color-border-light);
   background: var(--color-surface-light);
   box-shadow: 0 0 0 1px rgba(207, 216, 230, 0.35);
@@ -564,6 +606,9 @@
 }
 
 .console-management-shell {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--color-border-light);
   border-radius: var(--workspace-panel-radius);
@@ -577,6 +622,10 @@
 }
 
 .console-management-shell__body {
+  display: flex;
+  min-height: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
   background: var(--color-surface-light);
 }
 
@@ -613,6 +662,238 @@
 
 .console-workspace-panel__toolbar {
   background: transparent;
+}
+
+.console-workspace-panel__body {
+  min-width: 0;
+}
+
+.console-workspace-panel--paged .console-workspace-panel__body {
+  display: flex;
+  min-height: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.console-workspace-panel--paged .console-workspace-panel__body > .overflow-x-auto,
+.console-workspace-panel--paged .console-workspace-panel__body > .console-table-scroll {
+  min-height: var(--list-table-viewport-height);
+  flex: 1 1 auto;
+  height: 100%;
+  overflow: auto;
+  scrollbar-gutter: stable;
+}
+
+.console-table-scroll {
+  min-height: var(--list-table-viewport-height);
+  overflow: auto;
+  scrollbar-gutter: stable;
+}
+
+.console-table-scroll--fill {
+  min-height: 0;
+  height: 100%;
+}
+
+.console-workspace-panel--paged .console-workspace-panel__body > .console-table-scroll--fill,
+.console-workspace-panel--paged .console-workspace-panel__body > .overflow-x-auto.console-table-scroll--fill {
+  min-height: 0;
+  height: 100%;
+}
+
+.console-table-scroll,
+.custom-scrollbar,
+.workspace-shell .overflow-x-auto,
+.workspace-shell .overflow-y-auto {
+  scrollbar-width: auto;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+}
+
+/* Global fallback: force white square native scrollbars in app containers. */
+#app,
+#app * {
+  scrollbar-width: auto;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+}
+
+#app::-webkit-scrollbar,
+#app *::-webkit-scrollbar {
+  width: var(--scrollbar-size) !important;
+  height: var(--scrollbar-size) !important;
+}
+
+#app::-webkit-scrollbar-track,
+#app *::-webkit-scrollbar-track {
+  border-radius: 0 !important;
+  background: var(--scrollbar-track-color) !important;
+}
+
+#app::-webkit-scrollbar-thumb,
+#app *::-webkit-scrollbar-thumb {
+  border-radius: 0 !important;
+  border: 1px solid var(--scrollbar-thumb-outline) !important;
+  background: var(--scrollbar-thumb-color) !important;
+  box-shadow: none !important;
+}
+
+.console-table-scroll::-webkit-scrollbar,
+.custom-scrollbar::-webkit-scrollbar,
+.workspace-shell .overflow-x-auto::-webkit-scrollbar,
+.workspace-shell .overflow-y-auto::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+.console-table-scroll::-webkit-scrollbar-track,
+.custom-scrollbar::-webkit-scrollbar-track,
+.workspace-shell .overflow-x-auto::-webkit-scrollbar-track,
+.workspace-shell .overflow-y-auto::-webkit-scrollbar-track {
+  border: 1px solid transparent;
+  border-radius: 0 !important;
+  background: var(--scrollbar-track-color);
+  background-clip: padding-box;
+  box-shadow: inset 0 0 0 1px var(--scrollbar-track-highlight);
+}
+
+.console-table-scroll::-webkit-scrollbar-thumb,
+.custom-scrollbar::-webkit-scrollbar-thumb,
+.workspace-shell .overflow-x-auto::-webkit-scrollbar-thumb,
+.workspace-shell .overflow-y-auto::-webkit-scrollbar-thumb {
+  min-height: 44px;
+  min-width: 44px;
+  border: 1px solid var(--scrollbar-thumb-outline);
+  border-radius: 0 !important;
+  background: var(--scrollbar-thumb-color);
+  background-clip: padding-box;
+  box-shadow: none;
+  transition:
+    background 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.console-table-scroll::-webkit-scrollbar-thumb:hover,
+.custom-scrollbar::-webkit-scrollbar-thumb:hover,
+.workspace-shell .overflow-x-auto::-webkit-scrollbar-thumb:hover,
+.workspace-shell .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+.console-table-scroll::-webkit-scrollbar-thumb:active,
+.custom-scrollbar::-webkit-scrollbar-thumb:active,
+.workspace-shell .overflow-x-auto::-webkit-scrollbar-thumb:active,
+.workspace-shell .overflow-y-auto::-webkit-scrollbar-thumb:active {
+  background: var(--scrollbar-thumb-active);
+  box-shadow: none;
+}
+
+.console-table-scroll::-webkit-scrollbar-corner,
+.custom-scrollbar::-webkit-scrollbar-corner,
+.workspace-shell .overflow-x-auto::-webkit-scrollbar-corner,
+.workspace-shell .overflow-y-auto::-webkit-scrollbar-corner {
+  background: var(--scrollbar-corner);
+}
+
+.workspace-shell .el-scrollbar__bar {
+  opacity: 1;
+}
+
+.workspace-shell .el-scrollbar__bar.is-horizontal {
+  height: var(--scrollbar-size);
+}
+
+.workspace-shell .el-scrollbar__bar.is-vertical {
+  width: var(--scrollbar-size);
+}
+
+.workspace-shell .el-scrollbar__thumb {
+  border: 1px solid var(--scrollbar-thumb-outline);
+  background: var(--scrollbar-thumb-color);
+  border-radius: 0 !important;
+  box-shadow: none;
+}
+
+.workspace-shell .el-scrollbar__thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+.workspace-shell .el-scrollbar__thumb:active {
+  background: var(--scrollbar-thumb-active);
+}
+
+/* Global Element Plus override: remove dark capsule defaults everywhere. */
+.el-scrollbar {
+  --el-scrollbar-opacity: 1 !important;
+  --el-scrollbar-hover-opacity: 1 !important;
+  --el-scrollbar-bg-color: var(--scrollbar-thumb-color) !important;
+  --el-scrollbar-hover-bg-color: var(--scrollbar-thumb-hover) !important;
+}
+
+.el-scrollbar__bar {
+  border-radius: 0 !important;
+  opacity: 1 !important;
+}
+
+.el-scrollbar__bar.is-horizontal {
+  height: var(--scrollbar-size) !important;
+}
+
+.el-scrollbar__bar.is-vertical {
+  width: var(--scrollbar-size) !important;
+}
+
+.el-scrollbar__thumb {
+  opacity: 1 !important;
+  border-radius: 0 !important;
+  border: 1px solid var(--scrollbar-thumb-outline) !important;
+  background: var(--scrollbar-thumb-color) !important;
+  box-shadow: none !important;
+}
+
+.el-scrollbar__thumb:hover {
+  background: var(--scrollbar-thumb-hover) !important;
+}
+
+.el-scrollbar__thumb:active {
+  background: var(--scrollbar-thumb-active) !important;
+}
+
+/* Hard override: enforce square scrollbars inside workspace containers. */
+.workspace-shell::-webkit-scrollbar,
+.workspace-shell *::-webkit-scrollbar {
+  width: var(--scrollbar-size) !important;
+  height: var(--scrollbar-size) !important;
+}
+
+.workspace-shell::-webkit-scrollbar-track,
+.workspace-shell *::-webkit-scrollbar-track {
+  border-radius: 0 !important;
+  background: var(--scrollbar-track-color) !important;
+  box-shadow: inset 0 0 0 1px var(--scrollbar-track-highlight) !important;
+}
+
+.workspace-shell::-webkit-scrollbar-thumb,
+.workspace-shell *::-webkit-scrollbar-thumb {
+  border: 1px solid var(--scrollbar-thumb-outline) !important;
+  border-radius: 0 !important;
+  background: var(--scrollbar-thumb-color) !important;
+  box-shadow: none !important;
+}
+
+.workspace-shell::-webkit-scrollbar-thumb:hover,
+.workspace-shell *::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover) !important;
+}
+
+.workspace-shell::-webkit-scrollbar-thumb:active,
+.workspace-shell *::-webkit-scrollbar-thumb:active {
+  background: var(--scrollbar-thumb-active) !important;
+}
+
+.workspace-shell .el-scrollbar__bar,
+.workspace-shell .el-scrollbar__thumb {
+  border-radius: 0 !important;
 }
 
 .console-workspace-panel__footer,
@@ -653,6 +934,11 @@
   border-spacing: 0;
 }
 
+.console-table-scroll > table,
+.console-workspace-panel--paged .console-workspace-panel__body > .overflow-x-auto > table {
+  min-width: 100%;
+}
+
 .console-table thead tr,
 .workspace-shell .overflow-x-auto > table.w-full thead tr {
   background: var(--list-table-head-bg);
@@ -682,6 +968,82 @@
   text-align: center !important;
   vertical-align: middle;
   white-space: nowrap;
+}
+
+.console-table-scroll thead th,
+.console-workspace-panel--paged
+  .console-workspace-panel__body
+  > .overflow-x-auto
+  > table
+  thead
+  th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--list-table-head-bg);
+  box-shadow: inset 0 -1px 0 var(--list-table-divider);
+}
+
+.console-table th:first-child,
+.console-table td:first-child,
+.workspace-shell .overflow-x-auto > table.w-full th:first-child,
+.workspace-shell .overflow-x-auto > table.w-full td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+
+.console-table th:first-child,
+.workspace-shell .overflow-x-auto > table.w-full th:first-child {
+  z-index: 5;
+  background: var(--list-table-head-bg);
+  box-shadow:
+    inset -1px 0 0 rgba(148, 163, 184, 0.12),
+    10px 0 18px -18px rgba(15, 23, 42, 0.22);
+}
+
+.console-table td:first-child,
+.workspace-shell .overflow-x-auto > table.w-full td:first-child {
+  background: inherit;
+  box-shadow:
+    inset -1px 0 0 rgba(148, 163, 184, 0.1),
+    10px 0 18px -18px rgba(15, 23, 42, 0.18);
+}
+
+.console-actions-header,
+.console-actions-cell,
+.workspace-shell table:has(.list-row-button) th:last-child,
+.workspace-shell table:has(.list-row-button) td:last-child {
+  position: sticky;
+  right: 0;
+}
+
+.console-actions-header,
+.workspace-shell table:has(.list-row-button) th:last-child {
+  z-index: 6 !important;
+  background: var(--list-table-head-bg);
+  box-shadow:
+    inset 1px 0 0 rgba(148, 163, 184, 0.12),
+    -10px 0 18px -18px rgba(15, 23, 42, 0.22);
+}
+
+.console-actions-cell,
+.workspace-shell table:has(.list-row-button) td:last-child {
+  z-index: 3;
+  background: var(--color-surface-light);
+  box-shadow:
+    inset 1px 0 0 rgba(148, 163, 184, 0.1),
+    -10px 0 18px -18px rgba(15, 23, 42, 0.18);
+}
+
+.console-table tbody tr:hover > .console-actions-cell,
+.workspace-shell .overflow-x-auto > table.w-full tbody tr:hover > td:last-child:has(.list-row-button) {
+  background: var(--list-table-hover-bg);
+}
+
+.dark .console-actions-cell,
+.dark .workspace-shell table:has(.list-row-button) td:last-child {
+  background: var(--color-surface-dark);
 }
 
 .console-table th:last-child,
@@ -737,7 +1099,8 @@
 .workspace-shell table:has(.list-row-button) th:last-child,
 .workspace-shell table:has(.list-row-button) td:last-child {
   text-align: center !important;
-  width: 1%;
+  width: auto;
+  min-width: max-content;
   white-space: nowrap;
 }
 
@@ -1413,6 +1776,51 @@
   row-gap: 0.9rem;
 }
 
+.detail-info-grid.detail-info-grid--inline {
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: 1.2rem;
+  row-gap: 1rem;
+}
+
+@media (min-width: 900px) {
+  .detail-info-grid.detail-info-grid--inline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1600px) {
+  .detail-info-grid.detail-info-grid--inline {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.detail-info-grid--inline .detail-info-item {
+  display: grid;
+  grid-template-columns: minmax(88px, 108px) minmax(0, 1fr);
+  align-items: start;
+  column-gap: 0.9rem;
+  row-gap: 0;
+  min-width: 0;
+}
+
+.detail-info-grid--inline .detail-info-label {
+  padding-top: 0.12rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.detail-info-grid--inline .detail-info-value {
+  line-height: 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detail-info-grid--inline .detail-inline-chip {
+  min-height: 2.25rem;
+  width: 100%;
+}
+
 .detail-info-grid--triple-align {
   grid-template-columns: 1fr;
 }
@@ -1458,19 +1866,24 @@
 
 .detail-info-label {
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1rem;
   letter-spacing: 0.02em;
-  color: var(--color-ink-soft);
+  color: #0f172a;
 }
 
 .detail-info-value {
   min-width: 0;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 520;
   line-height: 1.45rem;
-  color: var(--color-ink-strong);
+  color: #64748b;
   word-break: break-word;
+}
+
+.detail-info-value--important {
+  color: #2563eb;
+  font-weight: 640;
 }
 
 .detail-info-value--mono {
@@ -1491,13 +1904,52 @@
   color: var(--color-ink-strong);
   font-size: 0.75rem;
   line-height: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detail-inline-chip--image {
+  border-color: rgba(148, 163, 184, 0.42);
+  background: linear-gradient(135deg, #dbe7f5 0%, #c5d5eb 100%);
+  color: #0f172a;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.detail-inline-chip--shell {
+  border-color: rgba(30, 41, 59, 0.12);
+  background: linear-gradient(180deg, #162033 0%, #0f172a 100%);
+  color: #dbe7f5;
+  box-shadow:
+    inset 0 1px 0 rgba(148, 163, 184, 0.12),
+    0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+.detail-info-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: inherit;
+}
+
+.detail-info-link:hover {
+  text-decoration: underline;
 }
 
 .detail-code-surface {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   overflow-x: auto;
   padding: 0.9rem 1rem;
   border-radius: var(--workspace-control-radius);
   background: #0f172a;
+}
+
+.detail-code-surface--soft {
+  border: 1px solid rgba(148, 163, 184, 0.34);
+  background: linear-gradient(180deg, #f8fbff 0%, #f1f5fb 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.88);
 }
 
 .detail-code-surface code,
@@ -1507,6 +1959,33 @@
   font-family:
     ui-monospace, SFMono-Regular, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
+}
+
+.detail-code-surface--soft code,
+.detail-code-surface--soft pre {
+  color: #334155;
+}
+
+.detail-code-surface--single {
+  overflow-x: hidden;
+}
+
+.detail-code-surface--single code {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detail-info-grid--inline .detail-info-item--stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.detail-info-grid--inline .detail-info-item--stack .detail-info-label {
+  padding-top: 0;
 }
 
 .detail-table-shell {
@@ -1521,10 +2000,49 @@
   background: rgba(20, 25, 35, 0.9);
 }
 
+.dark .detail-info-label {
+  color: rgba(241, 245, 249, 0.94);
+}
+
+.dark .detail-info-value {
+  color: rgba(203, 213, 225, 0.9);
+}
+
+.dark .detail-info-value--important {
+  color: #93c5fd;
+}
+
 .dark .detail-inline-chip {
   border-color: var(--color-field-border);
   background: rgba(24, 30, 41, 0.92);
   color: var(--color-ink-strong);
+}
+
+.dark .detail-inline-chip--image {
+  border-color: rgba(71, 85, 105, 0.9);
+  background: linear-gradient(135deg, #1e293b 0%, #172233 100%);
+  color: #e2e8f0;
+  box-shadow: inset 0 1px 0 rgba(148, 163, 184, 0.12);
+}
+
+.dark .detail-inline-chip--shell {
+  border-color: rgba(71, 85, 105, 0.72);
+  background: linear-gradient(180deg, #111827 0%, #0b1220 100%);
+  color: #e2e8f0;
+  box-shadow:
+    inset 0 1px 0 rgba(148, 163, 184, 0.08),
+    0 0 0 1px rgba(15, 23, 42, 0.18);
+}
+
+.dark .detail-code-surface--soft {
+  border-color: rgba(71, 85, 105, 0.72);
+  background: linear-gradient(180deg, #1e293b 0%, #162033 100%);
+  box-shadow: inset 0 1px 0 rgba(148, 163, 184, 0.08);
+}
+
+.dark .detail-code-surface--soft code,
+.dark .detail-code-surface--soft pre {
+  color: #e2e8f0;
 }
 
 .dark .detail-table-shell {
@@ -1795,25 +2313,6 @@
 }
 
 @layer components {
-  /* 自定义滚动条 - 来自模版 */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #d1d5db;
-    border-radius: 10px;
-  }
-
-  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #4b5563;
-  }
-
   /* 侧边栏激活状态 - 来自模版 */
   .sidebar-active {
     background: rgba(22, 93, 255, 0.1);
@@ -1903,4 +2402,82 @@
   .status-deploying {
     @apply text-primary bg-primary/10;
   }
+}
+
+/* Final override: force square white scrollbars everywhere in app. */
+html,
+body,
+#app,
+#app * {
+  scrollbar-width: auto !important;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color) !important;
+}
+
+*::-webkit-scrollbar {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 0 !important;
+  background: var(--scrollbar-track-color) !important;
+  box-shadow: none !important;
+}
+
+*::-webkit-scrollbar-thumb {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  border-radius: 0 !important;
+  border: 1px solid var(--scrollbar-thumb-outline) !important;
+  background: var(--scrollbar-thumb-color) !important;
+  box-shadow: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+*::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:active,
+*::-webkit-scrollbar-thumb:focus,
+*::-webkit-scrollbar-thumb:window-inactive {
+  border: 1px solid var(--scrollbar-thumb-outline) !important;
+  background: var(--scrollbar-thumb-color) !important;
+  box-shadow: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+.el-scrollbar,
+.el-scrollbar__bar,
+.el-scrollbar__thumb,
+.el-scrollbar__wrap {
+  border-radius: 0 !important;
+}
+
+.el-scrollbar__thumb {
+  opacity: 1 !important;
+  border: 1px solid var(--scrollbar-thumb-outline) !important;
+  background: var(--scrollbar-thumb-color) !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.el-scrollbar__thumb:hover,
+.el-scrollbar__thumb:active {
+  opacity: 1 !important;
+  border: 1px solid var(--scrollbar-thumb-outline) !important;
+  background: var(--scrollbar-thumb-color) !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Prevent OS dark overlay scrollbar from forcing black hover in dark mode. */
+html.dark .workspace-shell,
+html.dark .workspace-shell *,
+html.dark .console-table-scroll,
+html.dark .custom-scrollbar,
+html.dark .overflow-x-auto,
+html.dark .overflow-y-auto,
+html.dark .el-scrollbar,
+html.dark .el-scrollbar__wrap {
+  color-scheme: light !important;
 }

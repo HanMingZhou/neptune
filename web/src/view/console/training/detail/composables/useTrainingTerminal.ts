@@ -4,6 +4,14 @@ import type { FitAddon } from '@xterm/addon-fit'
 import { ElMessage } from 'element-plus'
 import { getTrainingTerminalWsUrl } from '@/api/training'
 import type { Translator } from '@/types/consoleResource'
+import {
+  createTerminalClipboardBridge,
+  type TerminalClipboardBridge
+} from '@/utils/terminalClipboard'
+import {
+  createTerminalOutputBuffer,
+  type TerminalOutputBuffer
+} from '@/utils/terminalOutputBuffer'
 
 const createTerminalTheme = () => ({
   background: '#1e1e1e',
@@ -62,6 +70,8 @@ export const useTrainingTerminal = ({
   let resizeObserver: ResizeObserver | null = null
   let ws: WebSocket | null = null
   let dataSubscription: DisposableLike | null = null
+  let terminalClipboardBridge: TerminalClipboardBridge | null = null
+  let terminalOutputBuffer: TerminalOutputBuffer | null = null
 
   const disconnectTerminal = (): void => {
     if (dataSubscription) {
@@ -76,6 +86,16 @@ export const useTrainingTerminal = ({
       ws.onopen = null
       ws.close()
       ws = null
+    }
+
+    if (terminalClipboardBridge) {
+      terminalClipboardBridge.dispose()
+      terminalClipboardBridge = null
+    }
+
+    if (terminalOutputBuffer) {
+      terminalOutputBuffer.dispose()
+      terminalOutputBuffer = null
     }
 
     if (terminal) {
@@ -119,6 +139,29 @@ export const useTrainingTerminal = ({
       theme: createTerminalTheme()
     })
 
+    terminalOutputBuffer = createTerminalOutputBuffer(terminal, {
+      onOverflow: () => {
+        ElMessage.warning(t('terminalHighOutputWarning'))
+      }
+    })
+    terminalClipboardBridge = createTerminalClipboardBridge(
+      terminal,
+      terminalContainer,
+      {
+        sendData: (data) => {
+          if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.send(data)
+          }
+        },
+        notifyCopyError: () => {
+          ElMessage.error(t('copyFailed'))
+        },
+        notifyPasteError: () => {
+          ElMessage.error(t('pasteFailed'))
+        }
+      }
+    )
+
     fitAddon = new FitAddon()
     terminal.loadAddon(fitAddon)
     terminal.open(terminalContainer)
@@ -148,14 +191,16 @@ export const useTrainingTerminal = ({
     }
 
     ws.onmessage = (event: MessageEvent<string>) => {
-      terminal?.write(event.data)
+      terminalOutputBuffer?.push(event.data)
     }
 
     ws.onclose = () => {
       terminalConnected.value = false
 
       if (terminal) {
-        terminal.write('\r\n\x1b[31mConnection disconnected.\x1b[0m\r\n')
+        terminalOutputBuffer?.push(
+          '\r\n\x1b[31mConnection disconnected.\x1b[0m\r\n'
+        )
       }
     }
 

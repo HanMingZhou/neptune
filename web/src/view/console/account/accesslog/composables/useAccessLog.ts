@@ -21,7 +21,7 @@ export function useAccessLog({ t }: UseAccessLogOptions = {}) {
   const loginLogs = ref<AccessLogRecord[]>([])
   const total = ref(0)
   const page = ref(1)
-  const pageSize = ref(10)
+  const pageSize = ref(15)
   const searchIp = ref('')
   const filterStatus = ref('')
 
@@ -29,7 +29,7 @@ export function useAccessLog({ t }: UseAccessLogOptions = {}) {
     try {
       const res = (await getActiveSessionList({
         page: 1,
-        pageSize: 20
+        pageSize: 15
       })) as ApiResponse<PageListData<AccessLogSession>>
       if (res.code === 0) {
         activeSessions.value = res.data?.list || []
@@ -127,3 +127,4 @@ export function useAccessLog({ t }: UseAccessLogOptions = {}) {
     total
   }
 }
+

@@ -1,6 +1,6 @@
 <template>
-  <TableCard>
-    <div class="overflow-x-auto">
+  <TableCard :page-size="pageSize">
+    <div class="console-table-scroll console-table-scroll--fill overflow-x-auto">
       <table class="console-table">
         <thead>
           <tr>
@@ -97,9 +97,14 @@
 
     <template #footer>
       <ListPaginationBar
-        :total="items.length"
-        :total-text="t('totalRecords', { total: items.length })"
-        :show-pagination="false"
+        :current-page="page"
+        :page-size="pageSize"
+        :page-sizes="[15, 20, 50, 100]"
+        :total="total"
+        :total-text="t('totalRecords', { total })"
+        layout="sizes, prev, pager, next, jumper"
+        @current-change="emit('page-change', $event)"
+        @size-change="emit('size-change', $event)"
       />
     </template>
   </TableCard>
@@ -116,17 +121,26 @@ withDefaults(
   defineProps<{
     items?: SshKeyListItem[]
     loading?: boolean
+    page?: number
+    pageSize?: number
+    total?: number
   }>(),
   {
     items: () => [],
-    loading: false
+    loading: false,
+    page: 1,
+    pageSize: 15,
+    total: 0
   }
 )
 
 const emit = defineEmits<{
   create: []
   delete: [key: SshKeyListItem]
+  'page-change': [value: number]
+  'size-change': [value: number]
   'set-default': [key: SshKeyListItem]
 }>()
 const t = inject<Translator>('t', (key: string) => key)
 </script>
+

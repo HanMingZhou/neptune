@@ -1,5 +1,5 @@
 <template>
-  <TableCard>
+  <TableCard :page-size="pageSize">
     <template #toolbar>
       <BaseFilterBar plain wrap-main>
         <div class="list-search-field">
@@ -34,13 +34,15 @@
       </BaseFilterBar>
     </template>
 
-    <div class="overflow-x-auto">
+    <div
+      class="console-table-scroll console-table-scroll--fill overflow-x-auto"
+    >
       <table
         class="console-table console-table--resource-dense w-full min-w-[1180px]"
       >
         <thead>
           <tr>
-            <th>{{ t('name') }}</th>
+            <th>{{ t('name') }} / {{ t('instanceId') }}</th>
             <th>{{ t('spec') }}</th>
             <th>{{ t('status') }}</th>
             <th>{{ t('gpu') }}</th>
@@ -81,11 +83,7 @@
             <td>
               <ResourceIdentityCell
                 :copy-title="t('copy')"
-                :copy-value="
-                  item.displayName && item.displayName !== item.jobName
-                    ? item.jobName
-                    : ''
-                "
+                :copy-value="item.jobName || ''"
                 :primary="item.displayName || item.jobName"
                 :secondary="item.jobName"
                 @copy="$emit('copy', $event)"
@@ -185,7 +183,7 @@
         :page-size="pageSize"
         :total="total"
         :total-text="t('totalRecords', { total })"
-        :page-sizes="[10, 20, 50]"
+        :page-sizes="[15, 20, 50, 100]"
         layout="sizes, prev, pager, next, jumper"
         @current-change="$emit('page-change', $event)"
         @size-change="$emit('size-change', $event)"
@@ -224,7 +222,7 @@ withDefaults(
     jobs: () => [],
     loading: false,
     page: 1,
-    pageSize: 20,
+    pageSize: 15,
     searchQuery: '',
     total: 0
   }
@@ -260,3 +258,4 @@ const formatTime = (time?: string | number) => {
   return `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`
 }
 </script>
+

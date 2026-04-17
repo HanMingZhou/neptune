@@ -77,6 +77,50 @@ func TestReleaseResourceAllocationsIsIdempotent(t *testing.T) {
 	require.Equal(t, int64(0), current.UsedCapacity)
 }
 
+func TestLoadPriceItemsForProductsHydratesComputePrices(t *testing.T) {
+	db := newTestProductDB(t)
+
+	products := []productModel.Product{
+		{
+			ID:           11,
+			Name:         "gpu-a",
+			ProductType:  productModel.ProductTypeCompute,
+			Status:       productModel.ProductStatusEnabled,
+			MaxInstances: 2,
+		},
+		{
+			ID:           12,
+			Name:         "gpu-b",
+			ProductType:  productModel.ProductTypeCompute,
+			Status:       productModel.ProductStatusEnabled,
+			MaxInstances: 4,
+		},
+	}
+	require.NoError(t, db.Create(&products).Error)
+	require.NoError(t, productModel.UpsertPriceItems(context.Background(), db, []productModel.ProductPrice{
+		{ProductID: 11, PriceType: productModel.ChargeTypeHourly, Price: 1.25},
+		{ProductID: 11, PriceType: productModel.ChargeTypeDaily, Price: 10.5},
+		{ProductID: 11, PriceType: productModel.ChargeTypeWeekly, Price: 60},
+		{ProductID: 11, PriceType: productModel.ChargeTypeMonthly, Price: 180},
+		{ProductID: 12, PriceType: productModel.ChargeTypeHourly, Price: 2.5},
+		{ProductID: 12, PriceType: productModel.ChargeTypeMonthly, Price: 260},
+	}))
+
+	var loaded []productModel.Product
+	require.NoError(t, db.Order("id ASC").Find(&loaded).Error)
+	require.NoError(t, productModel.LoadPriceItemsForProducts(context.Background(), db, loaded))
+
+	require.Len(t, loaded[0].PriceItems, 4)
+	require.Equal(t, 1.25, loaded[0].PriceHourly)
+	require.Equal(t, 10.5, loaded[0].PriceDaily)
+	require.Equal(t, 60.0, loaded[0].PriceWeekly)
+	require.Equal(t, 180.0, loaded[0].PriceMonthly)
+	require.Equal(t, 2.5, loaded[1].PriceHourly)
+	require.Equal(t, 0.0, loaded[1].PriceDaily)
+	require.Equal(t, 0.0, loaded[1].PriceWeekly)
+	require.Equal(t, 260.0, loaded[1].PriceMonthly)
+}
+
 func TestReleaseResourceAllocationsRollsBackWhenCapacityIsInvalid(t *testing.T) {
 	db := newTestProductDB(t)
 	svc := &ProductService{}
@@ -124,7 +168,7 @@ func newTestProductDB(t *testing.T) *gorm.DB {
 	dsn := fmt.Sprintf("file:%s?mode=memory&cache=shared", t.Name())
 	db, err := gorm.Open(sqlite.Open(dsn), &gorm.Config{})
 	require.NoError(t, err)
-	require.NoError(t, db.AutoMigrate(&productModel.Product{}, &productModel.ResourceAllocation{}))
+	require.NoError(t, db.AutoMigrate(&productModel.Product{}, &productModel.ProductPrice{}, &productModel.ResourceAllocation{}))
 
 	previous := global.GVA_DB
 	global.GVA_DB = db

@@ -1,5 +1,5 @@
 <template>
-  <div class="console-create-page pb-32">
+  <div class="console-create-page">
     <PageHeader title-key="inference.createTitle" @back="handleCancel" />
 
     <div class="console-page-container px-6 py-6 space-y-6">

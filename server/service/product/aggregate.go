@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"sort"
+	"strings"
 
 	"gin-vue-admin/global"
 	clusterModel "gin-vue-admin/model/cluster"
@@ -19,9 +20,14 @@ import (
 )
 
 type AggregateProductFilters struct {
-	Area     string
-	GPUModel string
-	CPUModel string
+	ClusterId       uint
+	Area            string
+	GPUModel        string
+	CPUModel        string
+	GPUResourceType string
+	VGPUNumber      int64
+	VGPUMemory      int64
+	VGPUCores       int64
 }
 
 type aggregateProductKey struct {
@@ -46,7 +52,9 @@ type aggregateProductKey struct {
 }
 
 type clusterNodeState struct {
-	Schedulable bool
+	Schedulable   bool
+	DriverVersion string
+	CUDAVersion   string
 }
 
 type candidateProduct struct {
@@ -89,6 +97,9 @@ func (s *ProductService) GetAggregateProductList(
 	if err := db.Order("sort_order ASC, id ASC").Find(&products).Error; err != nil {
 		return nil, err
 	}
+	if err := productModel.LoadPriceItemsForProducts(ctx, global.GVA_DB, products); err != nil {
+		return nil, err
+	}
 
 	clusterNames, err := s.loadClusterNames(ctx, products)
 	if err != nil {
@@ -99,6 +110,9 @@ func (s *ProductService) GetAggregateProductList(
 	grouped := make(map[aggregateProductKey]*productRes.AggregateProductResponse)
 	for _, p := range products {
 		key := buildAggregateProductKey(&p)
+		nodeState := nodeStates[p.ClusterId][p.NodeName]
+		resolvedDriverVersion := firstNonEmpty(p.DriverVersion, nodeState.DriverVersion)
+		resolvedCUDAVersion := firstNonEmpty(p.CUDAVersion, nodeState.CUDAVersion)
 		item, exists := grouped[key]
 		if !exists {
 			item = &productRes.AggregateProductResponse{
@@ -119,8 +133,8 @@ func (s *ProductService) GetAggregateProductList(
 				VGPUNumber:        p.VGPUNumber,
 				VGPUMemory:        p.VGPUMemory,
 				VGPUCores:         p.VGPUCores,
-				DriverVersion:     p.DriverVersion,
-				CUDAVersion:       p.CUDAVersion,
+				DriverVersion:     resolvedDriverVersion,
+				CUDAVersion:       resolvedCUDAVersion,
 				PriceHourly:       p.PriceHourly,
 				PriceDaily:        p.PriceDaily,
 				PriceWeekly:       p.PriceWeekly,
@@ -129,7 +143,7 @@ func (s *ProductService) GetAggregateProductList(
 			grouped[key] = item
 		}
 
-		nodeState, ok := nodeStates[p.ClusterId][p.NodeName]
+		_, ok := nodeStates[p.ClusterId][p.NodeName]
 		if !ok || !nodeState.Schedulable {
 			continue
 		}
@@ -299,6 +313,9 @@ func (s *ProductService) buildProductListDB(ctx context.Context, productType int
 	if productType > 0 {
 		db = db.Where("product_type = ?", productType)
 	}
+	if filters.ClusterId > 0 {
+		db = db.Where("cluster_id = ?", filters.ClusterId)
+	}
 	if filters.Area != "" {
 		db = db.Where("area = ?", filters.Area)
 	}
@@ -308,6 +325,21 @@ func (s *ProductService) buildProductListDB(ctx context.Context, productType int
 	if filters.CPUModel != "" {
 		db = db.Where("cpu_model = ?", filters.CPUModel)
 	}
+	if filters.GPUResourceType == "gpu" {
+		db = db.Where("COALESCE(v_gpu_number, 0) = 0 AND COALESCE(v_gpu_memory, 0) = 0 AND COALESCE(v_gpu_cores, 0) = 0")
+	}
+	if filters.GPUResourceType == "vgpu" {
+		db = db.Where("(COALESCE(v_gpu_number, 0) > 0 OR COALESCE(v_gpu_memory, 0) > 0 OR COALESCE(v_gpu_cores, 0) > 0)")
+	}
+	if filters.VGPUNumber > 0 {
+		db = db.Where("v_gpu_number = ?", filters.VGPUNumber)
+	}
+	if filters.VGPUMemory > 0 {
+		db = db.Where("v_gpu_memory = ?", filters.VGPUMemory)
+	}
+	if filters.VGPUCores > 0 {
+		db = db.Where("v_gpu_cores = ?", filters.VGPUCores)
+	}
 	return db
 }
 
@@ -316,6 +348,9 @@ func (s *ProductService) getEnabledProductModel(ctx context.Context, productID u
 	if err := global.GVA_DB.WithContext(ctx).
 		Where("id = ? AND status = ?", productID, productModel.ProductStatusEnabled).
 		First(&product).Error; err != nil {
+		return nil, err
+	}
+	if err := productModel.LoadPriceItems(ctx, global.GVA_DB, &product); err != nil {
 		return nil, err
 	}
 	return &product, nil
@@ -352,10 +387,16 @@ func (s *ProductService) loadCandidateProducts(ctx context.Context, templateProd
 	if err := s.matchTemplateProductsQuery(ctx, templateProduct).Order("id ASC").Find(&products).Error; err != nil {
 		return nil, err
 	}
+	if err := productModel.LoadPriceItemsForProducts(ctx, global.GVA_DB, products); err != nil {
+		return nil, err
+	}
 
 	nodeStates := s.loadClusterNodeStates(products)
 	candidates := make([]candidateProduct, 0, len(products))
 	for _, product := range products {
+		if !productModel.HasSameComputePrices(templateProduct, &product) {
+			continue
+		}
 		if !nodeStates[product.ClusterId][product.NodeName].Schedulable {
 			continue
 		}
@@ -393,8 +434,7 @@ func (s *ProductService) matchTemplateProductsQuery(ctx context.Context, templat
 		Where("cpu_model = ? AND cpu = ? AND memory = ?", template.CPUModel, template.CPU, template.Memory).
 		Where("gpu_model = ? AND gpu_count = ? AND gpu_memory = ?", template.GPUModel, template.GPUCount, template.GPUMemory).
 		Where("v_gpu_number = ? AND v_gpu_memory = ? AND v_gpu_cores = ?", template.VGPUNumber, template.VGPUMemory, template.VGPUCores).
-		Where("driver_version = ? AND cuda_version = ?", template.DriverVersion, template.CUDAVersion).
-		Where("price_hourly = ? AND price_daily = ? AND price_weekly = ? AND price_monthly = ?", template.PriceHourly, template.PriceDaily, template.PriceWeekly, template.PriceMonthly)
+		Where("driver_version = ? AND cuda_version = ?", template.DriverVersion, template.CUDAVersion)
 }
 
 func (s *ProductService) loadClusterNodeStates(products []productModel.Product) map[uint]map[string]clusterNodeState {
@@ -415,8 +455,11 @@ func (s *ProductService) loadClusterNodeStates(products []productModel.Product) 
 			continue
 		}
 		for _, node := range nodeList.Items {
+			driverVersion, cudaVersion := parseNodeVersionInfo(&node)
 			result[clusterID][node.Name] = clusterNodeState{
-				Schedulable: !node.Spec.Unschedulable && isNodeReady(&node),
+				Schedulable:   !node.Spec.Unschedulable && isNodeReady(&node),
+				DriverVersion: driverVersion,
+				CUDAVersion:   cudaVersion,
 			}
 		}
 	}
@@ -431,6 +474,84 @@ func isNodeReady(node *corev1.Node) bool {
 		}
 	}
 	return false
+}
+
+func parseNodeVersionInfo(node *corev1.Node) (string, string) {
+	driverVersion := resolveNodeMetadataValue(node,
+		[]string{
+			"nvidia.com/cuda.driver-version.full",
+			"nvidia.com/cuda.driver.version",
+			"nvidia.com/cuda.driver-version",
+			"nvidia.com/gpu.driver.version",
+			"nvidia.com/gpu.driver-version",
+			"nvidia.com/driver.version",
+			"gpu.nvidia.com/driver-version",
+		},
+		[][]string{
+			{"nvidia.com/cuda.driver-version.major", "nvidia.com/cuda.driver-version.minor", "nvidia.com/cuda.driver-version.revision"},
+			{"nvidia.com/cuda.driver.major", "nvidia.com/cuda.driver.minor", "nvidia.com/cuda.driver.rev"},
+			{"nvidia.com/cuda.driver.major", "nvidia.com/cuda.driver.minor", "nvidia.com/cuda.driver.patch"},
+		},
+	)
+
+	cudaVersion := resolveNodeMetadataValue(node,
+		[]string{
+			"nvidia.com/cuda.runtime-version.full",
+			"nvidia.com/cuda.runtime.version",
+			"nvidia.com/cuda.runtime-version",
+			"nvidia.com/cuda.version",
+			"nvidia.com/cuda-version",
+		},
+		[][]string{
+			{"nvidia.com/cuda.runtime-version.major", "nvidia.com/cuda.runtime-version.minor"},
+			{"nvidia.com/cuda.runtime.major", "nvidia.com/cuda.runtime.minor"},
+			{"nvidia.com/cuda.major", "nvidia.com/cuda.minor"},
+		},
+	)
+
+	return driverVersion, cudaVersion
+}
+
+func resolveNodeMetadataValue(node *corev1.Node, fullKeys []string, partKeys [][]string) string {
+	for _, key := range fullKeys {
+		if value := lookupNodeMetadataValue(node, key); value != "" {
+			return value
+		}
+	}
+
+	for _, keys := range partKeys {
+		parts := make([]string, 0, len(keys))
+		missing := false
+		for _, key := range keys {
+			value := lookupNodeMetadataValue(node, key)
+			if value == "" {
+				missing = true
+				break
+			}
+			parts = append(parts, value)
+		}
+		if !missing && len(parts) > 0 {
+			return strings.Join(parts, ".")
+		}
+	}
+
+	return ""
+}
+
+func lookupNodeMetadataValue(node *corev1.Node, key string) string {
+	if value := strings.TrimSpace(node.Labels[key]); value != "" {
+		return value
+	}
+	return strings.TrimSpace(node.Annotations[key])
+}
+
+func firstNonEmpty(values ...string) string {
+	for _, value := range values {
+		if value != "" {
+			return value
+		}
+	}
+	return ""
 }
 
 func buildAggregateProductKey(p *productModel.Product) aggregateProductKey {

@@ -21,9 +21,12 @@ type GPUModelInfo struct {
 }
 
 type VGPUModelInfo struct {
-	Memory    string `json:"memory"`
-	Available int    `json:"available"`
-	Total     int    `json:"total"`
+	Model      string `json:"model"`
+	VGPUNumber int64  `json:"vGpuNumber"`
+	VGPUMemory int64  `json:"vGpuMemory"`
+	VGPUCores  int64  `json:"vGpuCores"`
+	Available  int    `json:"available"`
+	Total      int    `json:"total"`
 }
 
 type CPUInfo struct {
@@ -45,6 +48,7 @@ type ProductDetailResponse struct {
 	Area              string  `json:"area"`
 	ClusterName       string  `json:"clusterName,omitempty"`
 	NodeName          string  `json:"nodeName"`
+	NodeIP            string  `json:"nodeIp,omitempty"`
 	NodeType          string  `json:"nodeType"`
 	CPUModel          string  `json:"cpuModel"`
 	CPU               int64   `json:"cpu"`
@@ -67,6 +71,7 @@ type ProductDetailResponse struct {
 	StorageClass      string  `json:"storageClass"`
 	StoragePriceGB    float64 `json:"storagePriceGb"`
 	MaxInstances      int64   `json:"maxInstances"`
+	UsedCapacity      int64   `json:"usedCapacity"`
 	Available         int64   `json:"available"` // 可用库存
 	ClusterId         uint    `json:"clusterId"`
 	PhysicalNodeCount int64   `json:"physicalNodeCount,omitempty"`
@@ -81,6 +86,7 @@ type ClusterResponse struct {
 	Area        string `json:"area"`
 	Description string `json:"description"`
 	Status      int    `json:"status"`
+	HarborAddr  string `json:"harborAddr"`
 }
 
 type NodeInfoResponse struct {

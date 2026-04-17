@@ -162,11 +162,6 @@
     max-width: calc(100vw - 64px) !important;
   }
 
-  .product-dialog--compute.el-dialog,
-  .product-dialog--compute .el-dialog {
-    width: min(840px, calc(100vw - 64px)) !important;
-  }
-
   .product-dialog--storage.el-dialog,
   .product-dialog--storage .el-dialog {
     width: min(600px, calc(100vw - 64px)) !important;
@@ -1198,29 +1193,6 @@
   .account-security-dialog .el-input__wrapper.is-focus,
   .account-security-dialog .el-input__wrapper:focus-within {
     @apply shadow-[0_0_0_2px_rgba(59,130,246,0.1)] dark:shadow-[0_0_0_2px_rgba(59,130,246,0.2)];
-  }
-
-  .recharge-balance-dialog .recharge-amount-input {
-    width: 100% !important;
-  }
-
-  .recharge-balance-dialog .recharge-amount-input .el-input__wrapper {
-    min-height: auto !important;
-    padding: 0 !important;
-    border: none !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-
-  .recharge-balance-dialog .recharge-amount-input .el-input__inner {
-    font-size: 1.75rem !important;
-    font-weight: 800 !important;
-    color: rgb(15 23 42) !important;
-  }
-
-  .dark .recharge-balance-dialog .recharge-amount-input .el-input__inner {
-    color: rgb(248 250 252) !important;
   }
 
   .ssh-key-create-dialog__textarea .el-textarea__inner {

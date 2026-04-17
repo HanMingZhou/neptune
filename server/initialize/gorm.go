@@ -1,6 +1,7 @@
 package initialize
 
 import (
+	"context"
 	"gin-vue-admin/global"
 	accountModel "gin-vue-admin/model/account"
 	"gin-vue-admin/model/cluster"
@@ -74,6 +75,7 @@ func RegisterTables() {
 
 		image.Image{},
 		product.Product{},
+		product.ProductPrice{},
 		product.ResourceAllocation{},
 		podgroup.PodGroup{},
 
@@ -122,6 +124,11 @@ func RegisterTables() {
 	)
 	if err != nil {
 		logx.Error("register table failed", zap.Error(err))
+		os.Exit(0)
+	}
+
+	if err = product.SyncLegacyComputePriceItems(context.Background(), db); err != nil {
+		logx.Error("sync legacy product prices failed", zap.Error(err))
 		os.Exit(0)
 	}
 

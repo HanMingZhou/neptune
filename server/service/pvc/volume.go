@@ -17,9 +17,11 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/gorm"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/kubernetes"
 )
 
 /*
@@ -37,6 +39,7 @@ type VolumeManager interface {
 	CreateVolume(ctx context.Context, req *request.CreateVolumeReq) error
 	GetVolumeList(ctx context.Context, req *request.GetVolumeListReq) (*response.VolumeListResp, error)
 	ExpandVolume(ctx context.Context, req *request.ExpandVolumeReq) error
+	UpdateVolume(ctx context.Context, req *request.UpdateVolumeReq) error
 	DeleteVolume(ctx context.Context, req *request.DeleteVolumeReq) error
 	GetAreaList(ctx context.Context) (*response.AreaListResp, error)
 }
@@ -55,9 +58,6 @@ func (v *VolumeService) CreateVolume(ctx context.Context, req *request.CreateVol
 	}
 	if req.Size <= 0 {
 		return errors.New("容量必须大于0")
-	}
-	if req.Area == "" {
-		return errors.New("区域不能为空")
 	}
 
 	// 2. 获取产品和集群
@@ -91,6 +91,7 @@ func (v *VolumeService) CreateVolume(ctx context.Context, req *request.CreateVol
 		return errors.New("指定的集群不可用")
 	}
 	clientSet := clientInfo.ClientSet
+	area := strings.TrimSpace(cluster.Area)
 
 	// 3. 系统生成 PVC 名称 (vol-时间戳-随机数)，确保符合 K8s 命名规范且唯一（全部小写）
 	pvcName := strings.ToLower(fmt.Sprintf("vol-%d-%s", time.Now().Unix(), utils.RandomString(4)))
@@ -118,7 +119,7 @@ func (v *VolumeService) CreateVolume(ctx context.Context, req *request.CreateVol
 				"app": "neptune-volume",
 			},
 			Annotations: map[string]string{
-				"area":       req.Area,
+				"area":       area,
 				"cluster-id": cluster.Name,
 				"product-id": fmt.Sprintf("%d", prod.ID),
 			},
@@ -142,6 +143,7 @@ func (v *VolumeService) CreateVolume(ctx context.Context, req *request.CreateVol
 	// 6. 保存到数据库
 	volume := &pvcModel.Volume{
 		Name:      req.Name,
+		Area:      area,
 		Namespace: req.Namespace,
 		Size:      req.Size,
 		Type:      req.Type,
@@ -178,7 +180,9 @@ func (v *VolumeService) GetVolumeList(ctx context.Context, req *request.GetVolum
 		db = db.Where("status = ?", req.Status)
 	}
 	if req.Area != "" {
-		db = db.Where("area = ?", req.Area)
+		db = db.
+			Joins("LEFT JOIN k8s_clusters ON k8s_clusters.id = volumes.cluster_id").
+			Where("k8s_clusters.area = ?", req.Area)
 	}
 	if req.UserId > 0 {
 		db = db.Where("user_id = ?", req.UserId)
@@ -200,22 +204,45 @@ func (v *VolumeService) GetVolumeList(ctx context.Context, req *request.GetVolum
 	// 构建响应
 	list := make([]response.VolumeItem, 0, len(volumes))
 	for _, vol := range volumes {
+		actualSize := vol.Size
+		requestedSize := vol.Size
+		resizePending := false
+
+		runtimeState, err := SyncVolumeRuntimeState(ctx, vol.ID, vol.ClusterId, vol.Namespace, vol.PVCName, vol.Size)
+		if err != nil {
+			logx.Error("获取Volume运行态失败",
+				logx.Field("volumeId", vol.ID),
+				logx.Field("pvcName", vol.PVCName),
+				logx.Field("err", err))
+		} else {
+			actualSize = runtimeState.ActualSize
+			requestedSize = runtimeState.RequestedSize
+			resizePending = runtimeState.ResizePending
+		}
+
 		productName := ""
 		if vol.Product != nil {
 			productName = vol.Product.Name
 		}
+		clusterID := vol.ClusterId
+		if vol.K8sCluster != nil && vol.K8sCluster.ID != 0 {
+			clusterID = vol.K8sCluster.ID
+		}
 		item := response.VolumeItem{
-			ID:          vol.ID,
-			Name:        vol.Name,
-			Size:        vol.Size,
-			Type:        vol.Type,
-			Status:      v.getVolumeStatus(ctx, &vol),
-			CreatedAt:   vol.CreatedAt.Format("2006-01-02 15:04:05"),
-			UsedBy:      v.getVolumeUsage(&vol),
-			ClusterId:   vol.K8sCluster.ID,
-			ProductId:   vol.ProductId,
-			ProductName: productName,
-			Area:        vol.K8sCluster.Area,
+			ID:            vol.ID,
+			Name:          vol.Name,
+			PVCName:       vol.PVCName,
+			Size:          actualSize,
+			RequestedSize: requestedSize,
+			ResizePending: resizePending,
+			Type:          vol.Type,
+			Status:        v.getVolumeStatus(ctx, &vol),
+			CreatedAt:     vol.CreatedAt.Format("2006-01-02 15:04:05"),
+			UsedBy:        v.getVolumeUsage(&vol),
+			ClusterId:     clusterID,
+			ProductId:     vol.ProductId,
+			ProductName:   productName,
+			Area:          resolveVolumeArea(&vol),
 		}
 		list = append(list, item)
 	}
@@ -234,40 +261,108 @@ func (v *VolumeService) ExpandVolume(ctx context.Context, req *request.ExpandVol
 		return errors.New("存储不存在或无权操作")
 	}
 
-	// 2. 获取当前容量
-	currentSize := volume.Size
-
-	// 3. 校验：只能扩大
-	if req.Size <= currentSize {
-		return errors.New("新容量必须大于当前容量")
+	// 2. 以 PVC 当前 spec/status 为准校准容量，避免数据库提前变更导致的误判
+	currentState, err := SyncVolumeRuntimeState(ctx, volume.ID, volume.ClusterId, volume.Namespace, volume.PVCName, volume.Size)
+	if err != nil {
+		return errors.Wrap(err, "获取PVC当前容量失败")
 	}
 
-	// 4. 获取集群客户端 (优先使用数据库记录的 ClusterId)
+	// 3. 获取集群客户端 (优先使用数据库记录的 ClusterId)
 	cluster := global.GVA_K8S_CLUSTER_MANAGER.GetCluster(volume.ClusterId)
 	if cluster == nil {
 		return errors.New("对应集群不可用")
 	}
 	clientSet := cluster.ClientSet
 
-	// 5. 更新 K8s PVC
-	newSizeStr := fmt.Sprintf("%dGi", req.Size)
 	pvc, err := clientSet.CoreV1().PersistentVolumeClaims(volume.Namespace).Get(ctx, volume.PVCName, metav1.GetOptions{})
 	if err != nil {
 		return errors.Wrap(err, "获取PVC失败")
 	}
 
+	if err := validatePVCExpansionSupport(ctx, clientSet, pvc); err != nil {
+		return err
+	}
+
+	// 4. 校验：只能扩大，且必须大于当前已申请容量
+	if req.Size <= currentState.RequestedSize {
+		if currentState.ResizePending {
+			return fmt.Errorf("该存储已申请扩容到 %dGB，请输入更大的容量", currentState.RequestedSize)
+		}
+		return fmt.Errorf("新容量必须大于当前容量 %dGB", currentState.RequestedSize)
+	}
+
+	// 5. 更新 K8s PVC
+	newSizeStr := fmt.Sprintf("%dGi", req.Size)
 	pvc.Spec.Resources.Requests[corev1.ResourceStorage] = resource.MustParse(newSizeStr)
 	if _, err := clientSet.CoreV1().PersistentVolumeClaims(volume.Namespace).Update(ctx, pvc, metav1.UpdateOptions{}); err != nil {
 		logx.Error("扩容K8s PVC失败", err)
 		return errors.Wrap(err, "扩容失败")
 	}
 
-	// 6. 更新数据库
-	if err := global.GVA_DB.Model(&pvcModel.Volume{}).Where("id = ?", req.Id).Update("size", req.Size).Error; err != nil {
-		return errors.Wrap(err, "更新存储信息失败")
+	// 6. 扩容请求提交后，以集群 status.capacity 作为数据库事实来源。
+	// 如果底层存储还未真正扩到位，size 会保持旧值，避免页面和计费提前显示新容量。
+	updatedState, err := SyncVolumeRuntimeState(ctx, volume.ID, volume.ClusterId, volume.Namespace, volume.PVCName, currentState.ActualSize)
+	if err != nil {
+		logx.Error("扩容后同步Volume运行态失败",
+			logx.Field("id", req.Id),
+			logx.Field("pvcName", volume.PVCName),
+			logx.Field("err", err))
 	}
 
-	logx.Info("扩容Volume成功", logx.Field("id", req.Id), logx.Field("newSize", req.Size))
+	actualSize := currentState.ActualSize
+	if updatedState != nil && updatedState.ActualSize > 0 {
+		actualSize = updatedState.ActualSize
+	}
+
+	logx.Info("扩容Volume成功",
+		logx.Field("id", req.Id),
+		logx.Field("requestedSize", req.Size),
+		logx.Field("actualSize", actualSize))
+	return nil
+}
+
+// UpdateVolume 编辑文件存储
+func (v *VolumeService) UpdateVolume(_ context.Context, req *request.UpdateVolumeReq) error {
+	req.Name = strings.TrimSpace(req.Name)
+	if req.Name == "" {
+		return errors.New("存储名称不能为空")
+	}
+
+	var volume pvcModel.Volume
+	if err := global.GVA_DB.Where("id = ? AND user_id = ?", req.Id, req.UserId).First(&volume).Error; err != nil {
+		return errors.New("存储不存在或无权操作")
+	}
+
+	if err := global.GVA_DB.Transaction(func(tx *gorm.DB) error {
+		var existing pvcModel.Volume
+		err := tx.Where("namespace = ? AND name = ? AND id <> ? AND deleted_at IS NULL", volume.Namespace, req.Name, volume.ID).First(&existing).Error
+		if err == nil {
+			return errors.New("该名称已被当前命名空间下的其他存储占用")
+		}
+		if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+			return err
+		}
+
+		if err := tx.Model(&pvcModel.Volume{}).Where("id = ?", volume.ID).Updates(map[string]interface{}{
+			"name": req.Name,
+		}).Error; err != nil {
+			return err
+		}
+
+		if req.Name != volume.Name {
+			if err := tx.Table("notebook_volumes").Where("pvc_id = ? AND deleted_at IS NULL", volume.ID).Update("name", req.Name).Error; err != nil {
+				return err
+			}
+		}
+
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "编辑存储失败")
+	}
+
+	logx.Info("编辑Volume成功",
+		logx.Field("id", volume.ID),
+		logx.Field("name", req.Name))
 	return nil
 }
 
@@ -293,7 +388,7 @@ func (v *VolumeService) DeleteVolume(ctx context.Context, req *request.DeleteVol
 	cluster := global.GVA_K8S_CLUSTER_MANAGER.GetCluster(volume.ClusterId)
 	if cluster == nil {
 		// 如果集群已经不存在了，直接删除数据库记录
-		logx.Errorf("集群不存在，直接删除数据库记录", logx.Field("clusterId", volume.ClusterId))
+		logx.Error("集群不存在，直接删除数据库记录", logx.Field("clusterId", volume.ClusterId))
 	} else {
 		clientSet := cluster.ClientSet
 
@@ -316,12 +411,31 @@ func (v *VolumeService) DeleteVolume(ctx context.Context, req *request.DeleteVol
 // GetAreaList 获取可用区域/集群列表
 func (v *VolumeService) GetAreaList(ctx context.Context) (*response.AreaListResp, error) {
 	clusters := global.GVA_K8S_CLUSTER_MANAGER.ListClusters()
+	clusterIDs := make([]uint, 0, len(clusters))
+	for _, clusterInfo := range clusters {
+		clusterIDs = append(clusterIDs, uint(clusterInfo.ClusterId))
+	}
+
+	harborMap := make(map[uint]string, len(clusterIDs))
+	if len(clusterIDs) > 0 {
+		var clusterConfigs []cluster.K8sCluster
+		if err := global.GVA_DB.WithContext(ctx).
+			Where("id IN ?", clusterIDs).
+			Find(&clusterConfigs).Error; err != nil {
+			return nil, err
+		}
+		for _, clusterConfig := range clusterConfigs {
+			harborMap[clusterConfig.ID] = clusterConfig.HarborAddr
+		}
+	}
+
 	list := make([]response.ClusterInfo, 0, len(clusters))
 	for _, c := range clusters {
 		list = append(list, response.ClusterInfo{
-			ID:   uint(c.ClusterId),
-			Name: c.ClusterName,
-			Area: c.Area,
+			ID:         uint(c.ClusterId),
+			Name:       c.ClusterName,
+			Area:       c.Area,
+			HarborAddr: harborMap[uint(c.ClusterId)],
 		})
 	}
 	return &response.AreaListResp{
@@ -372,5 +486,84 @@ func (v *VolumeService) getVolumeUsage(vol *pvcModel.Volume) []response.VolumeUs
 		})
 	}
 
+	var inferenceDisplayNames []string
+	global.GVA_DB.Table("inferences").
+		Where("model_pvc_id = ? AND deleted_at IS NULL", vol.ID).
+		Pluck("COALESCE(display_name, instance_name)", &inferenceDisplayNames)
+
+	for _, name := range inferenceDisplayNames {
+		usages = appendUniqueVolumeUsage(usages, response.VolumeUsage{
+			Type: "Inference",
+			Name: name,
+		})
+	}
+
+	var inferenceMountDisplayNames []string
+	global.GVA_DB.Table("inference_mounts").
+		Joins("JOIN inferences ON inferences.id = inference_mounts.service_id").
+		Where("inference_mounts.pvc_id = ? AND inference_mounts.deleted_at IS NULL AND inferences.deleted_at IS NULL", vol.ID).
+		Pluck("COALESCE(inferences.display_name, inferences.instance_name)", &inferenceMountDisplayNames)
+
+	for _, name := range inferenceMountDisplayNames {
+		usages = appendUniqueVolumeUsage(usages, response.VolumeUsage{
+			Type: "Inference",
+			Name: name,
+		})
+	}
+
 	return usages
+}
+
+func resolveVolumeArea(vol *pvcModel.Volume) string {
+	if vol == nil {
+		return ""
+	}
+	if vol.K8sCluster != nil {
+		if area := strings.TrimSpace(vol.K8sCluster.Area); area != "" {
+			return area
+		}
+	}
+	if area := strings.TrimSpace(vol.Area); area != "" {
+		return area
+	}
+	return ""
+}
+
+func appendUniqueVolumeUsage(usages []response.VolumeUsage, usage response.VolumeUsage) []response.VolumeUsage {
+	for _, item := range usages {
+		if item.Type == usage.Type && item.Name == usage.Name {
+			return usages
+		}
+	}
+	return append(usages, usage)
+}
+
+func validatePVCExpansionSupport(ctx context.Context, clientSet kubernetes.Interface, pvc *corev1.PersistentVolumeClaim) error {
+	storageClassName := ""
+	if pvc.Spec.StorageClassName != nil {
+		storageClassName = strings.TrimSpace(*pvc.Spec.StorageClassName)
+	}
+	if storageClassName == "" {
+		return errors.New("当前存储未配置 StorageClass，不支持在线扩容")
+	}
+
+	sc, err := clientSet.StorageV1().StorageClasses().Get(ctx, storageClassName, metav1.GetOptions{})
+	if err != nil {
+		return errors.Wrap(err, "获取StorageClass失败")
+	}
+
+	provisioner := strings.TrimSpace(sc.Provisioner)
+	if provisioner == "" {
+		provisioner = strings.TrimSpace(pvc.Annotations["volume.kubernetes.io/storage-provisioner"])
+	}
+
+	if strings.Contains(provisioner, "nfs-subdir-external-provisioner") || strings.Contains(provisioner, "nfs-client-provisioner") {
+		return fmt.Errorf("当前存储后端 %s 不支持 PVC 扩容，请新建更大存储后迁移数据", provisioner)
+	}
+
+	if sc.AllowVolumeExpansion == nil || !*sc.AllowVolumeExpansion {
+		return fmt.Errorf("当前 StorageClass %s 未开启 allowVolumeExpansion，不支持 PVC 扩容", storageClassName)
+	}
+
+	return nil
 }

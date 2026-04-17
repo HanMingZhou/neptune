@@ -36,8 +36,11 @@ export function useSshKeyManagementPage({
 }: UseSshKeyManagementPageOptions = {}) {
   const translate: Translator = t || ((key: string) => key)
 
+  const page = ref(1)
+  const pageSize = ref(15)
   const loading = ref(false)
   const keys = ref<SshKeyListItem[]>([])
+  const total = ref(0)
   const searchName = ref('')
   const showCreateDialog = ref(false)
   const creating = ref(false)
@@ -67,13 +70,14 @@ export function useSshKeyManagementPage({
 
     try {
       const res = (await getSSHKeyList({
-        page: 1,
-        pageSize: 100,
+        page: page.value,
+        pageSize: pageSize.value,
         name: searchName.value || undefined
-      })) as ApiResponse<{ list?: SshKeyListItem[] }>
+      })) as ApiResponse<{ list?: SshKeyListItem[]; total?: number }>
 
       if (res.code === 0) {
         keys.value = res.data?.list ?? []
+        total.value = res.data?.total ?? 0
       } else {
         ElMessage.error(res.msg || translate('error'))
       }
@@ -92,7 +96,19 @@ export function useSshKeyManagementPage({
   }
 
   const searchKeys = async (): Promise<void> => {
+    page.value = 1
     await loadKeys(true)
+  }
+
+  const handleCurrentChange = (value: number): void => {
+    page.value = value
+    void loadKeys()
+  }
+
+  const handleSizeChange = (value: number): void => {
+    page.value = 1
+    pageSize.value = value
+    void loadKeys()
   }
 
   const openCreateDialog = (): void => {
@@ -123,6 +139,7 @@ export function useSshKeyManagementPage({
       if (res.code === 0) {
         ElMessage.success(res.msg || translate('success'))
         closeCreateDialog()
+        page.value = 1
         await loadKeys()
         return
       }
@@ -152,6 +169,9 @@ export function useSshKeyManagementPage({
       const res = await deleteSSHKey({ id: key.id })
       if (res.code === 0) {
         ElMessage.success(res.msg || translate('success'))
+        if (keys.value.length === 1 && page.value > 1) {
+          page.value -= 1
+        }
         await loadKeys()
         return
       }
@@ -182,6 +202,7 @@ export function useSshKeyManagementPage({
 
   watch(searchName, (value) => {
     if (!value) {
+      page.value = 1
       void loadKeys()
     }
   })
@@ -190,17 +211,23 @@ export function useSshKeyManagementPage({
     closeCreateDialog,
     createForm,
     creating,
+    handleCurrentChange,
     handleCreate,
     handleDelete,
+    handleSizeChange,
     initialize,
     keys,
     loading,
     loadKeys,
     openCreateDialog,
+    page,
+    pageSize,
     rules,
     searchKeys,
     searchName,
     setDefault,
-    showCreateDialog
+    showCreateDialog,
+    total
   }
 }
+

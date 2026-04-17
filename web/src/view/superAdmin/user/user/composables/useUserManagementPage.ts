@@ -134,7 +134,7 @@ export function useUserManagementPage({
   const dialogFlag = ref<'add' | 'edit'>('add')
   const loading = ref(false)
   const page = ref(1)
-  const pageSize = ref(10)
+  const pageSize = ref(15)
   const resetPwdDialog = ref(false)
   const searchInfo = reactive<UserSearchInfo>(createDefaultSearchInfo())
   const tableData = ref<UserRow[]>([])
@@ -211,7 +211,7 @@ export function useUserManagementPage({
         )
         total.value = res.data?.total ?? 0
         page.value = res.data?.page ?? 1
-        pageSize.value = res.data?.pageSize ?? 10
+        pageSize.value = res.data?.pageSize ?? 20
       } else {
         ElMessage.error(res.msg || translate('failed'))
       }
@@ -494,3 +494,4 @@ export function useUserManagementPage({
     userInfo
   }
 }
+

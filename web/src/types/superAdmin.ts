@@ -55,6 +55,13 @@ export interface AuthorityTreeNode {
   [key: string]: unknown
 }
 
+export interface AuthorityListData {
+  list?: AuthorityTreeNode[]
+  total?: number
+  page?: number
+  pageSize?: number
+}
+
 export interface AuthorityForm {
   authorityId: ResourceId | ''
   authorityName: string
@@ -138,6 +145,13 @@ export interface MenuOption {
   ID: number
   disabled?: boolean
   children?: MenuOption[]
+}
+
+export interface MenuListData {
+  list?: MenuTreeNode[]
+  total?: number
+  page?: number
+  pageSize?: number
 }
 
 export interface OperationRecordUser {
@@ -256,12 +270,16 @@ export interface CmsClusterForm {
 
 export interface CmsClusterListData {
   list?: CmsClusterRow[]
+  total?: number
+  page?: number
+  pageSize?: number
 }
 
 export interface CmsClusterOption {
   id: ResourceId
   name: string
   area?: string
+  harborAddr?: string
   [key: string]: unknown
 }
 
@@ -283,6 +301,8 @@ export interface CmsNodeRow {
   gpuCount?: number
   gpuAvailable?: number
   gpuMemory?: number
+  driverVersion?: string
+  cudaVersion?: string
   vGpuNumber?: number
   vGpuCount?: number
   vGpuMemory?: number
@@ -290,12 +310,54 @@ export interface CmsNodeRow {
   [key: string]: unknown
 }
 
+export interface CmsExistingComputeProductSummary {
+  id: number
+  name: string
+  description?: string
+  resourceType: CmsProductResourceType
+  cpu: number
+  memory: number
+  gpuModel?: string
+  gpuCount: number
+  gpuMemory: number
+  vGpuNumber?: number
+  vGpuMemory: number
+  vGpuCores: number
+  priceHourly: number
+  priceDaily: number
+  priceWeekly: number
+  priceMonthly: number
+  status: number
+  maxInstances: number
+  usedCapacity: number
+  available: number
+}
+
+export interface CmsProductNodeCandidate extends CmsNodeRow {
+  existingComputeProducts?: CmsExistingComputeProductSummary[]
+  canCreateComputeProduct?: boolean
+  compatible?: boolean
+  disableReason?: string
+}
+
 export interface CmsNodeListData {
   nodes?: CmsNodeRow[]
+  total?: number
+  page?: number
+  pageSize?: number
 }
 
 export type CmsProductType = 1 | 2
 export type CmsProductResourceType = 'cpu' | 'gpu' | 'vgpu'
+export type CmsProductFilterResourceType = CmsProductResourceType | ''
+export type CmsComputePriceType = 1 | 2 | 3 | 4
+export type CmsCatalogPriceType = CmsComputePriceType | 5
+export type CmsProductPriceField = CmsCatalogPriceType
+
+export interface CmsProductPriceItem {
+  priceType: CmsCatalogPriceType
+  price: number
+}
 
 export interface CmsProductRow {
   id: number | null
@@ -306,6 +368,7 @@ export interface CmsProductRow {
   clusterName?: string
   area: string
   nodeName: string
+  nodeIp?: string
   nodeType: string
   cpuModel: string
   cpu: number
@@ -321,8 +384,13 @@ export interface CmsProductRow {
   priceDaily: number
   priceWeekly: number
   priceMonthly: number
+  driverVersion?: string
+  cudaVersion?: string
   status: number
+  available?: number
   maxInstances: number
+  usedCapacity?: number
+  prices?: CmsProductPriceItem[]
   storageClass: string
   storagePriceGb: number
   [key: string]: unknown
@@ -338,6 +406,11 @@ export interface CmsProductPriceForm {
   priceMonthly: number
 }
 
+export interface CmsProductPricePayload {
+  id: number | null
+  prices: CmsProductPriceItem[]
+}
+
 export interface CmsProductListData {
   list?: CmsProductRow[]
   total?: number
@@ -349,6 +422,17 @@ export interface CmsProductCatalogParams {
   productType: CmsProductType
   clusterId?: ResourceId
   area?: string
+  resourceType?: CmsProductResourceType
+  gpuModel?: string
+  availableMin?: number
+  availableMax?: number
+  maxInstancesMin?: number
+  maxInstancesMax?: number
+  usedCapacityMin?: number
+  usedCapacityMax?: number
+  priceType?: CmsCatalogPriceType
+  priceMin?: number
+  priceMax?: number
   keyword?: string
 }
 
@@ -364,9 +448,58 @@ export interface CmsNodeSelectionState {
     | 'gpuModel'
     | 'gpuCount'
     | 'gpuMemory'
+    | 'driverVersion'
+    | 'cudaVersion'
+    | 'vGpuNumber'
     | 'vGpuCount'
     | 'vGpuMemory'
     | 'vGpuCores'
   >
   suggestedName: string
+}
+
+export interface CmsProductNodeCandidatesParams {
+  clusterId: ResourceId
+  resourceType?: CmsProductResourceType
+  cpu?: number
+  memory?: number
+  gpuCount?: number
+  gpuMemory?: number
+  vGpuNumber?: number
+  vGpuMemory?: number
+  vGpuCores?: number
+  excludeProductId?: ResourceId
+}
+
+export interface CmsBatchCreateComputeProductPayload {
+  productType: CmsProductType
+  nodeNames: string[]
+  name: string
+  description: string
+  clusterId: ResourceId
+  area: string
+  nodeType: string
+  cpuModel: string
+  cpu: number
+  memory: number
+  gpuModel: string
+  gpuCount: number
+  gpuMemory: number
+  vGpuNumber: number
+  vGpuMemory: number
+  vGpuCores: number
+  prices: CmsProductPriceItem[]
+  driverVersion: string
+  cudaVersion: string
+  systemDisk?: number
+  dataDisk?: number
+  status: number
+  maxInstances?: number
+}
+
+export interface CmsBatchCreateComputeProductResult {
+  createdIds?: number[]
+  createdCount?: number
+  createdNodes?: string[]
+  skippedNodes?: string[]
 }

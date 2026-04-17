@@ -1,19 +1,25 @@
 <template>
   <div
     v-if="selectedProduct"
-    class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6"
+    class="console-create-card console-create-card--section w-full"
   >
-    <h3 class="text-base font-bold mb-4 flex items-center gap-2">
-      <span class="w-1 h-4 bg-primary rounded"></span>
+    <h3 class="console-create-card__title mb-4">
+      <span class="console-create-card__title-marker"></span>
       {{ t('resourceSpecConfirm') }}
     </h3>
     <div
       class="grid grid-cols-2 md:grid-cols-4 gap-6 p-4 bg-slate-50 dark:bg-zinc-800/50 rounded-lg"
     >
-      <div>
-        <div class="text-xs text-slate-400 mb-1">{{ t('totalGPU') }}</div>
+      <div class="flex flex-col items-center text-center">
+        <div class="text-xs text-slate-400 mb-1">
+          {{ hasVGpuSpec(selectedProduct) ? 'vGPU' : t('totalGPU') }}
+        </div>
         <div class="text-2xl font-bold text-primary">
-          {{ totalResources?.gpu || 0 }}
+          {{
+            hasVGpuSpec(selectedProduct) && getVGpuNumber(selectedProduct) <= 0
+              ? '-'
+              : (totalResources?.gpu || 0)
+          }}
         </div>
       </div>
       <div>
@@ -41,6 +47,7 @@
 <script setup lang="ts">
 import { inject } from 'vue'
 import type { ConsoleProduct, Translator } from '@/types/consoleResource'
+import { getVGpuNumber, hasVGpuSpec } from '@/utils/vgpu'
 
 interface TrainingTotalResources {
   gpu: number

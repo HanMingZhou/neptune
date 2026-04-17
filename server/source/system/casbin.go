@@ -399,6 +399,7 @@ func (i *initCasbin) InitializeData(ctx context.Context) (context.Context, error
 		{Ptype: "p", V0: "8881", V1: "/api/v1/product/list", V2: "GET"},
 		{Ptype: "p", V0: "8881", V1: "/api/v1/product/get", V2: "GET"},
 		{Ptype: "p", V0: "8881", V1: "/api/v1/product/filter/list", V2: "GET"},
+		{Ptype: "p", V0: "8881", V1: "/api/v1/cms/product/cluster/list", V2: "GET"},
 
 		{Ptype: "p", V0: "8881", V1: "/api/v1/sshkey/add", V2: "POST"},
 		{Ptype: "p", V0: "8881", V1: "/api/v1/sshkey/delete", V2: "POST"},

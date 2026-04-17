@@ -3,6 +3,7 @@ import service from '@/utils/request'
 export interface AuthorityListParams {
   page?: number
   pageSize?: number
+  keyword?: string
 }
 
 export interface Authority {

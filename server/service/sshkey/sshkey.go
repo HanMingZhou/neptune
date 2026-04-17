@@ -67,7 +67,7 @@ func (s *SSHKeyService) GetSSHKeyList(ctx context.Context, req *secretReq.GetSSH
 		req.Page = 1
 	}
 	if req.PageSize <= 0 {
-		req.PageSize = 10
+		req.PageSize = 20
 	}
 	if req.PageSize > 100 {
 		req.PageSize = 100

@@ -1,5 +1,5 @@
 <template>
-  <TableCard>
+  <TableCard :page-size="pageSize">
     <template #toolbar>
       <BaseFilterBar plain wrap-main actions-class="list-toolbar-actions--push">
         <div class="list-search-field">
@@ -41,13 +41,15 @@
       </BaseFilterBar>
     </template>
 
-    <div class="overflow-x-auto">
+    <div
+      class="console-table-scroll console-table-scroll--fill overflow-x-auto"
+    >
       <table
         class="console-table console-table--resource-dense w-full min-w-[1180px]"
       >
         <thead>
           <tr>
-            <th>{{ t('instanceId') }} / {{ t('name') }}</th>
+            <th>{{ t('name') }} / {{ t('instanceId') }}</th>
             <th>{{ t('status') }}</th>
             <th>{{ t('spec') }}</th>
             <th>{{ t('gpu') }}</th>
@@ -122,6 +124,12 @@
                 class="console-badge console-badge--neutral is-code"
               >
                 {{ item.gpuCount || item.gpu }} × {{ item.gpuModel || 'GPU' }}
+              </span>
+              <span
+                v-else-if="hasVGpuSpec(item)"
+                class="console-badge console-badge--neutral is-code"
+              >
+                vGPU · {{ formatVGpuSpec(item) }}
               </span>
               <span v-else class="is-muted text-[11px]">{{
                 t('CPU ONLY')
@@ -215,7 +223,7 @@
         :page-size="pageSize"
         :total="total"
         :total-text="t('totalRecords', { total })"
-        :page-sizes="[10, 20, 50, 100]"
+        :page-sizes="[15, 20, 50, 100]"
         layout="sizes, prev, pager, next, jumper"
         @current-change="$emit('page-change', $event)"
         @size-change="$emit('size-change', $event)"
@@ -232,6 +240,7 @@ import ResourceIdentityCell from '@/components/listPage/ResourceIdentityCell.vue
 import ResourceStatusCell from '@/components/listPage/ResourceStatusCell.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
 import type { ConsoleNotebook, Translator } from '@/types/consoleResource'
+import { formatVGpuSpec, hasVGpuSpec } from '@/utils/vgpu'
 
 withDefaults(
   defineProps<{
@@ -251,7 +260,7 @@ withDefaults(
     loading: false,
     notebooks: () => [],
     page: 1,
-    pageSize: 20,
+    pageSize: 15,
     searchQuery: '',
     statusFilter: '',
     total: 0
@@ -280,3 +289,4 @@ const handleSearchInput = (event: Event) => {
   emit('search-change', (event.target as HTMLInputElement).value)
 }
 </script>
+

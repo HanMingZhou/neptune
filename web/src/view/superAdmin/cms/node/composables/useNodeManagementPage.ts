@@ -21,16 +21,21 @@ interface UseNodeManagementPageOptions {
 const isDialogCancel = (error: unknown): error is 'cancel' | 'close' =>
   error === 'cancel' || error === 'close'
 
+const isMasterNode = (row: CmsNodeRow): boolean => row.nodeRole === 'master'
+
 export function useNodeManagementPage({
   t
 }: UseNodeManagementPageOptions = {}) {
   const translate: Translator = t || ((key: string) => key)
 
+  const page = ref(1)
+  const pageSize = ref(15)
   const loading = ref(false)
   const nodes = ref<CmsNodeRow[]>([])
   const clusters = ref<CmsClusterOption[]>([])
   const filterClusterId = ref<ResourceId | undefined>(undefined)
   const filterKeyword = ref('')
+  const total = ref(0)
 
   const currentClusterArea = computed(() => {
     const currentCluster = clusters.value.find(
@@ -71,6 +76,7 @@ export function useNodeManagementPage({
   const fetchNodes = async (silent = false): Promise<void> => {
     if (!filterClusterId.value) {
       nodes.value = []
+      total.value = 0
       return
     }
 
@@ -81,11 +87,16 @@ export function useNodeManagementPage({
     try {
       const res = (await getCMSNodeList({
         clusterId: filterClusterId.value,
-        keyword: filterKeyword.value || undefined
+        keyword: filterKeyword.value || undefined,
+        page: page.value,
+        pageSize: pageSize.value
       })) as ApiResponse<CmsNodeListData>
 
       if (res.code === 0) {
         nodes.value = res.data?.nodes ?? []
+        total.value = res.data?.total ?? 0
+        page.value = res.data?.page ?? page.value
+        pageSize.value = res.data?.pageSize ?? pageSize.value
       } else {
         ElMessage.error(res.msg || translate('failed'))
       }
@@ -110,16 +121,22 @@ export function useNodeManagementPage({
       if (filterClusterId.value) {
         const res = (await getCMSNodeList({
           clusterId: filterClusterId.value,
-          keyword: filterKeyword.value || undefined
+          keyword: filterKeyword.value || undefined,
+          page: page.value,
+          pageSize: pageSize.value
         })) as ApiResponse<CmsNodeListData>
 
         if (res.code === 0) {
           nodes.value = res.data?.nodes ?? []
+          total.value = res.data?.total ?? 0
+          page.value = res.data?.page ?? page.value
+          pageSize.value = res.data?.pageSize ?? pageSize.value
         } else {
           ElMessage.error(res.msg || translate('failed'))
         }
       } else {
         nodes.value = []
+        total.value = 0
       }
     } catch (error: unknown) {
       console.error('Failed to refresh node data:', error)
@@ -135,15 +152,33 @@ export function useNodeManagementPage({
     await refreshData()
   }
 
+  const handleSearch = (): void => {
+    page.value = 1
+    void fetchNodes()
+  }
+
   const handleClusterChange = async (
     clusterId: ResourceId | undefined
   ): Promise<void> => {
+    page.value = 1
     filterClusterId.value = clusterId
     await fetchNodes()
   }
 
   const handleResetFilters = (): void => {
+    page.value = 1
     filterKeyword.value = ''
+    void fetchNodes()
+  }
+
+  const handleCurrentChange = (value: number): void => {
+    page.value = value
+    void fetchNodes()
+  }
+
+  const handleSizeChange = (value: number): void => {
+    page.value = 1
+    pageSize.value = value
     void fetchNodes()
   }
 
@@ -186,6 +221,11 @@ export function useNodeManagementPage({
       return
     }
 
+    if (isMasterNode(row)) {
+      ElMessage.warning(translate('masterNodeEvictDisabled'))
+      return
+    }
+
     try {
       await ElMessageBox.confirm(
         translate('confirmDrain', { name: row.nodeName }),
@@ -222,12 +262,18 @@ export function useNodeManagementPage({
     filterClusterId,
     filterKeyword,
     handleClusterChange,
+    handleCurrentChange,
     handleDrain,
     handleResetFilters,
+    handleSearch,
+    handleSizeChange,
     handleUncordon,
     initialize,
     loading,
     nodes,
-    refreshData
+    page,
+    pageSize,
+    refreshData,
+    total
   }
 }

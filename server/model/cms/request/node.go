@@ -1,5 +1,7 @@
 package request
 
+import common "gin-vue-admin/model/common/request"
+
 // UncordonNodeReq 恢复节点调度请求
 type UncordonNodeReq struct {
 	ClusterId uint   `json:"clusterId" binding:"required"`
@@ -14,9 +16,9 @@ type DrainNodeReq struct {
 
 // GetClusterNodesReq 获取集群节点请求
 type GetClusterNodesReq struct {
-	ClusterId uint   `json:"clusterId" binding:"required"`
-	Keyword   string `json:"keyword"`
-	CPU       int64  `json:"cpu"`      // 产品CPU规格
-	Memory    int64  `json:"memory"`   // 产品内存规格
-	GPUCount  int64  `json:"gpuCount"` // 产品GPU规格
+	common.PageInfo
+	ClusterId uint  `json:"clusterId" binding:"required"`
+	CPU       int64 `json:"cpu"`      // 产品CPU规格
+	Memory    int64 `json:"memory"`   // 产品内存规格
+	GPUCount  int64 `json:"gpuCount"` // 产品GPU规格
 }

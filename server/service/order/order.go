@@ -59,6 +59,9 @@ func (s *OrderService) CreateOrder(ctx context.Context, req *orderReq.CreateOrde
 		logx.Error("获取产品信息失败", err)
 		return nil, errors.Errorf("产品不存在")
 	}
+	if err := productModel.LoadPriceItems(ctx, global.GVA_DB, &product); err != nil {
+		return nil, errors.Wrap(err, "加载产品价格失败")
+	}
 
 	// 2. 计算价格
 	unitPrice := product.GetPrice(int64(req.ChargeType))
@@ -150,6 +153,9 @@ func (s *OrderService) CheckBalanceSufficient(ctx context.Context, userId uint, 
 	var product productModel.Product
 	if err := global.GVA_DB.Where("id = ?", productId).First(&product).Error; err != nil {
 		return errors.Errorf("产品不存在")
+	}
+	if err := productModel.LoadPriceItems(ctx, global.GVA_DB, &product); err != nil {
+		return errors.Wrap(err, "加载产品价格失败")
 	}
 
 	// 2. 计算所需金额

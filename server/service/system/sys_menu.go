@@ -6,6 +6,7 @@ import (
 	"gin-vue-admin/model/common/request"
 	"gin-vue-admin/model/system"
 	"strconv"
+	"strings"
 
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
@@ -113,6 +114,68 @@ func (menuService *MenuService) GetInfoList(authorityID uint) (list interface{},
 		err = menuService.getBaseChildrenList(&menuList[i], treeMap)
 	}
 	return menuList, err
+}
+
+func filterMenuTree(nodes []system.SysBaseMenu, keyword string) []system.SysBaseMenu {
+	normalizedKeyword := strings.TrimSpace(strings.ToLower(keyword))
+	if normalizedKeyword == "" {
+		return nodes
+	}
+
+	filtered := make([]system.SysBaseMenu, 0, len(nodes))
+	for _, node := range nodes {
+		title := strings.ToLower(strings.TrimSpace(node.Title))
+		name := strings.ToLower(strings.TrimSpace(node.Name))
+		path := strings.ToLower(strings.TrimSpace(node.Path))
+		matchesKeyword := strings.Contains(title, normalizedKeyword) ||
+			strings.Contains(name, normalizedKeyword) ||
+			strings.Contains(path, normalizedKeyword)
+		filteredChildren := filterMenuTree(node.Children, keyword)
+
+		if matchesKeyword || len(filteredChildren) > 0 {
+			nextNode := node
+			nextNode.Children = filteredChildren
+			filtered = append(filtered, nextNode)
+		}
+	}
+
+	return filtered
+}
+
+func paginateMenuTree(nodes []system.SysBaseMenu, page, pageSize int) ([]system.SysBaseMenu, int64, int, int) {
+	if page <= 0 {
+		page = 1
+	}
+	if pageSize <= 0 {
+		pageSize = 20
+	}
+	if pageSize > 100 {
+		pageSize = 100
+	}
+
+	total := int64(len(nodes))
+	start := (page - 1) * pageSize
+	if start >= len(nodes) {
+		return []system.SysBaseMenu{}, total, page, pageSize
+	}
+
+	end := start + pageSize
+	if end > len(nodes) {
+		end = len(nodes)
+	}
+
+	return nodes[start:end], total, page, pageSize
+}
+
+func (menuService *MenuService) GetInfoPageList(authorityID uint, pageInfo request.PageInfo) (list []system.SysBaseMenu, total int64, page int, pageSize int, err error) {
+	menuTree, err := menuService.GetBaseMenuTree(authorityID)
+	if err != nil {
+		return nil, 0, 0, 0, err
+	}
+
+	filteredTree := filterMenuTree(menuTree, pageInfo.Keyword)
+	list, total, page, pageSize = paginateMenuTree(filteredTree, pageInfo.Page, pageInfo.PageSize)
+	return list, total, page, pageSize, nil
 }
 
 //@author: [piexlmax](https://github.com/piexlmax)

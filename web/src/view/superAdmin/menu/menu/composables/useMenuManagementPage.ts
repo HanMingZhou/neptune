@@ -12,7 +12,12 @@ import { canRemoveAuthorityBtnApi } from '@/api/authorityBtn'
 import pathInfo from '@/pathInfo.json'
 import type { Translator } from '@/types/consoleResource'
 import type { ApiResponse } from '@/utils/request'
-import type { MenuForm, MenuOption, MenuTreeNode } from '@/types/superAdmin'
+import type {
+  MenuForm,
+  MenuListData,
+  MenuOption,
+  MenuTreeNode
+} from '@/types/superAdmin'
 import { toLowerCase } from '@/utils/stringFun'
 
 interface UseMenuManagementPageOptions {
@@ -93,30 +98,6 @@ const buildMenuOptions = (
     return option
   })
 
-const filterMenuTree = (
-  nodes: MenuTreeNode[],
-  keyword: string
-): MenuTreeNode[] =>
-  nodes.reduce<MenuTreeNode[]>((accumulator, node) => {
-    const title = node.meta?.title || ''
-    const name = node.name || ''
-    const isMatch =
-      title.toLowerCase().includes(keyword) ||
-      name.toLowerCase().includes(keyword)
-    const filteredChildren = node.children?.length
-      ? filterMenuTree(node.children, keyword)
-      : []
-
-    if (isMatch || filteredChildren.length > 0) {
-      accumulator.push({
-        ...node,
-        children: filteredChildren
-      })
-    }
-
-    return accumulator
-  }, [])
-
 const isDialogCancel = (error: unknown): error is 'cancel' | 'close' =>
   error === 'cancel' || error === 'close'
 
@@ -130,8 +111,12 @@ export function useMenuManagementPage({
   const form = reactive<MenuForm>(createDefaultMenuForm())
   const isEdit = ref(false)
   const loading = ref(false)
+  const page = ref(1)
+  const pageSize = ref(15)
   const searchKeyword = ref('')
   const tableData = ref<MenuTreeNode[]>([])
+  const pagedTableData = ref<MenuTreeNode[]>([])
+  const total = ref(0)
 
   const rules = computed<FormRules<MenuForm>>(() => ({
     path: [
@@ -157,15 +142,6 @@ export function useMenuManagementPage({
     isEdit.value ? translate('edit') : translate('add')
   )
 
-  const filteredTableData = computed(() => {
-    const keyword = searchKeyword.value.trim().toLowerCase()
-    if (!keyword) {
-      return tableData.value
-    }
-
-    return filterMenuTree(tableData.value, keyword)
-  })
-
   const menuOptions = computed<MenuOption[]>(() => [
     {
       ID: 0,
@@ -179,15 +155,33 @@ export function useMenuManagementPage({
     Object.assign(form, createDefaultMenuForm(parentId))
   }
 
+  const loadMenuTree = async (): Promise<void> => {
+    const res = (await getMenuList()) as ApiResponse<MenuTreeNode[]>
+    if (res.code === 0) {
+      tableData.value = res.data ?? []
+      return
+    }
+
+    ElMessage.error(res.msg || translate('failed'))
+  }
+
   const getTableData = async (silent = false): Promise<void> => {
     if (!silent) {
       loading.value = true
     }
 
     try {
-      const res = (await getMenuList()) as ApiResponse<MenuTreeNode[]>
+      const res = (await getMenuList({
+        keyword: searchKeyword.value || undefined,
+        page: page.value,
+        pageSize: pageSize.value
+      })) as ApiResponse<MenuListData>
+
       if (res.code === 0) {
-        tableData.value = res.data ?? []
+        pagedTableData.value = res.data?.list ?? []
+        total.value = res.data?.total ?? 0
+        page.value = res.data?.page ?? page.value
+        pageSize.value = res.data?.pageSize ?? pageSize.value
       } else {
         ElMessage.error(res.msg || translate('failed'))
       }
@@ -202,15 +196,30 @@ export function useMenuManagementPage({
   }
 
   const initialize = async (): Promise<void> => {
-    await getTableData()
+    await Promise.all([getTableData(), loadMenuTree()])
   }
 
   const handleSearch = (): void => {
     searchKeyword.value = searchKeyword.value.trim()
+    page.value = 1
+    void getTableData()
   }
 
   const handleResetSearch = (): void => {
     searchKeyword.value = ''
+    page.value = 1
+    void getTableData()
+  }
+
+  const handleCurrentChange = (value: number): void => {
+    page.value = value
+    void getTableData()
+  }
+
+  const handleSizeChange = (value: number): void => {
+    page.value = 1
+    pageSize.value = value
+    void getTableData()
   }
 
   const addParameter = (): void => {
@@ -285,6 +294,10 @@ export function useMenuManagementPage({
     }
   }
 
+  const refreshAfterMutation = async (): Promise<void> => {
+    await Promise.all([getTableData(), loadMenuTree()])
+  }
+
   const handleSubmitMenu = async (): Promise<void> => {
     const api = isEdit.value ? updateBaseMenu : addBaseMenu
     const res = await api(normalizeMenuForm(form))
@@ -294,7 +307,10 @@ export function useMenuManagementPage({
         type: 'success',
         message: translate('success')
       })
-      await getTableData()
+      if (!isEdit.value) {
+        page.value = 1
+      }
+      await refreshAfterMutation()
       closeDialog()
     }
   }
@@ -317,7 +333,10 @@ export function useMenuManagementPage({
           type: 'success',
           message: translate('success')
         })
-        await getTableData()
+        if (pagedTableData.value.length === 1 && page.value > 1) {
+          page.value -= 1
+        }
+        await refreshAfterMutation()
       }
     } catch (error: unknown) {
       if (!isDialogCancel(error)) {
@@ -339,13 +358,14 @@ export function useMenuManagementPage({
     deleteParameter,
     dialogFormVisible,
     dialogTitle,
-    filteredTableData,
     fmtComponent,
     form,
     getTableData,
+    handleCurrentChange,
     handleDeleteMenu,
     handleResetSearch,
     handleSearch,
+    handleSizeChange,
     handleSubmitMenu,
     initialize,
     isEdit,
@@ -353,7 +373,12 @@ export function useMenuManagementPage({
     menuOptions,
     openCreateDialog,
     openEditDialog,
+    page,
+    pageSize,
+    pagedTableData,
     rules,
-    searchKeyword
+    searchKeyword,
+    total
   }
 }
+

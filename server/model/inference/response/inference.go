@@ -66,6 +66,7 @@ type InferenceServiceDetail struct {
 // InferenceMountItem 挂载项
 type InferenceMountItem struct {
 	MountType string `json:"mountType"`
+	Name      string `json:"name"`
 	PvcName   string `json:"pvcName"`
 	SubPath   string `json:"subPath"`
 	MountPath string `json:"mountPath"`

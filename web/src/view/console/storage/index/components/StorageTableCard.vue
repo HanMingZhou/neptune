@@ -1,10 +1,13 @@
 <template>
-  <TableCard>
-    <div class="overflow-x-auto">
+  <TableCard :page-size="pageSize">
+    <div
+      class="console-table-scroll console-table-scroll--fill overflow-x-auto"
+    >
       <table class="console-table">
         <thead>
           <tr>
             <th>{{ t('name') }}</th>
+            <th>{{ t('pvc') }}</th>
             <th>{{ t('storageProduct') }}</th>
             <th>{{ t('capacity') }}</th>
             <th>{{ t('status') }}</th>
@@ -15,7 +18,7 @@
         </thead>
         <tbody>
           <tr v-if="loading">
-            <td colspan="7" class="px-6 py-12 text-center text-slate-400">
+            <td colspan="8" class="px-6 py-12 text-center text-slate-400">
               <div class="flex items-center justify-center gap-2">
                 <div
                   class="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"
@@ -25,7 +28,7 @@
             </td>
           </tr>
           <tr v-else-if="items.length === 0">
-            <td colspan="7" class="px-6 py-12 text-center text-slate-400">
+            <td colspan="8" class="px-6 py-12 text-center text-slate-400">
               <div class="space-y-2">
                 <span class="material-icons text-4xl">folder_open</span>
                 <p>{{ t('noData') }}</p>
@@ -42,16 +45,11 @@
             <td>
               <span class="is-primary text-sm">{{ item.name }}</span>
             </td>
+            <td class="detail-info-value--mono">{{ item.pvcName || '-' }}</td>
             <td>{{ item.productName || '-' }}</td>
             <td class="is-code">{{ item.size }}</td>
             <td>
-              <span
-                :class="
-                  item.status === 'Bound'
-                    ? 'console-badge console-badge--success'
-                    : 'console-badge console-badge--neutral'
-                "
-              >
+              <span :class="resolveStatusBadgeClass(item.status)">
                 {{ t(item.status || '') || item.status || '-' }}
               </span>
             </td>
@@ -59,6 +57,13 @@
             <td class="text-slate-500">{{ item.createdAt || '-' }}</td>
             <td class="console-actions-cell">
               <div class="list-row-actions">
+                <button
+                  class="list-row-button list-row-button--neutral"
+                  @click="$emit('edit', item)"
+                >
+                  <span class="material-icons text-[14px]">edit</span>
+                  {{ t('edit') }}
+                </button>
                 <button
                   class="list-row-button list-row-button--info"
                   @click="$emit('expand', item)"
@@ -86,12 +91,14 @@
     <template #footer>
       <ListPaginationBar
         v-model:current-page="pageModel"
+        v-model:page-size="pageSizeModel"
         :total="total"
         :total-text="t('totalRecords', { total })"
-        :page-size="10"
-        :page-sizes="[10]"
-        layout="prev, pager, next"
+        :page-size="pageSize"
+        :page-sizes="[15, 20, 50, 100]"
+        layout="sizes, prev, pager, next, jumper"
         @current-change="$emit('refresh')"
+        @size-change="$emit('refresh')"
       />
     </template>
   </TableCard>
@@ -110,6 +117,7 @@ const props = withDefaults(
     items?: StorageListItem[]
     loading?: boolean
     page?: number
+    pageSize?: number
     total?: number
   }>(),
   {
@@ -117,6 +125,7 @@ const props = withDefaults(
     items: () => [],
     loading: false,
     page: 1,
+    pageSize: 15,
     total: 0
   }
 )
@@ -124,15 +133,60 @@ const props = withDefaults(
 const emit = defineEmits<{
   create: []
   delete: [item: StorageListItem]
+  edit: [item: StorageListItem]
   expand: [item: StorageListItem]
   refresh: []
   'update:page': [value: number]
+  'update:page-size': [value: number]
 }>()
 
 const t = inject<Translator>('t', (key: string) => key)
+
+const resolveStatusBadgeClass = (status?: string): string => {
+  const raw = `${status || ''}`.trim()
+  const normalized = raw.toUpperCase()
+
+  if (
+    raw === '使用中' ||
+    normalized === 'IN_USE' ||
+    normalized === 'INUSE' ||
+    normalized === 'BOUND' ||
+    normalized === 'READY' ||
+    normalized === 'RUNNING' ||
+    normalized === 'SUCCEEDED'
+  ) {
+    return 'console-badge console-badge--success'
+  }
+
+  if (
+    normalized === 'PENDING' ||
+    normalized === 'CREATING' ||
+    normalized === 'EXPANDING' ||
+    normalized === 'RESIZE_PENDING' ||
+    normalized === 'INQUEUE'
+  ) {
+    return 'console-badge console-badge--warning'
+  }
+
+  if (normalized === 'FAILED' || normalized === 'ERROR') {
+    return 'console-badge console-badge--danger'
+  }
+
+  if (raw === '未使用' || normalized === 'UNUSED' || normalized === 'STOPPED') {
+    return 'console-badge console-badge--info'
+  }
+
+  return 'console-badge console-badge--neutral'
+}
 
 const pageModel = computed({
   get: () => props.page,
   set: (value: number) => emit('update:page', value)
 })
+
+const pageSizeModel = computed({
+  get: () => props.pageSize,
+  set: (value: number) => emit('update:page-size', value)
+})
 </script>
+

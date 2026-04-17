@@ -11,6 +11,7 @@ import (
 	inferenceModel "gin-vue-admin/model/inference"
 	inferenceReq "gin-vue-admin/model/inference/request"
 	"gin-vue-admin/model/inference/response"
+	pvcModel "gin-vue-admin/model/pvc"
 	"gin-vue-admin/service/inference/builder"
 	productService "gin-vue-admin/service/product"
 	terminalService "gin-vue-admin/service/terminal"
@@ -125,8 +126,13 @@ func (s *InferenceServiceService) CreateInferenceService(ctx context.Context, re
 
 // validateCreateRequest 校验创建请求
 func (s *InferenceServiceService) validateCreateRequest(req *inferenceReq.CreateInferenceServiceReq) error {
+	req.Framework = strings.ToUpper(strings.TrimSpace(req.Framework))
+
 	if req.DeployType != consts.DeployTypeDistributed && req.DeployType != consts.DeployTypeStandalone {
 		return errors.New("部署类型必须为 DISTRIBUTED 或 STANDALONE")
+	}
+	if req.Framework != "" && req.Framework != consts.FrameworkSGLang && req.Framework != consts.FrameworkVLLM {
+		return errors.New("推理框架必须为 SGLANG 或 VLLM")
 	}
 	// 启动命令必填
 	if strings.TrimSpace(req.Command) == "" {
@@ -134,7 +140,7 @@ func (s *InferenceServiceService) validateCreateRequest(req *inferenceReq.Create
 	}
 	// 分布式模式必须指定框架（用于 NCCL 环境变量注入）
 	if req.DeployType == consts.DeployTypeDistributed {
-		if req.Framework != consts.FrameworkSGLang && req.Framework != consts.FrameworkVLLM {
+		if req.Framework == "" {
 			return errors.New("分布式模式下框架必须为 SGLANG 或 VLLM")
 		}
 		if req.InstanceCount < 2 {
@@ -781,10 +787,17 @@ func (s *InferenceServiceService) GetInferenceServiceDetail(ctx context.Context,
 		return nil, errors.Wrap(err, "获取挂载配置失败")
 	}
 
+	volumeNames, err := s.loadInferenceMountVolumeNames(ctx, mounts)
+	if err != nil {
+		logx.Error("查询推理服务文件存储名称失败", logx.Field("err", err), logx.Field("serviceId", service.ID))
+		volumeNames = map[uint]string{}
+	}
+
 	mountItems := make([]response.InferenceMountItem, len(mounts))
 	for i, m := range mounts {
 		mountItems[i] = response.InferenceMountItem{
 			MountType: m.MountType,
+			Name:      volumeNames[m.PvcId],
 			PvcName:   m.PvcName,
 			SubPath:   m.SubPath,
 			MountPath: m.MountPath,
@@ -844,6 +857,40 @@ func (s *InferenceServiceService) GetInferenceServiceDetail(ctx context.Context,
 		Mounts:           mountItems,
 		Envs:             envItems,
 	}, nil
+}
+
+func (s *InferenceServiceService) loadInferenceMountVolumeNames(ctx context.Context, mounts []inferenceModel.InferenceMount) (map[uint]string, error) {
+	pvcIDs := collectInferenceMountPVCIDs(mounts)
+	if len(pvcIDs) == 0 {
+		return map[uint]string{}, nil
+	}
+
+	var volumes []pvcModel.Volume
+	if err := global.GVA_DB.WithContext(ctx).Where("id IN ?", pvcIDs).Find(&volumes).Error; err != nil {
+		return nil, err
+	}
+
+	volumeNames := make(map[uint]string, len(volumes))
+	for _, vol := range volumes {
+		volumeNames[vol.ID] = vol.Name
+	}
+	return volumeNames, nil
+}
+
+func collectInferenceMountPVCIDs(mounts []inferenceModel.InferenceMount) []uint {
+	seen := make(map[uint]struct{})
+	ids := make([]uint, 0, len(mounts))
+	for _, mount := range mounts {
+		if mount.PvcId == 0 {
+			continue
+		}
+		if _, ok := seen[mount.PvcId]; ok {
+			continue
+		}
+		seen[mount.PvcId] = struct{}{}
+		ids = append(ids, mount.PvcId)
+	}
+	return ids
 }
 
 // GetInferenceServiceLogs 获取推理服务日志

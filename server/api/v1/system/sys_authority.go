@@ -2,10 +2,12 @@ package system
 
 import (
 	"gin-vue-admin/global"
+	commonReq "gin-vue-admin/model/common/request"
 	"gin-vue-admin/model/common/response"
 	"gin-vue-admin/model/system"
 	systemRes "gin-vue-admin/model/system/response"
 	"gin-vue-admin/utils"
+	"io"
 
 	"github.com/gin-gonic/gin"
 )
@@ -154,7 +156,28 @@ func (a *AuthorityApi) UpdateAuthority(c *gin.Context) {
 // @Success   200   {object}  response.Response{data=response.PageResult,msg=string}  "分页获取角色列表,返回包括列表,总数,页码,每页数量"
 // @Router    /authority/getAuthorityList [post]
 func (a *AuthorityApi) GetAuthorityList(c *gin.Context) {
+	var pageInfo commonReq.PageInfo
+	if err := c.ShouldBindJSON(&pageInfo); err != nil && err != io.EOF {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+
 	authorityID := utils.GetUserAuthorityId(c)
+	if pageInfo.Page > 0 || pageInfo.PageSize > 0 {
+		list, total, page, pageSize, err := authorityService.GetAuthorityPageInfoList(authorityID, pageInfo)
+		if err != nil {
+			utils.HandleError(c, err, "获取失败")
+			return
+		}
+		response.OkWithDetailed(response.PageResult{
+			List:     list,
+			Total:    total,
+			Page:     page,
+			PageSize: pageSize,
+		}, "获取成功", c)
+		return
+	}
+
 	list, err := authorityService.GetAuthorityInfoList(authorityID)
 	if err != nil {
 		utils.HandleError(c, err, "获取失败")

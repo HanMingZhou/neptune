@@ -21,6 +21,7 @@ type Image struct {
 	Type      int64  `json:"type" gorm:"column:type;comment:镜像类型:1系统镜像2自定义镜像;default:1"`
 	UsageType int64  `json:"usageType" gorm:"column:usage_type;comment:镜像用途:1容器实例2训练镜像3推理镜像"`
 	UserId    uint   `json:"userId" gorm:"column:user_id;comment:用户ID"`
+	ClusterId uint   `json:"clusterId" gorm:"column:cluster_id;comment:所属集群ID;index"`
 	ImagePath string `json:"imagePath" gorm:"column:image_path;comment:镜像路径"`
 	ImageAddr string `json:"imageAddr" gorm:"column:image_addr;comment:镜像地址"`
 	Size      string `json:"size" gorm:"column:size;comment:镜像大小"`

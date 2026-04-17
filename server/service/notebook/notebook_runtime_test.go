@@ -89,6 +89,27 @@ func TestBuildNotebookNormalizesDuplicateVolumeMounts(t *testing.T) {
 	require.Len(t, mountPaths, 4)
 }
 
+func TestBuildNotebookCPUOnlySetsNvidiaVisibleDevicesNone(t *testing.T) {
+	nbRef := &nbModel.Notebook{
+		InstanceName: "notebook-cpu-only",
+		Namespace:    "zzz",
+		Image:        "dockerhub.kubekey.local/notebook/jupyter:test",
+		CPU:          4,
+		Memory:       16,
+		StorageSize:  20,
+	}
+
+	notebookObj := buildNotebook(nbRef, "")
+	container := notebookObj.Spec.Template.Spec.Containers[0]
+
+	envs := make(map[string]string, len(container.Env))
+	for _, env := range container.Env {
+		envs[env.Name] = env.Value
+	}
+
+	require.Equal(t, "none", envs["NVIDIA_VISIBLE_DEVICES"])
+}
+
 func TestGetNotebookTensorboardLogsPathRequiresPersistentMount(t *testing.T) {
 	svc := &NotebookService{}
 	nbRef := &nbModel.Notebook{

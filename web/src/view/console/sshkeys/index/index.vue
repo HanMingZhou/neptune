@@ -1,5 +1,5 @@
 <template>
-  <div class="console-page-container space-y-6">
+  <div class="console-page-container flex min-h-full flex-col gap-6">
     <BaseTableToolbar
       :breadcrumbs="[t('management'), t('sshKeyManage')]"
       :description="t('sshKeyManageDesc')"
@@ -18,7 +18,7 @@
       </template>
     </BaseTableToolbar>
 
-    <ManagementListShell>
+    <ManagementListShell class="min-h-0 flex-1">
       <template #filters>
         <SshKeyFiltersBar
           :search-name="searchName"
@@ -28,10 +28,16 @@
       </template>
 
       <SshKeyList
+        class="min-h-0 flex-1"
         :items="keys"
         :loading="loading"
+        :page="page"
+        :page-size="pageSize"
+        :total="total"
         @create="openCreateDialog"
         @delete="handleDelete"
+        @page-change="handleCurrentChange"
+        @size-change="handleSizeChange"
         @set-default="setDefault"
       />
     </ManagementListShell>
@@ -65,16 +71,21 @@ const {
   creating,
   handleCreate,
   handleDelete,
+  handleCurrentChange,
+  handleSizeChange,
   initialize,
   keys,
   loading,
   loadKeys,
   openCreateDialog,
+  page,
+  pageSize,
   rules,
   searchKeys,
   searchName,
   setDefault,
-  showCreateDialog
+  showCreateDialog,
+  total
 } = useSshKeyManagementPage({ t })
 
 onMounted(() => {

@@ -33,6 +33,7 @@ type GetImageListReq struct {
 	Name       string `json:"name" form:"name"`             // 镜像名称
 	Type       int64  `json:"type" form:"type"`             // 1 系统镜像，2 自定义镜像
 	UsageType  int64  `json:"usageType" form:"usageType"`   // 1 容器实例，2 训练镜像，3 推理镜像
+	ClusterId  uint   `json:"clusterId" form:"clusterId"`   // 所属集群ID
 	ImageId    uint   `json:"imageId" form:"imageId"`       // 镜像ID
 	Size       string `json:"size" form:"size"`             // 镜像大小
 	ImageUUID  string `json:"imageUUID" form:"imageUUID"`   // 镜像UUID
@@ -43,12 +44,13 @@ type GetImageListReq struct {
 // 添加自定义镜像
 type AddImageReq struct {
 	Name      string `json:"name" form:"name" binding:"required"`           // 镜像名称
-	Area      string `json:"area" form:"area" binding:"required"`           // 镜像区域
+	ClusterId uint   `json:"clusterId" form:"clusterId" binding:"required"` // 所属集群ID
+	Area      string `json:"area" form:"area"`                              // 镜像区域（由集群推导）
 	UsageType int64  `json:"usageType" form:"usageType" binding:"required"` // 1 容器实例，2 训练镜像，3 推理镜像
 	Type      int64  `json:"type" form:"type"`                              // 1 系统镜像，2 自定义镜像
-	ImageAddr string `json:"imageAddr" form:"imageAddr"`                    // 镜像地址
+	ImageAddr string `json:"imageAddr" form:"imageAddr"`                    // 镜像地址（由 Harbor + 路径推导）
 	Size      string `json:"size" form:"size"`                              // 镜像大小
-	ImagePath string `json:"imagePath" form:"imagePath"`                    // 镜像路径
+	ImagePath string `json:"imagePath" form:"imagePath" binding:"required"` // 镜像路径
 	ImageUUID string `json:"imageUUID" form:"imageUUID"`                    // 镜像UUID
 }
 
@@ -56,6 +58,7 @@ type AddImageReq struct {
 type UpdateImageReq struct {
 	Id        uint   `json:"id" form:"id" binding:"required"`
 	Name      string `json:"name" form:"name"`
+	ClusterId uint   `json:"clusterId" form:"clusterId"`
 	Type      int64  `json:"type" form:"type"`
 	UsageType int64  `json:"usageType" form:"usageType"`
 	ImageAddr string `json:"imageAddr" form:"imageAddr"`

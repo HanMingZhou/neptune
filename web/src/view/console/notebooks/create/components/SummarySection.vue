@@ -1,10 +1,10 @@
 <template>
   <div
     v-if="selectedProduct"
-    class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6"
+    class="console-create-card console-create-card--section w-full"
   >
-    <h3 class="text-base font-bold mb-4 flex items-center gap-2">
-      <span class="w-1 h-4 bg-primary rounded"></span>
+    <h3 class="console-create-card__title mb-4">
+      <span class="console-create-card__title-marker"></span>
       {{ t('resourceSpecConfirm') }}
     </h3>
     <div
@@ -16,17 +16,50 @@
           {{ selectedProduct.name || selectedProduct.nodeType }}
         </div>
       </div>
-      <div>
+      <div class="flex flex-col items-center text-center">
         <div class="text-xs text-slate-400 mb-1">GPU</div>
-        <div class="text-sm font-bold">
-          <template v-if="selectedProduct.gpuCount > 0"
-            >{{ selectedProduct.gpuModel }} × {{ gpuCount }}</template
-          >
-          <template v-else-if="selectedProduct.vGpuCount > 0"
-            >vGPU ({{ selectedProduct.vGpuMemory }}GB)</template
-          >
-          <template v-else>CPU ONLY</template>
+        <div
+          v-if="hasGpuSpec(selectedProduct)"
+          class="flex flex-col items-center space-y-2 text-center"
+        >
+          <div class="text-sm font-bold">
+            {{ selectedProduct.gpuModel }}
+          </div>
+          <div class="flex flex-wrap justify-center gap-2">
+            <span
+              v-for="entry in getGpuFieldEntries()"
+              :key="entry.key"
+              class="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2 py-1 text-[11px] leading-none text-slate-600"
+            >
+              <span class="text-slate-400">{{ entry.label }}</span>
+              <span class="font-semibold text-slate-700">{{ entry.value }}</span>
+            </span>
+          </div>
         </div>
+        <div
+          v-else-if="hasVGpuSpec(selectedProduct)"
+          class="flex flex-col items-center space-y-2 text-center"
+        >
+          <div class="flex items-center justify-center gap-2 text-sm font-bold">
+            <span>{{ selectedProduct.gpuModel || t('gpu') }}</span>
+            <span
+              class="inline-flex items-center rounded-full bg-cyan-50 px-2 py-0.5 text-[11px] font-bold text-cyan-700"
+            >
+              vGPU
+            </span>
+          </div>
+          <div class="flex flex-wrap justify-center gap-2">
+            <span
+              v-for="entry in getVGpuFieldEntries(selectedProduct)"
+              :key="entry.key"
+              class="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2 py-1 text-[11px] leading-none text-slate-600"
+            >
+              <span class="text-slate-400">{{ entry.label }}</span>
+              <span class="font-semibold text-slate-700">{{ entry.value }}</span>
+            </span>
+          </div>
+        </div>
+        <div v-else class="text-sm font-bold">CPU ONLY</div>
       </div>
       <div>
         <div class="text-xs text-slate-400 mb-1">{{ t('cpuMemory') }}</div>
@@ -36,7 +69,7 @@
       </div>
       <div>
         <div class="text-xs text-slate-400 mb-1">{{ t('systemDisk') }}</div>
-        <div class="text-sm font-bold">10GB ({{ t('free') }})</div>
+        <div class="text-sm font-bold">50GB ({{ t('free') }})</div>
       </div>
       <div v-if="selectedVolumeId">
         <div class="text-xs text-slate-400 mb-1">{{ t('dataMount') }}</div>
@@ -59,8 +92,16 @@ import type {
   ResourceId,
   Translator
 } from '@/types/consoleResource'
+import {
+  buildGpuFieldEntries,
+  buildVGpuFieldEntries,
+  hasGpuSpec,
+  hasVGpuSpec
+} from '@/utils/vgpu'
 
-defineProps<{
+const t = inject<Translator>('t', (key: string) => key)
+
+const props = defineProps<{
   gpuCount: number
   priceUnitText: string
   selectedProduct: ConsoleProduct | null
@@ -69,5 +110,15 @@ defineProps<{
   totalPrice: string
 }>()
 
-const t = inject<Translator>('t', (key: string) => key)
+const getGpuFieldEntries = () =>
+  buildGpuFieldEntries(
+    {
+      gpuCount: props.gpuCount,
+      gpuMemory: props.selectedProduct?.gpuMemory
+    },
+    t
+  )
+
+const getVGpuFieldEntries = (product: ConsoleProduct) =>
+  buildVGpuFieldEntries(product, t)
 </script>

@@ -38,7 +38,7 @@ export function useOrderTransactions({ t }: UseOrderTransactionsOptions = {}) {
   const dateRange = ref<string[]>([])
   const transactions = ref<TransactionRecord[]>([])
   const page = ref(1)
-  const pageSize = ref(10)
+  const pageSize = ref(15)
   const total = ref(0)
   const rechargeDialogVisible = ref(false)
   const rechargeSubmitting = ref(false)
@@ -349,3 +349,4 @@ export function useOrderTransactions({ t }: UseOrderTransactionsOptions = {}) {
     transactions
   }
 }
+

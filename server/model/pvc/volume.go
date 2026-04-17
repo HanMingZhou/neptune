@@ -15,6 +15,7 @@ type Volume struct {
 	UpdatedAt  time.Time           `json:"updatedAt"`
 	DeletedAt  gorm.DeletedAt      `json:"-" gorm:"uniqueIndex:idx_volume_name_ns_deleted"`
 	Name       string              `json:"name" gorm:"column:name;comment:数据盘名称;uniqueIndex:idx_volume_name_ns_deleted"`
+	Area       string              `json:"area" gorm:"column:area;size:50;comment:展示地域标签"`
 	Namespace  string              `json:"namespace" gorm:"column:namespace;comment:命名空间;uniqueIndex:idx_volume_name_ns_deleted"`
 	Size       int64               `json:"size" gorm:"column:size;comment:大小"`
 	Status     string              `json:"status" gorm:"column:status;comment:状态(Ready/Bound/Error)"`

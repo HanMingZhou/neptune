@@ -3,7 +3,7 @@
     v-model="visibleModel"
     :cancel-text="t('cancel')"
     :close-on-click-modal="false"
-    :close-on-press-escape="false"
+    :close-on-press-escape="true"
     :model="form"
     :rules="rules"
     :size="480"

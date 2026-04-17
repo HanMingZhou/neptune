@@ -15,6 +15,8 @@ type NodeInfoResponse struct {
 	GPUMemory         int64  `json:"gpuMemory"`
 	GPUCount          int64  `json:"gpuCount"`
 	GPUAvailable      int64  `json:"gpuAvailable"`
+	DriverVersion     string `json:"driverVersion"`
+	CUDAVersion       string `json:"cudaVersion"`
 	VGPUNumber        int64  `json:"vGpuNumber"` // volcano.sh/vgpu-number
 	VGPUMemory        int64  `json:"vGpuMemory"` // volcano.sh/vgpu-memory
 	VGPUCores         int64  `json:"vGpuCores"`  // volcano.sh/vgpu-cores
@@ -23,6 +25,8 @@ type NodeInfoResponse struct {
 }
 
 type NodeListResponse struct {
-	Nodes []NodeInfoResponse `json:"nodes"`
-	Total int                `json:"total"`
+	Nodes    []NodeInfoResponse `json:"nodes"`
+	Total    int                `json:"total"`
+	Page     int                `json:"page"`
+	PageSize int                `json:"pageSize"`
 }

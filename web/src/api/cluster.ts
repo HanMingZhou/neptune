@@ -6,7 +6,12 @@ type ClusterPayload = Partial<CmsClusterForm> &
   Pick<CmsClusterForm, 'name' | 'status'>
 
 // 获取集群列表
-export const getClusterList = (data: { keyword?: string; status?: number }) => {
+export const getClusterList = (data: {
+  keyword?: string
+  page?: number
+  pageSize?: number
+  status?: number
+}) => {
   return service({
     url: '/api/v1/cms/cluster/list',
     method: 'post',

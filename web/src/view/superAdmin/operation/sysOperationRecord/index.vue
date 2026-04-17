@@ -1,5 +1,5 @@
 <template>
-  <div class="console-page-container space-y-6">
+  <div class="console-page-container flex min-h-full flex-col gap-6">
     <BaseTableToolbar
       :breadcrumbs="[t('admin'), t('operationRecord')]"
       :description="t('operationRecordDesc')"
@@ -20,6 +20,7 @@
     </BaseTableToolbar>
 
     <OperationRecordTableCard
+      class="min-h-0 flex-1"
       :all-selected="isAllSelected"
       :items="tableData"
       :loading="loading"

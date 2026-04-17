@@ -1,12 +1,13 @@
 package system
 
 import (
-	"gin-vue-admin/model/common/request"
+	commonReq "gin-vue-admin/model/common/request"
 	"gin-vue-admin/model/common/response"
 	"gin-vue-admin/model/system"
 	systemReq "gin-vue-admin/model/system/request"
 	systemRes "gin-vue-admin/model/system/response"
 	"gin-vue-admin/utils"
+	"io"
 
 	"github.com/gin-gonic/gin"
 )
@@ -89,7 +90,7 @@ func (a *AuthorityMenuApi) AddMenuAuthority(c *gin.Context) {
 // @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "获取指定角色menu"
 // @Router    /menu/getMenuAuthority [post]
 func (a *AuthorityMenuApi) GetMenuAuthority(c *gin.Context) {
-	var param request.GetAuthorityId
+	var param commonReq.GetAuthorityId
 	err := c.ShouldBindJSON(&param)
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
@@ -152,7 +153,7 @@ func (a *AuthorityMenuApi) AddBaseMenu(c *gin.Context) {
 // @Success   200   {object}  response.Response{msg=string}  "删除菜单"
 // @Router    /menu/deleteBaseMenu [post]
 func (a *AuthorityMenuApi) DeleteBaseMenu(c *gin.Context) {
-	var menu request.GetById
+	var menu commonReq.GetById
 	err := c.ShouldBindJSON(&menu)
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
@@ -215,7 +216,7 @@ func (a *AuthorityMenuApi) UpdateBaseMenu(c *gin.Context) {
 // @Success   200   {object}  response.Response{data=systemRes.SysBaseMenuResponse,msg=string}  "根据id获取菜单,返回包括系统菜单列表"
 // @Router    /menu/getBaseMenuById [post]
 func (a *AuthorityMenuApi) GetBaseMenuById(c *gin.Context) {
-	var idInfo request.GetById
+	var idInfo commonReq.GetById
 	err := c.ShouldBindJSON(&idInfo)
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
@@ -244,7 +245,28 @@ func (a *AuthorityMenuApi) GetBaseMenuById(c *gin.Context) {
 // @Success   200   {object}  response.Response{data=response.PageResult,msg=string}  "分页获取基础menu列表,返回包括列表,总数,页码,每页数量"
 // @Router    /menu/getMenuList [post]
 func (a *AuthorityMenuApi) GetMenuList(c *gin.Context) {
+	var pageInfo commonReq.PageInfo
+	if err := c.ShouldBindJSON(&pageInfo); err != nil && err != io.EOF {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+
 	authorityID := utils.GetUserAuthorityId(c)
+	if pageInfo.Page > 0 || pageInfo.PageSize > 0 {
+		menuList, total, page, pageSize, err := menuService.GetInfoPageList(authorityID, pageInfo)
+		if err != nil {
+			utils.HandleError(c, err, "获取失败")
+			return
+		}
+		response.OkWithDetailed(response.PageResult{
+			List:     menuList,
+			Total:    total,
+			Page:     page,
+			PageSize: pageSize,
+		}, "获取成功", c)
+		return
+	}
+
 	menuList, err := menuService.GetInfoList(authorityID)
 	if err != nil {
 		utils.HandleError(c, err, "获取失败")

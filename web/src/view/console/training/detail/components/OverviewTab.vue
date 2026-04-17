@@ -8,48 +8,72 @@
           <span class="w-1 h-4 bg-primary rounded"></span>
           {{ t('basicInfo') }}
         </h3>
-        <div class="detail-info-grid detail-info-grid--flat">
+        <div class="detail-info-grid detail-info-grid--flat detail-info-grid--inline">
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('displayName') }}</div>
-            <div class="detail-info-value">{{ job.displayName || '-' }}</div>
+            <div :title="job.displayName || '-'" class="detail-info-value">
+              {{ job.displayName || '-' }}
+            </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('taskName') }}</div>
-            <div class="detail-info-value detail-info-value--mono">
-              {{ job.jobName }}
+            <div
+              :title="job.jobName || '-'"
+              class="detail-info-value detail-info-value--important detail-info-value--mono"
+            >
+              {{ job.jobName || '-' }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('framework') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="getFrameworkLabel(job.frameworkType)"
+              class="detail-info-value"
+            >
               {{ getFrameworkLabel(job.frameworkType) }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('status') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="getStatusLabel(job.status)"
+              class="detail-info-value detail-info-value--important"
+            >
               {{ getStatusLabel(job.status) }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('createdAt') }}</div>
-            <div class="detail-info-value">{{ formatTime(job.createdAt) }}</div>
+            <div
+              :title="formatTime(job.createdAt) || '-'"
+              class="detail-info-value"
+            >
+              {{ formatTime(job.createdAt) }}
+            </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('startedAt') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="formatTime(job.startedAt) || '-'"
+              class="detail-info-value"
+            >
               {{ formatTime(job.startedAt) || '-' }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('finishedAt') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="formatTime(job.finishedAt) || '-'"
+              class="detail-info-value"
+            >
               {{ formatTime(job.finishedAt) || '-' }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('duration') }}</div>
-            <div class="detail-info-value">{{ job.duration || '-' }}</div>
+            <div :title="job.duration || '-'" class="detail-info-value">
+              {{ job.duration || '-' }}
+            </div>
           </div>
         </div>
       </section>
@@ -63,40 +87,66 @@
           <span class="w-1 h-4 bg-primary rounded"></span>
           {{ t('resourceConfig') }}
         </h3>
-        <div class="detail-info-grid detail-info-grid--flat">
+        <div
+          class="detail-info-grid detail-info-grid--flat detail-info-grid--inline"
+        >
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('totalGpu') }}</div>
-            <div class="detail-info-value text-primary">
+            <div
+              :title="String(job.totalGpuCount || 0)"
+              class="detail-info-value detail-info-value--important"
+            >
               {{ job.totalGpuCount || 0 }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('workerCount') }}</div>
-            <div class="detail-info-value text-primary">
+            <div
+              :title="String(job.workerCount || 1)"
+              class="detail-info-value detail-info-value--important"
+            >
               {{ job.workerCount || 1 }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('gpuType') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="job.gpuModel || job.gpuType || '-'"
+              class="detail-info-value"
+            >
               {{ job.gpuModel || job.gpuType || '-' }}
             </div>
           </div>
-          <div class="detail-info-item detail-info-item--wide">
+          <div class="detail-info-item detail-info-item--wide detail-info-item--stack">
             <div class="detail-info-label">{{ t('image') }}</div>
-            <div class="detail-inline-chip detail-info-value--mono break-all">
-              {{ job.imageName || job.image }}
+            <div
+              class="detail-code-surface detail-code-surface--soft detail-code-surface--single"
+            >
+              <code
+                :title="job.imageName || job.image || '-'"
+                class="detail-info-value--mono"
+              >
+                {{ job.imageName || job.image || '-' }}
+              </code>
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('nodeConfig') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="`${job.cpu || 0}${t('cpu')} / ${job.memory || 0}GB`"
+              class="detail-info-value"
+            >
               {{ job.cpu }}{{ t('cpu') }} / {{ job.memory }}GB
             </div>
           </div>
           <div v-if="job.workerGpu > 0" class="detail-info-item">
             <div class="detail-info-label">{{ t('gpuPerWorker') }}</div>
-            <div class="detail-info-value">{{ job.workerGpu }}</div>
+            <div
+              :title="String(job.workerGpu)"
+              class="detail-info-value"
+            >
+              {{ job.workerGpu }}
+            </div>
           </div>
         </div>
       </section>
@@ -110,24 +160,36 @@
           <span class="w-1 h-4 bg-primary rounded"></span>
           {{ t('orderAndCluster') }}
         </h3>
-        <div class="detail-info-grid detail-info-grid--flat">
+        <div
+          class="detail-info-grid detail-info-grid--flat detail-info-grid--inline"
+        >
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('clusterName') }}</div>
-            <div class="detail-info-value">{{ job.clusterName }}</div>
+            <div :title="job.clusterName || '-'" class="detail-info-value">
+              {{ job.clusterName || '-' }}
+            </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('area') }}</div>
-            <div class="detail-info-value">{{ job.area || '-' }}</div>
+            <div :title="job.area || '-'" class="detail-info-value">
+              {{ job.area || '-' }}
+            </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('payType') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="getPayTypeLabel(job.payType)"
+              class="detail-info-value"
+            >
               {{ getPayTypeLabel(job.payType) }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('unitPrice') }}</div>
-            <div class="detail-info-value text-red-500">
+            <div
+              :title="`￥${job.price?.toFixed(4) || '0.0000'} / ${t('unitHour')}`"
+              class="detail-info-value detail-info-value--important"
+            >
               ￥{{ job.price?.toFixed(4) || '0.0000' }} / {{ t('unitHour') }}
             </div>
           </div>
@@ -143,7 +205,7 @@
           <span class="w-1 h-4 bg-primary rounded"></span>
           {{ t('startupCommand') }}
         </h3>
-        <div class="detail-code-surface">
+        <div class="detail-code-surface detail-code-surface--soft">
           <pre class="text-sm whitespace-pre-wrap break-all">{{
             job.startupCommand || '-'
           }}</pre>
@@ -160,10 +222,13 @@
           <span class="w-1 h-4 bg-primary rounded"></span>
           TensorBoard
         </h3>
-        <div class="detail-info-grid detail-info-grid--flat">
+        <div class="detail-info-grid detail-info-grid--flat detail-info-grid--inline">
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('logPath') }}</div>
-            <div class="detail-info-value detail-info-value--mono">
+            <div
+              :title="job.tensorboardLogPath || '-'"
+              class="detail-info-value detail-info-value--mono"
+            >
               {{ job.tensorboardLogPath || '-' }}
             </div>
           </div>
@@ -172,7 +237,8 @@
             <a
               :href="job.tensorboardUrl"
               target="_blank"
-              class="text-sm text-primary hover:underline flex items-center gap-1"
+              :title="job.tensorboardUrl"
+              class="detail-info-value detail-info-link"
             >
               <span class="material-icons text-base">open_in_new</span>
               {{ t('openTensorboard') }}
@@ -198,12 +264,14 @@
             <thead>
               <tr>
                 <th>{{ t('storage') }}</th>
+                <th>{{ t('pvc') }}</th>
                 <th>{{ t('mountPath') }}</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(mount, index) in job.mounts" :key="index">
-                <td>{{ mount.pvcName || '-' }}</td>
+                <td>{{ mount.name || '-' }}</td>
+                <td class="detail-info-value--mono">{{ mount.pvcName || '-' }}</td>
                 <td class="detail-info-value--mono">{{ mount.mountPath }}</td>
               </tr>
             </tbody>

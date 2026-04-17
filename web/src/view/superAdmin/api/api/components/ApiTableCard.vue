@@ -1,5 +1,5 @@
 <template>
-  <TableCard>
+  <TableCard :page-size="pageSize">
     <template #toolbar>
       <BaseFilterBar plain>
         <div class="list-filter-field list-filter-field--compact max-w-[160px]">
@@ -77,7 +77,10 @@
       </BaseFilterBar>
     </template>
 
-    <div class="overflow-x-auto" v-loading="loading">
+    <div
+      class="console-table-scroll console-table-scroll--fill overflow-x-auto"
+      v-loading="loading"
+    >
       <table class="console-table w-full text-left">
         <thead>
           <tr>
@@ -168,7 +171,7 @@
         :page-size="pageSize"
         :total="total"
         :total-text="t('totalRecords', { total })"
-        :page-sizes="[10, 30, 50, 100]"
+        :page-sizes="[15, 30, 50, 100]"
         layout="sizes, prev, pager, next, jumper"
         @current-change="$emit('page-change', $event)"
         @size-change="$emit('size-change', $event)"
@@ -213,7 +216,7 @@ const props = withDefaults(
     loading: false,
     methodOptions: () => [],
     page: 1,
-    pageSize: 10,
+    pageSize: 15,
     searchApiGroup: '',
     searchDescription: '',
     searchMethod: '',
@@ -260,3 +263,4 @@ const searchPathModel = computed({
   set: (value: string) => emit('update:search-path', value)
 })
 </script>
+

@@ -18,6 +18,19 @@ import (
 
 type NodeService struct{}
 
+func normalizeNodePagination(page, pageSize int) (int, int) {
+	if page <= 0 {
+		page = 1
+	}
+	if pageSize <= 0 {
+		pageSize = 20
+	}
+	if pageSize > 100 {
+		pageSize = 100
+	}
+	return page, pageSize
+}
+
 // GetClusterNodes 获取集群下的所有Node节点信息（从内存集群管理器获取集群元数据）
 func (s *NodeService) GetClusterNodes(clusterId uint, keyword string) ([]cmsRes.NodeInfoResponse, error) {
 	cluster := global.GVA_K8S_CLUSTER_MANAGER.GetCluster(clusterId)
@@ -67,6 +80,34 @@ func (s *NodeService) GetClusterNodesWithResources(ctx context.Context, clusterI
 	return nodes, nil
 }
 
+// GetClusterNodesWithResourcesPage 获取集群节点分页列表
+func (s *NodeService) GetClusterNodesWithResourcesPage(ctx context.Context, clusterId uint, keyword string, page, pageSize int) ([]cmsRes.NodeInfoResponse, int, int, int, error) {
+	cluster := global.GVA_K8S_CLUSTER_MANAGER.GetCluster(clusterId)
+	if cluster == nil {
+		return nil, 0, 0, 0, errors.Errorf("集群不存在或未连接")
+	}
+	if cluster.ClientSet == nil {
+		return nil, 0, 0, 0, errors.Errorf("集群K8s客户端未初始化")
+	}
+
+	nodes, total, page, pageSize, err := s.ListNodeResourcesPage(ctx, cluster.ClientSet, keyword, page, pageSize)
+	if err != nil {
+		return nil, 0, 0, 0, err
+	}
+
+	var clusterInfo clusterModel.K8sCluster
+	if err := global.GVA_DB.Model(&clusterModel.K8sCluster{}).Where("id = ?", clusterId).First(&clusterInfo).Error; err != nil {
+		return nil, 0, 0, 0, errors.Errorf("查询集群信息失败: %v", err)
+	}
+
+	for i := range nodes {
+		nodes[i].Area = clusterInfo.Area
+		nodes[i].ClusterName = clusterInfo.Name
+	}
+
+	return nodes, total, page, pageSize, nil
+}
+
 // ---------------------- 节点操作 ----------------------
 
 // UncordonNode 恢复节点调度
@@ -103,6 +144,9 @@ func (s *NodeService) DrainNode(ctx context.Context, clusterId uint, nodeName st
 	node, err := cluster.ClientSet.CoreV1().Nodes().Get(ctx, nodeName, metav1.GetOptions{})
 	if err != nil {
 		return errors.Errorf("查询节点失败: %v", err)
+	}
+	if parseNodeRole(node) == "master" {
+		return errors.New("master 节点不支持从集群驱逐")
 	}
 
 	if !node.Spec.Unschedulable {
@@ -188,24 +232,28 @@ func (s *NodeService) CalculateNodeResources(ctx context.Context, clientSet *kub
 
 	// GPU / vGPU
 	parseGPUInfo(node, info)
+	info.DriverVersion, info.CUDAVersion = parseNodeVersionInfo(node)
 	info.GPUAvailable = info.GPUCount
 
 	return info, nil
 }
 
-// CalculateMaxInstances 根据节点资源和产品规格计算最大实例数（GPU / vGPU / CPU-only 互斥）
+// CalculateMaxInstances 根据节点资源和产品规格计算最大实例数（GPU / vGPU / CPU ONLY 互斥）
 func (s *NodeService) CalculateMaxInstances(nodeInfo *cmsRes.NodeInfoResponse, gpuCount, vgpuNumber, vgpuMemory, vgpuCores, cpu, memory int64, isGPU, isVGPU bool) int64 {
 	switch {
 	case isGPU:
-		if gpuCount > 0 {
-			return safeDiv(nodeInfo.GPUCount, gpuCount)
-		}
-		return 0
+		return minByRequested(
+			resourceQuota{total: nodeInfo.GPUCount, requested: gpuCount},
+			resourceQuota{total: nodeInfo.CPUAllocatable, requested: cpu},
+			resourceQuota{total: nodeInfo.MemoryAllocatable, requested: memory},
+		)
 	case isVGPU:
 		return minByRequested(
 			resourceQuota{total: nodeInfo.VGPUNumber, requested: vgpuNumber},
 			resourceQuota{total: nodeInfo.VGPUMemory, requested: vgpuMemory},
 			resourceQuota{total: nodeInfo.VGPUCores, requested: vgpuCores},
+			resourceQuota{total: nodeInfo.CPUAllocatable, requested: cpu},
+			resourceQuota{total: nodeInfo.MemoryAllocatable, requested: memory},
 		)
 	default:
 		return minByRequested(
@@ -236,6 +284,48 @@ func (s *NodeService) ListNodeResources(ctx context.Context, clientSet *kubernet
 		result = append(result, *info)
 	}
 	return result, nil
+}
+
+// ListNodeResourcesPage 获取集群节点资源分页数据
+func (s *NodeService) ListNodeResourcesPage(ctx context.Context, clientSet *kubernetes.Clientset, keyword string, page, pageSize int) ([]cmsRes.NodeInfoResponse, int, int, int, error) {
+	nodeList, err := clientSet.CoreV1().Nodes().List(ctx, metav1.ListOptions{})
+	if err != nil {
+		return nil, 0, 0, 0, errors.Errorf("获取节点列表失败: %v", err)
+	}
+
+	filteredNodes := make([]corev1.Node, 0, len(nodeList.Items))
+	for _, node := range nodeList.Items {
+		if keyword != "" && !nodeMatchesKeyword(&node, keyword) {
+			continue
+		}
+		filteredNodes = append(filteredNodes, node)
+	}
+
+	total := len(filteredNodes)
+	page, pageSize = normalizeNodePagination(page, pageSize)
+
+	start := (page - 1) * pageSize
+	if start >= total {
+		return []cmsRes.NodeInfoResponse{}, total, page, pageSize, nil
+	}
+
+	end := start + pageSize
+	if end > total {
+		end = total
+	}
+
+	calc := &NodeService{}
+	result := make([]cmsRes.NodeInfoResponse, 0, end-start)
+	for _, node := range filteredNodes[start:end] {
+		info, err := calc.CalculateNodeResources(ctx, clientSet, node.Name)
+		if err != nil {
+			logx.Errorf("获取节点 %s 资源失败: %v", node.Name, err)
+			continue
+		}
+		result = append(result, *info)
+	}
+
+	return result, total, page, pageSize, nil
 }
 
 // nodeMatchesKeyword 判断节点名称或IP是否匹配关键字
@@ -288,6 +378,75 @@ func parseGPUInfo(node *corev1.Node, info *cmsRes.NodeInfoResponse) {
 	if v, ok := node.Status.Capacity[corev1.ResourceName(consts.VolcanoVGPUCores)]; ok {
 		info.VGPUCores = v.Value()
 	}
+}
+
+func parseNodeVersionInfo(node *corev1.Node) (string, string) {
+	driverVersion := resolveNodeMetadataValue(node,
+		[]string{
+			"nvidia.com/cuda.driver-version.full",
+			"nvidia.com/cuda.driver.version",
+			"nvidia.com/cuda.driver-version",
+			"nvidia.com/gpu.driver.version",
+			"nvidia.com/gpu.driver-version",
+			"nvidia.com/driver.version",
+			"gpu.nvidia.com/driver-version",
+		},
+		[][]string{
+			{"nvidia.com/cuda.driver-version.major", "nvidia.com/cuda.driver-version.minor", "nvidia.com/cuda.driver-version.revision"},
+			{"nvidia.com/cuda.driver.major", "nvidia.com/cuda.driver.minor", "nvidia.com/cuda.driver.rev"},
+			{"nvidia.com/cuda.driver.major", "nvidia.com/cuda.driver.minor", "nvidia.com/cuda.driver.patch"},
+		},
+	)
+
+	cudaVersion := resolveNodeMetadataValue(node,
+		[]string{
+			"nvidia.com/cuda.runtime-version.full",
+			"nvidia.com/cuda.runtime.version",
+			"nvidia.com/cuda.runtime-version",
+			"nvidia.com/cuda.version",
+			"nvidia.com/cuda-version",
+		},
+		[][]string{
+			{"nvidia.com/cuda.runtime-version.major", "nvidia.com/cuda.runtime-version.minor"},
+			{"nvidia.com/cuda.runtime.major", "nvidia.com/cuda.runtime.minor"},
+			{"nvidia.com/cuda.major", "nvidia.com/cuda.minor"},
+		},
+	)
+
+	return driverVersion, cudaVersion
+}
+
+func resolveNodeMetadataValue(node *corev1.Node, fullKeys []string, partKeys [][]string) string {
+	for _, key := range fullKeys {
+		if value := lookupNodeMetadataValue(node, key); value != "" {
+			return value
+		}
+	}
+
+	for _, keys := range partKeys {
+		parts := make([]string, 0, len(keys))
+		missing := false
+		for _, key := range keys {
+			value := lookupNodeMetadataValue(node, key)
+			if value == "" {
+				missing = true
+				break
+			}
+			parts = append(parts, value)
+		}
+		if !missing && len(parts) > 0 {
+			return strings.Join(parts, ".")
+		}
+	}
+
+	return ""
+}
+
+func lookupNodeMetadataValue(node *corev1.Node, key string) string {
+	if value := strings.TrimSpace(node.Labels[key]); value != "" {
+		return value
+	}
+	return strings.TrimSpace(node.Annotations[key])
 }
 
 // parseNodeRole 根据节点标签判断角色

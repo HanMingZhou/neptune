@@ -35,6 +35,31 @@ func (p *ProductApi) CreateProduct(c *gin.Context) {
 	response.OkWithMessage("创建成功", c)
 }
 
+// BatchCreateComputeProducts 批量创建计算产品
+// @Tags CMS-Product
+// @Summary 批量创建计算产品
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body cmsReq.BatchCreateComputeProductReq true "批量创建计算产品请求"
+// @Success 200 {object} response.Response{msg=string}
+// @Router /api/v1/cms/product/batch/add [post]
+func (p *ProductApi) BatchCreateComputeProducts(c *gin.Context) {
+	var req cmsReq.BatchCreateComputeProductReq
+	if err := c.ShouldBindJSON(&req); err != nil {
+		response.FailWithMessage("参数错误: "+err.Error(), c)
+		return
+	}
+
+	result, err := cmsService.ProductService.BatchCreateComputeProducts(&req)
+	if err != nil {
+		utils.HandleError(c, err, "批量创建计算产品失败")
+		return
+	}
+
+	response.OkWithDetailed(result, "创建成功", c)
+}
+
 // UpdateProduct 更新产品
 // @Tags CMS-Product
 // @Summary 更新产品
@@ -117,8 +142,18 @@ func (p *ProductApi) DeleteProduct(c *gin.Context) {
 // @Param pageSize query int false "每页大小"
 // @Param clusterId query int false "集群ID"
 // @Param area query string false "地区"
+// @Param resourceType query string false "资源类型(cpu/gpu/vgpu)"
 // @Param gpuModel query string false "GPU型号"
 // @Param status query int false "状态"
+// @Param availableMin query int false "剩余库存最小值"
+// @Param availableMax query int false "剩余库存最大值"
+// @Param maxInstancesMin query int false "最大实例数最小值"
+// @Param maxInstancesMax query int false "最大实例数最大值"
+// @Param usedCapacityMin query int false "已用实例数最小值"
+// @Param usedCapacityMax query int false "已用实例数最大值"
+// @Param priceType query int false "价格类型(1-小时 2-天 3-周 4-月 5-存储GB/日)"
+// @Param priceMin query number false "价格最小值"
+// @Param priceMax query number false "价格最大值"
 // @Param keyword query string false "搜索关键词"
 // @Success 200 {object} response.Response{data=object,msg=string}
 // @Router /api/v1/cms/product/list [get]
@@ -201,19 +236,20 @@ func (p *ProductApi) GetAreaList(c *gin.Context) {
 // @Success 200 {object} response.Response{data=object,msg=string}
 // @Router /api/v1/cms/product/node/list [get]
 func (p *ProductApi) GetClusterNodes(c *gin.Context) {
-	clusterIdStr := c.Query("clusterId")
-	if clusterIdStr == "" {
-		response.FailWithMessage("集群ID不能为空", c)
+	var req cmsReq.GetProductNodeCandidatesReq
+	if err := c.ShouldBindQuery(&req); err != nil {
+		response.FailWithMessage("参数错误: "+err.Error(), c)
 		return
 	}
 
-	clusterId := cast.ToUint(clusterIdStr)
+	clusterId := cast.ToUint(req.ClusterId)
 	if clusterId == 0 {
 		response.FailWithMessage("集群ID格式错误", c)
 		return
 	}
+	req.ClusterId = clusterId
 
-	nodes, err := cmsService.NodeService.GetClusterNodes(clusterId, "")
+	nodes, err := cmsService.ProductService.GetProductNodeCandidates(&req)
 	if err != nil {
 		utils.HandleError(c, err, "获取集群节点失败")
 		return

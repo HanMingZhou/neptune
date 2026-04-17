@@ -80,17 +80,20 @@ type VolumeUsage struct {
 
 // 列表项
 type VolumeItem struct {
-	ID          uint          `json:"id"`
-	Name        string        `json:"name"`        // 存储名称
-	Size        int64         `json:"size"`        // 容量
-	Type        int           `json:"type"`        // 类型
-	Status      string        `json:"status"`      // 未使用/使用中
-	Area        string        `json:"area"`        // 区域
-	CreatedAt   string        `json:"createdAt"`   // 创建时间
-	UsedBy      []VolumeUsage `json:"usedBy"`      // 使用者列表
-	ClusterId   uint          `json:"clusterId"`   // 集群ID
-	ProductId   uint          `json:"productId"`   // 产品ID
-	ProductName string        `json:"productName"` // 产品名称
+	ID            uint          `json:"id"`
+	Name          string        `json:"name"`          // 存储名称
+	PVCName       string        `json:"pvcName"`       // PVC名称
+	Size          int64         `json:"size"`          // 容量
+	RequestedSize int64         `json:"requestedSize"` // 已申请容量
+	ResizePending bool          `json:"resizePending"` // 是否处于扩容中
+	Type          int           `json:"type"`          // 类型
+	Status        string        `json:"status"`        // 未使用/使用中
+	Area          string        `json:"area"`          // 区域
+	CreatedAt     string        `json:"createdAt"`     // 创建时间
+	UsedBy        []VolumeUsage `json:"usedBy"`        // 使用者列表
+	ClusterId     uint          `json:"clusterId"`     // 集群ID
+	ProductId     uint          `json:"productId"`     // 产品ID
+	ProductName   string        `json:"productName"`   // 产品名称
 }
 
 // 列表响应
@@ -101,9 +104,10 @@ type VolumeListResp struct {
 
 // 集群简要信息
 type ClusterInfo struct {
-	ID   uint   `json:"id"`
-	Name string `json:"name"`
-	Area string `json:"area"`
+	ID         uint   `json:"id"`
+	Name       string `json:"name"`
+	Area       string `json:"area"`
+	HarborAddr string `json:"harborAddr"`
 }
 
 // 区域/集群列表响应

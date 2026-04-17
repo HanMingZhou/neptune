@@ -277,6 +277,9 @@ func (s *TrainingJobService) getTrainingProduct(ctx context.Context, productID u
 	if err := global.GVA_DB.WithContext(ctx).Where("id = ?", productID).First(&product).Error; err != nil {
 		return nil, errors.Wrap(err, "获取产品规格失败")
 	}
+	if err := productModel.LoadPriceItems(ctx, global.GVA_DB, &product); err != nil {
+		return nil, errors.Wrap(err, "加载产品价格失败")
+	}
 	if product.Status != productModel.ProductStatusEnabled {
 		return nil, errors.New("所选产品已下架，无法使用")
 	}
@@ -1149,6 +1152,9 @@ func (s *TrainingJobService) fillTrainingProductDetail(
 	if err := global.GVA_DB.WithContext(ctx).Where("id = ?", job.ProductId).First(&product).Error; err != nil {
 		return err
 	}
+	if err := productModel.LoadPriceItems(ctx, global.GVA_DB, &product); err != nil {
+		return err
+	}
 
 	detail.CPU = product.CPU
 	detail.Memory = product.Memory
@@ -1193,22 +1199,19 @@ func (s *TrainingJobService) loadTrainingJobMountDetails(
 		return nil, err
 	}
 
-	pvcNames, err := s.loadTrainingMountPVCNames(ctx, mounts)
+	volumeNames, err := s.loadTrainingMountVolumeNames(ctx, mounts)
 	if err != nil {
-		logx.Error("查询训练任务PVC展示名失败", logx.Field("err", err), logx.Field("jobId", jobID))
-		pvcNames = map[uint]string{}
+		logx.Error("查询训练任务文件存储名称失败", logx.Field("err", err), logx.Field("jobId", jobID))
+		volumeNames = map[uint]string{}
 	}
 
 	details := make([]trainingResp.TrainingJobMountDetail, 0, len(mounts))
 	for _, mount := range mounts {
-		pvcName := mount.PvcName
-		if displayName, ok := pvcNames[mount.PvcId]; ok && displayName != "" {
-			pvcName = displayName
-		}
 		details = append(details, trainingResp.TrainingJobMountDetail{
 			MountType: mount.MountType,
 			SourceId:  mount.SourceId,
-			PvcName:   pvcName,
+			Name:      volumeNames[mount.PvcId],
+			PvcName:   mount.PvcName,
 			SubPath:   mount.SubPath,
 			MountPath: mount.MountPath,
 			ReadOnly:  mount.ReadOnly,
@@ -1218,7 +1221,7 @@ func (s *TrainingJobService) loadTrainingJobMountDetails(
 	return details, nil
 }
 
-func (s *TrainingJobService) loadTrainingMountPVCNames(
+func (s *TrainingJobService) loadTrainingMountVolumeNames(
 	ctx context.Context,
 	mounts []trainingModel.TrainingJobMount,
 ) (map[uint]string, error) {
@@ -1232,11 +1235,11 @@ func (s *TrainingJobService) loadTrainingMountPVCNames(
 		return nil, err
 	}
 
-	pvcNames := make(map[uint]string, len(volumes))
+	volumeNames := make(map[uint]string, len(volumes))
 	for _, vol := range volumes {
-		pvcNames[vol.ID] = vol.Name
+		volumeNames[vol.ID] = vol.Name
 	}
-	return pvcNames, nil
+	return volumeNames, nil
 }
 
 func collectTrainingMountPVCIDs(mounts []trainingModel.TrainingJobMount) []uint {

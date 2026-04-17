@@ -21,6 +21,16 @@ func (s *ClusterService) GetClusterList(req *request.GetClusterListReq) (*respon
 	var clusters []clusterModel.K8sCluster
 	var total int64
 
+	if req.Page <= 0 {
+		req.Page = 1
+	}
+	if req.PageSize <= 0 {
+		req.PageSize = 20
+	}
+	if req.PageSize > 100 {
+		req.PageSize = 100
+	}
+
 	db := global.GVA_DB.Model(&clusterModel.K8sCluster{})
 
 	// 关键词搜索
@@ -38,7 +48,7 @@ func (s *ClusterService) GetClusterList(req *request.GetClusterListReq) (*respon
 		return nil, errors.Wrap(err, "查询集群总数失败")
 	}
 
-	if err := db.Order("id DESC").Find(&clusters).Error; err != nil {
+	if err := db.Order("id DESC").Limit(req.PageSize).Offset((req.Page - 1) * req.PageSize).Find(&clusters).Error; err != nil {
 		return nil, errors.Wrap(err, "查询集群列表失败")
 	}
 
@@ -89,8 +99,10 @@ func (s *ClusterService) GetClusterList(req *request.GetClusterListReq) (*respon
 	}
 
 	return &response.ClusterListResponse{
-		List:  list,
-		Total: total,
+		List:     list,
+		Total:    total,
+		Page:     req.Page,
+		PageSize: req.PageSize,
 	}, nil
 }
 

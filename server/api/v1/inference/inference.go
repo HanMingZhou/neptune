@@ -341,7 +341,11 @@ func (i *InferenceApi) HandleTerminal(c *gin.Context) {
 		Command:       []string{"/bin/bash"},
 	}
 	if err := terminalService.TerminalServiceApp.HandleWebSocket(c.Request.Context(), termReq, conn); err != nil {
-		logx.Error("推理服务 Terminal 会话结束")
-		conn.WriteMessage(websocket.TextMessage, []byte("\r\n\033[31mError: "+err.Error()+"\033[0m\r\n"))
+		if terminalService.IsExpectedDisconnect(err) {
+			logx.Info("推理服务 Terminal 会话已关闭")
+			return
+		}
+		logx.Error("推理服务 Terminal 会话结束", logx.Field("err", err))
+		_ = conn.WriteMessage(websocket.TextMessage, []byte("\r\n\033[31mError: "+err.Error()+"\033[0m\r\n"))
 	}
 }

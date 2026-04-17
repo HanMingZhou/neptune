@@ -1,6 +1,8 @@
 <template>
-  <TableCard>
-    <div class="overflow-x-auto">
+  <TableCard :page-size="pageSize">
+    <div
+      class="console-table-scroll console-table-scroll--fill overflow-x-auto"
+    >
       <table class="console-table console-table--compact w-full min-w-[1180px]">
         <thead>
           <tr>
@@ -9,7 +11,7 @@
             <th class="text-center">{{ t('imageType') }}</th>
             <th class="text-center">{{ t('imageUsageType') }}</th>
             <th>{{ t('imageAddr') }}</th>
-            <th>{{ t('imageArea') }}</th>
+            <th>{{ t('cluster') }}</th>
             <th>{{ t('imageSize') }}</th>
             <th>{{ t('createdAt') }}</th>
             <th class="console-actions-header">{{ t('actions') }}</th>
@@ -66,7 +68,16 @@
               </el-tooltip>
               <span v-else class="text-xs text-slate-400">-</span>
             </td>
-            <td>{{ row.area || '-' }}</td>
+            <td>
+              <div
+                class="text-sm font-semibold text-slate-700 dark:text-slate-200"
+              >
+                {{ row.clusterName || '-' }}
+              </div>
+              <div class="mt-1 text-xs text-slate-400">
+                {{ row.area || '-' }}
+              </div>
+            </td>
             <td>{{ row.size || '-' }}</td>
             <td class="is-secondary">{{ row.createTime }}</td>
             <td class="console-actions-cell">
@@ -98,7 +109,7 @@
         v-model:page-size="pageSizeModel"
         :total="total"
         :total-text="t('totalRecords', { total })"
-        :page-sizes="[10, 20, 50, 100]"
+        :page-sizes="[15, 20, 50, 100]"
         layout="sizes, prev, pager, next, jumper"
         :hide-when-empty="true"
         @current-change="$emit('page-change')"
@@ -128,7 +139,7 @@ const props = withDefaults(
     currentPage: 1,
     items: () => [],
     loading: false,
-    pageSize: 10,
+    pageSize: 15,
     total: 0
   }
 )
@@ -175,3 +186,4 @@ const usageTypeBadgeTone = (
   return toneMap[value] || 'neutral'
 }
 </script>
+

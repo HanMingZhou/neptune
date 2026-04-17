@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useAttrs } from 'vue'
+import { computed, nextTick, useAttrs } from 'vue'
 
 defineOptions({
   inheritAttrs: false
@@ -90,7 +90,10 @@ const handleModelValueChange = (value: boolean): void => {
 }
 
 const handleBeforeClose = (done: () => void): void => {
+  emit('update:modelValue', false)
   emit('close')
-  done()
+  void nextTick(() => {
+    done()
+  })
 }
 </script>

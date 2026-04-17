@@ -1,5 +1,5 @@
 <template>
-  <div class="console-page-container space-y-6">
+  <div class="console-page-container flex min-h-full flex-col gap-6">
     <ApiManagementHeader
       :has-selection="hasSelection"
       :loading="loading"
@@ -11,6 +11,7 @@
     />
 
     <ApiTableSection
+      class="min-h-0 flex-1"
       :all-selected="isAllSelected"
       :api-group-options="apiGroupOptions"
       :get-method-class="getMethodClass"

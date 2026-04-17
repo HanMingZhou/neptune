@@ -82,6 +82,9 @@ type NotebookItem struct {
 	ImageName          string      `json:"imageName"`          // 镜像展示名称
 	GPUCount           int64       `json:"gpuCount"`           // GPU 数量
 	GPUModel           string      `json:"gpuModel"`           // GPU 型号
+	VGPUNumber         int64       `json:"vGpuNumber"`         // vGPU 数量
+	VGPUMemory         int64       `json:"vGpuMemory"`         // vGPU 显存
+	VGPUCores          int64       `json:"vGpuCores"`          // vGPU 核心
 	PayType            int         `json:"payType"`            // 计费方式
 	Price              float64     `json:"price"`              // 单价
 	EnableTensorboard  bool        `json:"enableTensorboard"`  // 是否启用 TensorBoard

@@ -2,18 +2,11 @@
   <header
     class="h-16 border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-8 flex items-center justify-between shrink-0 z-10"
   >
-    <div class="flex-1 max-w-lg">
-      <div class="relative group">
-        <span
-          class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-          >search</span
-        >
-        <input
-          type="text"
-          :placeholder="t('menuSearchPlaceholder')"
-          class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-zinc-800 border-none rounded-lg text-sm focus:ring-1 focus:ring-primary transition-all outline-none"
-        />
-      </div>
+    <div class="relative flex-1 max-w-xl">
+      <CommandMenu
+        :groups="dynamicNavigation"
+        :placeholder="t('menuSearchPlaceholder')"
+      />
     </div>
     <div class="flex items-center gap-4">
       <button
@@ -42,6 +35,8 @@
 <script setup lang="ts">
 import { inject } from 'vue'
 import type { ResourceId, Translator } from '@/types/consoleResource'
+import type { LayoutNavGroup } from '@/types/layout'
+import CommandMenu from '@/components/commandMenu/index.vue'
 import LayoutUserPopover from './LayoutUserPopover.vue'
 
 interface LayoutHeaderUserInfo {
@@ -60,11 +55,13 @@ interface LayoutHeaderUserInfo {
 
 withDefaults(
   defineProps<{
+    dynamicNavigation?: LayoutNavGroup[]
     lang?: string
     userBalance?: number
     userInfo?: LayoutHeaderUserInfo
   }>(),
   {
+    dynamicNavigation: () => [],
     lang: 'zh',
     userBalance: 0,
     userInfo: () => ({})

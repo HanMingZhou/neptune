@@ -1,5 +1,5 @@
 <template>
-  <TableCard>
+  <TableCard :page-size="pageSize">
     <template #toolbar>
       <BaseFilterBar plain>
         <div class="list-filter-field max-w-[240px]">
@@ -35,7 +35,10 @@
       </BaseFilterBar>
     </template>
 
-    <div class="overflow-x-auto" v-loading="loading">
+    <div
+      class="console-table-scroll console-table-scroll--fill overflow-x-auto"
+      v-loading="loading"
+    >
       <table class="console-table console-table--compact w-full">
         <thead>
           <tr>
@@ -214,9 +217,27 @@
               </tr>
             </template>
           </template>
+          <tr v-if="items.length === 0 && !loading">
+            <td colspan="10" class="px-6 py-10 text-center text-slate-400 text-sm">
+              {{ t('noData') }}
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
+
+    <template #footer>
+      <ListPaginationBar
+        :current-page="page"
+        :page-size="pageSize"
+        :page-sizes="[15, 20, 50, 100]"
+        :total="total"
+        :total-text="t('totalRecords', { total })"
+        layout="sizes, prev, pager, next, jumper"
+        @current-change="$emit('page-change', $event)"
+        @size-change="$emit('size-change', $event)"
+      />
+    </template>
   </TableCard>
 </template>
 
@@ -224,6 +245,7 @@
 import { computed, inject } from 'vue'
 import AppIcon from '@/components/AppIcon.vue'
 import BaseFilterBar from '@/components/listPage/BaseFilterBar.vue'
+import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
 import ListToneBadge from '@/components/listPage/ListToneBadge.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
 import type { Translator } from '@/types/consoleResource'
@@ -233,12 +255,18 @@ const props = withDefaults(
   defineProps<{
     items?: MenuTreeNode[]
     loading?: boolean
+    page?: number
+    pageSize?: number
     searchKeyword?: string
+    total?: number
   }>(),
   {
     items: () => [],
     loading: false,
-    searchKeyword: ''
+    page: 1,
+    pageSize: 15,
+    searchKeyword: '',
+    total: 0
   }
 )
 
@@ -246,8 +274,10 @@ const emit = defineEmits<{
   add: [id: number]
   delete: [id: number]
   edit: [id: number]
+  'page-change': [value: number]
   reset: []
   search: []
+  'size-change': [value: number]
   'update:search-keyword': [value: string]
 }>()
 const t = inject<Translator>('t', (key: string) => key)
@@ -257,3 +287,4 @@ const searchKeywordModel = computed({
   set: (value: string) => emit('update:search-keyword', value)
 })
 </script>
+

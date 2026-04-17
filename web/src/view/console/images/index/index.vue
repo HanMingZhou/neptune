@@ -1,5 +1,5 @@
 <template>
-  <div class="console-page-container space-y-6">
+  <div class="console-page-container flex min-h-full flex-col gap-6">
     <BaseTableToolbar
       :breadcrumbs="[t('resources'), t('imageManage')]"
       :description="t('imageManageDesc')"
@@ -18,7 +18,7 @@
       </template>
     </BaseTableToolbar>
 
-    <ManagementListShell>
+    <ManagementListShell class="min-h-0 flex-1">
       <template #filters>
         <ImageFiltersCard
           v-model:filter-keyword="filterKeyword"
@@ -30,6 +30,7 @@
       </template>
 
       <ImageTableCard
+        class="min-h-0 flex-1"
         v-model:current-page="currentPage"
         v-model:page-size="pageSize"
         :items="images"
@@ -44,10 +45,13 @@
 
     <ImageDialog
       v-model="showDialog"
+      :cluster-options="clusterOptions"
       :form="form"
+      :generated-image-addr="generatedImageAddr"
       :is-edit="isEdit"
       :rules="formRules"
       :submitting="submitting"
+      @image-addr-input="handleImageAddrInput"
       @closed="handleDialogClosed"
       @submit="submitImage"
     />
@@ -67,15 +71,19 @@ import { useImageManagement } from './composables/useImageManagement'
 const t = inject<Translator>('t', (key: string) => key)
 
 const {
+  clusterOptions,
   currentPage,
+  fetchClusters,
   fetchImages,
   filterKeyword,
   filterType,
   filterUsageType,
   form,
   formRules,
+  generatedImageAddr,
   handleDelete,
   handleDialogClosed,
+  handleImageAddrInput,
   handlePageChange,
   handleRefresh,
   handleReset,
@@ -94,6 +102,7 @@ const {
 } = useImageManagement({ t })
 
 onMounted(() => {
+  void fetchClusters()
   void fetchImages()
 })
 </script>

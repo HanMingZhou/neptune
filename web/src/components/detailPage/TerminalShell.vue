@@ -93,7 +93,7 @@
 
       <div
         :ref="setTerminalRef"
-        class="flex-1 p-1 relative overflow-hidden bg-[#1e1e1e]"
+        class="terminal-shell__body flex-1 p-1 relative overflow-hidden bg-[#1e1e1e]"
         :style="bodyStyle"
       >
         <div
@@ -167,3 +167,13 @@ defineEmits<{
 
 const t = inject<Translator>('t', (key: string) => key)
 </script>
+
+<style scoped>
+.terminal-shell__body {
+  overscroll-behavior: contain;
+}
+
+.terminal-shell__body :deep(.xterm-viewport) {
+  overscroll-behavior: contain;
+}
+</style>

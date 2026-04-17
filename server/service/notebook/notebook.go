@@ -1512,6 +1512,9 @@ func (nb *NotebookService) UpdateNotebook(ctx context.Context, req *request.Upda
 		updates["memory"] = productInfo.Memory
 		updates["gpu"] = fmt.Sprintf("%d", productInfo.GPUCount)
 		updates["gpu_model"] = productInfo.GPUModel
+		updates["v_gpu_number"] = productInfo.VGPUNumber
+		updates["v_gpu_memory"] = productInfo.VGPUMemory
+		updates["v_gpu_cores"] = productInfo.VGPUCores
 	}
 
 	// 如果更新了付费类型
@@ -1629,6 +1632,10 @@ func (nb *NotebookService) loadNotebookProducts(ctx context.Context, notebooks [
 		logx.Error("批量查询产品失败", err)
 		return map[uint]productModel.Product{}
 	}
+	if err := productModel.LoadPriceItemsForProducts(ctx, global.GVA_DB, products); err != nil {
+		logx.Error("批量加载产品价格失败", err)
+		return map[uint]productModel.Product{}
+	}
 
 	productMap := make(map[uint]productModel.Product, len(products))
 	for _, product := range products {
@@ -1706,10 +1713,13 @@ func buildNotebookResponseItem(dbNb nbModel.Notebook, lookup notebookResponseLoo
 		Status:             dbNb.Status,
 		GPUCount:           dbNb.GPU,
 		GPUModel:           dbNb.GPUModel,
+		VGPUNumber:         dbNb.VGPUNumber,
+		VGPUMemory:         dbNb.VGPUMemory,
+		VGPUCores:          dbNb.VGPUCores,
 		PayType:            dbNb.PayType,
 		EnableTensorboard:  dbNb.EnableTensorboard,
 		TensorboardLogPath: dbNb.TensorboardLogPath,
-		VolumeMounts:       normalizedVolumeMounts,
+		VolumeMounts:       filterNotebookDisplayVolumeMounts(normalizedVolumeMounts),
 		CreatedAt:          dbNb.CreatedAt.Format("2006-01-02 15:04:05"),
 	}
 
@@ -1728,6 +1738,21 @@ func enrichNotebookDisplayInfo(item *response.NotebookItem, dbNb nbModel.Noteboo
 
 	if product, ok := lookup.products[dbNb.ProductId]; ok {
 		item.Price = product.GetPrice(int64(dbNb.PayType))
+		if item.GPUCount == 0 {
+			item.GPUCount = product.GPUCount
+		}
+		if item.GPUModel == "" {
+			item.GPUModel = product.GPUModel
+		}
+		if item.VGPUNumber == 0 {
+			item.VGPUNumber = product.VGPUNumber
+		}
+		if item.VGPUMemory == 0 {
+			item.VGPUMemory = product.VGPUMemory
+		}
+		if item.VGPUCores == 0 {
+			item.VGPUCores = product.VGPUCores
+		}
 	}
 }
 
@@ -1879,6 +1904,14 @@ func refreshNotebookStatusFromPod(
 func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string) *nbv1.Notebook {
 	// 使用nbRef中已处理好的配置
 	image := nbRef.Image
+	productSpec := &helper.ProductSpec{
+		CPU:        nbRef.CPU,
+		Memory:     nbRef.Memory,
+		GPUCount:   nbRef.GPU,
+		VGPUNumber: nbRef.VGPUNumber,
+		VGPUMemory: nbRef.VGPUMemory,
+		VGPUCores:  nbRef.VGPUCores,
+	}
 
 	// 处理环境变量
 	prefix := "/notebook/" + nbRef.Namespace + "/" + nbRef.InstanceName + "/"
@@ -1903,6 +1936,13 @@ func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string) *nbv1.Notebook 
 			Name:  "HOME",
 			Value: nbModel.DefaultWorkspacePath,
 		},
+	}
+	if !productSpec.HasGPU() {
+		envVars = append(envVars, corev1.EnvVar{
+			// CPU ONLY Notebook 显式隐藏 GPU 设备，避免容器在 GPU 节点上仍探测到显卡
+			Name:  "NVIDIA_VISIBLE_DEVICES",
+			Value: "none",
+		})
 	}
 
 	// 处理挂载卷
@@ -1989,14 +2029,6 @@ func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string) *nbv1.Notebook 
 	}
 
 	// 处理资源限制（使用统一的 BuildResources）
-	productSpec := &helper.ProductSpec{
-		CPU:        nbRef.CPU,
-		Memory:     nbRef.Memory,
-		GPUCount:   nbRef.GPU,
-		VGPUNumber: nbRef.VGPUNumber,
-		VGPUMemory: nbRef.VGPUMemory,
-		VGPUCores:  nbRef.VGPUCores,
-	}
 	resourceReqs := helper.BuildResources(productSpec)
 	ephemeralQty := notebookEphemeralStorageQuantity()
 	resourceReqs.Limits[corev1.ResourceEphemeralStorage] = ephemeralQty
@@ -2098,6 +2130,25 @@ func normalizeNotebookRuntimeVolumeMounts(nbRef *nbModel.Notebook) []nbModel.Not
 	}
 
 	return normalized
+}
+
+func filterNotebookDisplayVolumeMounts(mounts []nbModel.NotebookVolume) []nbModel.NotebookVolume {
+	if len(mounts) == 0 {
+		return mounts
+	}
+
+	filtered := make([]nbModel.NotebookVolume, 0, len(mounts))
+	for _, mount := range mounts {
+		if isWorkspaceNotebookVolume(mount) {
+			continue
+		}
+		if strings.TrimSpace(mount.PVCName) == "" && mount.PVCId == 0 {
+			continue
+		}
+		filtered = append(filtered, mount)
+	}
+
+	return filtered
 }
 
 func resolveNotebookWorkspaceSize(nbRef *nbModel.Notebook) int64 {
@@ -2263,7 +2314,132 @@ func (nb *NotebookService) GetNotebookDetail(ctx context.Context, req *request.G
 
 	lookup := nb.loadNotebookResponseLookup(ctx, []nbModel.Notebook{dbNb})
 	stsLister, podLister, notebookClient := nb.getNotebookClusterRuntime(dbNb.ClusterID)
-	return convertDBModelToResponse(ctx, dbNb, lookup, stsLister, podLister, notebookClient)
+	item, err := convertDBModelToResponse(ctx, dbNb, lookup, stsLister, podLister, notebookClient)
+	if err != nil {
+		return item, err
+	}
+
+	if item != nil {
+		nb.syncNotebookDetailRuntimeVolumeMounts(ctx, item, dbNb, notebookClient)
+	}
+
+	return item, nil
+}
+
+func (nb *NotebookService) syncNotebookDetailRuntimeVolumeMounts(
+	ctx context.Context,
+	item *response.NotebookItem,
+	dbNb nbModel.Notebook,
+	notebookClient *global.NotebookClient,
+) {
+	if item == nil || notebookClient == nil {
+		return
+	}
+
+	notebookObj, err := notebookClient.Get(ctx, dbNb.Namespace, dbNb.InstanceName)
+	if err != nil {
+		if !apierrors.IsNotFound(err) {
+			logx.Error("获取Notebook运行时挂载信息失败", logx.Field("err", err), logx.Field("instance", dbNb.InstanceName))
+		}
+		return
+	}
+
+	runtimeMounts := buildNotebookDisplayVolumeMountsFromRuntime(notebookObj, dbNb)
+	if len(runtimeMounts) == 0 {
+		return
+	}
+
+	item.VolumeMounts = runtimeMounts
+}
+
+func buildNotebookDisplayVolumeMountsFromRuntime(notebookObj *nbv1.Notebook, dbNb nbModel.Notebook) []nbModel.NotebookVolume {
+	if notebookObj == nil {
+		return nil
+	}
+
+	claimNamesByVolume := make(map[string]string)
+	for _, volume := range notebookObj.Spec.Template.Spec.Volumes {
+		if volume.PersistentVolumeClaim == nil {
+			continue
+		}
+		claimName := strings.TrimSpace(volume.PersistentVolumeClaim.ClaimName)
+		if claimName == "" {
+			continue
+		}
+		claimNamesByVolume[volume.Name] = claimName
+	}
+	if len(claimNamesByVolume) == 0 {
+		return nil
+	}
+
+	existingMounts := filterNotebookDisplayVolumeMounts(normalizeNotebookRuntimeVolumeMounts(&dbNb))
+	existingByPVCAndPath := make(map[string]nbModel.NotebookVolume, len(existingMounts))
+	existingByPath := make(map[string]nbModel.NotebookVolume, len(existingMounts))
+	existingByPVC := make(map[string]nbModel.NotebookVolume, len(existingMounts))
+	for _, mount := range existingMounts {
+		path := strings.TrimSpace(mount.MountsPath)
+		pvcName := strings.TrimSpace(mount.PVCName)
+		if pvcName != "" && path != "" {
+			existingByPVCAndPath[pvcName+"|"+path] = mount
+		}
+		if path != "" {
+			existingByPath[path] = mount
+		}
+		if pvcName != "" {
+			existingByPVC[pvcName] = mount
+		}
+	}
+
+	runtimeMounts := make([]nbModel.NotebookVolume, 0)
+	seen := make(map[string]struct{})
+	for _, container := range notebookObj.Spec.Template.Spec.Containers {
+		for _, mount := range container.VolumeMounts {
+			claimName, ok := claimNamesByVolume[mount.Name]
+			if !ok {
+				continue
+			}
+
+			mountPath := strings.TrimSpace(mount.MountPath)
+			if mountPath == "" || mountPath == nbModel.DefaultWorkspacePath {
+				continue
+			}
+
+			key := claimName + "|" + mountPath
+			if _, exists := seen[key]; exists {
+				continue
+			}
+
+			displayMount := nbModel.NotebookVolume{
+				NotebookID: dbNb.ID,
+				Name:       strings.TrimSpace(mount.Name),
+				MountsPath: mountPath,
+				PVCName:    claimName,
+			}
+
+			if existing, ok := existingByPVCAndPath[key]; ok {
+				displayMount = existing
+			} else if existing, ok := existingByPath[mountPath]; ok {
+				displayMount = existing
+				displayMount.PVCName = claimName
+			} else if existing, ok := existingByPVC[claimName]; ok {
+				displayMount = existing
+				displayMount.MountsPath = mountPath
+			}
+
+			if displayMount.Name == "" {
+				displayMount.Name = strings.TrimSpace(mount.Name)
+			}
+			if displayMount.PVCName == "" {
+				displayMount.PVCName = claimName
+			}
+			displayMount.NotebookID = dbNb.ID
+
+			runtimeMounts = append(runtimeMounts, displayMount)
+			seen[key] = struct{}{}
+		}
+	}
+
+	return runtimeMounts
 }
 
 // GetNotebookLogs 获取Notebook日志

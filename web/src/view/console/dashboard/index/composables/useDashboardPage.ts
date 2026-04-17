@@ -154,32 +154,32 @@ export function useDashboardPage({ t }: UseDashboardPageOptions = {}) {
 
   const getStatusClass = (status?: string): string => {
     const map: Record<string, string> = {
-      Running: 'bg-emerald-500/10 text-emerald-500',
-      RUNNING: 'bg-emerald-500/10 text-emerald-500',
-      Stopped: 'bg-slate-500/10 text-slate-500',
-      STOPPED: 'bg-slate-500/10 text-slate-500',
-      Pending: 'bg-amber-500/10 text-amber-500',
-      PENDING: 'bg-amber-500/10 text-amber-500',
-      Failed: 'bg-red-500/10 text-red-500',
-      FAILED: 'bg-red-500/10 text-red-500',
-      Creating: 'bg-blue-500/10 text-blue-500',
-      CREATING: 'bg-blue-500/10 text-blue-500',
-      SUBMITTED: 'bg-blue-500/10 text-blue-500',
-      SUCCEEDED: 'bg-emerald-500/10 text-emerald-500',
-      KILLED: 'bg-slate-500/10 text-slate-500'
+      Running: 'recent-chip--status-running',
+      RUNNING: 'recent-chip--status-running',
+      Stopped: 'recent-chip--status-stopped',
+      STOPPED: 'recent-chip--status-stopped',
+      Pending: 'recent-chip--status-pending',
+      PENDING: 'recent-chip--status-pending',
+      Failed: 'recent-chip--status-failed',
+      FAILED: 'recent-chip--status-failed',
+      Creating: 'recent-chip--status-creating',
+      CREATING: 'recent-chip--status-creating',
+      SUBMITTED: 'recent-chip--status-creating',
+      SUCCEEDED: 'recent-chip--status-running',
+      KILLED: 'recent-chip--status-stopped'
     }
 
-    return map[status ?? ''] || 'bg-slate-500/10 text-slate-500'
+    return map[status ?? ''] || 'recent-chip--status-default'
   }
 
   const getTypeClass = (type?: string): string => {
     const map: Record<string, string> = {
-      notebook: 'bg-blue-500/10 text-blue-600',
-      training: 'bg-orange-500/10 text-orange-600',
-      inference: 'bg-violet-500/10 text-violet-600'
+      notebook: 'recent-chip--type-notebook',
+      training: 'recent-chip--type-training',
+      inference: 'recent-chip--type-inference'
     }
 
-    return map[type ?? ''] || 'bg-slate-500/10 text-slate-500'
+    return map[type ?? ''] || 'recent-chip--type-default'
   }
 
   const goToDetail = (item: DashboardRecentInstance): void => {

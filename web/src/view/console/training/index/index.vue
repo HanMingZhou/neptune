@@ -1,5 +1,5 @@
 <template>
-  <div class="console-page-container space-y-6">
+  <div class="console-page-container flex min-h-full flex-col gap-6">
     <BaseTableToolbar
       :breadcrumbs="[t('compute'), t('training')]"
       :description="t('trainingDesc')"
@@ -19,6 +19,7 @@
     </BaseTableToolbar>
 
     <TrainingTableCard
+      class="min-h-0 flex-1"
       :btn-loading="btnLoading"
       :filter-status="filterStatus"
       :get-framework-label="getFrameworkLabel"

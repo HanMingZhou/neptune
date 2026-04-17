@@ -7,6 +7,7 @@ import (
 	systemReq "gin-vue-admin/model/system/request"
 	"gin-vue-admin/model/system/response"
 	"strconv"
+	"strings"
 
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
@@ -236,6 +237,64 @@ func (authorityService *AuthorityService) GetAuthorityInfoList(authorityID uint)
 		err = authorityService.findChildrenAuthority(&authorities[k])
 	}
 	return authorities, err
+}
+
+func filterAuthorityTree(nodes []system.SysAuthority, keyword string) []system.SysAuthority {
+	normalizedKeyword := strings.TrimSpace(strings.ToLower(keyword))
+	if normalizedKeyword == "" {
+		return nodes
+	}
+
+	filtered := make([]system.SysAuthority, 0, len(nodes))
+	for _, node := range nodes {
+		matchesKeyword := strings.Contains(strings.ToLower(node.AuthorityName), normalizedKeyword) ||
+			strings.Contains(strconv.Itoa(int(node.AuthorityId)), normalizedKeyword)
+		filteredChildren := filterAuthorityTree(node.Children, keyword)
+
+		if matchesKeyword || len(filteredChildren) > 0 {
+			nextNode := node
+			nextNode.Children = filteredChildren
+			filtered = append(filtered, nextNode)
+		}
+	}
+
+	return filtered
+}
+
+func paginateAuthorityTree(nodes []system.SysAuthority, page, pageSize int) ([]system.SysAuthority, int64, int, int) {
+	if page <= 0 {
+		page = 1
+	}
+	if pageSize <= 0 {
+		pageSize = 20
+	}
+	if pageSize > 100 {
+		pageSize = 100
+	}
+
+	total := int64(len(nodes))
+	start := (page - 1) * pageSize
+	if start >= len(nodes) {
+		return []system.SysAuthority{}, total, page, pageSize
+	}
+
+	end := start + pageSize
+	if end > len(nodes) {
+		end = len(nodes)
+	}
+
+	return nodes[start:end], total, page, pageSize
+}
+
+func (authorityService *AuthorityService) GetAuthorityPageInfoList(authorityID uint, pageInfo request.PageInfo) (list []system.SysAuthority, total int64, page int, pageSize int, err error) {
+	fullTree, err := authorityService.GetAuthorityInfoList(authorityID)
+	if err != nil {
+		return nil, 0, 0, 0, err
+	}
+
+	filteredTree := filterAuthorityTree(fullTree, pageInfo.Keyword)
+	list, total, page, pageSize = paginateAuthorityTree(filteredTree, pageInfo.Page, pageInfo.PageSize)
+	return list, total, page, pageSize, nil
 }
 
 //@author: [piexlmax](https://github.com/piexlmax)

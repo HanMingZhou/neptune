@@ -18,6 +18,8 @@ type ClusterItem struct {
 
 // ClusterListResponse 集群列表响应
 type ClusterListResponse struct {
-	List  []ClusterItem `json:"list"`
-	Total int64         `json:"total"`
+	List     []ClusterItem `json:"list"`
+	Total    int64         `json:"total"`
+	Page     int           `json:"page"`
+	PageSize int           `json:"pageSize"`
 }

@@ -1,10 +1,12 @@
 import service from '@/utils/request'
 import type { ResourceId } from '@/types/consoleResource'
 import type {
+  CmsBatchCreateComputeProductPayload,
   CmsNodeRow,
+  CmsProductNodeCandidatesParams,
   CmsProductCatalogParams,
   CmsProductForm,
-  CmsProductPriceForm
+  CmsProductPricePayload
 } from '@/types/superAdmin'
 
 export interface CMSProduct {
@@ -51,7 +53,7 @@ export const updateCMSProduct = (data: CmsProductForm) => {
 }
 
 // 更新价格
-export const updateCMSProductPrice = (data: CmsProductPriceForm) => {
+export const updateCMSProductPrice = (data: CmsProductPricePayload) => {
   return service({
     url: '/api/v1/cms/product/price/update',
     method: 'post',
@@ -98,10 +100,32 @@ export const getCMSClusterNodes = (data: {
   })
 }
 
+export const getCMSProductNodeCandidates = (
+  params: CmsProductNodeCandidatesParams
+) => {
+  return service({
+    url: '/api/v1/cms/product/node/list',
+    method: 'get',
+    params
+  })
+}
+
+export const createCMSComputeProductsBatch = (
+  data: CmsBatchCreateComputeProductPayload
+) => {
+  return service({
+    url: '/api/v1/cms/product/batch/add',
+    method: 'post',
+    data
+  })
+}
+
 // 节点管理 - 获取列表
 export const getCMSNodeList = (data: {
   clusterId: ResourceId
   keyword?: string
+  page?: number
+  pageSize?: number
 }) => {
   return service({
     url: '/api/v1/cms/node/list',

@@ -27,15 +27,23 @@ func (api *NodeApi) GetClusterNodes(c *gin.Context) {
 		return
 	}
 
-	nodes, err := service.ServiceGroupApp.CMSServiceGroup.NodeService.GetClusterNodesWithResources(c.Request.Context(), req.ClusterId, req.Keyword)
+	nodes, total, page, pageSize, err := service.ServiceGroupApp.CMSServiceGroup.NodeService.GetClusterNodesWithResourcesPage(
+		c.Request.Context(),
+		req.ClusterId,
+		req.Keyword,
+		req.Page,
+		req.PageSize,
+	)
 	if err != nil {
 		utils.HandleError(c, err, "获取集群节点失败")
 		return
 	}
 
 	response.OkWithDetailed(cmsRes.NodeListResponse{
-		Nodes: nodes,
-		Total: len(nodes),
+		Nodes:    nodes,
+		Total:    total,
+		Page:     page,
+		PageSize: pageSize,
 	}, "获取成功", c)
 }
 

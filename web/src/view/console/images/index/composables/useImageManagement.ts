@@ -1,4 +1,4 @@
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import type { FormRules } from 'element-plus'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
@@ -7,8 +7,11 @@ import {
   getImageList,
   updateImage
 } from '@/api/image'
+import { getAreaList } from '@/api/volume'
 import type { Translator } from '@/types/consoleResource'
+import type { CmsClusterOption } from '@/types/superAdmin'
 import type { ApiResponse } from '@/utils/request'
+import { composeImageAddr } from '@/utils/imageRegistry'
 import type {
   ImageFilterValue,
   ImageForm,
@@ -16,6 +19,7 @@ import type {
   ImageListItem,
   ImageMutationPayload
 } from '@/types/image'
+import type { StorageAreaListData } from '@/types/storage'
 
 interface UseImageManagementOptions {
   t?: Translator
@@ -23,6 +27,7 @@ interface UseImageManagementOptions {
 
 const createDefaultForm = (): ImageForm => ({
   id: null,
+  clusterId: '',
   name: '',
   type: 1,
   usageType: 1,
@@ -37,10 +42,12 @@ export function useImageManagement({ t }: UseImageManagementOptions = {}) {
 
   const loading = ref(false)
   const submitting = ref(false)
+  const imageAddrManuallyEdited = ref(false)
   const images = ref<ImageListItem[]>([])
   const total = ref(0)
+  const clusterOptions = ref<CmsClusterOption[]>([])
   const currentPage = ref(1)
-  const pageSize = ref(10)
+  const pageSize = ref(15)
   const filterKeyword = ref('')
   const filterType = ref<ImageFilterValue>('')
   const filterUsageType = ref<ImageFilterValue>('')
@@ -50,16 +57,31 @@ export function useImageManagement({ t }: UseImageManagementOptions = {}) {
   const form = reactive<ImageForm>(createDefaultForm())
 
   const formRules: FormRules<ImageForm> = {
+    clusterId: [
+      { required: true, message: translate('selectCluster'), trigger: 'change' }
+    ],
     name: [
       { required: true, message: translate('inputName'), trigger: 'blur' }
+    ],
+    imagePath: [
+      { required: true, message: translate('fillAllFields'), trigger: 'blur' }
     ],
     usageType: [
       { required: true, message: translate('pleaseSelect'), trigger: 'change' }
     ]
   }
 
+  const selectedCluster = computed<CmsClusterOption | null>(
+    () =>
+      clusterOptions.value.find((item) => item.id === form.clusterId) || null
+  )
+  const generatedImageAddr = computed(() =>
+    composeImageAddr(selectedCluster.value?.harborAddr, form.imagePath)
+  )
+
   const resetForm = (): void => {
     Object.assign(form, createDefaultForm())
+    imageAddrManuallyEdited.value = false
   }
 
   const fetchImages = async (silent = false): Promise<void> => {
@@ -89,6 +111,20 @@ export function useImageManagement({ t }: UseImageManagementOptions = {}) {
       if (!silent) {
         loading.value = false
       }
+    }
+  }
+
+  const fetchClusters = async (): Promise<void> => {
+    try {
+      const res = (await getAreaList()) as ApiResponse<StorageAreaListData>
+      if (res.code === 0) {
+        clusterOptions.value = (res.data?.clusters ?? []) as CmsClusterOption[]
+        return
+      }
+
+      ElMessage.error(res.msg || translate('failed'))
+    } catch {
+      ElMessage.error(translate('failed'))
     }
   }
 
@@ -126,6 +162,7 @@ export function useImageManagement({ t }: UseImageManagementOptions = {}) {
   const openEditDialog = (row: ImageListItem): void => {
     isEdit.value = true
     form.id = row.id
+    form.clusterId = row.clusterId ?? ''
     form.name = row.name
     form.type = row.type ?? 1
     form.usageType = row.usageType ?? 1
@@ -133,6 +170,8 @@ export function useImageManagement({ t }: UseImageManagementOptions = {}) {
     form.area = row.area || ''
     form.size = row.size || ''
     form.imagePath = row.imagePath || ''
+    imageAddrManuallyEdited.value =
+      Boolean(form.imageAddr) && form.imageAddr !== generatedImageAddr.value
     showDialog.value = true
   }
 
@@ -170,6 +209,39 @@ export function useImageManagement({ t }: UseImageManagementOptions = {}) {
     }
   }
 
+  const handleImageAddrInput = (value: string): void => {
+    form.imageAddr = value
+    imageAddrManuallyEdited.value = value !== generatedImageAddr.value
+  }
+
+  watch(
+    [
+      () => form.clusterId,
+      () => form.imagePath,
+      selectedCluster,
+      generatedImageAddr
+    ],
+    () => {
+      if (!form.clusterId) {
+        form.area = ''
+        if (!imageAddrManuallyEdited.value) {
+          form.imageAddr = ''
+        }
+        return
+      }
+
+      if (!selectedCluster.value) {
+        return
+      }
+
+      form.area = selectedCluster.value.area ?? ''
+      if (!imageAddrManuallyEdited.value || !form.imageAddr) {
+        form.imageAddr = generatedImageAddr.value
+      }
+    },
+    { immediate: true }
+  )
+
   const handleDelete = (row: ImageListItem): void => {
     ElMessageBox.confirm(
       translate('confirmDelete', { name: row.name }),
@@ -199,14 +271,18 @@ export function useImageManagement({ t }: UseImageManagementOptions = {}) {
 
   return {
     currentPage,
+    clusterOptions,
     fetchImages,
+    fetchClusters,
     filterKeyword,
     filterType,
     filterUsageType,
     form,
     formRules,
+    generatedImageAddr,
     handleDelete,
     handleDialogClosed,
+    handleImageAddrInput,
     handlePageChange,
     handleRefresh,
     handleReset,
@@ -224,3 +300,4 @@ export function useImageManagement({ t }: UseImageManagementOptions = {}) {
     total
   }
 }
+

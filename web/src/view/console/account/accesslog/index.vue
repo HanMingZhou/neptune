@@ -1,5 +1,5 @@
 <template>
-  <div class="console-page-container space-y-6">
+  <div class="console-page-container flex min-h-full flex-col gap-6">
     <BaseTableToolbar
       :description="t('operationRecordDesc')"
       :loading="loading"
@@ -10,6 +10,7 @@
     <ActiveSessionsSection :sessions="activeSessions" @kill="handleKill" />
 
     <AccessLogTable
+      class="min-h-0 flex-1"
       v-model:filter-status="filterStatus"
       v-model:page="page"
       v-model:page-size="pageSize"

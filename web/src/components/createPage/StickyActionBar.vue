@@ -1,5 +1,11 @@
 <template>
   <div
+    aria-hidden="true"
+    class="w-full shrink-0"
+    :style="{ height: `${spacerHeight}px` }"
+  ></div>
+  <div
+    ref="stickyBarRef"
     class="fixed bottom-0 left-0 right-0 border-t border-border-light bg-surface-light py-4 z-50 dark:border-border-dark dark:bg-background-dark"
   >
     <div
@@ -41,8 +47,37 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue'
+import { inject, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import type { Translator } from '@/types/consoleResource'
+
+const stickyBarRef = ref<HTMLElement | null>(null)
+const spacerHeight = ref(112)
+let resizeObserver: ResizeObserver | null = null
+
+const syncStickyBarHeight = () => {
+  const height = stickyBarRef.value?.offsetHeight ?? 0
+  spacerHeight.value = height > 0 ? height + 16 : 112
+}
+
+onMounted(async () => {
+  await nextTick()
+  syncStickyBarHeight()
+
+  if (typeof ResizeObserver !== 'undefined' && stickyBarRef.value) {
+    resizeObserver = new ResizeObserver(() => {
+      syncStickyBarHeight()
+    })
+    resizeObserver.observe(stickyBarRef.value)
+  }
+
+  window.addEventListener('resize', syncStickyBarHeight)
+})
+
+onBeforeUnmount(() => {
+  resizeObserver?.disconnect()
+  resizeObserver = null
+  window.removeEventListener('resize', syncStickyBarHeight)
+})
 
 withDefaults(
   defineProps<{

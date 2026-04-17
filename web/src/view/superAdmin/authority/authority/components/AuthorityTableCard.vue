@@ -1,5 +1,5 @@
 <template>
-  <TableCard v-loading="loading">
+  <TableCard :page-size="pageSize" v-loading="loading">
     <template #toolbar>
       <BaseFilterBar plain>
         <div class="list-filter-field max-w-[240px]">
@@ -34,7 +34,7 @@
         </template>
       </BaseFilterBar>
     </template>
-    <div class="overflow-x-auto">
+    <div class="console-table-scroll console-table-scroll--fill overflow-x-auto">
       <table class="console-table console-table--compact w-full min-w-[840px]">
         <thead>
           <tr>
@@ -146,15 +146,34 @@
               </td>
             </tr>
           </template>
+          <tr v-if="items.length === 0 && !loading">
+            <td colspan="3" class="px-6 py-10 text-center text-slate-400 text-sm">
+              {{ t('noData') }}
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
+
+    <template #footer>
+      <ListPaginationBar
+        :current-page="page"
+        :page-size="pageSize"
+        :page-sizes="[15, 20, 50, 100]"
+        :total="total"
+        :total-text="t('totalRecords', { total })"
+        layout="sizes, prev, pager, next, jumper"
+        @current-change="emit('page-change', $event)"
+        @size-change="emit('size-change', $event)"
+      />
+    </template>
   </TableCard>
 </template>
 
 <script setup lang="ts">
 import { inject } from 'vue'
 import BaseFilterBar from '@/components/listPage/BaseFilterBar.vue'
+import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
 import type { ResourceId, Translator } from '@/types/consoleResource'
 import type { AuthorityTreeNode } from '@/types/superAdmin'
@@ -163,12 +182,18 @@ withDefaults(
   defineProps<{
     items?: AuthorityTreeNode[]
     loading?: boolean
+    page?: number
+    pageSize?: number
     searchKeyword?: string
+    total?: number
   }>(),
   {
     items: () => [],
     loading: false,
-    searchKeyword: ''
+    page: 1,
+    pageSize: 15,
+    searchKeyword: '',
+    total: 0
   }
 )
 
@@ -178,19 +203,22 @@ const emit = defineEmits<{
   copy: [row: AuthorityTreeNode]
   delete: [row: AuthorityTreeNode]
   edit: [row: AuthorityTreeNode]
+  'page-change': [value: number]
   reset: []
   search: []
-  'update:searchKeyword': [value: string]
+  'size-change': [value: number]
+  'update:search-keyword': [value: string]
 }>()
 
 const t = inject<Translator>('t', (key: string) => key)
 
 const handleSearchInput = (event: Event) => {
-  emit('update:searchKeyword', (event.target as HTMLInputElement).value)
+  emit('update:search-keyword', (event.target as HTMLInputElement).value)
 }
 
 const resetSearch = () => {
-  emit('update:searchKeyword', '')
+  emit('update:search-keyword', '')
   emit('reset')
 }
 </script>
+

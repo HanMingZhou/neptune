@@ -1,5 +1,5 @@
 <template>
-  <div class="console-page-container space-y-6">
+  <div class="console-page-container flex min-h-full flex-col gap-6">
     <BaseTableToolbar
       :breadcrumbs="[t('admin'), t('clusterManage')]"
       :description="t('clusterManageDesc')"
@@ -18,23 +18,29 @@
       </template>
     </BaseTableToolbar>
 
-    <ManagementListShell>
+    <ManagementListShell class="min-h-0 flex-1">
       <template #filters>
         <ClusterFiltersBar
           :filter-keyword="filterKeyword"
           :filter-status="filterStatus"
           @reset="handleResetFilters"
-          @search="fetchClusters"
+          @search="handleSearch"
           @update:filter-keyword="filterKeyword = $event"
           @update:filter-status="filterStatus = $event"
         />
       </template>
 
       <ClusterTableCard
+        class="min-h-0 flex-1"
         :items="clusters"
         :loading="loading"
+        :page="page"
+        :page-size="pageSize"
+        :total="total"
         @delete="handleDelete"
         @edit="openEditDialog"
+        @page-change="handleCurrentChange"
+        @size-change="handleSizeChange"
         @view-kubeconfig="viewKubeConfig"
       />
     </ManagementListShell>
@@ -82,17 +88,23 @@ const {
   filterStatus,
   form,
   formRules,
+  handleCurrentChange,
   handleDelete,
   handleResetFilters,
+  handleSearch,
+  handleSizeChange,
   handleSubmit,
   initialize,
   isEdit,
   loading,
   openCreateDialog,
   openEditDialog,
+  page,
+  pageSize,
   showDialog,
   showKubeConfigDialog,
   submitting,
+  total,
   viewKubeConfig,
   viewingKubeConfig
 } = useClusterManagementPage({ t })

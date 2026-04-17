@@ -12,12 +12,36 @@ export interface PageListData<T> extends ListData<T> {
 
 export interface FilterOption {
   model: string
+  key?: string
+  label?: string
+  meta?: string
+  metaFields?: Array<{
+    key: string
+    label: string
+    value: string
+  }>
   available?: number
+  total?: number
+  resourceType?: 'gpu' | 'vgpu'
+  gpuModel?: string
+  vGpuNumber?: number
+  vGpuMemory?: number
+  vGpuCores?: number
+}
+
+export interface VGpuFilterOption {
+  model?: string
+  available?: number
+  total?: number
+  vGpuNumber?: number
+  vGpuMemory?: number
+  vGpuCores?: number
 }
 
 export interface ProductFilterData {
   areas?: string[]
   gpuModels?: FilterOption[]
+  vgpuModels?: VGpuFilterOption[]
   cpuModels?: FilterOption[]
 }
 
@@ -35,6 +59,7 @@ export interface ConsoleProduct {
   gpuCount: number
   gpuModel?: string
   gpuMemory?: number
+  vGpuNumber?: number
   vGpuCount?: number
   vGpuMemory?: number
   vGpuCores?: number
@@ -42,6 +67,7 @@ export interface ConsoleProduct {
   strictMax?: number
   balancedMax?: number
   systemDisk?: number
+  driverVersion?: string
   cudaVersion?: string
   priceHourly?: number
   priceDaily?: number
@@ -54,12 +80,18 @@ export interface ConsoleImage {
   id: ResourceId
   name: string
   description?: string
+  clusterId?: ResourceId
+  clusterName?: string
+  area?: string
+  image?: string
+  imagePath?: string
   [key: string]: unknown
 }
 
 export interface ConsoleVolume {
   id: ResourceId
   name: string
+  pvcName?: string
   size?: string
   clusterId?: ResourceId
   [key: string]: unknown
@@ -99,6 +131,10 @@ export interface ConsoleNotebook {
   gpuCount?: number
   gpu?: number
   gpuModel?: string
+  vGpuNumber?: number
+  vGpuCount?: number
+  vGpuMemory?: number
+  vGpuCores?: number
   jupyterUrl?: string
   enableTensorboard?: boolean
   tensorboardUrl?: string
@@ -141,6 +177,7 @@ export interface ConsoleEnvVar {
 }
 
 export interface ConsoleTrainingMount {
+  name?: string
   pvcName?: string
   mountPath?: string
   [key: string]: unknown
@@ -168,7 +205,10 @@ export interface ConsoleTrainingDetail extends ConsoleTrainingJob {
 }
 
 export interface ConsoleNotebookVolumeMount {
+  name?: string
   pvcName?: string
+  pvcId?: number
+  type?: string
   mountsPath?: string
   mountPath?: string
   [key: string]: unknown
@@ -184,6 +224,7 @@ export interface ConsoleNotebookDetail extends ConsoleNotebook {
 }
 
 export interface ConsoleInferenceMount {
+  name?: string
   pvcName?: string
   mountPath?: string
   subPath?: string

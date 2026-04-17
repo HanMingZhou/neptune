@@ -1,5 +1,5 @@
 <template>
-  <div class="console-page-container space-y-8">
+  <div class="console-page-container flex min-h-full flex-col gap-8">
     <BaseTableToolbar
       :description="t('order.usageDesc')"
       :loading="loading"
@@ -18,7 +18,7 @@
     </BaseTableToolbar>
 
     <div
-      class="bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-2xl overflow-hidden shadow-sm"
+      class="flex min-h-0 flex-1 flex-col bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-2xl overflow-hidden shadow-sm"
     >
       <UsageFiltersBar
         v-model:search-query="searchQuery"
@@ -34,6 +34,7 @@
       />
 
       <UsageTableSection
+        class="min-h-0 flex-1"
         v-model:page="page"
         v-model:page-size="pageSize"
         :charge-filter="chargeFilter"

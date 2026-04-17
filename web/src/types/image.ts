@@ -14,6 +14,7 @@ export interface ImageListItem extends ConsoleImage {
 
 export interface ImageForm {
   id: ResourceId | null
+  clusterId: ResourceId | ''
   name: string
   type: number
   usageType: number

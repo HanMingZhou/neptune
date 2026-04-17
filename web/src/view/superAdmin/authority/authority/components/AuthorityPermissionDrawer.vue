@@ -1,6 +1,5 @@
 <template>
   <BaseDrawer
-    v-if="visibleModel"
     v-model="visibleModel"
     :size="600"
     :title="t('roleConfig')"

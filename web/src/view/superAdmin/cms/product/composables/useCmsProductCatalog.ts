@@ -1,10 +1,18 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import { getCMSAreaList, getCMSClusterList, getCMSProductList } from '@/api/cms'
-import type { ResourceId, Translator } from '@/types/consoleResource'
+import { getProductFilters } from '@/api/product'
+import type {
+  FilterOption,
+  ProductFilterData,
+  ResourceId,
+  Translator
+} from '@/types/consoleResource'
 import type {
   CmsClusterOption,
   CmsProductListData,
+  CmsProductFilterResourceType,
+  CmsProductPriceField,
   CmsProductRow,
   CmsProductType
 } from '@/types/superAdmin'
@@ -15,17 +23,37 @@ interface UseCmsProductCatalogOptions {
 }
 
 export const useCmsProductCatalog = ({ t }: UseCmsProductCatalogOptions) => {
+  const getDefaultPriceField = (
+    productType: CmsProductType
+  ): CmsProductPriceField =>
+    productType === 2 ? 5 : 1
+
   const loading = ref(false)
   const products = ref<CmsProductRow[]>([])
   const clusters = ref<CmsClusterOption[]>([])
   const areas = ref<string[]>([])
+  const gpuModels = ref<FilterOption[]>([])
   const total = ref(0)
   const currentPage = ref(1)
-  const pageSize = ref(20)
+  const pageSize = ref(15)
   const activeTab = ref<CmsProductType>(1)
   const filterClusterId = ref<ResourceId | ''>('')
   const filterArea = ref('')
+  const filterResourceType = ref<CmsProductFilterResourceType>('')
+  const filterGpuModel = ref('')
+  const filterAvailableMin = ref<number | undefined>(undefined)
+  const filterAvailableMax = ref<number | undefined>(undefined)
+  const filterMaxInstancesMin = ref<number | undefined>(undefined)
+  const filterMaxInstancesMax = ref<number | undefined>(undefined)
+  const filterUsedCapacityMin = ref<number | undefined>(undefined)
+  const filterUsedCapacityMax = ref<number | undefined>(undefined)
+  const filterPriceField = ref<CmsProductPriceField>(
+    getDefaultPriceField(activeTab.value)
+  )
+  const filterPriceMin = ref<number | undefined>(undefined)
+  const filterPriceMax = ref<number | undefined>(undefined)
   const filterKeyword = ref('')
+  let searchTimer: ReturnType<typeof setTimeout> | null = null
 
   const fetchProducts = async (silent = false): Promise<void> => {
     if (!silent) {
@@ -39,6 +67,19 @@ export const useCmsProductCatalog = ({ t }: UseCmsProductCatalogOptions) => {
         productType: activeTab.value,
         clusterId: filterClusterId.value || undefined,
         area: filterArea.value || undefined,
+        resourceType:
+          activeTab.value === 1 ? filterResourceType.value || undefined : undefined,
+        gpuModel:
+          activeTab.value === 1 ? filterGpuModel.value || undefined : undefined,
+        availableMin: filterAvailableMin.value,
+        availableMax: filterAvailableMax.value,
+        maxInstancesMin: filterMaxInstancesMin.value,
+        maxInstancesMax: filterMaxInstancesMax.value,
+        usedCapacityMin: filterUsedCapacityMin.value,
+        usedCapacityMax: filterUsedCapacityMax.value,
+        priceType: filterPriceField.value,
+        priceMin: filterPriceMin.value,
+        priceMax: filterPriceMax.value,
         keyword: filterKeyword.value || undefined
       })) as ApiResponse<CmsProductListData>
 
@@ -80,8 +121,27 @@ export const useCmsProductCatalog = ({ t }: UseCmsProductCatalogOptions) => {
     }
   }
 
+  const fetchFilterOptions = async (): Promise<void> => {
+    if (activeTab.value !== 1) {
+      gpuModels.value = []
+      return
+    }
+
+    try {
+      const res = (await getProductFilters({
+        productType: activeTab.value
+      })) as ApiResponse<ProductFilterData>
+
+      if (res.code === 0) {
+        gpuModels.value = res.data?.gpuModels ?? []
+      }
+    } catch (error: unknown) {
+      console.error(error)
+    }
+  }
+
   const initialize = async (): Promise<void> => {
-    await Promise.all([fetchClusters(), fetchAreas()])
+    await Promise.all([fetchClusters(), fetchAreas(), fetchFilterOptions()])
     await fetchProducts()
   }
 
@@ -91,6 +151,12 @@ export const useCmsProductCatalog = ({ t }: UseCmsProductCatalogOptions) => {
     }
 
     activeTab.value = value
+    filterPriceField.value = getDefaultPriceField(value)
+    if (value === 2) {
+      filterResourceType.value = ''
+      filterGpuModel.value = ''
+    }
+    void fetchFilterOptions()
     currentPage.value = 1
     void fetchProducts()
   }
@@ -103,6 +169,17 @@ export const useCmsProductCatalog = ({ t }: UseCmsProductCatalogOptions) => {
   const handleResetFilters = (): void => {
     filterClusterId.value = ''
     filterArea.value = ''
+    filterResourceType.value = ''
+    filterGpuModel.value = ''
+    filterAvailableMin.value = undefined
+    filterAvailableMax.value = undefined
+    filterMaxInstancesMin.value = undefined
+    filterMaxInstancesMax.value = undefined
+    filterUsedCapacityMin.value = undefined
+    filterUsedCapacityMax.value = undefined
+    filterPriceField.value = getDefaultPriceField(activeTab.value)
+    filterPriceMin.value = undefined
+    filterPriceMax.value = undefined
     filterKeyword.value = ''
     currentPage.value = 1
     void fetchProducts()
@@ -119,6 +196,48 @@ export const useCmsProductCatalog = ({ t }: UseCmsProductCatalogOptions) => {
     void fetchProducts()
   }
 
+  const scheduleSearch = (): void => {
+    if (searchTimer) {
+      clearTimeout(searchTimer)
+    }
+
+    searchTimer = setTimeout(() => {
+      currentPage.value = 1
+      void fetchProducts(true)
+    }, 250)
+  }
+
+  watch(
+    [
+      filterClusterId,
+      filterArea,
+      filterResourceType,
+      filterGpuModel,
+      filterAvailableMin,
+      filterAvailableMax,
+      filterMaxInstancesMin,
+      filterMaxInstancesMax,
+      filterUsedCapacityMin,
+      filterUsedCapacityMax,
+      filterPriceField,
+      filterPriceMin,
+      filterPriceMax
+    ],
+    () => {
+      scheduleSearch()
+    }
+  )
+
+  watch(filterResourceType, (value) => {
+    if (value === 'cpu' && filterGpuModel.value) {
+      filterGpuModel.value = ''
+    }
+  })
+
+  watch(filterKeyword, () => {
+    scheduleSearch()
+  })
+
   return {
     activeTab,
     areas,
@@ -126,10 +245,23 @@ export const useCmsProductCatalog = ({ t }: UseCmsProductCatalogOptions) => {
     currentPage,
     fetchAreas,
     fetchClusters,
+    fetchFilterOptions,
     fetchProducts,
     filterArea,
+    filterAvailableMax,
+    filterAvailableMin,
     filterClusterId,
+    filterResourceType,
+    filterGpuModel,
+    gpuModels,
     filterKeyword,
+    filterMaxInstancesMax,
+    filterMaxInstancesMin,
+    filterPriceField,
+    filterPriceMax,
+    filterPriceMin,
+    filterUsedCapacityMax,
+    filterUsedCapacityMin,
     handlePageChange,
     handleResetFilters,
     handleSearch,
@@ -142,3 +274,4 @@ export const useCmsProductCatalog = ({ t }: UseCmsProductCatalogOptions) => {
     total
   }
 }
+

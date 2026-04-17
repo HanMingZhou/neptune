@@ -2,6 +2,8 @@
   <BaseFormDialog
     v-model="dialogVisible"
     :cancel-text="t('general.cancel')"
+    form-class="recharge-balance-dialog__form"
+    label-width="108px"
     :model="form"
     :rules="rules"
     :submit-text="t('order.confirmRecharge')"
@@ -12,13 +14,14 @@
     @closed="emit('closed')"
     @submit="emit('submit')"
   >
-    <div class="space-y-5 pt-2">
-      <section class="space-y-3">
-        <div class="text-sm font-bold text-slate-700 dark:text-slate-200">
+    <div class="recharge-balance-dialog__content">
+      <section class="recharge-balance-dialog__section">
+        <div class="recharge-section-title text-sm font-bold">
           {{ t('order.rechargeMethod') }}
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <el-button
+        <div class="recharge-method-grid">
+          <button
+            type="button"
             class="recharge-method-card"
             :class="
               form.method === 4
@@ -27,93 +30,88 @@
             "
             @click="form.method = 4"
           >
-            <div class="flex items-center justify-between gap-3">
-              <div>
-                <div class="text-sm font-bold text-slate-900 dark:text-white">
+            <div class="recharge-method-card__inner">
+              <div class="recharge-method-card__meta">
+                <div class="recharge-section-title text-sm font-bold">
                   {{ t('order.platformRecharge') }}
                 </div>
-                <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                <div class="recharge-section-desc text-xs">
                   {{ t('order.platformRechargeDesc') }}
                 </div>
               </div>
-                <span
-                  v-if="form.method === 4"
-                  class="material-icons text-primary text-lg"
-                  >check_circle</span
-                >
-              </div>
-          </el-button>
+              <span
+                v-if="form.method === 4"
+                class="recharge-method-card__check material-icons"
+                >check_circle</span
+              >
+            </div>
+          </button>
 
-          <el-button
+          <button
+            type="button"
             disabled
             class="recharge-method-card recharge-method-card--disabled"
           >
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <div class="text-sm font-bold text-slate-900 dark:text-white">
+            <div class="recharge-method-card__inner recharge-method-card__inner--top">
+              <div class="recharge-method-card__meta">
+                <div class="recharge-section-title text-sm font-bold">
                   {{ t('order.alipayRecharge') }}
                 </div>
-                <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                <div class="recharge-section-desc text-xs">
                   {{ t('order.personalRechargeComingSoon') }}
                 </div>
               </div>
-              <span
-                class="text-[10px] font-black uppercase tracking-wide text-slate-400"
-                >{{ t('order.comingSoon') }}</span
-              >
+              <span class="recharge-method-card__badge">{{
+                t('order.comingSoon')
+              }}</span>
             </div>
-          </el-button>
+          </button>
 
-          <el-button
+          <button
+            type="button"
             disabled
             class="recharge-method-card recharge-method-card--disabled"
           >
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <div class="text-sm font-bold text-slate-900 dark:text-white">
+            <div class="recharge-method-card__inner recharge-method-card__inner--top">
+              <div class="recharge-method-card__meta">
+                <div class="recharge-section-title text-sm font-bold">
                   {{ t('order.wechatRecharge') }}
                 </div>
-                <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                <div class="recharge-section-desc text-xs">
                   {{ t('order.personalRechargeComingSoon') }}
                 </div>
               </div>
-              <span
-                class="text-[10px] font-black uppercase tracking-wide text-slate-400"
-                >{{ t('order.comingSoon') }}</span
-              >
+              <span class="recharge-method-card__badge">{{
+                t('order.comingSoon')
+              }}</span>
             </div>
-          </el-button>
+          </button>
         </div>
       </section>
 
-      <section
-        class="rounded-2xl border border-slate-200 dark:border-border-dark bg-slate-50/80 dark:bg-zinc-900/40 p-4"
-      >
-        <div class="flex items-center justify-between gap-3">
+      <section class="recharge-amount-panel">
+        <div class="recharge-amount-panel__head">
           <div>
-            <div class="text-sm font-bold text-slate-900 dark:text-white">
+            <div class="recharge-section-title text-sm font-bold">
               {{ t('order.rechargeAmount') }}
             </div>
-            <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            <div class="recharge-section-desc text-xs">
               {{ t('order.rechargeAmountHint') }}
             </div>
           </div>
-          <div class="text-right">
-            <div
-              class="text-[11px] font-bold uppercase tracking-wide text-slate-400"
-            >
+          <div class="recharge-amount-panel__meta">
+            <div class="recharge-amount-panel__meta-label">
               {{ t('dashboard.balance') }}
             </div>
-            <div
-              class="text-sm font-mono font-bold text-slate-700 dark:text-slate-200"
-            >
+            <div class="recharge-amount-panel__meta-value">
               {{ t('order.instantArrival') }}
             </div>
           </div>
         </div>
 
-        <div class="mt-4 flex flex-wrap gap-2">
-          <el-button
+        <div class="recharge-preset-grid">
+          <button
+            type="button"
             v-for="preset in amountPresets"
             :key="preset"
             class="recharge-preset-button"
@@ -125,7 +123,7 @@
             @click="form.amount = preset"
           >
             ¥{{ preset }}
-          </el-button>
+          </button>
         </div>
       </section>
 
@@ -141,7 +139,7 @@
             class="recharge-amount-input"
           />
         </div>
-        <div class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+        <div class="recharge-amount-footnote">
           {{ t('order.rechargeAmountFootnote') }}
         </div>
       </el-form-item>
@@ -188,97 +186,214 @@ const dialogVisible = computed({
 })
 </script>
 
-<style scoped>
-.recharge-method-card {
+<style>
+.recharge-balance-dialog .el-dialog__body {
+  padding: 20px 24px 14px;
+}
+
+.recharge-balance-dialog__form {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.recharge-balance-dialog .recharge-balance-dialog__content {
+  display: grid;
+  gap: 1.25rem;
+  padding-top: 0.35rem;
+}
+
+.recharge-balance-dialog .recharge-balance-dialog__section {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.recharge-balance-dialog .recharge-section-title {
+  line-height: 1.3;
+  color: rgb(30 41 59);
+}
+
+.recharge-balance-dialog .recharge-section-desc {
+  line-height: 1.35;
+  margin-top: 0.25rem;
+  color: rgb(100 116 139);
+}
+
+.recharge-balance-dialog .recharge-method-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .recharge-balance-dialog .recharge-method-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.recharge-balance-dialog .recharge-method-card {
+  display: block;
   width: 100%;
-  height: auto;
+  height: auto !important;
+  min-height: 88px !important;
   margin: 0;
-  justify-content: flex-start;
-  padding: 1rem;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+  padding: 1rem !important;
+  border: 1px solid rgb(226 232 240);
   border-radius: 1rem;
   white-space: normal;
+  text-align: left;
+  font: inherit;
+  line-height: 1.25 !important;
   transition:
     border-color 0.2s ease,
     background-color 0.2s ease,
     box-shadow 0.2s ease;
 }
 
-.recharge-method-card :deep(.el-button__text) {
-  display: block;
-  width: 100%;
+.recharge-balance-dialog .recharge-method-card__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
-.recharge-method-card--active {
+.recharge-balance-dialog .recharge-method-card__inner--top {
+  align-items: flex-start;
+}
+
+.recharge-balance-dialog .recharge-method-card__meta {
+  min-width: 0;
+}
+
+.recharge-balance-dialog .recharge-method-card__check {
+  font-size: 1.125rem;
+  color: var(--el-color-primary);
+}
+
+.recharge-balance-dialog .recharge-method-card__badge {
+  font-size: 0.625rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgb(148 163 184);
+}
+
+.recharge-balance-dialog .recharge-method-card--active {
   border-color: var(--el-color-primary);
   background: rgb(37 99 235 / 0.08);
   box-shadow: 0 6px 18px rgb(37 99 235 / 0.1);
 }
 
-.recharge-method-card--idle {
+.recharge-balance-dialog .recharge-method-card--idle {
   border-color: rgb(226 232 240);
   background: rgb(255 255 255);
 }
 
-.recharge-method-card--idle:hover {
+.recharge-balance-dialog .recharge-method-card:disabled {
+  cursor: not-allowed;
+}
+
+.recharge-balance-dialog .recharge-method-card--idle:hover {
   border-color: rgb(37 99 235 / 0.4);
 }
 
-.recharge-method-card--disabled {
+.recharge-balance-dialog .recharge-method-card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.recharge-balance-dialog .recharge-method-card--disabled {
   border-color: rgb(226 232 240);
   background: rgb(248 250 252);
   opacity: 0.6;
 }
 
-.dark .recharge-method-card--active {
-  background: rgb(37 99 235 / 0.12);
+.recharge-balance-dialog .recharge-amount-panel {
+  border: 1px solid rgb(226 232 240);
+  border-radius: 1rem;
+  padding: 1rem;
+  background: rgb(248 250 252 / 0.8);
 }
 
-.dark .recharge-method-card--idle,
-.dark .recharge-method-card--disabled {
-  border-color: rgb(63 63 70);
+.recharge-balance-dialog .recharge-amount-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
-.dark .recharge-method-card--idle {
-  background: rgb(24 24 27);
+.recharge-balance-dialog .recharge-amount-panel__meta {
+  text-align: right;
 }
 
-.dark .recharge-method-card--disabled {
-  background: rgb(24 24 27 / 0.4);
+.recharge-balance-dialog .recharge-amount-panel__meta-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgb(148 163 184);
 }
 
-.recharge-preset-button {
-  height: auto;
+.recharge-balance-dialog .recharge-amount-panel__meta-value {
+  margin-top: 0.125rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: rgb(51 65 85);
+}
+
+.recharge-balance-dialog .recharge-preset-grid {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.recharge-balance-dialog .recharge-preset-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: auto !important;
+  min-height: 30px !important;
   margin: 0;
-  padding: 0.375rem 0.75rem;
+  padding: 0.375rem 0.75rem !important;
+  border: 1px solid rgb(226 232 240);
   border-radius: 0.5rem;
   font-size: 0.75rem;
   font-weight: 700;
+  text-align: center;
+  font: inherit;
+  line-height: 1.2 !important;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.recharge-preset-button--active {
+.recharge-balance-dialog .recharge-preset-button--active {
   border-color: var(--el-color-primary);
   background: var(--el-color-primary);
   color: white;
   box-shadow: 0 6px 16px rgb(37 99 235 / 0.2);
 }
 
-.recharge-preset-button--idle {
+.recharge-balance-dialog .recharge-preset-button--idle {
   border-color: rgb(226 232 240);
   background: rgb(255 255 255);
   color: rgb(71 85 105);
 }
 
-.recharge-preset-button--idle:hover {
+.recharge-balance-dialog .recharge-preset-button--idle:hover {
   border-color: rgb(37 99 235 / 0.4);
 }
 
-.dark .recharge-preset-button--idle {
-  border-color: rgb(63 63 70);
-  background: rgb(24 24 27);
-  color: rgb(203 213 225);
+.recharge-balance-dialog .recharge-preset-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
 }
 
-.recharge-amount-shell {
+.recharge-balance-dialog .recharge-amount-shell {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -291,18 +406,88 @@ const dialogVisible = computed({
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-.dark .recharge-amount-shell {
-  border-color: rgb(63 63 70);
-  background: rgba(24, 24, 27, 0.85);
-}
-
-.recharge-amount-prefix {
+.recharge-balance-dialog .recharge-amount-prefix {
   font-size: 1.75rem;
   font-weight: 800;
   color: rgb(15 23 42);
 }
 
-.dark .recharge-amount-prefix {
+.recharge-balance-dialog .recharge-amount-input {
+  width: 100% !important;
+}
+
+.recharge-balance-dialog .recharge-amount-input .el-input__wrapper {
+  min-height: auto !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.recharge-balance-dialog .recharge-amount-input .el-input__inner {
+  font-size: 1.75rem !important;
+  font-weight: 800 !important;
+  color: rgb(15 23 42) !important;
+}
+
+.recharge-balance-dialog .recharge-amount-footnote {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: rgb(100 116 139);
+}
+
+.dark .recharge-balance-dialog .recharge-section-title {
   color: rgb(248 250 252);
+}
+
+.dark .recharge-balance-dialog .recharge-section-desc {
+  color: rgb(148 163 184);
+}
+
+.dark .recharge-balance-dialog .recharge-method-card--active {
+  background: rgb(37 99 235 / 0.12);
+}
+
+.dark .recharge-balance-dialog .recharge-method-card--idle,
+.dark .recharge-balance-dialog .recharge-method-card--disabled {
+  border-color: rgb(63 63 70);
+}
+
+.dark .recharge-balance-dialog .recharge-method-card--idle {
+  background: rgb(24 24 27);
+}
+
+.dark .recharge-balance-dialog .recharge-method-card--disabled {
+  background: rgb(24 24 27 / 0.4);
+}
+
+.dark .recharge-balance-dialog .recharge-preset-button--idle {
+  border-color: rgb(63 63 70);
+  background: rgb(24 24 27);
+  color: rgb(203 213 225);
+}
+
+.dark .recharge-balance-dialog .recharge-amount-panel {
+  border-color: rgb(63 63 70);
+  background: rgba(24, 24, 27, 0.45);
+}
+
+.dark .recharge-balance-dialog .recharge-amount-shell {
+  border-color: rgb(63 63 70);
+  background: rgba(24, 24, 27, 0.85);
+}
+
+.dark .recharge-balance-dialog .recharge-amount-panel__meta-value {
+  color: rgb(203 213 225);
+}
+
+.dark .recharge-balance-dialog .recharge-amount-prefix,
+.dark .recharge-balance-dialog .recharge-amount-input .el-input__inner {
+  color: rgb(248 250 252);
+}
+
+.dark .recharge-balance-dialog .recharge-amount-footnote {
+  color: rgb(148 163 184);
 }
 </style>

@@ -5,12 +5,12 @@
     :class="dialogClass"
     :model="form"
     :rules="rules"
+    :shell-size="'md'"
     :submit-text="t('confirm')"
     :submitting="loading"
     :title="title"
     form-class="py-4"
     label-position="top"
-    width="400px"
     @closed="emit('closed')"
     @submit="emit('submit')"
   >

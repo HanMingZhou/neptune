@@ -1,9 +1,9 @@
 <template>
   <div
-    class="console-create-card bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6"
+    class="console-create-card console-create-card--section"
   >
-    <h3 class="text-base font-bold mb-4 flex items-center gap-2">
-      <span class="w-1 h-4 bg-primary rounded"></span>
+    <h3 class="console-create-card__title mb-4">
+      <span class="console-create-card__title-marker"></span>
       {{ t(titleKey) }}
     </h3>
     <div class="flex gap-3 mb-3">
@@ -35,10 +35,10 @@
         v-for="item in items"
         :key="getItemValue(item)"
         :class="[
-          'border rounded-xl p-4 cursor-pointer transition-all',
+          'rounded-xl border bg-white dark:bg-zinc-900/40 p-4 cursor-pointer transition-all',
           selectedValue === getItemValue(item)
-            ? 'border-primary bg-primary/5'
-            : 'border-border-light dark:border-border-dark hover:border-primary hover:-translate-y-1'
+            ? 'border-primary bg-primary/5 ring-1 ring-primary/20'
+            : 'border-slate-200 dark:border-zinc-700 hover:border-primary hover:-translate-y-1 hover:shadow-sm'
         ]"
         @click="$emit('update:selectedValue', getItemValue(item))"
       >

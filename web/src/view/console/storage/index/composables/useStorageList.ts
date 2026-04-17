@@ -5,7 +5,8 @@ import {
   deleteVolume,
   expandVolume,
   getAreaList,
-  getVolumeList
+  getVolumeList,
+  updateVolume
 } from '@/api/volume'
 import { getProductList } from '@/api/product'
 import type { Translator } from '@/types/consoleResource'
@@ -13,6 +14,7 @@ import type { ApiResponse } from '@/utils/request'
 import type {
   StorageAreaListData,
   StorageCreateForm,
+  StorageEditForm,
   StorageExpandForm,
   StorageListData,
   StorageListItem,
@@ -43,7 +45,7 @@ export function useStorageList({ t }: UseStorageListOptions = {}) {
 
   const pageInfo = reactive<StoragePageInfo>({
     page: 1,
-    pageSize: 10
+    pageSize: 15
   })
 
   const showCreateDialog = ref(false)
@@ -64,6 +66,12 @@ export function useStorageList({ t }: UseStorageListOptions = {}) {
     minSize: 0,
     newSize: 0
   })
+  const showEditDialog = ref(false)
+  const editing = ref(false)
+  const editForm = reactive<StorageEditForm>({
+    id: 0,
+    name: ''
+  })
 
   const btnLoading = reactive<Record<string, boolean>>({})
 
@@ -75,7 +83,7 @@ export function useStorageList({ t }: UseStorageListOptions = {}) {
         productType: 2,
         clusterId: clusterId || undefined,
         status: 1,
-        pageSize: 100
+        pageSize: 150
       })) as ApiResponse<StorageProductListData>
 
       if (res.code === 0) {
@@ -195,14 +203,26 @@ export function useStorageList({ t }: UseStorageListOptions = {}) {
     expandForm.currentSize = row.size ? String(row.size) : ''
 
     const sizeNum = parseInt(String(row.size ?? ''), 10) || 50
-    expandForm.minSize = sizeNum + 10
-    expandForm.newSize = sizeNum + 50
+    const requestedSizeNum =
+      parseInt(String(row.requestedSize ?? row.size ?? ''), 10) || sizeNum
+    expandForm.minSize = requestedSizeNum + 10
+    expandForm.newSize = requestedSizeNum + 50
 
     showExpandDialog.value = true
   }
 
   const closeExpandDialog = (): void => {
     showExpandDialog.value = false
+  }
+
+  const openEditDialog = (row: StorageListItem): void => {
+    editForm.id = row.id
+    editForm.name = row.name
+    showEditDialog.value = true
+  }
+
+  const closeEditDialog = (): void => {
+    showEditDialog.value = false
   }
 
   const handleExpand = async (): Promise<void> => {
@@ -219,7 +239,11 @@ export function useStorageList({ t }: UseStorageListOptions = {}) {
       })
 
       if (res.code === 0) {
-        ElMessage.success(translate('expandSuccess'))
+        ElMessage.success(
+          typeof res.msg === 'string' && res.msg
+            ? res.msg
+            : translate('expandSuccess')
+        )
         closeExpandDialog()
         void fetchList()
         return
@@ -230,6 +254,33 @@ export function useStorageList({ t }: UseStorageListOptions = {}) {
       ElMessage.error(translate('expandFailed'))
     } finally {
       expanding.value = false
+    }
+  }
+
+  const handleEdit = async (): Promise<void> => {
+    if (!editForm.name.trim()) {
+      ElMessage.warning(translate('inputName'))
+      return
+    }
+
+    editing.value = true
+    try {
+      const res = await updateVolume({
+        id: editForm.id,
+        name: editForm.name.trim()
+      })
+      if (res.code === 0) {
+        ElMessage.success(translate('changeSuccess'))
+        closeEditDialog()
+        void fetchList()
+        return
+      }
+
+      ElMessage.error(res.msg || translate('changeFailed'))
+    } catch {
+      ElMessage.error(translate('changeFailed'))
+    } finally {
+      editing.value = false
     }
   }
 
@@ -279,27 +330,34 @@ export function useStorageList({ t }: UseStorageListOptions = {}) {
     btnLoading,
     clusterOptions,
     closeCreateDialog,
+    closeEditDialog,
     closeExpandDialog,
     createForm,
     creating,
+    editForm,
+    editing,
     expanding,
     expandForm,
     fetchAreas,
     fetchList,
     handleCreate,
     handleDelete,
+    handleEdit,
     handleExpand,
     loading,
     onClusterChange,
     openCreateDialog,
+    openEditDialog,
     openExpandDialog,
     pageInfo,
     searchName,
     searchStatus,
     showCreateDialog,
+    showEditDialog,
     showExpandDialog,
     storageProducts,
     total,
     volumeList
   }
 }
+

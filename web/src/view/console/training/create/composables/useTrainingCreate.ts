@@ -1,4 +1,4 @@
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import type { Router } from 'vue-router'
 import { createTrainingJob } from '@/api/training'
@@ -12,6 +12,12 @@ import {
   validateK8sResourceName,
   validateTensorBoardPath
 } from '@/utils/resourceValidators'
+import {
+  buildGpuResourceFilterOptions,
+  findGpuResourceFilterOption
+} from '@/utils/gpuFilters'
+import { decorateConsoleImages } from '@/utils/imageRegistry'
+import { getVGpuNumber } from '@/utils/vgpu'
 import type {
   ConsoleImage,
   ConsoleProduct,
@@ -176,6 +182,9 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
     }))
   )
 
+  const selectedImage = computed(
+    () => images.value.find((item) => item.id === form.imageId) || null
+  )
   const filteredImages = computed(() => images.value)
   const showWorkerCount = computed(() =>
     MULTI_WORKER_FRAMEWORKS.includes(form.frameworkType)
@@ -185,8 +194,11 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
     if (!selectedProduct.value) return null
 
     const nodes = showWorkerCount.value ? form.workerCount : 1
-    const gpu =
-      (selectedProduct.value.gpuCount > 0 ? form.gpuPerWorker : 0) * nodes
+    const gpuPerNode =
+      selectedProduct.value.gpuCount > 0
+        ? form.gpuPerWorker
+        : getVGpuNumber(selectedProduct.value)
+    const gpu = gpuPerNode * nodes
     return { gpu, nodes }
   })
 
@@ -274,23 +286,31 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
     return true
   })
 
-  const loadImages = async (): Promise<void> => {
+  const loadImages = async (clusterId?: ResourceId | null): Promise<void> => {
     try {
       const params: {
         page: number
         pageSize: number
         usageType: number
         type?: number
+        clusterId?: ResourceId
       } = { page: 1, pageSize: 100, usageType: 2 }
 
       if (activeTab.value === 'base') params.type = 1
       if (activeTab.value === 'my') params.type = 2
+      if (clusterId || selectedProduct.value?.clusterId) {
+        params.clusterId = (clusterId ||
+          selectedProduct.value?.clusterId) as ResourceId
+      }
 
       const res = (await getImageList(params)) as ApiResponse<
         ListData<ConsoleImage>
       >
       if (res.code === 0) {
-        images.value = res.data?.list || []
+        images.value = decorateConsoleImages(res.data?.list || [])
+        if (!images.value.some((item) => item.id === form.imageId)) {
+          form.imageId = null
+        }
       }
     } catch (error) {
       console.error('加载镜像失败', error)
@@ -300,10 +320,11 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
   const changeImageTab = (tab: TrainingImageTab): void => {
     activeTab.value = tab
     form.imageId = null
+    void loadProducts()
     void loadImages()
   }
 
-  const loadProducts = async (): Promise<void> => {
+  const loadProducts = async (clusterId?: ResourceId | null): Promise<void> => {
     try {
       const params: {
         page: number
@@ -311,7 +332,12 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
         productType: number
         area?: string
         gpuModel?: string
+        gpuResourceType?: 'gpu' | 'vgpu'
+        vGpuNumber?: number
+        vGpuMemory?: number
+        vGpuCores?: number
         cpuModel?: string
+        clusterId?: ResourceId
       } = {
         page: 1,
         pageSize: 100,
@@ -319,8 +345,31 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
       }
 
       if (filters.area) params.area = filters.area
-      if (filters.gpuModel) params.gpuModel = filters.gpuModel
+      if (filters.gpuModel) {
+        const selectedGpuFilter = findGpuResourceFilterOption(
+          gpuModels.value,
+          filters.gpuModel
+        )
+
+        if (selectedGpuFilter) {
+          params.gpuModel =
+            selectedGpuFilter.gpuModel || selectedGpuFilter.model || ''
+          params.gpuResourceType = selectedGpuFilter.resourceType
+
+          if (selectedGpuFilter.resourceType === 'vgpu') {
+            params.vGpuNumber = selectedGpuFilter.vGpuNumber
+            params.vGpuMemory = selectedGpuFilter.vGpuMemory
+            params.vGpuCores = selectedGpuFilter.vGpuCores
+          }
+        } else {
+          params.gpuModel = filters.gpuModel
+        }
+      }
       if (filters.cpuModel) params.cpuModel = filters.cpuModel
+      if (clusterId || selectedImage.value?.clusterId) {
+        params.clusterId = (clusterId ||
+          selectedImage.value?.clusterId) as ResourceId
+      }
 
       const res = (await getAggregateProductList(params)) as ApiResponse<
         ListData<ConsoleProduct>
@@ -346,7 +395,7 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
       })) as ApiResponse<ProductFilterData>
       if (res.code === 0) {
         areas.value = res.data?.areas || []
-        gpuModels.value = res.data?.gpuModels || []
+        gpuModels.value = buildGpuResourceFilterOptions(res.data, translate)
         cpuModels.value = res.data?.cpuModels || []
       }
     } catch (error) {
@@ -385,6 +434,7 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
       form.gpuPerWorker = 0
       form.gpuType = ''
     }
+    void loadImages(product.clusterId)
   }
 
   const decreaseWorker = (): void => {
@@ -588,6 +638,26 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
     void loadFilters()
     void loadProducts()
   })
+
+  watch(
+    () => form.imageId,
+    (value) => {
+      if (!value || !selectedImage.value?.clusterId) {
+        return
+      }
+
+      void loadProducts(selectedImage.value.clusterId)
+    }
+  )
+
+  watch(
+    () => selectedProduct.value?.id ?? null,
+    (value) => {
+      if (!value && !selectedImage.value?.clusterId) {
+        void loadImages()
+      }
+    }
+  )
 
   return {
     activeTab,

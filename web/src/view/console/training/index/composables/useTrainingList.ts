@@ -24,7 +24,7 @@ export const useTrainingList = () => {
   const jobs = ref<ConsoleTrainingJob[]>([])
   const total = ref(0)
   const page = ref(1)
-  const pageSize = ref(20)
+  const pageSize = ref(15)
   const searchQuery = ref('')
   const filterStatus = ref('')
   const btnLoading = ref<ButtonLoadingState>({})
@@ -238,3 +238,4 @@ export const useTrainingList = () => {
     viewLogs
   }
 }
+

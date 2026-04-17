@@ -71,7 +71,7 @@ type CreateVolumeReq struct {
 	Name      string `json:"name" binding:"required"`      // 存储名称
 	Size      int64  `json:"size" binding:"required"`      // 容量(GB)
 	Type      int    `json:"type"`                         // 类型(1:dataset, 2:model, 3:workspace)
-	Area      string `json:"area" binding:"required"`      // 区域
+	Area      string `json:"area"`                         // 区域(展示字段，实际以集群地域为准)
 	ClusterId uint   `json:"clusterId" binding:"required"` // 集群ID (必填)
 	ProductId uint   `json:"productId" binding:"required"` // 产品ID (必填)
 	UserId    uint   `json:"userId"`                       // 用户ID (必填)
@@ -83,6 +83,13 @@ type ExpandVolumeReq struct {
 	Id     uint  `json:"id" binding:"required"`   // 存储 ID
 	Size   int64 `json:"size" binding:"required"` // 新容量(GB)，必须大于当前容量
 	UserId uint  `json:"userId"`
+}
+
+// 编辑
+type UpdateVolumeReq struct {
+	Id     uint   `json:"id" binding:"required"`
+	Name   string `json:"name" binding:"required"`
+	UserId uint   `json:"userId"`
 }
 
 // 删除
@@ -107,4 +114,6 @@ type TaskVolumeInfo struct {
 	Size      int64
 	UserId    uint
 	ClusterId uint
+	Namespace string
+	PVCName   string
 }

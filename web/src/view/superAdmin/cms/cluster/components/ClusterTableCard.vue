@@ -1,6 +1,6 @@
 <template>
-  <TableCard>
-    <div class="overflow-x-auto">
+  <TableCard :page-size="pageSize">
+    <div class="console-table-scroll console-table-scroll--fill overflow-x-auto">
       <table class="console-table min-w-[1400px]" v-loading="loading">
         <thead>
           <tr>
@@ -128,11 +128,25 @@
         </tbody>
       </table>
     </div>
+
+    <template #footer>
+      <ListPaginationBar
+        :current-page="page"
+        :page-size="pageSize"
+        :page-sizes="[15, 20, 50, 100]"
+        :total="total"
+        :total-text="t('totalRecords', { total })"
+        layout="sizes, prev, pager, next, jumper"
+        @current-change="$emit('page-change', $event)"
+        @size-change="$emit('size-change', $event)"
+      />
+    </template>
   </TableCard>
 </template>
 
 <script setup lang="ts">
 import { inject } from 'vue'
+import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
 import ListToneBadge from '@/components/listPage/ListToneBadge.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
 import type { Translator } from '@/types/consoleResource'
@@ -142,18 +156,27 @@ withDefaults(
   defineProps<{
     items?: CmsClusterRow[]
     loading?: boolean
+    page?: number
+    pageSize?: number
+    total?: number
   }>(),
   {
     items: () => [],
-    loading: false
+    loading: false,
+    page: 1,
+    pageSize: 15,
+    total: 0
   }
 )
 
 defineEmits<{
   delete: [row: CmsClusterRow]
   edit: [row: CmsClusterRow]
+  'page-change': [value: number]
+  'size-change': [value: number]
   'view-kubeconfig': [row: CmsClusterRow]
 }>()
 
 const t = inject<Translator>('t', (key: string) => key)
 </script>
+

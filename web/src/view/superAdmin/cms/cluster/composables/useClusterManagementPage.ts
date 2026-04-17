@@ -54,9 +54,12 @@ export function useClusterManagementPage({
   const form = reactive<CmsClusterForm>(createDefaultForm())
   const isEdit = ref(false)
   const loading = ref(false)
+  const page = ref(1)
+  const pageSize = ref(15)
   const showDialog = ref(false)
   const showKubeConfigDialog = ref(false)
   const submitting = ref(false)
+  const total = ref(0)
   const viewingKubeConfig = ref('')
 
   const dialogTitle = computed(() =>
@@ -78,11 +81,16 @@ export function useClusterManagementPage({
     try {
       const res = (await getClusterList({
         keyword: filterKeyword.value || undefined,
+        page: page.value,
+        pageSize: pageSize.value,
         status: filterStatus.value
       })) as ApiResponse<CmsClusterListData>
 
       if (res.code === 0) {
         clusters.value = res.data?.list ?? []
+        total.value = res.data?.total ?? 0
+        page.value = res.data?.page ?? page.value
+        pageSize.value = res.data?.pageSize ?? pageSize.value
       } else {
         ElMessage.error(res.msg || translate('failed'))
       }
@@ -100,9 +108,26 @@ export function useClusterManagementPage({
     await fetchClusters()
   }
 
+  const handleSearch = (): void => {
+    page.value = 1
+    void fetchClusters()
+  }
+
   const handleResetFilters = (): void => {
+    page.value = 1
     filterKeyword.value = ''
     filterStatus.value = undefined
+    void fetchClusters()
+  }
+
+  const handleCurrentChange = (value: number): void => {
+    page.value = value
+    void fetchClusters()
+  }
+
+  const handleSizeChange = (value: number): void => {
+    page.value = 1
+    pageSize.value = value
     void fetchClusters()
   }
 
@@ -150,6 +175,9 @@ export function useClusterManagementPage({
       if (res.code === 0) {
         ElMessage.success(res.msg || translate('success'))
         closeDialog()
+        if (!isEdit.value) {
+          page.value = 1
+        }
         await fetchClusters()
       } else {
         ElMessage.error(res.msg || translate('failed'))
@@ -177,6 +205,9 @@ export function useClusterManagementPage({
       const res = await deleteCluster({ id: row.id })
       if (res.code === 0) {
         ElMessage.success(res.msg || translate('success'))
+        if (clusters.value.length === 1 && page.value > 1) {
+          page.value -= 1
+        }
         await fetchClusters()
       } else {
         ElMessage.error(res.msg || translate('failed'))
@@ -222,18 +253,25 @@ export function useClusterManagementPage({
     filterStatus,
     form,
     formRules,
+    handleCurrentChange,
     handleDelete,
     handleResetFilters,
+    handleSearch,
+    handleSizeChange,
     handleSubmit,
     initialize,
     isEdit,
     loading,
     openCreateDialog,
     openEditDialog,
+    page,
+    pageSize,
     showDialog,
     showKubeConfigDialog,
     submitting,
+    total,
     viewKubeConfig,
     viewingKubeConfig
   }
 }
+

@@ -1,5 +1,5 @@
 <template>
-  <TableCard>
+  <TableCard :page-size="pageSize">
     <template #toolbar>
       <div class="flex flex-wrap gap-4 items-center">
         <div class="flex items-center gap-3 flex-1">
@@ -31,22 +31,20 @@
       </div>
     </template>
 
-    <div class="overflow-x-auto">
-      <table class="w-full text-left">
+    <div
+      class="console-table-scroll console-table-scroll--fill overflow-x-auto"
+    >
+      <table class="console-table console-table--compact w-full min-w-[860px]">
         <thead>
-          <tr
-            class="bg-gray-50 dark:bg-zinc-900/50 border-b border-gray-100 dark:border-gray-800 text-slate-500 text-[11px] font-bold uppercase tracking-wider"
-          >
-            <th class="px-6 py-4">{{ t('time') }}</th>
-            <th class="px-6 py-4">IP</th>
-            <th class="px-6 py-4">{{ t('location') }}</th>
-            <th class="px-6 py-4">{{ t('device') }}</th>
-            <th class="px-6 py-4">{{ t('status') }}</th>
+          <tr>
+            <th>{{ t('time') }}</th>
+            <th>IP</th>
+            <th>{{ t('location') }}</th>
+            <th>{{ t('device') }}</th>
+            <th>{{ t('status') }}</th>
           </tr>
         </thead>
-        <tbody
-          class="divide-y divide-gray-100 dark:divide-border-dark text-[13px]"
-        >
+        <tbody class="divide-y divide-border-light dark:divide-border-dark">
           <tr v-if="loading">
             <td colspan="5" class="px-6 py-12 text-center text-slate-400">
               <div class="flex items-center justify-center gap-2">
@@ -66,35 +64,25 @@
             v-for="record in records"
             v-else
             :key="record.id"
-            class="hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors"
+            class="hover:bg-slate-50 dark:hover:bg-zinc-800/40 transition-colors"
           >
-            <td
-              class="px-6 py-4 text-slate-500 whitespace-nowrap text-xs font-mono"
-            >
+            <td class="is-code is-secondary whitespace-nowrap">
               {{ record.time }}
             </td>
-            <td
-              class="px-6 py-4 text-xs font-mono text-slate-700 dark:text-slate-200"
-            >
+            <td class="is-code">
               {{ record.ip }}
             </td>
-            <td class="px-6 py-4 text-xs text-slate-500">
+            <td class="is-secondary">
               {{ record.location || '-' }}
             </td>
-            <td class="px-6 py-4 text-xs text-slate-500">
+            <td class="is-secondary">
               {{ record.device || '-' }}
             </td>
-            <td class="px-6 py-4">
-              <span
-                :class="
-                  record.status === 'Success'
-                    ? 'bg-emerald-500/10 text-emerald-500'
-                    : 'bg-red-500/10 text-red-500'
-                "
-                class="px-2 py-0.5 rounded text-[10px] font-black uppercase"
-              >
-                {{ record.status === 'Success' ? t('success') : t('failed') }}
-              </span>
+            <td>
+              <ListToneBadge
+                :label="record.status === 'Success' ? t('success') : t('failed')"
+                :tone="record.status === 'Success' ? 'success' : 'danger'"
+              />
             </td>
           </tr>
         </tbody>
@@ -107,9 +95,8 @@
         v-model:page-size="pageSizeModel"
         :total="total"
         :total-text="t('totalRecords', { total })"
-        :page-sizes="[10, 20, 50]"
-        layout="sizes, prev, pager, next"
-        size="small"
+        :page-sizes="[15, 20, 50, 100]"
+        layout="sizes, prev, pager, next, jumper"
         @current-change="$emit('page-change', $event)"
         @size-change="$emit('size-change', $event)"
       />
@@ -120,6 +107,7 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
 import ListPaginationBar from '@/components/listPage/ListPaginationBar.vue'
+import ListToneBadge from '@/components/listPage/ListToneBadge.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
 import type { AccessLogRecord } from '@/types/account'
 import type { Translator } from '@/types/consoleResource'
@@ -166,3 +154,4 @@ const pageSizeModel = computed({
   set: (value: number) => emit('update:page-size', value)
 })
 </script>
+

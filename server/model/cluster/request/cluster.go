@@ -1,9 +1,11 @@
 package request
 
+import common "gin-vue-admin/model/common/request"
+
 // GetClusterListReq 获取集群列表请求
 type GetClusterListReq struct {
-	Keyword string `json:"keyword" form:"keyword"` // 搜索关键词
-	Status  *int   `json:"status" form:"status"`   // 状态筛选
+	common.PageInfo
+	Status *int `json:"status" form:"status"` // 状态筛选
 }
 
 // CreateClusterReq 创建集群请求

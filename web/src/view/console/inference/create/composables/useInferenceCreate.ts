@@ -1,4 +1,4 @@
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import type { Router } from 'vue-router'
 import { createInferenceService } from '@/api/inference'
@@ -11,6 +11,11 @@ import {
   isResourceNameErrorMessage,
   validateK8sResourceName
 } from '@/utils/resourceValidators'
+import {
+  buildGpuResourceFilterOptions,
+  findGpuResourceFilterOption
+} from '@/utils/gpuFilters'
+import { decorateConsoleImages } from '@/utils/imageRegistry'
 import type {
   ConsoleImage,
   ConsoleProduct,
@@ -182,6 +187,10 @@ export const useInferenceCreate = ({
     }))
   )
 
+  const selectedImage = computed(
+    () => images.value.find((item) => item.id === form.imageId) || null
+  )
+
   const imageOptions = computed(() =>
     images.value.map((image) => ({
       label: image.name,
@@ -279,7 +288,6 @@ export const useInferenceCreate = ({
   const onDeployTypeChange = (value: InferenceDeployType): void => {
     form.deployType = value
     if (value === 'STANDALONE') {
-      form.framework = ''
       form.scheduleStrategy = 'BALANCED'
       return
     }
@@ -289,23 +297,31 @@ export const useInferenceCreate = ({
     }
   }
 
-  const loadImages = async (): Promise<void> => {
+  const loadImages = async (clusterId?: ResourceId | null): Promise<void> => {
     try {
       const params: {
         page: number
         pageSize: number
         usageType: number
         type?: number
+        clusterId?: ResourceId
       } = { page: 1, pageSize: 100, usageType: 3 }
 
       if (activeTab.value === 'base') params.type = 1
       if (activeTab.value === 'my') params.type = 2
+      if (clusterId || selectedProduct.value?.clusterId) {
+        params.clusterId = (clusterId ||
+          selectedProduct.value?.clusterId) as ResourceId
+      }
 
       const res = (await getImageList(params)) as ApiResponse<
         ListData<ConsoleImage>
       >
       if (res.code === 0) {
-        images.value = res.data?.list || []
+        images.value = decorateConsoleImages(res.data?.list || [])
+        if (!images.value.some((item) => item.id === form.imageId)) {
+          form.imageId = ''
+        }
       }
     } catch (error) {
       console.error('加载镜像失败', error)
@@ -315,10 +331,14 @@ export const useInferenceCreate = ({
   const changeImageTab = (tab: InferenceImageTab): void => {
     activeTab.value = tab
     form.imageId = ''
+    void loadProducts()
     void loadImages()
   }
 
-  const loadProducts = async (silent = false): Promise<void> => {
+  const loadProducts = async (
+    clusterId?: ResourceId | null,
+    silent = false
+  ): Promise<void> => {
     if (!silent) loading.value = true
 
     try {
@@ -328,10 +348,38 @@ export const useInferenceCreate = ({
         productType: number
         area?: string
         gpuModel?: string
+        gpuResourceType?: 'gpu' | 'vgpu'
+        vGpuNumber?: number
+        vGpuMemory?: number
+        vGpuCores?: number
+        clusterId?: ResourceId
       } = { page: 1, pageSize: 100, productType: 1 }
 
       if (filters.area) params.area = filters.area
-      if (filters.gpuModel) params.gpuModel = filters.gpuModel
+      if (filters.gpuModel) {
+        const selectedGpuFilter = findGpuResourceFilterOption(
+          gpuModelsList.value,
+          filters.gpuModel
+        )
+
+        if (selectedGpuFilter) {
+          params.gpuModel =
+            selectedGpuFilter.gpuModel || selectedGpuFilter.model || ''
+          params.gpuResourceType = selectedGpuFilter.resourceType
+
+          if (selectedGpuFilter.resourceType === 'vgpu') {
+            params.vGpuNumber = selectedGpuFilter.vGpuNumber
+            params.vGpuMemory = selectedGpuFilter.vGpuMemory
+            params.vGpuCores = selectedGpuFilter.vGpuCores
+          }
+        } else {
+          params.gpuModel = filters.gpuModel
+        }
+      }
+      if (clusterId || selectedImage.value?.clusterId) {
+        params.clusterId = (clusterId ||
+          selectedImage.value?.clusterId) as ResourceId
+      }
 
       const res = (await getAggregateProductList(params)) as ApiResponse<
         ListData<ConsoleProduct>
@@ -356,7 +404,7 @@ export const useInferenceCreate = ({
       })) as ApiResponse<ProductFilterData>
       if (res.code === 0) {
         areas.value = res.data?.areas || []
-        gpuModelsList.value = res.data?.gpuModels || []
+        gpuModelsList.value = buildGpuResourceFilterOptions(res.data, translate)
       }
     } catch (error) {
       console.error('加载筛选条件失败', error)
@@ -560,11 +608,42 @@ export const useInferenceCreate = ({
   }
 
   onMounted(() => {
-    void loadImages()
     void loadPvcs()
     void loadFilters()
-    void loadProducts()
+    void (async () => {
+      await loadProducts()
+      await loadImages(selectedProduct.value?.clusterId)
+    })()
   })
+
+  watch(
+    () => form.imageId,
+    (value) => {
+      if (!value || !selectedImage.value?.clusterId) {
+        return
+      }
+
+      void loadProducts(selectedImage.value.clusterId)
+    }
+  )
+
+  watch(
+    () => form.productId,
+    (value) => {
+      if (!value) {
+        if (!selectedImage.value?.clusterId) {
+          void loadImages()
+        }
+        return
+      }
+
+      if (!selectedProduct.value?.clusterId) {
+        return
+      }
+
+      void loadImages(selectedProduct.value.clusterId)
+    }
+  )
 
   return {
     activeTab,

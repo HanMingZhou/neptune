@@ -408,6 +408,9 @@ func (s *InferenceServiceService) getEnabledProduct(productID uint) (*productMod
 	if err := global.GVA_DB.Where("id = ?", productID).First(&product).Error; err != nil {
 		return nil, errors.Wrap(err, "获取产品规格失败")
 	}
+	if err := productModel.LoadPriceItems(context.Background(), global.GVA_DB, &product); err != nil {
+		return nil, errors.Wrap(err, "加载产品价格失败")
+	}
 	if product.Status != productModel.ProductStatusEnabled {
 		return nil, errors.New("所选产品已下架，无法使用")
 	}

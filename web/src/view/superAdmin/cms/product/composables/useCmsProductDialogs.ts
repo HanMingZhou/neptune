@@ -2,16 +2,19 @@ import { computed, reactive, ref, watch, type Ref } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import { ElMessage } from 'element-plus'
 import {
+  createCMSComputeProductsBatch,
   createCMSProduct,
-  getCMSClusterNodes,
+  getCMSProductNodeCandidates,
   updateCMSProduct,
   updateCMSProductPrice
 } from '@/api/cms'
 import type { Translator } from '@/types/consoleResource'
 import type {
+  CmsBatchCreateComputeProductResult,
   CmsClusterOption,
   CmsNodeRow,
   CmsProductForm,
+  CmsProductNodeCandidate,
   CmsProductPriceForm,
   CmsProductResourceType,
   CmsProductRow,
@@ -28,8 +31,11 @@ import {
   getNodeSelectionState,
   normalizeClusterNodes,
   resolveProductResourceType,
+  sanitizeBatchComputeProductPayload,
+  sanitizeProductPricePayload,
   sanitizeProductPayload
 } from './productPageUtils'
+import { getVGpuNumber } from '@/utils/vgpu'
 
 interface UseCmsProductDialogsOptions {
   activeTab: Ref<CmsProductType>
@@ -38,6 +44,16 @@ interface UseCmsProductDialogsOptions {
   fetchProducts: (silent?: boolean) => Promise<void>
   t: Translator
 }
+
+const DEFAULT_NODE_LIMITS = {
+  cpu: 256,
+  memory: 2048,
+  gpuCount: 16,
+  gpuMemory: 256,
+  vGpuCount: 100,
+  vGpuMemory: 256,
+  vGpuCores: 100
+} as const
 
 export const useCmsProductDialogs = ({
   activeTab,
@@ -48,37 +64,94 @@ export const useCmsProductDialogs = ({
 }: UseCmsProductDialogsOptions) => {
   const loadingNodes = ref(false)
   const submitting = ref(false)
-  const clusterNodes = ref<CmsNodeRow[]>([])
+  const clusterNodes = ref<CmsProductNodeCandidate[]>([])
   const showProductDialog = ref(false)
   const showPriceDialog = ref(false)
   const isEdit = ref(false)
   const resourceType = ref<CmsProductResourceType>('cpu')
   const selectedNode = ref<CmsNodeRow | null>(null)
+  const selectedNodeNames = ref<string[]>([])
+  const activePreviewNodeName = ref('')
   const productForm = reactive<CmsProductForm>(createDefaultProductForm())
   const priceForm = reactive<CmsProductPriceForm>(createDefaultPriceForm())
 
   const computeRules = computed(() => createComputeRules(t))
   const storageRules = computed(() => createStorageRules(t))
+
+  const createPreviewNode = computed<CmsProductNodeCandidate | null>(() => {
+    if (isEdit.value) {
+      return null
+    }
+
+    const byPreview =
+      clusterNodes.value.find(
+        (node) => node.nodeName === activePreviewNodeName.value
+      ) || null
+    if (byPreview) {
+      return byPreview
+    }
+
+    const firstSelected = selectedNodeNames.value[0]
+    if (firstSelected) {
+      return (
+        clusterNodes.value.find((node) => node.nodeName === firstSelected) ||
+        null
+      )
+    }
+
+    return clusterNodes.value[0] || null
+  })
+
+  const previewNode = computed<CmsNodeRow | CmsProductNodeCandidate | null>(
+    () => (isEdit.value ? selectedNode.value : createPreviewNode.value)
+  )
+
+  const selectedNodeCandidates = computed(() =>
+    clusterNodes.value.filter((node) =>
+      selectedNodeNames.value.includes(node.nodeName)
+    )
+  )
+
+  const selectedNodeCount = computed(() => selectedNodeNames.value.length)
+
+  const editLimitNode = computed<CmsNodeRow | null>(() =>
+    isEdit.value ? selectedNode.value : null
+  )
+
   const nodeMaxCpu = computed(() =>
-    selectedNode.value ? (selectedNode.value.cpu ?? 0) : 256
+    editLimitNode.value
+      ? (editLimitNode.value.cpu ?? 0)
+      : DEFAULT_NODE_LIMITS.cpu
   )
   const nodeMaxMemory = computed(() =>
-    selectedNode.value ? (selectedNode.value.memory ?? 0) : 2048
+    editLimitNode.value
+      ? (editLimitNode.value.memory ?? 0)
+      : DEFAULT_NODE_LIMITS.memory
   )
   const nodeMaxGpuCount = computed(() =>
-    selectedNode.value ? (selectedNode.value.gpuCount ?? 0) : 16
+    editLimitNode.value
+      ? (editLimitNode.value.gpuCount ?? 0)
+      : DEFAULT_NODE_LIMITS.gpuCount
   )
   const nodeMaxGpuMemory = computed(() =>
-    selectedNode.value ? (selectedNode.value.gpuMemory ?? 0) : 256
+    editLimitNode.value
+      ? (editLimitNode.value.gpuMemory ?? 0)
+      : DEFAULT_NODE_LIMITS.gpuMemory
   )
   const nodeMaxVGpuCount = computed(() =>
-    selectedNode.value ? (selectedNode.value.vGpuNumber ?? 0) : 100
+    editLimitNode.value
+      ? getVGpuNumber(editLimitNode.value)
+      : DEFAULT_NODE_LIMITS.vGpuCount
   )
   const nodeMaxVGpuMemory = computed(() =>
-    selectedNode.value ? (selectedNode.value.vGpuMemory ?? 0) : 256
+    editLimitNode.value
+      ? (editLimitNode.value.vGpuMemory ?? 0)
+      : DEFAULT_NODE_LIMITS.vGpuMemory
   )
   const nodeMaxVGpuCores = computed(() =>
-    selectedNode.value ? (selectedNode.value.vGpuCores ?? 0) : 100
+    editLimitNode.value
+      ? (editLimitNode.value.vGpuCores ?? 0)
+      : DEFAULT_NODE_LIMITS.vGpuCores
   )
 
   const dialogTitle = computed(() => {
@@ -91,13 +164,33 @@ export const useCmsProductDialogs = ({
       : t('newStorageProduct')
   })
 
+  const submitButtonText = computed(() => {
+    if (isEdit.value) {
+      return t('save')
+    }
+
+    if (productForm.productType === 1 && selectedNodeCount.value > 1) {
+      return t('createForSelectedNodes')
+    }
+
+    return t('create')
+  })
+
+  const selectedNodeLabel = computed(() => {
+    if (selectedNodeCount.value === 0) {
+      return t('selectAtLeastOneNode')
+    }
+
+    return selectedNodeNames.value.join(' / ')
+  })
+
   const canSubmit = computed(() => {
     if (isEdit.value) {
       return true
     }
 
     if (productForm.productType === 1) {
-      return Boolean(productForm.nodeName)
+      return selectedNodeNames.value.length > 0
     }
 
     return Boolean(
@@ -105,29 +198,181 @@ export const useCmsProductDialogs = ({
     )
   })
 
+  const hasExplicitResourceSpec = (): boolean =>
+    Boolean(
+      productForm.cpu ||
+      productForm.memory ||
+      productForm.gpuCount ||
+      productForm.gpuMemory ||
+      productForm.vGpuNumber ||
+      productForm.vGpuMemory ||
+      productForm.vGpuCores
+    )
+
+  const syncMissingResourceFieldsFromNode = (
+    type: CmsProductResourceType,
+    node: CmsNodeRow | CmsProductNodeCandidate | null
+  ): void => {
+    if (!node) {
+      return
+    }
+
+    if (!productForm.area) {
+      productForm.area = node.area || ''
+    }
+    if (!productForm.cpuModel) {
+      productForm.cpuModel = node.cpuModel || ''
+    }
+    if (!productForm.driverVersion) {
+      productForm.driverVersion = node.driverVersion || ''
+    }
+    if (!productForm.cudaVersion) {
+      productForm.cudaVersion = node.cudaVersion || ''
+    }
+
+    if (type === 'gpu') {
+      if (!productForm.gpuModel) {
+        productForm.gpuModel = node.gpuModel || ''
+      }
+      if ((productForm.gpuCount || 0) === 0) {
+        productForm.gpuCount = node.gpuCount || 0
+      }
+      if ((productForm.gpuMemory || 0) === 0) {
+        productForm.gpuMemory = node.gpuMemory || 0
+      }
+      return
+    }
+
+    if (type === 'vgpu') {
+      const vGpuNumber = getVGpuNumber(node)
+      if (!productForm.gpuModel) {
+        productForm.gpuModel = node.gpuModel || ''
+      }
+      if ((productForm.vGpuNumber || 0) === 0) {
+        productForm.vGpuNumber = vGpuNumber
+      }
+      if ((productForm.vGpuCount || 0) === 0) {
+        productForm.vGpuCount = vGpuNumber
+      }
+      if ((productForm.vGpuMemory || 0) === 0) {
+        productForm.vGpuMemory = node.vGpuMemory || 0
+      }
+      if ((productForm.vGpuCores || 0) === 0) {
+        productForm.vGpuCores = node.vGpuCores || 0
+      }
+    }
+  }
+
+  const sortSelectionByCandidates = (nodeNames: string[]): string[] => {
+    const selected = new Set(nodeNames)
+    return clusterNodes.value
+      .filter((node) => selected.has(node.nodeName))
+      .map((node) => node.nodeName)
+  }
+
+  const syncSelectedNodeField = (): void => {
+    productForm.nodeName = selectedNodeNames.value[0] || ''
+  }
+
+  const resetProductForm = (): void => {
+    Object.assign(productForm, createDefaultProductForm(activeTab.value))
+    resourceType.value = 'cpu'
+    selectedNode.value = null
+    selectedNodeNames.value = []
+    activePreviewNodeName.value = ''
+    clusterNodes.value = []
+  }
+
+  const resetPriceForm = (): void => {
+    Object.assign(priceForm, createDefaultPriceForm())
+  }
+
+  const refreshPreviewPointer = (): void => {
+    if (
+      activePreviewNodeName.value &&
+      clusterNodes.value.some(
+        (node) => node.nodeName === activePreviewNodeName.value
+      )
+    ) {
+      return
+    }
+
+    activePreviewNodeName.value =
+      selectedNodeNames.value[0] || clusterNodes.value[0]?.nodeName || ''
+  }
+
   const fetchClusterNodes = async (
     clusterId: CmsProductForm['clusterId']
   ): Promise<void> => {
     if (!clusterId) {
       clusterNodes.value = []
+      selectedNodeNames.value = []
+      activePreviewNodeName.value = ''
+      syncSelectedNodeField()
       return
     }
 
     loadingNodes.value = true
 
     try {
-      const res = (await getCMSClusterNodes({
+      const res = (await getCMSProductNodeCandidates({
         clusterId,
+        resourceType: resourceType.value,
         cpu: productForm.cpu || 0,
         memory: productForm.memory || 0,
-        gpuCount: productForm.gpuCount || 0
-      })) as ApiResponse<CmsNodeRow[]>
+        gpuCount: productForm.gpuCount || 0,
+        gpuMemory: productForm.gpuMemory || 0,
+        vGpuNumber: productForm.vGpuCount || productForm.vGpuNumber || 0,
+        vGpuMemory: productForm.vGpuMemory || 0,
+        vGpuCores: productForm.vGpuCores || 0,
+        excludeProductId:
+          isEdit.value && productForm.id ? productForm.id : undefined
+      })) as ApiResponse<CmsProductNodeCandidate[]>
 
-      if (res.code === 0) {
-        clusterNodes.value = normalizeClusterNodes(res.data ?? [])
-      } else {
+      if (res.code !== 0) {
         ElMessage.error(res.msg || t('failed'))
+        return
       }
+
+      clusterNodes.value = normalizeClusterNodes(res.data ?? [])
+
+      if (!isEdit.value) {
+        const previousSelected = [...selectedNodeNames.value]
+        const selectable = new Set(
+          clusterNodes.value
+            .filter((node) => node.canCreateComputeProduct)
+            .map((node) => node.nodeName)
+        )
+        selectedNodeNames.value = sortSelectionByCandidates(
+          selectedNodeNames.value.filter((nodeName) => selectable.has(nodeName))
+        )
+        syncSelectedNodeField()
+
+        const removedNodeNames = previousSelected.filter(
+          (nodeName) => !selectedNodeNames.value.includes(nodeName)
+        )
+        if (removedNodeNames.length > 0) {
+          const previewText = removedNodeNames.slice(0, 3).join(' / ')
+          const suffix =
+            removedNodeNames.length > 3
+              ? t('selectionAdjustedMore', {
+                  count: removedNodeNames.length - 3
+                })
+              : ''
+          ElMessage.warning(
+            t('selectionAdjustedBySpec', {
+              nodes: `${previewText}${suffix}`
+            })
+          )
+        }
+      } else if (productForm.nodeName) {
+        selectedNode.value =
+          clusterNodes.value.find(
+            (node) => node.nodeName === productForm.nodeName
+          ) || selectedNode.value
+      }
+
+      refreshPreviewPointer()
     } catch (error: unknown) {
       console.error(error)
       ElMessage.error(t('failed'))
@@ -136,59 +381,24 @@ export const useCmsProductDialogs = ({
     }
   }
 
-  const resetProductForm = (): void => {
-    Object.assign(productForm, createDefaultProductForm(activeTab.value))
-    resourceType.value = 'cpu'
-    selectedNode.value = null
-    clusterNodes.value = []
-  }
+  const applyNodeDefaults = (node: CmsProductNodeCandidate): void => {
+    const selection = getNodeSelectionState(node)
 
-  const resetPriceForm = (): void => {
-    Object.assign(priceForm, createDefaultPriceForm())
-  }
-
-  const syncMissingResourceFieldsFromNode = (
-    type: CmsProductResourceType,
-    node: CmsNodeRow | null
-  ): void => {
-    if (!node) {
-      return
+    if (!hasExplicitResourceSpec()) {
+      resourceType.value = selection.resourceType
+      Object.assign(productForm, selection.fields)
+    } else {
+      syncMissingResourceFieldsFromNode(resourceType.value, node)
     }
 
-    if (type === 'gpu') {
-      if (!productForm.gpuModel) {
-        productForm.gpuModel = node.gpuModel || ''
-      }
+    syncMissingResourceFieldsFromNode(resourceType.value, node)
 
-      if ((productForm.gpuCount || 0) === 0) {
-        productForm.gpuCount = node.gpuCount || 0
-      }
-
-      if ((productForm.gpuMemory || 0) === 0) {
-        productForm.gpuMemory = node.gpuMemory || 0
-      }
-
-      return
-    }
-
-    if (type === 'vgpu') {
-      if ((productForm.vGpuCount || 0) === 0) {
-        productForm.vGpuCount = node.vGpuNumber || node.vGpuCount || 0
-      }
-
-      if ((productForm.vGpuMemory || 0) === 0) {
-        productForm.vGpuMemory = node.vGpuMemory || 0
-      }
-
-      if ((productForm.vGpuCores || 0) === 0) {
-        productForm.vGpuCores = node.vGpuCores || 0
-      }
+    if (!productForm.name) {
+      productForm.name = selection.suggestedName
     }
   }
 
-  const hydrateEditNodeContext = async (
-    row: CmsProductRow
-  ): Promise<void> => {
+  const hydrateEditNodeContext = async (row: CmsProductRow): Promise<void> => {
     if (row.productType !== 1 || !row.clusterId || !row.nodeName) {
       return
     }
@@ -208,6 +418,7 @@ export const useCmsProductDialogs = ({
     }
 
     selectedNode.value = matchedNode
+    activePreviewNodeName.value = matchedNode.nodeName
     syncMissingResourceFieldsFromNode(resourceType.value, matchedNode)
   }
 
@@ -220,6 +431,8 @@ export const useCmsProductDialogs = ({
   const openEditDialog = (row: CmsProductRow): void => {
     Object.assign(productForm, buildProductFormFromRow(row, activeTab.value))
     selectedNode.value = buildNodeContextFromProduct(row)
+    selectedNodeNames.value = row.nodeName ? [row.nodeName] : []
+    activePreviewNodeName.value = row.nodeName || ''
     clusterNodes.value = []
     isEdit.value = true
     resourceType.value = resolveProductResourceType(row)
@@ -240,26 +453,30 @@ export const useCmsProductDialogs = ({
   }
 
   const handleResourceTypeChange = (type: CmsProductResourceType): void => {
-    const node = selectedNode.value
+    const node = previewNode.value
 
     if (type === 'gpu') {
       productForm.gpuModel = node?.gpuModel || ''
       productForm.gpuCount = node?.gpuCount || 0
       productForm.gpuMemory = node?.gpuMemory || 0
+      productForm.vGpuNumber = 0
       productForm.vGpuCount = 0
       productForm.vGpuMemory = 0
       productForm.vGpuCores = 0
     } else if (type === 'vgpu') {
-      productForm.gpuModel = ''
+      const vGpuNumber = getVGpuNumber(node)
+      productForm.gpuModel = node?.gpuModel || ''
       productForm.gpuCount = 0
       productForm.gpuMemory = 0
-      productForm.vGpuCount = node?.vGpuNumber || 0
+      productForm.vGpuNumber = vGpuNumber
+      productForm.vGpuCount = vGpuNumber
       productForm.vGpuMemory = node?.vGpuMemory || 0
       productForm.vGpuCores = node?.vGpuCores || 0
     } else {
       productForm.gpuModel = ''
       productForm.gpuCount = 0
       productForm.gpuMemory = 0
+      productForm.vGpuNumber = 0
       productForm.vGpuCount = 0
       productForm.vGpuMemory = 0
       productForm.vGpuCores = 0
@@ -271,12 +488,20 @@ export const useCmsProductDialogs = ({
   ): void => {
     productForm.nodeName = ''
     selectedNode.value = null
+    selectedNodeNames.value = []
+    activePreviewNodeName.value = ''
 
-    if (clusterId) {
-      void fetchClusterNodes(clusterId)
-    } else {
+    if (!clusterId) {
       clusterNodes.value = []
+      return
     }
+
+    const cluster = clusters.value.find((item) => item.id === clusterId)
+    if (cluster?.area) {
+      productForm.area = cluster.area
+    }
+
+    void fetchClusterNodes(clusterId)
   }
 
   const handleStorageClusterChange = (
@@ -292,15 +517,34 @@ export const useCmsProductDialogs = ({
     }
   }
 
-  const selectNode = (node: CmsNodeRow): void => {
-    const selection = getNodeSelectionState(node)
+  const previewClusterNode = (node: CmsProductNodeCandidate): void => {
+    activePreviewNodeName.value = node.nodeName
+  }
 
-    selectedNode.value = node
-    resourceType.value = selection.resourceType
-    Object.assign(productForm, selection.fields)
+  const clearSelectedNodes = (): void => {
+    selectedNodeNames.value = []
+    syncSelectedNodeField()
+  }
 
-    if (!productForm.name) {
-      productForm.name = selection.suggestedName
+  const toggleNodeSelection = (node: CmsProductNodeCandidate): void => {
+    activePreviewNodeName.value = node.nodeName
+
+    if (!node.canCreateComputeProduct) {
+      return
+    }
+
+    const nextSelection = new Set(selectedNodeNames.value)
+    if (nextSelection.has(node.nodeName)) {
+      nextSelection.delete(node.nodeName)
+    } else {
+      nextSelection.add(node.nodeName)
+    }
+
+    selectedNodeNames.value = sortSelectionByCandidates([...nextSelection])
+    syncSelectedNodeField()
+
+    if (nextSelection.has(node.nodeName)) {
+      applyNodeDefaults(node)
     }
   }
 
@@ -308,11 +552,22 @@ export const useCmsProductDialogs = ({
     (clusterId: CmsProductForm['clusterId']) => {
       void fetchClusterNodes(clusterId)
     },
-    300
+    260
   )
 
   watch(
-    () => [productForm.cpu, productForm.memory, productForm.gpuCount] as const,
+    () =>
+      [
+        productForm.cpu,
+        productForm.memory,
+        productForm.gpuCount,
+        productForm.gpuMemory,
+        productForm.vGpuCount,
+        productForm.vGpuNumber,
+        productForm.vGpuMemory,
+        productForm.vGpuCores,
+        resourceType.value
+      ] as const,
     () => {
       if (
         productForm.clusterId &&
@@ -328,16 +583,41 @@ export const useCmsProductDialogs = ({
     submitting.value = true
 
     try {
+      if (!isEdit.value && productForm.productType === 1) {
+        if (selectedNodeNames.value.length === 0) {
+          ElMessage.warning(t('selectAtLeastOneNode'))
+          return
+        }
+
+        const res = (await createCMSComputeProductsBatch(
+          sanitizeBatchComputeProductPayload(
+            productForm,
+            resourceType.value,
+            selectedNodeNames.value
+          )
+        )) as ApiResponse<CmsBatchCreateComputeProductResult>
+
+        if (res.code === 0) {
+          ElMessage.success(
+            t('batchCreateComputeSuccess', {
+              count: res.data?.createdCount || selectedNodeNames.value.length
+            })
+          )
+          showProductDialog.value = false
+          await Promise.all([fetchProducts(), fetchAreas()])
+        } else {
+          ElMessage.error(res.msg || t('failed'))
+        }
+        return
+      }
+
       const api = isEdit.value ? updateCMSProduct : createCMSProduct
       const res = await api(
         sanitizeProductPayload(productForm, resourceType.value, isEdit.value)
       )
 
       if (res.code === 0) {
-        ElMessage({
-          type: 'success',
-          message: t('success')
-        })
+        ElMessage.success(t('success'))
         showProductDialog.value = false
         await Promise.all([fetchProducts(), fetchAreas()])
       } else {
@@ -355,12 +635,9 @@ export const useCmsProductDialogs = ({
     submitting.value = true
 
     try {
-      const res = await updateCMSProductPrice(priceForm)
+      const res = await updateCMSProductPrice(sanitizeProductPricePayload(priceForm))
       if (res.code === 0) {
-        ElMessage({
-          type: 'success',
-          message: t('success')
-        })
+        ElMessage.success(t('success'))
         showPriceDialog.value = false
         await fetchProducts()
       } else {
@@ -375,8 +652,10 @@ export const useCmsProductDialogs = ({
   }
 
   return {
+    activePreviewNodeName,
     canSubmit,
     clusterNodes,
+    clearSelectedNodes,
     computeRules,
     dialogTitle,
     fetchClusterNodes,
@@ -397,14 +676,21 @@ export const useCmsProductDialogs = ({
     openCreateDialog,
     openEditDialog,
     openPriceDialog,
+    previewClusterNode,
+    previewNode,
     priceForm,
     productForm,
     resetPriceForm,
     resourceType,
-    selectNode,
+    selectedNodeCount,
+    selectedNodeLabel,
+    selectedNodeNames,
+    selectedNodeCandidates,
     showPriceDialog,
     showProductDialog,
     storageRules,
-    submitting
+    submitButtonText,
+    submitting,
+    toggleNodeSelection
   }
 }

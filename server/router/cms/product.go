@@ -14,6 +14,7 @@ func (r *ProductRouter) InitCMSProductRouter(Router *gin.RouterGroup) {
 	{
 		// 产品管理
 		cmsRouter.POST("add", cmsApi.ProductApi.CreateProduct)
+		cmsRouter.POST("batch/add", cmsApi.ProductApi.BatchCreateComputeProducts)
 		cmsRouter.POST("update", cmsApi.ProductApi.UpdateProduct)
 		cmsRouter.POST("price/update", cmsApi.ProductApi.UpdatePrice)
 		cmsRouter.POST("delete", cmsApi.ProductApi.DeleteProduct)

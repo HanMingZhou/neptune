@@ -4,11 +4,13 @@ import (
 	"context"
 	"errors"
 	"gin-vue-admin/global"
+	clusterModel "gin-vue-admin/model/cluster"
 	imageModel "gin-vue-admin/model/image"
 	"gin-vue-admin/model/image/request"
 	"gin-vue-admin/model/image/response"
 	sysModel "gin-vue-admin/model/system"
 	"gin-vue-admin/utils/uuid"
+	"strings"
 )
 
 type ImageService struct{}
@@ -33,6 +35,9 @@ func (s *ImageService) GetImageList(ctx context.Context, req *request.GetImageLi
 	if req.ImageId > 0 {
 		db = db.Where("id = ?", req.ImageId)
 	}
+	if req.ClusterId > 0 {
+		db = db.Where("cluster_id = ?", req.ClusterId)
+	}
 	if req.Area != "" {
 		db = db.Where("area = ?", req.Area)
 	}
@@ -53,21 +58,28 @@ func (s *ImageService) GetImageList(ctx context.Context, req *request.GetImageLi
 		return nil, err
 	}
 
+	clusterNames, err := s.loadClusterNames(ctx, images)
+	if err != nil {
+		return nil, err
+	}
+
 	// 转换为响应格式
 	list := make([]response.ImageItem, 0, len(images))
 	for _, img := range images {
 		list = append(list, response.ImageItem{
-			ID:         img.ID,
-			Name:       img.Name,
-			Image:      img.ImageAddr,
-			Size:       img.Size,
-			ImageUUID:  img.ImageUUID,
-			Area:       img.Area,
-			CreateTime: img.CreatedAt.Format("2006-01-02 15:04:05"),
-			UsageType:  img.UsageType,
-			Type:       img.Type,
-			ImagePath:  img.ImagePath,
-			UserId:     img.UserId,
+			ID:          img.ID,
+			Name:        img.Name,
+			Image:       img.ImageAddr,
+			Size:        img.Size,
+			ImageUUID:   img.ImageUUID,
+			Area:        img.Area,
+			ClusterId:   img.ClusterId,
+			ClusterName: clusterNames[img.ClusterId],
+			CreateTime:  img.CreatedAt.Format("2006-01-02 15:04:05"),
+			UsageType:   img.UsageType,
+			Type:        img.Type,
+			ImagePath:   img.ImagePath,
+			UserId:      img.UserId,
 		})
 	}
 
@@ -113,25 +125,40 @@ func (s *ImageService) CreateImage(ctx context.Context, req *request.AddImageReq
 			return errors.New("系统镜像不能创建")
 		}
 	}
+
+	cluster, err := s.getEnabledCluster(ctx, req.ClusterId)
+	if err != nil {
+		return err
+	}
+	imageAddr, err := resolveImageAddr(
+		req.ImageAddr,
+		cluster.HarborAddr,
+		req.ImagePath,
+	)
+	if err != nil {
+		return err
+	}
+
 	img := imageModel.Image{
 		Name:      req.Name,
 		UserId:    userId,
-		Area:      req.Area,
+		ClusterId: req.ClusterId,
+		Area:      cluster.Area,
 		UsageType: req.UsageType,
 		Type:      imgType,
-		ImageAddr: req.ImageAddr,
+		ImageAddr: imageAddr,
 		Size:      req.Size,
-		ImagePath: req.ImagePath,
+		ImagePath: strings.Trim(strings.TrimSpace(req.ImagePath), "/"),
 		ImageUUID: uuid.GenerateUUID(),
 	}
-	return global.GVA_DB.Create(&img).Error
+	return global.GVA_DB.WithContext(ctx).Create(&img).Error
 }
 
 // UpdateImage 更新镜像
 func (s *ImageService) UpdateImage(ctx context.Context, req *request.UpdateImageReq, userId uint) error {
 	// 判断镜像是否为自己创建
 	var img imageModel.Image
-	if err := global.GVA_DB.Where("id = ?", req.Id).First(&img).Error; err != nil {
+	if err := global.GVA_DB.WithContext(ctx).Where("id = ?", req.Id).First(&img).Error; err != nil {
 		return err
 	}
 	if img.Type == imageModel.ImageTypeSystem {
@@ -139,14 +166,124 @@ func (s *ImageService) UpdateImage(ctx context.Context, req *request.UpdateImage
 			return errors.New("系统镜像不属于自己")
 		}
 	}
-	updates := map[string]interface{}{
-		"name":       req.Name,
-		"type":       req.Type,
-		"usage_type": req.UsageType,
-		"image_addr": req.ImageAddr,
-		"area":       req.Area,
-		"size":       req.Size,
-		"image_path": req.ImagePath,
+
+	clusterId := img.ClusterId
+	if req.ClusterId > 0 {
+		clusterId = req.ClusterId
 	}
-	return global.GVA_DB.Model(&imageModel.Image{}).Where("id = ?", req.Id).Updates(updates).Error
+	cluster, err := s.getEnabledCluster(ctx, clusterId)
+	if err != nil {
+		return err
+	}
+
+	name := img.Name
+	if strings.TrimSpace(req.Name) != "" {
+		name = req.Name
+	}
+
+	imageType := img.Type
+	if req.Type > 0 {
+		imageType = req.Type
+	}
+
+	usageType := img.UsageType
+	if req.UsageType > 0 {
+		usageType = req.UsageType
+	}
+
+	imagePath := img.ImagePath
+	if strings.TrimSpace(req.ImagePath) != "" {
+		imagePath = strings.Trim(strings.TrimSpace(req.ImagePath), "/")
+	}
+
+	imageAddr, err := buildImageAddr(cluster.HarborAddr, imagePath)
+	if err != nil {
+		return err
+	}
+	if strings.TrimSpace(req.ImageAddr) != "" {
+		imageAddr = strings.TrimSpace(req.ImageAddr)
+	}
+
+	size := img.Size
+	if strings.TrimSpace(req.Size) != "" {
+		size = req.Size
+	}
+
+	updates := map[string]interface{}{
+		"name":       name,
+		"cluster_id": clusterId,
+		"type":       imageType,
+		"usage_type": usageType,
+		"image_addr": imageAddr,
+		"area":       cluster.Area,
+		"size":       size,
+		"image_path": imagePath,
+	}
+	return global.GVA_DB.WithContext(ctx).Model(&imageModel.Image{}).Where("id = ?", req.Id).Updates(updates).Error
+}
+
+func (s *ImageService) loadClusterNames(ctx context.Context, images []imageModel.Image) (map[uint]string, error) {
+	clusterIDs := make([]uint, 0)
+	seen := make(map[uint]struct{})
+	for _, img := range images {
+		if img.ClusterId == 0 {
+			continue
+		}
+		if _, ok := seen[img.ClusterId]; ok {
+			continue
+		}
+		seen[img.ClusterId] = struct{}{}
+		clusterIDs = append(clusterIDs, img.ClusterId)
+	}
+	if len(clusterIDs) == 0 {
+		return map[uint]string{}, nil
+	}
+
+	var clusters []clusterModel.K8sCluster
+	if err := global.GVA_DB.WithContext(ctx).Where("id IN ?", clusterIDs).Find(&clusters).Error; err != nil {
+		return nil, err
+	}
+
+	result := make(map[uint]string, len(clusters))
+	for _, cluster := range clusters {
+		result[cluster.ID] = cluster.Name
+	}
+	return result, nil
+}
+
+func (s *ImageService) getEnabledCluster(ctx context.Context, clusterId uint) (*clusterModel.K8sCluster, error) {
+	if clusterId == 0 {
+		return nil, errors.New("请选择集群")
+	}
+
+	var cluster clusterModel.K8sCluster
+	if err := global.GVA_DB.WithContext(ctx).
+		Where("id = ? AND status = ?", clusterId, clusterModel.ClusterStatusEnabled).
+		First(&cluster).Error; err != nil {
+		return nil, errors.New("集群不存在或已停用")
+	}
+	return &cluster, nil
+}
+
+func buildImageAddr(harborAddr, imagePath string) (string, error) {
+	path := strings.Trim(strings.TrimSpace(imagePath), "/")
+	if path == "" {
+		return "", errors.New("镜像路径不能为空")
+	}
+
+	registry := strings.TrimSpace(harborAddr)
+	registry = strings.TrimRight(registry, "/")
+	if registry == "" {
+		return "", errors.New("所选集群未配置 Harbor 地址")
+	}
+
+	return registry + "/" + path, nil
+}
+
+func resolveImageAddr(imageAddr, harborAddr, imagePath string) (string, error) {
+	if strings.TrimSpace(imageAddr) != "" {
+		return strings.TrimSpace(imageAddr), nil
+	}
+
+	return buildImageAddr(harborAddr, imagePath)
 }

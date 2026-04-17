@@ -1,5 +1,5 @@
 <template>
-  <div class="console-page-container space-y-8">
+  <div class="console-page-container flex min-h-full flex-col gap-8">
     <BaseTableToolbar
       :description="t('order.invoiceDesc')"
       :loading="loading"
@@ -19,7 +19,11 @@
 
     <InvoiceStatsCards />
 
-    <InvoiceTabsCard v-model:active-tab="activeTab" :invoices="invoices" />
+    <InvoiceTabsCard
+      class="min-h-0 flex-1"
+      v-model:active-tab="activeTab"
+      :invoices="invoices"
+    />
 
     <ApplyInvoiceDialog
       v-model="showApplyDialog"

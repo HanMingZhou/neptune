@@ -55,7 +55,7 @@ export const useNotebookList = () => {
   const searchQuery = ref('')
   const statusFilter = ref('')
   const page = ref(1)
-  const pageSize = ref(20)
+  const pageSize = ref(15)
   const total = ref(0)
   const btnLoading = ref<ButtonLoadingState>({})
 
@@ -305,3 +305,4 @@ export const useNotebookList = () => {
     total
   }
 }
+

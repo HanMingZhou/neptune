@@ -1,11 +1,11 @@
 <template>
-  <div class="console-page-container space-y-6">
+  <div class="console-page-container flex min-h-full flex-col gap-6">
     <BaseTableToolbar
       :breadcrumbs="[t('admin'), t('menus')]"
       :description="t('manageMenusDesc')"
       :loading="loading"
       :title="t('menus')"
-      @refresh="getTableData"
+      @refresh="initialize"
     >
       <template #actions>
         <button
@@ -19,14 +19,20 @@
     </BaseTableToolbar>
 
     <MenuTableCard
-      :items="filteredTableData"
+      class="min-h-0 flex-1"
+      :items="pagedTableData"
       :loading="loading"
+      :page="page"
+      :page-size="pageSize"
       :search-keyword="searchKeyword"
+      :total="total"
       @add="openCreateDialog"
       @delete="handleDeleteMenu"
       @edit="openEditDialog"
+      @page-change="handleCurrentChange"
       @reset="handleResetSearch"
       @search="handleSearch"
+      @size-change="handleSizeChange"
       @update:search-keyword="searchKeyword = $event"
     />
 
@@ -69,13 +75,13 @@ const {
   deleteParameter,
   dialogFormVisible,
   dialogTitle,
-  filteredTableData,
   fmtComponent,
   form,
-  getTableData,
+  handleCurrentChange,
   handleDeleteMenu,
   handleResetSearch,
   handleSearch,
+  handleSizeChange,
   handleSubmitMenu,
   initialize,
   isEdit,
@@ -83,8 +89,12 @@ const {
   menuOptions,
   openCreateDialog,
   openEditDialog,
+  page,
+  pageSize,
+  pagedTableData,
   rules,
-  searchKeyword
+  searchKeyword,
+  total
 } = useMenuManagementPage({ t })
 
 onMounted(() => {

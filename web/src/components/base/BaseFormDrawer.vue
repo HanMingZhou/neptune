@@ -40,7 +40,7 @@
     <slot name="prepend" />
 
     <el-form
-      v-if="modelValue || keepMounted"
+      v-show="modelValue || keepMounted"
       ref="formRef"
       :model="model"
       :rules="rules"

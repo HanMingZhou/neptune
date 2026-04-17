@@ -1,9 +1,9 @@
 <template>
   <div
-    class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6"
+    class="console-create-card console-create-card--section w-full"
   >
-    <h3 class="text-base font-bold mb-6 flex items-center gap-2">
-      <span class="w-1 h-4 bg-primary rounded"></span>
+    <h3 class="console-create-card__title mb-6">
+      <span class="console-create-card__title-marker"></span>
       {{ t('jobConfig') }}
     </h3>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">

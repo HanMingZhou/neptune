@@ -21,7 +21,7 @@ export function useInvoicePage({ t }: UseInvoicePageOptions = {}) {
   const loading = ref(false)
   const invoices = ref<InvoiceRecord[]>([])
   const page = ref(1)
-  const pageSize = ref(10)
+  const pageSize = ref(15)
   const activeTab = ref<InvoiceTab>('records')
   const showApplyDialog = ref(false)
   const submitting = ref(false)
@@ -130,3 +130,4 @@ export function useInvoicePage({ t }: UseInvoicePageOptions = {}) {
     submitting
   }
 }
+

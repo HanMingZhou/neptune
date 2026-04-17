@@ -137,9 +137,26 @@ func parseInt(s string, defaultVal int) int {
 }
 
 func aggregateProductFiltersFromContext(c *gin.Context) productSvc.AggregateProductFilters {
-	return productSvc.AggregateProductFilters{
-		Area:     c.Query("area"),
-		GPUModel: c.Query("gpuModel"),
-		CPUModel: c.Query("cpuModel"),
+	filters := productSvc.AggregateProductFilters{
+		Area:            c.Query("area"),
+		GPUModel:        c.Query("gpuModel"),
+		CPUModel:        c.Query("cpuModel"),
+		GPUResourceType: c.Query("gpuResourceType"),
 	}
+
+	if value := c.Query("clusterId"); value != "" {
+		filters.ClusterId = cast.ToUint(value)
+	}
+
+	if value := c.Query("vGpuNumber"); value != "" {
+		filters.VGPUNumber = int64(parseInt(value, 0))
+	}
+	if value := c.Query("vGpuMemory"); value != "" {
+		filters.VGPUMemory = int64(parseInt(value, 0))
+	}
+	if value := c.Query("vGpuCores"); value != "" {
+		filters.VGPUCores = int64(parseInt(value, 0))
+	}
+
+	return filters
 }

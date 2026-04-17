@@ -1,12 +1,12 @@
 <template>
-  <div class="console-page-container space-y-6">
+  <div class="console-page-container flex min-h-full flex-col gap-6">
     <StorageManagementHeader
       :loading="loading"
       @create="openCreateDialog"
       @refresh="fetchList"
     />
 
-    <ManagementListShell>
+    <ManagementListShell class="min-h-0 flex-1">
       <template #filters>
         <StorageFiltersBar
           :search-name="searchName"
@@ -18,13 +18,17 @@
       </template>
 
       <StorageTableCard
+        class="min-h-0 flex-1"
         v-model:page="pageInfo.page"
+        v-model:page-size="pageInfo.pageSize"
         :btn-loading="btnLoading"
         :items="volumeList"
         :loading="loading"
+        :page-size="pageInfo.pageSize"
         :total="total"
         @create="openCreateDialog"
         @delete="handleDelete"
+        @edit="openEditDialog"
         @expand="openExpandDialog"
         @refresh="fetchList"
       />
@@ -34,15 +38,20 @@
       :cluster-options="clusterOptions"
       :create-form="createForm"
       :creating="creating"
+      :edit-form="editForm"
+      :editing="editing"
       :expand-form="expandForm"
       :expanding="expanding"
       :show-create-dialog="showCreateDialog"
+      :show-edit-dialog="showEditDialog"
       :show-expand-dialog="showExpandDialog"
       :storage-products="storageProducts"
       @cluster-change="onClusterChange"
       @submit-create="handleCreate"
+      @submit-edit="handleEdit"
       @submit-expand="handleExpand"
       @update:create-visible="showCreateDialog = $event"
+      @update:edit-visible="showEditDialog = $event"
       @update:expand-visible="showExpandDialog = $event"
     />
   </div>
@@ -65,21 +74,26 @@ const {
   clusterOptions,
   createForm,
   creating,
+  editForm,
+  editing,
   expanding,
   expandForm,
   fetchAreas,
   fetchList,
   handleCreate,
   handleDelete,
+  handleEdit,
   handleExpand,
   loading,
   onClusterChange,
   openCreateDialog,
+  openEditDialog,
   openExpandDialog,
   pageInfo,
   searchName,
   searchStatus,
   showCreateDialog,
+  showEditDialog,
   showExpandDialog,
   storageProducts,
   total,

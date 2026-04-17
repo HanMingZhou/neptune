@@ -10,6 +10,7 @@ import (
 	pvcModel "gin-vue-admin/model/pvc"
 	pvcReq "gin-vue-admin/model/pvc/request"
 	orderService "gin-vue-admin/service/order"
+	pvcService "gin-vue-admin/service/pvc"
 	"gin-vue-admin/utils/order"
 	"time"
 
@@ -146,7 +147,7 @@ func DailyStorageOrderTask() error {
 	// 查询所有未删除的数据盘
 	var volumes []pvcReq.TaskVolumeInfo
 	if err := global.GVA_DB.Model(&pvcModel.Volume{}).
-		Select("id, name, size, user_id, cluster_id").
+		Select("id, name, size, user_id, cluster_id, namespace, pvc_name").
 		Where("deleted_at IS NULL").
 		Find(&volumes).Error; err != nil {
 		logx.Error("查询数据盘失败", logx.Field("err", err))
@@ -164,6 +165,16 @@ func DailyStorageOrderTask() error {
 	today := now.Format("2006-01-02")
 
 	for _, vol := range volumes {
+		runtimeState, err := pvcService.SyncVolumeRuntimeState(ctx, vol.ID, vol.ClusterId, vol.Namespace, vol.PVCName, vol.Size)
+		if err != nil {
+			logx.Error("同步存储真实容量失败，按数据库容量继续计费",
+				logx.Field("volumeId", vol.ID),
+				logx.Field("pvcName", vol.PVCName),
+				logx.Field("err", err))
+		} else if runtimeState != nil && runtimeState.ActualSize > 0 {
+			vol.Size = runtimeState.ActualSize
+		}
+
 		if vol.Size <= 0 || vol.UserId == 0 {
 			continue
 		}

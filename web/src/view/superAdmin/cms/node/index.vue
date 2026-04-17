@@ -1,5 +1,5 @@
 <template>
-  <div class="console-page-container space-y-6">
+  <div class="console-page-container flex min-h-full flex-col gap-6">
     <BaseTableToolbar
       :breadcrumbs="[t('admin'), t('nodeManage')]"
       :description="t('nodeManageDesc')"
@@ -8,7 +8,7 @@
       @refresh="refreshData"
     />
 
-    <ManagementListShell>
+    <ManagementListShell class="min-h-0 flex-1">
       <template #filters>
         <NodeFiltersBar
           :clusters="clusters"
@@ -16,16 +16,22 @@
           :filter-cluster-id="filterClusterId"
           :filter-keyword="filterKeyword"
           @reset="handleResetFilters"
-          @search="fetchNodes"
+          @search="handleSearch"
           @update:filter-cluster-id="handleClusterChange"
           @update:filter-keyword="filterKeyword = $event"
         />
       </template>
 
       <NodeTableCard
+        class="min-h-0 flex-1"
         :items="nodes"
         :loading="loading"
+        :page="page"
+        :page-size="pageSize"
+        :total="total"
         @drain="handleDrain"
+        @page-change="handleCurrentChange"
+        @size-change="handleSizeChange"
         @uncordon="handleUncordon"
       />
     </ManagementListShell>
@@ -45,17 +51,22 @@ const t = inject('t', (key) => key)
 const {
   clusters,
   currentClusterArea,
-  fetchNodes,
   filterClusterId,
   filterKeyword,
   handleClusterChange,
+  handleCurrentChange,
   handleDrain,
   handleResetFilters,
+  handleSearch,
+  handleSizeChange,
   handleUncordon,
   initialize,
   loading,
   nodes,
-  refreshData
+  page,
+  pageSize,
+  refreshData,
+  total
 } = useNodeManagementPage({ t })
 
 onMounted(() => {

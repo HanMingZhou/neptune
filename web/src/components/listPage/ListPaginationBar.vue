@@ -47,8 +47,8 @@ const props = withDefaults(
     hideWhenEmpty: false,
     justify: 'between',
     layout: 'sizes, prev, pager, next, jumper',
-    pageSize: 10,
-    pageSizes: () => [10, 20, 50, 100],
+    pageSize: 15,
+    pageSizes: () => [15, 20, 50, 100],
     showTotal: true,
     showPagination: true,
     size: '',
@@ -103,3 +103,4 @@ const handleSizeChange = (value: number) => {
   emit('size-change', value)
 }
 </script>
+

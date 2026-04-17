@@ -286,10 +286,7 @@ func (api *TrainingJobApi) HandleTerminal(c *gin.Context) {
 		logx.Error("WebSocket升级失败")
 		return
 	}
-	defer func() {
-		conn.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.CloseNormalClosure, "Terminal session ended"))
-		conn.Close()
-	}()
+	defer conn.Close()
 
 	// 7. 调用通用 Terminal 服务
 	termReq := &terminalService.TerminalRequest{
@@ -300,8 +297,12 @@ func (api *TrainingJobApi) HandleTerminal(c *gin.Context) {
 	}
 
 	if err := terminalService.TerminalServiceApp.HandleWebSocket(c.Request.Context(), termReq, conn); err != nil {
-		logx.Error("Terminal会话结束")
-		conn.WriteMessage(websocket.TextMessage, []byte("\r\n\033[31mError: "+err.Error()+"\033[0m\r\n"))
+		if terminalService.IsExpectedDisconnect(err) {
+			logx.Info("Terminal 会话已关闭")
+			return
+		}
+		logx.Error("Terminal会话结束", logx.Field("err", err))
+		_ = conn.WriteMessage(websocket.TextMessage, []byte("\r\n\033[31mError: "+err.Error()+"\033[0m\r\n"))
 	}
 }
 

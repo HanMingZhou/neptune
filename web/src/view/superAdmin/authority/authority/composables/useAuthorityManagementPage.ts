@@ -13,6 +13,7 @@ import type {
   AuthorityCopyPayload,
   AuthorityDialogType,
   AuthorityForm,
+  AuthorityListData,
   AuthorityOption,
   AuthorityTreeNode
 } from '@/types/superAdmin'
@@ -32,37 +33,6 @@ const createDefaultForm = (): AuthorityForm => ({
 
 const isDialogCancel = (error: unknown): error is 'cancel' | 'close' =>
   error === 'cancel' || error === 'close'
-
-const buildFilteredAuthorities = (
-  nodes: AuthorityTreeNode[] = [],
-  keyword = ''
-): AuthorityTreeNode[] => {
-  const normalizedKeyword = keyword.trim().toLowerCase()
-  if (!normalizedKeyword) {
-    return nodes
-  }
-
-  return nodes.reduce<AuthorityTreeNode[]>((accumulator, node) => {
-    const matchesKeyword =
-      String(node.authorityName || '')
-        .toLowerCase()
-        .includes(normalizedKeyword) ||
-      String(node.authorityId ?? '').includes(keyword.trim())
-
-    const filteredChildren = node.children?.length
-      ? buildFilteredAuthorities(node.children, keyword)
-      : []
-
-    if (matchesKeyword || filteredChildren.length > 0) {
-      accumulator.push({
-        ...node,
-        children: filteredChildren
-      })
-    }
-
-    return accumulator
-  }, [])
-}
 
 const buildAuthorityOptions = (
   authorityData: AuthorityTreeNode[] = [],
@@ -123,9 +93,13 @@ export function useAuthorityManagementPage({
   const drawer = ref(false)
   const form = reactive<AuthorityForm>(createDefaultForm())
   const loading = ref(false)
+  const page = ref(1)
+  const pageSize = ref(15)
   const searchKeyword = ref('')
   const submitting = ref(false)
   const tableData = ref<AuthorityTreeNode[]>([])
+  const pagedTableData = ref<AuthorityTreeNode[]>([])
+  const total = ref(0)
 
   const dialogTitle = computed(() => {
     if (dialogType.value === 'edit') {
@@ -160,10 +134,6 @@ export function useAuthorityManagementPage({
     ]
   }))
 
-  const filteredTableData = computed(() =>
-    buildFilteredAuthorities(tableData.value, searchKeyword.value)
-  )
-
   const authorityOptions = computed<AuthorityOption[]>(() => [
     {
       authorityId: 0,
@@ -178,16 +148,34 @@ export function useAuthorityManagementPage({
     disabledAuthorityId.value = null
   }
 
+  const loadAuthorityTree = async (): Promise<void> => {
+    const res = (await getAuthorityList()) as ApiResponse<AuthorityTreeNode[]>
+
+    if (res.code === 0) {
+      tableData.value = res.data ?? []
+      return
+    }
+
+    ElMessage.error(res.msg || translate('getRoleListFailed'))
+  }
+
   const getTableData = async (silent = false): Promise<void> => {
     if (!silent) {
       loading.value = true
     }
 
     try {
-      const res = (await getAuthorityList()) as ApiResponse<AuthorityTreeNode[]>
+      const res = (await getAuthorityList({
+        keyword: searchKeyword.value || undefined,
+        page: page.value,
+        pageSize: pageSize.value
+      })) as ApiResponse<AuthorityListData>
 
       if (res.code === 0) {
-        tableData.value = res.data ?? []
+        pagedTableData.value = res.data?.list ?? []
+        total.value = res.data?.total ?? 0
+        page.value = res.data?.page ?? page.value
+        pageSize.value = res.data?.pageSize ?? pageSize.value
       } else {
         ElMessage.error(res.msg || translate('getRoleListFailed'))
       }
@@ -202,15 +190,30 @@ export function useAuthorityManagementPage({
   }
 
   const initialize = async (): Promise<void> => {
-    await getTableData()
+    await Promise.all([getTableData(), loadAuthorityTree()])
   }
 
   const handleSearch = (): void => {
     searchKeyword.value = searchKeyword.value.trim()
+    page.value = 1
+    void getTableData()
   }
 
   const handleResetSearch = (): void => {
     searchKeyword.value = ''
+    page.value = 1
+    void getTableData()
+  }
+
+  const handleCurrentChange = (value: number): void => {
+    page.value = value
+    void getTableData()
+  }
+
+  const handleSizeChange = (value: number): void => {
+    page.value = 1
+    pageSize.value = value
+    void getTableData()
   }
 
   const openDrawer = (row: AuthorityTreeNode): void => {
@@ -268,6 +271,10 @@ export function useAuthorityManagementPage({
     resetForm()
   }
 
+  const refreshAfterMutation = async (): Promise<void> => {
+    await Promise.all([getTableData(), loadAuthorityTree()])
+  }
+
   const submitAuthorityForm = async (): Promise<void> => {
     submitting.value = true
 
@@ -281,17 +288,19 @@ export function useAuthorityManagementPage({
       let res
 
       if (dialogType.value === 'add') {
+        page.value = 1
         res = await createAuthority(authorityPayload)
       } else if (dialogType.value === 'edit') {
         res = await updateAuthority(authorityPayload)
       } else {
+        page.value = 1
         res = await copyAuthority(createCopyPayload(form, copySource.value))
       }
 
       if (res.code === 0) {
         ElMessage.success(res.msg || translate('success'))
         closeAuthorityForm()
-        await getTableData()
+        await refreshAfterMutation()
         return
       }
 
@@ -317,7 +326,10 @@ export function useAuthorityManagementPage({
       })
       if (res.code === 0) {
         ElMessage.success(res.msg || translate('success'))
-        await getTableData()
+        if (pagedTableData.value.length === 1 && page.value > 1) {
+          page.value -= 1
+        }
+        await refreshAfterMutation()
         return
       }
 
@@ -346,18 +358,23 @@ export function useAuthorityManagementPage({
     dialogType,
     drawer,
     editAuthority,
-    filteredTableData,
-    form,
     getTableData,
+    handleCurrentChange,
     handleResetSearch,
     handleSearch,
+    handleSizeChange,
     initialize,
     loading,
     openDrawer,
+    page,
+    pageSize,
+    pagedTableData,
     rules,
     searchKeyword,
     submitAuthorityForm,
     submitting,
-    tableData
+    tableData,
+    total
   }
 }
+

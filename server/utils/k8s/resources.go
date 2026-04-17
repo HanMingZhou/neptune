@@ -38,7 +38,7 @@ func (p *ProductSpec) HasGPU() bool {
 // BuildResources 根据产品规格构建 K8s 资源请求（统一入口）
 // GPU 产品 → nvidia.com/gpu
 // vGPU 产品 → volcano.sh/vgpu-number + volcano.sh/vgpu-memory + volcano.sh/vgpu-cores
-// CPU-only → 不设置 GPU 资源
+// CPU ONLY → 不设置 GPU 资源
 func BuildResources(product *ProductSpec) corev1.ResourceRequirements {
 	resources := corev1.ResourceRequirements{
 		Limits:   corev1.ResourceList{},

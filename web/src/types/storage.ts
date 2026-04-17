@@ -14,7 +14,10 @@ export interface StorageUsageReference {
 export interface StorageListItem extends Omit<ConsoleVolume, 'size'> {
   id: ResourceId
   name: string
+  pvcName?: string
   size?: string | number
+  requestedSize?: string | number
+  resizePending?: boolean
   productName?: string
   status?: string
   area?: string
@@ -26,6 +29,7 @@ export interface StorageClusterOption {
   id: ResourceId
   name?: string
   area?: string
+  harborAddr?: string
   [key: string]: unknown
 }
 
@@ -42,6 +46,11 @@ export interface StorageExpandForm {
   currentSize: string
   minSize: number
   newSize: number
+}
+
+export interface StorageEditForm {
+  id: ResourceId
+  name: string
 }
 
 export interface StorageAreaListData {

@@ -46,6 +46,7 @@ func toProductDetailResponse(p *productModel.Product) productRes.ProductDetailRe
 		StorageClass:      p.StorageClass,
 		StoragePriceGB:    p.StoragePriceGB,
 		MaxInstances:      p.MaxInstances,
+		UsedCapacity:      p.UsedCapacity,
 		Available:         p.AvailableCapacity(),
 		ClusterId:         p.ClusterId,
 	}
@@ -57,8 +58,16 @@ func (s *ProductService) GetProductById(ctx context.Context, productId uint) (*p
 	if err := global.GVA_DB.WithContext(ctx).Where("id = ? AND status = ?", productId, productModel.ProductStatusEnabled).First(&product).Error; err != nil {
 		return nil, err
 	}
+	if err := productModel.LoadPriceItems(ctx, global.GVA_DB, &product); err != nil {
+		return nil, err
+	}
 
 	resp := toProductDetailResponse(&product)
+	nodeStates := s.loadClusterNodeStates([]productModel.Product{product})
+	if nodeState, ok := nodeStates[product.ClusterId][product.NodeName]; ok {
+		resp.DriverVersion = firstNonEmpty(resp.DriverVersion, nodeState.DriverVersion)
+		resp.CUDAVersion = firstNonEmpty(resp.CUDAVersion, nodeState.CUDAVersion)
+	}
 	return &resp, nil
 }
 
@@ -88,10 +97,19 @@ func (s *ProductService) GetProductList(
 	if err := db.Offset(offset).Limit(pageSize).Order("sort_order ASC, id ASC").Find(&products).Error; err != nil {
 		return nil, err
 	}
+	if err := productModel.LoadPriceItemsForProducts(ctx, global.GVA_DB, products); err != nil {
+		return nil, err
+	}
 
+	nodeStates := s.loadClusterNodeStates(products)
 	list := make([]productRes.ProductDetailResponse, 0, len(products))
 	for _, p := range products {
-		list = append(list, toProductDetailResponse(&p))
+		detail := toProductDetailResponse(&p)
+		if nodeState, ok := nodeStates[p.ClusterId][p.NodeName]; ok {
+			detail.DriverVersion = firstNonEmpty(detail.DriverVersion, nodeState.DriverVersion)
+			detail.CUDAVersion = firstNonEmpty(detail.CUDAVersion, nodeState.CUDAVersion)
+		}
+		list = append(list, detail)
 	}
 
 	resp := &productRes.ProductListResponse{
@@ -124,6 +142,7 @@ func (s *ProductService) GetProductFilters(ctx context.Context, productType int)
 	if err := baseDb.Session(&gorm.Session{}).
 		Select("gpu_model as model, SUM(max_instances - used_capacity) as available, SUM(max_instances) as total").
 		Where("gpu_model != '' AND gpu_model IS NOT NULL").
+		Where("COALESCE(v_gpu_number, 0) = 0 AND COALESCE(v_gpu_memory, 0) = 0 AND COALESCE(v_gpu_cores, 0) = 0").
 		Group("gpu_model").
 		Scan(&resp.GPUModels).Error; err != nil {
 		return resp, err
@@ -132,9 +151,10 @@ func (s *ProductService) GetProductFilters(ctx context.Context, productType int)
 	// 获取vGPU型号列表
 	resp.VGPUModels = make([]productRes.VGPUModelInfo, 0)
 	if err := baseDb.Session(&gorm.Session{}).
-		Select("v_gpu_memory as memory, SUM(max_instances - used_capacity) as available, SUM(max_instances) as total").
+		Select("gpu_model as model, v_gpu_number, v_gpu_memory, v_gpu_cores, SUM(max_instances - used_capacity) as available, SUM(max_instances) as total").
+		Where("gpu_model != '' AND gpu_model IS NOT NULL").
 		Where("v_gpu_number > 0 OR v_gpu_memory > 0 OR v_gpu_cores > 0").
-		Group("v_gpu_memory").
+		Group("gpu_model, v_gpu_number, v_gpu_memory, v_gpu_cores").
 		Scan(&resp.VGPUModels).Error; err != nil {
 		return resp, err
 	}
@@ -178,6 +198,9 @@ func (s *ProductService) ReserveCapacityWithCount(ctx context.Context, productId
 	if err := global.GVA_DB.WithContext(ctx).Where("id = ? AND status = ?", productId, productModel.ProductStatusEnabled).First(&p).Error; err != nil {
 		return nil, errors.New("产品不存在或已下架")
 	}
+	if err := productModel.LoadPriceItems(ctx, global.GVA_DB, &p); err != nil {
+		return nil, err
+	}
 
 	// 2. 快速检查（无锁，避免不必要的加锁开销）
 	if p.AvailableCapacity() < count {
@@ -195,6 +218,9 @@ func (s *ProductService) ReserveCapacityWithCount(ctx context.Context, productId
 	// 二次查询同样需要带 status 过滤，防止加锁期间产品被下架仍能锁定资源
 	if err = global.GVA_DB.WithContext(ctx).Where("id = ? AND status = ?", productId, productModel.ProductStatusEnabled).First(&p).Error; err != nil {
 		return nil, errors.New("产品不存在或已下架")
+	}
+	if err = productModel.LoadPriceItems(ctx, global.GVA_DB, &p); err != nil {
+		return nil, err
 	}
 	if p.AvailableCapacity() < count {
 		return nil, ErrCapacityInsufficient

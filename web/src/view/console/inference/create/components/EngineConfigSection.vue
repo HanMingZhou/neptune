@@ -1,10 +1,10 @@
 <template>
   <div class="space-y-6">
     <div
-      class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6"
+      class="console-create-card console-create-card--section w-full"
     >
-      <h3 class="text-base font-bold mb-6 flex items-center gap-2">
-        <span class="w-1 h-4 bg-primary rounded"></span>
+      <h3 class="console-create-card__title mb-6">
+        <span class="console-create-card__title-marker"></span>
         {{ t('engineConfig') }}
       </h3>
       <el-form
@@ -82,10 +82,10 @@
 
     <div
       v-if="form.deployType === 'DISTRIBUTED'"
-      class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6"
+      class="console-create-card console-create-card--section w-full"
     >
-      <h3 class="text-base font-bold mb-6 flex items-center gap-2">
-        <span class="w-1 h-4 bg-primary rounded"></span>
+      <h3 class="console-create-card__title mb-6">
+        <span class="console-create-card__title-marker"></span>
         {{ t('inference.distributedConfig') }}
       </h3>
       <div
@@ -210,10 +210,10 @@
     </div>
 
     <div
-      class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6"
+      class="console-create-card console-create-card--section w-full"
     >
-      <h3 class="text-base font-bold mb-6 flex items-center gap-2">
-        <span class="w-1 h-4 bg-primary rounded"></span>
+      <h3 class="console-create-card__title mb-6">
+        <span class="console-create-card__title-marker"></span>
         {{ t('inference.modelConfig') }}
       </h3>
       <el-form

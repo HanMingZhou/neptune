@@ -1,5 +1,5 @@
 <template>
-  <div class="console-page-container space-y-8">
+  <div class="console-page-container flex min-h-full flex-col gap-8">
     <BaseTableToolbar
       :description="t('transactionsDesc')"
       :show-refresh="false"
@@ -18,7 +18,7 @@
     </BaseTableToolbar>
 
     <div
-      class="bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl overflow-hidden shadow-sm"
+      class="flex min-h-0 flex-1 flex-col bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl overflow-hidden shadow-sm"
     >
       <TransactionsFiltersBar
         v-model:search-query="searchQuery"
@@ -29,6 +29,7 @@
       />
 
       <TransactionsTableSection
+        class="min-h-0 flex-1"
         v-model:page="page"
         v-model:page-size="pageSize"
         :items="transactions"

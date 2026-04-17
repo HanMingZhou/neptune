@@ -125,8 +125,12 @@ func (a *NoteBookApi) HandleTerminal(c *gin.Context) {
 		Command:   []string{"/bin/bash"},
 	}
 	if err := terminalService.TerminalServiceApp.HandleWebSocket(c.Request.Context(), termReq, conn); err != nil {
-		logx.Error("Notebook Terminal会话结束")
-		conn.WriteMessage(websocket.TextMessage, []byte("\r\n\033[31mError: "+err.Error()+"\033[0m\r\n"))
+		if terminalService.IsExpectedDisconnect(err) {
+			logx.Info("Notebook Terminal 会话已关闭")
+			return
+		}
+		logx.Error("Notebook Terminal会话结束", logx.Field("err", err))
+		_ = conn.WriteMessage(websocket.TextMessage, []byte("\r\n\033[31mError: "+err.Error()+"\033[0m\r\n"))
 	}
 }
 

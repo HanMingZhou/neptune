@@ -1,22 +1,28 @@
 <template>
-  <div class="console-page-container space-y-6">
+  <div class="console-page-container flex min-h-full flex-col gap-6">
     <AuthorityManagementHeader
       :loading="loading"
       @create="addAuthority(0)"
-      @refresh="getTableData"
+      @refresh="initialize"
     />
 
     <AuthorityTableCard
-      :items="filteredTableData"
+      class="min-h-0 flex-1"
+      :items="pagedTableData"
       :loading="loading"
+      :page="page"
+      :page-size="pageSize"
       :search-keyword="searchKeyword"
+      :total="total"
       @add-child="addAuthority"
       @configure="openDrawer"
       @copy="copyAuthorityFunc"
       @delete="deleteAuth"
       @edit="editAuthority"
+      @page-change="handleCurrentChange"
       @reset="handleResetSearch"
       @search="handleSearch"
+      @size-change="handleSizeChange"
       @update:search-keyword="searchKeyword = $event"
     />
 
@@ -62,19 +68,23 @@ const {
   dialogType,
   drawer,
   editAuthority,
-  filteredTableData,
   form,
-  getTableData,
+  handleCurrentChange,
   handleResetSearch,
   handleSearch,
+  handleSizeChange,
   initialize,
   loading,
   openDrawer,
+  page,
+  pageSize,
+  pagedTableData,
   rules,
   searchKeyword,
   submitAuthorityForm,
   submitting,
-  tableData
+  tableData,
+  total
 } = useAuthorityManagementPage({ t })
 
 onMounted(() => {

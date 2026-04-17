@@ -58,7 +58,7 @@ export function useApiManagementPage({ t }: UseApiManagementPageOptions = {}) {
   const form = reactive<ApiForm>(createDefaultForm())
   const loading = ref(false)
   const page = ref(1)
-  const pageSize = ref(10)
+  const pageSize = ref(15)
   const searchApiGroup = ref('')
   const searchDescription = ref('')
   const searchMethod = ref('')
@@ -471,3 +471,4 @@ export function useApiManagementPage({ t }: UseApiManagementPageOptions = {}) {
     total
   }
 }
+

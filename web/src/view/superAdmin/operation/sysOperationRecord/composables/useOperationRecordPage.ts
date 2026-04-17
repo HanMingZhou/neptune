@@ -44,7 +44,7 @@ export function useOperationRecordPage({
 
   const loading = ref(false)
   const page = ref(1)
-  const pageSize = ref(10)
+  const pageSize = ref(15)
   const searchInfo = reactive<OperationRecordSearchInfo>(
     createDefaultSearchInfo()
   )
@@ -230,3 +230,4 @@ export function useOperationRecordPage({
     total
   }
 }
+

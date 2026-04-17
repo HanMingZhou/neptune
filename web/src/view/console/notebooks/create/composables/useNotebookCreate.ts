@@ -1,4 +1,4 @@
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import type { Router } from 'vue-router'
 import { getProductFilters, getProductList } from '@/api/product'
@@ -18,6 +18,11 @@ import {
   validateK8sResourceName,
   validateTensorBoardPath
 } from '@/utils/resourceValidators'
+import {
+  buildGpuResourceFilterOptions,
+  findGpuResourceFilterOption
+} from '@/utils/gpuFilters'
+import { decorateConsoleImages } from '@/utils/imageRegistry'
 import type {
   ConsoleImage,
   ConsoleProduct,
@@ -97,6 +102,10 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
   })
 
   const payTypes = NOTEBOOK_PAY_TYPES
+
+  const selectedImageRecord = computed(
+    () => images.value.find((item) => item.id === selectedImage.value) || null
+  )
 
   const imageTabs = computed(() =>
     NOTEBOOK_IMAGE_TABS.map((tab) => ({
@@ -266,7 +275,7 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
     selectedProduct.value = nextSelected
   }
 
-  const loadProducts = async (): Promise<void> => {
+  const loadProducts = async (clusterId?: ResourceId | null): Promise<void> => {
     try {
       const params: {
         page: number
@@ -274,12 +283,40 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
         productType: number
         area?: string
         gpuModel?: string
+        gpuResourceType?: 'gpu' | 'vgpu'
+        vGpuNumber?: number
+        vGpuMemory?: number
+        vGpuCores?: number
         cpuModel?: string
+        clusterId?: ResourceId
       } = { page: 1, pageSize: 100, productType: 1 }
 
       if (filters.value.area) params.area = filters.value.area
-      if (filters.value.gpuModel) params.gpuModel = filters.value.gpuModel
+      if (filters.value.gpuModel) {
+        const selectedGpuFilter = findGpuResourceFilterOption(
+          gpuModels.value,
+          filters.value.gpuModel
+        )
+
+        if (selectedGpuFilter) {
+          params.gpuModel =
+            selectedGpuFilter.gpuModel || selectedGpuFilter.model || ''
+          params.gpuResourceType = selectedGpuFilter.resourceType
+
+          if (selectedGpuFilter.resourceType === 'vgpu') {
+            params.vGpuNumber = selectedGpuFilter.vGpuNumber
+            params.vGpuMemory = selectedGpuFilter.vGpuMemory
+            params.vGpuCores = selectedGpuFilter.vGpuCores
+          }
+        } else {
+          params.gpuModel = filters.value.gpuModel
+        }
+      }
       if (filters.value.cpuModel) params.cpuModel = filters.value.cpuModel
+      if (clusterId || selectedImageRecord.value?.clusterId) {
+        params.clusterId = (clusterId ||
+          selectedImageRecord.value?.clusterId) as ResourceId
+      }
 
       const res = (await getProductList(params)) as ApiResponse<
         ListData<ConsoleProduct>
@@ -302,7 +339,7 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
       })) as ApiResponse<ProductFilterData>
       if (res.code === 0) {
         areas.value = res.data?.areas || []
-        gpuModels.value = res.data?.gpuModels || []
+        gpuModels.value = buildGpuResourceFilterOptions(res.data, translate)
         cpuModels.value = res.data?.cpuModels || []
       }
     } catch (error) {
@@ -310,23 +347,31 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
     }
   }
 
-  const loadImages = async (): Promise<void> => {
+  const loadImages = async (clusterId?: ResourceId | null): Promise<void> => {
     try {
       const params: {
         page: number
         pageSize: number
         usageType: number
         type?: number
+        clusterId?: ResourceId
       } = { page: 1, pageSize: 100, usageType: 1 }
 
       if (activeTab.value === 'base') params.type = 1
       if (activeTab.value === 'my') params.type = 2
+      if (clusterId || selectedProduct.value?.clusterId) {
+        params.clusterId = (clusterId ||
+          selectedProduct.value?.clusterId) as ResourceId
+      }
 
       const res = (await getImageList(params)) as ApiResponse<
         ListData<ConsoleImage>
       >
       if (res.code === 0) {
-        images.value = res.data?.list || []
+        images.value = decorateConsoleImages(res.data?.list || [])
+        if (!images.value.some((item) => item.id === selectedImage.value)) {
+          selectedImage.value = ''
+        }
       }
     } catch (error) {
       console.error('加载镜像失败', error)
@@ -379,6 +424,7 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
     gpuCount.value = 1
     selectedVolumeId.value = null
     volumeMountPath.value = DEFAULT_VOLUME_MOUNT_PATH
+    void loadImages(product.clusterId)
     void loadVolumes()
   }
 
@@ -396,6 +442,7 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
   const changeImageTab = (tab: NotebookImageTab): void => {
     activeTab.value = tab
     selectedImage.value = ''
+    void loadProducts()
     void loadImages()
   }
 
@@ -471,11 +518,33 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
   }
 
   onMounted(() => {
-    void loadProducts()
     void loadFilters()
-    void loadImages()
     void loadSSHKeys()
+    void (async () => {
+      await loadProducts()
+      await loadImages(selectedProduct.value?.clusterId)
+    })()
   })
+
+  watch(
+    () => selectedImage.value,
+    (value) => {
+      if (!value || !selectedImageRecord.value?.clusterId) {
+        return
+      }
+
+      void loadProducts(selectedImageRecord.value.clusterId)
+    }
+  )
+
+  watch(
+    () => selectedProduct.value?.id ?? null,
+    (value) => {
+      if (!value && !selectedImageRecord.value?.clusterId) {
+        void loadImages()
+      }
+    }
+  )
 
   return {
     activeTab,

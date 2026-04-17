@@ -111,7 +111,39 @@ func (v *VolumeApi) ExpandVolume(c *gin.Context) {
 		return
 	}
 
-	response.OkWithMessage("扩容成功", c)
+	response.OkWithMessage("扩容请求已提交，请稍后刷新查看实际容量", c)
+}
+
+// UpdateVolume 编辑文件存储
+// @Tags Volume
+// @Summary 编辑文件存储
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body pvcReq.UpdateVolumeReq true "编辑参数"
+// @Success 200 {object} response.Response{msg=string} "编辑成功"
+// @Router /api/v1/volume/update [post]
+func (v *VolumeApi) UpdateVolume(c *gin.Context) {
+	var req pvcReq.UpdateVolumeReq
+	if err := c.ShouldBindJSON(&req); err != nil {
+		utils.HandleError(c, err, "参数错误:")
+		return
+	}
+
+	userId := utils.GetUserID(c)
+	if userId == 0 {
+		utils.HandleError(c, errors.New("请先登录"), "请先登录")
+		return
+	}
+	req.UserId = userId
+
+	if err := volumeService.UpdateVolume(c.Request.Context(), &req); err != nil {
+		logx.Error("编辑存储失败")
+		utils.HandleError(c, err, "")
+		return
+	}
+
+	response.OkWithMessage("编辑成功", c)
 }
 
 // DeleteVolume 删除文件存储

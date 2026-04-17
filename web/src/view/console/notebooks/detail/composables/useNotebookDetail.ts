@@ -20,6 +20,14 @@ import {
 } from '@/api/notebook'
 import { useUserStore } from '@/pinia/modules/user'
 import type { ApiResponse } from '@/utils/request'
+import {
+  createTerminalClipboardBridge,
+  type TerminalClipboardBridge
+} from '@/utils/terminalClipboard'
+import {
+  createTerminalOutputBuffer,
+  type TerminalOutputBuffer
+} from '@/utils/terminalOutputBuffer'
 import type {
   ConsoleNotebookDetail,
   ConsoleNotebookVolumeMount,
@@ -31,6 +39,8 @@ import type {
 interface DisposableLike {
   dispose: () => void
 }
+
+const DEFAULT_WORKSPACE_PATH = '/home/workspace'
 
 type NotebookLike = Partial<ConsoleNotebookDetail>
 
@@ -44,13 +54,30 @@ const normalizeStatus = (status: unknown): string =>
 const normalizeVolumeMounts = (
   volumeMounts: ConsoleNotebookDetail['volumeMounts']
 ): ConsoleNotebookVolumeMount[] => {
-  if (Array.isArray(volumeMounts)) return volumeMounts
+  if (Array.isArray(volumeMounts)) {
+    return volumeMounts.filter((mount) => {
+      const mountPath = `${mount.mountsPath || mount.mountPath || ''}`.trim()
+      const pvcName = `${mount.pvcName || ''}`.trim()
+      return (
+        mountPath !== DEFAULT_WORKSPACE_PATH &&
+        (Boolean(pvcName) || Number(mount.pvcId) > 0)
+      )
+    })
+  }
 
   if (typeof volumeMounts === 'string' && volumeMounts.trim()) {
     try {
       const parsed = JSON.parse(volumeMounts) as unknown
       return Array.isArray(parsed)
-        ? (parsed as ConsoleNotebookVolumeMount[])
+        ? (parsed as ConsoleNotebookVolumeMount[]).filter((mount) => {
+            const mountPath =
+              `${mount.mountsPath || mount.mountPath || ''}`.trim()
+            const pvcName = `${mount.pvcName || ''}`.trim()
+            return (
+              mountPath !== DEFAULT_WORKSPACE_PATH &&
+              (Boolean(pvcName) || Number(mount.pvcId) > 0)
+            )
+          })
         : []
     } catch (_error) {
       console.warn('解析挂载卷数据失败', _error)
@@ -107,6 +134,8 @@ export const useNotebookDetail = () => {
   let resizeObserver: ResizeObserver | null = null
   let ws: WebSocket | null = null
   let dataSubscription: DisposableLike | null = null
+  let terminalClipboardBridge: TerminalClipboardBridge | null = null
+  let terminalOutputBuffer: TerminalOutputBuffer | null = null
 
   const setLogsRef = (element: HTMLElement | null): void => {
     logsRef.value = element
@@ -236,6 +265,16 @@ export const useNotebookDetail = () => {
       ws = null
     }
 
+    if (terminalClipboardBridge) {
+      terminalClipboardBridge.dispose()
+      terminalClipboardBridge = null
+    }
+
+    if (terminalOutputBuffer) {
+      terminalOutputBuffer.dispose()
+      terminalOutputBuffer = null
+    }
+
     if (terminal) {
       terminal.dispose()
       terminal = null
@@ -298,6 +337,29 @@ export const useNotebookDetail = () => {
       }
     })
 
+    terminalOutputBuffer = createTerminalOutputBuffer(terminal, {
+      onOverflow: () => {
+        ElMessage.warning(t('terminalHighOutputWarning'))
+      }
+    })
+    terminalClipboardBridge = createTerminalClipboardBridge(
+      terminal,
+      terminalContainer,
+      {
+        sendData: (data) => {
+          if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.send(data)
+          }
+        },
+        notifyCopyError: () => {
+          ElMessage.error(t('copyFailed'))
+        },
+        notifyPasteError: () => {
+          ElMessage.error(t('pasteFailed'))
+        }
+      }
+    )
+
     fitAddon = new FitAddon()
     terminal.loadAddon(fitAddon)
     terminal.open(terminalContainer)
@@ -324,12 +386,14 @@ export const useNotebookDetail = () => {
     }
 
     ws.onmessage = (event: MessageEvent<string>) => {
-      terminal?.write(event.data)
+      terminalOutputBuffer?.push(event.data)
     }
 
     ws.onclose = () => {
       terminalConnected.value = false
-      terminal?.write('\r\n\x1b[31mConnection disconnected.\x1b[0m\r\n')
+      terminalOutputBuffer?.push(
+        '\r\n\x1b[31mConnection disconnected.\x1b[0m\r\n'
+      )
     }
 
     ws.onerror = () => {

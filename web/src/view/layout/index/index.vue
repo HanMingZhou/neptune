@@ -11,6 +11,7 @@
 
       <div class="flex-1 flex flex-col min-w-0">
         <LayoutHeaderBar
+          :dynamic-navigation="dynamicNavigation"
           :lang="lang"
           :user-balance="userBalance"
           :user-info="userInfo"
@@ -20,7 +21,7 @@
         />
 
         <main
-          class="workspace-shell flex-1 min-w-0 overflow-x-hidden overflow-y-auto custom-scrollbar py-6 lg:py-8 bg-background-light dark:bg-background-dark"
+          class="workspace-shell flex min-h-0 flex-1 flex-col min-w-0 overflow-x-hidden overflow-y-auto custom-scrollbar py-6 lg:py-8 bg-background-light dark:bg-background-dark"
         >
           <router-view v-slot="{ Component, route: currentRoute }">
             <keep-alive :include="routerStore.keepAliveRouters">

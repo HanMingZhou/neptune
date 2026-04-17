@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <div class="overflow-x-auto">
+  <div class="flex flex-col overflow-hidden">
+    <div
+      class="console-table-scroll console-table-scroll--fill flex-1 overflow-x-auto"
+    >
       <table class="console-table w-full">
         <thead>
           <tr
@@ -67,12 +69,14 @@
                 {{ tx.amount }}
               </span>
             </td>
-            <td class="px-4 py-3 whitespace-nowrap">
-              <span
-                class="console-amount-chip console-amount-chip--neutral font-mono"
-              >
-                ¥{{ tx.balanceAfter.toFixed(2) }}
-              </span>
+            <td class="transactions-balance-cell px-4 py-3 whitespace-nowrap">
+              <div class="flex w-full justify-center">
+                <span
+                  class="console-amount-chip console-amount-chip--neutral font-mono"
+                >
+                  ¥{{ tx.balanceAfter.toFixed(2) }}
+                </span>
+              </div>
             </td>
             <td class="px-4 py-3">
               <span
@@ -106,7 +110,7 @@
         :total="total"
         :show-total="false"
         justify="end"
-        :page-sizes="[10, 20, 50, 100]"
+        :page-sizes="[15, 20, 50, 100]"
         layout="total, sizes, prev, pager, next, jumper"
         @current-change="$emit('page-change', $event)"
         @size-change="$emit('size-change', $event)"
@@ -145,4 +149,17 @@ const pageSizeModel = computed({
   get: () => props.pageSize,
   set: (value: number) => emit('update:page-size', value)
 })
+
 </script>
+
+<style scoped>
+.transactions-balance-cell :deep(.console-amount-chip) {
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 16px;
+  padding-inline: 0.42rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+</style>
+

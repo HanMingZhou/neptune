@@ -8,35 +8,54 @@
           <span class="w-1 h-4 bg-primary rounded"></span>
           {{ t('basicInfo') }}
         </h3>
-        <div class="detail-info-grid detail-info-grid--flat">
+        <div class="detail-info-grid detail-info-grid--flat detail-info-grid--inline">
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('name') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="notebook.displayName || '-'"
+              class="detail-info-value"
+            >
               {{ notebook.displayName || '-' }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('instanceId') }}</div>
-            <div class="detail-info-value detail-info-value--mono">
+            <div
+              :title="notebook.instanceName || '-'"
+              class="detail-info-value detail-info-value--important detail-info-value--mono"
+            >
               {{ notebook.instanceName || '-' }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('status') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="getStatusLabel(notebook.status)"
+              class="detail-info-value detail-info-value--important"
+            >
               {{ getStatusLabel(notebook.status) }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('createdAt') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="formatTime(notebook.createdAt)"
+              class="detail-info-value"
+            >
               {{ formatTime(notebook.createdAt) }}
             </div>
           </div>
-          <div class="detail-info-item detail-info-item--wide">
+          <div class="detail-info-item detail-info-item--wide detail-info-item--stack">
             <div class="detail-info-label">{{ t('image') }}</div>
-            <div class="detail-inline-chip detail-info-value--mono break-all">
-              {{ notebook.imageName || '-' }}
+            <div
+              class="detail-code-surface detail-code-surface--soft detail-code-surface--single"
+            >
+              <code
+                :title="notebook.imageName || '-'"
+                class="detail-info-value--mono"
+              >
+                {{ notebook.imageName || '-' }}
+              </code>
             </div>
           </div>
         </div>
@@ -52,25 +71,46 @@
           {{ t('resourceConfig') }}
         </h3>
         <div
-          class="detail-info-grid detail-info-grid--flat detail-info-grid--triple-align"
+          class="detail-info-grid detail-info-grid--flat detail-info-grid--inline"
         >
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('cpu') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="`${notebook.cpu || 0} ${t('cpu')}`"
+              class="detail-info-value"
+            >
               {{ notebook.cpu }} {{ t('cpu') }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('memory') }}</div>
-            <div class="detail-info-value">{{ notebook.memory }} GB</div>
+            <div
+              :title="`${notebook.memory || 0} GB`"
+              class="detail-info-value"
+            >
+              {{ notebook.memory }} GB
+            </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('gpu') }}</div>
-            <div class="detail-info-value">
-              <span v-if="notebook.gpuCount" class="text-primary font-bold"
-                >{{ notebook.gpuCount }} × {{ notebook.gpuModel }}</span
-              >
-              <span v-else class="text-slate-400">{{ t('CPU ONLY') }}</span>
+            <div
+              :title="
+                notebook.gpuCount
+                  ? `${notebook.gpuCount} × ${notebook.gpuModel || 'GPU'}`
+                  : hasVGpuSpec(notebook)
+                    ? `vGPU / ${formatVGpuSpec(notebook, { detailed: true, t })}`
+                    : t('CPU ONLY')
+              "
+              class="detail-info-value detail-info-value--important"
+            >
+              <span v-if="notebook.gpuCount">
+                {{ notebook.gpuCount }} × {{ notebook.gpuModel }}
+              </span>
+              <span v-else-if="hasVGpuSpec(notebook)">
+                {{ notebook.gpuModel || t('gpu') }} vGPU ·
+                {{ formatVGpuSpec(notebook, { detailed: true, t }) }}
+              </span>
+              <span v-else>{{ t('CPU ONLY') }}</span>
             </div>
           </div>
         </div>
@@ -86,17 +126,23 @@
           {{ t('order') }}
         </h3>
         <div
-          class="detail-info-grid detail-info-grid--flat detail-info-grid--triple-align"
+          class="detail-info-grid detail-info-grid--flat detail-info-grid--inline"
         >
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('payType') }}</div>
-            <div class="detail-info-value">
+            <div
+              :title="getPayTypeLabel(notebook.payType)"
+              class="detail-info-value"
+            >
               {{ getPayTypeLabel(notebook.payType) }}
             </div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('unitPrice') }}</div>
-            <div class="detail-info-value text-red-500">
+            <div
+              :title="`￥${formatPrice(notebook.price)} / ${getUnitPriceLabel(notebook.payType)}`"
+              class="detail-info-value detail-info-value--important"
+            >
               ￥{{ formatPrice(notebook.price) }} /
               {{ getUnitPriceLabel(notebook.payType) }}
             </div>
@@ -114,10 +160,13 @@
           <span class="w-1 h-4 bg-primary rounded"></span>
           TensorBoard
         </h3>
-        <div class="detail-info-grid detail-info-grid--flat">
+        <div class="detail-info-grid detail-info-grid--flat detail-info-grid--inline">
           <div class="detail-info-item">
             <div class="detail-info-label">{{ t('logPath') }}</div>
-            <div class="detail-info-value detail-info-value--mono">
+            <div
+              :title="notebook.tensorboardLogPath || 'logs'"
+              class="detail-info-value detail-info-value--mono"
+            >
               {{ notebook.tensorboardLogPath || 'logs' }}
             </div>
           </div>
@@ -126,7 +175,8 @@
             <a
               :href="notebook.tensorboardUrl"
               target="_blank"
-              class="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+              :title="notebook.tensorboardUrl"
+              class="detail-info-value detail-info-link"
             >
               <span class="material-icons text-base">open_in_new</span>
               {{ t('openTensorboard') }}
@@ -148,12 +198,14 @@
             <thead>
               <tr>
                 <th>{{ t('storage') }}</th>
+                <th>{{ t('pvc') }}</th>
                 <th>{{ t('mountPath') }}</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(mount, index) in volumeMounts" :key="index">
-                <td>{{ mount.pvcName || '-' }}</td>
+                <td>{{ mount.name || '-' }}</td>
+                <td class="detail-info-value--mono">{{ mount.pvcName || '-' }}</td>
                 <td class="detail-info-value--mono">
                   {{ mount.mountsPath || mount.mountPath || '-' }}
                 </td>
@@ -176,6 +228,7 @@ import type {
   ConsoleNotebookVolumeMount,
   Translator
 } from '@/types/consoleResource'
+import { formatVGpuSpec, hasVGpuSpec } from '@/utils/vgpu'
 
 type FormatTime = (value?: string | number | null) => string
 type StatusLabelGetter = (status?: string) => string

@@ -27,6 +27,15 @@ export const expandVolume = (data: any) => {
   })
 }
 
+// 编辑文件存储
+export const updateVolume = (data: any) => {
+  return service({
+    url: '/api/v1/volume/update',
+    method: 'post',
+    data
+  })
+}
+
 // 删除文件存储
 export const deleteVolume = (data: any) => {
   return service({

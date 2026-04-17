@@ -112,6 +112,7 @@ type TrainingJobDetail struct {
 type TrainingJobMountDetail struct {
 	MountType string `json:"mountType"` // 挂载类型
 	SourceId  uint   `json:"sourceId"`  // 资源引用ID
+	Name      string `json:"name"`      // 文件存储名称
 	PvcName   string `json:"pvcName"`   // PVC名称
 	SubPath   string `json:"subPath"`   // 子路径
 	MountPath string `json:"mountPath"` // 容器内挂载路径

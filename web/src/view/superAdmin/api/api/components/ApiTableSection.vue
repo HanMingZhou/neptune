@@ -62,7 +62,7 @@ withDefaults(
     loading: false,
     methodOptions: () => [],
     page: 1,
-    pageSize: 10,
+    pageSize: 15,
     searchApiGroup: '',
     searchDescription: '',
     searchMethod: '',
@@ -87,3 +87,4 @@ const emit = defineEmits<{
   'update:search-path': [value: string]
 }>()
 </script>
+

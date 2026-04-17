@@ -55,6 +55,7 @@ export interface AddMenuParams {
 export interface MenuListParams {
   page?: number
   pageSize?: number
+  keyword?: string
 }
 
 // @Summary 用户登录 获取动态路由
