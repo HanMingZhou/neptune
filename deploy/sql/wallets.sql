@@ -1,0 +1,4 @@
+UPDATE aiInfra.wallets SET created_at = '2026-02-23 12:27:44.944', updated_at = '2026-04-17 15:47:53.013', deleted_at = null, user_id = 1, balance = 1000000285.798140, frozen = 0.000000, version = 250 WHERE id = 1;
+UPDATE aiInfra.wallets SET created_at = '2026-02-25 00:48:42.732', updated_at = '2026-02-25 00:48:42.735', deleted_at = null, user_id = 2, balance = 1000000.000000, frozen = 0.000000, version = 0 WHERE id = 2;
+UPDATE aiInfra.wallets SET created_at = '2026-02-25 01:09:53.027', updated_at = '2026-02-25 01:09:53.027', deleted_at = null, user_id = 4, balance = 0.000000, frozen = 0.000000, version = 0 WHERE id = 3;
+UPDATE aiInfra.wallets SET created_at = '2026-04-16 21:43:13.738', updated_at = '2026-04-16 21:43:13.738', deleted_at = null, user_id = 5, balance = 0.000000, frozen = 0.000000, version = 0 WHERE id = 4;

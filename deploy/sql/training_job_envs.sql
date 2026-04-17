@@ -1,0 +1,4 @@
+UPDATE aiInfra.training_job_envs SET created_at = '2026-02-21 22:22:47.127', updated_at = '2026-02-21 22:22:47.127', deleted_at = null, job_id = 56, name = '--log-dir', value = '/mpi/logs' WHERE id = 1;
+UPDATE aiInfra.training_job_envs SET created_at = '2026-04-03 21:41:34.731', updated_at = '2026-04-03 21:41:34.731', deleted_at = null, job_id = 85, name = '--log-dir', value = ' /home/notebook/neptune/logs' WHERE id = 2;
+UPDATE aiInfra.training_job_envs SET created_at = '2026-04-03 21:44:21.242', updated_at = '2026-04-03 21:44:21.242', deleted_at = null, job_id = 86, name = '-log-dir', value = '/train/logs' WHERE id = 3;
+UPDATE aiInfra.training_job_envs SET created_at = '2026-04-03 21:46:27.231', updated_at = '2026-04-03 21:46:27.231', deleted_at = null, job_id = 87, name = '--log-dir', value = '/train/logs' WHERE id = 4;
