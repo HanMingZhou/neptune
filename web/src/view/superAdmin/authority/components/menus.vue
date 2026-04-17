@@ -163,7 +163,18 @@ const menuDefaultProps = {
   disabled: (data: MenuTreeNode) => props.row.defaultRouter === data.name
 }
 
+const applyCheckedKeys = async (keys: number[]): Promise<void> => {
+  await nextTick()
+  menuTree.value?.setCheckedKeys([])
+  if (keys.length > 0) {
+    menuTree.value?.setCheckedKeys(keys)
+  }
+}
+
 const init = async (): Promise<void> => {
+  menuTreeIds.value = []
+  await applyCheckedKeys([])
+
   const menuTreeRes = (await getBaseMenuTree()) as ApiResponse<{
     menus?: MenuTreeNode[]
   }>
@@ -174,7 +185,7 @@ const init = async (): Promise<void> => {
     props.row.authorityId === null ||
     props.row.authorityId === ''
   ) {
-    menuTreeIds.value = []
+    await applyCheckedKeys([])
     return
   }
 
@@ -192,9 +203,16 @@ const init = async (): Promise<void> => {
   })
 
   menuTreeIds.value = nextIds
+  await applyCheckedKeys(nextIds)
 }
 
-void init()
+watch(
+  () => props.row.authorityId,
+  () => {
+    void init()
+  },
+  { immediate: true }
+)
 
 const setDefault = async (data: MenuTreeNode): Promise<void> => {
   if (
@@ -207,7 +225,7 @@ const setDefault = async (data: MenuTreeNode): Promise<void> => {
 
   const res = (await updateAuthority({
     authorityId: props.row.authorityId,
-    AuthorityName: props.row.authorityName,
+    authorityName: props.row.authorityName,
     parentId: props.row.parentId,
     defaultRouter: data.name
   })) as ApiResponse<{ authority?: { defaultRouter?: string } }>

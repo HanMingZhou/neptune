@@ -358,6 +358,7 @@ export function useAuthorityManagementPage({
     dialogType,
     drawer,
     editAuthority,
+    form,
     getTableData,
     handleCurrentChange,
     handleResetSearch,
@@ -377,4 +378,3 @@ export function useAuthorityManagementPage({
     total
   }
 }
-

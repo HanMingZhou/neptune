@@ -7,18 +7,22 @@
     width="600px"
   >
     <div class="space-y-4">
-      <div class="flex items-start gap-3">
+      <div class="flex flex-col items-stretch gap-3 sm:flex-row">
         <el-input
+          class="flex-1"
           :model-value="newKeyName"
           :placeholder="t('inference.inputKeyName')"
+          size="large"
           @update:model-value="emit('update:new-key-name', $event)"
         />
         <el-button
+          class="shrink-0 sm:self-auto"
           type="primary"
+          size="large"
           :disabled="!newKeyName.trim()"
           @click="emit('create')"
         >
-          <span class="material-icons mr-1 text-lg">add</span>
+          <span class="material-icons mr-1 text-base">add</span>
           {{ t('inference.createKey') }}
         </el-button>
       </div>

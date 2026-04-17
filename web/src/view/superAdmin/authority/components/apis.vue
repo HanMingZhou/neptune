@@ -126,6 +126,14 @@ const apiTree = ref<TreeInstance | null>(null)
 const isAllExpanded = ref(true)
 const isAllSelected = ref(false)
 
+const applyCheckedKeys = async (keys: string[]): Promise<void> => {
+  await nextTick()
+  apiTree.value?.setCheckedKeys([])
+  if (keys.length > 0) {
+    apiTree.value?.setCheckedKeys(keys)
+  }
+}
+
 const buildApiTree = (apis: ApiListItem[] = []): ApiTreeGroupNode[] => {
   const apiGroups: Record<string, ApiTreeLeaf[]> = {}
 
@@ -152,6 +160,11 @@ const buildApiTree = (apis: ApiListItem[] = []): ApiTreeGroupNode[] => {
 }
 
 const init = async (): Promise<void> => {
+  activeUserId.value = ''
+  apiTreeIds.value = []
+  isAllSelected.value = false
+  await applyCheckedKeys([])
+
   const allApisRes = (await getAllApis()) as ApiResponse<{
     apis?: ApiListItem[]
   }>
@@ -162,8 +175,7 @@ const init = async (): Promise<void> => {
     props.row.authorityId === null ||
     props.row.authorityId === ''
   ) {
-    activeUserId.value = ''
-    apiTreeIds.value = []
+    await applyCheckedKeys([])
     return
   }
 
@@ -175,9 +187,16 @@ const init = async (): Promise<void> => {
   apiTreeIds.value = (policyRes.data?.paths ?? []).map(
     (item) => `p:${item.path}m:${item.method}`
   )
+  await applyCheckedKeys(apiTreeIds.value)
 }
 
-void init()
+watch(
+  () => props.row.authorityId,
+  () => {
+    void init()
+  },
+  { immediate: true }
+)
 
 const nodeChange = (): void => {
   needConfirm.value = true

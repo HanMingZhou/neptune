@@ -39,7 +39,7 @@
 import { setDataAuthority } from '@/api/authority'
 import WarningBar from '@/components/warningBar/warningBar.vue'
 import { ElMessage } from 'element-plus'
-import { inject, ref } from 'vue'
+import { inject, ref, watch } from 'vue'
 import type { ResourceId, Translator } from '@/types/consoleResource'
 import type { AuthorityTreeNode } from '@/types/superAdmin'
 
@@ -103,7 +103,16 @@ const init = (): void => {
   })
 }
 
-init()
+watch(
+  () => [props.row.authorityId, props.row.dataAuthorityId, props.authority],
+  () => {
+    init()
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
 
 const emit = defineEmits<{
   changeRow: [key: string, value: AuthoritySelectionItem[]]

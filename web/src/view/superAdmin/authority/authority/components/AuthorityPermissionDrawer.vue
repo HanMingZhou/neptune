@@ -1,6 +1,7 @@
 <template>
   <BaseDrawer
     v-model="visibleModel"
+    destroy-on-close
     :size="600"
     :title="t('roleConfig')"
     @close="emit('close')"
