@@ -409,9 +409,10 @@ func (s *InferenceServiceService) ensureInferenceRoute(ctx context.Context, serv
 	}
 
 	baseDomain := strings.TrimSpace(global.GVA_CONFIG.Apisix.BaseDomain)
+	authEnabled := global.GVA_CONFIG.Apisix.AuthEnabled
 	authUri := global.GVA_CONFIG.Apisix.AuthUri
-	if authUri == "" {
-		return errors.New("auth-uri 未配置，跳过推理路由创建")
+	if authEnabled && authUri == "" {
+		return errors.New("auth-enabled 为 true 但 auth-uri 未配置，跳过推理路由更新")
 	}
 
 	routeName := fmt.Sprintf("inference-%s", service.InstanceName)
@@ -433,16 +434,11 @@ func (s *InferenceServiceService) ensureInferenceRoute(ctx context.Context, serv
 			"neptune.io/instance":    service.InstanceName,
 		},
 		Websocket:  false,
-		EnableAuth: true,
+		EnableAuth: authEnabled,
 		AuthUri:    authUri,
 	}
 
-	err := s.apisixSvc.CreateRoute(ctx, routeReq)
-	if err != nil && apierrors.IsAlreadyExists(err) {
-		// 路由已存在，视为成功
-		return nil
-	}
-	return err
+	return s.apisixSvc.UpdateRoute(ctx, routeReq)
 }
 
 // deleteInferenceRoute 删除推理服务的 APISIX 路由

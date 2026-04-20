@@ -15,7 +15,7 @@ type CreateRouteReq struct {
 	Websocket     bool              `json:"websocket"`     // 是否开启 WebSocket
 	// forward-auth 认证配置
 	EnableAuth bool   `json:"enableAuth"` // 是否启用 forward-auth 认证
-	AuthUri    string `json:"authUri"`    // 认证服务地址，如 http://backend:8001/aiInfra/notebook/auth
+	AuthUri    string `json:"authUri"`    // 认证服务地址，如 http://backend:<server-port>/aiInfra/api/v1/apisix/auth
 }
 
 // DeleteRouteReq 删除路由请求

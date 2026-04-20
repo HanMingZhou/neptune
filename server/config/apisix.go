@@ -13,7 +13,7 @@ type Apisix struct {
 	// AuthUri forward-auth 认证服务地址（Notebook / TensorBoard / Inference 统一入口）
 	// 注意：此地址必须是 Apisix 能访问到的后端地址
 	// 开发环境（Docker Desktop）: http://host.docker.internal:8001/aiInfra/api/v1/apisix/auth
-	// 生产环境（K8s）: http://<backend-service>.<namespace>.svc.cluster.local:8001/aiInfra/api/v1/apisix/auth
+	// 生产环境（K8s）: http://<backend-service>.<namespace>.svc.cluster.local:<server-port>/aiInfra/api/v1/apisix/auth
 	AuthUri string `mapstructure:"auth-uri" json:"auth-uri" yaml:"auth-uri"`
 	// HttpPort Apisix 网关对外暴露的 HTTP 入口端口（Jupyter、TensorBoard、Inference 共用）
 	HttpPort int `mapstructure:"http-port" json:"http-port" yaml:"http-port"`
