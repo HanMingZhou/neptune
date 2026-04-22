@@ -17,6 +17,8 @@ import (
 	terminalService "gin-vue-admin/service/terminal"
 	helper "gin-vue-admin/utils/k8s"
 	"io"
+	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -138,6 +140,9 @@ func (s *InferenceServiceService) validateCreateRequest(req *inferenceReq.Create
 	if strings.TrimSpace(req.Command) == "" {
 		return errors.New("启动命令不能为空")
 	}
+	if err := validateInferenceServicePort(req.Command, req.Args, req.ServicePort); err != nil {
+		return err
+	}
 	// 分布式模式必须指定框架（用于 NCCL 环境变量注入）
 	if req.DeployType == consts.DeployTypeDistributed {
 		if req.Framework == "" {
@@ -157,6 +162,32 @@ func (s *InferenceServiceService) validateCreateRequest(req *inferenceReq.Create
 		if m.MountPath == modelMount || strings.HasPrefix(m.MountPath, modelMount+"/") {
 			return fmt.Errorf("挂载路径 %s 与模型挂载路径 %s 冲突，请更换挂载路径", m.MountPath, modelMount)
 		}
+	}
+
+	return nil
+}
+
+func validateInferenceServicePort(command string, args []string, servicePort int) error {
+	combined := strings.TrimSpace(command)
+	if len(args) > 0 {
+		combined = strings.TrimSpace(combined + " " + strings.Join(args, " "))
+	}
+	if combined == "" {
+		return nil
+	}
+
+	portPattern := regexp.MustCompile(`(?:^|\s)--port(?:\s+|=)(\d+)(?:\s|$)`)
+	matches := portPattern.FindStringSubmatch(combined)
+	if len(matches) < 2 {
+		return nil
+	}
+
+	commandPort, err := strconv.Atoi(matches[1])
+	if err != nil {
+		return errors.Errorf("启动命令中的端口参数无效: %s", matches[1])
+	}
+	if commandPort != servicePort {
+		return errors.Errorf("启动命令中的 --port=%d 与服务端口 %d 不一致，请保持一致", commandPort, servicePort)
 	}
 
 	return nil
