@@ -92,24 +92,31 @@ func (b *BaseInferenceBuilder) BuildDeployment(spec *InferenceSpec) (*appsv1.Dep
 							Ports: []corev1.ContainerPort{
 								{Name: "http", ContainerPort: int32(spec.ServicePort)},
 							},
-							ReadinessProbe: &corev1.Probe{
+							StartupProbe: &corev1.Probe{
 								ProbeHandler: corev1.ProbeHandler{
-									HTTPGet: &corev1.HTTPGetAction{
-										Path: "/health",
+									TCPSocket: &corev1.TCPSocketAction{
 										Port: intstr.FromInt(spec.ServicePort),
 									},
 								},
-								InitialDelaySeconds: 60,
+								PeriodSeconds:    10,
+								FailureThreshold: 120,
+							},
+							ReadinessProbe: &corev1.Probe{
+								ProbeHandler: corev1.ProbeHandler{
+									TCPSocket: &corev1.TCPSocketAction{
+										Port: intstr.FromInt(spec.ServicePort),
+									},
+								},
+								InitialDelaySeconds: 10,
 								PeriodSeconds:       10,
 							},
 							LivenessProbe: &corev1.Probe{
 								ProbeHandler: corev1.ProbeHandler{
-									HTTPGet: &corev1.HTTPGetAction{
-										Path: "/health",
+									TCPSocket: &corev1.TCPSocketAction{
 										Port: intstr.FromInt(spec.ServicePort),
 									},
 								},
-								InitialDelaySeconds: 120,
+								InitialDelaySeconds: 10,
 								PeriodSeconds:       30,
 							},
 						},

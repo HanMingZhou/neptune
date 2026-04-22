@@ -142,24 +142,31 @@ func (b *BaseInferenceBuilder) buildHeadTask(
 							{Name: "http", ContainerPort: int32(spec.ServicePort)},
 							{Name: "nccl", ContainerPort: int32(ncclPort)},
 						},
-						ReadinessProbe: &corev1.Probe{
+						StartupProbe: &corev1.Probe{
 							ProbeHandler: corev1.ProbeHandler{
-								HTTPGet: &corev1.HTTPGetAction{
-									Path: "/health",
+								TCPSocket: &corev1.TCPSocketAction{
 									Port: intstr.FromInt(spec.ServicePort),
 								},
 							},
-							InitialDelaySeconds: 120,
+							PeriodSeconds:    10,
+							FailureThreshold: 120,
+						},
+						ReadinessProbe: &corev1.Probe{
+							ProbeHandler: corev1.ProbeHandler{
+								TCPSocket: &corev1.TCPSocketAction{
+									Port: intstr.FromInt(spec.ServicePort),
+								},
+							},
+							InitialDelaySeconds: 10,
 							PeriodSeconds:       10,
 						},
 						LivenessProbe: &corev1.Probe{
 							ProbeHandler: corev1.ProbeHandler{
-								HTTPGet: &corev1.HTTPGetAction{
-									Path: "/health",
+								TCPSocket: &corev1.TCPSocketAction{
 									Port: intstr.FromInt(spec.ServicePort),
 								},
 							},
-							InitialDelaySeconds: 180,
+							InitialDelaySeconds: 10,
 							PeriodSeconds:       30,
 						},
 					},
