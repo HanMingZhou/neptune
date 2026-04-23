@@ -92,7 +92,7 @@ func (b *BaseInferenceBuilder) BuildVCJob(spec *InferenceSpec) (*vcbatch.Job, er
 			Queue:         consts.DefalutQueue,
 			Tasks:         tasks,
 			Plugins: map[string][]string{
-				"svc": {"--publish-not-ready-addresses=true"},
+				"svc": {"--publish-not-ready-addresses=true", "--disable-network-policy=true"},
 			},
 			Policies: []vcbatch.LifecyclePolicy{
 				{Event: vcbus.PodFailedEvent, Action: vcbus.RestartJobAction},

@@ -7,6 +7,42 @@ import (
 	"gin-vue-admin/model/consts"
 )
 
+func TestBuildVCJob_SvcPluginDisablesNetworkPolicy(t *testing.T) {
+	t.Parallel()
+
+	builder := NewInferenceBuilder(consts.FrameworkSGLang)
+	b, ok := builder.(*BaseInferenceBuilder)
+	if !ok {
+		t.Fatal("NewInferenceBuilder() did not return *BaseInferenceBuilder")
+	}
+	spec := &InferenceSpec{
+		Name:         "inference-e64025",
+		InstanceName: "inference-e64025",
+		Namespace:    "zzz",
+		Framework:    consts.FrameworkSGLang,
+		WorkerCount:  2,
+	}
+
+	job, err := b.BuildVCJob(spec)
+	if err != nil {
+		t.Fatalf("BuildVCJob() error = %v", err)
+	}
+
+	args, ok := job.Spec.Plugins["svc"]
+	if !ok {
+		t.Fatal("BuildVCJob() svc plugin not configured")
+	}
+	if len(args) != 2 {
+		t.Fatalf("BuildVCJob() svc plugin args len = %d, want 2", len(args))
+	}
+	if args[0] != "--publish-not-ready-addresses=true" {
+		t.Fatalf("BuildVCJob() svc plugin args[0] = %q, want %q", args[0], "--publish-not-ready-addresses=true")
+	}
+	if args[1] != "--disable-network-policy=true" {
+		t.Fatalf("BuildVCJob() svc plugin args[1] = %q, want %q", args[1], "--disable-network-policy=true")
+	}
+}
+
 func TestWrapDistributedCommand_SGLangInjectsMultiNodeFlags(t *testing.T) {
 	t.Parallel()
 
