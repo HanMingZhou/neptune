@@ -2,6 +2,7 @@ import { computed, onBeforeUnmount, reactive, ref, watch } from 'vue'
 import { ElMessage, type FormRules } from 'element-plus'
 import { changePassword, setSelfInfo } from '@/api/user'
 import { useUserStore } from '@/pinia/modules/user'
+import { getErrorMessage } from '@/utils/resourceValidators'
 import type { Translator } from '@/types/consoleResource'
 import type {
   AccountEmailForm,
@@ -119,9 +120,9 @@ export function useAccountProfile({ t }: UseAccountProfileOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || translate('changeFailed'))
-    } catch (_error) {
-      ElMessage.error(translate('changeFailed'))
+      ElMessage.error(getErrorMessage(res, translate('changeFailed')))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('changeFailed')))
     } finally {
       passwordLoading.value = false
     }
@@ -145,6 +146,8 @@ export function useAccountProfile({ t }: UseAccountProfileOptions = {}) {
     if (res.code === 0) {
       userStore.ResetUserInfo({ nickName: nickName.value })
       ElMessage.success(translate('changeSuccess'))
+    } else {
+      ElMessage.error(getErrorMessage(res, translate('changeFailed')))
     }
 
     closeEdit()
@@ -207,9 +210,9 @@ export function useAccountProfile({ t }: UseAccountProfileOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || translate('changeFailed'))
-    } catch (_error) {
-      ElMessage.error(translate('changeFailed'))
+      ElMessage.error(getErrorMessage(res, translate('changeFailed')))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('changeFailed')))
     } finally {
       phoneLoading.value = false
     }
@@ -239,9 +242,9 @@ export function useAccountProfile({ t }: UseAccountProfileOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || translate('changeFailed'))
-    } catch (_error) {
-      ElMessage.error(translate('changeFailed'))
+      ElMessage.error(getErrorMessage(res, translate('changeFailed')))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('changeFailed')))
     } finally {
       emailLoading.value = false
     }

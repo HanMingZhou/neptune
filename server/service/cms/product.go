@@ -6,9 +6,12 @@ import (
 	clusterModel "gin-vue-admin/model/cluster"
 	cmsReq "gin-vue-admin/model/cms/request"
 	cmsRes "gin-vue-admin/model/cms/response"
+	"gin-vue-admin/model/consts"
+	inferenceModel "gin-vue-admin/model/inference"
 	nbModel "gin-vue-admin/model/notebook"
 	productModel "gin-vue-admin/model/product"
 	productRes "gin-vue-admin/model/product/response"
+	trainingModel "gin-vue-admin/model/training"
 	"sort"
 	"strings"
 
@@ -233,6 +236,39 @@ func (s *ProductService) hydrateComputeProductRequest(req *cmsReq.CreateProductR
 	if req.CUDAVersion == "" {
 		req.CUDAVersion = nodeInfo.CUDAVersion
 	}
+}
+
+func (s *ProductService) hasRunningResourcesForProduct(ctx context.Context, productID uint) (bool, error) {
+	if productID == 0 {
+		return false, nil
+	}
+
+	type runningResourceQuery struct {
+		model  interface{}
+		status string
+	}
+
+	queries := []runningResourceQuery{
+		{model: &nbModel.Notebook{}, status: consts.NotebookStatusRunning},
+		{model: &inferenceModel.Inference{}, status: consts.InferenceStatusRunning},
+		{model: &trainingModel.TrainingJob{}, status: consts.TrainingStatusRunning},
+	}
+
+	for _, item := range queries {
+		var count int64
+		err := global.GVA_DB.WithContext(ctx).
+			Model(item.model).
+			Where("product_id = ? AND status = ?", productID, item.status).
+			Count(&count).Error
+		if err != nil {
+			return false, err
+		}
+		if count > 0 {
+			return true, nil
+		}
+	}
+
+	return false, nil
 }
 
 func (s *ProductService) validateComputeProductSpec(nodeInfo *cmsRes.NodeInfoResponse, req *cmsReq.CreateProductReq) (int64, error) {
@@ -756,6 +792,14 @@ func (s *ProductService) UpdateProduct(req *cmsReq.UpdateProductReq) error {
 	// 3. 重新计算 MaxInstances（如果规格字段有变更）
 	specChanged := req.GPUCount > 0 || req.GPUMemory > 0 || req.VGPUNumber > 0 || req.VGPUMemory > 0 || req.VGPUCores > 0 || req.CPU > 0 || req.Memory > 0
 	if specChanged && existing.NodeName != "" {
+		hasRunningResources, runningErr := s.hasRunningResourcesForProduct(context.Background(), existing.ID)
+		if runningErr != nil {
+			return errors.Wrap(runningErr, "查询产品运行中资源失败")
+		}
+		if hasRunningResources {
+			return errors.New("当前产品仍有关联资源处于运行中状态，不允许修改产品规格")
+		}
+
 		// 规格变了，自动重新计算
 		cluster := global.GVA_K8S_CLUSTER_MANAGER.GetCluster(existing.ClusterId)
 		if cluster != nil && cluster.ClientSet != nil {
@@ -767,9 +811,6 @@ func (s *ProductService) UpdateProduct(req *cmsReq.UpdateProductReq) error {
 				newMax, validateErr := s.validateComputeProductSpec(nodeInfo, validationReq)
 				if validateErr != nil {
 					return validateErr
-				}
-				if req.MaxInstances > 0 {
-					newMax = req.MaxInstances
 				}
 				updates["max_instances"] = newMax
 			}

@@ -34,24 +34,29 @@
             v-for="product in products"
             :key="product.id"
             :class="[
-              'cursor-pointer transition-colors',
-              selectedProductId === product.id
-                ? 'bg-primary/5'
-                : 'hover:bg-slate-50 dark:hover:bg-zinc-800/40'
+              'transition-colors',
+              isSelectableProduct(product)
+                ? 'cursor-pointer'
+                : 'cursor-not-allowed opacity-50',
+              isSelectableProduct(product)
+                ? selectedProductId === product.id
+                  ? 'bg-primary/5'
+                  : 'hover:bg-slate-50 dark:hover:bg-zinc-800/40'
+                : ''
             ]"
-            @click="$emit('select-product', product)"
+            @click="isSelectableProduct(product) && $emit('select-product', product)"
           >
             <td class="px-6 py-4 align-top">
               <div
                 :class="[
                   'w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all',
-                  selectedProductId === product.id
+                  selectedProductId === product.id && isSelectableProduct(product)
                     ? 'border-primary'
                     : 'border-slate-300 dark:border-zinc-600'
                 ]"
               >
                 <div
-                  v-if="selectedProductId === product.id"
+                  v-if="selectedProductId === product.id && isSelectableProduct(product)"
                   class="w-2 h-2 rounded-full bg-primary"
                 ></div>
               </div>
@@ -188,4 +193,7 @@ const getGpuFieldEntries = (product: ConsoleProduct) =>
 
 const getVGpuFieldEntries = (product: ConsoleProduct) =>
   buildVGpuFieldEntries(product, t)
+
+const isSelectableProduct = (product: ConsoleProduct): boolean =>
+  (product.available || 0) > 0
 </script>

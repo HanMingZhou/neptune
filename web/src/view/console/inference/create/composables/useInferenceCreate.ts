@@ -204,6 +204,9 @@ export const useInferenceCreate = ({
   const selectedProduct = computed(
     () => products.value.find((item) => item.id === form.productId) || null
   )
+  const isSelectableProduct = (
+    product: ConsoleProduct | null | undefined
+  ): product is ConsoleProduct => (product?.available ?? 0) > 0
   const maxDistributedCount = computed(() => {
     const product = selectedProduct.value
     if (!product) return 0
@@ -225,6 +228,7 @@ export const useInferenceCreate = ({
       !form.productId
     )
       return false
+    if (!isSelectableProduct(selectedProduct.value)) return false
     if (!hasCommand.value) return false
     if (frameworkRequired.value && !form.framework) return false
     if (form.deployType === 'DISTRIBUTED' && form.workerCount < 2) return false
@@ -386,9 +390,15 @@ export const useInferenceCreate = ({
       >
       if (res.code === 0) {
         products.value = res.data?.list || []
-        if (!products.value.some((item) => item.id === form.productId)) {
-          form.productId = products.value[0]?.id ?? ''
+        const nextSelected = products.value.find(
+          (item) => item.id === form.productId && isSelectableProduct(item)
+        )
+        if (nextSelected) {
+          form.productId = nextSelected.id
+          return
         }
+
+        form.productId = products.value.find(isSelectableProduct)?.id ?? ''
       }
     } catch (error) {
       console.error(error)
@@ -497,6 +507,9 @@ export const useInferenceCreate = ({
     ) {
       return translate('fillAllFields')
     }
+    if (!isSelectableProduct(selectedProduct.value)) {
+      return translate('fillAllFields')
+    }
 
     if (frameworkRequired.value && !form.framework) {
       return translate('fillAllFields')
@@ -526,7 +539,7 @@ export const useInferenceCreate = ({
     const modelPvcId = form.modelPvcId
     const imageId = form.imageId
     const productId = form.productId
-    if (!modelPvcId || !imageId || !productId) {
+    if (!modelPvcId || !imageId || !productId || !isSelectableProduct(selectedProduct.value)) {
       ElMessage.warning(translate('fillAllFields'))
       return
     }

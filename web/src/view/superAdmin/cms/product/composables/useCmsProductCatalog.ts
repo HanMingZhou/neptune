@@ -17,6 +17,7 @@ import type {
   CmsProductType
 } from '@/types/superAdmin'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 
 interface UseCmsProductCatalogOptions {
   t: Translator
@@ -91,7 +92,7 @@ export const useCmsProductCatalog = ({ t }: UseCmsProductCatalogOptions) => {
       }
     } catch (error: unknown) {
       console.error(error)
-      ElMessage.error(t('failed'))
+      ElMessage.error(getErrorMessage(error, t('failed')))
     } finally {
       if (!silent) {
         loading.value = false

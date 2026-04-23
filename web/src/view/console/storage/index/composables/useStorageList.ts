@@ -11,6 +11,7 @@ import {
 import { getProductList } from '@/api/product'
 import type { Translator } from '@/types/consoleResource'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 import type {
   StorageAreaListData,
   StorageCreateForm,
@@ -190,9 +191,9 @@ export function useStorageList({ t }: UseStorageListOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || translate('createFailed'))
-    } catch {
-      ElMessage.error(translate('createFailed'))
+      ElMessage.error(getErrorMessage(res, translate('createFailed')))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('createFailed')))
     } finally {
       creating.value = false
     }
@@ -249,9 +250,9 @@ export function useStorageList({ t }: UseStorageListOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || translate('expandFailed'))
-    } catch {
-      ElMessage.error(translate('expandFailed'))
+      ElMessage.error(getErrorMessage(res, translate('expandFailed')))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('expandFailed')))
     } finally {
       expanding.value = false
     }
@@ -276,9 +277,9 @@ export function useStorageList({ t }: UseStorageListOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || translate('changeFailed'))
-    } catch {
-      ElMessage.error(translate('changeFailed'))
+      ElMessage.error(getErrorMessage(res, translate('changeFailed')))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('changeFailed')))
     } finally {
       editing.value = false
     }

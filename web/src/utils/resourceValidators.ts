@@ -58,7 +58,7 @@ export const isResourceNameErrorMessage = (message = ''): boolean =>
     message
   )
 
-export const getSubmitErrorMessage = (
+export const getErrorMessage = (
   error: unknown,
   fallbackMessage: string
 ): string => {
@@ -71,6 +71,11 @@ export const getSubmitErrorMessage = (
     fallbackMessage
   )
 }
+
+export const getSubmitErrorMessage = (
+  error: unknown,
+  fallbackMessage: string
+): string => getErrorMessage(error, fallbackMessage)
 
 export const validateTensorBoardPath = (
   path: string,

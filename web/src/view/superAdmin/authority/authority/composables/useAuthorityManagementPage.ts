@@ -18,10 +18,14 @@ import type {
   AuthorityTreeNode
 } from '@/types/superAdmin'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 
 interface UseAuthorityManagementPageOptions {
   t?: Translator
 }
+
+const isDialogCancel = (error: unknown): error is 'cancel' | 'close' =>
+  error === 'cancel' || error === 'close'
 
 type EditableAuthorityRow = AuthorityTreeNode & Record<string, unknown>
 
@@ -30,9 +34,6 @@ const createDefaultForm = (): AuthorityForm => ({
   authorityName: '',
   parentId: 0
 })
-
-const isDialogCancel = (error: unknown): error is 'cancel' | 'close' =>
-  error === 'cancel' || error === 'close'
 
 const buildAuthorityOptions = (
   authorityData: AuthorityTreeNode[] = [],
@@ -181,7 +182,7 @@ export function useAuthorityManagementPage({
       }
     } catch (error: unknown) {
       console.error('Failed to fetch authority list:', error)
-      ElMessage.error(translate('getRoleListFailedDetail'))
+      ElMessage.error(getErrorMessage(error, translate('getRoleListFailedDetail')))
     } finally {
       if (!silent) {
         loading.value = false
@@ -304,10 +305,10 @@ export function useAuthorityManagementPage({
         return
       }
 
-      ElMessage.error(res.msg || translate('failed'))
+      ElMessage.error(getErrorMessage(res.msg, translate('failed')))
     } catch (error: unknown) {
       console.error('Failed to submit authority form:', error)
-      ElMessage.error(translate('failed'))
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     } finally {
       submitting.value = false
     }
@@ -333,14 +334,14 @@ export function useAuthorityManagementPage({
         return
       }
 
-      ElMessage.error(res.msg || translate('failed'))
+      ElMessage.error(getErrorMessage(res.msg, translate('failed')))
     } catch (error: unknown) {
       if (isDialogCancel(error)) {
         ElMessage.info(translate('deleteCancel'))
         return
       }
 
-      ElMessage.error(translate('failed'))
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     }
   }
 

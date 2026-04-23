@@ -75,6 +75,9 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
 
   const products = ref<ConsoleProduct[]>([])
   const selectedProduct = ref<ConsoleProduct | null>(null)
+  const isSelectableProduct = (
+    product: ConsoleProduct | null | undefined
+  ): product is ConsoleProduct => (product?.available ?? 0) > 0
   const gpuCount = ref(1)
   const payType = ref<NotebookPayType>(1)
   const filters = ref<NotebookFilters>({ area: '', gpuModel: '', cpuModel: '' })
@@ -184,7 +187,9 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
 
   const canCreate = computed(() =>
     Boolean(
-      selectedProduct.value && selectedImage.value && instanceName.value.trim()
+      isSelectableProduct(selectedProduct.value) &&
+        selectedImage.value &&
+        instanceName.value.trim()
     )
   )
 
@@ -243,6 +248,9 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
     if (!selectedProduct.value || !selectedImage.value) {
       return translate('fillAllFields')
     }
+    if (!isSelectableProduct(selectedProduct.value)) {
+      return translate('fillAllFields')
+    }
 
     if (!isTensorboardPathValid) {
       return fieldErrors.value.tensorboardLogPath
@@ -259,16 +267,26 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
       return
     }
 
+    const firstSelectable = list.find(isSelectableProduct)
+
     if (!selectedProduct.value) {
-      selectProduct(list[0])
+      if (firstSelectable) {
+        selectProduct(firstSelectable)
+      } else {
+        selectedProduct.value = null
+      }
       return
     }
 
     const nextSelected = list.find(
-      (item) => item.id === selectedProduct.value?.id
+      (item) => item.id === selectedProduct.value?.id && isSelectableProduct(item)
     )
     if (!nextSelected) {
-      selectProduct(list[0])
+      if (firstSelectable) {
+        selectProduct(firstSelectable)
+      } else {
+        selectedProduct.value = null
+      }
       return
     }
 
@@ -328,7 +346,7 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
       }
     } catch (error) {
       console.error('加载产品失败', error)
-      ElMessage.error(translate('error'))
+      ElMessage.error(getSubmitErrorMessage(error, translate('error')))
     }
   }
 
@@ -420,6 +438,8 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
   }
 
   const selectProduct = (product: ConsoleProduct): void => {
+    if (!isSelectableProduct(product)) return
+
     selectedProduct.value = product
     gpuCount.value = 1
     selectedVolumeId.value = null
@@ -466,7 +486,7 @@ export const useNotebookCreate = ({ t, router }: UseNotebookCreateOptions) => {
 
     const product = selectedProduct.value
     const imageId = selectedImage.value
-    if (!product || !imageId) {
+    if (!product || !imageId || !isSelectableProduct(product)) {
       ElMessage.warning(translate('fillAllFields'))
       return
     }

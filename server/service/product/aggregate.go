@@ -348,6 +348,9 @@ func (s *ProductService) getEnabledProductModel(ctx context.Context, productID u
 	if err := global.GVA_DB.WithContext(ctx).
 		Where("id = ? AND status = ?", productID, productModel.ProductStatusEnabled).
 		First(&product).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errors.New("产品不存在或已下架")
+		}
 		return nil, err
 	}
 	if err := productModel.LoadPriceItems(ctx, global.GVA_DB, &product); err != nil {

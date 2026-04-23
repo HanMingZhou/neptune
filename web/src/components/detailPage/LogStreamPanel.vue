@@ -11,7 +11,7 @@
         <button
           v-if="!logsConnected"
           :disabled="logsLoading"
-          class="px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg text-sm font-bold flex items-center gap-2 disabled:opacity-50"
+          class="shrink-0 whitespace-nowrap px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg text-sm font-bold flex items-center gap-2 disabled:opacity-50"
           @click="$emit('connect')"
         >
           <span class="material-icons text-lg">link</span>
@@ -19,7 +19,7 @@
         </button>
         <button
           v-else
-          class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-sm font-bold flex items-center gap-2"
+          class="shrink-0 whitespace-nowrap px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-sm font-bold flex items-center gap-2"
           @click="$emit('disconnect')"
         >
           <span class="material-icons text-lg">link_off</span>
@@ -27,7 +27,7 @@
         </button>
         <span
           v-if="logsConnected"
-          class="flex items-center gap-2 text-sm text-emerald-500"
+          class="shrink-0 whitespace-nowrap flex items-center gap-2 text-sm text-emerald-500"
         >
           <span
             class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
@@ -73,7 +73,7 @@ withDefaults(
     logs: '',
     logsConnected: false,
     logsLoading: false,
-    toolbarClass: 'flex items-center gap-4'
+    toolbarClass: 'flex flex-wrap items-center gap-3'
   }
 )
 

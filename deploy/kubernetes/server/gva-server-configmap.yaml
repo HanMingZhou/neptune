@@ -118,11 +118,13 @@ data:
     # apisix configuration
     apisix:
         enabled: true
-        # APISIX 对外访问域名或地址；如果部署前未知，可先留空，待网关地址确定后回填
-        base-domain: ""
+        base-domain: ""     # APISIX 对外访问域名或地址；如果部署前未知，可先留空，待网关地址确定后回填
         gateway-namespace: "apisix"
-        auth-enabled: true
+        auth-enabled: true  # forward-auth 认证配置 是否启用 Notebook/TensorBoard/Inference 访问认证
+
+        # 生产环境（K8s）: http://<backend-svc>.<ns>.svc.cluster.local:8001/aiInfra/api/v1/apisix/auth
         auth-uri: "http://neptune-server.neptune.svc.cluster.local:8888/aiInfra/api/v1/apisix/auth"
+        
         http-port: 0
         # APISIX stream proxy 在 Pod 内部监听的 SSH 入口端口
         # 注意：这里填写的是 APISIX 内部端口（通常为 9100），不是用户实际连接时看到的外部 22
@@ -130,7 +132,5 @@ data:
 
     # sshpiper configuration
     sshpiper:
-        # SSH 对外访问地址；开发环境可填 127.0.0.1，生产环境建议改成网关域名或留空回退到 apisix.base-domain
-        host: "127.0.0.1"
-        # SSH 对外暴露给用户访问的端口；统一经 APISIX 暴露时通常是 22，而不是 sshpiper Pod 内部的 2222
-        port: 22
+        host: "127.0.0.1"   # SSH 对外访问地址；开发环境可填 127.0.0.1，生产环境建议改成网关域名或留空回退到 apisix.base-domain
+        port: 22            # SSH 对外暴露给用户访问的端口；统一经 APISIX 暴露时通常是 22，而不是 sshpiper Pod 内部的 2222

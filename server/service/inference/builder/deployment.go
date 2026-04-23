@@ -98,8 +98,8 @@ func (b *BaseInferenceBuilder) BuildDeployment(spec *InferenceSpec) (*appsv1.Dep
 										Port: intstr.FromInt(spec.ServicePort),
 									},
 								},
-								PeriodSeconds:    10,
-								FailureThreshold: 120,
+								PeriodSeconds:    inferenceStartupProbePeriodSeconds,
+								FailureThreshold: inferenceStartupProbeFailureThreshold,
 							},
 							ReadinessProbe: &corev1.Probe{
 								ProbeHandler: corev1.ProbeHandler{

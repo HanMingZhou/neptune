@@ -56,6 +56,9 @@
 
     <InferenceDetailDialogsHost
       :api-keys="apiKeys"
+      :api-keys-loading="apiKeysLoading"
+      :creating-api-key="creatingApiKey"
+      :deleting-api-key-id="deletingApiKeyId"
       :format-time="formatTime"
       :new-key-name="newKeyName"
       :newly-created-key="newlyCreatedKey"
@@ -81,12 +84,15 @@ const {
   activeTab,
   apiEndpoint,
   apiKeys,
+  apiKeysLoading,
   canConnectTerminal,
   clearLogs,
   connectLogStream,
   connectTerminal,
   copyText,
+  creatingApiKey,
   curlExample,
+  deletingApiKeyId,
   disconnectLogStream,
   disconnectTerminal,
   fetchPods,

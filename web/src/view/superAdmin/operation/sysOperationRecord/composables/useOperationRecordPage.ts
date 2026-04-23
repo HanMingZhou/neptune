@@ -12,6 +12,7 @@ import type {
   OperationRecordSearchInfo
 } from '@/types/superAdmin'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 
 interface UseOperationRecordPageOptions {
   t?: Translator
@@ -99,7 +100,7 @@ export function useOperationRecordPage({
       }
     } catch (error: unknown) {
       console.error('Failed to fetch operation records:', error)
-      ElMessage.error(translate('failed'))
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     } finally {
       if (!silent) {
         loading.value = false
@@ -175,7 +176,7 @@ export function useOperationRecordPage({
       }
     } catch (error: unknown) {
       if (!isDialogCancel(error)) {
-        ElMessage.error(translate('failed'))
+        ElMessage.error(getErrorMessage(error, translate('failed')))
       }
     }
   }
@@ -203,7 +204,7 @@ export function useOperationRecordPage({
       }
     } catch (error: unknown) {
       if (!isDialogCancel(error)) {
-        ElMessage.error(translate('failed'))
+        ElMessage.error(getErrorMessage(error, translate('failed')))
       }
     }
   }

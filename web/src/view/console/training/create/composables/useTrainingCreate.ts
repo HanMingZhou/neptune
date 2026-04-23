@@ -156,6 +156,9 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
   const pvcs = ref<ConsoleVolume[]>([])
   const products = ref<ConsoleProduct[]>([])
   const selectedProduct = ref<ConsoleProduct | null>(null)
+  const isSelectableProduct = (
+    product: ConsoleProduct | null | undefined
+  ): product is ConsoleProduct => (product?.available ?? 0) > 0
   const areas = ref<string[]>([])
   const gpuModels = ref<NonNullable<ProductFilterData['gpuModels']>>([])
   const cpuModels = ref<NonNullable<ProductFilterData['cpuModels']>>([])
@@ -279,6 +282,7 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
     ) {
       return false
     }
+    if (!isSelectableProduct(selectedProduct.value)) return false
 
     const requiredNodes = showWorkerCount.value ? form.workerCount : 1
     if (requiredNodes > totalAllowedNodes.value) return false
@@ -376,12 +380,15 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
       >
       if (res.code === 0) {
         products.value = res.data?.list || []
-        if (
-          selectedProduct.value &&
-          !products.value.find((item) => item.id === selectedProduct.value?.id)
-        ) {
-          selectedProduct.value = null
+        const nextSelected = products.value.find(
+          (item) => item.id === selectedProduct.value?.id && isSelectableProduct(item)
+        )
+        if (nextSelected) {
+          selectedProduct.value = nextSelected
+          return
         }
+
+        selectedProduct.value = products.value.find(isSelectableProduct) ?? null
       }
     } catch (error) {
       console.error('加载产品失败', error)
@@ -426,6 +433,8 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
   }
 
   const selectProduct = (product: ConsoleProduct): void => {
+    if (!isSelectableProduct(product)) return
+
     selectedProduct.value = product
     if (product.gpuCount > 0) {
       form.gpuPerWorker = 1
@@ -531,6 +540,9 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
     ) {
       return translate('fillAllFields')
     }
+    if (!isSelectableProduct(selectedProduct.value)) {
+      return translate('fillAllFields')
+    }
 
     if (!isTensorboardPathValid) {
       return fieldErrors.tensorboardLogPath
@@ -571,7 +583,7 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
 
     const product = selectedProduct.value
     const imageId = form.imageId
-    if (!product || !imageId) {
+    if (!product || !imageId || !isSelectableProduct(product)) {
       ElMessage.warning(translate('fillAllFields'))
       return
     }

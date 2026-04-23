@@ -25,6 +25,7 @@ import type {
   LabelValueOption
 } from '@/types/superAdmin'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 
 interface UseApiManagementPageOptions {
   t?: Translator
@@ -156,6 +157,12 @@ export function useApiManagementPage({ t }: UseApiManagementPageOptions = {}) {
         total.value = res.data?.total ?? 0
         page.value = res.data?.page ?? 1
         pageSize.value = res.data?.pageSize ?? 10
+      } else {
+        ElMessage.error(res.msg || translate('failed'))
+      }
+    } catch (error: unknown) {
+      if (!silent) {
+        ElMessage.error(getErrorMessage(error, translate('failed')))
       }
     } finally {
       if (!silent) {
@@ -229,10 +236,12 @@ export function useApiManagementPage({ t }: UseApiManagementPageOptions = {}) {
         }
         selectedApis.value = []
         await getTableData()
+      } else {
+        ElMessage.error(res.msg || translate('failed'))
       }
     } catch (error: unknown) {
       if (!isDialogCancel(error)) {
-        ElMessage.error(translate('failed'))
+        ElMessage.error(getErrorMessage(error, translate('failed')))
       }
     }
   }
@@ -252,10 +261,15 @@ export function useApiManagementPage({ t }: UseApiManagementPageOptions = {}) {
       const res = await freshCasbin()
       if (res.code === 0) {
         ElMessage({ type: 'success', message: translate('success') })
+        page.value = 1
+        selectedApis.value = []
+        await getTableData()
+      } else {
+        ElMessage.error(res.msg || translate('failed'))
       }
     } catch (error: unknown) {
       if (!isDialogCancel(error)) {
-        ElMessage.error(translate('failed'))
+        ElMessage.error(getErrorMessage(error, translate('failed')))
       }
     }
   }
@@ -415,10 +429,12 @@ export function useApiManagementPage({ t }: UseApiManagementPageOptions = {}) {
           page.value -= 1
         }
         await Promise.all([getTableData(), getGroup()])
+      } else {
+        ElMessage.error(res.msg || translate('failed'))
       }
     } catch (error: unknown) {
       if (!isDialogCancel(error)) {
-        ElMessage.error(translate('failed'))
+        ElMessage.error(getErrorMessage(error, translate('failed')))
       }
     }
   }

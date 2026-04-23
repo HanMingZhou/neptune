@@ -1,5 +1,6 @@
 import { inject, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { AxiosError } from 'axios'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   deleteInferenceService,
@@ -8,6 +9,7 @@ import {
   stopInferenceService
 } from '@/api/inference'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 import type {
   ConsoleInferenceService,
   PageListData,
@@ -19,6 +21,16 @@ type ButtonLoadingState = Partial<Record<ResourceId, boolean>>
 
 const normalizeStatus = (status: unknown): string =>
   `${status || ''}`.trim().toUpperCase()
+
+const extractErrorMessage = (error: unknown, fallback: string): string => {
+  if (error instanceof AxiosError) {
+    return error.response?.data?.msg || error.message || fallback
+  }
+  if (error instanceof Error) {
+    return error.message || fallback
+  }
+  return fallback
+}
 
 export const useInferenceList = () => {
   const t = inject<Translator>('t', (key) => key)
@@ -66,9 +78,9 @@ export const useInferenceList = () => {
       } else {
         ElMessage.error(res.msg || t('error'))
       }
-    } catch (_error) {
-      console.error(_error)
-      ElMessage.error(t('error'))
+    } catch (error) {
+      console.error(error)
+      ElMessage.error(getErrorMessage(error, t('error')))
     } finally {
       loading.value = false
       isInitialLoad.value = false
@@ -177,7 +189,11 @@ export const useInferenceList = () => {
       } else {
         ElMessage.error(res.msg || t('error'))
       }
-    } catch (_error) {
+    } catch (error) {
+      if (error === 'cancel' || error === 'close') {
+        return
+      }
+      ElMessage.error(extractErrorMessage(error, t('error')))
     } finally {
       btnLoading.value[item.id] = false
     }

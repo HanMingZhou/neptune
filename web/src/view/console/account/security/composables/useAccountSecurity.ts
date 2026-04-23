@@ -10,6 +10,7 @@ import {
   updatePassword
 } from '@/api/account'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 import type { Translator } from '@/types/consoleResource'
 import type {
   AccountEmailForm,
@@ -209,9 +210,9 @@ export function useAccountSecurity({ t }: UseAccountSecurityOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || translate('changeFailed'))
-    } catch (_error) {
-      ElMessage.error(translate('changeFailed'))
+      ElMessage.error(getErrorMessage(res, translate('changeFailed')))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('changeFailed')))
     } finally {
       pwdLoading.value = false
     }
@@ -282,9 +283,9 @@ export function useAccountSecurity({ t }: UseAccountSecurityOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || translate('changeFailed'))
-    } catch (_error) {
-      ElMessage.error(translate('changeFailed'))
+      ElMessage.error(getErrorMessage(res, translate('changeFailed')))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('changeFailed')))
     } finally {
       phoneLoading.value = false
     }
@@ -322,9 +323,9 @@ export function useAccountSecurity({ t }: UseAccountSecurityOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || translate('changeFailed'))
-    } catch (_error) {
-      ElMessage.error(translate('changeFailed'))
+      ElMessage.error(getErrorMessage(res, translate('changeFailed')))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('changeFailed')))
     } finally {
       emailLoading.value = false
     }
@@ -355,9 +356,9 @@ export function useAccountSecurity({ t }: UseAccountSecurityOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || translate('error'))
-    } catch (_error) {
-      ElMessage.error(translate('error'))
+      ElMessage.error(getErrorMessage(res, translate('error')))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('error')))
     } finally {
       mfaLoading.value = false
     }
@@ -388,9 +389,9 @@ export function useAccountSecurity({ t }: UseAccountSecurityOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || '验证码错误')
-    } catch (_error) {
-      ElMessage.error('激活失败')
+      ElMessage.error(getErrorMessage(res, '验证码错误'))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, '激活失败'))
     } finally {
       mfaLoading.value = false
     }
@@ -415,9 +416,9 @@ export function useAccountSecurity({ t }: UseAccountSecurityOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || '验证码错误')
-    } catch (_error) {
-      ElMessage.error('关闭失败')
+      ElMessage.error(getErrorMessage(res, '验证码错误'))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, '关闭失败'))
     } finally {
       mfaLoading.value = false
     }
@@ -434,8 +435,8 @@ export function useAccountSecurity({ t }: UseAccountSecurityOptions = {}) {
     try {
       await navigator.clipboard.writeText(value)
       ElMessage.success(successMessage)
-    } catch (_error) {
-      ElMessage.error(translate('error'))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('error')))
     }
   }
 
@@ -464,7 +465,7 @@ export function useAccountSecurity({ t }: UseAccountSecurityOptions = {}) {
           type: 'warning'
         }
       )
-    } catch (_error) {
+    } catch (error) {
       return
     }
 
@@ -477,9 +478,9 @@ export function useAccountSecurity({ t }: UseAccountSecurityOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || translate('error'))
-    } catch (_error) {
-      ElMessage.error(translate('error'))
+      ElMessage.error(getErrorMessage(res, translate('error')))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('error')))
     } finally {
       akLoading.value = false
     }

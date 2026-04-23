@@ -7,6 +7,7 @@ import (
 	"gin-vue-admin/model/consts"
 	inferenceReq "gin-vue-admin/model/inference/request"
 	"gin-vue-admin/service"
+	inferenceServicePkg "gin-vue-admin/service/inference"
 	terminalService "gin-vue-admin/service/terminal"
 	"gin-vue-admin/utils"
 	"io"
@@ -310,7 +311,7 @@ func (i *InferenceApi) HandleTerminal(c *gin.Context) {
 	container := req.Container
 	if container == "" {
 		if svcInfo.DeployType == consts.DeployTypeDistributed {
-			container = svcInfo.InstanceName + "-head"
+			container = inferenceServicePkg.ResolveDistributedContainerName(svcInfo.InstanceName, podName)
 		} else {
 			container = svcInfo.InstanceName
 		}

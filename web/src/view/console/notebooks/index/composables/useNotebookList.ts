@@ -8,6 +8,7 @@ import {
   stopNotebook
 } from '@/api/notebook'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 import type {
   ConsoleNotebook,
   PageListData,
@@ -96,7 +97,7 @@ export const useNotebookList = () => {
     } catch (error) {
       console.error(error)
       if (!silent) {
-        ElMessage.error(t('error'))
+        ElMessage.error(getErrorMessage(error, t('error')))
       }
     } finally {
       loading.value = false
@@ -147,7 +148,7 @@ export const useNotebookList = () => {
     } catch (error) {
       if (error !== 'cancel') {
         console.error(error)
-        ElMessage.error(t('operationFailed'))
+        ElMessage.error(getErrorMessage(error, t('operationFailed')))
       }
     } finally {
       btnLoading.value[item.id] = false
@@ -168,11 +169,11 @@ export const useNotebookList = () => {
         item.status = 'PENDING'
         await fetchNotebooks(true)
       } else {
-        ElMessage.error(res.msg || t('error'))
+        ElMessage.error(res.msg || t('operationFailed'))
       }
     } catch (error) {
       console.error(error)
-      ElMessage.error(t('operationFailed'))
+      ElMessage.error(getErrorMessage(error, t('operationFailed')))
     } finally {
       btnLoading.value[item.id] = false
     }
@@ -194,7 +195,7 @@ export const useNotebookList = () => {
       }
     } catch (error) {
       console.error(error)
-      ElMessage.error(t('operationFailed'))
+      ElMessage.error(getErrorMessage(error, t('operationFailed')))
     } finally {
       btnLoading.value[item.id] = false
     }

@@ -10,17 +10,10 @@ import {
 import type { Translator } from '@/types/consoleResource'
 import type { ApiResponse } from '@/utils/request'
 import type { SshKeyCreateForm, SshKeyListItem } from '@/types/sshkey'
+import { getErrorMessage } from '@/utils/resourceValidators'
 
 interface UseSshKeyManagementPageOptions {
   t?: Translator
-}
-
-interface ErrorResponseShape {
-  response?: {
-    data?: {
-      msg?: string
-    }
-  }
 }
 
 const createDefaultForm = (): SshKeyCreateForm => ({
@@ -83,7 +76,7 @@ export function useSshKeyManagementPage({
       }
     } catch (error: unknown) {
       console.error('Failed to fetch SSH keys:', error)
-      ElMessage.error(translate('error'))
+      ElMessage.error(getErrorMessage(error, translate('error')))
     } finally {
       if (!silent) {
         loading.value = false
@@ -147,8 +140,7 @@ export function useSshKeyManagementPage({
       ElMessage.error(res.msg || translate('error'))
     } catch (error: unknown) {
       console.error('Failed to create SSH key:', error)
-      const responseError = error as ErrorResponseShape
-      ElMessage.error(responseError.response?.data?.msg || translate('error'))
+      ElMessage.error(getErrorMessage(error, translate('error')))
     } finally {
       creating.value = false
     }
@@ -179,7 +171,7 @@ export function useSshKeyManagementPage({
       ElMessage.error(res.msg || translate('error'))
     } catch (error) {
       if (!isDialogCancel(error)) {
-        ElMessage.error(translate('error'))
+        ElMessage.error(getErrorMessage(error, translate('error')))
       }
     }
   }
@@ -196,7 +188,7 @@ export function useSshKeyManagementPage({
       ElMessage.error(res.msg || translate('error'))
     } catch (error: unknown) {
       console.error('Failed to set default SSH key:', error)
-      ElMessage.error(translate('error'))
+      ElMessage.error(getErrorMessage(error, translate('error')))
     }
   }
 

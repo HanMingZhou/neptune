@@ -61,9 +61,9 @@
           <el-form-item :label="t('inference.customCommand')" required>
             <el-input
               :model-value="form.command"
-              :rows="3"
+              :autosize="{ minRows: 6, maxRows: 14 }"
               :placeholder="'python3 -m vllm.entrypoints.openai.api_server --model /model/Qwen2.5-0.5B-Instruct --port 8000 --dtype float32'"
-              class="w-full font-mono"
+              class="w-full font-mono text-sm leading-6 [&_.el-textarea__inner]:min-h-[160px]"
               type="textarea"
               @update:model-value="
                 $emit('update:field', { key: 'command', value: $event })

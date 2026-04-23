@@ -259,8 +259,10 @@ docker compose -f deploy/docker-compose/docker-compose.yaml up -d --build
 ![训练任务示例 2](docs/readme/images/training-example-2.png)
 
 ### 推理服务
+![推理服务示例 1](docs/readme/images/inference-example-sglang-1.png)
+![推理服务示例 2](docs/readme/images/inference-example-sglang-vgpu-1.png)
+![推理服务示例 3](docs/readme/images/inference-example-sglang-vgpu-2.png)
 
-- 当前文档中暂无推理服务截图，后续可继续补充到 `./images/` 目录。
 
 ## 📦 部署方式
 
@@ -318,7 +320,7 @@ kubectl apply -f deploy/kubernetes/web/
 kubectl apply -f deploy/kubernetes/component/apisix/neptune-platform-route.yaml
 ```
 
-> 📝 部署前请修改 Deployment 中的镜像地址和 Ingress 域名
+> 📝 部署前请先修改镜像地址、Ingress 域名，以及 `deploy/kubernetes/server/gva-server-configmap.yaml` 中的网关相关配置
 
 ---
 
@@ -336,11 +338,111 @@ kubectl apply -f deploy/kubernetes/component/apisix/neptune-platform-route.yaml
 
 > 本地开发默认走 Vite dev server，不使用 Nginx。
 
+### 推荐修改顺序
+
+#### 1. 本地开发
+
+- **后端配置文件**：`server/config.dev.yaml`
+- **适用场景**：本地启动 `server`，外部已有 APISIX / Kubernetes 网关，或者你在开发环境联调网关访问
+
+重点关注：
+
+- **`system.addr`**：后端监听端口，默认 `8001`
+- **`apisix.base-domain`**：APISIX 对外访问域名或地址，本地一般填 `localhost`
+- **`apisix.auth-uri`**：APISIX 能访问到的后端认证地址
+- **`apisix.http-port`**：APISIX 对外暴露的 HTTP 端口，例如 `8888`
+- **`apisix.ssh-ingress-port`**：APISIX Pod / 进程内部监听的 SSH 入口端口，通常是 `9100`
+- **`sshpiper.host`**：用户最终访问 SSH 的地址，本地通常填 `127.0.0.1`
+- **`sshpiper.port`**：用户看到的 SSH 端口，统一经网关暴露时通常是 `22`
+
+示例：
+
+```yaml
+system:
+  addr: 8001
+  router-prefix: "aiInfra"
+
+apisix:
+  enabled: true
+  base-domain: "localhost"
+  gateway-namespace: "apisix"
+  auth-enabled: true
+  auth-uri: "http://localhost:8001/aiInfra/api/v1/apisix/auth"
+  http-port: 8888
+  ssh-ingress-port: 9100
+
+sshpiper:
+  host: "127.0.0.1"
+  port: 22
+```
+
+#### 2. Docker Compose
+
+- **配置文件**：`deploy/docker-compose/config.yaml`
+- **适用场景**：单机部署、功能体验、接口联调
+
+因为 APISIX 和后端都在 Compose 网络里，所以 `auth-uri` 应填写 **容器之间可访问的地址**，不是宿主机地址。
+
+示例：
+
+```yaml
+apisix:
+  enabled: true
+  base-domain: "localhost"
+  gateway-namespace: "apisix"
+  auth-enabled: true
+  auth-uri: "http://neptune-server:8888/aiInfra/api/v1/apisix/auth"
+  http-port: 80
+
+sshpiper:
+  host: "127.0.0.1"
+  port: 22
+```
+
+说明：
+
+- **`base-domain`**：用于生成 Notebook / TensorBoard / Inference 的访问地址
+- **`auth-uri`**：这里必须写 Compose 网络内的服务名，例如 `neptune-server`
+- **`http-port`**：这里填写 APISIX 对外 HTTP 入口端口；Compose 默认是 `80`
+
+#### 3. Kubernetes
+
+- **配置文件**：`deploy/kubernetes/server/gva-server-configmap.yaml`
+- **适用场景**：正式环境 / 集群部署
+
+Kubernetes 下最容易填错的是 `base-domain`、`auth-uri`、`http-port`、`sshpiper.host`。
+
+示例：
+
+```yaml
+apisix:
+  enabled: true
+  base-domain: "ai.example.com"
+  gateway-namespace: "apisix"
+  auth-enabled: true
+  auth-uri: "http://neptune-server.neptune.svc.cluster.local:8888/aiInfra/api/v1/apisix/auth"
+  http-port: 80
+  ssh-ingress-port: 9100
+
+sshpiper:
+  host: "ssh.ai.example.com"
+  port: 22
+```
+
+说明：
+
+- **`base-domain`**：填写用户最终访问平台网关的域名或地址
+- **`auth-uri`**：必须填写 **APISIX Pod 能访问到的后端 Service 地址**，推荐写成集群内 Service DNS
+- **`http-port`**：填写 APISIX 对外暴露给用户的 HTTP 端口；如果由 Ingress / LoadBalancer 统一接入，通常填 `80` 或 `443` 对应的实际入口；不要保留成一个无意义的占位值
+- **`ssh-ingress-port`**：填写 APISIX stream proxy 内部监听端口，通常是 `9100`，不是外部 `22`
+- **`sshpiper.host`**：填写用户最终 SSH 连接入口；如果统一由 APISIX / LB 暴露，建议填网关域名
+- **`sshpiper.port`**：填写用户连接时实际使用的端口，通常是 `22`
+
 ### 关键配置项
 
 ```yaml
 system:
-  addr: 8888                # 服务监听端口
+  addr: 8001                # 服务监听端口
   router-prefix: "aiInfra"  # 路由全局前缀
 
 mysql:
@@ -352,17 +454,205 @@ redis:
 
 apisix:
   enabled: true             # 启用 APISIX 网关
-  base-domain: "localhost"  # 网关访问域名
-  auth-uri: "http://neptune-server:8888/aiInfra/api/v1/apisix/auth"
-  http-port: 80
+  base-domain: "localhost"  # 网关对外访问域名或地址
+  gateway-namespace: "apisix"
+  auth-enabled: true         # 是否启用 Notebook / TensorBoard / Inference 访问认证
+  auth-uri: "http://localhost:8001/aiInfra/api/v1/apisix/auth"
+  http-port: 8888            # APISIX 对外 HTTP 入口端口
+  ssh-ingress-port: 9100     # APISIX 内部 SSH 入口端口，不是外部 22
 
 sshpiper:
-  host: "127.0.0.1"         # SSHPiper 地址
-  port: 22                  # SSHPiper 端口
+  host: "127.0.0.1"         # 用户最终访问 SSH 的地址
+  port: 22                  # 用户最终访问 SSH 的端口
 ```
+
+### 配置项含义与常见误区
+
+- **`apisix.base-domain`**
+  - 用于生成资源访问地址
+  - 应填写用户实际访问的网关域名或 IP
+  - 如果部署前尚未确定，可暂时留空，待网关地址确定后回填
+
+- **`apisix.auth-uri`**
+  - 这是 APISIX forward-auth 调用后端鉴权接口的地址
+  - 必须填写 **APISIX 自己能访问到的后端地址**
+  - 不能简单照抄浏览器访问地址，尤其在 Compose / K8s 场景下要使用容器网络 / Service DNS
+
+- **`apisix.http-port`**
+  - 这是用户访问 Notebook / TensorBoard / Inference 时经过的 HTTP 入口端口
+  - 例如本地可填 `8888`，Compose 默认可填 `80`
+
+- **`apisix.ssh-ingress-port`**
+  - 这是 APISIX stream proxy 内部监听的 SSH 端口
+  - 通常填 `9100`
+  - 不要误填成用户最终看到的 `22`
+
+- **`sshpiper.host` / `sshpiper.port`**
+  - 这是展示给用户的 SSH 入口信息
+  - 如果 SSH 统一经 APISIX 或负载均衡暴露，应填写最终对外地址和端口
+
+### 推理 / Notebook / TensorBoard 访问地址说明
+
+启用 APISIX 后，平台会为资源自动生成网关访问地址。实际访问地址由以下字段共同决定：
+
+- **域名 / 地址**：`apisix.base-domain`
+- **HTTP 端口**：`apisix.http-port`
+- **鉴权入口**：`apisix.auth-uri`
+
+例如本地开发环境中：
+
+- `base-domain = localhost`
+- `http-port = 8888`
+
+则推理服务访问地址通常类似：
+
+```text
+http://localhost:8888/inference/<namespace>/<instanceName>/v1
+```
+
+如果推理服务选择的是：
+
+- **JWT Token**：请求头使用 `Authorization: Bearer <JWT_TOKEN>`
+- **API Key**：请求头使用 `API-Key: <YOUR_API_KEY>`
 
 ---
 
-## 📄 License
+## 最小可用配置清单
+
+如果你只是希望先把平台跑起来，建议至少确认下面这些配置：
+
+#### 本地开发最小配置
+
+- **数据库**：`mysql.path`、`mysql.port`、`mysql.username`、`mysql.password`、`mysql.db-name`
+- **Redis**：`redis.addr`
+- **后端端口**：`system.addr`
+- **网关域名**：`apisix.base-domain`
+- **网关认证地址**：`apisix.auth-uri`
+- **网关 HTTP 端口**：`apisix.http-port`
+
+#### Kubernetes 最小配置
+
+- **后端镜像地址**：`deploy/kubernetes/server/*.yaml`
+- **前端镜像地址**：`deploy/kubernetes/web/*.yaml`
+- **平台入口域名**：Ingress / APISIX Route 中的 host
+- **后端配置**：`deploy/kubernetes/server/gva-server-configmap.yaml`
+  - `apisix.base-domain`
+  - `apisix.auth-uri`
+  - `apisix.http-port`
+  - `apisix.ssh-ingress-port`
+  - `sshpiper.host`
+  - `sshpiper.port`
+
+### 部署前检查表
+
+正式部署前，建议逐项确认：
+
+- **镜像是否可拉取**
+  - 前后端 Deployment 中的镜像地址、Tag 是否正确
+
+- **数据库是否可连接**
+  - MySQL 用户、密码、库名、地址是否正确
+  - 后端启动后是否能正常完成初始化
+
+- **Redis 是否可连接**
+  - `redis.addr` 是否正确
+
+- **路由前缀是否一致**
+  - 后端 `system.router-prefix` 是否与前端请求前缀 / 网关转发规则一致
+  - 默认通常为 `aiInfra`
+
+- **APISIX 是否能访问后端认证接口**
+  - `apisix.auth-uri` 是否能从 APISIX 容器 / Pod 内访问
+  - 不要只在浏览器里验证，要从网关所在网络视角确认
+
+- **平台入口域名是否正确**
+  - `apisix.base-domain` 是否等于用户最终访问地址
+  - 如果使用 Ingress / LB，对外端口是否与 `apisix.http-port` 保持一致
+
+- **SSH 信息是否正确**
+  - `sshpiper.host` / `sshpiper.port` 是否等于最终提供给用户的 SSH 入口
+  - `apisix.ssh-ingress-port` 是否仍保持为 APISIX 内部监听端口
+
+- **K8s Service DNS 是否正确**
+  - `auth-uri` 里引用的 Service 名称、命名空间、端口是否真实存在
+
+### 常见配置错误排查
+
+#### 1. 推理 / Notebook / TensorBoard 页面能看到，但打开资源时报 401 / 403
+
+优先检查：
+
+- **`apisix.auth-enabled`** 是否开启
+- **`apisix.auth-uri`** 是否填写正确
+- **JWT / API Key** 是否按资源要求正确携带
+- **APISIX 是否真的把认证请求转发到了后端**
+
+常见原因：
+
+- 把 `auth-uri` 填成了浏览器能访问但 APISIX Pod 访问不到的地址
+- 生产环境仍误用了 `localhost`
+- 推理服务选择了 JWT，但实际请求没带 `Authorization: Bearer ...`
+
+#### 2. 创建成功了，但详情里的访问地址不对
+
+优先检查：
+
+- **`apisix.base-domain`**
+- **`apisix.http-port`**
+
+常见表现：
+
+- 地址里还是 `localhost`
+- 端口显示成开发端口或内部端口
+- 生成的链接无法被外部用户访问
+
+这通常说明：
+
+- `base-domain` 没回填
+- `http-port` 写成了内部服务端口，而不是对外入口端口
+
+#### 3. SSH 信息展示正常，但实际连不上
+
+优先检查：
+
+- **`sshpiper.host` / `sshpiper.port`** 是否是最终对外地址
+- **`apisix.ssh-ingress-port`** 是否为内部端口，例如 `9100`
+- APISIX Stream / LB / NodePort / 安全组是否真的放通了 SSH 链路
+
+常见错误：
+
+- 把 `sshpiper.port` 配成了容器内部端口 `2222`
+- 把 `apisix.ssh-ingress-port` 错配成了 `22`
+
+#### 4. Docker Compose 下资源地址生成了，但访问失败
+
+优先检查：
+
+- `deploy/docker-compose/config.yaml` 中的 `auth-uri`
+- `deploy/docker-compose/apisix/apisix.yaml` 是否正确挂载
+- `deploy/docker-compose/apisix/config.yaml` 是否正常启动 APISIX
+
+常见原因：
+
+- `auth-uri` 错写成了 `http://localhost:8001/...`
+- Compose 网络里 `localhost` 指向的是 APISIX 容器自身，不是 `neptune-server`
+
+#### 5. Kubernetes 下后端正常，但资源访问全部失败
+
+优先检查：
+
+- `deploy/kubernetes/server/gva-server-configmap.yaml` 是否已被正确应用
+- 修改 ConfigMap 后是否重启了后端 Pod
+- APISIX 网关是否已部署，平台入口路由是否已应用
+
+常见原因：
+
+- ConfigMap 改了，但 Pod 没重建，实际仍使用旧配置
+- `base-domain` 留空后未回填
+- `auth-uri` 中的 Service DNS 或端口写错
+
+---
+
+## License
 
 Proprietary - All Rights Reserved

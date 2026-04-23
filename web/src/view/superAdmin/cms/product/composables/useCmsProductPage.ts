@@ -2,6 +2,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { deleteCMSProduct } from '@/api/cms'
 import type { Translator } from '@/types/consoleResource'
 import type { CmsProductRow } from '@/types/superAdmin'
+import { getErrorMessage } from '@/utils/resourceValidators'
 import { useCmsProductCatalog } from './useCmsProductCatalog'
 import { useCmsProductDialogs } from './useCmsProductDialogs'
 
@@ -121,7 +122,7 @@ export function useCmsProductPage({ t }: UseCmsProductPageOptions = {}) {
       }
     } catch (error: unknown) {
       if (!isDialogCancel(error)) {
-        ElMessage.error(translate('failed'))
+        ElMessage.error(getErrorMessage(error, translate('failed')))
       }
     }
   }

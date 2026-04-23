@@ -51,7 +51,7 @@ type InferenceServiceService struct {
 
 var InferenceServiceServiceApp = new(InferenceServiceService)
 
-// SetApisixService 注入 APISIX 服务依赖
+// SetApisixService APISIX 服务依赖
 func (s *InferenceServiceService) SetApisixService(svc inferenceApisixService) {
 	s.apisixSvc = svc
 }
@@ -965,7 +965,7 @@ func (s *InferenceServiceService) GetInferenceServiceLogs(ctx context.Context, r
 	container := req.Container
 	if container == "" {
 		if service.DeployType == consts.DeployTypeDistributed {
-			container = service.InstanceName + "-head"
+			container = ResolveDistributedContainerName(service.InstanceName, podName)
 		} else {
 			container = service.InstanceName
 		}
@@ -1034,4 +1034,11 @@ func (s *InferenceServiceService) GetInferenceServiceForTerminal(ctx context.Con
 		ClusterID:    svc.ClusterID,
 		DeployType:   svc.DeployType,
 	}, nil
+}
+func ResolveDistributedContainerName(instanceName, podName string) string {
+	trimmedPodName := strings.TrimSpace(podName)
+	if strings.Contains(trimmedPodName, "-worker-") {
+		return instanceName + "-worker"
+	}
+	return instanceName + "-head"
 }

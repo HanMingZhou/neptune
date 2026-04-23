@@ -2,6 +2,9 @@
   <ApiKeyDialog
     v-if="showApiKeyDialog"
     :api-keys="apiKeys"
+    :api-keys-loading="apiKeysLoading"
+    :creating-api-key="creatingApiKey"
+    :deleting-api-key-id="deletingApiKeyId"
     :format-time="formatTime"
     :new-key-name="newKeyName"
     :newly-created-key="newlyCreatedKey"
@@ -20,6 +23,9 @@ import type { InferenceApiKey } from '@/types/consoleResource'
 withDefaults(
   defineProps<{
     apiKeys?: InferenceApiKey[]
+    apiKeysLoading?: boolean
+    creatingApiKey?: boolean
+    deletingApiKeyId?: number | null
     formatTime: (value?: string | number) => string
     newKeyName?: string
     newlyCreatedKey?: string
@@ -27,6 +33,9 @@ withDefaults(
   }>(),
   {
     apiKeys: () => [],
+    apiKeysLoading: false,
+    creatingApiKey: false,
+    deletingApiKeyId: null,
     newKeyName: '',
     newlyCreatedKey: '',
     showApiKeyDialog: false

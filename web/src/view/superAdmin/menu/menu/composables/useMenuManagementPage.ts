@@ -18,6 +18,7 @@ import type {
   MenuOption,
   MenuTreeNode
 } from '@/types/superAdmin'
+import { getErrorMessage } from '@/utils/resourceValidators'
 import { toLowerCase } from '@/utils/stringFun'
 
 interface UseMenuManagementPageOptions {
@@ -187,7 +188,7 @@ export function useMenuManagementPage({
       }
     } catch (error: unknown) {
       console.error('Failed to fetch menu list:', error)
-      ElMessage.error(translate('failed'))
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     } finally {
       if (!silent) {
         loading.value = false

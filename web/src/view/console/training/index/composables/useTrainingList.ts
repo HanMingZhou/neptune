@@ -7,6 +7,7 @@ import {
   stopTrainingJob
 } from '@/api/training'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 import type {
   ConsoleTrainingJob,
   PageListData,
@@ -60,9 +61,9 @@ export const useTrainingList = () => {
       } else {
         ElMessage.error(res.msg || t('error'))
       }
-    } catch (_error) {
-      console.error(_error)
-      ElMessage.error(t('error'))
+    } catch (error) {
+      console.error(error)
+      ElMessage.error(getErrorMessage(error, t('error')))
     } finally {
       loading.value = false
       isInitialLoad.value = false

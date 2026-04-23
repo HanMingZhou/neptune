@@ -14,6 +14,7 @@ import type {
   CmsClusterRow
 } from '@/types/superAdmin'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 
 interface UseClusterManagementPageOptions {
   t?: Translator
@@ -96,7 +97,7 @@ export function useClusterManagementPage({
       }
     } catch (error: unknown) {
       console.error('Failed to fetch clusters:', error)
-      ElMessage.error(translate('failed'))
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     } finally {
       if (!silent) {
         loading.value = false
@@ -184,7 +185,7 @@ export function useClusterManagementPage({
       }
     } catch (error: unknown) {
       console.error('Failed to submit cluster form:', error)
-      ElMessage.error(translate('failed'))
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     } finally {
       submitting.value = false
     }
@@ -214,7 +215,7 @@ export function useClusterManagementPage({
       }
     } catch (error: unknown) {
       if (!isDialogCancel(error)) {
-        ElMessage.error(translate('failed'))
+        ElMessage.error(getErrorMessage(error, translate('failed')))
       }
     }
   }

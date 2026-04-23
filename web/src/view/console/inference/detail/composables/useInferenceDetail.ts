@@ -7,6 +7,7 @@ import {
   ref,
   watch
 } from 'vue'
+import { AxiosError } from 'axios'
 import { useRoute, useRouter, type LocationQueryValue } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
@@ -40,6 +41,16 @@ import { useInferenceTerminal } from './useInferenceTerminal'
 const getQueryValue = (
   value: LocationQueryValue | LocationQueryValue[] | null | undefined
 ): string => (Array.isArray(value) ? value[0] || '' : value || '')
+
+const extractErrorMessage = (error: unknown, fallback: string): string => {
+  if (error instanceof AxiosError) {
+    return error.response?.data?.msg || error.message || fallback
+  }
+  if (error instanceof Error) {
+    return error.message || fallback
+  }
+  return fallback
+}
 
 export const useInferenceDetail = () => {
   const t = inject<Translator>('t', (key: string) => key)
@@ -116,6 +127,9 @@ export const useInferenceDetail = () => {
 
   const {
     apiKeys,
+    apiKeysLoading,
+    creatingApiKey,
+    deletingApiKeyId,
     handleCreateApiKey,
     handleDeleteApiKey,
     newKeyName,
@@ -187,7 +201,11 @@ export const useInferenceDetail = () => {
       } else {
         ElMessage.error(res.msg || t('error'))
       }
-    } catch (_error) {
+    } catch (error) {
+      if (error === 'cancel' || error === 'close') {
+        return
+      }
+      ElMessage.error(extractErrorMessage(error, t('error')))
     } finally {
       actionLoading.value = false
     }
@@ -251,15 +269,50 @@ export const useInferenceDetail = () => {
     })
   }
 
-  const copyText = (text: string): void => {
-    void navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        ElMessage.success(t('success'))
-      })
-      .catch(() => {
-        ElMessage.error(t('error'))
-      })
+  const fallbackCopyText = (text: string): boolean => {
+    if (typeof document === 'undefined') {
+      return false
+    }
+
+    const textarea = document.createElement('textarea')
+    textarea.value = text
+    textarea.setAttribute('readonly', 'true')
+    textarea.style.position = 'fixed'
+    textarea.style.opacity = '0'
+    textarea.style.pointerEvents = 'none'
+    textarea.style.left = '-9999px'
+    document.body.appendChild(textarea)
+    textarea.focus()
+    textarea.select()
+
+    let copied = false
+    try {
+      copied = document.execCommand('copy')
+    } catch (_error) {
+      copied = false
+    }
+
+    document.body.removeChild(textarea)
+    return copied
+  }
+
+  const copyText = async (text: string): Promise<void> => {
+    if (!text) {
+      ElMessage.error(t('error'))
+      return
+    }
+
+    try {
+      if (navigator.clipboard?.writeText && window.isSecureContext) {
+        await navigator.clipboard.writeText(text)
+      } else if (!fallbackCopyText(text)) {
+        throw new Error('copy failed')
+      }
+
+      ElMessage.success(t('success'))
+    } catch (_error) {
+      ElMessage.error(t('error'))
+    }
   }
   const formatCommand = formatInferenceCommand
   const formatTime = formatInferenceTime
@@ -313,12 +366,15 @@ export const useInferenceDetail = () => {
     activeTab,
     apiEndpoint,
     apiKeys,
+    apiKeysLoading,
     canConnectTerminal,
     clearLogs,
     connectLogStream,
     connectTerminal,
     copyText,
+    creatingApiKey,
     curlExample,
+    deletingApiKeyId,
     disconnectLogStream,
     disconnectTerminal,
     fetchPods,

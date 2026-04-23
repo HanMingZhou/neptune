@@ -11,6 +11,7 @@ import { getAreaList } from '@/api/volume'
 import type { Translator } from '@/types/consoleResource'
 import type { CmsClusterOption } from '@/types/superAdmin'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 import { composeImageAddr } from '@/utils/imageRegistry'
 import type {
   ImageFilterValue,
@@ -105,8 +106,8 @@ export function useImageManagement({ t }: UseImageManagementOptions = {}) {
       }
 
       ElMessage.error(res.msg || translate('failed'))
-    } catch {
-      ElMessage.error(translate('failed'))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     } finally {
       if (!silent) {
         loading.value = false
@@ -123,8 +124,8 @@ export function useImageManagement({ t }: UseImageManagementOptions = {}) {
       }
 
       ElMessage.error(res.msg || translate('failed'))
-    } catch {
-      ElMessage.error(translate('failed'))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     }
   }
 
@@ -201,9 +202,9 @@ export function useImageManagement({ t }: UseImageManagementOptions = {}) {
         return
       }
 
-      ElMessage.error(res.msg || translate('failed'))
-    } catch {
-      ElMessage.error(translate('failed'))
+      ElMessage.error(getErrorMessage(res, translate('failed')))
+    } catch (error) {
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     } finally {
       submitting.value = false
     }
@@ -261,9 +262,9 @@ export function useImageManagement({ t }: UseImageManagementOptions = {}) {
             return
           }
 
-          ElMessage.error(res.msg || translate('failed'))
-        } catch {
-          ElMessage.error(translate('failed'))
+          ElMessage.error(getErrorMessage(res, translate('failed')))
+        } catch (error) {
+          ElMessage.error(getErrorMessage(error, translate('failed')))
         }
       })
       .catch(() => {})

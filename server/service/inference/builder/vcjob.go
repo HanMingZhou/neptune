@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"gin-vue-admin/model/consts"
 	helper "gin-vue-admin/utils/k8s"
+	"regexp"
+	"strings"
 
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -16,6 +18,24 @@ const (
 	ncclPort   = 29500 // NCCL rendezvous 端口
 	masterPort = 29500 // 与 ncclPort 一致，用于 MASTER_PORT 环境变量
 )
+
+func commandHasFlag(command, flag string) bool {
+	if strings.TrimSpace(command) == "" || strings.TrimSpace(flag) == "" {
+		return false
+	}
+	pattern := regexp.MustCompile(fmt.Sprintf(`(?:^|\s)%s(?:\s|=|$)`, regexp.QuoteMeta(flag)))
+	return pattern.MatchString(command)
+}
+
+func appendCommandFlag(command, flag, value string) string {
+	if commandHasFlag(command, flag) {
+		return command
+	}
+	if strings.TrimSpace(value) == "" {
+		return strings.TrimSpace(command + " " + flag)
+	}
+	return strings.TrimSpace(command + " " + flag + " " + value)
+}
 
 // BuildVCJob 构建分布式推理 VCJob
 //
@@ -72,7 +92,7 @@ func (b *BaseInferenceBuilder) BuildVCJob(spec *InferenceSpec) (*vcbatch.Job, er
 			Queue:         consts.DefalutQueue,
 			Tasks:         tasks,
 			Plugins: map[string][]string{
-				"svc": {},
+				"svc": {"--publish-not-ready-addresses=true"},
 			},
 			Policies: []vcbatch.LifecyclePolicy{
 				{Event: vcbus.PodFailedEvent, Action: vcbus.RestartJobAction},
@@ -148,8 +168,8 @@ func (b *BaseInferenceBuilder) buildHeadTask(
 									Port: intstr.FromInt(spec.ServicePort),
 								},
 							},
-							PeriodSeconds:    10,
-							FailureThreshold: 120,
+							PeriodSeconds:    inferenceStartupProbePeriodSeconds,
+							FailureThreshold: inferenceStartupProbeFailureThreshold,
 						},
 						ReadinessProbe: &corev1.Probe{
 							ProbeHandler: corev1.ProbeHandler{
@@ -260,10 +280,10 @@ func (b *BaseInferenceBuilder) wrapDistributedCommand(spec *InferenceSpec, nodeR
 
 	// SGLang 需要额外的 --node-rank 和 --dist-init-addr 参数
 	if spec.Framework == consts.FrameworkSGLang {
-		return fmt.Sprintf(
-			`exec %s --node-rank %d --dist-init-addr ${MASTER_ADDR}:${MASTER_PORT}`,
-			baseCmd, nodeRank,
-		)
+		baseCmd = appendCommandFlag(baseCmd, "--nnodes", fmt.Sprintf("%d", spec.WorkerCount))
+		baseCmd = appendCommandFlag(baseCmd, "--node-rank", fmt.Sprintf("%d", nodeRank))
+		baseCmd = appendCommandFlag(baseCmd, "--dist-init-addr", "${MASTER_ADDR}:${MASTER_PORT}")
+		return fmt.Sprintf(`exec %s`, baseCmd)
 	}
 
 	// vLLM 通过 MASTER_ADDR/WORLD_SIZE/NODE_RANK 环境变量自动组网，无需额外参数
@@ -283,8 +303,11 @@ func (b *BaseInferenceBuilder) buildWorkerShellScript(spec *InferenceSpec) strin
 
 	// SGLang worker 需要 --node-rank 和 --dist-init-addr
 	if spec.Framework == "SGLANG" {
+		baseCmd = appendCommandFlag(baseCmd, "--nnodes", fmt.Sprintf("%d", spec.WorkerCount))
+		baseCmd = appendCommandFlag(baseCmd, "--node-rank", "$NODE_RANK")
+		baseCmd = appendCommandFlag(baseCmd, "--dist-init-addr", "${MASTER_ADDR}:${MASTER_PORT}")
 		return fmt.Sprintf(
-			`export NODE_RANK=$((VK_TASK_INDEX + 1)) && exec %s --node-rank $NODE_RANK --dist-init-addr ${MASTER_ADDR}:${MASTER_PORT}`,
+			`export NODE_RANK=$((VK_TASK_INDEX + 1)) && exec %s`,
 			baseCmd,
 		)
 	}

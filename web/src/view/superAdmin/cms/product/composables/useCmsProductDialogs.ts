@@ -21,6 +21,7 @@ import type {
   CmsProductType
 } from '@/types/superAdmin'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 import {
   buildNodeContextFromProduct,
   buildProductFormFromRow,
@@ -32,8 +33,8 @@ import {
   normalizeClusterNodes,
   resolveProductResourceType,
   sanitizeBatchComputeProductPayload,
-  sanitizeProductPricePayload,
-  sanitizeProductPayload
+  sanitizeProductPayload,
+  sanitizeProductPricePayload
 } from './productPageUtils'
 import { getVGpuNumber } from '@/utils/vgpu'
 
@@ -69,7 +70,7 @@ export const useCmsProductDialogs = ({
   const showPriceDialog = ref(false)
   const isEdit = ref(false)
   const resourceType = ref<CmsProductResourceType>('cpu')
-  const selectedNode = ref<CmsNodeRow | null>(null)
+  const selectedNode = ref<CmsProductNodeCandidate | null>(null)
   const selectedNodeNames = ref<string[]>([])
   const activePreviewNodeName = ref('')
   const productForm = reactive<CmsProductForm>(createDefaultProductForm())
@@ -114,7 +115,7 @@ export const useCmsProductDialogs = ({
 
   const selectedNodeCount = computed(() => selectedNodeNames.value.length)
 
-  const editLimitNode = computed<CmsNodeRow | null>(() =>
+  const editLimitNode = computed<CmsProductNodeCandidate | null>(() =>
     isEdit.value ? selectedNode.value : null
   )
 
@@ -375,7 +376,7 @@ export const useCmsProductDialogs = ({
       refreshPreviewPointer()
     } catch (error: unknown) {
       console.error(error)
-      ElMessage.error(t('failed'))
+      ElMessage.error(getErrorMessage(error, t('failed')))
     } finally {
       loadingNodes.value = false
     }
@@ -625,7 +626,7 @@ export const useCmsProductDialogs = ({
       }
     } catch (error: unknown) {
       console.error(error)
-      ElMessage.error(t('failed'))
+      ElMessage.error(getErrorMessage(error, t('failed')))
     } finally {
       submitting.value = false
     }
@@ -645,7 +646,7 @@ export const useCmsProductDialogs = ({
       }
     } catch (error: unknown) {
       console.error(error)
-      ElMessage.error(t('failed'))
+      ElMessage.error(getErrorMessage(error, t('failed')))
     } finally {
       submitting.value = false
     }

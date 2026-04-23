@@ -10,6 +10,7 @@
         <colgroup>
           <col style="width: 96px" />
           <col style="width: 200px" />
+          <col style="width: 120px" />
           <col style="width: 140px" />
           <col style="width: 170px" />
           <col style="width: 150px" />
@@ -19,13 +20,13 @@
           <col style="width: 140px" />
           <col style="width: 220px" />
           <col style="width: 320px" />
-          <col style="width: 120px" />
           <col style="width: 228px" />
         </colgroup>
         <thead>
           <tr>
             <th>{{ t('id') }}</th>
             <th class="product-column">{{ t('productName') }}</th>
+            <th class="text-center">{{ t('status') }}</th>
             <th class="cluster-column">{{ t('clusterName') }}</th>
             <th class="node-column">{{ t('nodeName') }}</th>
             <th class="node-ip-column">{{ t('nodeIp') }}</th>
@@ -34,12 +35,7 @@
             <th class="resource-column">{{ t('resourceConfig') }}</th>
             <th class="cuda-column">{{ t('cudaVersion') }}</th>
             <th class="text-center inventory-column">{{ t('inventory') }}</th>
-            <th class="price-column">
-              {{ t('prices') }}({{ t('priceHourly') }}/{{ t('priceDaily') }}/{{
-                t('priceWeekly')
-              }}/{{ t('priceMonthly') }})
-            </th>
-            <th class="text-center">{{ t('status') }}</th>
+            <th class="price-column">{{ t('prices') }}({{ t('priceHourly') }}/{{ t('priceDaily') }}/{{ t('priceWeekly') }}/{{ t('priceMonthly') }})</th>
             <th class="console-actions-header product-actions-column">
               {{ t('actions') }}
             </th>
@@ -54,6 +50,12 @@
             <td class="is-code is-secondary">{{ row.id }}</td>
             <td class="product-cell">
               <span class="is-primary product-name">{{ row.name }}</span>
+            </td>
+            <td class="text-center">
+              <ListToneBadge
+                :label="row.status === 1 ? t('onShelf') : t('offShelf')"
+                :tone="row.status === 1 ? 'success' : 'danger'"
+              />
             </td>
             <td class="cluster-cell">
               <span class="meta-pill">{{ row.clusterName || '-' }}</span>
@@ -200,12 +202,6 @@
                   </span>
                 </div>
               </div>
-            </td>
-            <td class="text-center">
-              <ListToneBadge
-                :label="row.status === 1 ? t('onShelf') : t('offShelf')"
-                :tone="row.status === 1 ? 'success' : 'neutral'"
-              />
             </td>
             <td class="console-actions-cell product-actions-cell">
               <div class="list-row-actions">

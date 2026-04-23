@@ -13,6 +13,7 @@ import type {
   CmsNodeRow
 } from '@/types/superAdmin'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 
 interface UseNodeManagementPageOptions {
   t?: Translator
@@ -69,7 +70,7 @@ export function useNodeManagementPage({
       }
     } catch (error: unknown) {
       console.error('Failed to fetch CMS clusters:', error)
-      ElMessage.error(translate('failed'))
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     }
   }
 
@@ -102,7 +103,7 @@ export function useNodeManagementPage({
       }
     } catch (error: unknown) {
       console.error('Failed to fetch CMS nodes:', error)
-      ElMessage.error(translate('failed'))
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     } finally {
       if (!silent) {
         loading.value = false
@@ -140,7 +141,7 @@ export function useNodeManagementPage({
       }
     } catch (error: unknown) {
       console.error('Failed to refresh node data:', error)
-      ElMessage.error(translate('failed'))
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     } finally {
       if (!silent) {
         loading.value = false
@@ -204,14 +205,14 @@ export function useNodeManagementPage({
       })
 
       if (res.code === 0) {
-        ElMessage.success(translate('success'))
-        await fetchNodes()
+        ElMessage.success(res.msg || translate('success'))
+        await refreshData(true)
       } else {
         ElMessage.error(res.msg || translate('failed'))
       }
     } catch (error: unknown) {
       if (!isDialogCancel(error)) {
-        ElMessage.error(translate('failed'))
+        ElMessage.error(getErrorMessage(error, translate('failed')))
       }
     }
   }
@@ -250,7 +251,7 @@ export function useNodeManagementPage({
       }
     } catch (error: unknown) {
       if (!isDialogCancel(error)) {
-        ElMessage.error(translate('failed'))
+        ElMessage.error(getErrorMessage(error, translate('failed')))
       }
     }
   }

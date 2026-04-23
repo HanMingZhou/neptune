@@ -11,6 +11,11 @@ import (
 	vcbatch "volcano.sh/apis/pkg/apis/batch/v1alpha1"
 )
 
+const (
+	inferenceStartupProbePeriodSeconds    = 10
+	inferenceStartupProbeFailureThreshold = 180
+)
+
 // InferenceSpec 推理服务规格
 type InferenceSpec struct {
 	Name             string

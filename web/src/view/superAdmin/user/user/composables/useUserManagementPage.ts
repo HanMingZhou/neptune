@@ -21,6 +21,7 @@ import type {
   UserSearchInfo
 } from '@/types/superAdmin'
 import type { ApiResponse } from '@/utils/request'
+import { getErrorMessage } from '@/utils/resourceValidators'
 
 interface UseUserManagementPageOptions {
   t?: Translator
@@ -217,7 +218,7 @@ export function useUserManagementPage({
       }
     } catch (error: unknown) {
       console.error('Failed to fetch user list:', error)
-      ElMessage.error(translate('failed'))
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     } finally {
       if (!silent) {
         loading.value = false
@@ -235,7 +236,7 @@ export function useUserManagementPage({
       }
     } catch (error: unknown) {
       console.error('Failed to fetch authority list:', error)
-      ElMessage.error(translate('failed'))
+      ElMessage.error(getErrorMessage(error, translate('failed')))
     }
   }
 
@@ -308,7 +309,7 @@ export function useUserManagementPage({
       return
     }
 
-    ElMessage.error(res.msg || translate('failed'))
+    ElMessage.error(getErrorMessage(res, translate('failed')))
   }
 
   const openResetPasswordDialog = (row: UserRow): void => {
@@ -367,10 +368,7 @@ export function useUserManagementPage({
       return
     }
 
-    ElMessage({
-      type: 'error',
-      message: res.msg || translate('resetPasswordFailed')
-    })
+    ElMessage.error(getErrorMessage(res, translate('resetPasswordFailed')))
   }
 
   const deleteUserFunc = async (row: UserRow): Promise<void> => {
@@ -391,7 +389,7 @@ export function useUserManagementPage({
       }
     } catch (error: unknown) {
       if (!isDialogCancel(error)) {
-        ElMessage.error(translate('failed'))
+        ElMessage.error(getErrorMessage(error, translate('failed')))
       }
     }
   }
