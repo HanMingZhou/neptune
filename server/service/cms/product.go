@@ -155,14 +155,14 @@ func buildUpdatedComputeSpec(existing productModel.Product, req *cmsReq.UpdatePr
 	return spec
 }
 
-func buildExistingComputeProductSummary(product productModel.Product) cmsRes.ExistingComputeProductSummary {
+func toExistingComputeProductSummary(product productModel.Product) cmsRes.ExistingComputeProductSummary {
 	resourceType := "cpu"
 	if product.IsVGPU() {
 		resourceType = "vgpu"
 	} else if product.IsGPUOnly() {
 		resourceType = "gpu"
 	}
-
+	prices := productModel.ComputePriceValuesFromItems(product.PriceItems)
 	return cmsRes.ExistingComputeProductSummary{
 		ID:           product.ID,
 		Name:         product.Name,
@@ -176,10 +176,10 @@ func buildExistingComputeProductSummary(product productModel.Product) cmsRes.Exi
 		VGPUNumber:   product.VGPUNumber,
 		VGPUMemory:   product.VGPUMemory,
 		VGPUCores:    product.VGPUCores,
-		PriceHourly:  product.PriceHourly,
-		PriceDaily:   product.PriceDaily,
-		PriceWeekly:  product.PriceWeekly,
-		PriceMonthly: product.PriceMonthly,
+		PriceHourly:  prices.Hourly,
+		PriceDaily:   prices.Daily,
+		PriceWeekly:  prices.Weekly,
+		PriceMonthly: prices.Monthly,
 		Status:       product.Status,
 		MaxInstances: product.MaxInstances,
 		UsedCapacity: product.UsedCapacity,
@@ -409,6 +409,7 @@ func (s *ProductService) prepareComputeProduct(tx *gorm.DB, req *cmsReq.CreatePr
 		SystemDisk:    req.SystemDisk,
 		DataDisk:      req.DataDisk,
 		Status:        req.Status,
+		SortOrder:     req.SortOrder,
 		MaxInstances:  maxInstances,
 		VGPUCores:     req.VGPUCores,
 	}
@@ -534,6 +535,7 @@ func (s *ProductService) CreateProduct(req *cmsReq.CreateProductReq) error {
 			SystemDisk:     req.SystemDisk,
 			DataDisk:       req.DataDisk,
 			Status:         req.Status,
+			SortOrder:      req.SortOrder,
 			MaxInstances:   req.MaxInstances,
 			StorageClass:   req.StorageClass,
 			StoragePriceGB: req.StoragePriceGB,
@@ -577,7 +579,7 @@ func (s *ProductService) GetProductNodeCandidates(req *cmsReq.GetProductNodeCand
 		compatible, compatibilityReason := s.resolveNodeCandidateCompatibility(&node, req)
 		summaries := make([]cmsRes.ExistingComputeProductSummary, 0, len(existingProducts[node.NodeName]))
 		for _, product := range existingProducts[node.NodeName] {
-			summaries = append(summaries, buildExistingComputeProductSummary(product))
+			summaries = append(summaries, toExistingComputeProductSummary(product))
 		}
 
 		disableReason := ""
@@ -652,6 +654,7 @@ func (s *ProductService) BatchCreateComputeProducts(req *cmsReq.BatchCreateCompu
 				SystemDisk:    req.SystemDisk,
 				DataDisk:      req.DataDisk,
 				Status:        req.Status,
+				SortOrder:     req.SortOrder,
 				MaxInstances:  req.MaxInstances,
 			}
 
@@ -776,6 +779,7 @@ func (s *ProductService) UpdateProduct(req *cmsReq.UpdateProductReq) error {
 	if req.DataDisk > 0 {
 		updates["data_disk"] = req.DataDisk
 	}
+	updates["sort_order"] = req.SortOrder
 
 	// 文件存储字段
 	if req.StorageClass != "" {
@@ -1026,6 +1030,7 @@ func (s *ProductService) GetProductList(req *cmsReq.GetProductListReq) (*product
 
 	var list []productRes.ProductDetailResponse
 	for _, p := range products {
+		prices := productModel.ComputePriceValuesFromItems(p.PriceItems)
 		metadata := nodeMetadata[productNodeKey{
 			clusterID: p.ClusterId,
 			nodeName:  p.NodeName,
@@ -1050,19 +1055,21 @@ func (s *ProductService) GetProductList(req *cmsReq.GetProductListReq) (*product
 			VGPUNumber:     p.VGPUNumber,
 			VGPUMemory:     p.VGPUMemory,
 			VGPUCores:      p.VGPUCores,
-			PriceHourly:    p.PriceHourly,
-			PriceDaily:     p.PriceDaily,
-			PriceWeekly:    p.PriceWeekly,
-			PriceMonthly:   p.PriceMonthly,
+			PriceHourly:    prices.Hourly,
+			PriceDaily:     prices.Daily,
+			PriceWeekly:    prices.Weekly,
+			PriceMonthly:   prices.Monthly,
 			DriverVersion:  firstNonEmpty(p.DriverVersion, metadata.driverVersion),
 			CUDAVersion:    firstNonEmpty(p.CUDAVersion, metadata.cudaVersion),
 			SystemDisk:     p.SystemDisk,
 			DataDisk:       p.DataDisk,
 			Status:         p.Status,
+			SortOrder:      p.SortOrder,
 			StorageClass:   p.StorageClass,
 			StoragePriceGB: p.StoragePriceGB,
 			MaxInstances:   p.MaxInstances,
 			UsedCapacity:   p.UsedCapacity,
+			Version:        p.Version,
 			Available:      p.AvailableCapacity(),
 		})
 	}
@@ -1093,6 +1100,7 @@ func (s *ProductService) GetProductDetail(idStr string) (*productRes.ProductDeta
 		clusterID: product.ClusterId,
 		nodeName:  product.NodeName,
 	}]
+	prices := productModel.ComputePriceValuesFromItems(product.PriceItems)
 
 	resp := &productRes.ProductDetailResponse{
 		ID:             product.ID,
@@ -1113,19 +1121,21 @@ func (s *ProductService) GetProductDetail(idStr string) (*productRes.ProductDeta
 		GPUMemory:      product.GPUMemory,
 		VGPUNumber:     product.VGPUNumber,
 		VGPUMemory:     product.VGPUMemory,
-		PriceHourly:    product.PriceHourly,
-		PriceDaily:     product.PriceDaily,
-		PriceWeekly:    product.PriceWeekly,
-		PriceMonthly:   product.PriceMonthly,
+		PriceHourly:    prices.Hourly,
+		PriceDaily:     prices.Daily,
+		PriceWeekly:    prices.Weekly,
+		PriceMonthly:   prices.Monthly,
 		DriverVersion:  firstNonEmpty(product.DriverVersion, metadata.driverVersion),
 		CUDAVersion:    firstNonEmpty(product.CUDAVersion, metadata.cudaVersion),
 		SystemDisk:     product.SystemDisk,
 		DataDisk:       product.DataDisk,
 		Status:         product.Status,
+		SortOrder:      product.SortOrder,
 		StorageClass:   product.StorageClass,
 		StoragePriceGB: product.StoragePriceGB,
 		MaxInstances:   product.MaxInstances,
 		UsedCapacity:   product.UsedCapacity,
+		Version:        product.Version,
 		Available:      product.AvailableCapacity(),
 	}
 	return resp, nil

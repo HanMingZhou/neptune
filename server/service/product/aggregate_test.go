@@ -111,14 +111,16 @@ func TestLoadPriceItemsForProductsHydratesComputePrices(t *testing.T) {
 	require.NoError(t, productModel.LoadPriceItemsForProducts(context.Background(), db, loaded))
 
 	require.Len(t, loaded[0].PriceItems, 4)
-	require.Equal(t, 1.25, loaded[0].PriceHourly)
-	require.Equal(t, 10.5, loaded[0].PriceDaily)
-	require.Equal(t, 60.0, loaded[0].PriceWeekly)
-	require.Equal(t, 180.0, loaded[0].PriceMonthly)
-	require.Equal(t, 2.5, loaded[1].PriceHourly)
-	require.Equal(t, 0.0, loaded[1].PriceDaily)
-	require.Equal(t, 0.0, loaded[1].PriceWeekly)
-	require.Equal(t, 260.0, loaded[1].PriceMonthly)
+	prices0 := productModel.ComputePriceValuesFromItems(loaded[0].PriceItems)
+	prices1 := productModel.ComputePriceValuesFromItems(loaded[1].PriceItems)
+	require.Equal(t, 1.25, prices0.Hourly)
+	require.Equal(t, 10.5, prices0.Daily)
+	require.Equal(t, 60.0, prices0.Weekly)
+	require.Equal(t, 180.0, prices0.Monthly)
+	require.Equal(t, 2.5, prices1.Hourly)
+	require.Equal(t, 0.0, prices1.Daily)
+	require.Equal(t, 0.0, prices1.Weekly)
+	require.Equal(t, 260.0, prices1.Monthly)
 }
 
 func TestReleaseResourceAllocationsRollsBackWhenCapacityIsInvalid(t *testing.T) {

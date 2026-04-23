@@ -42,6 +42,7 @@ export const createDefaultProductForm = (
   priceWeekly: 0,
   priceMonthly: 0,
   status: 1,
+  sortOrder: 0,
   maxInstances: 0,
   storageClass: '',
   storagePriceGb: 0
@@ -150,6 +151,7 @@ export const buildProductFormFromRow = (
   priceWeekly: row.priceWeekly || 0,
   priceMonthly: row.priceMonthly || 0,
   status: row.status ?? 1,
+  sortOrder: row.sortOrder ?? 0,
   maxInstances: row.maxInstances || 0,
   storageClass: row.storageClass || '',
   storagePriceGb: row.storagePriceGb || 0
@@ -301,6 +303,7 @@ export const sanitizeBatchComputeProductPayload = (
     systemDisk: 0,
     dataDisk: 0,
     status: data.status,
+    sortOrder: data.sortOrder ?? 0,
     maxInstances: data.maxInstances || 0
   }
 }

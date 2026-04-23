@@ -29,6 +29,7 @@ type CreateProductReq struct {
 	SystemDisk    int64              `json:"systemDisk"`
 	DataDisk      int64              `json:"dataDisk"`
 	Status        int                `json:"status"`
+	SortOrder     int                `json:"sortOrder"`
 	MaxInstances  int64              `json:"maxInstances"`
 	// 文件存储字段
 	StorageClass   string  `json:"storageClass"`
@@ -59,6 +60,7 @@ type BatchCreateComputeProductReq struct {
 	SystemDisk    int64              `json:"systemDisk"`
 	DataDisk      int64              `json:"dataDisk"`
 	Status        int                `json:"status"`
+	SortOrder     int                `json:"sortOrder"`
 	MaxInstances  int64              `json:"maxInstances"`
 }
 
@@ -84,6 +86,7 @@ type UpdateProductReq struct {
 	SystemDisk    int64              `json:"systemDisk"`
 	DataDisk      int64              `json:"dataDisk"`
 	Status        int                `json:"status"`
+	SortOrder     int                `json:"sortOrder"`
 	MaxInstances  int64              `json:"maxInstances"`
 	// 文件存储字段
 	StorageClass   string  `json:"storageClass"`

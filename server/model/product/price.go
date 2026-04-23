@@ -21,6 +21,66 @@ func (ProductPrice) TableName() string {
 	return "product_prices"
 }
 
+type ComputePriceValues struct {
+	Hourly  float64
+	Daily   float64
+	Weekly  float64
+	Monthly float64
+}
+
+func ComputePriceValuesFromItems(items []ProductPrice) ComputePriceValues {
+	values := ComputePriceValues{}
+	for _, item := range items {
+		switch item.PriceType {
+		case ChargeTypeHourly:
+			values.Hourly = item.Price
+		case ChargeTypeDaily:
+			values.Daily = item.Price
+		case ChargeTypeWeekly:
+			values.Weekly = item.Price
+		case ChargeTypeMonthly:
+			values.Monthly = item.Price
+		}
+	}
+	return values
+}
+
+func GetPriceByTypeFromItems(items []ProductPrice, priceType int) float64 {
+	values := ComputePriceValuesFromItems(items)
+	switch NormalizeComputePriceType(priceType) {
+	case ChargeTypeHourly:
+		return values.Hourly
+	case ChargeTypeDaily:
+		return values.Daily
+	case ChargeTypeWeekly:
+		return values.Weekly
+	case ChargeTypeMonthly:
+		return values.Monthly
+	default:
+		return values.Hourly
+	}
+}
+
+func HasSameComputePrices(a, b *Product) bool {
+	if a == nil || b == nil {
+		return false
+	}
+	left := ComputePriceValuesFromItems(a.PriceItems)
+	right := ComputePriceValuesFromItems(b.PriceItems)
+	return left.Hourly == right.Hourly &&
+		left.Daily == right.Daily &&
+		left.Weekly == right.Weekly &&
+		left.Monthly == right.Monthly
+}
+
+func (p *Product) GetPriceByType(priceType int) float64 {
+	return GetPriceByTypeFromItems(p.PriceItems, priceType)
+}
+
+func (p *Product) GetPrice(priceType int64) float64 {
+	return GetPriceByTypeFromItems(p.PriceItems, int(priceType))
+}
+
 func LoadPriceItems(ctx context.Context, db *gorm.DB, product *Product) error {
 	if product == nil || product.ID == 0 {
 		return nil
@@ -34,7 +94,7 @@ func LoadPriceItems(ctx context.Context, db *gorm.DB, product *Product) error {
 		return err
 	}
 
-	product.ApplyPriceItems(items)
+	product.PriceItems = append([]ProductPrice(nil), items...)
 	return nil
 }
 
@@ -73,7 +133,7 @@ func LoadPriceItemsForProducts(ctx context.Context, db *gorm.DB, products []Prod
 	}
 
 	for idx := range products {
-		products[idx].ApplyPriceItems(priceMap[products[idx].ID])
+		products[idx].PriceItems = append([]ProductPrice(nil), priceMap[products[idx].ID]...)
 	}
 	return nil
 }

@@ -61,7 +61,7 @@ func (b *BaseInferenceBuilder) BuildVCJob(spec *InferenceSpec) (*vcbatch.Job, er
 	volumes = append(volumes, spec.UserVolumes...)
 	volumeMounts = append(volumeMounts, spec.UserVolumeMounts...)
 
-	headAddr := fmt.Sprintf("%s-head-0.%s", spec.Name, spec.Name)
+	headAddr := fmt.Sprintf("%s-head-0.%s.%s.svc.cluster.local", spec.Name, spec.Name, spec.Namespace)
 	totalNodes := spec.WorkerCount
 	affinity := helper.BuildSchedulingAffinity(spec.InstanceName, spec.AllowedNodes, spec.StrictSpread)
 

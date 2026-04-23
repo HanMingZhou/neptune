@@ -1,6 +1,6 @@
-UPDATE aiInfra.sys_user_authority SET  WHERE sys_user_id = 1 AND sys_authority_authority_id = 888;
-UPDATE aiInfra.sys_user_authority SET  WHERE sys_user_id = 1 AND sys_authority_authority_id = 8881;
-UPDATE aiInfra.sys_user_authority SET  WHERE sys_user_id = 1 AND sys_authority_authority_id = 9528;
-UPDATE aiInfra.sys_user_authority SET  WHERE sys_user_id = 2 AND sys_authority_authority_id = 888;
-UPDATE aiInfra.sys_user_authority SET  WHERE sys_user_id = 4 AND sys_authority_authority_id = 8881;
-UPDATE aiInfra.sys_user_authority SET  WHERE sys_user_id = 5 AND sys_authority_authority_id = 8881;
+INSERT IGNORE INTO aiInfra.sys_user_authority (sys_user_id, sys_authority_authority_id) VALUES (1, 888);
+INSERT IGNORE INTO aiInfra.sys_user_authority (sys_user_id, sys_authority_authority_id) VALUES (1, 8881);
+INSERT IGNORE INTO aiInfra.sys_user_authority (sys_user_id, sys_authority_authority_id) VALUES (1, 9528);
+INSERT IGNORE INTO aiInfra.sys_user_authority (sys_user_id, sys_authority_authority_id) VALUES (2, 888);
+INSERT IGNORE INTO aiInfra.sys_user_authority (sys_user_id, sys_authority_authority_id) VALUES (4, 8881);
+INSERT IGNORE INTO aiInfra.sys_user_authority (sys_user_id, sys_authority_authority_id) VALUES (5, 8881);

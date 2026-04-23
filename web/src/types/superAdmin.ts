@@ -387,9 +387,11 @@ export interface CmsProductRow {
   driverVersion?: string
   cudaVersion?: string
   status: number
+  sortOrder?: number
   available?: number
   maxInstances: number
   usedCapacity?: number
+  version?: number
   prices?: CmsProductPriceItem[]
   storageClass: string
   storagePriceGb: number
@@ -494,6 +496,7 @@ export interface CmsBatchCreateComputeProductPayload {
   systemDisk?: number
   dataDisk?: number
   status: number
+  sortOrder?: number
   maxInstances?: number
 }
 

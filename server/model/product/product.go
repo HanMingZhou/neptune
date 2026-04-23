@@ -62,10 +62,6 @@ type Product struct {
 	VGPUNumber    int64          `json:"vGpuNumber" gorm:"column:v_gpu_number;comment:每个实例的vGPU数量(vGPU产品,与GPU/CPU-only互斥);default:0"`
 	VGPUMemory    int64          `json:"vGpuMemory" gorm:"column:v_gpu_memory;comment:每个实例的vGPU显存(vGPU产品);default:0"`
 	VGPUCores     int64          `json:"vGpuCores" gorm:"column:v_gpu_cores;comment:每个实例的vGPU核心数(vGPU产品);default:0"`
-	PriceHourly   float64        `json:"priceHourly" gorm:"-"`
-	PriceDaily    float64        `json:"priceDaily" gorm:"-"`
-	PriceWeekly   float64        `json:"priceWeekly" gorm:"-"`
-	PriceMonthly  float64        `json:"priceMonthly" gorm:"-"`
 	PriceItems    []ProductPrice `json:"-" gorm:"foreignKey:ProductID"`
 	DriverVersion string         `json:"driverVersion" gorm:"column:driver_version;size:50;comment:显卡驱动版本"`
 	CUDAVersion   string         `json:"cudaVersion" gorm:"column:cuda_version;size:50;comment:CUDA版本"`
@@ -75,10 +71,10 @@ type Product struct {
 	SortOrder     int            `json:"sortOrder" gorm:"column:sort_order;default:0;comment:排序"`
 	MaxInstances  int64          `json:"maxInstances" gorm:"column:max_instances;comment:最大实例数(自动计算:节点资源/产品规格);default:0"`
 	UsedCapacity  int64          `json:"usedCapacity" gorm:"column:used_capacity;comment:已使用实例数;default:0"`
+	Version       int64          `json:"version" gorm:"column:version;default:0;comment:乐观锁版本号"`
 	// 文件存储专用字段
 	StorageClass   string  `json:"storageClass" gorm:"column:storage_class;size:100;comment:K8s StorageClass名称;uniqueIndex:idx_product_unique"`
 	StoragePriceGB float64 `json:"storagePriceGb" gorm:"column:storage_price_gb;type:decimal(20,6);comment:每GB每日价格"`
-	Version        int64   `json:"version" gorm:"column:version;default:0;comment:乐观锁版本号"`
 }
 
 func (Product) TableName() string {
@@ -107,22 +103,6 @@ func (p *Product) AvailableCapacity() int64 {
 		return 0
 	}
 	return available
-}
-
-// GetPrice 根据付费类型获取价格
-func (p *Product) GetPrice(chargeType int64) float64 {
-	switch chargeType {
-	case ChargeTypeHourly:
-		return p.PriceHourly
-	case ChargeTypeDaily:
-		return p.PriceDaily
-	case ChargeTypeWeekly:
-		return p.PriceWeekly
-	case ChargeTypeMonthly:
-		return p.PriceMonthly
-	default:
-		return p.PriceHourly
-	}
 }
 
 func ComputePriceTypes() []int {
@@ -155,37 +135,6 @@ func NormalizeCatalogPriceType(productType, priceType int) int {
 		return PriceTypeStorageGBDaily
 	}
 	return NormalizeComputePriceType(priceType)
-}
-
-func (p *Product) ApplyPriceItems(items []ProductPrice) {
-	p.PriceHourly = 0
-	p.PriceDaily = 0
-	p.PriceWeekly = 0
-	p.PriceMonthly = 0
-	p.PriceItems = append(p.PriceItems[:0], items...)
-
-	for _, item := range items {
-		switch item.PriceType {
-		case ChargeTypeHourly:
-			p.PriceHourly = item.Price
-		case ChargeTypeDaily:
-			p.PriceDaily = item.Price
-		case ChargeTypeWeekly:
-			p.PriceWeekly = item.Price
-		case ChargeTypeMonthly:
-			p.PriceMonthly = item.Price
-		}
-	}
-}
-
-func HasSameComputePrices(left, right *Product) bool {
-	if left == nil || right == nil {
-		return false
-	}
-	return left.PriceHourly == right.PriceHourly &&
-		left.PriceDaily == right.PriceDaily &&
-		left.PriceWeekly == right.PriceWeekly &&
-		left.PriceMonthly == right.PriceMonthly
 }
 
 // GetPayTypeName 获取付费类型名称

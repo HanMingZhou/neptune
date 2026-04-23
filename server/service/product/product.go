@@ -16,6 +16,7 @@ type ProductService struct{}
 // toProductDetailResponse 将 Product Model 统一转换为 ProductDetailResponse DTO
 // 集中维护映射关系，避免多处重复代码导致字段遗漏
 func toProductDetailResponse(p *productModel.Product) productRes.ProductDetailResponse {
+	prices := productModel.ComputePriceValuesFromItems(p.PriceItems)
 	return productRes.ProductDetailResponse{
 		ID:                p.ID,
 		TemplateProductId: p.ID,
@@ -34,19 +35,21 @@ func toProductDetailResponse(p *productModel.Product) productRes.ProductDetailRe
 		VGPUNumber:        p.VGPUNumber,
 		VGPUMemory:        p.VGPUMemory,
 		VGPUCores:         p.VGPUCores,
-		PriceHourly:       p.PriceHourly,
-		PriceDaily:        p.PriceDaily,
-		PriceWeekly:       p.PriceWeekly,
-		PriceMonthly:      p.PriceMonthly,
+		PriceHourly:       prices.Hourly,
+		PriceDaily:        prices.Daily,
+		PriceWeekly:       prices.Weekly,
+		PriceMonthly:      prices.Monthly,
 		DriverVersion:     p.DriverVersion,
 		CUDAVersion:       p.CUDAVersion,
 		SystemDisk:        p.SystemDisk,
 		DataDisk:          p.DataDisk,
 		Status:            p.Status,
+		SortOrder:         p.SortOrder,
 		StorageClass:      p.StorageClass,
 		StoragePriceGB:    p.StoragePriceGB,
 		MaxInstances:      p.MaxInstances,
 		UsedCapacity:      p.UsedCapacity,
+		Version:           p.Version,
 		Available:         p.AvailableCapacity(),
 		ClusterId:         p.ClusterId,
 	}

@@ -68,10 +68,12 @@ type ProductDetailResponse struct {
 	SystemDisk        int64   `json:"systemDisk"`
 	DataDisk          int64   `json:"dataDisk"`
 	Status            int     `json:"status"`
+	SortOrder         int     `json:"sortOrder"`
 	StorageClass      string  `json:"storageClass"`
 	StoragePriceGB    float64 `json:"storagePriceGb"`
 	MaxInstances      int64   `json:"maxInstances"`
 	UsedCapacity      int64   `json:"usedCapacity"`
+	Version           int64   `json:"version"`
 	Available         int64   `json:"available"` // 可用库存
 	ClusterId         uint    `json:"clusterId"`
 	PhysicalNodeCount int64   `json:"physicalNodeCount,omitempty"`
@@ -139,6 +141,8 @@ type AggregateProductResponse struct {
 	PriceDaily        float64 `json:"priceDaily"`
 	PriceWeekly       float64 `json:"priceWeekly"`
 	PriceMonthly      float64 `json:"priceMonthly"`
+	SortOrder         int     `json:"sortOrder"`
+	Version           int64   `json:"version"`
 	Available         int64   `json:"available"`
 	TotalSlots        int64   `json:"totalSlots"`
 	PhysicalNodeCount int64   `json:"physicalNodeCount"`

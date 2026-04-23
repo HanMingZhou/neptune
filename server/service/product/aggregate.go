@@ -109,6 +109,7 @@ func (s *ProductService) GetAggregateProductList(
 
 	grouped := make(map[aggregateProductKey]*productRes.AggregateProductResponse)
 	for _, p := range products {
+		prices := productModel.ComputePriceValuesFromItems(p.PriceItems)
 		key := buildAggregateProductKey(&p)
 		nodeState := nodeStates[p.ClusterId][p.NodeName]
 		resolvedDriverVersion := firstNonEmpty(p.DriverVersion, nodeState.DriverVersion)
@@ -135,10 +136,12 @@ func (s *ProductService) GetAggregateProductList(
 				VGPUCores:         p.VGPUCores,
 				DriverVersion:     resolvedDriverVersion,
 				CUDAVersion:       resolvedCUDAVersion,
-				PriceHourly:       p.PriceHourly,
-				PriceDaily:        p.PriceDaily,
-				PriceWeekly:       p.PriceWeekly,
-				PriceMonthly:      p.PriceMonthly,
+				PriceHourly:       prices.Hourly,
+				PriceDaily:        prices.Daily,
+				PriceWeekly:       prices.Weekly,
+				PriceMonthly:      prices.Monthly,
+				SortOrder:         p.SortOrder,
+				Version:           p.Version,
 			}
 			grouped[key] = item
 		}
@@ -558,6 +561,7 @@ func firstNonEmpty(values ...string) string {
 }
 
 func buildAggregateProductKey(p *productModel.Product) aggregateProductKey {
+	prices := productModel.ComputePriceValuesFromItems(p.PriceItems)
 	return aggregateProductKey{
 		ProductType:   p.ProductType,
 		ClusterID:     p.ClusterId,
@@ -573,10 +577,10 @@ func buildAggregateProductKey(p *productModel.Product) aggregateProductKey {
 		VGPUCores:     p.VGPUCores,
 		DriverVersion: p.DriverVersion,
 		CUDAVersion:   p.CUDAVersion,
-		PriceHourly:   p.PriceHourly,
-		PriceDaily:    p.PriceDaily,
-		PriceWeekly:   p.PriceWeekly,
-		PriceMonthly:  p.PriceMonthly,
+		PriceHourly:   prices.Hourly,
+		PriceDaily:    prices.Daily,
+		PriceWeekly:   prices.Weekly,
+		PriceMonthly:  prices.Monthly,
 	}
 }
 
