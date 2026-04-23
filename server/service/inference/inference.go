@@ -151,6 +151,11 @@ func (s *InferenceServiceService) validateCreateRequest(req *inferenceReq.Create
 		if req.InstanceCount < 2 {
 			return errors.New("分布式模式实例数量必须大于 1（总节点数，包含 head）")
 		}
+		if req.Framework == consts.FrameworkVLLM {
+			if err := validateDistributedVLLMCommand(req); err != nil {
+				return err
+			}
+		}
 	}
 
 	// 校验用户挂载路径不能与模型挂载路径冲突
@@ -165,6 +170,74 @@ func (s *InferenceServiceService) validateCreateRequest(req *inferenceReq.Create
 	}
 
 	return nil
+}
+
+func validateDistributedVLLMCommand(req *inferenceReq.CreateInferenceServiceReq) error {
+	combined := strings.TrimSpace(req.Command)
+	if len(req.Args) > 0 {
+		combined = strings.TrimSpace(combined + " " + strings.Join(req.Args, " "))
+	}
+	if !regexp.MustCompile(`(?:^|\s)vllm\s+serve(?:\s|$)`).MatchString(combined) {
+		return errors.New("分布式 VLLM 启动命令必须使用 vllm serve")
+	}
+	if inferenceCommandHasFlag(combined, "--headless") {
+		return errors.New("分布式 VLLM 启动命令不要手动包含 --headless，worker 由后端自动追加")
+	}
+
+	backend, ok := extractInferenceCommandFlagValue(combined, "--distributed-executor-backend")
+	if !ok || backend != "mp" {
+		return errors.New("分布式 VLLM 启动命令必须包含 --distributed-executor-backend mp")
+	}
+
+	nnodes, ok := extractInferenceCommandFlagValue(combined, "--nnodes")
+	if !ok {
+		return errors.New("分布式 VLLM 启动命令必须包含 --nnodes")
+	}
+	nnodeCount, err := strconv.Atoi(nnodes)
+	if err != nil || nnodeCount != req.InstanceCount {
+		return errors.Errorf("分布式 VLLM 启动命令中的 --nnodes=%s 与实例数 %d 不一致", nnodes, req.InstanceCount)
+	}
+
+	nodeRank, ok := extractInferenceCommandFlagValue(combined, "--node-rank")
+	if !ok || !matchesEnvPlaceholder(nodeRank, "NODE_RANK") {
+		return errors.New("分布式 VLLM 启动命令中的 --node-rank 必须使用 ${NODE_RANK} 或 $NODE_RANK")
+	}
+
+	masterAddr, ok := extractInferenceCommandFlagValue(combined, "--master-addr")
+	if !ok || !matchesEnvPlaceholder(masterAddr, "MASTER_ADDR") {
+		return errors.New("分布式 VLLM 启动命令中的 --master-addr 必须使用 ${MASTER_ADDR} 或 $MASTER_ADDR")
+	}
+
+	masterPort, ok := extractInferenceCommandFlagValue(combined, "--master-port")
+	if !ok || !matchesEnvPlaceholder(masterPort, "MASTER_PORT") {
+		return errors.New("分布式 VLLM 启动命令中的 --master-port 必须使用 ${MASTER_PORT} 或 $MASTER_PORT")
+	}
+
+	return nil
+}
+
+func inferenceCommandHasFlag(command, flag string) bool {
+	if strings.TrimSpace(command) == "" || strings.TrimSpace(flag) == "" {
+		return false
+	}
+	pattern := regexp.MustCompile(fmt.Sprintf(`(?:^|\s)%s(?:\s|=|$)`, regexp.QuoteMeta(flag)))
+	return pattern.MatchString(command)
+}
+
+func extractInferenceCommandFlagValue(command, flag string) (string, bool) {
+	if strings.TrimSpace(command) == "" || strings.TrimSpace(flag) == "" {
+		return "", false
+	}
+	pattern := regexp.MustCompile(fmt.Sprintf(`(?:^|\s)%s(?:\s+|=)(\S+)(?:\s|$)`, regexp.QuoteMeta(flag)))
+	matches := pattern.FindStringSubmatch(command)
+	if len(matches) < 2 {
+		return "", false
+	}
+	return matches[1], true
+}
+
+func matchesEnvPlaceholder(value, envName string) bool {
+	return value == fmt.Sprintf("${%s}", envName) || value == fmt.Sprintf("$%s", envName)
 }
 
 func validateInferenceServicePort(command string, args []string, servicePort int) error {

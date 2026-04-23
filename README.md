@@ -259,9 +259,13 @@ docker compose -f deploy/docker-compose/docker-compose.yaml up -d --build
 ![训练任务示例 2](docs/readme/images/training-example-2.png)
 
 ### 推理服务
-![推理服务示例 1](docs/readme/images/inference-example-sglang-1.png)
+![推理服务示例 1](docs/readme/images/inference-example-sglang-gpu-1.png)
 ![推理服务示例 2](docs/readme/images/inference-example-sglang-vgpu-1.png)
 ![推理服务示例 3](docs/readme/images/inference-example-sglang-vgpu-2.png)
+![推理服务示例 4](docs/readme/images/inference-example-sglang-distribute-1.png)
+![推理服务示例 5](docs/readme/images/inference-example-sglang-distribute-2.png)
+
+
 
 
 ## 📦 部署方式

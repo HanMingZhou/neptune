@@ -67,6 +67,57 @@ func TestWrapDistributedCommand_SGLangInjectsMultiNodeFlags(t *testing.T) {
 	}
 }
 
+func TestWrapDistributedCommand_VLLMDoesNotInjectHeadlessForHead(t *testing.T) {
+	t.Parallel()
+
+	b := &BaseInferenceBuilder{}
+	spec := &InferenceSpec{
+		Framework: consts.FrameworkVLLM,
+		Command:   "vllm serve /model/foo --host 0.0.0.0 --port 30000 --tensor-parallel-size 4 --pipeline-parallel-size 1 --distributed-executor-backend mp --nnodes 2 --node-rank ${NODE_RANK} --master-addr ${MASTER_ADDR} --master-port ${MASTER_PORT}",
+	}
+
+	cmd := b.wrapDistributedCommand(spec, 0)
+
+	if strings.Contains(cmd, "--headless") {
+		t.Fatalf("wrapDistributedCommand() = %q, should not contain --headless for head", cmd)
+	}
+	for _, want := range []string{
+		"--distributed-executor-backend mp",
+		"--node-rank ${NODE_RANK}",
+		"--master-addr ${MASTER_ADDR}",
+		"--master-port ${MASTER_PORT}",
+	} {
+		if !strings.Contains(cmd, want) {
+			t.Fatalf("wrapDistributedCommand() = %q, want substring %q", cmd, want)
+		}
+	}
+}
+
+func TestBuildWorkerShellScript_VLLMAppendsHeadless(t *testing.T) {
+	t.Parallel()
+
+	b := &BaseInferenceBuilder{}
+	spec := &InferenceSpec{
+		Framework: consts.FrameworkVLLM,
+		Command:   "vllm serve /model/foo --host 0.0.0.0 --port 30000 --tensor-parallel-size 4 --pipeline-parallel-size 1 --distributed-executor-backend mp --nnodes 2 --node-rank ${NODE_RANK} --master-addr ${MASTER_ADDR} --master-port ${MASTER_PORT}",
+	}
+
+	script := b.buildWorkerShellScript(spec)
+
+	for _, want := range []string{
+		"export NODE_RANK=$((VK_TASK_INDEX + 1))",
+		"--distributed-executor-backend mp",
+		"--node-rank ${NODE_RANK}",
+		"--master-addr ${MASTER_ADDR}",
+		"--master-port ${MASTER_PORT}",
+		"--headless",
+	} {
+		if !strings.Contains(script, want) {
+			t.Fatalf("buildWorkerShellScript() = %q, want substring %q", script, want)
+		}
+	}
+}
+
 func TestBuildWorkerShellScript_SGLangInjectsMultiNodeFlags(t *testing.T) {
 	t.Parallel()
 

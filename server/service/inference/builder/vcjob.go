@@ -313,6 +313,9 @@ func (b *BaseInferenceBuilder) buildWorkerShellScript(spec *InferenceSpec) strin
 	}
 
 	// vLLM worker 通过环境变量自动组网
+	if spec.Framework == consts.FrameworkVLLM {
+		baseCmd = appendCommandFlag(baseCmd, "--headless", "")
+	}
 	return fmt.Sprintf(
 		`export NODE_RANK=$((VK_TASK_INDEX + 1)) && exec %s`,
 		baseCmd,

@@ -76,6 +76,57 @@ func TestValidateCreateRequest_DistributedRequiresFramework(t *testing.T) {
 	}
 }
 
+func TestValidateCreateRequest_DistributedVLLMAcceptsExplicitTemplate(t *testing.T) {
+	t.Parallel()
+
+	svc := &InferenceServiceService{}
+	req := &inferenceReq.CreateInferenceServiceReq{
+		DeployType:    consts.DeployTypeDistributed,
+		Framework:     consts.FrameworkVLLM,
+		Command:       "vllm serve /1/qwen/DeepSeek-R1-Distill-Qwen-32B --host 0.0.0.0 --port 30000 --tensor-parallel-size 4 --pipeline-parallel-size 1 --distributed-executor-backend mp --nnodes 2 --node-rank ${NODE_RANK} --master-addr ${MASTER_ADDR} --master-port ${MASTER_PORT}",
+		InstanceCount: 2,
+		ServicePort:   30000,
+	}
+
+	if err := svc.validateCreateRequest(req); err != nil {
+		t.Fatalf("validateCreateRequest() error = %v", err)
+	}
+}
+
+func TestValidateCreateRequest_DistributedVLLMRejectsManualHeadless(t *testing.T) {
+	t.Parallel()
+
+	svc := &InferenceServiceService{}
+	req := &inferenceReq.CreateInferenceServiceReq{
+		DeployType:    consts.DeployTypeDistributed,
+		Framework:     consts.FrameworkVLLM,
+		Command:       "vllm serve /1/qwen/DeepSeek-R1-Distill-Qwen-32B --host 0.0.0.0 --port 30000 --tensor-parallel-size 4 --pipeline-parallel-size 1 --distributed-executor-backend mp --nnodes 2 --node-rank ${NODE_RANK} --master-addr ${MASTER_ADDR} --master-port ${MASTER_PORT} --headless",
+		InstanceCount: 2,
+		ServicePort:   30000,
+	}
+
+	if err := svc.validateCreateRequest(req); err == nil {
+		t.Fatal("validateCreateRequest() expected error, got nil")
+	}
+}
+
+func TestValidateCreateRequest_DistributedVLLMRejectsHardcodedNodeRank(t *testing.T) {
+	t.Parallel()
+
+	svc := &InferenceServiceService{}
+	req := &inferenceReq.CreateInferenceServiceReq{
+		DeployType:    consts.DeployTypeDistributed,
+		Framework:     consts.FrameworkVLLM,
+		Command:       "vllm serve /1/qwen/DeepSeek-R1-Distill-Qwen-32B --host 0.0.0.0 --port 30000 --tensor-parallel-size 4 --pipeline-parallel-size 1 --distributed-executor-backend mp --nnodes 2 --node-rank 0 --master-addr ${MASTER_ADDR} --master-port ${MASTER_PORT}",
+		InstanceCount: 2,
+		ServicePort:   30000,
+	}
+
+	if err := svc.validateCreateRequest(req); err == nil {
+		t.Fatal("validateCreateRequest() expected error, got nil")
+	}
+}
+
 func TestInferenceServiceNamesForCleanup_DistributedIncludesLegacyAndAPIService(t *testing.T) {
 	t.Parallel()
 
