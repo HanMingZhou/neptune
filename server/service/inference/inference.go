@@ -325,13 +325,15 @@ func (s *InferenceServiceService) createInferenceRuntime(ctx context.Context, st
 
 	if err := s.createK8sService(ctx, state.cluster.ClientSet, state.service); err != nil {
 		logx.Error("创建K8s Service失败", err)
-		return nil
+		return err
 	}
 
 	cleanups.Add(func(ctx context.Context) {
-		_ = state.cluster.ClientSet.CoreV1().Services(state.service.Namespace).Delete(
-			ctx, state.service.InstanceName, metav1.DeleteOptions{},
-		)
+		for _, serviceName := range inferenceServiceNamesForCleanup(state.service) {
+			_ = state.cluster.ClientSet.CoreV1().Services(state.service.Namespace).Delete(
+				ctx, serviceName, metav1.DeleteOptions{},
+			)
+		}
 	})
 	return nil
 }
@@ -403,7 +405,7 @@ func (s *InferenceServiceService) createK8sService(ctx context.Context, clientSe
 
 	svc := &corev1.Service{
 		ObjectMeta: metav1.ObjectMeta{
-			Name:      service.InstanceName,
+			Name:      inferenceAPIServiceName(service),
 			Namespace: service.Namespace,
 			Labels: map[string]string{
 				consts.LabelApp:          consts.InferenceInstance,
@@ -458,7 +460,7 @@ func (s *InferenceServiceService) ensureInferenceRoute(ctx context.Context, serv
 		Path:          pathMatch,
 		RewriteRegex:  rewriteRegex,
 		RewriteTarget: "/$1",
-		ServiceName:   service.InstanceName,
+		ServiceName:   inferenceAPIServiceName(service),
 		ServicePort:   80,
 		Labels: map[string]string{
 			consts.LabelInstanceType: consts.InferenceInstance,
@@ -490,6 +492,27 @@ func (s *InferenceServiceService) deleteInferenceRoute(ctx context.Context, serv
 // buildGatewayUrl 构建推理服务的 APISIX 网关完整访问地址
 func buildGatewayUrl(namespace, instanceName string) string {
 	return fmt.Sprintf("/inference/%s/%s", namespace, instanceName)
+}
+
+func inferenceAPIServiceName(service *inferenceModel.Inference) string {
+	if service == nil {
+		return ""
+	}
+	if service.DeployType == consts.DeployTypeDistributed {
+		return service.InstanceName + "-api"
+	}
+	return service.InstanceName
+}
+
+func inferenceServiceNamesForCleanup(service *inferenceModel.Inference) []string {
+	if service == nil {
+		return nil
+	}
+	serviceName := inferenceAPIServiceName(service)
+	if service.DeployType == consts.DeployTypeDistributed && serviceName != service.InstanceName {
+		return []string{serviceName, service.InstanceName}
+	}
+	return []string{serviceName}
 }
 
 // updateStatus 更新服务状态
@@ -573,7 +596,9 @@ func (s *InferenceServiceService) DeleteInferenceService(ctx context.Context, re
 			_ = cluster.ClientSet.AppsV1().Deployments(service.Namespace).Delete(ctx, service.InstanceName, metav1.DeleteOptions{})
 		}
 		// 删除 K8s Service
-		_ = cluster.ClientSet.CoreV1().Services(service.Namespace).Delete(ctx, service.InstanceName, metav1.DeleteOptions{})
+		for _, serviceName := range inferenceServiceNamesForCleanup(service) {
+			_ = cluster.ClientSet.CoreV1().Services(service.Namespace).Delete(ctx, serviceName, metav1.DeleteOptions{})
+		}
 	}
 
 	// 配额释放和订单停止由 PodGroup Informer 监听 PodGroup 删除事件统一处理
