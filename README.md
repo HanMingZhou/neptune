@@ -252,20 +252,22 @@ docker compose -f deploy/docker-compose/docker-compose.yaml up -d --build
 
 ### 容器实例（Notebook）
 ![容器实例示例 1](docs/readme/images/notebook-example-1.png)
-![容器实例示例 2](docs/readme/images/notebook-example-2.png)
+![容器实例示例 2](docs/readme/images/tensorboard-example.png)
 
 ### 训练任务
 ![训练任务示例 1](docs/readme/images/training-example-1.png)
 ![训练任务示例 2](docs/readme/images/training-example-2.png)
 
 ### 推理服务
+#### SGLANG
 ![推理服务示例 1](docs/readme/images/inference-example-sglang-gpu-1.png)
 ![推理服务示例 2](docs/readme/images/inference-example-sglang-vgpu-1.png)
 ![推理服务示例 3](docs/readme/images/inference-example-sglang-vgpu-2.png)
 ![推理服务示例 4](docs/readme/images/inference-example-sglang-distribute-1.png)
 ![推理服务示例 5](docs/readme/images/inference-example-sglang-distribute-2.png)
-
-
+#### VLLM
+![推理服务示例 7](docs/readme/images/inference-example-vllm-gpu-1.png)
+![推理服务示例 6](docs/readme/images/inference-example-vllm-distribute-gpu-1.png)
 
 
 ## 📦 部署方式
