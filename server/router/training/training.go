@@ -19,6 +19,7 @@ func (r *TrainingRouter) InitTrainingRouter(Router *gin.RouterGroup, PublicRoute
 
 	{
 		trainingRouter.POST("add", trainingApi.CreateTrainingJob)    // 创建训练任务
+		trainingRouter.POST("update", trainingApi.UpdateTrainingJob) // 更新训练任务
 		trainingRouter.POST("delete", trainingApi.DeleteTrainingJob) // 删除训练任务
 		trainingRouter.POST("stop", trainingApi.StopTrainingJob)     // 停止训练任务
 	}

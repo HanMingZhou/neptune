@@ -150,6 +150,11 @@ export const useNotebookDetail = () => {
     return status === 'RUNNING' || status === 'READY'
   })
 
+  const isEditable = computed(() => {
+    const status = normalizeStatus(notebook.value.status)
+    return status === 'STOPPED' || status === 'CLOSED'
+  })
+
   const fetchDetail = async (): Promise<void> => {
     if (!resourceId.value) {
       return
@@ -475,6 +480,22 @@ export const useNotebookDetail = () => {
 
   const goBack = (): void => router.go(-1)
 
+  const goToEdit = (): void => {
+    if (!resourceId.value || !isEditable.value) return
+
+    void router
+      .push({
+        name: 'notebookCreate',
+        query: { id: resourceId.value, mode: 'edit' }
+      })
+      .catch(() => {
+        return router.push({
+          path: '/layout/notebooks/create',
+          query: { id: resourceId.value, mode: 'edit' }
+        })
+      })
+  }
+
   const getPayTypeLabel = (type?: number | string): string => {
     const map: Record<number, string> = {
       1: 'payHourly',
@@ -571,9 +592,11 @@ export const useNotebookDetail = () => {
     getStatusLabel,
     getUnitPriceLabel,
     goBack,
+    goToEdit,
     handleDelete,
     handleStart,
     handleStop,
+    isEditable,
     isInstanceRunning,
     logs,
     logsConnected,

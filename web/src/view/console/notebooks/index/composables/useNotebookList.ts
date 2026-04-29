@@ -21,6 +21,11 @@ type ButtonLoadingState = Partial<Record<ResourceId, boolean>>
 const normalizeStatus = (status: unknown): string =>
   `${status || ''}`.trim().toUpperCase()
 
+const isEditableStatus = (status: unknown): boolean => {
+  const normalizedStatus = normalizeStatus(status)
+  return normalizedStatus === 'STOPPED' || normalizedStatus === 'CLOSED'
+}
+
 const fallbackCopyText = (text: string): boolean => {
   if (typeof document === 'undefined') return false
 
@@ -240,6 +245,22 @@ export const useNotebookList = () => {
     })
   }
 
+  const goToEdit = (item: ConsoleNotebook): void => {
+    if (item.id === undefined || !isEditableStatus(item.status)) return
+
+    void router
+      .push({
+        name: 'notebookCreate',
+        query: { id: item.id, mode: 'edit' }
+      })
+      .catch(() => {
+        return router.push({
+          path: '/layout/notebooks/create',
+          query: { id: item.id, mode: 'edit' }
+        })
+      })
+  }
+
   const goToDetail = (item: ConsoleNotebook): void => {
     if (item.id === undefined) return
 
@@ -287,6 +308,7 @@ export const useNotebookList = () => {
     getStatusStyle,
     getStatusText,
     goToCreate,
+    goToEdit,
     goToDetail,
     handleDelete,
     handlePageChange,

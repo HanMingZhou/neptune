@@ -12,12 +12,6 @@
       @change="changeFilter($event.key, $event.value)"
     />
 
-    <GpuCountSection
-      :model-value="gpuCount"
-      :selected-product="selectedProduct"
-      @update:model-value="emit('update:gpu-count', $event)"
-    />
-
     <ProductTable
       :format-price="formatPrice"
       :price-unit-text="priceUnitText"
@@ -27,6 +21,7 @@
     />
 
     <VolumeMountSection
+      v-if="showVolumeMount"
       :available-volumes="availableVolumes"
       :selected-volume-id="selectedVolumeId"
       :volume-mount-path="volumeMountPath"
@@ -36,7 +31,6 @@
     />
 
     <SummarySection
-      :gpu-count="gpuCount"
       :price-unit-text="priceUnitText"
       :selected-product="selectedProduct"
       :selected-volume-id="selectedVolumeId"
@@ -56,7 +50,6 @@ import type {
 } from '@/types/consoleResource'
 import BillingSection from '@/components/createPage/BillingSection.vue'
 import FilterChipSection from '@/components/createPage/FilterChipSection.vue'
-import GpuCountSection from './GpuCountSection.vue'
 import ProductTable from './ProductTable.vue'
 import SummarySection from './SummarySection.vue'
 import VolumeMountSection from './VolumeMountSection.vue'
@@ -78,7 +71,6 @@ const props = withDefaults(
     cpuModels?: FilterOption[]
     filters: NotebookFilters
     formatPrice: (product: ConsoleProduct | null | undefined) => string
-    gpuCount: number
     gpuModels?: FilterOption[]
     onVolumeChange: (value: ResourceId | null) => void
     payType: NotebookPayType
@@ -89,6 +81,7 @@ const props = withDefaults(
     selectedVolumeId?: ResourceId | null
     selectedVolumeName?: string
     selectProduct: (product: ConsoleProduct) => void
+    showVolumeMount?: boolean
     totalPrice: string
     volumeMountPath?: string
   }>(),
@@ -102,12 +95,12 @@ const props = withDefaults(
     selectedProduct: null,
     selectedVolumeId: null,
     selectedVolumeName: '',
+    showVolumeMount: true,
     volumeMountPath: ''
   }
 )
 
 const emit = defineEmits<{
-  'update:gpu-count': [value: number]
   'update:pay-type': [value: NotebookPayType]
   'update:selected-volume-id': [value: ResourceId | null]
   'update:volume-mount-path': [value: string]

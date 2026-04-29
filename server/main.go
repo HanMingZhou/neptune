@@ -47,7 +47,7 @@ func initializeSystem() {
 	//initialize.DBList()
 	initialize.SetupHandlers() // 注册全局函数
 	if global.GVA_DB != nil {
-		initialize.RegisterTables() // 初始化表
+		// initialize.RegisterTables() // 初始化表
 		// initialize.LoadInitSQLFiles() // 加SQL数据
 		// initialize.InitBaseData() // 初始化基础数据（角色、菜单、管理员用户等）
 	}

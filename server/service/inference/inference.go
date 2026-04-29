@@ -23,6 +23,7 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/gorm"
 	corev1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -33,6 +34,7 @@ import (
 // InferenceServiceManager 推理服务管理器接口
 type InferenceServiceManager interface {
 	CreateInferenceService(ctx context.Context, req *inferenceReq.CreateInferenceServiceReq) (*response.CreateInferenceServiceResp, error)
+	UpdateInferenceService(ctx context.Context, req *inferenceReq.UpdateInferenceServiceReq) error
 	DeleteInferenceService(ctx context.Context, req *inferenceReq.DeleteInferenceServiceReq) error
 	StopInferenceService(ctx context.Context, req *inferenceReq.StopInferenceServiceReq) error
 	StartInferenceService(ctx context.Context, req *inferenceReq.StartInferenceServiceReq) error
@@ -124,6 +126,132 @@ func (s *InferenceServiceService) CreateInferenceService(ctx context.Context, re
 		Status:       consts.InferenceStatusPending,
 		AccessUrl:    buildGatewayUrl(state.user.Namespace, state.service.InstanceName),
 	}, nil
+}
+
+// UpdateInferenceService 编辑推理服务（仅停止状态可编辑，不重建运行时资源）
+func (s *InferenceServiceService) UpdateInferenceService(ctx context.Context, req *inferenceReq.UpdateInferenceServiceReq) error {
+	createReq := &req.CreateInferenceServiceReq
+	if err := s.prepareCreateRequest(createReq); err != nil {
+		return err
+	}
+
+	service, err := s.getInferenceService(req.ID)
+	if err != nil {
+		return err
+	}
+
+	if service.Status != consts.InferenceStatusStopped {
+		return errors.Errorf("推理服务当前状态为%s，仅停止状态可编辑", service.Status)
+	}
+
+	if _, err := s.getInferenceImage(createReq.ImageId); err != nil {
+		return err
+	}
+	product, err := s.getEnabledProduct(createReq.TemplateProductId)
+	if err != nil {
+		return err
+	}
+	modelPVC, err := s.getInferenceVolume(createReq.ModelPvcId, "获取模型PVC信息失败")
+	if err != nil {
+		return err
+	}
+
+	argsJSON, err := marshalInferenceArgs(createReq.Args)
+	if err != nil {
+		return errors.Wrap(err, "序列化启动参数失败")
+	}
+
+	displayName := strings.TrimSpace(createReq.Name)
+	if displayName == "" {
+		displayName = service.DisplayName
+	}
+
+	mountRecords := make([]inferenceModel.InferenceMount, 0, len(createReq.Mounts))
+	for _, mount := range createReq.Mounts {
+		pvc, err := s.getInferenceVolume(mount.PvcId, "获取挂载PVC信息失败")
+		if err != nil {
+			return err
+		}
+		mountRecords = append(mountRecords, inferenceModel.InferenceMount{
+			ServiceId: service.ID,
+			MountType: mount.MountType,
+			PvcId:     mount.PvcId,
+			PvcName:   pvc.PVCName,
+			SubPath:   mount.SubPath,
+			MountPath: mount.MountPath,
+			ReadOnly:  mount.ReadOnly,
+		})
+	}
+
+	envRecords := make([]inferenceModel.InferenceEnv, 0, len(createReq.Envs))
+	for _, env := range createReq.Envs {
+		if strings.TrimSpace(env.Name) == "" {
+			continue
+		}
+		envRecords = append(envRecords, inferenceModel.InferenceEnv{
+			ServiceId: service.ID,
+			Name:      env.Name,
+			Value:     env.Value,
+		})
+	}
+
+	_ = modelPVC
+
+	return global.GVA_DB.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
+		updates := map[string]interface{}{
+			"display_name":      displayName,
+			"deploy_type":       createReq.DeployType,
+			"framework":         createReq.Framework,
+			"model_mount_path":  createReq.ModelMountPath,
+			"model_pvc_id":      createReq.ModelPvcId,
+			"image_id":          createReq.ImageId,
+			"product_id":        createReq.TemplateProductId,
+			"cluster_id":        product.ClusterId,
+			"cpu":               product.CPU,
+			"memory":            product.Memory,
+			"gpu":               product.GPUCount,
+			"gpu_model":         product.GPUModel,
+			"v_gpu_number":      product.VGPUNumber,
+			"v_gpu_memory":      product.VGPUMemory,
+			"v_gpu_cores":       product.VGPUCores,
+			"tensor_parallel":   createReq.TensorParallel,
+			"pipeline_parallel": createReq.PipelineParallel,
+			"instance_count":    createReq.InstanceCount,
+			"worker_count":      createReq.InstanceCount,
+			"schedule_strategy": createReq.ScheduleStrategy,
+			"service_port":      createReq.ServicePort,
+			"command":           createReq.Command,
+			"args":              argsJSON,
+			"auto_restart":      createReq.AutoRestart,
+			"max_restarts":      createReq.MaxRestarts,
+			"auth_type":         createReq.AuthType,
+			"pay_type":          createReq.PayType,
+			"price":             product.GetPrice(createReq.PayType),
+			"error_msg":         "",
+		}
+		if err := tx.Model(&inferenceModel.Inference{}).Where("id = ?", service.ID).Updates(updates).Error; err != nil {
+			return errors.Wrap(err, "更新推理服务失败")
+		}
+
+		if err := tx.Where("service_id = ?", service.ID).Delete(&inferenceModel.InferenceMount{}).Error; err != nil {
+			return errors.Wrap(err, "更新挂载配置失败")
+		}
+		if len(mountRecords) > 0 {
+			if err := tx.Create(&mountRecords).Error; err != nil {
+				return errors.Wrap(err, "更新挂载配置失败")
+			}
+		}
+
+		if err := tx.Where("service_id = ?", service.ID).Delete(&inferenceModel.InferenceEnv{}).Error; err != nil {
+			return errors.Wrap(err, "更新环境变量失败")
+		}
+		if len(envRecords) > 0 {
+			if err := tx.Create(&envRecords).Error; err != nil {
+				return errors.Wrap(err, "更新环境变量失败")
+			}
+		}
+		return nil
+	})
 }
 
 // validateCreateRequest 校验创建请求
@@ -922,6 +1050,7 @@ func (s *InferenceServiceService) GetInferenceServiceDetail(ctx context.Context,
 	for i, m := range mounts {
 		mountItems[i] = response.InferenceMountItem{
 			MountType: m.MountType,
+			PvcId:     m.PvcId,
 			Name:      volumeNames[m.PvcId],
 			PvcName:   m.PvcName,
 			SubPath:   m.SubPath,
@@ -979,6 +1108,13 @@ func (s *InferenceServiceService) GetInferenceServiceDetail(ctx context.Context,
 		AccessUrl:        buildGatewayUrl(service.Namespace, service.InstanceName),
 		CreatedAt:        service.CreatedAt,
 		StartedAt:        service.StartedAt,
+		ImageId:          service.ImageId,
+		ProductId:        service.ProductId,
+		ClusterId:        service.ClusterID,
+		ModelPvcId:       service.ModelPvcId,
+		InstanceCount:    service.InstanceCount,
+		ScheduleStrategy: service.ScheduleStrategy,
+		PayType:          service.PayType,
 		Mounts:           mountItems,
 		Envs:             envItems,
 	}, nil

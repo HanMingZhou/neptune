@@ -50,6 +50,24 @@ func (api *TrainingJobApi) CreateTrainingJob(c *gin.Context) {
 	response.OkWithDetailed(resp, "创建成功", c)
 }
 
+func (api *TrainingJobApi) UpdateTrainingJob(c *gin.Context) {
+	var req request.UpdateTrainingJobReq
+	if err := c.ShouldBindJSON(&req); err != nil {
+		response.FailWithMessage("参数错误: "+err.Error(), c)
+		return
+	}
+
+	req.UserId = utils.GetUserID(c)
+	req.Namespace = utils.GetUserNamespace(c)
+
+	if err := trainingService.TrainingJobServiceApp.UpdateTrainingJob(c.Request.Context(), &req); err != nil {
+		utils.HandleError(c, err, "更新训练任务失败")
+		return
+	}
+
+	response.OkWithMessage("更新成功", c)
+}
+
 // DeleteTrainingJob 删除训练任务
 // @Tags TrainingJob
 // @Summary 删除训练任务

@@ -37,6 +37,7 @@
       @create="goToCreate"
       @delete="handleDelete"
       @detail="goToDetail"
+      @edit="goToEdit"
       @framework-change="filterFramework = $event"
       @logs="viewLogs"
       @page-change="handlePageChange"
@@ -70,6 +71,7 @@ const {
   getStatusStyle,
   goToCreate,
   goToDetail,
+  goToEdit,
   handleDelete,
   handlePageChange,
   handleRefresh,

@@ -68,6 +68,8 @@ type NotebookItem struct {
 	InstanceName      string `json:"instanceName"`      // Notebook实例名称
 	Namespace         string `json:"namespace"`         // Notebook所属命名空间
 	Image             string `json:"image"`             // Notebook镜像
+	ImageId           uint   `json:"imageId"`           // 镜像ID
+	ImageType         int64  `json:"imageType"`         // 镜像类型
 	CPU               int64  `json:"cpu"`               // Notebook CPU资源
 	Memory            int64  `json:"memory"`            // Notebook 内存资源
 	GPU               int64  `json:"gpu,omitempty"`     // Notebook GPU资源
@@ -80,6 +82,8 @@ type NotebookItem struct {
 	TensorboardUrl    string `json:"tensorboardUrl"`    // TensorBoard访问地址（启用TensorBoard时返回）
 	// 详情页补充字段
 	ImageName          string      `json:"imageName"`          // 镜像展示名称
+	ClusterID          uint        `json:"clusterId"`          // 集群ID
+	ProductId          uint        `json:"productId"`          // 产品ID
 	GPUCount           int64       `json:"gpuCount"`           // GPU 数量
 	GPUModel           string      `json:"gpuModel"`           // GPU 型号
 	VGPUNumber         int64       `json:"vGpuNumber"`         // vGPU 数量
@@ -87,6 +91,8 @@ type NotebookItem struct {
 	VGPUCores          int64       `json:"vGpuCores"`          // vGPU 核心
 	PayType            int         `json:"payType"`            // 计费方式
 	Price              float64     `json:"price"`              // 单价
+	SSHKeyId           uint        `json:"sshKeyId"`           // SSH密钥ID
+	EnableSSHPassword  bool        `json:"enableSshPassword"`  // 是否启用 SSH 密码登录
 	EnableTensorboard  bool        `json:"enableTensorboard"`  // 是否启用 TensorBoard
 	TensorboardLogPath string      `json:"tensorboardLogPath"` // TensorBoard 日志路径
 	VolumeMounts       interface{} `json:"volumeMounts"`       // 挂载卷

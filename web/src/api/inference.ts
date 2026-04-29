@@ -18,6 +18,15 @@ export const createInferenceService = (data: any) => {
   })
 }
 
+// 编辑推理服务
+export const updateInferenceService = (data: any) => {
+  return service({
+    url: '/api/v1/inference/update',
+    method: 'post',
+    data
+  })
+}
+
 // 删除推理服务
 export const deleteInferenceService = (data: any) => {
   return service({

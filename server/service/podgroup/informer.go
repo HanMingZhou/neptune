@@ -460,6 +460,17 @@ func (f *PodGroupInformerFactory) lookupByInstanceName(table, column, ownerName,
 }
 
 func (f *PodGroupInformerFactory) processDelete(pg *vcv1beta1.PodGroup) error {
+	// 幂等保护：若 DB 中 PG 已标记为 Deleted，说明此前已停账并释放过资源
+	// 避免 informer 重放/重复事件导致重复扣减 used_capacity
+	var existing podgroupModel.PodGroup
+	if err := f.db.Select("id, status").
+		Where("name = ? AND namespace = ?", pg.Name, pg.Namespace).
+		Take(&existing).Error; err == nil {
+		if existing.Status == consts.PodGroupStatusDeleted {
+			return nil
+		}
+	}
+
 	res := f.resolveDeleteResource(pg)
 	config, ok := businessConfigs[res.InstanceType]
 

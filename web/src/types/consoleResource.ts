@@ -80,6 +80,7 @@ export interface ConsoleImage {
   id: ResourceId
   name: string
   description?: string
+  type?: number
   clusterId?: ResourceId
   clusterName?: string
   area?: string
@@ -126,6 +127,10 @@ export interface ConsoleNotebook {
   displayName?: string
   instanceName?: string
   status?: string
+  imageId?: ResourceId
+  imageType?: number
+  clusterId?: ResourceId
+  productId?: ResourceId
   cpu?: number | string
   memory?: number | string
   gpuCount?: number
@@ -138,6 +143,8 @@ export interface ConsoleNotebook {
   jupyterUrl?: string
   enableTensorboard?: boolean
   tensorboardUrl?: string
+  sshKeyId?: ResourceId
+  enableSshPassword?: boolean
   sshKeyCommand?: string
   sshCommand?: string
   sshPassword?: string
@@ -178,8 +185,12 @@ export interface ConsoleEnvVar {
 
 export interface ConsoleTrainingMount {
   name?: string
+  mountType?: string
+  sourceId?: ResourceId
+  pvcId?: ResourceId
   pvcName?: string
   mountPath?: string
+  readOnly?: boolean
   [key: string]: unknown
 }
 
@@ -196,6 +207,10 @@ export interface ConsoleTrainingDetail extends ConsoleTrainingJob {
   payType?: number
   price?: number
   startupCommand?: string
+  scheduleStrategy?: string
+  productId?: ResourceId
+  imageId?: ResourceId
+  clusterId?: ResourceId
   startedAt?: string | number
   finishedAt?: string | number
   tensorboardLogPath?: string
@@ -225,7 +240,9 @@ export interface ConsoleNotebookDetail extends ConsoleNotebook {
 
 export interface ConsoleInferenceMount {
   name?: string
+  pvcId?: ResourceId
   pvcName?: string
+  mountType?: string
   mountPath?: string
   subPath?: string
   readOnly?: boolean
@@ -237,6 +254,13 @@ export interface ConsoleInferenceDetail extends ConsoleInferenceService {
   memory?: number | string
   gpuModel?: string
   imageName?: string
+  imageId?: ResourceId
+  productId?: ResourceId
+  clusterId?: ResourceId
+  modelPvcId?: ResourceId
+  payType?: number
+  scheduleStrategy?: string
+  instanceCount?: number
   accessUrl?: string
   authType?: number
   modelMountPath?: string

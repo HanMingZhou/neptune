@@ -179,6 +179,14 @@
                   {{ t('start') }}
                 </button>
                 <button
+                  v-if="item.status === 'STOPPED'"
+                  class="list-row-button list-row-button--neutral"
+                  @click="$emit('edit', item)"
+                >
+                  <span class="material-icons text-[14px]">edit</span>
+                  {{ t('edit') }}
+                </button>
+                <button
                   :disabled="
                     !['STOPPED', 'FAILED'].includes(item.status) ||
                     btnLoading[item.id]
@@ -257,6 +265,7 @@ const emit = defineEmits<{
   create: []
   delete: [item: ConsoleInferenceService]
   detail: [item: ConsoleInferenceService]
+  edit: [item: ConsoleInferenceService]
   'framework-change': [value?: string]
   logs: [item: ConsoleInferenceService]
   'page-change': [page: number]

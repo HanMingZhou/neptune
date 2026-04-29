@@ -36,6 +36,7 @@
       @create="goToCreate"
       @delete="handleDelete"
       @detail="goToDetail"
+      @edit="goToEdit"
       @logs="viewLogs"
       @open-tensorboard="openTensorboard"
       @page-change="handlePageChange"
@@ -67,6 +68,7 @@ const {
   getStatusStyle,
   goToCreate,
   goToDetail,
+  goToEdit,
   handleDelete,
   handlePageChange,
   handleRefresh,

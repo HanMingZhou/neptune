@@ -1,7 +1,12 @@
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import type { Router } from 'vue-router'
-import { createTrainingJob } from '@/api/training'
+import { useRoute } from 'vue-router'
+import {
+  createTrainingJob,
+  getTrainingJobDetail,
+  updateTrainingJob
+} from '@/api/training'
 import { getImageList } from '@/api/image'
 import { getAggregateProductList, getProductFilters } from '@/api/product'
 import { getVolumeList } from '@/api/volume'
@@ -21,6 +26,7 @@ import { getVGpuNumber } from '@/utils/vgpu'
 import type {
   ConsoleImage,
   ConsoleProduct,
+  ConsoleTrainingDetail,
   ConsoleVolume,
   ListData,
   ProductFilterData,
@@ -95,6 +101,7 @@ export interface TrainingTotalResources {
 }
 
 interface TrainingCreatePayload {
+  id?: ResourceId
   name: string
   frameworkType: TrainingFrameworkType
   imageId: ResourceId
@@ -123,8 +130,10 @@ interface UseTrainingCreateOptions {
 }
 
 const MULTI_WORKER_FRAMEWORKS: TrainingFrameworkType[] = ['PYTORCH_DDP', 'MPI']
+const EDITABLE_STATUSES = ['KILLED', 'SUCCEEDED']
 
 export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
+  const route = useRoute()
   const translate: Translator = (key, params) =>
     typeof t === 'function' ? t(key, params) : key
 
@@ -156,13 +165,23 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
   const pvcs = ref<ConsoleVolume[]>([])
   const products = ref<ConsoleProduct[]>([])
   const selectedProduct = ref<ConsoleProduct | null>(null)
+  const creating = ref(false)
+  const editLoading = ref(false)
+  const editJobId = computed(() => Number(route.query.id) || 0)
+  const isEditMode = computed(() => editJobId.value > 0)
+  const pageTitleKey = computed(() =>
+    isEditMode.value ? 'editTrainingJob' : 'createTrainingJob'
+  )
+  const submitLabelKey = computed(() =>
+    isEditMode.value ? 'save' : 'submitOrder'
+  )
   const isSelectableProduct = (
     product: ConsoleProduct | null | undefined
-  ): product is ConsoleProduct => (product?.available ?? 0) > 0
+  ): product is ConsoleProduct =>
+    Boolean(product && (isEditMode.value || (product.available ?? 0) > 0))
   const areas = ref<string[]>([])
   const gpuModels = ref<NonNullable<ProductFilterData['gpuModels']>>([])
   const cpuModels = ref<NonNullable<ProductFilterData['cpuModels']>>([])
-  const creating = ref(false)
   const fieldErrors = reactive<TrainingFieldErrors>({
     name: '',
     tensorboardLogPath: ''
@@ -446,6 +465,85 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
     void loadImages(product.clusterId)
   }
 
+  const applyTrainingDetail = async (
+    detail: ConsoleTrainingDetail
+  ): Promise<void> => {
+    const status = `${detail.status || ''}`.toUpperCase()
+    if (!EDITABLE_STATUSES.includes(status)) {
+      ElMessage.warning(translate('onlyStoppedOrCompletedCanEdit'))
+      router.go(-1)
+      return
+    }
+
+    form.name = detail.displayName || detail.jobName || ''
+    form.frameworkType = (detail.frameworkType ||
+      'STANDALONE') as TrainingFrameworkType
+    form.imageId = detail.imageId || null
+    form.startupCommand = detail.startupCommand || ''
+    form.workerCount = Math.max(2, Number(detail.workerCount) || 2)
+    form.scheduleStrategy = (detail.scheduleStrategy || 'BALANCED') as ScheduleStrategy
+    form.enableTensorboard = Boolean(detail.enableTensorboard)
+    form.tensorboardLogPath = detail.tensorboardLogPath || 'logs'
+    form.payType = (detail.payType || 1) as TrainingPayType
+    form.mounts = (detail.mounts || [])
+      .filter((mount) => mount.pvcId)
+      .map((mount) => ({
+        mountType: mount.mountType || 'DATASET',
+        pvcId: mount.pvcId || null,
+        mountPath: mount.mountPath || '',
+        readOnly: Boolean(mount.readOnly)
+      }))
+    form.envs = (detail.envs || [])
+      .filter((env) => env.name)
+      .map((env) => ({
+        name: env.name || '',
+        value: `${env.value ?? ''}`
+      }))
+
+    await Promise.all([
+      loadImages(detail.clusterId || null),
+      loadProducts(detail.clusterId || null)
+    ])
+
+    const matchedProduct =
+      products.value.find(
+        (item) =>
+          item.id === detail.productId ||
+          item.templateProductId === detail.productId
+      ) || null
+    if (matchedProduct) {
+      selectedProduct.value = matchedProduct
+      form.gpuPerWorker =
+        detail.workerGpu ??
+        (matchedProduct.gpuCount > 0
+          ? matchedProduct.gpuCount
+          : getVGpuNumber(matchedProduct))
+      form.gpuType = matchedProduct.gpuModel || ''
+    }
+  }
+
+  const loadEditDetail = async (): Promise<void> => {
+    if (!isEditMode.value) return
+    editLoading.value = true
+    try {
+      const res = (await getTrainingJobDetail({
+        id: editJobId.value
+      })) as ApiResponse<ConsoleTrainingDetail>
+      if (res.code === 0 && res.data) {
+        await applyTrainingDetail(res.data)
+      } else {
+        ElMessage.error(res.msg || translate('error'))
+        router.go(-1)
+      }
+    } catch (error) {
+      console.error('加载训练任务详情失败', error)
+      ElMessage.error(getSubmitErrorMessage(error, translate('error')))
+      router.go(-1)
+    } finally {
+      editLoading.value = false
+    }
+  }
+
   const decreaseWorker = (): void => {
     if (form.workerCount > 2) form.workerCount -= 1
   }
@@ -591,6 +689,7 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
     creating.value = true
     try {
       const params: TrainingCreatePayload = {
+        id: isEditMode.value ? editJobId.value : undefined,
         name: form.name.trim(),
         frameworkType: form.frameworkType,
         imageId,
@@ -617,23 +716,28 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
         envs: form.envs.filter((env) => env.name && env.value)
       }
 
-      const res = await createTrainingJob(params)
+      const res = isEditMode.value
+        ? await updateTrainingJob(params)
+        : await createTrainingJob(params)
       if (res.code === 0) {
-        ElMessage.success(translate('createSuccess'))
+        ElMessage.success(
+          translate(isEditMode.value ? 'success' : 'createSuccess')
+        )
         router.go(-1)
         return
       }
 
-      const submitMessage = res.msg || translate('createFailed')
+      const submitMessage =
+        res.msg || translate(isEditMode.value ? 'error' : 'createFailed')
       if (isResourceNameErrorMessage(submitMessage)) {
         updateFieldError('name', submitMessage)
       }
       ElMessage.error(submitMessage)
     } catch (error) {
-      console.error('创建失败', error)
+      console.error(isEditMode.value ? '更新失败' : '创建失败', error)
       const submitMessage = getSubmitErrorMessage(
         error,
-        translate('createFailed')
+        translate(isEditMode.value ? 'error' : 'createFailed')
       )
       if (isResourceNameErrorMessage(submitMessage)) {
         updateFieldError('name', submitMessage)
@@ -644,11 +748,13 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
     }
   }
 
-  onMounted(() => {
-    void loadImages()
-    void loadPvcs()
-    void loadFilters()
-    void loadProducts()
+  onMounted(async () => {
+    await Promise.all([loadPvcs(), loadFilters()])
+    if (isEditMode.value) {
+      await loadEditDetail()
+      return
+    }
+    await Promise.all([loadImages(), loadProducts()])
   })
 
   watch(
@@ -683,6 +789,7 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
     cpuModels,
     creating,
     decreaseWorker,
+    editLoading,
     fieldErrors,
     filteredImages,
     filters,
@@ -697,6 +804,7 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
     insertMpiExample,
     insertPytorchExample,
     maxWorkerCount,
+    pageTitleKey,
     payTypes,
     priceUnitText,
     products,
@@ -706,6 +814,7 @@ export const useTrainingCreate = ({ t, router }: UseTrainingCreateOptions) => {
     selectProduct,
     selectedProduct,
     showWorkerCount,
+    submitLabelKey,
     totalAllowedNodes,
     totalPrice,
     totalResources,

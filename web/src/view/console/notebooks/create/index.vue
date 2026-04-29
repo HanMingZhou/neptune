@@ -1,6 +1,6 @@
 <template>
   <div class="console-create-page">
-    <PageHeader title-key="createInstance" @back="goBack" />
+    <PageHeader :title-key="pageTitleKey" @back="goBack" />
 
     <div class="console-page-container px-6 py-6 space-y-6">
       <NotebookResourceSelectionSection
@@ -10,7 +10,6 @@
         :cpu-models="cpuModels"
         :filters="filters"
         :format-price="formatPrice"
-        :gpu-count="gpuCount"
         :gpu-models="gpuModels"
         :on-volume-change="onVolumeChange"
         :pay-type="payType"
@@ -21,9 +20,9 @@
         :selected-volume-id="selectedVolumeId"
         :selected-volume-name="selectedVolumeName"
         :select-product="selectProduct"
+        :show-volume-mount="!isEditMode"
         :total-price="totalPrice"
         :volume-mount-path="volumeMountPath"
-        @update:gpu-count="gpuCount = $event"
         @update:pay-type="payType = $event"
         @update:selected-volume-id="selectedVolumeId = $event"
         @update:volume-mount-path="volumeMountPath = $event"
@@ -40,6 +39,8 @@
         :instance-name="instanceName"
         :selected-ssh-key="selectedSshKey"
         :selected-image="selectedImage"
+        :show-ssh-config="!isEditMode"
+        :show-tensorboard-config="!isEditMode"
         :ssh-keys="sshKeys"
         :tensorboard-log-path="tensorboardLogPath"
         @update:selected-image="selectedImage = $event"
@@ -55,17 +56,19 @@
 
     <StickyActionBar
       :can-submit="canCreate"
+      :loading="submitLoading"
       :price-unit-text="priceUnitText"
+      :submit-label-key="submitLabelKey"
       :total-price="totalPrice"
       @back="goBack"
-      @submit="handleCreate"
+      @submit="handleSubmit"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import { inject } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import PageHeader from '@/components/createPage/PageHeader.vue'
 import StickyActionBar from '@/components/createPage/StickyActionBar.vue'
 import NotebookConfigurationSection from './components/NotebookConfigurationSection.vue'
@@ -74,6 +77,7 @@ import { useNotebookCreate } from './composables/useNotebookCreate'
 import type { Translator } from '@/types/consoleResource'
 
 const t = inject<Translator>('t', (key: string) => key)
+const route = useRoute()
 const router = useRouter()
 
 const {
@@ -91,12 +95,13 @@ const {
   filters,
   formatPrice,
   goBack,
-  gpuCount,
   gpuModels,
-  handleCreate,
+  handleSubmit,
   imageTabs,
   instanceName,
+  isEditMode,
   onVolumeChange,
+  pageTitleKey,
   payType,
   payTypes,
   priceUnitText,
@@ -108,6 +113,8 @@ const {
   selectedVolumeId,
   selectedVolumeName,
   sshKeys,
+  submitLabelKey,
+  submitLoading,
   tensorboardLogPath,
   totalPrice,
   updateInstanceName,
@@ -115,5 +122,5 @@ const {
   validateInstanceNameField,
   validateTensorboardLogPathField,
   volumeMountPath
-} = useNotebookCreate({ t, router })
+} = useNotebookCreate({ route, t, router })
 </script>

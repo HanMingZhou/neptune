@@ -19,6 +19,7 @@ func (r *InferenceRouter) InitInferenceRouter(Router *gin.RouterGroup, PublicRou
 	{
 		// 推理服务管理 (需要操作记录)
 		inferenceRouter.POST("add", inferenceApi.CreateInferenceService)
+		inferenceRouter.POST("update", inferenceApi.UpdateInferenceService)
 		inferenceRouter.POST("delete", inferenceApi.DeleteInferenceService)
 		inferenceRouter.POST("stop", inferenceApi.StopInferenceService)
 		inferenceRouter.POST("start", inferenceApi.StartInferenceService)

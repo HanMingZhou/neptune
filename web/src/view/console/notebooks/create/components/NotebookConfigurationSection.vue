@@ -18,6 +18,8 @@
       :instance-name="instanceName"
       :instance-name-error="fieldErrors.instanceName"
       :selected-ssh-key="selectedSshKey"
+      :show-ssh-config="showSshConfig"
+      :show-tensorboard-config="showTensorboardConfig"
       :ssh-keys="sshKeys"
       :tensorboard-log-path="tensorboardLogPath"
       :tensorboard-path-error="fieldErrors.tensorboardLogPath"
@@ -66,6 +68,8 @@ const props = withDefaults(
     instanceName?: string
     selectedImage?: SelectableId
     selectedSshKey?: ResourceId | null
+    showSshConfig?: boolean
+    showTensorboardConfig?: boolean
     sshKeys?: ConsoleSshKey[]
     tensorboardLogPath?: string
   }>(),
@@ -81,6 +85,8 @@ const props = withDefaults(
     instanceName: '',
     selectedImage: null,
     selectedSshKey: null,
+    showSshConfig: true,
+    showTensorboardConfig: true,
     sshKeys: () => [],
     tensorboardLogPath: ''
   }

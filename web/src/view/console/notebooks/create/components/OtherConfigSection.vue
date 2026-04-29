@@ -30,6 +30,7 @@
           </p>
         </div>
         <div>
+          <template v-if="showTensorboardConfig">
           <label class="flex items-center gap-2 cursor-pointer">
             <input
               :checked="enableTensorboard"
@@ -53,11 +54,12 @@
               {{ tensorboardPathError }}
             </p>
           </div>
+          </template>
         </div>
       </div>
 
       <div class="space-y-4">
-        <div>
+        <div v-if="showSshConfig">
           <label class="block text-sm text-slate-500 mb-2">{{
             t('sshKeyLogin')
           }}</label>
@@ -110,6 +112,8 @@ withDefaults(
     instanceName?: string
     instanceNameError?: string
     selectedSshKey?: ResourceId | null
+    showSshConfig?: boolean
+    showTensorboardConfig?: boolean
     sshKeys?: ConsoleSshKey[]
     tensorboardLogPath?: string
     tensorboardPathError?: string
@@ -120,6 +124,8 @@ withDefaults(
     instanceName: '',
     instanceNameError: '',
     selectedSshKey: null,
+    showSshConfig: true,
+    showTensorboardConfig: true,
     sshKeys: () => [],
     tensorboardLogPath: '',
     tensorboardPathError: ''

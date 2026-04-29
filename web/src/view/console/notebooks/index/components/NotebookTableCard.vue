@@ -202,6 +202,15 @@
                   {{ t('stop') }}
                 </button>
                 <button
+                  v-if="['STOPPED', 'CLOSED'].includes(normalizeStatus(item.status))"
+                  :disabled="btnLoading[item.id]"
+                  class="list-row-button list-row-button--info disabled:opacity-50"
+                  @click="$emit('edit', item)"
+                >
+                  <span class="material-icons text-[14px]">edit</span>
+                  {{ t('edit') }}
+                </button>
+                <button
                   v-if="item.status !== 'DELETING'"
                   :disabled="btnLoading[item.id]"
                   class="list-row-button list-row-button--danger disabled:opacity-50"
@@ -242,6 +251,9 @@ import TableCard from '@/components/listPage/TableCard.vue'
 import type { ConsoleNotebook, Translator } from '@/types/consoleResource'
 import { formatVGpuSpec, hasVGpuSpec } from '@/utils/vgpu'
 
+const normalizeStatus = (status?: string): string =>
+  `${status || ''}`.trim().toUpperCase()
+
 withDefaults(
   defineProps<{
     btnLoading?: Record<string | number, boolean>
@@ -272,6 +284,7 @@ const emit = defineEmits<{
   create: []
   delete: [item: ConsoleNotebook]
   detail: [item: ConsoleNotebook]
+  edit: [item: ConsoleNotebook]
   'page-change': [page: number]
   refresh: []
   'search-change': [value: string]

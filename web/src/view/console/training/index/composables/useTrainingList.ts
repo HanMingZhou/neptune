@@ -17,6 +17,9 @@ import type {
 
 type ButtonLoadingState = Partial<Record<ResourceId, boolean>>
 
+const isEditableStatus = (status?: string): boolean =>
+  ['KILLED', 'SUCCEEDED'].includes(`${status || ''}`.toUpperCase())
+
 export const useTrainingList = () => {
   const t = inject<Translator>('t', (key) => key)
   const router = useRouter()
@@ -145,6 +148,11 @@ export const useTrainingList = () => {
     void router.push({ name: 'trainingDetail', query: { id: item.id } })
   }
 
+  const goToEdit = (item: ConsoleTrainingJob): void => {
+    if (!isEditableStatus(item.status)) return
+    void router.push({ name: 'trainingCreate', query: { id: item.id } })
+  }
+
   const viewLogs = (item: ConsoleTrainingJob): void => {
     void router.push({
       name: 'trainingDetail',
@@ -224,6 +232,7 @@ export const useTrainingList = () => {
     getStatusStyle,
     goToCreate,
     goToDetail,
+    goToEdit,
     handleDelete,
     handlePageChange,
     handleRefresh,

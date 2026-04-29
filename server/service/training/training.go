@@ -40,6 +40,7 @@ import (
 // TrainingJobManager 训练任务管理器接口
 type TrainingJobManager interface {
 	CreateTrainingJob(ctx context.Context, req *trainingReq.CreateTrainingJobReq) (*trainingResp.CreateTrainingJobResp, error)
+	UpdateTrainingJob(ctx context.Context, req *trainingReq.UpdateTrainingJobReq) error
 	DeleteTrainingJob(ctx context.Context, req *trainingReq.DeleteTrainingJobReq) error
 	StopTrainingJob(ctx context.Context, req *trainingReq.StopTrainingJobReq) error
 	GetTrainingJobList(ctx context.Context, req *trainingReq.GetTrainingJobListReq) (*trainingResp.GetTrainingJobListResp, error)
@@ -189,6 +190,88 @@ func (s *TrainingJobService) CreateTrainingJob(ctx context.Context, req *trainin
 		ID:          state.trainingJob.ID,
 		DisplayName: state.displayName,
 	}, nil
+}
+
+func (s *TrainingJobService) UpdateTrainingJob(ctx context.Context, req *trainingReq.UpdateTrainingJobReq) error {
+	createReq := &req.CreateTrainingJobReq
+	if err := s.validateCreateRequest(createReq); err != nil {
+		return err
+	}
+	if err := normalizeTrainingCreateRequest(createReq); err != nil {
+		return err
+	}
+
+	job := &trainingModel.TrainingJob{}
+	if err := global.GVA_DB.WithContext(ctx).Where("id = ?", req.ID).First(job).Error; err != nil {
+		return errors.Wrap(err, "任务不存在")
+	}
+	s.syncJobStatus(ctx, job)
+	if !isTrainingEditableStatus(job.Status) {
+		return errors.Errorf("训练任务当前状态为%s，无法编辑", job.Status)
+	}
+
+	if _, err := s.getTrainingImage(ctx, req.ImageId); err != nil {
+		return err
+	}
+
+	product, err := s.getTrainingProduct(ctx, req.TemplateProductId)
+	if err != nil {
+		return err
+	}
+	computeNodes, err := normalizeTrainingComputeNodes(createReq)
+	if err != nil {
+		return err
+	}
+	jobMounts, err := s.buildTrainingJobMounts(ctx, job.ID, createReq)
+	if err != nil {
+		return err
+	}
+	jobEnvs := buildTrainingJobEnvs(job.ID, createReq.Envs)
+
+	displayName := strings.TrimSpace(req.Name)
+	if displayName == "" {
+		displayName = job.JobName
+	}
+
+	return global.GVA_DB.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
+		if err := tx.Model(&trainingModel.TrainingJob{}).Where("id = ?", job.ID).Updates(map[string]interface{}{
+			"display_name":         displayName,
+			"cluster_id":           product.ClusterId,
+			"framework_type":       req.FrameworkType,
+			"image_id":             req.ImageId,
+			"startup_command":      req.StartupCommand,
+			"total_gpu_count":      calculateTrainingTotalGPU(product, computeNodes),
+			"product_id":           req.TemplateProductId,
+			"instance_count":       computeNodes,
+			"schedule_strategy":    req.ScheduleStrategy,
+			"worker_count":         computeNodes,
+			"enable_tensorboard":   req.EnableTensorboard,
+			"tensorboard_log_path": req.TensorboardLogPath,
+			"pay_type":             req.PayType,
+			"price":                product.GetPrice(req.PayType),
+		}).Error; err != nil {
+			return errors.Wrap(err, "更新训练任务失败")
+		}
+
+		if err := tx.Where("job_id = ?", job.ID).Delete(&trainingModel.TrainingJobMount{}).Error; err != nil {
+			return errors.Wrap(err, "更新挂载配置失败")
+		}
+		if len(jobMounts) > 0 {
+			if err := tx.Create(&jobMounts).Error; err != nil {
+				return errors.Wrap(err, "更新挂载配置失败")
+			}
+		}
+
+		if err := tx.Where("job_id = ?", job.ID).Delete(&trainingModel.TrainingJobEnv{}).Error; err != nil {
+			return errors.Wrap(err, "更新环境变量失败")
+		}
+		if len(jobEnvs) > 0 {
+			if err := tx.Create(&jobEnvs).Error; err != nil {
+				return errors.Wrap(err, "更新环境变量失败")
+			}
+		}
+		return nil
+	})
 }
 
 func (s *TrainingJobService) buildCreateTrainingState(
@@ -397,6 +480,11 @@ func normalizeTrainingCreateRequest(req *trainingReq.CreateTrainingJobReq) error
 	return nil
 }
 
+func isTrainingEditableStatus(status string) bool {
+	normalized := strings.ToUpper(strings.TrimSpace(status))
+	return normalized == consts.TrainingStatusKilled || normalized == consts.TrainingStatusSucceeded
+}
+
 func (s *TrainingJobService) saveTrainingAllocations(
 	ctx context.Context,
 	state *trainingCreateState,
@@ -558,23 +646,30 @@ func (s *TrainingJobService) saveTrainingJobEnvs(
 	jobID uint,
 	envs []trainingReq.CreateTrainingJobEnvReq,
 ) error {
-	if len(envs) == 0 {
+	jobEnvs := buildTrainingJobEnvs(jobID, envs)
+	if len(jobEnvs) == 0 {
 		return nil
-	}
-
-	jobEnvs := make([]trainingModel.TrainingJobEnv, 0, len(envs))
-	for _, env := range envs {
-		jobEnvs = append(jobEnvs, trainingModel.TrainingJobEnv{
-			JobId: jobID,
-			Name:  env.Name,
-			Value: env.Value,
-		})
 	}
 
 	if err := global.GVA_DB.WithContext(ctx).Create(&jobEnvs).Error; err != nil {
 		return errors.Wrap(err, "保存环境变量失败")
 	}
 	return nil
+}
+
+func buildTrainingJobEnvs(jobID uint, envs []trainingReq.CreateTrainingJobEnvReq) []trainingModel.TrainingJobEnv {
+	jobEnvs := make([]trainingModel.TrainingJobEnv, 0, len(envs))
+	for _, env := range envs {
+		if strings.TrimSpace(env.Name) == "" {
+			continue
+		}
+		jobEnvs = append(jobEnvs, trainingModel.TrainingJobEnv{
+			JobId: jobID,
+			Name:  env.Name,
+			Value: env.Value,
+		})
+	}
+	return jobEnvs
 }
 
 func (s *TrainingJobService) submitTrainingJob(
@@ -1084,6 +1179,7 @@ func (s *TrainingJobService) GetTrainingJobDetail(ctx context.Context, req *trai
 		TotalGPUCount:      job.TotalGPUCount,
 		ProductId:          job.ProductId,
 		WorkerCount:        job.WorkerCount,
+		ScheduleStrategy:   job.ScheduleStrategy,
 		K8sJobUid:          job.K8sJobUid,
 		ErrorMsg:           job.ErrorMsg,
 		CreatedAt:          job.CreatedAt,
@@ -1210,6 +1306,7 @@ func (s *TrainingJobService) loadTrainingJobMountDetails(
 		details = append(details, trainingResp.TrainingJobMountDetail{
 			MountType: mount.MountType,
 			SourceId:  mount.SourceId,
+			PvcId:     mount.PvcId,
 			Name:      volumeNames[mount.PvcId],
 			PvcName:   mount.PvcName,
 			SubPath:   mount.SubPath,

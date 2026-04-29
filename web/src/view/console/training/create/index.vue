@@ -1,6 +1,6 @@
 <template>
   <div class="console-create-page">
-    <PageHeader title-key="createTrainingJob" @back="goBack" />
+    <PageHeader :title-key="pageTitleKey" @back="goBack" />
 
     <div class="console-page-container px-6 py-6 space-y-6">
       <TrainingResourceSelectionSection
@@ -50,11 +50,11 @@
 
     <StickyActionBar
       :can-submit="canCreate"
-      :loading="creating"
+      :loading="creating || editLoading"
       :loading-label-key="'submitting'"
       :price-label-key="'totalPrice'"
       :price-unit-text="priceUnitText"
-      :submit-label-key="'submitOrder'"
+      :submit-label-key="submitLabelKey"
       :total-price="totalPrice"
       @back="goBack"
       @submit="handleCreate"
@@ -87,6 +87,7 @@ const {
   cpuModels,
   creating,
   decreaseWorker,
+  editLoading,
   fieldErrors,
   filteredImages,
   filters,
@@ -101,6 +102,7 @@ const {
   insertMpiExample,
   insertPytorchExample,
   maxWorkerCount,
+  pageTitleKey,
   payTypes,
   priceUnitText,
   products,
@@ -110,6 +112,7 @@ const {
   selectProduct,
   selectedProduct,
   showWorkerCount,
+  submitLabelKey,
   totalPrice,
   totalResources,
   updateField,

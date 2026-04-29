@@ -162,6 +162,14 @@
                   {{ t('stop') }}
                 </button>
                 <button
+                  v-if="['SUCCEEDED', 'KILLED'].includes(item.status)"
+                  class="list-row-button list-row-button--neutral"
+                  @click="$emit('edit', item)"
+                >
+                  <span class="material-icons text-[14px]">edit</span>
+                  {{ t('edit') }}
+                </button>
+                <button
                   v-if="['SUCCEEDED', 'FAILED', 'KILLED'].includes(item.status)"
                   :disabled="btnLoading[item.id]"
                   class="list-row-button list-row-button--danger disabled:opacity-50"
@@ -233,6 +241,7 @@ const emit = defineEmits<{
   create: []
   delete: [item: ConsoleTrainingJob]
   detail: [item: ConsoleTrainingJob]
+  edit: [item: ConsoleTrainingJob]
   logs: [item: ConsoleTrainingJob]
   'open-tensorboard': [item: ConsoleTrainingJob]
   'page-change': [page: number]

@@ -18,6 +18,14 @@ export const createTrainingJob = (data: any) => {
   })
 }
 
+export const updateTrainingJob = (data: any) => {
+  return service({
+    url: '/api/v1/training/update',
+    method: 'post',
+    data
+  })
+}
+
 // 删除训练任务
 export const deleteTrainingJob = (data: any) => {
   return service({

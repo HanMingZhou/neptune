@@ -27,6 +27,11 @@ type CreateTrainingJobReq struct {
 	PayType            int64  `json:"payType"`            // 付费类型
 }
 
+type UpdateTrainingJobReq struct {
+	ID uint `json:"id" binding:"required"`
+	CreateTrainingJobReq
+}
+
 // CreateTrainingJobMountReq 挂载配置请求
 type CreateTrainingJobMountReq struct {
 	MountType string `json:"mountType"` // 挂载类型

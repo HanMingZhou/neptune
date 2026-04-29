@@ -16,6 +16,14 @@
         {{ t('start') }}
       </button>
       <button
+        v-if="normalizedStatus === 'STOPPED' || normalizedStatus === 'CLOSED'"
+        :disabled="actionLoading"
+        class="detail-header-action detail-header-action--secondary"
+        @click="$emit('edit')"
+      >
+        {{ t('edit') }}
+      </button>
+      <button
         v-if="normalizedStatus === 'RUNNING'"
         :disabled="actionLoading"
         class="detail-header-action detail-header-action--warning"
@@ -44,6 +52,7 @@ type StatusResolver = (status?: string) => string
 defineEmits<{
   back: []
   delete: []
+  edit: []
   start: []
   stop: []
 }>()

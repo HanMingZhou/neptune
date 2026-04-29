@@ -20,7 +20,7 @@ func (a *ApisixApi) AuthApisix(c *gin.Context) {
 		originalUri = c.GetHeader("X-Original-URI")
 	}
 
-	// 2. 提取 API-Key（推理服务可用）
+	// 2. 提取 API-Key（推理服务可用，兼容自定义 Header 与 OpenAI 风格 Authorization: Bearer sk-xxx）
 	apiKey := c.GetHeader("API-Key")
 
 	// 3. 提取 Token（优先 Cookie，其次 Header，最后 URL 参数）
@@ -29,9 +29,21 @@ func (a *ApisixApi) AuthApisix(c *gin.Context) {
 		token = c.GetHeader("x-token")
 	}
 	if token == "" {
-		token = c.GetHeader("Authorization")
+		auth := strings.TrimSpace(c.GetHeader("Authorization"))
+		if auth != "" {
+			// 兼容 "Bearer xxx"（OpenAI / Cherry Studio 风格）
+			if len(auth) >= 7 && strings.EqualFold(auth[:7], "Bearer ") {
+				auth = strings.TrimSpace(auth[7:])
+			}
+			// sk- 前缀视为推理服务 API-Key，其余视为 JWT Token
+			if apiKey == "" && strings.HasPrefix(auth, "sk-") {
+				apiKey = auth
+			} else {
+				token = auth
+			}
+		}
 	}
-	if token == "" {
+	if token == "" && apiKey == "" {
 		if idx := strings.Index(originalUri, "token="); idx != -1 {
 			tokenStart := idx + 6
 			tokenEnd := strings.IndexAny(originalUri[tokenStart:], "& ")

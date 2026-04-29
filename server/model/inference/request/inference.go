@@ -78,6 +78,12 @@ type GetInferenceServiceDetailReq struct {
 	ID uint `json:"id" form:"id" binding:"required"`
 }
 
+// UpdateInferenceServiceReq 编辑推理服务请求
+type UpdateInferenceServiceReq struct {
+	ID uint `json:"id" binding:"required"`
+	CreateInferenceServiceReq
+}
+
 // DeleteInferenceServiceReq 删除推理服务请求
 type DeleteInferenceServiceReq struct {
 	ID uint `json:"id" binding:"required"`

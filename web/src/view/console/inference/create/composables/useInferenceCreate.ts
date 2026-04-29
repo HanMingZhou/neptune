@@ -1,7 +1,12 @@
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import type { Router } from 'vue-router'
-import { createInferenceService } from '@/api/inference'
+import { useRoute } from 'vue-router'
+import {
+  createInferenceService,
+  getInferenceServiceDetail,
+  updateInferenceService
+} from '@/api/inference'
 import { getImageList } from '@/api/image'
 import { getAggregateProductList, getProductFilters } from '@/api/product'
 import { getVolumeList } from '@/api/volume'
@@ -18,6 +23,7 @@ import {
 import { decorateConsoleImages } from '@/utils/imageRegistry'
 import type {
   ConsoleImage,
+  ConsoleInferenceDetail,
   ConsoleProduct,
   ConsoleVolume,
   FilterOption,
@@ -91,6 +97,7 @@ export interface InferenceFieldErrors {
 }
 
 interface InferenceCreatePayload {
+  id?: ResourceId
   name: string
   framework?: Exclude<InferenceFramework, ''>
   deployType: InferenceDeployType
@@ -127,8 +134,19 @@ export const useInferenceCreate = ({
   t,
   router
 }: UseInferenceCreateOptions) => {
+  const route = useRoute()
   const translate: Translator = (key, params) =>
     typeof t === 'function' ? t(key, params) : key
+
+  const editServiceId = computed(() => Number(route.query.id) || 0)
+  const isEditMode = computed(() => editServiceId.value > 0)
+  const editLoading = ref(false)
+  const pageTitleKey = computed(() =>
+    isEditMode.value ? 'inference.editTitle' : 'inference.createTitle'
+  )
+  const submitLabelKey = computed(() =>
+    isEditMode.value ? 'save' : 'inference.createService'
+  )
 
   const frameworks = computed(() => [
     { label: 'vLLM', value: 'VLLM', icon: 'auto_awesome' },
@@ -206,7 +224,8 @@ export const useInferenceCreate = ({
   )
   const isSelectableProduct = (
     product: ConsoleProduct | null | undefined
-  ): product is ConsoleProduct => (product?.available ?? 0) > 0
+  ): product is ConsoleProduct =>
+    Boolean(product && (isEditMode.value || (product.available ?? 0) > 0))
   const maxDistributedCount = computed(() => {
     const product = selectedProduct.value
     if (!product) return 0
@@ -547,6 +566,7 @@ export const useInferenceCreate = ({
     loading.value = true
     try {
       const params: InferenceCreatePayload = {
+        id: isEditMode.value ? editServiceId.value : undefined,
         name: form.displayName.trim(),
         framework: form.framework || undefined,
         deployType: form.deployType,
@@ -593,23 +613,26 @@ export const useInferenceCreate = ({
         params.maxRestarts = form.autoRestart ? form.maxRestarts : 0
       }
 
-      const res = await createInferenceService(params)
+      const res = isEditMode.value
+        ? await updateInferenceService(params)
+        : await createInferenceService(params)
       if (res.code === 0) {
         ElMessage.success(translate('success'))
         router.push({ name: 'inference' })
         return
       }
 
-      const submitMessage = res.msg || translate('createFailed')
+      const submitMessage =
+        res.msg || translate(isEditMode.value ? 'error' : 'createFailed')
       if (isResourceNameErrorMessage(submitMessage)) {
         updateFieldError('displayName', submitMessage)
       }
       ElMessage.error(submitMessage)
     } catch (error) {
-      console.error('创建失败', error)
+      console.error(isEditMode.value ? '更新失败' : '创建失败', error)
       const submitMessage = getSubmitErrorMessage(
         error,
-        translate('createFailed')
+        translate(isEditMode.value ? 'error' : 'createFailed')
       )
       if (isResourceNameErrorMessage(submitMessage)) {
         updateFieldError('displayName', submitMessage)
@@ -620,13 +643,85 @@ export const useInferenceCreate = ({
     }
   }
 
-  onMounted(() => {
+  const applyInferenceDetail = async (
+    detail: ConsoleInferenceDetail
+  ): Promise<void> => {
+    if (`${detail.status || ''}`.toUpperCase() !== 'STOPPED') {
+      ElMessage.warning(translate('onlyStoppedCanEditInference'))
+      router.push({ name: 'inference' })
+      return
+    }
+
+    form.displayName = detail.displayName || detail.instanceName || ''
+    form.framework = ((detail.framework || '') as InferenceFramework) || ''
+    form.deployType =
+      (detail.deployType as InferenceDeployType) || 'STANDALONE'
+    form.modelPvcId = (detail.modelPvcId as ResourceId) || ''
+    form.modelMountPath = detail.modelMountPath || '/model'
+    form.imageId = (detail.imageId as ResourceId) || ''
+    form.productId = (detail.productId as ResourceId) || ''
+    form.payType = (Number(detail.payType) || 1) as InferencePayType
+    form.workerCount = Math.max(
+      2,
+      Number(detail.instanceCount ?? detail.workerCount) || 2
+    )
+    form.scheduleStrategy =
+      (detail.scheduleStrategy as InferenceScheduleStrategy) || 'BALANCED'
+    form.autoRestart = Boolean(detail.autoRestart)
+    form.maxRestarts = Number(detail.maxRestarts) || 3
+    form.servicePort = Number(detail.servicePort) || 30000
+    form.authType = (Number(detail.authType) || 1) as InferenceAuthType
+    form.command = detail.command || ''
+    form.args = Array.isArray(detail.args)
+      ? detail.args.join('\n')
+      : `${detail.args ?? ''}`
+    form.mounts = (detail.mounts || [])
+      .filter((mount) => mount.pvcId)
+      .map((mount) => ({
+        pvcId: (mount.pvcId as ResourceId) || null,
+        mountPath: mount.mountPath || '',
+        subPath: mount.subPath || '',
+        readOnly: Boolean(mount.readOnly)
+      }))
+    form.envs = (detail.envs || [])
+      .filter((env) => env.name)
+      .map((env) => ({ name: env.name || '', value: `${env.value ?? ''}` }))
+
+    await loadProducts(detail.clusterId || null, true)
+    await loadImages(detail.clusterId || null)
+  }
+
+  const loadEditDetail = async (): Promise<void> => {
+    if (!isEditMode.value) return
+    editLoading.value = true
+    try {
+      const res = (await getInferenceServiceDetail({
+        id: editServiceId.value
+      })) as ApiResponse<ConsoleInferenceDetail>
+      if (res.code === 0 && res.data) {
+        await applyInferenceDetail(res.data)
+      } else {
+        ElMessage.error(res.msg || translate('error'))
+        router.push({ name: 'inference' })
+      }
+    } catch (error) {
+      console.error('加载推理服务详情失败', error)
+      ElMessage.error(getSubmitErrorMessage(error, translate('error')))
+      router.push({ name: 'inference' })
+    } finally {
+      editLoading.value = false
+    }
+  }
+
+  onMounted(async () => {
     void loadPvcs()
     void loadFilters()
-    void (async () => {
-      await loadProducts()
-      await loadImages(selectedProduct.value?.clusterId)
-    })()
+    if (isEditMode.value) {
+      await loadEditDetail()
+      return
+    }
+    await loadProducts()
+    await loadImages(selectedProduct.value?.clusterId)
   })
 
   watch(
@@ -668,6 +763,7 @@ export const useInferenceCreate = ({
     changeFilter,
     changeImageTab,
     deployTypes,
+    editLoading,
     fieldErrors,
     filters,
     form,
@@ -681,12 +777,14 @@ export const useInferenceCreate = ({
     imageTabs,
     loading,
     onDeployTypeChange,
+    pageTitleKey,
     payTypes,
     priceUnitText,
     products,
     pvcs,
     removeEnv,
     removeMount,
+    submitLabelKey,
     totalPrice,
     updateField,
     validateDisplayNameField

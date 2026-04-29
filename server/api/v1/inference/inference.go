@@ -46,6 +46,27 @@ func (i *InferenceApi) CreateInferenceService(c *gin.Context) {
 	response.OkWithData(resp, c)
 }
 
+// UpdateInferenceService 编辑推理服务（仅停止状态）
+// @Summary 编辑推理服务
+// @Router /inference/services [put]
+func (i *InferenceApi) UpdateInferenceService(c *gin.Context) {
+	var req inferenceReq.UpdateInferenceServiceReq
+	if err := c.ShouldBindJSON(&req); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+
+	req.UserId = utils.GetUserID(c)
+
+	if err := inferenceService.UpdateInferenceService(c.Request.Context(), &req); err != nil {
+		global.GVA_LOG.Error("编辑推理服务失败", zap.Error(err))
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+
+	response.OkWithMessage("更新成功", c)
+}
+
 // DeleteInferenceService 删除推理服务
 // @Summary 删除推理服务
 // @Router /inference/services [delete]

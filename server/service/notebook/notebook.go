@@ -85,6 +85,7 @@ type notebookCreateState struct {
 	req               *request.AddNoteBookReq
 	userInfo          *systemModel.SysUser
 	productInfo       productRes.ProductDetailResponse
+	allocationPlan    *product.AllocationPlan
 	imageAddr         string
 	sshPublicKey      string
 	cluster           *global.ClusterClientInfo
@@ -221,9 +222,6 @@ func (nb *NotebookService) CreateNotebook(ctx context.Context, req *request.AddN
 		return err
 	}
 
-	// 4. 构建 Notebook 对象
-	notebookObj := buildNotebook(state.nbRef, state.sshPublicKey)
-
 	// 5. 写入数据库
 	// 注意：GORM 会自动级联创建 VolumeMounts（通过外键关联），无需手动创建
 	if err = global.GVA_DB.Create(state.nbRef).Error; err != nil {
@@ -235,6 +233,12 @@ func (nb *NotebookService) CreateNotebook(ctx context.Context, req *request.AddN
 			logx.Error("回滚时删除Notebook数据库记录失败", rollbackErr)
 		}
 	})
+	if err = nb.saveNotebookAllocations(ctx, state.nbRef, state.allocationPlan, &cleanups); err != nil {
+		return err
+	}
+
+	// 4. 构建 Notebook 对象
+	notebookObj := buildNotebook(state.nbRef, state.sshPublicKey, state.allocationPlan)
 
 	// 6. 创建 K8s Notebook
 	if err = state.cluster.NotebookClient.Create(ctx, notebookObj); err != nil {
@@ -295,7 +299,7 @@ func (nb *NotebookService) buildCreateNotebookState(ctx context.Context, req *re
 		return nil, err
 	}
 
-	productInfo, err := nb.reserveNotebookProduct(ctx, req, cleanups)
+	productInfo, allocationPlan, err := nb.reserveNotebookProduct(ctx, req, cleanups)
 	if err != nil {
 		return nil, err
 	}
@@ -320,16 +324,20 @@ func (nb *NotebookService) buildCreateNotebookState(ctx context.Context, req *re
 		return nil, err
 	}
 	nbRef.VolumeMounts = volumeMounts
+	if nbRef.EnableTensorboard && nb.getNotebookTensorboardLogsPath(nbRef) == "" {
+		return nil, errors.New("TensorBoard 需要使用持久化数据卷上的绝对日志路径，请选择数据卷并将日志路径设置为该数据卷挂载路径下的目录")
+	}
 
 	return &notebookCreateState{
-		req:           req,
-		userInfo:      userInfo,
-		productInfo:   productInfo,
-		imageAddr:     imageAddr,
-		sshPublicKey:  sshPublicKey,
-		cluster:       cluster,
-		secretManager: secret.NewK8sSecretManager(cluster.ClientSet),
-		nbRef:         nbRef,
+		req:            req,
+		userInfo:       userInfo,
+		productInfo:    productInfo,
+		allocationPlan: allocationPlan,
+		imageAddr:      imageAddr,
+		sshPublicKey:   sshPublicKey,
+		cluster:        cluster,
+		secretManager:  secret.NewK8sSecretManager(cluster.ClientSet),
+		nbRef:          nbRef,
 	}, nil
 }
 
@@ -356,31 +364,91 @@ func (nb *NotebookService) getNotebookImageAddr(imageID uint) (string, error) {
 	return imageInfo.ImageAddr, nil
 }
 
-func (nb *NotebookService) reserveNotebookProduct(ctx context.Context, req *request.AddNoteBookReq, cleanups *Cleanups) (productRes.ProductDetailResponse, error) {
+func (nb *NotebookService) reserveNotebookProduct(ctx context.Context, req *request.AddNoteBookReq, cleanups *Cleanups) (productRes.ProductDetailResponse, *product.AllocationPlan, error) {
 	var productInfo productRes.ProductDetailResponse
 	if req.ProductId == 0 {
-		return productInfo, nil
+		return productInfo, nil, nil
 	}
 
 	orderSvc := &orderService.OrderService{}
 	if balanceErr := orderSvc.CheckBalanceSufficient(ctx, req.UserId, req.ProductId, req.PayType, req.Quantity); balanceErr != nil {
-		return productInfo, balanceErr
+		return productInfo, nil, balanceErr
 	}
 
 	productSvc := &product.ProductService{}
-	reserve, reserveErr := productSvc.ReserveCapacity(ctx, req.ProductId)
-	if reserveErr != nil {
-		logx.Error("产品资源锁定失败", reserveErr)
-		return productInfo, reserveErr
+	allocationPlan, planErr := productSvc.PlanAllocations(ctx, req.ProductId, 1, consts.ScheduleStrategyBalanced)
+	if planErr != nil {
+		logx.Error("产品资源规划失败", planErr)
+		return productInfo, nil, planErr
 	}
 
-	cleanups.Add(func(ctx context.Context) {
-		if releaseErr := productSvc.ReleaseCapacity(ctx, req.ProductId, reserve.ResourceCount); releaseErr != nil {
-			logx.Error("回滚时释放资源失败", releaseErr)
+	for _, reservation := range allocationPlan.Reservations {
+		reserve, reserveErr := productSvc.ReserveCapacityWithCount(ctx, reservation.ProductID, reservation.Count)
+		if reserveErr != nil {
+			logx.Error("产品资源锁定失败", reserveErr)
+			return productInfo, nil, reserveErr
 		}
-	})
+		if productInfo.ID == 0 {
+			productInfo = reserve.Product
+			productInfo.ID = req.ProductId
+		}
+		productID := reservation.ProductID
+		lockedCount := reserve.ResourceCount
+		cleanups.Add(func(ctx context.Context) {
+			if releaseErr := productSvc.ReleaseCapacity(ctx, productID, lockedCount); releaseErr != nil {
+				logx.Error("回滚时释放资源失败", releaseErr)
+			}
+		})
+	}
 
-	return reserve.Product, nil
+	return productInfo, allocationPlan, nil
+}
+
+func (nb *NotebookService) saveNotebookAllocations(
+	ctx context.Context,
+	nbRef *nbModel.Notebook,
+	plan *product.AllocationPlan,
+	cleanups *Cleanups,
+) error {
+	allocations := buildNotebookAllocations(nbRef, plan)
+	if len(allocations) == 0 {
+		return nil
+	}
+	if err := (&product.ProductService{}).SaveResourceAllocations(ctx, allocations); err != nil {
+		return errors.Wrap(err, "保存Notebook资源分配失败")
+	}
+
+	notebookID := nbRef.ID
+	cleanups.Add(func(ctx context.Context) {
+		_ = (&product.ProductService{}).DeleteResourceAllocations(ctx, consts.NotebookInstance, notebookID)
+	})
+	return nil
+}
+
+func buildNotebookAllocations(nbRef *nbModel.Notebook, plan *product.AllocationPlan) []productModel.ResourceAllocation {
+	if nbRef == nil || plan == nil {
+		return nil
+	}
+	allocations := make([]productModel.ResourceAllocation, 0, len(plan.Reservations))
+	replicaIndex := 0
+	for _, reservation := range plan.Reservations {
+		for count := int64(0); count < reservation.Count; count++ {
+			allocations = append(allocations, productModel.ResourceAllocation{
+				InstanceType:      consts.NotebookInstance,
+				InstanceID:        nbRef.ID,
+				ClusterID:         nbRef.ClusterID,
+				TemplateProductID: nbRef.ProductId,
+				ProductID:         reservation.ProductID,
+				NodeName:          reservation.NodeName,
+				ScheduleStrategy:  plan.ScheduleStrategy,
+				ReplicaIndex:      replicaIndex,
+				TaskRole:          "standalone",
+				ReservedCount:     1,
+			})
+			replicaIndex++
+		}
+	}
+	return allocations
 }
 
 func (nb *NotebookService) getNotebookSSHPublicKey(sshKeyID uint) (string, error) {
@@ -1480,15 +1548,21 @@ func (nb *NotebookService) UpdateNotebook(ctx context.Context, req *request.Upda
 		return err
 	}
 
+	runtimeStatus, statusErr := nb.resolveNotebookRuntimeStatus(ctx, *nbRef)
+	if statusErr != nil {
+		logx.Error("获取Notebook实时状态失败，回退使用数据库状态", logx.Field("err", statusErr), logx.Field("instance", nbRef.InstanceName))
+		runtimeStatus = normalizeNotebookStatus(nbRef.Status)
+	}
+	if runtimeStatus == "" {
+		runtimeStatus = normalizeNotebookStatus(nbRef.Status)
+	}
+	if !isNotebookEditableStatus(runtimeStatus) {
+		return errors.New("请先关闭或停止实例后再编辑")
+	}
+
 	// 2. 构建更新字段
 	updates := map[string]interface{}{
 		"display_name": req.DisplayName,
-	}
-
-	// 校验：修改配置（镜像或规格）必须先停止实例
-	configChanged := (req.ImageId > 0 && req.ImageId != nbRef.ImageId) || (req.ProductId > 0 && req.ProductId != nbRef.ProductId)
-	if configChanged && nbRef.Status != consts.NotebookStatusStopped {
-		return errors.New("请先停止实例后再修改配置")
 	}
 
 	// 如果更新了镜像
@@ -1519,7 +1593,7 @@ func (nb *NotebookService) UpdateNotebook(ctx context.Context, req *request.Upda
 
 	// 如果更新了付费类型
 	if req.ChargeType > 0 {
-		updates["charge_type"] = req.ChargeType
+		updates["pay_type"] = req.ChargeType
 	}
 
 	// 3. 更新数据库
@@ -1706,17 +1780,22 @@ func buildNotebookResponseItem(dbNb nbModel.Notebook, lookup notebookResponseLoo
 		InstanceName:       dbNb.InstanceName,
 		Namespace:          dbNb.Namespace,
 		Image:              dbNb.Image,
+		ImageId:            dbNb.ImageId,
 		CPU:                dbNb.CPU,
 		Memory:             dbNb.Memory,
 		GPU:                dbNb.GPU,
 		CreationTimestamp:  dbNb.CreatedAt.Format("2006-01-02T15:04:05Z"),
 		Status:             dbNb.Status,
+		ClusterID:          dbNb.ClusterID,
+		ProductId:          dbNb.ProductId,
 		GPUCount:           dbNb.GPU,
 		GPUModel:           dbNb.GPUModel,
 		VGPUNumber:         dbNb.VGPUNumber,
 		VGPUMemory:         dbNb.VGPUMemory,
 		VGPUCores:          dbNb.VGPUCores,
 		PayType:            dbNb.PayType,
+		SSHKeyId:           dbNb.SSHKeyId,
+		EnableSSHPassword:  dbNb.EnableSSHPassword,
 		EnableTensorboard:  dbNb.EnableTensorboard,
 		TensorboardLogPath: dbNb.TensorboardLogPath,
 		VolumeMounts:       filterNotebookDisplayVolumeMounts(normalizedVolumeMounts),
@@ -1901,7 +1980,7 @@ func refreshNotebookStatusFromPod(
 }
 
 // buildNotebook 构建原生 Notebook 对象
-func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string) *nbv1.Notebook {
+func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string, allocationPlans ...*product.AllocationPlan) *nbv1.Notebook {
 	// 使用nbRef中已处理好的配置
 	image := nbRef.Image
 	productSpec := &helper.ProductSpec{
@@ -1960,8 +2039,9 @@ func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string) *nbv1.Notebook 
 			continue
 		}
 
+		volumeName := notebookRuntimeVolumeName(m)
 		volumes = append(volumes, corev1.Volume{
-			Name: m.Name,
+			Name: volumeName,
 			VolumeSource: corev1.VolumeSource{
 				PersistentVolumeClaim: &corev1.PersistentVolumeClaimVolumeSource{
 					ClaimName: m.PVCName,
@@ -1969,7 +2049,7 @@ func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string) *nbv1.Notebook 
 			},
 		})
 		volumeMounts = append(volumeMounts, corev1.VolumeMount{
-			Name:      m.Name,
+			Name:      volumeName,
 			MountPath: m.MountsPath,
 		})
 	}
@@ -2041,6 +2121,14 @@ func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string) *nbv1.Notebook 
 		consts.NotebookInstance,
 		nbRef.ID,
 	)
+	affinity := helper.BuildSchedulingAffinity(nbRef.InstanceName, nil, false)
+	var allocationPlan *product.AllocationPlan
+	if len(allocationPlans) > 0 {
+		allocationPlan = allocationPlans[0]
+	}
+	if allocationPlan != nil {
+		affinity = helper.BuildSchedulingAffinity(nbRef.InstanceName, allocationPlan.AllowedNodes, allocationPlan.StrictSpread)
+	}
 
 	return &nbv1.Notebook{
 		ObjectMeta: metav1.ObjectMeta{
@@ -2055,6 +2143,7 @@ func buildNotebook(nbRef *nbModel.Notebook, sshPublicKey string) *nbv1.Notebook 
 					SchedulerName: podgroup.VolcanoSchedulerName,
 					// Notebook关闭自动挂载k8s凭证
 					AutomountServiceAccountToken: pointer.Bool(false),
+					Affinity:                     affinity,
 					Containers: []corev1.Container{
 						{
 							Name:            nbRef.InstanceName,
@@ -2176,6 +2265,45 @@ func resolveNotebookWorkspaceSize(nbRef *nbModel.Notebook) int64 {
 
 func isWorkspaceNotebookVolume(mount nbModel.NotebookVolume) bool {
 	return mount.Type == nbModel.Workspace || mount.Name == nbModel.Workspace || mount.MountsPath == nbModel.DefaultWorkspacePath
+}
+
+func notebookRuntimeVolumeName(mount nbModel.NotebookVolume) string {
+	if mount.PVCId > 0 {
+		return fmt.Sprintf("pvc-%d", mount.PVCId)
+	}
+
+	candidate := strings.ToLower(strings.TrimSpace(mount.PVCName))
+	if candidate == "" {
+		candidate = strings.ToLower(strings.TrimSpace(mount.Name))
+	}
+
+	var builder strings.Builder
+	builder.Grow(len(candidate))
+	previousDash := false
+	for _, r := range candidate {
+		valid := (r >= 'a' && r <= 'z') || (r >= '0' && r <= '9')
+		if valid {
+			builder.WriteRune(r)
+			previousDash = false
+			continue
+		}
+		if !previousDash && builder.Len() > 0 {
+			builder.WriteByte('-')
+			previousDash = true
+		}
+	}
+
+	name := strings.Trim(builder.String(), "-")
+	if name == "" {
+		name = "pvc-volume"
+	}
+	if len(name) > 63 {
+		name = strings.TrimRight(name[:63], "-")
+	}
+	if name == "" {
+		return "pvc-volume"
+	}
+	return name
 }
 
 func buildNotebookWorkspaceVolume(nbRef *nbModel.Notebook) corev1.Volume {
@@ -2562,6 +2690,11 @@ func normalizeNotebookStatus(status string) string {
 	return normalized
 }
 
+func isNotebookEditableStatus(status string) bool {
+	normalized := normalizeNotebookStatus(status)
+	return normalized == consts.NotebookStatusStopped || normalized == "CLOSED"
+}
+
 func resolveNotebookResourceStatus(ctx context.Context, dbNb nbModel.Notebook, notebookClient *global.NotebookClient) (string, bool, error) {
 	if notebookClient == nil {
 		return "", false, nil
@@ -2692,19 +2825,31 @@ func (nb *NotebookService) StartNotebook(ctx context.Context, id uint) (err erro
 		}
 	}()
 
-	// 1. 检查并锁定资源（所有产品类型统一锁定 1 个实例配额）
+	var allocationPlan *product.AllocationPlan
+
+	// 1. 检查并锁定资源（按模板商品规划实际节点商品）
 	if dbNb.ProductId > 0 {
 		productSvc := &product.ProductService{}
-		reserve, reserveErr := productSvc.ReserveCapacity(ctx, dbNb.ProductId)
-		if reserveErr != nil {
-			return errors.Wrap(reserveErr, "锁定资源失败")
+		plan, planErr := productSvc.PlanAllocations(ctx, dbNb.ProductId, 1, consts.ScheduleStrategyBalanced)
+		if planErr != nil {
+			return errors.Wrap(planErr, "规划资源失败")
 		}
-		lockedCount := reserve.ResourceCount
+		allocationPlan = plan
 
-		// 添加回滚逻辑：释放资源
-		cleanups.Add(func(ctx context.Context) {
-			_ = productSvc.ReleaseCapacity(ctx, dbNb.ProductId, lockedCount)
-		})
+		for _, reservation := range plan.Reservations {
+			reserve, reserveErr := productSvc.ReserveCapacityWithCount(ctx, reservation.ProductID, reservation.Count)
+			if reserveErr != nil {
+				return errors.Wrap(reserveErr, "锁定资源失败")
+			}
+			productID := reservation.ProductID
+			lockedCount := reserve.ResourceCount
+			cleanups.Add(func(ctx context.Context) {
+				_ = productSvc.ReleaseCapacity(ctx, productID, lockedCount)
+			})
+		}
+		if err = nb.saveNotebookAllocations(ctx, &dbNb, allocationPlan, &cleanups); err != nil {
+			return err
+		}
 	}
 
 	// 2. 创建订单（仅针对按量付费的Notebook）
@@ -2744,7 +2889,7 @@ func (nb *NotebookService) StartNotebook(ctx context.Context, id uint) (err erro
 	}
 
 	// 4. 构建并创建 Notebook CR
-	notebookObj := buildNotebook(&dbNb, sshPublicKey)
+	notebookObj := buildNotebook(&dbNb, sshPublicKey, allocationPlan)
 	if err = cluster.NotebookClient.Create(ctx, notebookObj); err != nil {
 		if apierrors.IsAlreadyExists(err) {
 			return errors.New("Notebook资源已存在，请先停止后再启动")

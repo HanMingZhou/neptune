@@ -7,6 +7,7 @@
       :notebook="notebook"
       @back="goBack"
       @delete="handleDelete"
+      @edit="goToEdit"
       @start="handleStart"
       @stop="handleStop"
     />
@@ -69,6 +70,7 @@ const {
   getStatusLabel,
   getUnitPriceLabel,
   goBack,
+  goToEdit,
   handleDelete,
   handleStart,
   handleStop,

@@ -102,7 +102,6 @@ import {
 const t = inject<Translator>('t', (key: string) => key)
 
 const props = defineProps<{
-  gpuCount: number
   priceUnitText: string
   selectedProduct: ConsoleProduct | null
   selectedVolumeId: ResourceId | null
@@ -113,7 +112,7 @@ const props = defineProps<{
 const getGpuFieldEntries = () =>
   buildGpuFieldEntries(
     {
-      gpuCount: props.gpuCount,
+      gpuCount: props.selectedProduct?.gpuCount,
       gpuMemory: props.selectedProduct?.gpuMemory
     },
     t

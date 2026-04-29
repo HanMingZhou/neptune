@@ -34,6 +34,7 @@
       @create="goToCreate"
       @delete="handleDelete"
       @detail="goToDetail"
+      @edit="goToEdit"
       @page-change="handlePageChange"
       @refresh="fetchNotebooks"
       @search-change="searchQuery = $event"
@@ -75,6 +76,7 @@ const {
   getStatusText,
   goToCreate,
   goToDetail,
+  goToEdit,
   handleDelete,
   handlePageChange,
   handleSizeChange,

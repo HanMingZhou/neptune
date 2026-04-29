@@ -159,6 +159,11 @@ export const useInferenceList = () => {
     void router.push({ name: 'inferenceDetail', query: { id: item.id } })
   }
 
+  const goToEdit = (item: ConsoleInferenceService): void => {
+    if (normalizeStatus(item.status) !== 'STOPPED') return
+    void router.push({ name: 'inferenceCreate', query: { id: item.id } })
+  }
+
   const viewLogs = (item: ConsoleInferenceService): void => {
     void router.push({
       name: 'inferenceDetail',
@@ -272,6 +277,7 @@ export const useInferenceList = () => {
     getStatusStyle,
     goToCreate,
     goToDetail,
+    goToEdit,
     handleDelete,
     handlePageChange,
     handleRefresh,

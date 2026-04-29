@@ -59,6 +59,13 @@ type InferenceServiceDetail struct {
 	AccessUrl        string               `json:"accessUrl"`
 	CreatedAt        time.Time            `json:"createdAt"`
 	StartedAt        *time.Time           `json:"startedAt"`
+	ImageId          uint                 `json:"imageId"`
+	ProductId        uint                 `json:"productId"`
+	ClusterId        uint                 `json:"clusterId"`
+	ModelPvcId       uint                 `json:"modelPvcId"`
+	InstanceCount    int                  `json:"instanceCount"`
+	ScheduleStrategy string               `json:"scheduleStrategy"`
+	PayType          int64                `json:"payType"`
 	Mounts           []InferenceMountItem `json:"mounts"`
 	Envs             []InferenceEnvItem   `json:"envs"`
 }
@@ -66,6 +73,7 @@ type InferenceServiceDetail struct {
 // InferenceMountItem 挂载项
 type InferenceMountItem struct {
 	MountType string `json:"mountType"`
+	PvcId     uint   `json:"pvcId"`
 	Name      string `json:"name"`
 	PvcName   string `json:"pvcName"`
 	SubPath   string `json:"subPath"`
