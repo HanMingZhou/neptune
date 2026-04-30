@@ -18,16 +18,22 @@ type GetInferenceServiceListResp struct {
 
 // InferenceServiceListItem 列表项
 type InferenceServiceListItem struct {
-	ID           uint       `json:"id"`
-	DisplayName  string     `json:"displayName"`
-	InstanceName string     `json:"instanceName"`
-	DeployType   string     `json:"deployType"`
-	Framework    string     `json:"framework"`
-	Status       string     `json:"status"`
-	GPU          int64      `json:"gpu"`
-	GPUModel     string     `json:"gpuModel"`
-	CreatedAt    time.Time  `json:"createdAt"`
-	StartedAt    *time.Time `json:"startedAt"`
+	ID            uint       `json:"id"`
+	DisplayName   string     `json:"displayName"`
+	InstanceName  string     `json:"instanceName"`
+	DeployType    string     `json:"deployType"`
+	Framework     string     `json:"framework"`
+	Status        string     `json:"status"`
+	CPU           int64      `json:"cpu"`
+	Memory        int64      `json:"memory"`
+	GPU           int64      `json:"gpu"`
+	GPUModel      string     `json:"gpuModel"`
+	VGPUNumber    int64      `json:"vGpuNumber"`
+	VGPUMemory    int64      `json:"vGpuMemory"`
+	VGPUCores     int64      `json:"vGpuCores"`
+	InstanceCount int        `json:"instanceCount"`
+	CreatedAt     time.Time  `json:"createdAt"`
+	StartedAt     *time.Time `json:"startedAt"`
 }
 
 // InferenceServiceDetail 推理服务详情

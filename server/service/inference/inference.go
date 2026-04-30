@@ -999,16 +999,22 @@ func (s *InferenceServiceService) GetInferenceServiceList(ctx context.Context, r
 	list := make([]response.InferenceServiceListItem, len(services))
 	for i, svc := range services {
 		list[i] = response.InferenceServiceListItem{
-			ID:           svc.ID,
-			DisplayName:  svc.DisplayName,
-			InstanceName: svc.InstanceName,
-			DeployType:   svc.DeployType,
-			Framework:    svc.Framework,
-			Status:       svc.Status,
-			GPU:          svc.GPU,
-			GPUModel:     svc.GPUModel,
-			CreatedAt:    svc.CreatedAt,
-			StartedAt:    svc.StartedAt,
+			ID:            svc.ID,
+			DisplayName:   svc.DisplayName,
+			InstanceName:  svc.InstanceName,
+			DeployType:    svc.DeployType,
+			Framework:     svc.Framework,
+			Status:        svc.Status,
+			CPU:           svc.CPU,
+			Memory:        svc.Memory,
+			GPU:           svc.GPU,
+			GPUModel:      svc.GPUModel,
+			VGPUNumber:    svc.VGPUNumber,
+			VGPUMemory:    svc.VGPUMemory,
+			VGPUCores:     svc.VGPUCores,
+			InstanceCount: svc.InstanceCount,
+			CreatedAt:     svc.CreatedAt,
+			StartedAt:     svc.StartedAt,
 		}
 	}
 

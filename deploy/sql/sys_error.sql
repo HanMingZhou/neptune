@@ -1,28 +1,45 @@
-UPDATE aiInfra.sys_error SET created_at = '2025-12-25 23:21:21.941', updated_at = '2025-12-25 23:21:21.941', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue?t=1766675724030
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue?t=1766675724030', level = 'error', solution = null, status = '未处理' WHERE id = 1;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 22:42:57.356', updated_at = '2025-12-27 22:42:57.356', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505', level = 'error', solution = null, status = '未处理' WHERE id = 2;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 22:43:24.565', updated_at = '2025-12-27 22:43:24.565', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505', level = 'error', solution = null, status = '未处理' WHERE id = 3;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 22:43:25.809', updated_at = '2025-12-27 22:43:25.809', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505', level = 'error', solution = null, status = '未处理' WHERE id = 4;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 22:43:25.939', updated_at = '2025-12-27 22:43:25.939', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505', level = 'error', solution = null, status = '未处理' WHERE id = 5;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 22:43:26.186', updated_at = '2025-12-27 22:43:26.186', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505', level = 'error', solution = null, status = '未处理' WHERE id = 6;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 22:48:15.406', updated_at = '2025-12-27 22:48:15.406', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue', level = 'error', solution = null, status = '未处理' WHERE id = 7;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 22:49:34.795', updated_at = '2025-12-27 22:49:34.795', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587', level = 'error', solution = null, status = '未处理' WHERE id = 8;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 22:49:50.176', updated_at = '2025-12-27 22:49:50.176', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587', level = 'error', solution = null, status = '未处理' WHERE id = 9;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 22:50:50.353', updated_at = '2025-12-27 22:50:50.353', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587', level = 'error', solution = null, status = '未处理' WHERE id = 10;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 22:52:03.544', updated_at = '2025-12-27 22:52:03.544', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587', level = 'error', solution = null, status = '未处理' WHERE id = 11;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 22:52:15.839', updated_at = '2025-12-27 22:52:15.839', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587', level = 'error', solution = null, status = '未处理' WHERE id = 12;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 23:08:59.807', updated_at = '2025-12-27 23:08:59.807', deleted_at = null, form = '前端', info = '错误信息: TypeError: _ctx.getDialogTitle is not a function
+create table sys_error
+(
+    id         bigint unsigned auto_increment
+        primary key,
+    created_at datetime(3)                  null,
+    updated_at datetime(3)                  null,
+    deleted_at datetime(3)                  null,
+    form       text                         null comment '错误来源',
+    info       text                         null comment '错误内容',
+    level      varchar(191)                 null comment '日志等级',
+    solution   text                         null comment '解决方案',
+    status     varchar(20) default '未处理' null comment '处理状态'
+);
+
+create index idx_sys_error_deleted_at
+    on sys_error (deleted_at);
+
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (1, '2025-12-25 23:21:21.941', '2025-12-25 23:21:21.941', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue?t=1766675724030
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue?t=1766675724030', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (2, '2025-12-27 22:42:57.356', '2025-12-27 22:42:57.356', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (3, '2025-12-27 22:43:24.565', '2025-12-27 22:43:24.565', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (4, '2025-12-27 22:43:25.809', '2025-12-27 22:43:25.809', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (5, '2025-12-27 22:43:25.939', '2025-12-27 22:43:25.939', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (6, '2025-12-27 22:43:26.186', '2025-12-27 22:43:26.186', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue?t=1766846450505', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (7, '2025-12-27 22:48:15.406', '2025-12-27 22:48:15.406', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (8, '2025-12-27 22:49:34.795', '2025-12-27 22:49:34.795', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (9, '2025-12-27 22:49:50.176', '2025-12-27 22:49:50.176', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (10, '2025-12-27 22:50:50.353', '2025-12-27 22:50:50.353', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (11, '2025-12-27 22:52:03.544', '2025-12-27 22:52:03.544', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (12, '2025-12-27 22:52:15.839', '2025-12-27 22:52:15.839', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766846940587', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (13, '2025-12-27 23:08:59.807', '2025-12-27 23:08:59.807', null, '前端', '错误信息: TypeError: _ctx.getDialogTitle is not a function
 Stack: 调用栈: TypeError: _ctx.getDialogTitle is not a function
     at Proxy._sfc_render (http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766848139385:944:19)
     at renderComponentRoot (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:6648:17)
@@ -33,8 +50,8 @@ Stack: 调用栈: TypeError: _ctx.getDialogTitle is not a function
     at processComponent (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:8056:9)
     at patch (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:7560:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:8282:9)
-    at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 13;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 23:08:59.807', updated_at = '2025-12-27 23:08:59.807', deleted_at = null, form = '前端', info = '错误信息: TypeError: _ctx.getDialogTitle is not a function
+    at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (14, '2025-12-27 23:08:59.807', '2025-12-27 23:08:59.807', null, '前端', '错误信息: TypeError: _ctx.getDialogTitle is not a function
 Stack: 调用栈: TypeError: _ctx.getDialogTitle is not a function
     at Proxy._sfc_render (http://localhost:5175/src/view/superAdmin/cms/product.vue?t=1766848139385:944:19)
     at renderComponentRoot (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:6648:17)
@@ -45,8 +62,8 @@ Stack: 调用栈: TypeError: _ctx.getDialogTitle is not a function
     at processComponent (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:8056:9)
     at patch (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:7560:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:8282:9)
-    at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 14;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 23:09:56.164', updated_at = '2025-12-27 23:09:56.164', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'component\')
+    at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (15, '2025-12-27 23:09:56.164', '2025-12-27 23:09:56.164', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'component\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component\')
     at locateNonHydratedAsyncRoot (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:8994:41)
     at locateNonHydratedAsyncRoot (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:8999:14)
@@ -54,40 +71,40 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:505:19)
     at http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:2673:27
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 15;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-27 23:14:23.193', updated_at = '2025-12-27 23:14:23.193', deleted_at = null, form = '前端', info = '错误信息: [object Object]
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 16;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-29 00:09:26.600', updated_at = '2025-12-29 00:09:26.600', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue', level = 'error', solution = null, status = '未处理' WHERE id = 17;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-29 00:09:31.471', updated_at = '2025-12-29 00:09:31.471', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue', level = 'error', solution = null, status = '未处理' WHERE id = 18;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-29 00:28:24.632', updated_at = '2025-12-29 00:28:24.632', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue', level = 'error', solution = null, status = '未处理' WHERE id = 19;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-30 00:00:14.003', updated_at = '2025-12-30 00:00:14.003', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-47AVF3SR.js?v=12edfd6f:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (16, '2025-12-27 23:14:23.193', '2025-12-27 23:14:23.193', null, '前端', '错误信息: [object Object]
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (17, '2025-12-29 00:09:26.600', '2025-12-29 00:09:26.600', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (18, '2025-12-29 00:09:31.471', '2025-12-29 00:09:31.471', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (19, '2025-12-29 00:28:24.632', '2025-12-29 00:28:24.632', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (20, '2025-12-30 00:00:14.003', '2025-12-30 00:00:14.003', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=12edfd6f:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=12edfd6f:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=12edfd6f:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=12edfd6f:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 20;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-30 00:00:18.788', updated_at = '2025-12-30 00:00:18.788', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=12edfd6f:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (21, '2025-12-30 00:00:18.788', '2025-12-30 00:00:18.788', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=12edfd6f:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=12edfd6f:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=12edfd6f:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=12edfd6f:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 21;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-30 00:00:25.528', updated_at = '2025-12-30 00:00:25.528', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue', level = 'error', solution = null, status = '未处理' WHERE id = 22;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-30 00:00:27.145', updated_at = '2025-12-30 00:00:27.145', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue', level = 'error', solution = null, status = '未处理' WHERE id = 23;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-30 00:00:38.815', updated_at = '2025-12-30 00:00:38.815', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue', level = 'error', solution = null, status = '未处理' WHERE id = 24;
-UPDATE aiInfra.sys_error SET created_at = '2025-12-30 23:27:35.561', updated_at = '2025-12-30 23:27:35.561', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue?t=1767108450584
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue?t=1767108450584', level = 'error', solution = null, status = '未处理' WHERE id = 25;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-05 22:08:47.581', updated_at = '2026-01-05 22:08:47.581', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue', level = 'error', solution = null, status = '未处理' WHERE id = 26;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-05 22:36:47.956', updated_at = '2026-01-05 22:36:47.956', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=12edfd6f:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (22, '2025-12-30 00:00:25.528', '2025-12-30 00:00:25.528', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (23, '2025-12-30 00:00:27.145', '2025-12-30 00:00:27.145', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (24, '2025-12-30 00:00:38.815', '2025-12-30 00:00:38.815', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (25, '2025-12-30 23:27:35.561', '2025-12-30 23:27:35.561', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue?t=1767108450584
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/training/detail.vue?t=1767108450584', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (26, '2026-01-05 22:08:47.581', '2026-01-05 22:08:47.581', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/superAdmin/cms/product.vue', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (27, '2026-01-05 22:36:47.956', '2026-01-05 22:36:47.956', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'length\')
     at Proxy._sfc_render (http://localhost:5174/src/view/console/notebooks/create.vue?t=1767623807764:1061:32)
     at renderComponentRoot (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:6648:17)
@@ -98,8 +115,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'leng
     at processComponent (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:8056:9)
     at patch (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:7560:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:8282:9)
-    at ReactiveEffect.run (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 27;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-05 22:36:54.165', updated_at = '2026-01-05 22:36:54.165', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'component\')
+    at ReactiveEffect.run (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (28, '2026-01-05 22:36:54.165', '2026-01-05 22:36:54.165', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'component\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component\')
     at locateNonHydratedAsyncRoot (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:8994:41)
     at locateNonHydratedAsyncRoot (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:8999:14)
@@ -107,8 +124,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component
     at ReactiveEffect.run (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:505:19)
     at http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2673:27
     at callWithErrorHandling (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2342:33)
-    at flushJobs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 28;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-05 22:40:37.359', updated_at = '2026-01-05 22:40:37.359', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'component\')
+    at flushJobs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (29, '2026-01-05 22:40:37.359', '2026-01-05 22:40:37.359', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'component\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component\')
     at locateNonHydratedAsyncRoot (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:8994:41)
     at locateNonHydratedAsyncRoot (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:8999:14)
@@ -119,8 +136,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component
     at updateComponent (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:8133:18)
     at processComponent (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:8067:7)
     at patch (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:7560:11)
-    at patchKeyedChildren (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:8473:9)', level = 'error', solution = null, status = '未处理' WHERE id = 29;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-05 23:50:08.985', updated_at = '2026-01-05 23:50:08.985', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: logsRefreshTimer is not defined
+    at patchKeyedChildren (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:8473:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (30, '2026-01-05 23:50:08.985', '2026-01-05 23:50:08.985', null, '前端', '错误信息: ReferenceError: logsRefreshTimer is not defined
 Stack: 调用栈: ReferenceError: logsRefreshTimer is not defined
     at http://localhost:5174/src/view/console/training/detail.vue?t=1767628178863:405:3
     at http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:5049:40
@@ -128,8 +145,8 @@ Stack: 调用栈: ReferenceError: logsRefreshTimer is not defined
     at callWithAsyncErrorHandling (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2349:17)
     at hook.__weh.hook.__weh (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:5029:19)
     at flushPostFlushCbs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2527:28)
-    at flushJobs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2569:5)', level = 'error', solution = null, status = '未处理' WHERE id = 30;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-05 23:50:08.985', updated_at = '2026-01-05 23:50:08.985', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: logsRefreshTimer is not defined
+    at flushJobs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2569:5)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (31, '2026-01-05 23:50:08.985', '2026-01-05 23:50:08.985', null, '前端', '错误信息: ReferenceError: logsRefreshTimer is not defined
 Stack: 调用栈: ReferenceError: logsRefreshTimer is not defined
     at http://localhost:5174/src/view/console/training/detail.vue?t=1767628178863:405:3
     at http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:5049:40
@@ -137,8 +154,8 @@ Stack: 调用栈: ReferenceError: logsRefreshTimer is not defined
     at callWithAsyncErrorHandling (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2349:17)
     at hook.__weh.hook.__weh (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:5029:19)
     at flushPostFlushCbs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2527:28)
-    at flushJobs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2569:5)', level = 'error', solution = null, status = '未处理' WHERE id = 31;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-05 23:50:08.985', updated_at = '2026-01-05 23:50:08.985', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: logsRefreshTimer is not defined
+    at flushJobs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2569:5)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (32, '2026-01-05 23:50:08.985', '2026-01-05 23:50:08.985', null, '前端', '错误信息: ReferenceError: logsRefreshTimer is not defined
 Stack: 调用栈: ReferenceError: logsRefreshTimer is not defined
     at http://localhost:5174/src/view/console/training/detail.vue?t=1767628178863:405:3
     at http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:5049:40
@@ -146,8 +163,8 @@ Stack: 调用栈: ReferenceError: logsRefreshTimer is not defined
     at callWithAsyncErrorHandling (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2349:17)
     at hook.__weh.hook.__weh (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:5029:19)
     at flushPostFlushCbs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2527:28)
-    at flushJobs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2569:5)', level = 'error', solution = null, status = '未处理' WHERE id = 32;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-05 23:50:08.988', updated_at = '2026-01-05 23:50:08.988', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: logsRefreshTimer is not defined
+    at flushJobs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2569:5)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (33, '2026-01-05 23:50:08.988', '2026-01-05 23:50:08.988', null, '前端', '错误信息: ReferenceError: logsRefreshTimer is not defined
 Stack: 调用栈: ReferenceError: logsRefreshTimer is not defined
     at http://localhost:5174/src/view/console/training/detail.vue?t=1767628178863:405:3
     at http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:5049:40
@@ -155,8 +172,8 @@ Stack: 调用栈: ReferenceError: logsRefreshTimer is not defined
     at callWithAsyncErrorHandling (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2349:17)
     at hook.__weh.hook.__weh (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:5029:19)
     at flushPostFlushCbs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2527:28)
-    at flushJobs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2569:5)', level = 'error', solution = null, status = '未处理' WHERE id = 33;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-05 23:50:09.040', updated_at = '2026-01-05 23:50:09.040', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: logsRefreshTimer is not defined
+    at flushJobs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2569:5)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (34, '2026-01-05 23:50:09.040', '2026-01-05 23:50:09.040', null, '前端', '错误信息: ReferenceError: logsRefreshTimer is not defined
 Stack: 调用栈: ReferenceError: logsRefreshTimer is not defined
     at http://localhost:5174/src/view/console/training/detail.vue?t=1767628178863:405:3
     at http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:5049:40
@@ -164,141 +181,141 @@ Stack: 调用栈: ReferenceError: logsRefreshTimer is not defined
     at callWithAsyncErrorHandling (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2349:17)
     at hook.__weh.hook.__weh (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:5029:19)
     at flushPostFlushCbs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2527:28)
-    at flushJobs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2569:5)', level = 'error', solution = null, status = '未处理' WHERE id = 34;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 14:24:16.722', updated_at = '2026-01-11 14:24:16.722', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at flushJobs (http://localhost:5174/node_modules/.vite/deps/chunk-47AVF3SR.js?v=1e1edb03:2569:5)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (35, '2026-01-11 14:24:16.722', '2026-01-11 14:24:16.722', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/api/api.vue:354:27
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 35;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 14:24:17.478', updated_at = '2026-01-11 14:24:17.478', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (36, '2026-01-11 14:24:17.478', '2026-01-11 14:24:17.478', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/api/api.vue:354:27
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 36;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 14:24:19.181', updated_at = '2026-01-11 14:24:19.181', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (37, '2026-01-11 14:24:19.181', '2026-01-11 14:24:19.181', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/api/api.vue:354:27
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 37;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 14:24:19.877', updated_at = '2026-01-11 14:24:19.877', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (38, '2026-01-11 14:24:19.877', '2026-01-11 14:24:19.877', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/api/api.vue:354:27
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 38;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 14:24:20.217', updated_at = '2026-01-11 14:24:20.217', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (39, '2026-01-11 14:24:20.217', '2026-01-11 14:24:20.217', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/api/api.vue:354:27
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 39;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 14:24:20.375', updated_at = '2026-01-11 14:24:20.375', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (40, '2026-01-11 14:24:20.375', '2026-01-11 14:24:20.375', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/api/api.vue:354:27
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 40;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 14:24:20.553', updated_at = '2026-01-11 14:24:20.553', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (41, '2026-01-11 14:24:20.553', '2026-01-11 14:24:20.553', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/api/api.vue:354:27
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 41;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:16:45.455', updated_at = '2026-01-11 19:16:45.455', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (42, '2026-01-11 19:16:45.455', '2026-01-11 19:16:45.455', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 42;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:16:46.611', updated_at = '2026-01-11 19:16:46.611', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (43, '2026-01-11 19:16:46.611', '2026-01-11 19:16:46.611', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 43;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:16:47.271', updated_at = '2026-01-11 19:16:47.271', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (44, '2026-01-11 19:16:47.271', '2026-01-11 19:16:47.271', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 44;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:17:04.455', updated_at = '2026-01-11 19:17:04.455', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (45, '2026-01-11 19:17:04.455', '2026-01-11 19:17:04.455', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 45;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:17:04.669', updated_at = '2026-01-11 19:17:04.669', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (46, '2026-01-11 19:17:04.669', '2026-01-11 19:17:04.669', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 46;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:17:04.836', updated_at = '2026-01-11 19:17:04.836', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (47, '2026-01-11 19:17:04.836', '2026-01-11 19:17:04.836', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 47;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:17:05.034', updated_at = '2026-01-11 19:17:05.034', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (48, '2026-01-11 19:17:05.034', '2026-01-11 19:17:05.034', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 48;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:17:10.964', updated_at = '2026-01-11 19:17:10.964', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (49, '2026-01-11 19:17:10.964', '2026-01-11 19:17:10.964', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 49;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:17:51.103', updated_at = '2026-01-11 19:17:51.103', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (50, '2026-01-11 19:17:51.103', '2026-01-11 19:17:51.103', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 50;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:18:02.375', updated_at = '2026-01-11 19:18:02.375', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (51, '2026-01-11 19:18:02.375', '2026-01-11 19:18:02.375', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 51;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:34:53.089', updated_at = '2026-01-11 19:34:53.089', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (52, '2026-01-11 19:34:53.089', '2026-01-11 19:34:53.089', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 52;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:34:59.812', updated_at = '2026-01-11 19:34:59.812', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (53, '2026-01-11 19:34:59.812', '2026-01-11 19:34:59.812', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 53;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:40:06.316', updated_at = '2026-01-11 19:40:06.316', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: ElMessage is not defined
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (54, '2026-01-11 19:40:06.316', '2026-01-11 19:40:06.316', null, '前端', '错误信息: ReferenceError: ElMessage is not defined
 Stack: 调用栈: ReferenceError: ElMessage is not defined
     at http://localhost:5173/src/view/layout/index.vue?t=1768131438701:61:7
     at http://localhost:5173/node_modules/.vite/deps/mitt.js?v=1e1edb03:14:7
@@ -307,8 +324,8 @@ Stack: 调用栈: ReferenceError: ElMessage is not defined
     at http://localhost:5173/src/utils/request.js?t=1768122791339:187:13
     at async Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2104:14)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 54;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:40:08.093', updated_at = '2026-01-11 19:40:08.093', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: ElMessage is not defined
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (55, '2026-01-11 19:40:08.093', '2026-01-11 19:40:08.093', null, '前端', '错误信息: ReferenceError: ElMessage is not defined
 Stack: 调用栈: ReferenceError: ElMessage is not defined
     at http://localhost:5173/src/view/layout/index.vue?t=1768131438701:61:7
     at http://localhost:5173/node_modules/.vite/deps/mitt.js?v=1e1edb03:14:7
@@ -317,64 +334,64 @@ Stack: 调用栈: ReferenceError: ElMessage is not defined
     at http://localhost:5173/src/utils/request.js?t=1768122791339:187:13
     at async Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2104:14)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 55;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 19:42:04.773', updated_at = '2026-01-11 19:42:04.773', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (56, '2026-01-11 19:42:04.773', '2026-01-11 19:42:04.773', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue?t=1768131456634:205:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 56;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 20:09:13.715', updated_at = '2026-01-11 20:09:13.715', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (57, '2026-01-11 20:09:13.715', '2026-01-11 20:09:13.715', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:203:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 57;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 20:12:59.404', updated_at = '2026-01-11 20:12:59.404', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (58, '2026-01-11 20:12:59.404', '2026-01-11 20:12:59.404', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:203:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 58;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 20:13:07.017', updated_at = '2026-01-11 20:13:07.017', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (59, '2026-01-11 20:13:07.017', '2026-01-11 20:13:07.017', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:203:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 59;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 20:13:24.839', updated_at = '2026-01-11 20:13:24.839', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (60, '2026-01-11 20:13:24.839', '2026-01-11 20:13:24.839', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:203:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 60;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 20:21:53.592', updated_at = '2026-01-11 20:21:53.592', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (61, '2026-01-11 20:21:53.592', '2026-01-11 20:21:53.592', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:203:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 61;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 20:28:19.028', updated_at = '2026-01-11 20:28:19.028', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (62, '2026-01-11 20:28:19.028', '2026-01-11 20:28:19.028', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:203:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 62;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-11 20:29:00.799', updated_at = '2026-01-11 20:29:00.799', deleted_at = null, form = '前端', info = '错误信息: AxiosError: Request failed with status code 400
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (63, '2026-01-11 20:29:00.799', '2026-01-11 20:29:00.799', null, '前端', '错误信息: AxiosError: Request failed with status code 400
 Stack: 调用栈: AxiosError: Request failed with status code 400
     at settle (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1218:12)
     at XMLHttpRequest.onloadend (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:1550:7)
     at Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=1e1edb03:2108:41)
     at async http://localhost:5173/src/view/superAdmin/menu/menu.vue:203:17
-    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', level = 'error', solution = null, status = '未处理' WHERE id = 63;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 21:03:53.219', updated_at = '2026-01-31 21:03:53.219', deleted_at = null, form = '前端', info = '错误信息: Error: No match for
+    at async validateField (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=1e1edb03:32454:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (64, '2026-01-31 21:03:53.219', '2026-01-31 21:03:53.219', null, '前端', '错误信息: Error: No match for
  {"name":"notebookRouter","params":{}}
 Stack: 调用栈: Error: No match for
  {"name":"notebookRouter","params":{}}
@@ -387,8 +404,8 @@ Stack: 调用栈: Error: No match for
     at useLink (http://localhost:5175/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1800:22)
     at setup (http://localhost:5175/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1846:27)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
-    at setupStatefulComponent (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', level = 'error', solution = null, status = '未处理' WHERE id = 64;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 21:19:02.705', updated_at = '2026-01-31 21:19:02.705', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: Cannot access \'hasVisibleChildren\' before initialization
+    at setupStatefulComponent (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (65, '2026-01-31 21:19:02.705', '2026-01-31 21:19:02.705', null, '前端', '错误信息: ReferenceError: Cannot access \'hasVisibleChildren\' before initialization
 Stack: 调用栈: ReferenceError: Cannot access \'hasVisibleChildren\' before initialization
     at http://localhost:5177/src/view/layout/index.vue:49:5
     at Array.forEach (<anonymous>)
@@ -399,8 +416,8 @@ Stack: 调用栈: ReferenceError: Cannot access \'hasVisibleChildren\' before in
     at ReactiveEffect.getter [as fn] (http://localhost:5177/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2022:25)
     at ReactiveEffect.run (http://localhost:5177/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
     at job (http://localhost:5177/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2081:15)
-    at baseWatchOptions.scheduler (http://localhost:5177/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:3037:9)', level = 'error', solution = null, status = '未处理' WHERE id = 65;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 21:19:12.069', updated_at = '2026-01-31 21:19:12.069', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: Cannot access \'hasVisibleChildren\' before initialization
+    at baseWatchOptions.scheduler (http://localhost:5177/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:3037:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (66, '2026-01-31 21:19:12.069', '2026-01-31 21:19:12.069', null, '前端', '错误信息: ReferenceError: Cannot access \'hasVisibleChildren\' before initialization
 Stack: 调用栈: ReferenceError: Cannot access \'hasVisibleChildren\' before initialization
     at http://localhost:5177/src/view/layout/index.vue:49:5
     at Array.forEach (<anonymous>)
@@ -411,8 +428,8 @@ Stack: 调用栈: ReferenceError: Cannot access \'hasVisibleChildren\' before in
     at ReactiveEffect.getter [as fn] (http://localhost:5177/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2022:25)
     at ReactiveEffect.run (http://localhost:5177/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
     at job (http://localhost:5177/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2081:15)
-    at baseWatchOptions.scheduler (http://localhost:5177/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:3037:9)', level = 'error', solution = null, status = '未处理' WHERE id = 66;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 21:26:13.197', updated_at = '2026-01-31 21:26:13.197', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: Cannot access \'hasVisibleChildren\' before initialization
+    at baseWatchOptions.scheduler (http://localhost:5177/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:3037:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (67, '2026-01-31 21:26:13.197', '2026-01-31 21:26:13.197', null, '前端', '错误信息: ReferenceError: Cannot access \'hasVisibleChildren\' before initialization
 Stack: 调用栈: ReferenceError: Cannot access \'hasVisibleChildren\' before initialization
     at http://192.168.31.223:5175/src/view/layout/index.vue:49:5
     at Array.forEach (<anonymous>)
@@ -423,8 +440,8 @@ Stack: 调用栈: ReferenceError: Cannot access \'hasVisibleChildren\' before in
     at ReactiveEffect.getter [as fn] (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2022:25)
     at ReactiveEffect.run (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
     at job (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2081:15)
-    at baseWatchOptions.scheduler (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:3037:9)', level = 'error', solution = null, status = '未处理' WHERE id = 67;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 21:26:28.661', updated_at = '2026-01-31 21:26:28.661', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'component\')
+    at baseWatchOptions.scheduler (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:3037:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (68, '2026-01-31 21:26:28.661', '2026-01-31 21:26:28.661', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'component\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component\')
     at locateNonHydratedAsyncRoot (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9010:41)
     at locateNonHydratedAsyncRoot (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9015:14)
@@ -432,13 +449,13 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component
     at ReactiveEffect.run (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
     at ReactiveEffect.runIfDirty (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:543:12)
     at callWithErrorHandling (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:33)
-    at flushJobs (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 68;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 21:27:13.956', updated_at = '2026-01-31 21:27:13.956', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'flags\')
+    at flushJobs (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (69, '2026-01-31 21:27:13.956', '2026-01-31 21:27:13.956', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'flags\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'flags\')
     at http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2671:28
     at callWithErrorHandling (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:33)
-    at flushJobs (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 69;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 21:27:46.814', updated_at = '2026-01-31 21:27:46.814', deleted_at = null, form = '前端', info = '错误信息: Error: No match for
+    at flushJobs (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (70, '2026-01-31 21:27:46.814', '2026-01-31 21:27:46.814', null, '前端', '错误信息: Error: No match for
  {"name":"systemTools","params":{}}
 Stack: 调用栈: Error: No match for
  {"name":"systemTools","params":{}}
@@ -451,8 +468,8 @@ Stack: 调用栈: Error: No match for
     at useLink (http://192.168.31.223:5175/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1800:22)
     at setup (http://192.168.31.223:5175/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1846:27)
     at callWithErrorHandling (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
-    at setupStatefulComponent (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', level = 'error', solution = null, status = '未处理' WHERE id = 70;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 21:27:52.620', updated_at = '2026-01-31 21:27:52.620', deleted_at = null, form = '前端', info = '错误信息: Error: No match for
+    at setupStatefulComponent (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (71, '2026-01-31 21:27:52.620', '2026-01-31 21:27:52.620', null, '前端', '错误信息: Error: No match for
  {"name":"systemTools","params":{}}
 Stack: 调用栈: Error: No match for
  {"name":"systemTools","params":{}}
@@ -465,16 +482,16 @@ Stack: 调用栈: Error: No match for
     at useLink (http://192.168.31.223:5175/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1800:22)
     at setup (http://192.168.31.223:5175/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1846:27)
     at callWithErrorHandling (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
-    at setupStatefulComponent (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', level = 'error', solution = null, status = '未处理' WHERE id = 71;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 21:28:24.514', updated_at = '2026-01-31 21:28:24.514', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'parentNode\')
+    at setupStatefulComponent (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (72, '2026-01-31 21:28:24.514', '2026-01-31 21:28:24.514', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'parentNode\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'parentNode\')
     at parentNode (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10754:30)
     at ReactiveEffect.componentUpdateFn [as fn] (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8296:11)
     at ReactiveEffect.run (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
     at http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2673:27
     at callWithErrorHandling (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:33)
-    at flushJobs (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 72;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 21:33:30.871', updated_at = '2026-01-31 21:33:30.871', deleted_at = null, form = '前端', info = '错误信息: Error: No match for
+    at flushJobs (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (73, '2026-01-31 21:33:30.871', '2026-01-31 21:33:30.871', null, '前端', '错误信息: Error: No match for
  {"name":"systemTools","params":{}}
 Stack: 调用栈: Error: No match for
  {"name":"systemTools","params":{}}
@@ -487,8 +504,8 @@ Stack: 调用栈: Error: No match for
     at useLink (http://192.168.31.223:5175/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1800:22)
     at setup (http://192.168.31.223:5175/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1846:27)
     at callWithErrorHandling (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
-    at setupStatefulComponent (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', level = 'error', solution = null, status = '未处理' WHERE id = 73;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 21:33:37.842', updated_at = '2026-01-31 21:33:37.842', deleted_at = null, form = '前端', info = '错误信息: Error: No match for
+    at setupStatefulComponent (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (74, '2026-01-31 21:33:37.842', '2026-01-31 21:33:37.842', null, '前端', '错误信息: Error: No match for
  {"name":"systemTools","params":{}}
 Stack: 调用栈: Error: No match for
  {"name":"systemTools","params":{}}
@@ -501,8 +518,8 @@ Stack: 调用栈: Error: No match for
     at useLink (http://192.168.31.223:5175/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1800:22)
     at setup (http://192.168.31.223:5175/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1846:27)
     at callWithErrorHandling (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
-    at setupStatefulComponent (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', level = 'error', solution = null, status = '未处理' WHERE id = 74;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 23:34:49.146', updated_at = '2026-01-31 23:34:49.146', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useAppStore is not defined
+    at setupStatefulComponent (http://192.168.31.223:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (75, '2026-01-31 23:34:49.146', '2026-01-31 23:34:49.146', null, '前端', '错误信息: ReferenceError: useAppStore is not defined
 Stack: 调用栈: ReferenceError: useAppStore is not defined
     at setup (http://localhost:5173/src/view/layout/index.vue?t=1769873689080:20:18)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -513,8 +530,8 @@ Stack: 调用栈: ReferenceError: useAppStore is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2673:27', level = 'error', solution = null, status = '未处理' WHERE id = 75;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 23:35:07.499', updated_at = '2026-01-31 23:35:07.499', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useAppStore is not defined
+    at http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2673:27', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (76, '2026-01-31 23:35:07.499', '2026-01-31 23:35:07.499', null, '前端', '错误信息: ReferenceError: useAppStore is not defined
 Stack: 调用栈: ReferenceError: useAppStore is not defined
     at setup (http://localhost:5173/src/view/layout/index.vue?t=1769873689080:20:18)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -525,8 +542,8 @@ Stack: 调用栈: ReferenceError: useAppStore is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at ReactiveEffect.runIfDirty (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:543:12)', level = 'error', solution = null, status = '未处理' WHERE id = 76;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 23:35:09.411', updated_at = '2026-01-31 23:35:09.411', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useAppStore is not defined
+    at ReactiveEffect.runIfDirty (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:543:12)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (77, '2026-01-31 23:35:09.411', '2026-01-31 23:35:09.411', null, '前端', '错误信息: ReferenceError: useAppStore is not defined
 Stack: 调用栈: ReferenceError: useAppStore is not defined
     at setup (http://localhost:5173/src/view/layout/index.vue?t=1769873689080:20:18)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -537,13 +554,13 @@ Stack: 调用栈: ReferenceError: useAppStore is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at ReactiveEffect.runIfDirty (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:543:12)', level = 'error', solution = null, status = '未处理' WHERE id = 77;
-UPDATE aiInfra.sys_error SET created_at = '2026-01-31 23:35:47.226', updated_at = '2026-01-31 23:35:47.226', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'flags\')
+    at ReactiveEffect.runIfDirty (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:543:12)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (78, '2026-01-31 23:35:47.226', '2026-01-31 23:35:47.226', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'flags\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'flags\')
     at http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2671:28
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:33)
-    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 78;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 00:03:11.719', updated_at = '2026-02-01 00:03:11.719', deleted_at = null, form = '前端', info = '错误信息: TypeError: route.component.includes is not a function
+    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (79, '2026-02-01 00:03:11.719', '2026-02-01 00:03:11.719', null, '前端', '错误信息: TypeError: route.component.includes is not a function
 Stack: 调用栈: TypeError: route.component.includes is not a function
     at convertRouteToNavItem (http://localhost:5173/src/view/layout/index.vue?t=1769875391406:131:47)
     at http://localhost:5173/src/view/layout/index.vue?t=1769875391406:92:18
@@ -554,8 +571,8 @@ Stack: 调用栈: TypeError: route.component.includes is not a function
     at ComputedRefImpl.fn (http://localhost:5173/src/view/layout/index.vue?t=1769875391406:88:16)
     at refreshComputed (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:659:29)
     at get value (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:1907:5)
-    at unref (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:1762:30)', level = 'error', solution = null, status = '未处理' WHERE id = 79;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 00:04:35.237', updated_at = '2026-02-01 00:04:35.237', deleted_at = null, form = '前端', info = '错误信息: TypeError: route.component.includes is not a function
+    at unref (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:1762:30)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (80, '2026-02-01 00:04:35.237', '2026-02-01 00:04:35.237', null, '前端', '错误信息: TypeError: route.component.includes is not a function
 Stack: 调用栈: TypeError: route.component.includes is not a function
     at convertRouteToNavItem (http://localhost:5173/src/view/layout/index.vue?t=1769875416750:131:47)
     at http://localhost:5173/src/view/layout/index.vue?t=1769875416750:92:18
@@ -566,8 +583,8 @@ Stack: 调用栈: TypeError: route.component.includes is not a function
     at ComputedRefImpl.fn (http://localhost:5173/src/view/layout/index.vue?t=1769875416750:88:16)
     at refreshComputed (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:659:29)
     at get value (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:1907:5)
-    at unref (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:1762:30)', level = 'error', solution = null, status = '未处理' WHERE id = 80;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 00:04:39.589', updated_at = '2026-02-01 00:04:39.589', deleted_at = null, form = '前端', info = '错误信息: TypeError: route.component.includes is not a function
+    at unref (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:1762:30)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (81, '2026-02-01 00:04:39.589', '2026-02-01 00:04:39.589', null, '前端', '错误信息: TypeError: route.component.includes is not a function
 Stack: 调用栈: TypeError: route.component.includes is not a function
     at convertRouteToNavItem (http://localhost:5173/src/view/layout/index.vue?t=1769875416750:131:47)
     at http://localhost:5173/src/view/layout/index.vue?t=1769875416750:92:18
@@ -578,8 +595,8 @@ Stack: 调用栈: TypeError: route.component.includes is not a function
     at ComputedRefImpl.fn (http://localhost:5173/src/view/layout/index.vue?t=1769875416750:88:16)
     at refreshComputed (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:659:29)
     at get value (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:1907:5)
-    at unref (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:1762:30)', level = 'error', solution = null, status = '未处理' WHERE id = 81;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 00:04:46.325', updated_at = '2026-02-01 00:04:46.325', deleted_at = null, form = '前端', info = '错误信息: TypeError: route.component.includes is not a function
+    at unref (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:1762:30)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (82, '2026-02-01 00:04:46.325', '2026-02-01 00:04:46.325', null, '前端', '错误信息: TypeError: route.component.includes is not a function
 Stack: 调用栈: TypeError: route.component.includes is not a function
     at convertRouteToNavItem (http://localhost:5173/src/view/layout/index.vue?t=1769875416750:131:47)
     at http://localhost:5173/src/view/layout/index.vue?t=1769875416750:92:18
@@ -590,8 +607,8 @@ Stack: 调用栈: TypeError: route.component.includes is not a function
     at ComputedRefImpl.fn (http://localhost:5173/src/view/layout/index.vue?t=1769875416750:88:16)
     at refreshComputed (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:659:29)
     at get value (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:1907:5)
-    at unref (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:1762:30)', level = 'error', solution = null, status = '未处理' WHERE id = 82;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 00:06:24.982', updated_at = '2026-02-01 00:06:24.982', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'component\')
+    at unref (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:1762:30)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (83, '2026-02-01 00:06:24.982', '2026-02-01 00:06:24.982', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'component\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component\')
     at locateNonHydratedAsyncRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9010:41)
     at locateNonHydratedAsyncRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9015:14)
@@ -599,8 +616,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
     at http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2673:27
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:33)
-    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 83;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 00:11:04.744', updated_at = '2026-02-01 00:11:04.744', deleted_at = null, form = '前端', info = '错误信息: Error: No match for
+    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (84, '2026-02-01 00:11:04.744', '2026-02-01 00:11:04.744', null, '前端', '错误信息: Error: No match for
  {"name":"rolesParent","params":{}}
 Stack: 调用栈: Error: No match for
  {"name":"rolesParent","params":{}}
@@ -613,8 +630,8 @@ Stack: 调用栈: Error: No match for
     at useLink (http://localhost:5173/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1800:22)
     at setup (http://localhost:5173/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1846:27)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
-    at setupStatefulComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', level = 'error', solution = null, status = '未处理' WHERE id = 84;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 00:11:28.317', updated_at = '2026-02-01 00:11:28.317', deleted_at = null, form = '前端', info = '错误信息: Error: No match for
+    at setupStatefulComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (85, '2026-02-01 00:11:28.317', '2026-02-01 00:11:28.317', null, '前端', '错误信息: Error: No match for
  {"name":"rolesParent","params":{}}
 Stack: 调用栈: Error: No match for
  {"name":"rolesParent","params":{}}
@@ -627,16 +644,16 @@ Stack: 调用栈: Error: No match for
     at useLink (http://localhost:5173/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1800:22)
     at setup (http://localhost:5173/node_modules/.vite/deps/vue-router.js?v=f8cbd1dd:1846:27)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
-    at setupStatefulComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', level = 'error', solution = null, status = '未处理' WHERE id = 85;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 00:12:12.062', updated_at = '2026-02-01 00:12:12.062', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'parentNode\')
+    at setupStatefulComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10198:25)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (86, '2026-02-01 00:12:12.062', '2026-02-01 00:12:12.062', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'parentNode\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'parentNode\')
     at parentNode (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:10754:30)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8296:11)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
     at http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2673:27
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:33)
-    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 86;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:24:21.609', updated_at = '2026-02-01 14:24:21.609', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
+    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (87, '2026-02-01 14:24:21.609', '2026-02-01 14:24:21.609', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'length\')
     at Proxy._sfc_render (http://localhost:5173/src/view/console/training/index.vue?t=1769927061168:307:36)
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:6650:17)
@@ -647,8 +664,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'leng
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 87;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:24:21.611', updated_at = '2026-02-01 14:24:21.611', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (88, '2026-02-01 14:24:21.611', '2026-02-01 14:24:21.611', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'length\')
     at Proxy._sfc_render (http://localhost:5173/src/view/console/training/index.vue?t=1769927061168:307:36)
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:6650:17)
@@ -659,8 +676,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'leng
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 88;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:24:21.611', updated_at = '2026-02-01 14:24:21.611', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (89, '2026-02-01 14:24:21.611', '2026-02-01 14:24:21.611', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'length\')
     at Proxy._sfc_render (http://localhost:5173/src/view/console/training/index.vue?t=1769927061168:307:36)
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:6650:17)
@@ -671,8 +688,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'leng
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 89;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:24:21.623', updated_at = '2026-02-01 14:24:21.623', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (90, '2026-02-01 14:24:21.623', '2026-02-01 14:24:21.623', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'length\')
     at Proxy._sfc_render (http://localhost:5173/src/view/console/training/index.vue?t=1769927061168:307:36)
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:6650:17)
@@ -683,8 +700,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'leng
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 90;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:24:21.624', updated_at = '2026-02-01 14:24:21.624', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (91, '2026-02-01 14:24:21.624', '2026-02-01 14:24:21.624', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'length\')
     at Proxy._sfc_render (http://localhost:5173/src/view/console/training/index.vue?t=1769927061168:307:36)
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:6650:17)
@@ -695,8 +712,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'leng
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 91;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:24:21.624', updated_at = '2026-02-01 14:24:21.624', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (92, '2026-02-01 14:24:21.624', '2026-02-01 14:24:21.624', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'length\')
     at Proxy._sfc_render (http://localhost:5173/src/view/console/training/index.vue?t=1769927061168:307:36)
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:6650:17)
@@ -707,8 +724,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'leng
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 92;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:24:21.645', updated_at = '2026-02-01 14:24:21.645', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (93, '2026-02-01 14:24:21.645', '2026-02-01 14:24:21.645', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'length\')
     at Proxy._sfc_render (http://localhost:5173/src/view/console/training/index.vue?t=1769927061168:307:36)
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:6650:17)
@@ -719,8 +736,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'leng
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 93;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:24:21.645', updated_at = '2026-02-01 14:24:21.645', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (94, '2026-02-01 14:24:21.645', '2026-02-01 14:24:21.645', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'length\')
     at Proxy._sfc_render (http://localhost:5173/src/view/console/training/index.vue?t=1769927061168:307:36)
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:6650:17)
@@ -731,8 +748,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'leng
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 94;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:26:39.122', updated_at = '2026-02-01 14:26:39.122', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (95, '2026-02-01 14:26:39.122', '2026-02-01 14:26:39.122', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'length\')
     at Proxy._sfc_render (http://localhost:5173/src/view/console/notebooks/index.vue?t=1769927134437:372:41)
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:6650:17)
@@ -743,8 +760,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'leng
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 95;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:26:46.261', updated_at = '2026-02-01 14:26:46.261', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (96, '2026-02-01 14:26:46.261', '2026-02-01 14:26:46.261', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'length\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'length\')
     at Proxy._sfc_render (http://localhost:5173/src/view/console/notebooks/index.vue?t=1769927134437:372:41)
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:6650:17)
@@ -755,8 +772,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'leng
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 96;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:26:47.694', updated_at = '2026-02-01 14:26:47.694', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'component\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (97, '2026-02-01 14:26:47.694', '2026-02-01 14:26:47.694', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'component\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component\')
     at locateNonHydratedAsyncRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9010:41)
     at locateNonHydratedAsyncRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9015:14)
@@ -765,8 +782,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:543:12)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:33)
-    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 97;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:39:45.850', updated_at = '2026-02-01 14:39:45.850', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (98, '2026-02-01 14:39:45.850', '2026-02-01 14:39:45.850', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769927982879:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -777,8 +794,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 98;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:40:01.481', updated_at = '2026-02-01 14:40:01.481', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'component\')
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (99, '2026-02-01 14:40:01.481', '2026-02-01 14:40:01.481', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'component\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component\')
     at locateNonHydratedAsyncRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9010:41)
     at locateNonHydratedAsyncRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9015:14)
@@ -787,8 +804,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:543:12)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:33)
-    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 99;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:40:52.364', updated_at = '2026-02-01 14:40:52.364', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (100, '2026-02-01 14:40:52.364', '2026-02-01 14:40:52.364', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928034748:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -799,8 +816,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 100;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:40:52.373', updated_at = '2026-02-01 14:40:52.373', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (101, '2026-02-01 14:40:52.373', '2026-02-01 14:40:52.373', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928034748:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -811,8 +828,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 101;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:40:52.373', updated_at = '2026-02-01 14:40:52.373', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (102, '2026-02-01 14:40:52.373', '2026-02-01 14:40:52.373', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928034748:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -823,8 +840,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 102;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:40:52.374', updated_at = '2026-02-01 14:40:52.374', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (103, '2026-02-01 14:40:52.374', '2026-02-01 14:40:52.374', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928034748:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -835,8 +852,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 103;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:40:52.382', updated_at = '2026-02-01 14:40:52.382', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (104, '2026-02-01 14:40:52.382', '2026-02-01 14:40:52.382', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928034748:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -847,8 +864,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 104;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:40:52.385', updated_at = '2026-02-01 14:40:52.385', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (105, '2026-02-01 14:40:52.385', '2026-02-01 14:40:52.385', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928034748:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -859,8 +876,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 105;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:40:52.401', updated_at = '2026-02-01 14:40:52.401', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (106, '2026-02-01 14:40:52.401', '2026-02-01 14:40:52.401', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928034748:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -871,8 +888,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 106;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:40:54.313', updated_at = '2026-02-01 14:40:54.313', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'component\')
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (107, '2026-02-01 14:40:54.313', '2026-02-01 14:40:54.313', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'component\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component\')
     at locateNonHydratedAsyncRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9010:41)
     at locateNonHydratedAsyncRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9015:14)
@@ -881,8 +898,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:543:12)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:33)
-    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 107;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:40:59.222', updated_at = '2026-02-01 14:40:59.222', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (108, '2026-02-01 14:40:59.222', '2026-02-01 14:40:59.222', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928034748:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -893,8 +910,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 108;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:41:45.436', updated_at = '2026-02-01 14:41:45.436', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (109, '2026-02-01 14:41:45.436', '2026-02-01 14:41:45.436', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928034748:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -905,8 +922,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 109;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:41:58.680', updated_at = '2026-02-01 14:41:58.680', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'component\')
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (110, '2026-02-01 14:41:58.680', '2026-02-01 14:41:58.680', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'component\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component\')
     at locateNonHydratedAsyncRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9010:41)
     at locateNonHydratedAsyncRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9015:14)
@@ -915,8 +932,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:543:12)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:33)
-    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 110;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:47:05.678', updated_at = '2026-02-01 14:47:05.678', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (111, '2026-02-01 14:47:05.678', '2026-02-01 14:47:05.678', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928286344:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -927,8 +944,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 111;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:47:05.678', updated_at = '2026-02-01 14:47:05.678', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (112, '2026-02-01 14:47:05.678', '2026-02-01 14:47:05.678', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928286344:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -939,8 +956,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 112;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:47:05.678', updated_at = '2026-02-01 14:47:05.678', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (113, '2026-02-01 14:47:05.678', '2026-02-01 14:47:05.678', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928286344:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -951,8 +968,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 113;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:47:05.678', updated_at = '2026-02-01 14:47:05.678', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (114, '2026-02-01 14:47:05.678', '2026-02-01 14:47:05.678', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928286344:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -963,8 +980,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 114;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:47:05.679', updated_at = '2026-02-01 14:47:05.679', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (115, '2026-02-01 14:47:05.679', '2026-02-01 14:47:05.679', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928286344:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -975,8 +992,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 115;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:47:05.679', updated_at = '2026-02-01 14:47:05.679', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (116, '2026-02-01 14:47:05.679', '2026-02-01 14:47:05.679', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928286344:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -987,8 +1004,8 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 116;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:47:05.711', updated_at = '2026-02-01 14:47:05.711', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: useRouter is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (117, '2026-02-01 14:47:05.711', '2026-02-01 14:47:05.711', null, '前端', '错误信息: ReferenceError: useRouter is not defined
 Stack: 调用栈: ReferenceError: useRouter is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928286344:12:16)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -999,13 +1016,13 @@ Stack: 调用栈: ReferenceError: useRouter is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 117;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:47:29.957', updated_at = '2026-02-01 14:47:29.957', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'flags\')
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (118, '2026-02-01 14:47:29.957', '2026-02-01 14:47:29.957', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'flags\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'flags\')
     at http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2671:28
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:33)
-    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 118;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:48:51.298', updated_at = '2026-02-01 14:48:51.298', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (119, '2026-02-01 14:48:51.298', '2026-02-01 14:48:51.298', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928449201:134:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -1016,8 +1033,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 119;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:48:51.298', updated_at = '2026-02-01 14:48:51.298', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (120, '2026-02-01 14:48:51.298', '2026-02-01 14:48:51.298', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928449201:134:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -1028,8 +1045,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 120;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:48:51.298', updated_at = '2026-02-01 14:48:51.298', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (121, '2026-02-01 14:48:51.298', '2026-02-01 14:48:51.298', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928449201:134:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -1040,8 +1057,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 121;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:48:51.298', updated_at = '2026-02-01 14:48:51.298', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (122, '2026-02-01 14:48:51.298', '2026-02-01 14:48:51.298', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928449201:134:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -1052,8 +1069,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 122;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:48:51.298', updated_at = '2026-02-01 14:48:51.298', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (123, '2026-02-01 14:48:51.298', '2026-02-01 14:48:51.298', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928449201:134:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -1064,8 +1081,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 123;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:48:51.298', updated_at = '2026-02-01 14:48:51.298', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (124, '2026-02-01 14:48:51.298', '2026-02-01 14:48:51.298', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928449201:134:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -1076,8 +1093,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 124;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:48:51.335', updated_at = '2026-02-01 14:48:51.335', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (125, '2026-02-01 14:48:51.335', '2026-02-01 14:48:51.335', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/training/index.vue?t=1769928449201:134:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -1088,8 +1105,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 125;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:49:05.027', updated_at = '2026-02-01 14:49:05.027', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'component\')
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (126, '2026-02-01 14:49:05.027', '2026-02-01 14:49:05.027', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'component\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component\')
     at locateNonHydratedAsyncRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9010:41)
     at locateNonHydratedAsyncRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:9015:14)
@@ -1098,33 +1115,33 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'component
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:543:12)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:33)
-    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 126;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-01 14:49:11.202', updated_at = '2026-02-01 14:49:11.202', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'flags\')
+    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (127, '2026-02-01 14:49:11.202', '2026-02-01 14:49:11.202', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'flags\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'flags\')
     at http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2671:28
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:33)
-    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 127;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-03 01:04:27.674', updated_at = '2026-02-03 01:04:27.674', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', level = 'error', solution = null, status = '未处理' WHERE id = 128;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-03 01:06:47.133', updated_at = '2026-02-03 01:06:47.133', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', level = 'error', solution = null, status = '未处理' WHERE id = 129;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-03 01:06:48.115', updated_at = '2026-02-03 01:06:48.115', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', level = 'error', solution = null, status = '未处理' WHERE id = 130;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-03 01:06:48.999', updated_at = '2026-02-03 01:06:48.999', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', level = 'error', solution = null, status = '未处理' WHERE id = 131;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-03 01:06:49.615', updated_at = '2026-02-03 01:06:49.615', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', level = 'error', solution = null, status = '未处理' WHERE id = 132;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-03 01:06:50.131', updated_at = '2026-02-03 01:06:50.131', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', level = 'error', solution = null, status = '未处理' WHERE id = 133;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-03 01:06:50.331', updated_at = '2026-02-03 01:06:50.331', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', level = 'error', solution = null, status = '未处理' WHERE id = 134;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-03 01:06:50.515', updated_at = '2026-02-03 01:06:50.515', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', level = 'error', solution = null, status = '未处理' WHERE id = 135;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-03 01:06:50.698', updated_at = '2026-02-03 01:06:50.698', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', level = 'error', solution = null, status = '未处理' WHERE id = 136;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-03 01:07:08.558', updated_at = '2026-02-03 01:07:08.558', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', level = 'error', solution = null, status = '未处理' WHERE id = 137;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 16:54:45.581', updated_at = '2026-02-15 16:54:45.581', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (128, '2026-02-03 01:04:27.674', '2026-02-03 01:04:27.674', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (129, '2026-02-03 01:06:47.133', '2026-02-03 01:06:47.133', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (130, '2026-02-03 01:06:48.115', '2026-02-03 01:06:48.115', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (131, '2026-02-03 01:06:48.999', '2026-02-03 01:06:48.999', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (132, '2026-02-03 01:06:49.615', '2026-02-03 01:06:49.615', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (133, '2026-02-03 01:06:50.131', '2026-02-03 01:06:50.131', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (134, '2026-02-03 01:06:50.331', '2026-02-03 01:06:50.331', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (135, '2026-02-03 01:06:50.515', '2026-02-03 01:06:50.515', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (136, '2026-02-03 01:06:50.698', '2026-02-03 01:06:50.698', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (137, '2026-02-03 01:07:08.558', '2026-02-03 01:07:08.558', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5174/src/view/console/notebooks/detail.vue?t=1770051832702', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (138, '2026-02-15 16:54:45.581', '2026-02-15 16:54:45.581', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7708:9)
@@ -1135,8 +1152,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7550:11)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 138;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 16:54:50.584', updated_at = '2026-02-15 16:54:50.584', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (139, '2026-02-15 16:54:50.584', '2026-02-15 16:54:50.584', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7708:9)
@@ -1147,8 +1164,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7550:11)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 139;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 16:54:55.727', updated_at = '2026-02-15 16:54:55.727', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (140, '2026-02-15 16:54:55.727', '2026-02-15 16:54:55.727', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7708:9)
@@ -1159,8 +1176,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7550:11)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 140;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 16:55:00.602', updated_at = '2026-02-15 16:55:00.602', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (141, '2026-02-15 16:55:00.602', '2026-02-15 16:55:00.602', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7708:9)
@@ -1171,36 +1188,36 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7550:11)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 141;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 17:38:15.409', updated_at = '2026-02-15 17:38:15.409', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/dashboard/index.vue
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/dashboard/index.vue', level = 'error', solution = null, status = '未处理' WHERE id = 142;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:20:13.880', updated_at = '2026-02-15 19:20:13.880', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 143;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:20:25.199', updated_at = '2026-02-15 19:20:25.199', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 144;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:22:57.978', updated_at = '2026-02-15 19:22:57.978', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 145;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:24:00.577', updated_at = '2026-02-15 19:24:00.577', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 146;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:24:01.243', updated_at = '2026-02-15 19:24:01.243', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 147;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:24:01.545', updated_at = '2026-02-15 19:24:01.545', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 148;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:24:02.322', updated_at = '2026-02-15 19:24:02.322', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 149;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:24:02.752', updated_at = '2026-02-15 19:24:02.752', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 150;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:24:03.257', updated_at = '2026-02-15 19:24:03.257', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 151;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:24:38.223', updated_at = '2026-02-15 19:24:38.223', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 152;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:24:39.076', updated_at = '2026-02-15 19:24:39.076', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 153;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:24:39.790', updated_at = '2026-02-15 19:24:39.790', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 154;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:24:42.877', updated_at = '2026-02-15 19:24:42.877', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 155;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:27:32.002', updated_at = '2026-02-15 19:27:32.002', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: loading is not defined
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (142, '2026-02-15 17:38:15.409', '2026-02-15 17:38:15.409', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/dashboard/index.vue
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/dashboard/index.vue', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (143, '2026-02-15 19:20:13.880', '2026-02-15 19:20:13.880', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (144, '2026-02-15 19:20:25.199', '2026-02-15 19:20:25.199', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (145, '2026-02-15 19:22:57.978', '2026-02-15 19:22:57.978', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (146, '2026-02-15 19:24:00.577', '2026-02-15 19:24:00.577', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (147, '2026-02-15 19:24:01.243', '2026-02-15 19:24:01.243', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (148, '2026-02-15 19:24:01.545', '2026-02-15 19:24:01.545', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (149, '2026-02-15 19:24:02.322', '2026-02-15 19:24:02.322', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (150, '2026-02-15 19:24:02.752', '2026-02-15 19:24:02.752', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (151, '2026-02-15 19:24:03.257', '2026-02-15 19:24:03.257', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (152, '2026-02-15 19:24:38.223', '2026-02-15 19:24:38.223', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (153, '2026-02-15 19:24:39.076', '2026-02-15 19:24:39.076', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (154, '2026-02-15 19:24:39.790', '2026-02-15 19:24:39.790', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (155, '2026-02-15 19:24:42.877', '2026-02-15 19:24:42.877', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (156, '2026-02-15 19:27:32.002', '2026-02-15 19:27:32.002', null, '前端', '错误信息: ReferenceError: loading is not defined
 Stack: 调用栈: ReferenceError: loading is not defined
     at getTableData (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:90:3)
     at initPage (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:127:3)
@@ -1211,8 +1228,8 @@ Stack: 调用栈: ReferenceError: loading is not defined
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8100:7)
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 156;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:27:42.048', updated_at = '2026-02-15 19:27:42.048', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: loading is not defined
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (157, '2026-02-15 19:27:42.048', '2026-02-15 19:27:42.048', null, '前端', '错误信息: ReferenceError: loading is not defined
 Stack: 调用栈: ReferenceError: loading is not defined
     at getTableData (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:90:3)
     at initPage (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:127:3)
@@ -1223,8 +1240,8 @@ Stack: 调用栈: ReferenceError: loading is not defined
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8100:7)
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 157;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:27:50.462', updated_at = '2026-02-15 19:27:50.462', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: loading is not defined
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (158, '2026-02-15 19:27:50.462', '2026-02-15 19:27:50.462', null, '前端', '错误信息: ReferenceError: loading is not defined
 Stack: 调用栈: ReferenceError: loading is not defined
     at getTableData (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:90:3)
     at initPage (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:127:3)
@@ -1235,8 +1252,8 @@ Stack: 调用栈: ReferenceError: loading is not defined
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8100:7)
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 158;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:27:54.489', updated_at = '2026-02-15 19:27:54.489', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: loading is not defined
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (159, '2026-02-15 19:27:54.489', '2026-02-15 19:27:54.489', null, '前端', '错误信息: ReferenceError: loading is not defined
 Stack: 调用栈: ReferenceError: loading is not defined
     at getTableData (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:90:3)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -1246,8 +1263,8 @@ Stack: 调用栈: ReferenceError: loading is not defined
     at handleRefresh (http://localhost:5173/src/components/RefreshButton/index.vue?t=1771154291737:22:3)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
     at callWithAsyncErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2349:17)
-    at HTMLButtonElement.invoker (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:11425:5)', level = 'error', solution = null, status = '未处理' WHERE id = 159;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:27:54.973', updated_at = '2026-02-15 19:27:54.973', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: loading is not defined
+    at HTMLButtonElement.invoker (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:11425:5)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (160, '2026-02-15 19:27:54.973', '2026-02-15 19:27:54.973', null, '前端', '错误信息: ReferenceError: loading is not defined
 Stack: 调用栈: ReferenceError: loading is not defined
     at getTableData (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:90:3)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -1257,8 +1274,8 @@ Stack: 调用栈: ReferenceError: loading is not defined
     at handleRefresh (http://localhost:5173/src/components/RefreshButton/index.vue?t=1771154291737:22:3)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
     at callWithAsyncErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2349:17)
-    at HTMLButtonElement.invoker (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:11425:5)', level = 'error', solution = null, status = '未处理' WHERE id = 160;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:27:55.189', updated_at = '2026-02-15 19:27:55.189', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: loading is not defined
+    at HTMLButtonElement.invoker (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:11425:5)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (161, '2026-02-15 19:27:55.189', '2026-02-15 19:27:55.189', null, '前端', '错误信息: ReferenceError: loading is not defined
 Stack: 调用栈: ReferenceError: loading is not defined
     at getTableData (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:90:3)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -1268,8 +1285,8 @@ Stack: 调用栈: ReferenceError: loading is not defined
     at handleRefresh (http://localhost:5173/src/components/RefreshButton/index.vue?t=1771154291737:22:3)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
     at callWithAsyncErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2349:17)
-    at HTMLButtonElement.invoker (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:11425:5)', level = 'error', solution = null, status = '未处理' WHERE id = 161;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:27:55.372', updated_at = '2026-02-15 19:27:55.372', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: loading is not defined
+    at HTMLButtonElement.invoker (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:11425:5)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (162, '2026-02-15 19:27:55.372', '2026-02-15 19:27:55.372', null, '前端', '错误信息: ReferenceError: loading is not defined
 Stack: 调用栈: ReferenceError: loading is not defined
     at getTableData (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:90:3)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -1279,8 +1296,8 @@ Stack: 调用栈: ReferenceError: loading is not defined
     at handleRefresh (http://localhost:5173/src/components/RefreshButton/index.vue?t=1771154291737:22:3)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
     at callWithAsyncErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2349:17)
-    at HTMLButtonElement.invoker (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:11425:5)', level = 'error', solution = null, status = '未处理' WHERE id = 162;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:27:55.555', updated_at = '2026-02-15 19:27:55.555', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: loading is not defined
+    at HTMLButtonElement.invoker (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:11425:5)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (163, '2026-02-15 19:27:55.555', '2026-02-15 19:27:55.555', null, '前端', '错误信息: ReferenceError: loading is not defined
 Stack: 调用栈: ReferenceError: loading is not defined
     at getTableData (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:90:3)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -1290,8 +1307,8 @@ Stack: 调用栈: ReferenceError: loading is not defined
     at handleRefresh (http://localhost:5173/src/components/RefreshButton/index.vue?t=1771154291737:22:3)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
     at callWithAsyncErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2349:17)
-    at HTMLButtonElement.invoker (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:11425:5)', level = 'error', solution = null, status = '未处理' WHERE id = 163;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:27:55.755', updated_at = '2026-02-15 19:27:55.755', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: loading is not defined
+    at HTMLButtonElement.invoker (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:11425:5)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (164, '2026-02-15 19:27:55.755', '2026-02-15 19:27:55.755', null, '前端', '错误信息: ReferenceError: loading is not defined
 Stack: 调用栈: ReferenceError: loading is not defined
     at getTableData (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:90:3)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
@@ -1301,8 +1318,8 @@ Stack: 调用栈: ReferenceError: loading is not defined
     at handleRefresh (http://localhost:5173/src/components/RefreshButton/index.vue?t=1771154291737:22:3)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2342:19)
     at callWithAsyncErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:2349:17)
-    at HTMLButtonElement.invoker (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:11425:5)', level = 'error', solution = null, status = '未处理' WHERE id = 164;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:28:08.020', updated_at = '2026-02-15 19:28:08.020', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: loading is not defined
+    at HTMLButtonElement.invoker (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:11425:5)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (165, '2026-02-15 19:28:08.020', '2026-02-15 19:28:08.020', null, '前端', '错误信息: ReferenceError: loading is not defined
 Stack: 调用栈: ReferenceError: loading is not defined
     at getTableData (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:90:3)
     at initPage (http://localhost:5173/src/view/superAdmin/user/user.vue?t=1771154836392:127:3)
@@ -1313,10 +1330,10 @@ Stack: 调用栈: ReferenceError: loading is not defined
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8100:7)
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:7562:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 165;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-15 19:50:33.081', updated_at = '2026-02-15 19:50:33.081', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 166;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:40:42.203', updated_at = '2026-02-20 16:40:42.203', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=f8cbd1dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (166, '2026-02-15 19:50:33.081', '2026-02-15 19:50:33.081', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (167, '2026-02-20 16:40:42.203', '2026-02-20 16:40:42.203', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1327,8 +1344,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 167;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:40:42.260', updated_at = '2026-02-20 16:40:42.260', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (168, '2026-02-20 16:40:42.260', '2026-02-20 16:40:42.260', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1339,8 +1356,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 168;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:40:52.200', updated_at = '2026-02-20 16:40:52.200', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (169, '2026-02-20 16:40:52.200', '2026-02-20 16:40:52.200', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1351,8 +1368,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 169;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:40:52.225', updated_at = '2026-02-20 16:40:52.225', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (170, '2026-02-20 16:40:52.225', '2026-02-20 16:40:52.225', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1363,8 +1380,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 170;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:41:02.200', updated_at = '2026-02-20 16:41:02.200', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (171, '2026-02-20 16:41:02.200', '2026-02-20 16:41:02.200', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1375,8 +1392,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 171;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:41:02.225', updated_at = '2026-02-20 16:41:02.225', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (172, '2026-02-20 16:41:02.225', '2026-02-20 16:41:02.225', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1387,8 +1404,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 172;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:41:12.202', updated_at = '2026-02-20 16:41:12.202', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (173, '2026-02-20 16:41:12.202', '2026-02-20 16:41:12.202', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1399,8 +1416,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 173;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:41:12.224', updated_at = '2026-02-20 16:41:12.224', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (174, '2026-02-20 16:41:12.224', '2026-02-20 16:41:12.224', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1411,8 +1428,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 174;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:41:22.201', updated_at = '2026-02-20 16:41:22.201', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (175, '2026-02-20 16:41:22.201', '2026-02-20 16:41:22.201', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1423,8 +1440,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 175;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:41:22.237', updated_at = '2026-02-20 16:41:22.237', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (176, '2026-02-20 16:41:22.237', '2026-02-20 16:41:22.237', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1435,8 +1452,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 176;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:41:32.201', updated_at = '2026-02-20 16:41:32.201', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (177, '2026-02-20 16:41:32.201', '2026-02-20 16:41:32.201', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1447,8 +1464,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 177;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:41:32.232', updated_at = '2026-02-20 16:41:32.232', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (178, '2026-02-20 16:41:32.232', '2026-02-20 16:41:32.232', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1459,8 +1476,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 178;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:41:42.202', updated_at = '2026-02-20 16:41:42.202', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (179, '2026-02-20 16:41:42.202', '2026-02-20 16:41:42.202', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1471,8 +1488,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 179;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:41:42.228', updated_at = '2026-02-20 16:41:42.228', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (180, '2026-02-20 16:41:42.228', '2026-02-20 16:41:42.228', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1483,8 +1500,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 180;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:41:52.201', updated_at = '2026-02-20 16:41:52.201', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (181, '2026-02-20 16:41:52.201', '2026-02-20 16:41:52.201', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1495,8 +1512,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 181;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:41:52.225', updated_at = '2026-02-20 16:41:52.225', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (182, '2026-02-20 16:41:52.225', '2026-02-20 16:41:52.225', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1507,8 +1524,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 182;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:42:02.202', updated_at = '2026-02-20 16:42:02.202', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (183, '2026-02-20 16:42:02.202', '2026-02-20 16:42:02.202', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1519,8 +1536,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 183;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:42:02.227', updated_at = '2026-02-20 16:42:02.227', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (184, '2026-02-20 16:42:02.227', '2026-02-20 16:42:02.227', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1531,8 +1548,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 184;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:42:12.201', updated_at = '2026-02-20 16:42:12.201', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (185, '2026-02-20 16:42:12.201', '2026-02-20 16:42:12.201', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1543,8 +1560,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 185;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:42:12.231', updated_at = '2026-02-20 16:42:12.231', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (186, '2026-02-20 16:42:12.231', '2026-02-20 16:42:12.231', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1555,8 +1572,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 186;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:42:22.203', updated_at = '2026-02-20 16:42:22.203', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (187, '2026-02-20 16:42:22.203', '2026-02-20 16:42:22.203', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1567,8 +1584,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 187;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:42:22.268', updated_at = '2026-02-20 16:42:22.268', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (188, '2026-02-20 16:42:22.268', '2026-02-20 16:42:22.268', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1579,8 +1596,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 188;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:42:32.203', updated_at = '2026-02-20 16:42:32.203', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (189, '2026-02-20 16:42:32.203', '2026-02-20 16:42:32.203', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1591,8 +1608,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 189;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:42:32.233', updated_at = '2026-02-20 16:42:32.233', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (190, '2026-02-20 16:42:32.233', '2026-02-20 16:42:32.233', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
@@ -1603,8 +1620,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 190;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 16:42:40.674', updated_at = '2026-02-20 16:42:40.674', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'type\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (191, '2026-02-20 16:42:40.674', '2026-02-20 16:42:40.674', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'type\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8830:18)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8737:7)
@@ -1615,12 +1632,12 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7513:7)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)
-    at http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2673:27', level = 'error', solution = null, status = '未处理' WHERE id = 191;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 17:53:32.312', updated_at = '2026-02-20 17:53:32.312', deleted_at = null, form = '前端', info = '错误信息: cancel
-Stack: 调用栈: 没有调用栈信息', level = 'error', solution = null, status = '未处理' WHERE id = 192;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 21:14:52.180', updated_at = '2026-02-20 21:14:52.180', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/create.vue?t=1771593252919
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/create.vue?t=1771593252919', level = 'error', solution = null, status = '未处理' WHERE id = 193;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 21:33:20.449', updated_at = '2026-02-20 21:33:20.449', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2673:27', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (192, '2026-02-20 17:53:32.312', '2026-02-20 17:53:32.312', null, '前端', '错误信息: cancel
+Stack: 调用栈: 没有调用栈信息', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (193, '2026-02-20 21:14:52.180', '2026-02-20 21:14:52.180', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/create.vue?t=1771593252919
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/create.vue?t=1771593252919', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (194, '2026-02-20 21:33:20.449', '2026-02-20 21:33:20.449', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/inference/create.vue?t=1771594286885:227:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2342:19)
@@ -1631,8 +1648,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 194;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 21:33:20.454', updated_at = '2026-02-20 21:33:20.454', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (195, '2026-02-20 21:33:20.454', '2026-02-20 21:33:20.454', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/inference/create.vue?t=1771594286885:227:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2342:19)
@@ -1643,8 +1660,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 195;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 21:33:20.463', updated_at = '2026-02-20 21:33:20.463', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (196, '2026-02-20 21:33:20.463', '2026-02-20 21:33:20.463', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/inference/create.vue?t=1771594286885:227:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2342:19)
@@ -1655,8 +1672,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 196;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 21:33:20.463', updated_at = '2026-02-20 21:33:20.463', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (197, '2026-02-20 21:33:20.463', '2026-02-20 21:33:20.463', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/inference/create.vue?t=1771594286885:227:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2342:19)
@@ -1667,8 +1684,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 197;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 21:33:20.463', updated_at = '2026-02-20 21:33:20.463', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (198, '2026-02-20 21:33:20.463', '2026-02-20 21:33:20.463', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/inference/create.vue?t=1771594286885:227:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2342:19)
@@ -1679,8 +1696,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 198;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 21:33:20.463', updated_at = '2026-02-20 21:33:20.463', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (199, '2026-02-20 21:33:20.463', '2026-02-20 21:33:20.463', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/inference/create.vue?t=1771594286885:227:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2342:19)
@@ -1691,8 +1708,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 199;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 21:33:20.465', updated_at = '2026-02-20 21:33:20.465', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (200, '2026-02-20 21:33:20.465', '2026-02-20 21:33:20.465', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/inference/create.vue?t=1771594286885:227:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2342:19)
@@ -1703,8 +1720,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 200;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 21:33:20.474', updated_at = '2026-02-20 21:33:20.474', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (201, '2026-02-20 21:33:20.474', '2026-02-20 21:33:20.474', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/inference/create.vue?t=1771594286885:227:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2342:19)
@@ -1715,8 +1732,8 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 201;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 21:33:20.492', updated_at = '2026-02-20 21:33:20.492', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: onUnmounted is not defined
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (202, '2026-02-20 21:33:20.492', '2026-02-20 21:33:20.492', null, '前端', '错误信息: ReferenceError: onUnmounted is not defined
 Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at setup (http://localhost:5173/src/view/console/inference/create.vue?t=1771594286885:227:1)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2342:19)
@@ -1727,13 +1744,13 @@ Stack: 调用栈: ReferenceError: onUnmounted is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 202;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 21:34:33.809', updated_at = '2026-02-20 21:34:33.809', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'flags\')
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (203, '2026-02-20 21:34:33.809', '2026-02-20 21:34:33.809', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'flags\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'flags\')
     at http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2671:28
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2342:33)
-    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 203;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 22:58:56.184', updated_at = '2026-02-20 22:58:56.184', deleted_at = null, form = '前端', info = '错误信息: ReferenceError: computed is not defined
+    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (204, '2026-02-20 22:58:56.184', '2026-02-20 22:58:56.184', null, '前端', '错误信息: ReferenceError: computed is not defined
 Stack: 调用栈: ReferenceError: computed is not defined
     at setup (http://localhost:5173/src/view/superAdmin/cms/node.vue?t=1771599535599:24:28)
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2342:19)
@@ -1744,13 +1761,13 @@ Stack: 调用栈: ReferenceError: computed is not defined
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:7562:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:505:19)
-    at http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2673:27', level = 'error', solution = null, status = '未处理' WHERE id = 204;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-20 22:59:06.500', updated_at = '2026-02-20 22:59:06.500', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'flags\')
+    at http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2673:27', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (205, '2026-02-20 22:59:06.500', '2026-02-20 22:59:06.500', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'flags\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'flags\')
     at http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2671:28
     at callWithErrorHandling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2342:33)
-    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 205;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:53:59.407', updated_at = '2026-02-23 22:53:59.407', deleted_at = null, form = '前端', info = '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
+    at flushJobs (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7bdd73e1:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (206, '2026-02-23 22:53:59.407', '2026-02-23 22:53:59.407', null, '前端', '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
 Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than max.
     at throwError (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:9656:9)
     at verifyValue (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:40112:9)
@@ -1761,8 +1778,8 @@ Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than
     at job (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2072:18)
     at watch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2107:7)
     at doWatch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:3055:23)
-    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', level = 'error', solution = null, status = '未处理' WHERE id = 206;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:53:59.407', updated_at = '2026-02-23 22:53:59.407', deleted_at = null, form = '前端', info = '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
+    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (207, '2026-02-23 22:53:59.407', '2026-02-23 22:53:59.407', null, '前端', '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
 Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than max.
     at throwError (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:9656:9)
     at verifyValue (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:40112:9)
@@ -1773,8 +1790,8 @@ Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than
     at job (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2072:18)
     at watch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2107:7)
     at doWatch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:3055:23)
-    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', level = 'error', solution = null, status = '未处理' WHERE id = 207;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:53:59.407', updated_at = '2026-02-23 22:53:59.407', deleted_at = null, form = '前端', info = '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
+    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (208, '2026-02-23 22:53:59.407', '2026-02-23 22:53:59.407', null, '前端', '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
 Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than max.
     at throwError (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:9656:9)
     at verifyValue (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:40112:9)
@@ -1785,8 +1802,8 @@ Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than
     at job (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2072:18)
     at watch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2107:7)
     at doWatch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:3055:23)
-    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', level = 'error', solution = null, status = '未处理' WHERE id = 208;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:53:59.417', updated_at = '2026-02-23 22:53:59.417', deleted_at = null, form = '前端', info = '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
+    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (209, '2026-02-23 22:53:59.417', '2026-02-23 22:53:59.417', null, '前端', '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
 Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than max.
     at throwError (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:9656:9)
     at verifyValue (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:40112:9)
@@ -1797,8 +1814,8 @@ Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than
     at job (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2072:18)
     at watch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2107:7)
     at doWatch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:3055:23)
-    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', level = 'error', solution = null, status = '未处理' WHERE id = 209;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:03.232', updated_at = '2026-02-23 22:54:03.232', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'type\')
+    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (210, '2026-02-23 22:54:03.232', '2026-02-23 22:54:03.232', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'type\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8830:18)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8737:7)
@@ -1809,8 +1826,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8856:7)
-    at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)', level = 'error', solution = null, status = '未处理' WHERE id = 210;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:03.232', updated_at = '2026-02-23 22:54:03.232', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'type\')
+    at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (211, '2026-02-23 22:54:03.232', '2026-02-23 22:54:03.232', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'type\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8830:18)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8737:7)
@@ -1821,8 +1838,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8856:7)
-    at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)', level = 'error', solution = null, status = '未处理' WHERE id = 211;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:03.233', updated_at = '2026-02-23 22:54:03.233', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'type\')
+    at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (212, '2026-02-23 22:54:03.233', '2026-02-23 22:54:03.233', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'type\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8830:18)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8737:7)
@@ -1833,8 +1850,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8856:7)
-    at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)', level = 'error', solution = null, status = '未处理' WHERE id = 212;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:06.960', updated_at = '2026-02-23 22:54:06.960', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (213, '2026-02-23 22:54:06.960', '2026-02-23 22:54:06.960', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -1845,8 +1862,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchBlockChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7936:7)
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8014:9)
-    at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)', level = 'error', solution = null, status = '未处理' WHERE id = 213;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:10.670', updated_at = '2026-02-23 22:54:10.670', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (214, '2026-02-23 22:54:10.670', '2026-02-23 22:54:10.670', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -1857,8 +1874,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 214;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:10.688', updated_at = '2026-02-23 22:54:10.688', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (215, '2026-02-23 22:54:10.688', '2026-02-23 22:54:10.688', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -1869,8 +1886,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 215;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:36.818', updated_at = '2026-02-23 22:54:36.818', deleted_at = null, form = '前端', info = '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (216, '2026-02-23 22:54:36.818', '2026-02-23 22:54:36.818', null, '前端', '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
 Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than max.
     at throwError (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:9656:9)
     at verifyValue (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:40112:9)
@@ -1881,8 +1898,8 @@ Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than
     at job (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2072:18)
     at watch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2107:7)
     at doWatch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:3055:23)
-    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', level = 'error', solution = null, status = '未处理' WHERE id = 216;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:36.820', updated_at = '2026-02-23 22:54:36.820', deleted_at = null, form = '前端', info = '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
+    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (217, '2026-02-23 22:54:36.820', '2026-02-23 22:54:36.820', null, '前端', '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
 Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than max.
     at throwError (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:9656:9)
     at verifyValue (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:40112:9)
@@ -1893,8 +1910,8 @@ Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than
     at job (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2072:18)
     at watch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2107:7)
     at doWatch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:3055:23)
-    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', level = 'error', solution = null, status = '未处理' WHERE id = 217;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:36.820', updated_at = '2026-02-23 22:54:36.820', deleted_at = null, form = '前端', info = '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
+    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (218, '2026-02-23 22:54:36.820', '2026-02-23 22:54:36.820', null, '前端', '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
 Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than max.
     at throwError (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:9656:9)
     at verifyValue (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:40112:9)
@@ -1905,8 +1922,8 @@ Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than
     at job (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2072:18)
     at watch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2107:7)
     at doWatch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:3055:23)
-    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', level = 'error', solution = null, status = '未处理' WHERE id = 218;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:36.821', updated_at = '2026-02-23 22:54:36.821', deleted_at = null, form = '前端', info = '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
+    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (219, '2026-02-23 22:54:36.821', '2026-02-23 22:54:36.821', null, '前端', '错误信息: ElementPlusError: [InputNumber] min should not be greater than max.
 Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than max.
     at throwError (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:9656:9)
     at verifyValue (http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a51189bf:40112:9)
@@ -1917,8 +1934,8 @@ Stack: 调用栈: ElementPlusError: [InputNumber] min should not be greater than
     at job (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2072:18)
     at watch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2107:7)
     at doWatch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:3055:23)
-    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', level = 'error', solution = null, status = '未处理' WHERE id = 219;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:43.569', updated_at = '2026-02-23 22:54:43.569', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'type\')
+    at watch2 (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2988:10)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (220, '2026-02-23 22:54:43.569', '2026-02-23 22:54:43.569', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'type\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8830:18)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8737:7)
@@ -1929,8 +1946,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8856:7)
-    at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)', level = 'error', solution = null, status = '未处理' WHERE id = 220;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:43.569', updated_at = '2026-02-23 22:54:43.569', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'type\')
+    at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (221, '2026-02-23 22:54:43.569', '2026-02-23 22:54:43.569', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'type\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8830:18)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8737:7)
@@ -1941,8 +1958,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8856:7)
-    at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)', level = 'error', solution = null, status = '未处理' WHERE id = 221;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:43.569', updated_at = '2026-02-23 22:54:43.569', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'type\')
+    at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (222, '2026-02-23 22:54:43.569', '2026-02-23 22:54:43.569', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'type\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8830:18)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8737:7)
@@ -1953,8 +1970,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8856:7)
-    at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)', level = 'error', solution = null, status = '未处理' WHERE id = 222;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:44.965', updated_at = '2026-02-23 22:54:44.965', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'nextSibling\')
+    at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8761:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (223, '2026-02-23 22:54:44.965', '2026-02-23 22:54:44.965', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'nextSibling\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'nextSibling\')
     at nextSibling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:10755:31)
     at getNextHostNode (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8866:16)
@@ -1965,8 +1982,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'nextSibli
     at patchBlockChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7936:7)
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8014:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
-    at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)', level = 'error', solution = null, status = '未处理' WHERE id = 223;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:54:46.497', updated_at = '2026-02-23 22:54:46.497', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'subTree\')
+    at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (224, '2026-02-23 22:54:46.497', '2026-02-23 22:54:46.497', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'subTree\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'subTree\')
     at getNextHostNode (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8861:46)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7512:16)
@@ -1977,8 +1994,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'subTree\'
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8014:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 224;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:55:12.681', updated_at = '2026-02-23 22:55:12.681', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'nextSibling\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (225, '2026-02-23 22:55:12.681', '2026-02-23 22:55:12.681', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'nextSibling\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'nextSibling\')
     at nextSibling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:10755:31)
     at getNextHostNode (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8866:16)
@@ -1989,8 +2006,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'nextSibli
     at patchBlockChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7936:7)
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8014:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
-    at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)', level = 'error', solution = null, status = '未处理' WHERE id = 225;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:55:13.732', updated_at = '2026-02-23 22:55:13.732', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'subTree\')
+    at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (226, '2026-02-23 22:55:13.732', '2026-02-23 22:55:13.732', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'subTree\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'subTree\')
     at getNextHostNode (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8861:46)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7512:16)
@@ -2001,8 +2018,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'subTree\'
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8014:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 226;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:56:23.150', updated_at = '2026-02-23 22:56:23.150', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'nextSibling\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (227, '2026-02-23 22:56:23.150', '2026-02-23 22:56:23.150', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'nextSibling\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'nextSibling\')
     at nextSibling (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:10755:31)
     at getNextHostNode (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8866:16)
@@ -2013,8 +2030,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'nextSibli
     at patchBlockChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7936:7)
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8014:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
-    at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)', level = 'error', solution = null, status = '未处理' WHERE id = 227;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.090', updated_at = '2026-02-23 22:57:31.090', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (228, '2026-02-23 22:57:31.090', '2026-02-23 22:57:31.090', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2025,8 +2042,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 228;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.090', updated_at = '2026-02-23 22:57:31.090', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (229, '2026-02-23 22:57:31.090', '2026-02-23 22:57:31.090', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2037,8 +2054,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 229;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.092', updated_at = '2026-02-23 22:57:31.092', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (230, '2026-02-23 22:57:31.092', '2026-02-23 22:57:31.092', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2049,8 +2066,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 230;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.101', updated_at = '2026-02-23 22:57:31.101', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (231, '2026-02-23 22:57:31.101', '2026-02-23 22:57:31.101', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2061,8 +2078,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 231;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.107', updated_at = '2026-02-23 22:57:31.107', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (232, '2026-02-23 22:57:31.107', '2026-02-23 22:57:31.107', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2073,8 +2090,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 232;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.118', updated_at = '2026-02-23 22:57:31.118', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (233, '2026-02-23 22:57:31.118', '2026-02-23 22:57:31.118', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2085,8 +2102,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 233;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.136', updated_at = '2026-02-23 22:57:31.136', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (234, '2026-02-23 22:57:31.136', '2026-02-23 22:57:31.136', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2097,8 +2114,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 234;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.150', updated_at = '2026-02-23 22:57:31.150', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (235, '2026-02-23 22:57:31.150', '2026-02-23 22:57:31.150', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2109,8 +2126,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 235;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.154', updated_at = '2026-02-23 22:57:31.154', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (236, '2026-02-23 22:57:31.154', '2026-02-23 22:57:31.154', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2121,8 +2138,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 236;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.156', updated_at = '2026-02-23 22:57:31.156', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (237, '2026-02-23 22:57:31.156', '2026-02-23 22:57:31.156', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2133,8 +2150,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 237;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.172', updated_at = '2026-02-23 22:57:31.172', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (238, '2026-02-23 22:57:31.172', '2026-02-23 22:57:31.172', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2145,8 +2162,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 238;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.183', updated_at = '2026-02-23 22:57:31.183', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (239, '2026-02-23 22:57:31.183', '2026-02-23 22:57:31.183', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2157,8 +2174,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 239;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.202', updated_at = '2026-02-23 22:57:31.202', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (240, '2026-02-23 22:57:31.202', '2026-02-23 22:57:31.202', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2169,8 +2186,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 240;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.202', updated_at = '2026-02-23 22:57:31.202', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (241, '2026-02-23 22:57:31.202', '2026-02-23 22:57:31.202', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2181,8 +2198,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 241;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.202', updated_at = '2026-02-23 22:57:31.202', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (242, '2026-02-23 22:57:31.202', '2026-02-23 22:57:31.202', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2193,8 +2210,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 242;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.215', updated_at = '2026-02-23 22:57:31.215', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (243, '2026-02-23 22:57:31.215', '2026-02-23 22:57:31.215', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2205,8 +2222,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 243;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:31.218', updated_at = '2026-02-23 22:57:31.218', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (244, '2026-02-23 22:57:31.218', '2026-02-23 22:57:31.218', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2217,8 +2234,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 244;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:40.326', updated_at = '2026-02-23 22:57:40.326', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (245, '2026-02-23 22:57:40.326', '2026-02-23 22:57:40.326', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2229,8 +2246,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 245;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:40.327', updated_at = '2026-02-23 22:57:40.327', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (246, '2026-02-23 22:57:40.327', '2026-02-23 22:57:40.327', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2241,8 +2258,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 246;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:40.326', updated_at = '2026-02-23 22:57:40.326', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (247, '2026-02-23 22:57:40.326', '2026-02-23 22:57:40.326', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2253,8 +2270,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 247;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:40.326', updated_at = '2026-02-23 22:57:40.326', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (248, '2026-02-23 22:57:40.326', '2026-02-23 22:57:40.326', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2265,8 +2282,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 248;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:40.327', updated_at = '2026-02-23 22:57:40.327', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (249, '2026-02-23 22:57:40.327', '2026-02-23 22:57:40.327', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2277,8 +2294,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 249;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:40.327', updated_at = '2026-02-23 22:57:40.327', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (250, '2026-02-23 22:57:40.327', '2026-02-23 22:57:40.327', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2289,8 +2306,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 250;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:40.346', updated_at = '2026-02-23 22:57:40.346', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (251, '2026-02-23 22:57:40.346', '2026-02-23 22:57:40.346', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2301,8 +2318,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 251;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:40.352', updated_at = '2026-02-23 22:57:40.352', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (252, '2026-02-23 22:57:40.352', '2026-02-23 22:57:40.352', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2313,8 +2330,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 252;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.079', updated_at = '2026-02-23 22:57:41.079', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (253, '2026-02-23 22:57:41.079', '2026-02-23 22:57:41.079', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2325,8 +2342,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 253;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.079', updated_at = '2026-02-23 22:57:41.079', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (254, '2026-02-23 22:57:41.079', '2026-02-23 22:57:41.079', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2337,8 +2354,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 254;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.080', updated_at = '2026-02-23 22:57:41.080', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (255, '2026-02-23 22:57:41.080', '2026-02-23 22:57:41.080', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2349,8 +2366,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 255;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.081', updated_at = '2026-02-23 22:57:41.081', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (256, '2026-02-23 22:57:41.081', '2026-02-23 22:57:41.081', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2361,8 +2378,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 256;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.081', updated_at = '2026-02-23 22:57:41.081', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (257, '2026-02-23 22:57:41.081', '2026-02-23 22:57:41.081', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2373,8 +2390,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 257;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.094', updated_at = '2026-02-23 22:57:41.094', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (258, '2026-02-23 22:57:41.094', '2026-02-23 22:57:41.094', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2385,8 +2402,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 258;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.128', updated_at = '2026-02-23 22:57:41.128', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (259, '2026-02-23 22:57:41.128', '2026-02-23 22:57:41.128', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2397,8 +2414,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 259;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.125', updated_at = '2026-02-23 22:57:41.125', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (260, '2026-02-23 22:57:41.125', '2026-02-23 22:57:41.125', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2409,8 +2426,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 260;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.146', updated_at = '2026-02-23 22:57:41.146', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (261, '2026-02-23 22:57:41.146', '2026-02-23 22:57:41.146', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2421,8 +2438,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 261;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.150', updated_at = '2026-02-23 22:57:41.150', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (262, '2026-02-23 22:57:41.150', '2026-02-23 22:57:41.150', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2433,8 +2450,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 262;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.150', updated_at = '2026-02-23 22:57:41.150', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (263, '2026-02-23 22:57:41.150', '2026-02-23 22:57:41.150', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2445,8 +2462,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 263;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.150', updated_at = '2026-02-23 22:57:41.150', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (264, '2026-02-23 22:57:41.150', '2026-02-23 22:57:41.150', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2457,8 +2474,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 264;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.169', updated_at = '2026-02-23 22:57:41.169', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (265, '2026-02-23 22:57:41.169', '2026-02-23 22:57:41.169', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2469,8 +2486,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 265;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.177', updated_at = '2026-02-23 22:57:41.177', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (266, '2026-02-23 22:57:41.177', '2026-02-23 22:57:41.177', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2481,8 +2498,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 266;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.177', updated_at = '2026-02-23 22:57:41.177', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (267, '2026-02-23 22:57:41.177', '2026-02-23 22:57:41.177', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2493,8 +2510,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 267;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.177', updated_at = '2026-02-23 22:57:41.177', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (268, '2026-02-23 22:57:41.177', '2026-02-23 22:57:41.177', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2505,8 +2522,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 268;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:41.176', updated_at = '2026-02-23 22:57:41.176', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (269, '2026-02-23 22:57:41.176', '2026-02-23 22:57:41.176', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2517,8 +2534,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 269;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:47.893', updated_at = '2026-02-23 22:57:47.893', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (270, '2026-02-23 22:57:47.893', '2026-02-23 22:57:47.893', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2529,8 +2546,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 270;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:47.893', updated_at = '2026-02-23 22:57:47.893', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (271, '2026-02-23 22:57:47.893', '2026-02-23 22:57:47.893', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2541,8 +2558,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 271;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:47.895', updated_at = '2026-02-23 22:57:47.895', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (272, '2026-02-23 22:57:47.895', '2026-02-23 22:57:47.895', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2553,8 +2570,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 272;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:47.895', updated_at = '2026-02-23 22:57:47.895', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (273, '2026-02-23 22:57:47.895', '2026-02-23 22:57:47.895', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2565,8 +2582,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 273;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:47.897', updated_at = '2026-02-23 22:57:47.897', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (274, '2026-02-23 22:57:47.897', '2026-02-23 22:57:47.897', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2577,8 +2594,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 274;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:47.896', updated_at = '2026-02-23 22:57:47.896', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (275, '2026-02-23 22:57:47.896', '2026-02-23 22:57:47.896', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2589,8 +2606,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 275;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:47.911', updated_at = '2026-02-23 22:57:47.911', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (276, '2026-02-23 22:57:47.911', '2026-02-23 22:57:47.911', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2601,8 +2618,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 276;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:47.920', updated_at = '2026-02-23 22:57:47.920', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (277, '2026-02-23 22:57:47.920', '2026-02-23 22:57:47.920', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2613,8 +2630,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 277;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:47.920', updated_at = '2026-02-23 22:57:47.920', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (278, '2026-02-23 22:57:47.920', '2026-02-23 22:57:47.920', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2625,8 +2642,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 278;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:48.853', updated_at = '2026-02-23 22:57:48.853', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (279, '2026-02-23 22:57:48.853', '2026-02-23 22:57:48.853', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2637,8 +2654,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 279;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:48.854', updated_at = '2026-02-23 22:57:48.854', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (280, '2026-02-23 22:57:48.854', '2026-02-23 22:57:48.854', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2649,8 +2666,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 280;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:48.855', updated_at = '2026-02-23 22:57:48.855', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (281, '2026-02-23 22:57:48.855', '2026-02-23 22:57:48.855', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2661,8 +2678,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 281;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:48.855', updated_at = '2026-02-23 22:57:48.855', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (282, '2026-02-23 22:57:48.855', '2026-02-23 22:57:48.855', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2673,8 +2690,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 282;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:48.856', updated_at = '2026-02-23 22:57:48.856', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (283, '2026-02-23 22:57:48.856', '2026-02-23 22:57:48.856', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2685,8 +2702,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 283;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:48.856', updated_at = '2026-02-23 22:57:48.856', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (284, '2026-02-23 22:57:48.856', '2026-02-23 22:57:48.856', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2697,8 +2714,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 284;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:48.868', updated_at = '2026-02-23 22:57:48.868', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (285, '2026-02-23 22:57:48.868', '2026-02-23 22:57:48.868', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2709,8 +2726,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 285;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:48.874', updated_at = '2026-02-23 22:57:48.874', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (286, '2026-02-23 22:57:48.874', '2026-02-23 22:57:48.874', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2721,8 +2738,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 286;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:48.890', updated_at = '2026-02-23 22:57:48.890', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (287, '2026-02-23 22:57:48.890', '2026-02-23 22:57:48.890', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -2733,8 +2750,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
-    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', level = 'error', solution = null, status = '未处理' WHERE id = 287;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.076', updated_at = '2026-02-23 22:57:51.076', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (288, '2026-02-23 22:57:51.076', '2026-02-23 22:57:51.076', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2745,8 +2762,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 288;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.077', updated_at = '2026-02-23 22:57:51.077', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (289, '2026-02-23 22:57:51.077', '2026-02-23 22:57:51.077', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2757,8 +2774,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 289;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.077', updated_at = '2026-02-23 22:57:51.077', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (290, '2026-02-23 22:57:51.077', '2026-02-23 22:57:51.077', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2769,8 +2786,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 290;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.077', updated_at = '2026-02-23 22:57:51.077', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (291, '2026-02-23 22:57:51.077', '2026-02-23 22:57:51.077', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2781,8 +2798,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 291;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.077', updated_at = '2026-02-23 22:57:51.077', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (292, '2026-02-23 22:57:51.077', '2026-02-23 22:57:51.077', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2793,8 +2810,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 292;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.091', updated_at = '2026-02-23 22:57:51.091', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (293, '2026-02-23 22:57:51.091', '2026-02-23 22:57:51.091', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2805,8 +2822,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 293;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.100', updated_at = '2026-02-23 22:57:51.100', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (294, '2026-02-23 22:57:51.100', '2026-02-23 22:57:51.100', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2817,8 +2834,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 294;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.100', updated_at = '2026-02-23 22:57:51.100', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (295, '2026-02-23 22:57:51.100', '2026-02-23 22:57:51.100', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2829,8 +2846,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 295;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.100', updated_at = '2026-02-23 22:57:51.100', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (296, '2026-02-23 22:57:51.100', '2026-02-23 22:57:51.100', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2841,8 +2858,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 296;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.159', updated_at = '2026-02-23 22:57:51.159', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (297, '2026-02-23 22:57:51.159', '2026-02-23 22:57:51.159', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2853,8 +2870,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 297;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.159', updated_at = '2026-02-23 22:57:51.159', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (298, '2026-02-23 22:57:51.159', '2026-02-23 22:57:51.159', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2865,8 +2882,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 298;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.161', updated_at = '2026-02-23 22:57:51.161', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (299, '2026-02-23 22:57:51.161', '2026-02-23 22:57:51.161', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2877,8 +2894,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 299;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.161', updated_at = '2026-02-23 22:57:51.161', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (300, '2026-02-23 22:57:51.161', '2026-02-23 22:57:51.161', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2889,8 +2906,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 300;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.161', updated_at = '2026-02-23 22:57:51.161', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (301, '2026-02-23 22:57:51.161', '2026-02-23 22:57:51.161', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2901,8 +2918,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 301;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.161', updated_at = '2026-02-23 22:57:51.161', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (302, '2026-02-23 22:57:51.161', '2026-02-23 22:57:51.161', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2913,8 +2930,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 302;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.176', updated_at = '2026-02-23 22:57:51.176', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (303, '2026-02-23 22:57:51.176', '2026-02-23 22:57:51.176', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2925,8 +2942,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 303;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:57:51.183', updated_at = '2026-02-23 22:57:51.183', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (304, '2026-02-23 22:57:51.183', '2026-02-23 22:57:51.183', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2937,8 +2954,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 304;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.084', updated_at = '2026-02-23 22:58:01.084', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (305, '2026-02-23 22:58:01.084', '2026-02-23 22:58:01.084', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2949,8 +2966,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 305;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.084', updated_at = '2026-02-23 22:58:01.084', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (306, '2026-02-23 22:58:01.084', '2026-02-23 22:58:01.084', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2961,8 +2978,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 306;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.085', updated_at = '2026-02-23 22:58:01.085', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (307, '2026-02-23 22:58:01.085', '2026-02-23 22:58:01.085', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2973,8 +2990,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 307;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.085', updated_at = '2026-02-23 22:58:01.085', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (308, '2026-02-23 22:58:01.085', '2026-02-23 22:58:01.085', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2985,8 +3002,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 308;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.085', updated_at = '2026-02-23 22:58:01.085', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (309, '2026-02-23 22:58:01.085', '2026-02-23 22:58:01.085', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -2997,8 +3014,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 309;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.109', updated_at = '2026-02-23 22:58:01.109', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (310, '2026-02-23 22:58:01.109', '2026-02-23 22:58:01.109', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3009,8 +3026,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 310;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.114', updated_at = '2026-02-23 22:58:01.114', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (311, '2026-02-23 22:58:01.114', '2026-02-23 22:58:01.114', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3021,8 +3038,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 311;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.114', updated_at = '2026-02-23 22:58:01.114', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (312, '2026-02-23 22:58:01.114', '2026-02-23 22:58:01.114', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3033,8 +3050,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 312;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.115', updated_at = '2026-02-23 22:58:01.115', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (313, '2026-02-23 22:58:01.115', '2026-02-23 22:58:01.115', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3045,8 +3062,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 313;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.148', updated_at = '2026-02-23 22:58:01.148', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (314, '2026-02-23 22:58:01.148', '2026-02-23 22:58:01.148', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3057,8 +3074,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 314;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.148', updated_at = '2026-02-23 22:58:01.148', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (315, '2026-02-23 22:58:01.148', '2026-02-23 22:58:01.148', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3069,8 +3086,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 315;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.148', updated_at = '2026-02-23 22:58:01.148', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (316, '2026-02-23 22:58:01.148', '2026-02-23 22:58:01.148', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3081,8 +3098,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 316;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.150', updated_at = '2026-02-23 22:58:01.150', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (317, '2026-02-23 22:58:01.150', '2026-02-23 22:58:01.150', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3093,8 +3110,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 317;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.151', updated_at = '2026-02-23 22:58:01.151', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (318, '2026-02-23 22:58:01.151', '2026-02-23 22:58:01.151', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3105,8 +3122,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 318;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.151', updated_at = '2026-02-23 22:58:01.151', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (319, '2026-02-23 22:58:01.151', '2026-02-23 22:58:01.151', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3117,8 +3134,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 319;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.177', updated_at = '2026-02-23 22:58:01.177', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (320, '2026-02-23 22:58:01.177', '2026-02-23 22:58:01.177', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3129,8 +3146,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 320;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:01.178', updated_at = '2026-02-23 22:58:01.178', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (321, '2026-02-23 22:58:01.178', '2026-02-23 22:58:01.178', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3141,8 +3158,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 321;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.084', updated_at = '2026-02-23 22:58:11.084', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (322, '2026-02-23 22:58:11.084', '2026-02-23 22:58:11.084', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3153,8 +3170,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 322;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.085', updated_at = '2026-02-23 22:58:11.085', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (323, '2026-02-23 22:58:11.085', '2026-02-23 22:58:11.085', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3165,8 +3182,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 323;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.085', updated_at = '2026-02-23 22:58:11.085', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (324, '2026-02-23 22:58:11.085', '2026-02-23 22:58:11.085', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3177,8 +3194,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 324;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.085', updated_at = '2026-02-23 22:58:11.085', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (325, '2026-02-23 22:58:11.085', '2026-02-23 22:58:11.085', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3189,8 +3206,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 325;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.085', updated_at = '2026-02-23 22:58:11.085', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (326, '2026-02-23 22:58:11.085', '2026-02-23 22:58:11.085', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3201,8 +3218,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 326;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.103', updated_at = '2026-02-23 22:58:11.103', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (327, '2026-02-23 22:58:11.103', '2026-02-23 22:58:11.103', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3213,8 +3230,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 327;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.116', updated_at = '2026-02-23 22:58:11.116', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (328, '2026-02-23 22:58:11.116', '2026-02-23 22:58:11.116', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3225,8 +3242,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 328;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.116', updated_at = '2026-02-23 22:58:11.116', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (329, '2026-02-23 22:58:11.116', '2026-02-23 22:58:11.116', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3237,8 +3254,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 329;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.116', updated_at = '2026-02-23 22:58:11.116', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (330, '2026-02-23 22:58:11.116', '2026-02-23 22:58:11.116', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3249,8 +3266,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 330;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.143', updated_at = '2026-02-23 22:58:11.143', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (331, '2026-02-23 22:58:11.143', '2026-02-23 22:58:11.143', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3261,8 +3278,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 331;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.145', updated_at = '2026-02-23 22:58:11.145', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (332, '2026-02-23 22:58:11.145', '2026-02-23 22:58:11.145', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3273,8 +3290,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 332;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.144', updated_at = '2026-02-23 22:58:11.144', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (333, '2026-02-23 22:58:11.144', '2026-02-23 22:58:11.144', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3285,8 +3302,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 333;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.148', updated_at = '2026-02-23 22:58:11.148', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (334, '2026-02-23 22:58:11.148', '2026-02-23 22:58:11.148', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3297,8 +3314,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 334;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.150', updated_at = '2026-02-23 22:58:11.150', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (335, '2026-02-23 22:58:11.150', '2026-02-23 22:58:11.150', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3309,8 +3326,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 335;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.150', updated_at = '2026-02-23 22:58:11.150', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (336, '2026-02-23 22:58:11.150', '2026-02-23 22:58:11.150', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3321,8 +3338,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 336;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.163', updated_at = '2026-02-23 22:58:11.163', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (337, '2026-02-23 22:58:11.163', '2026-02-23 22:58:11.163', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3333,8 +3350,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 337;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:11.174', updated_at = '2026-02-23 22:58:11.174', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (338, '2026-02-23 22:58:11.174', '2026-02-23 22:58:11.174', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3345,8 +3362,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 338;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.088', updated_at = '2026-02-23 22:58:21.088', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (339, '2026-02-23 22:58:21.088', '2026-02-23 22:58:21.088', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3357,8 +3374,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 339;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.088', updated_at = '2026-02-23 22:58:21.088', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (340, '2026-02-23 22:58:21.088', '2026-02-23 22:58:21.088', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3369,8 +3386,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 340;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.090', updated_at = '2026-02-23 22:58:21.090', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (341, '2026-02-23 22:58:21.090', '2026-02-23 22:58:21.090', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3381,8 +3398,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 341;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.090', updated_at = '2026-02-23 22:58:21.090', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (342, '2026-02-23 22:58:21.090', '2026-02-23 22:58:21.090', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3393,8 +3410,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 342;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.092', updated_at = '2026-02-23 22:58:21.092', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (343, '2026-02-23 22:58:21.092', '2026-02-23 22:58:21.092', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3405,8 +3422,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 343;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.118', updated_at = '2026-02-23 22:58:21.118', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (344, '2026-02-23 22:58:21.118', '2026-02-23 22:58:21.118', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3417,8 +3434,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 344;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.168', updated_at = '2026-02-23 22:58:21.168', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (345, '2026-02-23 22:58:21.168', '2026-02-23 22:58:21.168', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3429,8 +3446,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 345;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.171', updated_at = '2026-02-23 22:58:21.171', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (346, '2026-02-23 22:58:21.171', '2026-02-23 22:58:21.171', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3441,8 +3458,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 346;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.171', updated_at = '2026-02-23 22:58:21.171', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (347, '2026-02-23 22:58:21.171', '2026-02-23 22:58:21.171', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3453,8 +3470,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 347;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.194', updated_at = '2026-02-23 22:58:21.194', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (348, '2026-02-23 22:58:21.194', '2026-02-23 22:58:21.194', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3465,8 +3482,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 348;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.199', updated_at = '2026-02-23 22:58:21.199', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (349, '2026-02-23 22:58:21.199', '2026-02-23 22:58:21.199', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3477,8 +3494,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 349;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.226', updated_at = '2026-02-23 22:58:21.226', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (350, '2026-02-23 22:58:21.226', '2026-02-23 22:58:21.226', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3489,8 +3506,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 350;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.251', updated_at = '2026-02-23 22:58:21.251', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (351, '2026-02-23 22:58:21.251', '2026-02-23 22:58:21.251', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3501,8 +3518,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 351;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.252', updated_at = '2026-02-23 22:58:21.252', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (352, '2026-02-23 22:58:21.252', '2026-02-23 22:58:21.252', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3513,8 +3530,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 352;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.253', updated_at = '2026-02-23 22:58:21.253', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (353, '2026-02-23 22:58:21.253', '2026-02-23 22:58:21.253', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3525,8 +3542,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 353;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.255', updated_at = '2026-02-23 22:58:21.255', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (354, '2026-02-23 22:58:21.255', '2026-02-23 22:58:21.255', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3537,8 +3554,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 354;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:21.255', updated_at = '2026-02-23 22:58:21.255', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (355, '2026-02-23 22:58:21.255', '2026-02-23 22:58:21.255', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3549,8 +3566,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 355;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.100', updated_at = '2026-02-23 22:58:31.100', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (356, '2026-02-23 22:58:31.100', '2026-02-23 22:58:31.100', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3561,8 +3578,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 356;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.101', updated_at = '2026-02-23 22:58:31.101', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (357, '2026-02-23 22:58:31.101', '2026-02-23 22:58:31.101', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3573,8 +3590,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 357;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.101', updated_at = '2026-02-23 22:58:31.101', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (358, '2026-02-23 22:58:31.101', '2026-02-23 22:58:31.101', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3585,8 +3602,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 358;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.101', updated_at = '2026-02-23 22:58:31.101', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (359, '2026-02-23 22:58:31.101', '2026-02-23 22:58:31.101', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3597,8 +3614,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 359;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.101', updated_at = '2026-02-23 22:58:31.101', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (360, '2026-02-23 22:58:31.101', '2026-02-23 22:58:31.101', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3609,8 +3626,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 360;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.160', updated_at = '2026-02-23 22:58:31.160', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (361, '2026-02-23 22:58:31.160', '2026-02-23 22:58:31.160', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3621,8 +3638,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 361;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.185', updated_at = '2026-02-23 22:58:31.185', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (362, '2026-02-23 22:58:31.185', '2026-02-23 22:58:31.185', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3633,8 +3650,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 362;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.200', updated_at = '2026-02-23 22:58:31.200', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (363, '2026-02-23 22:58:31.200', '2026-02-23 22:58:31.200', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3645,8 +3662,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 363;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.200', updated_at = '2026-02-23 22:58:31.200', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (364, '2026-02-23 22:58:31.200', '2026-02-23 22:58:31.200', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3657,8 +3674,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 364;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.201', updated_at = '2026-02-23 22:58:31.201', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (365, '2026-02-23 22:58:31.201', '2026-02-23 22:58:31.201', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3669,8 +3686,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 365;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.201', updated_at = '2026-02-23 22:58:31.201', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (366, '2026-02-23 22:58:31.201', '2026-02-23 22:58:31.201', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3681,8 +3698,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 366;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.201', updated_at = '2026-02-23 22:58:31.201', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (367, '2026-02-23 22:58:31.201', '2026-02-23 22:58:31.201', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3693,8 +3710,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 367;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.205', updated_at = '2026-02-23 22:58:31.205', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (368, '2026-02-23 22:58:31.205', '2026-02-23 22:58:31.205', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3705,8 +3722,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 368;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.218', updated_at = '2026-02-23 22:58:31.218', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (369, '2026-02-23 22:58:31.218', '2026-02-23 22:58:31.218', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3717,8 +3734,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 369;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.224', updated_at = '2026-02-23 22:58:31.224', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (370, '2026-02-23 22:58:31.224', '2026-02-23 22:58:31.224', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3729,8 +3746,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 370;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.226', updated_at = '2026-02-23 22:58:31.226', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (371, '2026-02-23 22:58:31.226', '2026-02-23 22:58:31.226', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3741,8 +3758,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 371;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:31.226', updated_at = '2026-02-23 22:58:31.226', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (372, '2026-02-23 22:58:31.226', '2026-02-23 22:58:31.226', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3753,8 +3770,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 372;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.087', updated_at = '2026-02-23 22:58:41.087', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (373, '2026-02-23 22:58:41.087', '2026-02-23 22:58:41.087', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3765,8 +3782,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 373;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.089', updated_at = '2026-02-23 22:58:41.089', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (374, '2026-02-23 22:58:41.089', '2026-02-23 22:58:41.089', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3777,8 +3794,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 374;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.090', updated_at = '2026-02-23 22:58:41.090', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (375, '2026-02-23 22:58:41.090', '2026-02-23 22:58:41.090', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3789,8 +3806,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 375;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.090', updated_at = '2026-02-23 22:58:41.090', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (376, '2026-02-23 22:58:41.090', '2026-02-23 22:58:41.090', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3801,8 +3818,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 376;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.090', updated_at = '2026-02-23 22:58:41.090', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (377, '2026-02-23 22:58:41.090', '2026-02-23 22:58:41.090', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3813,8 +3830,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 377;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.105', updated_at = '2026-02-23 22:58:41.105', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (378, '2026-02-23 22:58:41.105', '2026-02-23 22:58:41.105', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3825,8 +3842,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 378;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.177', updated_at = '2026-02-23 22:58:41.177', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (379, '2026-02-23 22:58:41.177', '2026-02-23 22:58:41.177', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3837,8 +3854,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 379;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.177', updated_at = '2026-02-23 22:58:41.177', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (380, '2026-02-23 22:58:41.177', '2026-02-23 22:58:41.177', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3849,8 +3866,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 380;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.179', updated_at = '2026-02-23 22:58:41.179', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (381, '2026-02-23 22:58:41.179', '2026-02-23 22:58:41.179', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3861,8 +3878,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 381;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.178', updated_at = '2026-02-23 22:58:41.178', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (382, '2026-02-23 22:58:41.178', '2026-02-23 22:58:41.178', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3873,8 +3890,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 382;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.179', updated_at = '2026-02-23 22:58:41.179', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (383, '2026-02-23 22:58:41.179', '2026-02-23 22:58:41.179', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3885,8 +3902,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 383;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.205', updated_at = '2026-02-23 22:58:41.205', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (384, '2026-02-23 22:58:41.205', '2026-02-23 22:58:41.205', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3897,8 +3914,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 384;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.211', updated_at = '2026-02-23 22:58:41.211', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (385, '2026-02-23 22:58:41.211', '2026-02-23 22:58:41.211', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3909,8 +3926,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 385;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.211', updated_at = '2026-02-23 22:58:41.211', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (386, '2026-02-23 22:58:41.211', '2026-02-23 22:58:41.211', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3921,8 +3938,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 386;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.219', updated_at = '2026-02-23 22:58:41.219', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (387, '2026-02-23 22:58:41.219', '2026-02-23 22:58:41.219', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3933,8 +3950,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 387;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.219', updated_at = '2026-02-23 22:58:41.219', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (388, '2026-02-23 22:58:41.219', '2026-02-23 22:58:41.219', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3945,8 +3962,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 388;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:41.220', updated_at = '2026-02-23 22:58:41.220', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (389, '2026-02-23 22:58:41.220', '2026-02-23 22:58:41.220', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3957,8 +3974,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 389;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.089', updated_at = '2026-02-23 22:58:51.089', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (390, '2026-02-23 22:58:51.089', '2026-02-23 22:58:51.089', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3969,8 +3986,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 390;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.092', updated_at = '2026-02-23 22:58:51.092', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (391, '2026-02-23 22:58:51.092', '2026-02-23 22:58:51.092', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3981,8 +3998,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 391;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.093', updated_at = '2026-02-23 22:58:51.093', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (392, '2026-02-23 22:58:51.093', '2026-02-23 22:58:51.093', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -3993,8 +4010,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 392;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.094', updated_at = '2026-02-23 22:58:51.094', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (393, '2026-02-23 22:58:51.094', '2026-02-23 22:58:51.094', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4005,8 +4022,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 393;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.095', updated_at = '2026-02-23 22:58:51.095', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (394, '2026-02-23 22:58:51.095', '2026-02-23 22:58:51.095', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4017,8 +4034,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 394;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.117', updated_at = '2026-02-23 22:58:51.117', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (395, '2026-02-23 22:58:51.117', '2026-02-23 22:58:51.117', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4029,8 +4046,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 395;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.134', updated_at = '2026-02-23 22:58:51.134', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (396, '2026-02-23 22:58:51.134', '2026-02-23 22:58:51.134', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4041,8 +4058,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 396;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.134', updated_at = '2026-02-23 22:58:51.134', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (397, '2026-02-23 22:58:51.134', '2026-02-23 22:58:51.134', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4053,8 +4070,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 397;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.135', updated_at = '2026-02-23 22:58:51.135', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (398, '2026-02-23 22:58:51.135', '2026-02-23 22:58:51.135', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4065,8 +4082,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 398;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.188', updated_at = '2026-02-23 22:58:51.188', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (399, '2026-02-23 22:58:51.188', '2026-02-23 22:58:51.188', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4077,8 +4094,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 399;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.191', updated_at = '2026-02-23 22:58:51.191', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (400, '2026-02-23 22:58:51.191', '2026-02-23 22:58:51.191', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4089,8 +4106,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 400;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.192', updated_at = '2026-02-23 22:58:51.192', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (401, '2026-02-23 22:58:51.192', '2026-02-23 22:58:51.192', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4101,8 +4118,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 401;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.211', updated_at = '2026-02-23 22:58:51.211', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (402, '2026-02-23 22:58:51.211', '2026-02-23 22:58:51.211', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4113,8 +4130,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 402;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.220', updated_at = '2026-02-23 22:58:51.220', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (403, '2026-02-23 22:58:51.220', '2026-02-23 22:58:51.220', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4125,8 +4142,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 403;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.220', updated_at = '2026-02-23 22:58:51.220', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (404, '2026-02-23 22:58:51.220', '2026-02-23 22:58:51.220', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4137,8 +4154,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 404;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.222', updated_at = '2026-02-23 22:58:51.222', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (405, '2026-02-23 22:58:51.222', '2026-02-23 22:58:51.222', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4149,8 +4166,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 405;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:58:51.225', updated_at = '2026-02-23 22:58:51.225', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (406, '2026-02-23 22:58:51.225', '2026-02-23 22:58:51.225', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4161,8 +4178,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 406;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.092', updated_at = '2026-02-23 22:59:01.092', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (407, '2026-02-23 22:59:01.092', '2026-02-23 22:59:01.092', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4173,8 +4190,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 407;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.092', updated_at = '2026-02-23 22:59:01.092', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (408, '2026-02-23 22:59:01.092', '2026-02-23 22:59:01.092', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4185,8 +4202,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 408;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.092', updated_at = '2026-02-23 22:59:01.092', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (409, '2026-02-23 22:59:01.092', '2026-02-23 22:59:01.092', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4197,8 +4214,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 409;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.092', updated_at = '2026-02-23 22:59:01.092', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (410, '2026-02-23 22:59:01.092', '2026-02-23 22:59:01.092', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4209,8 +4226,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 410;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.093', updated_at = '2026-02-23 22:59:01.093', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (411, '2026-02-23 22:59:01.093', '2026-02-23 22:59:01.093', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4221,8 +4238,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 411;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.111', updated_at = '2026-02-23 22:59:01.111', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (412, '2026-02-23 22:59:01.111', '2026-02-23 22:59:01.111', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4233,8 +4250,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 412;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.130', updated_at = '2026-02-23 22:59:01.130', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (413, '2026-02-23 22:59:01.130', '2026-02-23 22:59:01.130', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4245,8 +4262,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 413;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.134', updated_at = '2026-02-23 22:59:01.134', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (414, '2026-02-23 22:59:01.134', '2026-02-23 22:59:01.134', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4257,8 +4274,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 414;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.136', updated_at = '2026-02-23 22:59:01.136', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (415, '2026-02-23 22:59:01.136', '2026-02-23 22:59:01.136', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4269,8 +4286,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 415;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.158', updated_at = '2026-02-23 22:59:01.158', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (416, '2026-02-23 22:59:01.158', '2026-02-23 22:59:01.158', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4281,8 +4298,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 416;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.177', updated_at = '2026-02-23 22:59:01.177', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (417, '2026-02-23 22:59:01.177', '2026-02-23 22:59:01.177', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4293,8 +4310,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 417;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.193', updated_at = '2026-02-23 22:59:01.193', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (418, '2026-02-23 22:59:01.193', '2026-02-23 22:59:01.193', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4305,8 +4322,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 418;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.193', updated_at = '2026-02-23 22:59:01.193', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (419, '2026-02-23 22:59:01.193', '2026-02-23 22:59:01.193', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4317,8 +4334,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 419;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.194', updated_at = '2026-02-23 22:59:01.194', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (420, '2026-02-23 22:59:01.194', '2026-02-23 22:59:01.194', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4329,8 +4346,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 420;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.193', updated_at = '2026-02-23 22:59:01.193', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (421, '2026-02-23 22:59:01.193', '2026-02-23 22:59:01.193', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4341,8 +4358,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 421;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.193', updated_at = '2026-02-23 22:59:01.193', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (422, '2026-02-23 22:59:01.193', '2026-02-23 22:59:01.193', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4353,8 +4370,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 422;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:01.228', updated_at = '2026-02-23 22:59:01.228', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (423, '2026-02-23 22:59:01.228', '2026-02-23 22:59:01.228', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4365,8 +4382,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 423;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.091', updated_at = '2026-02-23 22:59:11.091', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (424, '2026-02-23 22:59:11.091', '2026-02-23 22:59:11.091', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4377,8 +4394,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 424;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.091', updated_at = '2026-02-23 22:59:11.091', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (425, '2026-02-23 22:59:11.091', '2026-02-23 22:59:11.091', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4389,8 +4406,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 425;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.091', updated_at = '2026-02-23 22:59:11.091', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (426, '2026-02-23 22:59:11.091', '2026-02-23 22:59:11.091', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4401,8 +4418,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 426;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.091', updated_at = '2026-02-23 22:59:11.091', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (427, '2026-02-23 22:59:11.091', '2026-02-23 22:59:11.091', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4413,8 +4430,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 427;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.092', updated_at = '2026-02-23 22:59:11.092', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (428, '2026-02-23 22:59:11.092', '2026-02-23 22:59:11.092', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4425,8 +4442,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 428;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.121', updated_at = '2026-02-23 22:59:11.121', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (429, '2026-02-23 22:59:11.121', '2026-02-23 22:59:11.121', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4437,8 +4454,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 429;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.126', updated_at = '2026-02-23 22:59:11.126', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (430, '2026-02-23 22:59:11.126', '2026-02-23 22:59:11.126', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4449,8 +4466,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 430;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.126', updated_at = '2026-02-23 22:59:11.126', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (431, '2026-02-23 22:59:11.126', '2026-02-23 22:59:11.126', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4461,8 +4478,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 431;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.128', updated_at = '2026-02-23 22:59:11.128', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (432, '2026-02-23 22:59:11.128', '2026-02-23 22:59:11.128', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4473,8 +4490,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 432;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.146', updated_at = '2026-02-23 22:59:11.146', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (433, '2026-02-23 22:59:11.146', '2026-02-23 22:59:11.146', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4485,8 +4502,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 433;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.146', updated_at = '2026-02-23 22:59:11.146', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (434, '2026-02-23 22:59:11.146', '2026-02-23 22:59:11.146', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4497,8 +4514,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 434;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.151', updated_at = '2026-02-23 22:59:11.151', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (435, '2026-02-23 22:59:11.151', '2026-02-23 22:59:11.151', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4509,8 +4526,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 435;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.162', updated_at = '2026-02-23 22:59:11.162', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (436, '2026-02-23 22:59:11.162', '2026-02-23 22:59:11.162', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4521,8 +4538,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 436;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.168', updated_at = '2026-02-23 22:59:11.168', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (437, '2026-02-23 22:59:11.168', '2026-02-23 22:59:11.168', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4533,8 +4550,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 437;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.170', updated_at = '2026-02-23 22:59:11.170', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (438, '2026-02-23 22:59:11.170', '2026-02-23 22:59:11.170', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4545,8 +4562,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 438;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.169', updated_at = '2026-02-23 22:59:11.169', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (439, '2026-02-23 22:59:11.169', '2026-02-23 22:59:11.169', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4557,8 +4574,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 439;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:11.177', updated_at = '2026-02-23 22:59:11.177', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (440, '2026-02-23 22:59:11.177', '2026-02-23 22:59:11.177', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4569,8 +4586,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 440;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.128', updated_at = '2026-02-23 22:59:21.128', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (441, '2026-02-23 22:59:21.128', '2026-02-23 22:59:21.128', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4581,8 +4598,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 441;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.129', updated_at = '2026-02-23 22:59:21.129', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (442, '2026-02-23 22:59:21.129', '2026-02-23 22:59:21.129', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4593,8 +4610,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 442;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.173', updated_at = '2026-02-23 22:59:21.173', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (443, '2026-02-23 22:59:21.173', '2026-02-23 22:59:21.173', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4605,8 +4622,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 443;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.129', updated_at = '2026-02-23 22:59:21.129', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (444, '2026-02-23 22:59:21.129', '2026-02-23 22:59:21.129', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4617,8 +4634,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 444;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.187', updated_at = '2026-02-23 22:59:21.187', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (445, '2026-02-23 22:59:21.187', '2026-02-23 22:59:21.187', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4629,8 +4646,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 445;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.209', updated_at = '2026-02-23 22:59:21.209', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (446, '2026-02-23 22:59:21.209', '2026-02-23 22:59:21.209', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4641,8 +4658,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 446;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.222', updated_at = '2026-02-23 22:59:21.222', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (447, '2026-02-23 22:59:21.222', '2026-02-23 22:59:21.222', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4653,8 +4670,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 447;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.222', updated_at = '2026-02-23 22:59:21.222', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (448, '2026-02-23 22:59:21.222', '2026-02-23 22:59:21.222', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4665,8 +4682,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 448;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.222', updated_at = '2026-02-23 22:59:21.222', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (449, '2026-02-23 22:59:21.222', '2026-02-23 22:59:21.222', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4677,8 +4694,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 449;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.250', updated_at = '2026-02-23 22:59:21.250', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (450, '2026-02-23 22:59:21.250', '2026-02-23 22:59:21.250', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4689,8 +4706,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 450;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.254', updated_at = '2026-02-23 22:59:21.254', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (451, '2026-02-23 22:59:21.254', '2026-02-23 22:59:21.254', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4701,8 +4718,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 451;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.254', updated_at = '2026-02-23 22:59:21.254', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (452, '2026-02-23 22:59:21.254', '2026-02-23 22:59:21.254', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4713,8 +4730,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 452;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.254', updated_at = '2026-02-23 22:59:21.254', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (453, '2026-02-23 22:59:21.254', '2026-02-23 22:59:21.254', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4725,8 +4742,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 453;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.255', updated_at = '2026-02-23 22:59:21.255', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (454, '2026-02-23 22:59:21.255', '2026-02-23 22:59:21.255', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4737,8 +4754,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 454;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.255', updated_at = '2026-02-23 22:59:21.255', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (455, '2026-02-23 22:59:21.255', '2026-02-23 22:59:21.255', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4749,8 +4766,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 455;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.264', updated_at = '2026-02-23 22:59:21.264', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (456, '2026-02-23 22:59:21.264', '2026-02-23 22:59:21.264', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4761,8 +4778,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 456;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:21.268', updated_at = '2026-02-23 22:59:21.268', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (457, '2026-02-23 22:59:21.268', '2026-02-23 22:59:21.268', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4773,8 +4790,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 457;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.099', updated_at = '2026-02-23 22:59:31.099', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (458, '2026-02-23 22:59:31.099', '2026-02-23 22:59:31.099', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4785,8 +4802,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 458;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.102', updated_at = '2026-02-23 22:59:31.102', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (459, '2026-02-23 22:59:31.102', '2026-02-23 22:59:31.102', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4797,8 +4814,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 459;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.102', updated_at = '2026-02-23 22:59:31.102', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (460, '2026-02-23 22:59:31.102', '2026-02-23 22:59:31.102', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4809,8 +4826,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 460;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.102', updated_at = '2026-02-23 22:59:31.102', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (461, '2026-02-23 22:59:31.102', '2026-02-23 22:59:31.102', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4821,8 +4838,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 461;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.105', updated_at = '2026-02-23 22:59:31.105', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (462, '2026-02-23 22:59:31.105', '2026-02-23 22:59:31.105', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4833,8 +4850,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 462;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.131', updated_at = '2026-02-23 22:59:31.131', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (463, '2026-02-23 22:59:31.131', '2026-02-23 22:59:31.131', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4845,8 +4862,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 463;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.190', updated_at = '2026-02-23 22:59:31.190', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (464, '2026-02-23 22:59:31.190', '2026-02-23 22:59:31.190', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4857,8 +4874,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 464;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.190', updated_at = '2026-02-23 22:59:31.190', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (465, '2026-02-23 22:59:31.190', '2026-02-23 22:59:31.190', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4869,8 +4886,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 465;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.190', updated_at = '2026-02-23 22:59:31.190', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (466, '2026-02-23 22:59:31.190', '2026-02-23 22:59:31.190', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4881,8 +4898,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 466;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.246', updated_at = '2026-02-23 22:59:31.246', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (467, '2026-02-23 22:59:31.246', '2026-02-23 22:59:31.246', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4893,8 +4910,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 467;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.247', updated_at = '2026-02-23 22:59:31.247', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (468, '2026-02-23 22:59:31.247', '2026-02-23 22:59:31.247', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4905,8 +4922,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 468;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.253', updated_at = '2026-02-23 22:59:31.253', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (469, '2026-02-23 22:59:31.253', '2026-02-23 22:59:31.253', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4917,8 +4934,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 469;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.255', updated_at = '2026-02-23 22:59:31.255', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (470, '2026-02-23 22:59:31.255', '2026-02-23 22:59:31.255', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4929,8 +4946,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 470;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.257', updated_at = '2026-02-23 22:59:31.257', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (471, '2026-02-23 22:59:31.257', '2026-02-23 22:59:31.257', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4941,8 +4958,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 471;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.257', updated_at = '2026-02-23 22:59:31.257', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (472, '2026-02-23 22:59:31.257', '2026-02-23 22:59:31.257', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4953,8 +4970,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 472;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.266', updated_at = '2026-02-23 22:59:31.266', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (473, '2026-02-23 22:59:31.266', '2026-02-23 22:59:31.266', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4965,8 +4982,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 473;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:31.270', updated_at = '2026-02-23 22:59:31.270', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (474, '2026-02-23 22:59:31.270', '2026-02-23 22:59:31.270', null, '前端', '错误信息: TypeError: Cannot set properties of null (setting \'__vnode\')
 Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7830:18)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
@@ -4977,8 +4994,8 @@ Stack: 调用栈: TypeError: Cannot set properties of null (setting \'__vnode\')
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7536:9)
     at patchKeyedChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8483:9)
     at patchChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8397:11)
-    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', level = 'error', solution = null, status = '未处理' WHERE id = 474;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:41.070', updated_at = '2026-02-23 22:59:41.070', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at processFragment (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8040:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (475, '2026-02-23 22:59:41.070', '2026-02-23 22:59:41.070', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -4989,8 +5006,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 475;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:41.104', updated_at = '2026-02-23 22:59:41.104', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (476, '2026-02-23 22:59:41.104', '2026-02-23 22:59:41.104', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -5001,8 +5018,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 476;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:51.071', updated_at = '2026-02-23 22:59:51.071', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (477, '2026-02-23 22:59:51.071', '2026-02-23 22:59:51.071', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -5013,8 +5030,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 477;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 22:59:51.101', updated_at = '2026-02-23 22:59:51.101', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (478, '2026-02-23 22:59:51.101', '2026-02-23 22:59:51.101', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -5025,8 +5042,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 478;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 23:00:01.072', updated_at = '2026-02-23 23:00:01.072', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (479, '2026-02-23 23:00:01.072', '2026-02-23 23:00:01.072', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -5037,8 +5054,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 479;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-23 23:00:01.093', updated_at = '2026-02-23 23:00:01.093', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (480, '2026-02-23 23:00:01.093', '2026-02-23 23:00:01.093', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8131:9)
@@ -5049,30 +5066,30 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 480;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 03:39:48.315', updated_at = '2026-02-24 03:39:48.315', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', level = 'error', solution = null, status = '未处理' WHERE id = 481;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 03:40:54.687', updated_at = '2026-02-24 03:40:54.687', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', level = 'error', solution = null, status = '未处理' WHERE id = 482;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 03:44:48.445', updated_at = '2026-02-24 03:44:48.445', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', level = 'error', solution = null, status = '未处理' WHERE id = 483;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 03:44:49.675', updated_at = '2026-02-24 03:44:49.675', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', level = 'error', solution = null, status = '未处理' WHERE id = 484;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 03:44:50.559', updated_at = '2026-02-24 03:44:50.559', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', level = 'error', solution = null, status = '未处理' WHERE id = 485;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 03:44:51.392', updated_at = '2026-02-24 03:44:51.392', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', level = 'error', solution = null, status = '未处理' WHERE id = 486;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 03:45:47.044', updated_at = '2026-02-24 03:45:47.044', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', level = 'error', solution = null, status = '未处理' WHERE id = 487;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 03:45:47.926', updated_at = '2026-02-24 03:45:47.926', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', level = 'error', solution = null, status = '未处理' WHERE id = 488;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 03:46:44.462', updated_at = '2026-02-24 03:46:44.462', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', level = 'error', solution = null, status = '未处理' WHERE id = 489;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 03:46:45.411', updated_at = '2026-02-24 03:46:45.411', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', level = 'error', solution = null, status = '未处理' WHERE id = 490;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 03:47:05.626', updated_at = '2026-02-24 03:47:05.626', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', level = 'error', solution = null, status = '未处理' WHERE id = 491;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:03.208', updated_at = '2026-02-24 15:04:03.208', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (481, '2026-02-24 03:39:48.315', '2026-02-24 03:39:48.315', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (482, '2026-02-24 03:40:54.687', '2026-02-24 03:40:54.687', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (483, '2026-02-24 03:44:48.445', '2026-02-24 03:44:48.445', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (484, '2026-02-24 03:44:49.675', '2026-02-24 03:44:49.675', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (485, '2026-02-24 03:44:50.559', '2026-02-24 03:44:50.559', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (486, '2026-02-24 03:44:51.392', '2026-02-24 03:44:51.392', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (487, '2026-02-24 03:45:47.044', '2026-02-24 03:45:47.044', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (488, '2026-02-24 03:45:47.926', '2026-02-24 03:45:47.926', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (489, '2026-02-24 03:46:44.462', '2026-02-24 03:46:44.462', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (490, '2026-02-24 03:46:45.411', '2026-02-24 03:46:45.411', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (491, '2026-02-24 03:47:05.626', '2026-02-24 03:47:05.626', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/inference/detail.vue?t=1771875583558', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (492, '2026-02-24 15:04:03.208', '2026-02-24 15:04:03.208', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5081,8 +5098,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 492;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:04.358', updated_at = '2026-02-24 15:04:04.358', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (493, '2026-02-24 15:04:04.358', '2026-02-24 15:04:04.358', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5091,8 +5108,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 493;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:08.021', updated_at = '2026-02-24 15:04:08.021', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (494, '2026-02-24 15:04:08.021', '2026-02-24 15:04:08.021', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5101,8 +5118,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 494;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:11.607', updated_at = '2026-02-24 15:04:11.607', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (495, '2026-02-24 15:04:11.607', '2026-02-24 15:04:11.607', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5111,8 +5128,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 495;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:12.480', updated_at = '2026-02-24 15:04:12.480', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (496, '2026-02-24 15:04:12.480', '2026-02-24 15:04:12.480', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5121,8 +5138,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 496;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:16.523', updated_at = '2026-02-24 15:04:16.523', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (497, '2026-02-24 15:04:16.523', '2026-02-24 15:04:16.523', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5131,8 +5148,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 497;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:21.532', updated_at = '2026-02-24 15:04:21.532', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (498, '2026-02-24 15:04:21.532', '2026-02-24 15:04:21.532', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5141,8 +5158,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 498;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:26.520', updated_at = '2026-02-24 15:04:26.520', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (499, '2026-02-24 15:04:26.520', '2026-02-24 15:04:26.520', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5151,8 +5168,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 499;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:31.516', updated_at = '2026-02-24 15:04:31.516', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (500, '2026-02-24 15:04:31.516', '2026-02-24 15:04:31.516', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5161,8 +5178,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 500;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:36.520', updated_at = '2026-02-24 15:04:36.520', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (501, '2026-02-24 15:04:36.520', '2026-02-24 15:04:36.520', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5171,8 +5188,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 501;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:41.521', updated_at = '2026-02-24 15:04:41.521', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (502, '2026-02-24 15:04:41.521', '2026-02-24 15:04:41.521', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5181,8 +5198,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 502;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:46.525', updated_at = '2026-02-24 15:04:46.525', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (503, '2026-02-24 15:04:46.525', '2026-02-24 15:04:46.525', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5191,8 +5208,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 503;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:51.532', updated_at = '2026-02-24 15:04:51.532', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (504, '2026-02-24 15:04:51.532', '2026-02-24 15:04:51.532', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5201,8 +5218,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 504;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:04:56.524', updated_at = '2026-02-24 15:04:56.524', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (505, '2026-02-24 15:04:56.524', '2026-02-24 15:04:56.524', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5211,8 +5228,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 505;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:05:01.547', updated_at = '2026-02-24 15:05:01.547', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (506, '2026-02-24 15:05:01.547', '2026-02-24 15:05:01.547', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5221,8 +5238,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 506;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:05:06.526', updated_at = '2026-02-24 15:05:06.526', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (507, '2026-02-24 15:05:06.526', '2026-02-24 15:05:06.526', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5231,8 +5248,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 507;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:05:11.526', updated_at = '2026-02-24 15:05:11.526', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (508, '2026-02-24 15:05:11.526', '2026-02-24 15:05:11.526', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5241,8 +5258,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 508;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:05:16.527', updated_at = '2026-02-24 15:05:16.527', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (509, '2026-02-24 15:05:16.527', '2026-02-24 15:05:16.527', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5251,8 +5268,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 509;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:05:21.526', updated_at = '2026-02-24 15:05:21.526', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (510, '2026-02-24 15:05:21.526', '2026-02-24 15:05:21.526', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5261,8 +5278,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 510;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:05:26.529', updated_at = '2026-02-24 15:05:26.529', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (511, '2026-02-24 15:05:26.529', '2026-02-24 15:05:26.529', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5271,8 +5288,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 511;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:05:31.631', updated_at = '2026-02-24 15:05:31.631', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (512, '2026-02-24 15:05:31.631', '2026-02-24 15:05:31.631', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5281,8 +5298,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 512;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 15:05:36.526', updated_at = '2026-02-24 15:05:36.526', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (513, '2026-02-24 15:05:36.526', '2026-02-24 15:05:36.526', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5291,8 +5308,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 513;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 20:31:39.543', updated_at = '2026-02-24 20:31:39.543', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=a51189bf:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (514, '2026-02-24 20:31:39.543', '2026-02-24 20:31:39.543', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5301,8 +5318,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 514;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 20:31:47.703', updated_at = '2026-02-24 20:31:47.703', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (515, '2026-02-24 20:31:47.703', '2026-02-24 20:31:47.703', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5311,8 +5328,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 515;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 20:31:49.241', updated_at = '2026-02-24 20:31:49.241', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (516, '2026-02-24 20:31:49.241', '2026-02-24 20:31:49.241', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5321,8 +5338,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 516;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 20:31:52.645', updated_at = '2026-02-24 20:31:52.645', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (517, '2026-02-24 20:31:52.645', '2026-02-24 20:31:52.645', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5331,8 +5348,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 517;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 20:31:57.585', updated_at = '2026-02-24 20:31:57.585', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (518, '2026-02-24 20:31:57.585', '2026-02-24 20:31:57.585', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5341,8 +5358,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 518;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 20:32:02.586', updated_at = '2026-02-24 20:32:02.586', deleted_at = null, form = '前端', info = '错误信息: TypeError: svc.command.join is not a function
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (519, '2026-02-24 20:32:02.586', '2026-02-24 20:32:02.586', null, '前端', '错误信息: TypeError: svc.command.join is not a function
 Stack: 调用栈: TypeError: svc.command.join is not a function
     at Proxy.formatCommand (http://localhost:5175/src/view/console/inference/detail.vue:404:51)
     at Proxy._sfc_render (http://localhost:5175/src/view/console/inference/detail.vue:879:84)
@@ -5351,8 +5368,8 @@ Stack: 调用栈: TypeError: svc.command.join is not a function
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 519;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 22:15:35.349', updated_at = '2026-02-24 22:15:35.349', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'toFixed\')
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (520, '2026-02-24 22:15:35.349', '2026-02-24 22:15:35.349', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'toFixed\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'toFixed\')
     at http://localhost:5175/src/view/console/order/transactions.vue?t=1771942532575:409:99
     at renderList (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:5310:16)
@@ -5362,8 +5379,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'toFi
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 520;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 22:15:45.347', updated_at = '2026-02-24 22:15:45.347', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'toFixed\')
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (521, '2026-02-24 22:15:45.347', '2026-02-24 22:15:45.347', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'toFixed\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'toFixed\')
     at http://localhost:5175/src/view/console/order/transactions.vue?t=1771942532575:409:99
     at renderList (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:5310:16)
@@ -5373,8 +5390,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'toFi
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 521;
-UPDATE aiInfra.sys_error SET created_at = '2026-02-24 22:15:55.349', updated_at = '2026-02-24 22:15:55.349', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'toFixed\')
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (522, '2026-02-24 22:15:55.349', '2026-02-24 22:15:55.349', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'toFixed\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'toFixed\')
     at http://localhost:5175/src/view/console/order/transactions.vue?t=1771942532575:409:99
     at renderList (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:5310:16)
@@ -5384,34 +5401,34 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'toFi
     at ReactiveEffect.run (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:505:19)
     at ReactiveEffect.runIfDirty (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:543:12)
     at callWithErrorHandling (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2342:33)
-    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', level = 'error', solution = null, status = '未处理' WHERE id = 522;
-UPDATE aiInfra.sys_error SET created_at = '2026-03-27 08:22:13.148', updated_at = '2026-03-27 08:22:13.148', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570909592
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570909592', level = 'error', solution = null, status = '未处理' WHERE id = 523;
-UPDATE aiInfra.sys_error SET created_at = '2026-03-27 08:23:16.997', updated_at = '2026-03-27 08:23:16.997', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', level = 'error', solution = null, status = '未处理' WHERE id = 524;
-UPDATE aiInfra.sys_error SET created_at = '2026-03-27 08:23:42.909', updated_at = '2026-03-27 08:23:42.909', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', level = 'error', solution = null, status = '未处理' WHERE id = 525;
-UPDATE aiInfra.sys_error SET created_at = '2026-03-27 08:23:43.156', updated_at = '2026-03-27 08:23:43.156', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', level = 'error', solution = null, status = '未处理' WHERE id = 526;
-UPDATE aiInfra.sys_error SET created_at = '2026-03-27 08:23:43.578', updated_at = '2026-03-27 08:23:43.578', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', level = 'error', solution = null, status = '未处理' WHERE id = 527;
-UPDATE aiInfra.sys_error SET created_at = '2026-03-27 08:23:43.761', updated_at = '2026-03-27 08:23:43.761', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', level = 'error', solution = null, status = '未处理' WHERE id = 528;
-UPDATE aiInfra.sys_error SET created_at = '2026-03-27 08:23:43.939', updated_at = '2026-03-27 08:23:43.939', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', level = 'error', solution = null, status = '未处理' WHERE id = 529;
-UPDATE aiInfra.sys_error SET created_at = '2026-03-27 08:24:11.196', updated_at = '2026-03-27 08:24:11.196', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', level = 'error', solution = null, status = '未处理' WHERE id = 530;
-UPDATE aiInfra.sys_error SET created_at = '2026-03-27 08:24:12.224', updated_at = '2026-03-27 08:24:12.224', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', level = 'error', solution = null, status = '未处理' WHERE id = 531;
-UPDATE aiInfra.sys_error SET created_at = '2026-03-27 08:24:12.409', updated_at = '2026-03-27 08:24:12.409', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', level = 'error', solution = null, status = '未处理' WHERE id = 532;
-UPDATE aiInfra.sys_error SET created_at = '2026-03-27 08:24:12.596', updated_at = '2026-03-27 08:24:12.596', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', level = 'error', solution = null, status = '未处理' WHERE id = 533;
-UPDATE aiInfra.sys_error SET created_at = '2026-03-27 08:24:12.773', updated_at = '2026-03-27 08:24:12.773', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', level = 'error', solution = null, status = '未处理' WHERE id = 534;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-05 23:49:55.890', updated_at = '2026-04-05 23:49:55.890', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/dashboard/index.vue?t=1775404193914
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/dashboard/index.vue?t=1775404193914', level = 'error', solution = null, status = '未处理' WHERE id = 535;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-06 10:26:24.993', updated_at = '2026-04-06 10:26:24.993', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'ce\')
+    at flushJobs (http://localhost:5175/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=7244f9e8:2550:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (523, '2026-03-27 08:22:13.148', '2026-03-27 08:22:13.148', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570909592
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570909592', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (524, '2026-03-27 08:23:16.997', '2026-03-27 08:23:16.997', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (525, '2026-03-27 08:23:42.909', '2026-03-27 08:23:42.909', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (526, '2026-03-27 08:23:43.156', '2026-03-27 08:23:43.156', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (527, '2026-03-27 08:23:43.578', '2026-03-27 08:23:43.578', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (528, '2026-03-27 08:23:43.761', '2026-03-27 08:23:43.761', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (529, '2026-03-27 08:23:43.939', '2026-03-27 08:23:43.939', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (530, '2026-03-27 08:24:11.196', '2026-03-27 08:24:11.196', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (531, '2026-03-27 08:24:12.224', '2026-03-27 08:24:12.224', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (532, '2026-03-27 08:24:12.409', '2026-03-27 08:24:12.409', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (533, '2026-03-27 08:24:12.596', '2026-03-27 08:24:12.596', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (534, '2026-03-27 08:24:12.773', '2026-03-27 08:24:12.773', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5173/src/view/console/training/detail.vue?t=1774570991804', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (535, '2026-04-05 23:49:55.890', '2026-04-05 23:49:55.890', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/dashboard/index.vue?t=1775404193914
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/dashboard/index.vue?t=1775404193914', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (536, '2026-04-06 10:26:24.993', '2026-04-06 10:26:24.993', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'ce\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'ce\')
     at renderSlot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=d1384188:5365:32)
     at Proxy.<anonymous> (http://localhost:5173/node_modules/.vite/deps/chunk-KID347RM.js?v=d1384188:27074:18)
@@ -5422,8 +5439,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'ce\')
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=90484c1f:8114:7)
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=90484c1f:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=90484c1f:7562:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=90484c1f:8212:11)', level = 'error', solution = null, status = '未处理' WHERE id = 536;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-06 18:11:29.107', updated_at = '2026-04-06 18:11:29.107', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'ce\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=90484c1f:8212:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (537, '2026-04-06 18:11:29.107', '2026-04-06 18:11:29.107', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'ce\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'ce\')
     at renderSlot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:5365:32)
     at Proxy.<anonymous> (http://localhost:5173/node_modules/.vite/deps/chunk-KID347RM.js?v=1d0171dd:27074:18)
@@ -5434,8 +5451,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'ce\')
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=bea521f3:8114:7)
     at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=bea521f3:8066:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=bea521f3:7562:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=bea521f3:8212:11)', level = 'error', solution = null, status = '未处理' WHERE id = 537;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:17:03.322', updated_at = '2026-04-16 16:17:03.322', deleted_at = null, form = '前端', info = '错误信息: TypeError: _ctx.getSpecKind is not a function
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=bea521f3:8212:11)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (538, '2026-04-16 16:17:03.322', '2026-04-16 16:17:03.322', null, '前端', '错误信息: TypeError: _ctx.getSpecKind is not a function
 Stack: 调用栈: TypeError: _ctx.getSpecKind is not a function
     at http://localhost:5173/src/view/superAdmin/cms/product/components/ComputeProductsTable.vue?t=1776327419801:291:85
     at renderList (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:5310:16)
@@ -5446,8 +5463,8 @@ Stack: 调用栈: TypeError: _ctx.getSpecKind is not a function
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6650:17)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8283:26)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 538;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:17:13.650', updated_at = '2026-04-16 16:17:13.650', deleted_at = null, form = '前端', info = '错误信息: TypeError: _ctx.getSpecKind is not a function
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (539, '2026-04-16 16:17:13.650', '2026-04-16 16:17:13.650', null, '前端', '错误信息: TypeError: _ctx.getSpecKind is not a function
 Stack: 调用栈: TypeError: _ctx.getSpecKind is not a function
     at http://localhost:5173/src/view/superAdmin/cms/product/components/ComputeProductsTable.vue?t=1776327419801:291:85
     at renderList (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:5310:16)
@@ -5458,8 +5475,8 @@ Stack: 调用栈: TypeError: _ctx.getSpecKind is not a function
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6650:17)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8283:26)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 539;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:17:23.661', updated_at = '2026-04-16 16:17:23.661', deleted_at = null, form = '前端', info = '错误信息: TypeError: _ctx.getSpecKind is not a function
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (540, '2026-04-16 16:17:23.661', '2026-04-16 16:17:23.661', null, '前端', '错误信息: TypeError: _ctx.getSpecKind is not a function
 Stack: 调用栈: TypeError: _ctx.getSpecKind is not a function
     at http://localhost:5173/src/view/superAdmin/cms/product/components/ComputeProductsTable.vue?t=1776327419801:291:85
     at renderList (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:5310:16)
@@ -5470,8 +5487,8 @@ Stack: 调用栈: TypeError: _ctx.getSpecKind is not a function
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6650:17)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8283:26)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 540;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:17:33.600', updated_at = '2026-04-16 16:17:33.600', deleted_at = null, form = '前端', info = '错误信息: TypeError: _ctx.getSpecKind is not a function
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (541, '2026-04-16 16:17:33.600', '2026-04-16 16:17:33.600', null, '前端', '错误信息: TypeError: _ctx.getSpecKind is not a function
 Stack: 调用栈: TypeError: _ctx.getSpecKind is not a function
     at http://localhost:5173/src/view/superAdmin/cms/product/components/ComputeProductsTable.vue?t=1776327419801:291:85
     at renderList (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:5310:16)
@@ -5482,8 +5499,8 @@ Stack: 调用栈: TypeError: _ctx.getSpecKind is not a function
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6650:17)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8283:26)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 541;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:17:43.593', updated_at = '2026-04-16 16:17:43.593', deleted_at = null, form = '前端', info = '错误信息: TypeError: _ctx.getSpecKind is not a function
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (542, '2026-04-16 16:17:43.593', '2026-04-16 16:17:43.593', null, '前端', '错误信息: TypeError: _ctx.getSpecKind is not a function
 Stack: 调用栈: TypeError: _ctx.getSpecKind is not a function
     at http://localhost:5173/src/view/superAdmin/cms/product/components/ComputeProductsTable.vue?t=1776327419801:291:85
     at renderList (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:5310:16)
@@ -5494,8 +5511,8 @@ Stack: 调用栈: TypeError: _ctx.getSpecKind is not a function
     at renderComponentRoot (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6650:17)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8283:26)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 542;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:17:53.641', updated_at = '2026-04-16 16:17:53.641', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (543, '2026-04-16 16:17:53.641', '2026-04-16 16:17:53.641', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5506,8 +5523,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 543;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:18:03.652', updated_at = '2026-04-16 16:18:03.652', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (544, '2026-04-16 16:18:03.652', '2026-04-16 16:18:03.652', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5518,8 +5535,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 544;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:18:14.029', updated_at = '2026-04-16 16:18:14.029', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (545, '2026-04-16 16:18:14.029', '2026-04-16 16:18:14.029', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5530,8 +5547,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 545;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:18:23.983', updated_at = '2026-04-16 16:18:23.983', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (546, '2026-04-16 16:18:23.983', '2026-04-16 16:18:23.983', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5542,8 +5559,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 546;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:18:33.912', updated_at = '2026-04-16 16:18:33.912', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (547, '2026-04-16 16:18:33.912', '2026-04-16 16:18:33.912', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5554,8 +5571,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 547;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:18:41.098', updated_at = '2026-04-16 16:18:41.098', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (548, '2026-04-16 16:18:41.098', '2026-04-16 16:18:41.098', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5566,8 +5583,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 548;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:18:42.345', updated_at = '2026-04-16 16:18:42.345', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (549, '2026-04-16 16:18:42.345', '2026-04-16 16:18:42.345', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5578,8 +5595,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 549;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:18:43.379', updated_at = '2026-04-16 16:18:43.379', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (550, '2026-04-16 16:18:43.379', '2026-04-16 16:18:43.379', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5590,8 +5607,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 550;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:18:54.178', updated_at = '2026-04-16 16:18:54.178', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (551, '2026-04-16 16:18:54.178', '2026-04-16 16:18:54.178', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5602,8 +5619,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 551;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:19:03.659', updated_at = '2026-04-16 16:19:03.659', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (552, '2026-04-16 16:19:03.659', '2026-04-16 16:19:03.659', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5614,8 +5631,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 552;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:19:13.648', updated_at = '2026-04-16 16:19:13.648', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (553, '2026-04-16 16:19:13.648', '2026-04-16 16:19:13.648', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5626,8 +5643,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 553;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:19:23.650', updated_at = '2026-04-16 16:19:23.650', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (554, '2026-04-16 16:19:23.650', '2026-04-16 16:19:23.650', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5638,8 +5655,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 554;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:19:33.662', updated_at = '2026-04-16 16:19:33.662', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (555, '2026-04-16 16:19:33.662', '2026-04-16 16:19:33.662', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5650,8 +5667,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 555;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:19:43.578', updated_at = '2026-04-16 16:19:43.578', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (556, '2026-04-16 16:19:43.578', '2026-04-16 16:19:43.578', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5662,8 +5679,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 556;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:19:53.607', updated_at = '2026-04-16 16:19:53.607', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (557, '2026-04-16 16:19:53.607', '2026-04-16 16:19:53.607', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5674,8 +5691,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 557;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:20:03.646', updated_at = '2026-04-16 16:20:03.646', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (558, '2026-04-16 16:20:03.646', '2026-04-16 16:20:03.646', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5686,8 +5703,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patchElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7867:7)
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 558;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:20:14.340', updated_at = '2026-04-16 16:20:14.340', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (559, '2026-04-16 16:20:14.340', '2026-04-16 16:20:14.340', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5698,8 +5715,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 559;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:20:23.630', updated_at = '2026-04-16 16:20:23.630', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (560, '2026-04-16 16:20:23.630', '2026-04-16 16:20:23.630', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5710,8 +5727,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 560;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:20:33.611', updated_at = '2026-04-16 16:20:33.611', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (561, '2026-04-16 16:20:33.611', '2026-04-16 16:20:33.611', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5722,8 +5739,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 561;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:20:43.635', updated_at = '2026-04-16 16:20:43.635', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (562, '2026-04-16 16:20:43.635', '2026-04-16 16:20:43.635', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5734,8 +5751,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 562;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:20:53.677', updated_at = '2026-04-16 16:20:53.677', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (563, '2026-04-16 16:20:53.677', '2026-04-16 16:20:53.677', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5746,8 +5763,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 563;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:21:03.749', updated_at = '2026-04-16 16:21:03.749', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (564, '2026-04-16 16:21:03.749', '2026-04-16 16:21:03.749', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5758,8 +5775,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at processElement (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7708:9)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7550:11)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
-    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', level = 'error', solution = null, status = '未处理' WHERE id = 564;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 16:21:12.013', updated_at = '2026-04-16 16:21:12.013', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'type\')
+    at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (565, '2026-04-16 16:21:12.013', '2026-04-16 16:21:12.013', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'type\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8830:18)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8737:7)
@@ -5770,10 +5787,10 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'type\')
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8737:7)
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7513:7)
-    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', level = 'error', solution = null, status = '未处理' WHERE id = 565;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 18:17:25.186', updated_at = '2026-04-16 18:17:25.186', deleted_at = null, form = '前端', info = '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/notebooks/detail.vue?t=1776334615785
-Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/notebooks/detail.vue?t=1776334615785', level = 'error', solution = null, status = '未处理' WHERE id = 566;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:01:15.947', updated_at = '2026-04-16 20:01:15.947', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (566, '2026-04-16 18:17:25.186', '2026-04-16 18:17:25.186', null, '前端', '错误信息: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/notebooks/detail.vue?t=1776334615785
+Stack: 调用栈: TypeError: Failed to fetch dynamically imported module: http://localhost:5173/src/view/console/notebooks/detail.vue?t=1776334615785', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (567, '2026-04-16 20:01:15.947', '2026-04-16 20:01:15.947', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -5784,8 +5801,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 567;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:01:15.947', updated_at = '2026-04-16 20:01:15.947', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (568, '2026-04-16 20:01:15.947', '2026-04-16 20:01:15.947', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -5796,8 +5813,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 568;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:01:15.947', updated_at = '2026-04-16 20:01:15.947', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (569, '2026-04-16 20:01:15.947', '2026-04-16 20:01:15.947', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -5808,8 +5825,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 569;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:01:23.961', updated_at = '2026-04-16 20:01:23.961', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (570, '2026-04-16 20:01:23.961', '2026-04-16 20:01:23.961', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -5820,8 +5837,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 570;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:01:23.961', updated_at = '2026-04-16 20:01:23.961', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (571, '2026-04-16 20:01:23.961', '2026-04-16 20:01:23.961', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -5832,8 +5849,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 571;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:01:23.961', updated_at = '2026-04-16 20:01:23.961', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (572, '2026-04-16 20:01:23.961', '2026-04-16 20:01:23.961', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -5844,8 +5861,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 572;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:01:25.728', updated_at = '2026-04-16 20:01:25.728', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (573, '2026-04-16 20:01:25.728', '2026-04-16 20:01:25.728', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5856,8 +5873,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7536:9)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 573;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:01:33.654', updated_at = '2026-04-16 20:01:33.654', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (574, '2026-04-16 20:01:33.654', '2026-04-16 20:01:33.654', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5868,8 +5885,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7536:9)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 574;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:01:43.799', updated_at = '2026-04-16 20:01:43.799', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (575, '2026-04-16 20:01:43.799', '2026-04-16 20:01:43.799', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5880,8 +5897,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7536:9)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 575;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:01:53.799', updated_at = '2026-04-16 20:01:53.799', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (576, '2026-04-16 20:01:53.799', '2026-04-16 20:01:53.799', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5892,8 +5909,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7536:9)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 576;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:03.824', updated_at = '2026-04-16 20:02:03.824', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (577, '2026-04-16 20:02:03.824', '2026-04-16 20:02:03.824', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -5904,8 +5921,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7536:9)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 577;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:07.652', updated_at = '2026-04-16 20:02:07.652', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (578, '2026-04-16 20:02:07.652', '2026-04-16 20:02:07.652', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -5916,8 +5933,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 578;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:07.654', updated_at = '2026-04-16 20:02:07.654', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (579, '2026-04-16 20:02:07.654', '2026-04-16 20:02:07.654', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -5928,8 +5945,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 579;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:07.654', updated_at = '2026-04-16 20:02:07.654', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (580, '2026-04-16 20:02:07.654', '2026-04-16 20:02:07.654', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -5940,8 +5957,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 580;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:15.840', updated_at = '2026-04-16 20:02:15.840', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (581, '2026-04-16 20:02:15.840', '2026-04-16 20:02:15.840', null, '前端', '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
 Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8705:7)
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)
@@ -5952,8 +5969,8 @@ Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' a
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8769:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8761:9)
-    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', level = 'error', solution = null, status = '未处理' WHERE id = 581;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:16.061', updated_at = '2026-04-16 20:02:16.061', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
+    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (582, '2026-04-16 20:02:16.061', '2026-04-16 20:02:16.061', null, '前端', '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
 Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8705:7)
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)
@@ -5964,8 +5981,8 @@ Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' a
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8769:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8761:9)
-    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', level = 'error', solution = null, status = '未处理' WHERE id = 582;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:16.061', updated_at = '2026-04-16 20:02:16.061', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
+    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (583, '2026-04-16 20:02:16.061', '2026-04-16 20:02:16.061', null, '前端', '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
 Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8705:7)
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)
@@ -5976,8 +5993,8 @@ Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' a
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8769:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8761:9)
-    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', level = 'error', solution = null, status = '未处理' WHERE id = 583;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:16.061', updated_at = '2026-04-16 20:02:16.061', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
+    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (584, '2026-04-16 20:02:16.061', '2026-04-16 20:02:16.061', null, '前端', '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
 Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8705:7)
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)
@@ -5988,8 +6005,8 @@ Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' a
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8769:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8761:9)
-    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', level = 'error', solution = null, status = '未处理' WHERE id = 584;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:31.106', updated_at = '2026-04-16 20:02:31.106', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (585, '2026-04-16 20:02:31.106', '2026-04-16 20:02:31.106', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -6000,8 +6017,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 585;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:31.106', updated_at = '2026-04-16 20:02:31.106', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (586, '2026-04-16 20:02:31.106', '2026-04-16 20:02:31.106', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -6012,8 +6029,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 586;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:31.106', updated_at = '2026-04-16 20:02:31.106', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (587, '2026-04-16 20:02:31.106', '2026-04-16 20:02:31.106', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -6024,8 +6041,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 587;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:38.671', updated_at = '2026-04-16 20:02:38.671', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (588, '2026-04-16 20:02:38.671', '2026-04-16 20:02:38.671', null, '前端', '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
 Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8705:7)
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)
@@ -6036,8 +6053,8 @@ Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' a
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8769:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8761:9)
-    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', level = 'error', solution = null, status = '未处理' WHERE id = 588;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:38.917', updated_at = '2026-04-16 20:02:38.917', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
+    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (589, '2026-04-16 20:02:38.917', '2026-04-16 20:02:38.917', null, '前端', '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
 Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8705:7)
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)
@@ -6048,8 +6065,8 @@ Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' a
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8769:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8761:9)
-    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', level = 'error', solution = null, status = '未处理' WHERE id = 589;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:38.917', updated_at = '2026-04-16 20:02:38.917', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
+    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (590, '2026-04-16 20:02:38.917', '2026-04-16 20:02:38.917', null, '前端', '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
 Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8705:7)
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)
@@ -6060,8 +6077,8 @@ Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' a
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8769:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8761:9)
-    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', level = 'error', solution = null, status = '未处理' WHERE id = 590;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:02:38.922', updated_at = '2026-04-16 20:02:38.922', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
+    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (591, '2026-04-16 20:02:38.922', '2026-04-16 20:02:38.922', null, '前端', '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
 Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8705:7)
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)
@@ -6072,8 +6089,8 @@ Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' a
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8769:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8761:9)
-    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', level = 'error', solution = null, status = '未处理' WHERE id = 591;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:11:54.106', updated_at = '2026-04-16 20:11:54.106', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (592, '2026-04-16 20:11:54.106', '2026-04-16 20:11:54.106', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue?t=1776341348303:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -6084,8 +6101,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 592;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:11:54.106', updated_at = '2026-04-16 20:11:54.106', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (593, '2026-04-16 20:11:54.106', '2026-04-16 20:11:54.106', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue?t=1776341348303:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -6096,8 +6113,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 593;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:11:54.121', updated_at = '2026-04-16 20:11:54.121', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (594, '2026-04-16 20:11:54.121', '2026-04-16 20:11:54.121', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue?t=1776341348303:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -6108,8 +6125,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 594;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:12:07.620', updated_at = '2026-04-16 20:12:07.620', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (595, '2026-04-16 20:12:07.620', '2026-04-16 20:12:07.620', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue?t=1776341348303:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -6120,8 +6137,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 595;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:12:07.620', updated_at = '2026-04-16 20:12:07.620', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (596, '2026-04-16 20:12:07.620', '2026-04-16 20:12:07.620', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue?t=1776341348303:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -6132,8 +6149,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 596;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:12:07.620', updated_at = '2026-04-16 20:12:07.620', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (597, '2026-04-16 20:12:07.620', '2026-04-16 20:12:07.620', null, '前端', '错误信息: TypeError: Cannot read properties of undefined (reading \'parentId\')
 Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'parentId\')
     at http://localhost:5173/src/view/superAdmin/authority/authority/components/AuthorityEditorDrawer.vue?t=1776341348303:65:37
     at renderFnWithContext (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:2846:13)
@@ -6144,8 +6161,8 @@ Stack: 调用栈: TypeError: Cannot read properties of undefined (reading \'pare
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
     at setupRenderEffect (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8340:5)
     at mountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8114:7)
-    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', level = 'error', solution = null, status = '未处理' WHERE id = 597;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:12:17.065', updated_at = '2026-04-16 20:12:17.065', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
+    at processComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8066:9)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (598, '2026-04-16 20:12:17.065', '2026-04-16 20:12:17.065', null, '前端', '错误信息: TypeError: Cannot read properties of null (reading \'emitsOptions\')
 Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOptions\')
     at shouldUpdateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:6826:27)
     at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8131:9)
@@ -6156,8 +6173,8 @@ Stack: 调用栈: TypeError: Cannot read properties of null (reading \'emitsOpti
     at patch (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:7536:9)
     at ReactiveEffect.componentUpdateFn [as fn] (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8292:9)
     at ReactiveEffect.run (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:505:19)
-    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', level = 'error', solution = null, status = '未处理' WHERE id = 598;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:12:21.768', updated_at = '2026-04-16 20:12:21.768', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
+    at updateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8143:18)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (599, '2026-04-16 20:12:21.768', '2026-04-16 20:12:21.768', null, '前端', '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
 Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8705:7)
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)
@@ -6168,8 +6185,8 @@ Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' a
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8769:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8761:9)
-    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', level = 'error', solution = null, status = '未处理' WHERE id = 599;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:12:21.947', updated_at = '2026-04-16 20:12:21.947', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
+    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (600, '2026-04-16 20:12:21.947', '2026-04-16 20:12:21.947', null, '前端', '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
 Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8705:7)
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)
@@ -6180,8 +6197,8 @@ Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' a
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8769:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8761:9)
-    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', level = 'error', solution = null, status = '未处理' WHERE id = 600;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:12:22.003', updated_at = '2026-04-16 20:12:22.003', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
+    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (601, '2026-04-16 20:12:22.003', '2026-04-16 20:12:22.003', null, '前端', '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
 Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8705:7)
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)
@@ -6192,8 +6209,8 @@ Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' a
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8769:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8761:9)
-    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', level = 'error', solution = null, status = '未处理' WHERE id = 601;
-UPDATE aiInfra.sys_error SET created_at = '2026-04-16 20:12:22.003', updated_at = '2026-04-16 20:12:22.003', deleted_at = null, form = '前端', info = '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
+    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', 'error', null, '未处理');
+INSERT INTO aiInfra.sys_error (id, created_at, updated_at, deleted_at, form, info, level, solution, status) VALUES (602, '2026-04-16 20:12:22.003', '2026-04-16 20:12:22.003', null, '前端', '错误信息: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
 Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' as it is null.
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8705:7)
     at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)
@@ -6204,4 +6221,4 @@ Stack: 调用栈: TypeError: Cannot destructure property \'type\' of \'vnode\' a
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8769:9)
     at unmountChildren (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8856:7)
     at unmount (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8761:9)
-    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', level = 'error', solution = null, status = '未处理' WHERE id = 602;
+    at unmountComponent (http://localhost:5173/node_modules/.vite/deps/chunk-T4E5PGWE.js?v=1d0171dd:8842:7)', 'error', null, '未处理');

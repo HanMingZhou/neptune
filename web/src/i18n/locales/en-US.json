@@ -701,6 +701,7 @@
   "totalGPU": "Total GPU",
   "totalGpu": "Total GPU",
   "totalNodes": "Total Nodes",
+  "nodesUnit": "nodes",
   "totalPrice": "Total Price",
   "trainingDesc": "Manage distributed training jobs, supporting PyTorch DDP, MPI, etc.",
   "trainingFramework": "Training Framework",

@@ -127,9 +127,13 @@
               </span>
               <span
                 v-else-if="hasVGpuSpec(item)"
-                class="console-badge console-badge--neutral is-code"
+                class="console-badge console-badge--info is-code"
               >
-                vGPU · {{ formatVGpuSpec(item) }}
+                <span
+                  class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-indigo-500 text-white text-[10px] font-bold mr-1"
+                  >v</span
+                >
+                {{ formatVGpuSpec(item) }}
               </span>
               <span v-else class="is-muted text-[11px]">{{
                 t('CPU ONLY')

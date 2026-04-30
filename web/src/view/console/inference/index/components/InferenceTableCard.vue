@@ -56,7 +56,9 @@
             <th>{{ t('name') }} / {{ t('instanceId') }}</th>
             <th>{{ t('framework') }}</th>
             <th>{{ t('status') }}</th>
+            <th>{{ t('spec') }}</th>
             <th>{{ t('gpu') }}</th>
+            <th>{{ t('totalNodes') }}</th>
             <th>{{ t('deployMode') }}</th>
             <th>{{ t('createdAt') }}</th>
             <th class="console-actions-header">{{ t('actions') }}</th>
@@ -64,7 +66,7 @@
         </thead>
         <tbody>
           <tr v-if="loading">
-            <td colspan="7" class="px-6 py-10 text-center text-slate-400">
+            <td colspan="9" class="px-6 py-10 text-center text-slate-400">
               <div class="flex items-center justify-center gap-2">
                 <div
                   class="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"
@@ -74,7 +76,7 @@
             </td>
           </tr>
           <tr v-else-if="services.length === 0">
-            <td colspan="7" class="px-6 py-10 text-center text-slate-400">
+            <td colspan="9" class="px-6 py-10 text-center text-slate-400">
               <div class="console-list-empty">
                 <span class="material-icons console-list-empty__icon"
                   >rocket_launch</span
@@ -119,12 +121,39 @@
               />
             </td>
             <td>
+              <div class="flex items-center gap-1">
+                <span class="material-icons text-[14px] text-slate-400"
+                  >memory</span
+                >
+                <span class="is-metric"
+                  >{{ item.cpu || 0 }} {{ t('cpu') }}</span
+                >
+                <span class="text-slate-300 mx-1">|</span>
+                <span class="is-metric">{{ item.memory || 0 }} GB</span>
+              </div>
+            </td>
+            <td>
               <span
-                v-if="item.gpu"
+                v-if="(item.gpuCount || item.gpu || 0) > 0"
                 class="console-badge console-badge--neutral is-code"
-                >{{ item.gpu }} GPU</span
               >
+                {{ item.gpuCount || item.gpu }} ×
+                {{ item.gpuModel || 'GPU' }}
+              </span>
+              <span
+                v-else-if="hasVGpuSpec(item)"
+                class="console-badge console-badge--info is-code"
+              >
+                <span
+                  class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-indigo-500 text-white text-[10px] font-bold mr-1"
+                  >v</span
+                >
+                {{ formatVGpuSpec(item) }}
+              </span>
               <span v-else class="is-muted text-[11px]">CPU ONLY</span>
+            </td>
+            <td class="font-mono text-xs is-metric">
+              {{ item.instanceCount || 1 }} {{ t('nodesUnit') }}
             </td>
             <td>
               <span
@@ -230,6 +259,7 @@ import type {
   ConsoleInferenceService,
   Translator
 } from '@/types/consoleResource'
+import { formatVGpuSpec, hasVGpuSpec } from '@/utils/vgpu'
 
 withDefaults(
   defineProps<{

@@ -41,22 +41,30 @@ func FailWithMessage(message string, c *gin.Context) {
 
 // TrainingJobItem 训练任务列表项
 type TrainingJobItem struct {
-	ID            uint       `json:"id"`            // 任务ID
-	DisplayName   string     `json:"displayName"`   // 展示名称
-	JobName       string     `json:"jobName"`       // K8s Job名称
-	Namespace     string     `json:"namespace"`     // 命名空间
-	FrameworkType string     `json:"frameworkType"` // 框架类型
-	Image         string     `json:"image"`         // 镜像地址
-	ImageName     string     `json:"imageName"`     // 镜像名称
-	Status        string     `json:"status"`        // 状态
-	TotalGPUCount int64      `json:"totalGpuCount"` // GPU总数
-	WorkerCount   int64      `json:"workerCount"`   // Worker数量
-	ClusterName   string     `json:"clusterName"`   // 集群名称
-	CreatedAt     time.Time  `json:"createdAt"`     // 创建时间
-	StartedAt     *time.Time `json:"startedAt"`     // 开始时间
-	FinishedAt    *time.Time `json:"finishedAt"`    // 结束时间
-	Duration      string     `json:"duration"`      // 运行时长
-	ErrorMsg      string     `json:"errorMsg"`      // 错误信息
+	ID            uint   `json:"id"`            // 任务ID
+	DisplayName   string `json:"displayName"`   // 展示名称
+	JobName       string `json:"jobName"`       // K8s Job名称
+	Namespace     string `json:"namespace"`     // 命名空间
+	FrameworkType string `json:"frameworkType"` // 框架类型
+	Image         string `json:"image"`         // 镜像地址
+	ImageName     string `json:"imageName"`     // 镜像名称
+	Status        string `json:"status"`        // 状态
+	TotalGPUCount int64  `json:"totalGpuCount"` // GPU总数
+	WorkerCount   int64  `json:"workerCount"`   // Worker数量
+	// 单节点资源规格（来自 product 快照查询）
+	CPU         int64      `json:"cpu"`         // 每节点CPU(核)
+	Memory      int64      `json:"memory"`      // 每节点内存(GB)
+	GPUModel    string     `json:"gpuModel"`    // GPU型号
+	GPUCount    int64      `json:"gpuCount"`    // 每节点GPU卡数
+	VGPUNumber  int64      `json:"vGpuNumber"`  // 每节点vGPU数量
+	VGPUMemory  int64      `json:"vGpuMemory"`  // 每节点vGPU显存(GB)
+	VGPUCores   int64      `json:"vGpuCores"`   // 每节点vGPU核心数
+	ClusterName string     `json:"clusterName"` // 集群名称
+	CreatedAt   time.Time  `json:"createdAt"`   // 创建时间
+	StartedAt   *time.Time `json:"startedAt"`   // 开始时间
+	FinishedAt  *time.Time `json:"finishedAt"`  // 结束时间
+	Duration    string     `json:"duration"`    // 运行时长
+	ErrorMsg    string     `json:"errorMsg"`    // 错误信息
 	// TensorBoard 和 Web Terminal
 	TensorboardUrl string `json:"tensorboardUrl"` // TensorBoard访问地址
 }

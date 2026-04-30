@@ -115,6 +115,13 @@ export interface ConsoleTrainingJob {
   status?: string
   totalGpuCount?: number
   workerCount?: number
+  cpu?: number | string
+  memory?: number | string
+  gpuModel?: string
+  gpuCount?: number
+  vGpuNumber?: number
+  vGpuMemory?: number
+  vGpuCores?: number
   createdAt?: string | number
   duration?: string
   enableTensorboard?: boolean
@@ -157,7 +164,15 @@ export interface ConsoleInferenceService {
   instanceName?: string
   framework?: string
   status?: string
+  cpu?: number | string
+  memory?: number | string
   gpu?: number
+  gpuCount?: number
+  gpuModel?: string
+  vGpuNumber?: number
+  vGpuMemory?: number
+  vGpuCores?: number
+  instanceCount?: number
   deployType?: string
   createdAt?: string | number
   [key: string]: unknown

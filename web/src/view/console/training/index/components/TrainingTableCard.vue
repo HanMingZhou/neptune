@@ -43,10 +43,11 @@
         <thead>
           <tr>
             <th>{{ t('name') }} / {{ t('instanceId') }}</th>
-            <th>{{ t('spec') }}</th>
+            <th>{{ t('framework') }}</th>
             <th>{{ t('status') }}</th>
+            <th>{{ t('spec') }}</th>
             <th>{{ t('gpu') }}</th>
-            <th>{{ t('workerCount') }}</th>
+            <th>{{ t('totalNodes') }}</th>
             <th>{{ t('createdAt') }}</th>
             <th>{{ t('duration') }}</th>
             <th class="console-actions-header">{{ t('actions') }}</th>
@@ -54,7 +55,7 @@
         </thead>
         <tbody>
           <tr v-if="loading">
-            <td colspan="8" class="px-6 py-10 text-center text-slate-400">
+            <td colspan="9" class="px-6 py-10 text-center text-slate-400">
               <div class="flex items-center justify-center gap-2">
                 <div
                   class="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"
@@ -64,7 +65,7 @@
             </td>
           </tr>
           <tr v-else-if="jobs.length === 0">
-            <td colspan="8" class="px-6 py-10 text-center text-slate-400">
+            <td colspan="9" class="px-6 py-10 text-center text-slate-400">
               <div class="console-list-empty">
                 <span class="material-icons console-list-empty__icon"
                   >model_training</span
@@ -107,17 +108,40 @@
               />
             </td>
             <td>
+              <div class="flex items-center gap-1">
+                <span class="material-icons text-[14px] text-slate-400"
+                  >memory</span
+                >
+                <span class="is-metric"
+                  >{{ item.cpu || 0 }} {{ t('cpu') }}</span
+                >
+                <span class="text-slate-300 mx-1">|</span>
+                <span class="is-metric">{{ item.memory || 0 }} GB</span>
+              </div>
+            </td>
+            <td>
               <span
-                v-if="item.totalGpuCount"
+                v-if="item.gpuCount && item.gpuCount > 0"
                 class="console-badge console-badge--neutral is-code"
-                >{{ item.totalGpuCount }} GPU</span
               >
+                {{ item.gpuCount }} × {{ item.gpuModel || 'GPU' }}
+              </span>
+              <span
+                v-else-if="hasVGpuSpec(item)"
+                class="console-badge console-badge--info is-code"
+              >
+                <span
+                  class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-indigo-500 text-white text-[10px] font-bold mr-1"
+                  >v</span
+                >
+                {{ formatVGpuSpec(item) }}
+              </span>
               <span v-else class="is-muted text-[11px]">{{
                 t('CPU ONLY')
               }}</span>
             </td>
             <td class="font-mono text-xs is-metric">
-              {{ item.workerCount || 1 }}x
+              {{ item.workerCount || 1 }} {{ t('nodesUnit') }}
             </td>
             <td class="text-slate-500 text-[12px] font-mono is-secondary">
               {{ formatTime(item.createdAt) }}
@@ -208,6 +232,7 @@ import ResourceIdentityCell from '@/components/listPage/ResourceIdentityCell.vue
 import ResourceStatusCell from '@/components/listPage/ResourceStatusCell.vue'
 import TableCard from '@/components/listPage/TableCard.vue'
 import type { ConsoleTrainingJob, Translator } from '@/types/consoleResource'
+import { formatVGpuSpec, hasVGpuSpec } from '@/utils/vgpu'
 
 withDefaults(
   defineProps<{

@@ -78,6 +78,7 @@ type trainingCreateState struct {
 type trainingListLookup struct {
 	images   map[uint]imageModel.Image
 	clusters map[uint]clusterModel.K8sCluster
+	products map[uint]productModel.Product
 }
 
 var TrainingJobServiceApp = new(TrainingJobService)
@@ -1036,7 +1037,43 @@ func (s *TrainingJobService) loadTrainingListLookup(ctx context.Context, jobs []
 	return trainingListLookup{
 		images:   s.loadTrainingImages(ctx, jobs),
 		clusters: s.loadTrainingClusters(ctx, jobs),
+		products: s.loadTrainingProducts(ctx, jobs),
 	}
+}
+
+func (s *TrainingJobService) loadTrainingProducts(ctx context.Context, jobs []trainingModel.TrainingJob) map[uint]productModel.Product {
+	productIDs := collectTrainingJobProductIDs(jobs)
+	if len(productIDs) == 0 {
+		return map[uint]productModel.Product{}
+	}
+
+	var products []productModel.Product
+	if err := global.GVA_DB.WithContext(ctx).Where("id IN ?", productIDs).Find(&products).Error; err != nil {
+		logx.Error("批量查询训练任务产品失败", logx.Field("err", err))
+		return map[uint]productModel.Product{}
+	}
+
+	productMap := make(map[uint]productModel.Product, len(products))
+	for _, product := range products {
+		productMap[product.ID] = product
+	}
+	return productMap
+}
+
+func collectTrainingJobProductIDs(jobs []trainingModel.TrainingJob) []uint {
+	seen := make(map[uint]struct{})
+	ids := make([]uint, 0, len(jobs))
+	for _, job := range jobs {
+		if job.ProductId == 0 {
+			continue
+		}
+		if _, ok := seen[job.ProductId]; ok {
+			continue
+		}
+		seen[job.ProductId] = struct{}{}
+		ids = append(ids, job.ProductId)
+	}
+	return ids
 }
 
 func (s *TrainingJobService) loadTrainingImages(ctx context.Context, jobs []trainingModel.TrainingJob) map[uint]imageModel.Image {
@@ -1133,6 +1170,15 @@ func (s *TrainingJobService) convertToListItem(job *trainingModel.TrainingJob, l
 	}
 	if cluster, ok := lookup.clusters[job.ClusterID]; ok {
 		item.ClusterName = cluster.Name
+	}
+	if product, ok := lookup.products[job.ProductId]; ok {
+		item.CPU = product.CPU
+		item.Memory = product.Memory
+		item.GPUModel = product.GPUModel
+		item.GPUCount = product.GPUCount
+		item.VGPUNumber = product.VGPUNumber
+		item.VGPUMemory = product.VGPUMemory
+		item.VGPUCores = product.VGPUCores
 	}
 	if job.EnableTensorboard {
 		item.TensorboardUrl = buildTrainingTensorboardURL(job.Namespace, job.JobName)
