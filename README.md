@@ -252,7 +252,8 @@ docker compose -f deploy/docker-compose/docker-compose.yaml up -d --build
 
 ### 容器实例（Notebook）
 ![容器实例示例 1](docs/readme/images/notebook-example-1.png)
-![容器实例示例 2](docs/readme/images/tensorboard-example.png)
+![容器实例示例 2](docs/readme/images/notebook-example-2.png)
+![容器实例示例 3](docs/readme/images/tensorboard-example.png)
 
 ### 训练任务
 ![训练任务示例 1](docs/readme/images/training-example-1.png)
