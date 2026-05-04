@@ -279,11 +279,8 @@ func (s *InferenceServiceService) validateCreateRequest(req *inferenceReq.Create
 		if req.InstanceCount < 2 {
 			return errors.New("分布式模式实例数量必须大于 1（总节点数，包含 head）")
 		}
-		if req.Framework == consts.FrameworkVLLM {
-			if err := validateDistributedVLLMCommand(req); err != nil {
-				return err
-			}
-		}
+		// vLLM 启动命令由用户完全控制，不做格式校验
+		// 后端仅在 worker 节点自动追加 --headless
 	}
 
 	// 校验用户挂载路径不能与模型挂载路径冲突
@@ -305,8 +302,10 @@ func validateDistributedVLLMCommand(req *inferenceReq.CreateInferenceServiceReq)
 	if len(req.Args) > 0 {
 		combined = strings.TrimSpace(combined + " " + strings.Join(req.Args, " "))
 	}
-	if !regexp.MustCompile(`(?:^|\s)vllm\s+serve(?:\s|$)`).MatchString(combined) {
-		return errors.New("分布式 VLLM 启动命令必须使用 vllm serve")
+	isVllmServe := regexp.MustCompile(`(?:^|\s)vllm\s+serve(?:\s|$)`).MatchString(combined)
+	isVllmModule := regexp.MustCompile(`python[23]?\s+-m\s+vllm\.entrypoints\.openai\.api_server(?:\s|$)`).MatchString(combined)
+	if !isVllmServe && !isVllmModule {
+		return errors.New("分布式 VLLM 启动命令必须使用 vllm serve 或 python3 -m vllm.entrypoints.openai.api_server")
 	}
 	if inferenceCommandHasFlag(combined, "--headless") {
 		return errors.New("分布式 VLLM 启动命令不要手动包含 --headless，worker 由后端自动追加")
