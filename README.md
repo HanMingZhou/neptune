@@ -269,6 +269,9 @@ docker compose -f deploy/docker-compose/docker-compose.yaml up -d --build
 #### VLLM
 ![推理服务示例 7](docs/readme/images/inference-example-vllm-gpu-1.png)
 ![推理服务示例 6](docs/readme/images/inference-example-vllm-distribute-gpu-1.png)
+#### CherryStudio
+![CherryStudio 推理服务示例 1](docs/readme/images/cherrystudio-1.jpeg)
+![CherryStudio 推理服务示例 2](docs/readme/images/cherrystudio-2.jpeg)
 
 
 ## 📦 部署方式
