@@ -30,7 +30,7 @@ type CreateStreamRouteReq struct {
 	Name             string            `json:"name"`             // 路由名称
 	Namespace        string            `json:"namespace"`        // 命名空间（路由创建在 Apisix 所在的 namespace）
 	ClusterId        uint              `json:"clusterId"`        // 集群ID
-	IngressPort      int               `json:"ingressPort"`      // Apisix 监听的入口端口（如 9100，对外通过 Gateway 映射为 22）
+	StreamPort       int               `json:"streamPort"`       // Apisix 监听的入口端口（如 9100，对外通过 Gateway 映射为 22）
 	ServiceName      string            `json:"serviceName"`      // 后端服务名称（如 sshpiper）
 	ServiceNamespace string            `json:"serviceNamespace"` // 后端服务所在的 namespace
 	ServicePort      int               `json:"servicePort"`      // 后端服务端口（如 22）

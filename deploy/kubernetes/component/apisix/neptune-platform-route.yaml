@@ -12,7 +12,7 @@ spec:
           - /aiInfra/*
       backends:
         - serviceName: neptune-server
-          servicePort: 8888
+          servicePort: 8001
       websocket: true
     - name: neptune-web
       match:

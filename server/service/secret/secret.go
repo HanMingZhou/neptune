@@ -75,7 +75,7 @@ func (m *K8sSecretService) DeleteSSHSecret(ctx context.Context, req *secretModel
 }
 
 func (m *K8sSecretService) CreateSSHPrivateKeySecret(ctx context.Context, req *secretModel.AddSecretReq) (string, error) {
-	secretName := fmt.Sprintf("%s-ssh-private-key", req.InstanceName)
+	secretName := fmt.Sprintf("pipe-%s-ssh-private-key", req.InstanceName)
 
 	secret := &corev1.Secret{
 		ObjectMeta: metav1.ObjectMeta{
@@ -100,7 +100,7 @@ func (m *K8sSecretService) CreateSSHPrivateKeySecret(ctx context.Context, req *s
 }
 
 func (m *K8sSecretService) DeleteSSHPrivateKeySecret(ctx context.Context, req *secretModel.DeleteSecretReq) error {
-	secretName := fmt.Sprintf("%s-ssh-private-key", req.InstanceName)
+	secretName := fmt.Sprintf("pipe-%s-ssh-private-key", req.InstanceName)
 	if err := m.client.CoreV1().
 		Secrets(req.Namespace).
 		Delete(ctx, secretName, metav1.DeleteOptions{}); err != nil {

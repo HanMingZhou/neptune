@@ -360,8 +360,7 @@ kubectl apply -f deploy/kubernetes/component/apisix/neptune-platform-route.yaml
 - **`system.addr`**：后端监听端口，默认 `8001`
 - **`apisix.base-domain`**：APISIX 对外访问域名或地址，本地一般填 `localhost`
 - **`apisix.auth-uri`**：APISIX 能访问到的后端认证地址
-- **`apisix.http-port`**：APISIX 对外暴露的 HTTP 端口，例如 `8888`
-- **`apisix.ssh-ingress-port`**：APISIX Pod / 进程内部监听的 SSH 入口端口，通常是 `9100`
+- **`apisix.stream-port`**：APISIX Pod / 进程内部监听的 TCP Stream 端口，通常是 `9100`
 - **`sshpiper.host`**：用户最终访问 SSH 的地址，本地通常填 `127.0.0.1`
 - **`sshpiper.port`**：用户看到的 SSH 端口，统一经网关暴露时通常是 `22`
 
@@ -378,8 +377,7 @@ apisix:
   gateway-namespace: "apisix"
   auth-enabled: true
   auth-uri: "http://localhost:8001/aiInfra/api/v1/apisix/auth"
-  http-port: 8888
-  ssh-ingress-port: 9100
+  stream-port: 9100
 
 sshpiper:
   host: "127.0.0.1"
@@ -402,7 +400,6 @@ apisix:
   gateway-namespace: "apisix"
   auth-enabled: true
   auth-uri: "http://neptune-server:8888/aiInfra/api/v1/apisix/auth"
-  http-port: 80
 
 sshpiper:
   host: "127.0.0.1"
@@ -413,14 +410,13 @@ sshpiper:
 
 - **`base-domain`**：用于生成 Notebook / TensorBoard / Inference 的访问地址
 - **`auth-uri`**：这里必须写 Compose 网络内的服务名，例如 `neptune-server`
-- **`http-port`**：这里填写 APISIX 对外 HTTP 入口端口；Compose 默认是 `80`
 
 #### 3. Kubernetes
 
 - **配置文件**：`deploy/kubernetes/server/gva-server-configmap.yaml`
 - **适用场景**：正式环境 / 集群部署
 
-Kubernetes 下最容易填错的是 `base-domain`、`auth-uri`、`http-port`、`sshpiper.host`。
+Kubernetes 下最容易填错的是 `base-domain`、`auth-uri`、`sshpiper.host`。
 
 示例：
 
@@ -431,8 +427,7 @@ apisix:
   gateway-namespace: "apisix"
   auth-enabled: true
   auth-uri: "http://neptune-server.neptune.svc.cluster.local:8888/aiInfra/api/v1/apisix/auth"
-  http-port: 80
-  ssh-ingress-port: 9100
+  stream-port: 9100
 
 sshpiper:
   host: "ssh.ai.example.com"
@@ -443,8 +438,7 @@ sshpiper:
 
 - **`base-domain`**：填写用户最终访问平台网关的域名或地址
 - **`auth-uri`**：必须填写 **APISIX Pod 能访问到的后端 Service 地址**，推荐写成集群内 Service DNS
-- **`http-port`**：填写 APISIX 对外暴露给用户的 HTTP 端口；如果由 Ingress / LoadBalancer 统一接入，通常填 `80` 或 `443` 对应的实际入口；不要保留成一个无意义的占位值
-- **`ssh-ingress-port`**：填写 APISIX stream proxy 内部监听端口，通常是 `9100`，不是外部 `22`
+- **`stream-port`**：填写 APISIX stream proxy 内部监听端口，通常是 `9100`，不是外部 `22`
 - **`sshpiper.host`**：填写用户最终 SSH 连接入口；如果统一由 APISIX / LB 暴露，建议填网关域名
 - **`sshpiper.port`**：填写用户连接时实际使用的端口，通常是 `22`
 
@@ -468,8 +462,7 @@ apisix:
   gateway-namespace: "apisix"
   auth-enabled: true         # 是否启用 Notebook / TensorBoard / Inference 访问认证
   auth-uri: "http://localhost:8001/aiInfra/api/v1/apisix/auth"
-  http-port: 8888            # APISIX 对外 HTTP 入口端口
-  ssh-ingress-port: 9100     # APISIX 内部 SSH 入口端口，不是外部 22
+  stream-port: 9100          # APISIX 内部 SSH 入口端口，不是外部 22
 
 sshpiper:
   host: "127.0.0.1"         # 用户最终访问 SSH 的地址
@@ -484,15 +477,11 @@ sshpiper:
   - 如果部署前尚未确定，可暂时留空，待网关地址确定后回填
 
 - **`apisix.auth-uri`**
-  - 这是 APISIX forward-auth 调用后端鉴权接口的地址
+  - 这是 APISIX forward-auth 调用后端鉴权接口 of 地址
   - 必须填写 **APISIX 自己能访问到的后端地址**
   - 不能简单照抄浏览器访问地址，尤其在 Compose / K8s 场景下要使用容器网络 / Service DNS
 
-- **`apisix.http-port`**
-  - 这是用户访问 Notebook / TensorBoard / Inference 时经过的 HTTP 入口端口
-  - 例如本地可填 `8888`，Compose 默认可填 `80`
-
-- **`apisix.ssh-ingress-port`**
+- **`apisix.stream-port`**
   - 这是 APISIX stream proxy 内部监听的 SSH 端口
   - 通常填 `9100`
   - 不要误填成用户最终看到的 `22`
@@ -503,21 +492,12 @@ sshpiper:
 
 ### 推理 / Notebook / TensorBoard 访问地址说明
 
-启用 APISIX 后，平台会为资源自动生成网关访问地址。实际访问地址由以下字段共同决定：
+启用 APISIX 后，平台会为资源自动生成网关访问地址。由于平台统一生成的是**相对路径**（例如 `/notebook/<namespace>/<name>/lab`），前端浏览器会自动使用当前地址栏中的 Origin 来补齐完整的地址。
 
-- **域名 / 地址**：`apisix.base-domain`
-- **HTTP 端口**：`apisix.http-port`
-- **鉴权入口**：`apisix.auth-uri`
-
-例如本地开发环境中：
-
-- `base-domain = localhost`
-- `http-port = 8888`
-
-则推理服务访问地址通常类似：
+例如本地开发环境中，网页控制台地址为 `http://localhost:5173`，则跳转时浏览器自动请求：
 
 ```text
-http://localhost:8888/inference/<namespace>/<instanceName>/v1
+http://localhost:5173/notebook/<namespace>/<instanceName>/lab
 ```
 
 如果推理服务选择的是：
@@ -538,7 +518,6 @@ http://localhost:8888/inference/<namespace>/<instanceName>/v1
 - **后端端口**：`system.addr`
 - **网关域名**：`apisix.base-domain`
 - **网关认证地址**：`apisix.auth-uri`
-- **网关 HTTP 端口**：`apisix.http-port`
 
 #### Kubernetes 最小配置
 
@@ -548,8 +527,7 @@ http://localhost:8888/inference/<namespace>/<instanceName>/v1
 - **后端配置**：`deploy/kubernetes/server/gva-server-configmap.yaml`
   - `apisix.base-domain`
   - `apisix.auth-uri`
-  - `apisix.http-port`
-  - `apisix.ssh-ingress-port`
+  - `apisix.stream-port`
   - `sshpiper.host`
   - `sshpiper.port`
 
@@ -577,11 +555,10 @@ http://localhost:8888/inference/<namespace>/<instanceName>/v1
 
 - **平台入口域名是否正确**
   - `apisix.base-domain` 是否等于用户最终访问地址
-  - 如果使用 Ingress / LB，对外端口是否与 `apisix.http-port` 保持一致
 
 - **SSH 信息是否正确**
   - `sshpiper.host` / `sshpiper.port` 是否等于最终提供给用户的 SSH 入口
-  - `apisix.ssh-ingress-port` 是否仍保持为 APISIX 内部监听端口
+  - `apisix.stream-port` 是否仍保持为 APISIX 内部监听端口
 
 - **K8s Service DNS 是否正确**
   - `auth-uri` 里引用的 Service 名称、命名空间、端口是否真实存在
@@ -607,32 +584,27 @@ http://localhost:8888/inference/<namespace>/<instanceName>/v1
 
 优先检查：
 
-- **`apisix.base-domain`**
-- **`apisix.http-port`**
+- **`apisix.base-domain`** 是否配置正确
 
 常见表现：
 
 - 地址里还是 `localhost`
-- 端口显示成开发端口或内部端口
 - 生成的链接无法被外部用户访问
 
-这通常说明：
-
-- `base-domain` 没回填
-- `http-port` 写成了内部服务端口，而不是对外入口端口
+这通常说明 `base-domain` 没回填。
 
 #### 3. SSH 信息展示正常，但实际连不上
 
 优先检查：
 
 - **`sshpiper.host` / `sshpiper.port`** 是否是最终对外地址
-- **`apisix.ssh-ingress-port`** 是否为内部端口，例如 `9100`
+- **`apisix.stream-port`** 是否为内部端口，例如 `9100`
 - APISIX Stream / LB / NodePort / 安全组是否真的放通了 SSH 链路
 
 常见错误：
 
 - 把 `sshpiper.port` 配成了容器内部端口 `2222`
-- 把 `apisix.ssh-ingress-port` 错配成了 `22`
+- 把 `apisix.stream-port` 错配成了 `22`
 
 #### 4. Docker Compose 下资源地址生成了，但访问失败
 

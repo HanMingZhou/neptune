@@ -682,6 +682,7 @@ func (nb *NotebookService) createNotebookSSHSecrets(ctx context.Context, state *
 		InstanceName: state.nbRef.InstanceName,
 		Namespace:    state.nbRef.Namespace,
 		Content: map[string]string{
+			// 关键点：将【用户上传的公钥】与新生成的【平台公钥】用换行符强行拼接在一起！
 			"ssh-publickey": strings.TrimSpace(state.sshPublicKey) + "\n" + pubKey,
 		},
 		InstanceType: consts.NotebookInstance,
@@ -697,6 +698,7 @@ func (nb *NotebookService) createNotebookSSHSecrets(ctx context.Context, state *
 		})
 	})
 
+	// 创建平台SSH私钥Secret
 	addPrivKeySecretReq := &secretModel.AddSecretReq{
 		InstanceName: state.nbRef.InstanceName,
 		Namespace:    consts.SSHPiperNamespace,
@@ -705,7 +707,7 @@ func (nb *NotebookService) createNotebookSSHSecrets(ctx context.Context, state *
 	}
 	privKeySecretName, err := state.secretManager.CreateSSHPrivateKeySecret(ctx, addPrivKeySecretReq)
 	if err != nil {
-		logx.Error("创建平台私钥SSH私钥Secret失败", err)
+		logx.Error("创建平台SSH私钥Secret失败", err)
 		return err
 	}
 	state.privKeySecretName = privKeySecretName
@@ -1233,8 +1235,8 @@ func (nb *NotebookService) createNotebookSSHPipe(
 		TargetNamespace:      nbRef.Namespace,
 		TargetHost:           fmt.Sprintf("%s.%s.svc.cluster.local:22", sshServiceName, nbRef.Namespace),
 		TargetUsername:       "root",
-		UserSSHKey:           sshPublicKey,
-		PrivateKeySecretName: privKeySecretName,
+		UserSSHKey:           sshPublicKey,      // 1. 对应 From 侧校验：写入用户公钥
+		PrivateKeySecretName: privKeySecretName, // 2. 对应 To 侧连接：引用平台私钥 Secret
 		EnablePasswordAuth:   nbRef.EnableSSHPassword,
 		Labels: map[string]string{
 			consts.LabelApp:       nbRef.InstanceName,
@@ -1251,16 +1253,28 @@ func (nb *NotebookService) createNotebookSSHStreamRoute(ctx context.Context, nbR
 		return
 	}
 
-	ingressPort := global.GVA_CONFIG.Apisix.SSHIngressPort
-	if ingressPort == 0 {
-		ingressPort = apisixModel.DefaultSSHIngressPort
+	streamPort := global.GVA_CONFIG.Apisix.StreamPort
+	if streamPort == 0 {
+		streamPort = apisixModel.DefaultSSHStreamPort
 	}
 
+	/*
+		1. 同命名空间下的内网解析规则
+		在 Kubernetes 中：
+
+		如果 APISIX 路由资源 (ApisixRoute) 和它要转发的 目标服务 (Service) 处于同一个 Namespace，可以直接使用服务的短名称（例如 "sshpiper"），Kubernetes 内部 DNS 会自动在当前 Namespace 下进行解析。
+		只有当它们跨 Namespace（比如路由在 apisix 空间，而服务在 kubeflow 空间）时，才必须使用完全限定域名（FQDN，例如 "sshpiper.kubeflow.svc.cluster.local"）来进行跨空间寻址。
+		而在我们的创建参数中：
+
+		Namespace 设置为了 consts.SSHPiperNamespace（即 "kubeflow"）。
+		目标 sshpiper 服务同样部署在 "kubeflow" 命名空间中。
+		因为它们同属 kubeflow 空间，所以使用短服务名 "sshpiper" 即可。
+	*/
 	streamRouteReq := &apisixReq.CreateStreamRouteReq{
 		Name:             fmt.Sprintf("%s-sshpiper", apisixModel.StreamRoutePrefix),
 		Namespace:        consts.SSHPiperNamespace,
 		ClusterId:        nbRef.ClusterID,
-		IngressPort:      ingressPort,
+		StreamPort:       streamPort,
 		ServiceName:      "sshpiper",
 		ServiceNamespace: "",
 		ServicePort:      22,
@@ -1276,7 +1290,7 @@ func (nb *NotebookService) createNotebookSSHStreamRoute(ctx context.Context, nbR
 	}
 
 	logx.Info("创建Apisix SSH Stream Route成功",
-		logx.Field("ingressPort", ingressPort),
+		logx.Field("streamPort", streamPort),
 		logx.Field("backend", "sshpiper"),
 	)
 }

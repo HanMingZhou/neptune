@@ -15,9 +15,7 @@ type Apisix struct {
 	// 开发环境（Docker Desktop）: http://host.docker.internal:8001/aiInfra/api/v1/apisix/auth
 	// 生产环境（K8s）: http://<backend-service>.<namespace>.svc.cluster.local:<server-port>/aiInfra/api/v1/apisix/auth
 	AuthUri string `mapstructure:"auth-uri" json:"auth-uri" yaml:"auth-uri"`
-	// HttpPort Apisix 网关对外暴露的 HTTP 入口端口（Jupyter、TensorBoard、Inference 共用）
-	HttpPort int `mapstructure:"http-port" json:"http-port" yaml:"http-port"`
-	// SSHIngressPort Apisix stream proxy 在 Pod 内部监听的 SSH 入口端口
+	// StreamPort Apisix stream proxy 在 Pod 内部监听的 SSH 入口端口
 	// 典型场景：Gateway Service 对外暴露 22，并转发到 APISIX 内部 9100
-	SSHIngressPort int `mapstructure:"ssh-ingress-port" json:"ssh-ingress-port" yaml:"ssh-ingress-port"`
+	StreamPort int `mapstructure:"stream-port" json:"stream-port" yaml:"stream-port"`
 }

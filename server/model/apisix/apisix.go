@@ -11,8 +11,8 @@ const (
 	// StreamRoutePrefix TCP Stream 路由名称前缀
 	StreamRoutePrefix = "stream"
 
-	// DefaultSSHIngressPort Apisix stream proxy 在 Pod 内部监听的 SSH 入口端口
-	DefaultSSHIngressPort = 9100
+	// DefaultSSHStreamPort Apisix stream proxy 在 Pod 内部监听的 SSH 入口端口
+	DefaultSSHStreamPort = 9100
 )
 
 // ApisixConfig Apisix 配置

@@ -253,11 +253,11 @@ func (m *ApisixService) CreateStreamRoute(ctx context.Context, req *apisixReq.Cr
 		Name:     "tcp-access",
 		Protocol: "TCP",
 		Match: apisixv2.ApisixRouteStreamMatch{
-			IngressPort: int32(req.IngressPort), // Apisix 内部监听的端口 (9100)
+			IngressPort: int32(req.StreamPort), // Apisix Pod内部监听的端口 (9100)
 		},
 		Backend: apisixv2.ApisixRouteStreamBackend{
 			ServiceName: backendServiceName,              // sshpiper
-			ServicePort: intstr.FromInt(req.ServicePort), // kubeflow
+			ServicePort: intstr.FromInt(req.ServicePort), // sshpiper-svc port 22
 		},
 	}
 
