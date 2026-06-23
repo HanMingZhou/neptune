@@ -1,10 +1,12 @@
 package builder
 
 import (
+	"fmt"
 	"gin-vue-admin/model/consts"
 	trainingReq "gin-vue-admin/model/training/request"
 	helper "gin-vue-admin/utils/k8s"
 
+	corev1 "k8s.io/api/core/v1"
 	vcbatch "volcano.sh/apis/pkg/apis/batch/v1alpha1"
 	vcbus "volcano.sh/apis/pkg/apis/bus/v1alpha1"
 )
@@ -24,6 +26,8 @@ func (s *StandaloneStrategy) BuildTasks(spec *trainingReq.TrainingJobSpec) ([]vc
 	tolerations := buildGPUTolerations(&spec.Product)
 	affinity := helper.BuildSchedulingAffinity(spec.Name, spec.AllowedNodes, spec.StrictSpread)
 
+	envs := s.buildEnvVars(spec)
+
 	task := vcbatch.TaskSpec{
 		Name:     consts.TaskSpecWorker,
 		Replicas: 1,
@@ -34,7 +38,7 @@ func (s *StandaloneStrategy) BuildTasks(spec *trainingReq.TrainingJobSpec) ([]vc
 			args:          spec.Args,
 			resources:     resources,
 			volumeMounts:  spec.VolumeMounts,
-			envs:          spec.Envs,
+			envs:          envs,
 			volumes:       spec.Volumes,
 			tolerations:   tolerations,
 			labels:        spec.Labels,
@@ -43,6 +47,30 @@ func (s *StandaloneStrategy) BuildTasks(spec *trainingReq.TrainingJobSpec) ([]vc
 	}
 
 	return []vcbatch.TaskSpec{task}, nil
+}
+
+func (s *StandaloneStrategy) buildEnvVars(spec *trainingReq.TrainingJobSpec) []corev1.EnvVar {
+	envs := cloneEnvVars(spec.Envs)
+	gpuCount := spec.Product.GPUCount
+	if spec.Product.VGPUNumber > gpuCount {
+		gpuCount = spec.Product.VGPUNumber
+	}
+
+	if gpuCount > 1 {
+		envs = append(envs,
+			corev1.EnvVar{Name: "PREFLIGHT_TYPE", Value: "single_node_ddp"},
+			corev1.EnvVar{Name: "NPROC_PER_NODE", Value: fmt.Sprintf("%d", gpuCount)},
+		)
+	} else if gpuCount == 1 {
+		envs = append(envs,
+			corev1.EnvVar{Name: "PREFLIGHT_TYPE", Value: "single_gpu"},
+		)
+	} else {
+		envs = append(envs,
+			corev1.EnvVar{Name: "PREFLIGHT_TYPE", Value: "none"},
+		)
+	}
+	return envs
 }
 
 // GetPlugins 获取插件配置

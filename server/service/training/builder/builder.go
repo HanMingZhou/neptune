@@ -159,6 +159,17 @@ func buildGPUTolerations(product *trainingReq.ProductSpec) []corev1.Toleration {
 }
 
 func buildTaskTemplate(opts taskTemplateOptions) corev1.PodTemplateSpec {
+	var hasPreflightType bool
+	for _, env := range opts.envs {
+		if env.Name == "PREFLIGHT_TYPE" {
+			hasPreflightType = true
+			break
+		}
+	}
+	if hasPreflightType {
+		wrapCommandWithPreflight(&opts)
+	}
+
 	return corev1.PodTemplateSpec{
 		ObjectMeta: metav1.ObjectMeta{
 			Labels: cloneStringMap(opts.labels),
@@ -167,14 +178,20 @@ func buildTaskTemplate(opts taskTemplateOptions) corev1.PodTemplateSpec {
 			RestartPolicy: corev1.RestartPolicyNever,
 			Containers: []corev1.Container{
 				{
-					Name:           opts.containerName,
-					Image:          opts.image,
-					Command:        append([]string(nil), opts.command...),
-					Args:           append([]string(nil), opts.args...),
-					Resources:      opts.resources,
-					VolumeMounts:   append([]corev1.VolumeMount(nil), opts.volumeMounts...),
-					Env:            cloneEnvVars(opts.envs),
-					ReadinessProbe: opts.readiness,
+					Name:                     opts.containerName,
+					Image:                    opts.image,
+					Command:                  append([]string(nil), opts.command...),
+					Args:                     append([]string(nil), opts.args...),
+					Resources:                opts.resources,
+					VolumeMounts:             append([]corev1.VolumeMount(nil), opts.volumeMounts...),
+					Env:                      cloneEnvVars(opts.envs),
+					ReadinessProbe:           opts.readiness,
+					TerminationMessagePath:   "/dev/termination-log",
+					TerminationMessagePolicy: corev1.TerminationMessageFallbackToLogsOnError,
+					/*
+						FallbackToLogsOnError 的作用是：如果 termination log 文件为空，并且容器以错误退出，K8s 会把最后一部分容器日志放到 termination message 里；
+						API 文档说明它最多使用 2048 字节或 80 行。
+					*/
 				},
 			},
 			Volumes:     append([]corev1.Volume(nil), opts.volumes...),
@@ -202,4 +219,185 @@ func cloneStringMap(values map[string]string) map[string]string {
 		cloned[k] = v
 	}
 	return cloned
+}
+
+func wrapCommandWithPreflight(opts *taskTemplateOptions) {
+	bootstrapScript := `cat > /tmp/preflight-and-run.sh <<'EOF'
+#!/bin/bash
+set -euo pipefail
+
+if [ "${1:-}" = "--" ]; then
+  shift
+fi
+
+fail() {
+  local code="$1"
+  local msg="$2"
+  echo "[platform] ${msg}" | tee /dev/termination-log
+  exit "${code}"
+}
+
+run_basic_check() {
+  echo "[platform] running basic checks..."
+  python -V || python3 -V || fail 10 "python not found"
+}
+
+run_gpu_check() {
+  echo "[platform] running GPU checks..."
+  nvidia-smi || fail 11 "gpu not visible"
+  python - <<'PY' || fail 12 "torch cuda check failed"
+import torch
+print("torch:", torch.__version__)
+print("cuda available:", torch.cuda.is_available())
+print("cuda device count:", torch.cuda.device_count())
+if not torch.cuda.is_available():
+    raise SystemExit("cuda is not available")
+if torch.cuda.device_count() == 0:
+    raise SystemExit("no cuda device found")
+PY
+}
+
+write_ddp_preflight_py() {
+  cat > /tmp/ddp_preflight.py <<'PY'
+import os
+import torch
+import torch.distributed as dist
+
+required = ["MASTER_ADDR", "MASTER_PORT", "WORLD_SIZE", "RANK"]
+missing = [k for k in required if not os.environ.get(k)]
+if missing:
+    raise RuntimeError(f"missing env: {missing}")
+
+local_rank = int(os.environ.get("LOCAL_RANK", "0"))
+torch.cuda.set_device(local_rank)
+
+dist.init_process_group(backend="nccl", init_method="env://")
+
+rank = dist.get_rank()
+world_size = dist.get_world_size()
+
+x = torch.ones(1, device="cuda")
+dist.all_reduce(x)
+
+actual = float(x.item())
+expected = float(world_size)
+
+print(f"[ddp-preflight] rank={rank}, actual={actual}, expected={expected}", flush=True)
+
+if actual != expected:
+    raise RuntimeError(f"all_reduce invalid: {actual} != {expected}")
+
+dist.barrier()
+dist.destroy_process_group()
+PY
+}
+
+run_mpi_master_check() {
+  echo "[platform] running mpi master checks..."
+  command -v mpirun &>/dev/null || fail 40 "mpirun not found"
+  
+  local host_file="/etc/volcano/mpiworker.host"
+  if [ ! -f "${host_file}" ]; then
+    fail 43 "mpi worker host file ${host_file} not found"
+  fi
+  
+  export MPI_HOSTS=$(awk -F'.' '{print $1}' "${host_file}" | tr "\n" ",")
+  export MPI_HOSTS=${MPI_HOSTS%,}
+  echo "[platform] resolved MPI_HOSTS=${MPI_HOSTS}"
+  
+  echo "[platform] running basic mpirun check..."
+  mpirun --allow-run-as-root \
+    --host "${MPI_HOSTS}" \
+    -np "${WORLD_SIZE:-1}" \
+    hostname || fail 41 "mpi hostname check failed"
+    
+  local nccl_bin=""
+  if [ -x /opt/nccl-tests/build/all_reduce_perf ]; then
+    nccl_bin="/opt/nccl-tests/build/all_reduce_perf"
+  elif command -v all_reduce_perf &>/dev/null; then
+    nccl_bin="all_reduce_perf"
+  fi
+
+  if [ -n "${nccl_bin}" ]; then
+    echo "[platform] running nccl-tests all_reduce_perf check using ${nccl_bin}..."
+    mpirun --allow-run-as-root \
+      --host "${MPI_HOSTS}" \
+      -np "${WORLD_SIZE:-1}" \
+      -N "${GPUS_PER_NODE:-1}" \
+      "${nccl_bin}" -b 8M -e 128M -f 2 -g 1 || fail 42 "mpi NCCL test failed"
+  else
+    echo "[platform] nccl-tests not found or not executable, skipping NCCL check"
+  fi
+}
+
+case "${PREFLIGHT_TYPE:-none}" in
+  none)
+    run_basic_check
+    ;;
+
+  single_gpu)
+    run_basic_check
+    run_gpu_check
+    ;;
+
+  single_node_ddp)
+    run_basic_check
+    run_gpu_check
+    write_ddp_preflight_py
+    echo "[platform] running single node DDP preflight check..."
+    torchrun \
+      --standalone \
+      --nproc_per_node="${NPROC_PER_NODE:-1}" \
+      /tmp/ddp_preflight.py || fail 30 "single node DDP preflight check failed"
+    ;;
+
+  multi_node_ddp)
+    run_basic_check
+    run_gpu_check
+    write_ddp_preflight_py
+    
+    node_rank="${NODE_RANK:-${RANK:-}}"
+    if [ -z "${node_rank}" ]; then
+      fail 31 "NODE_RANK or RANK env is not set for multi_node_ddp"
+    fi
+    
+    echo "[platform] running multi node DDP preflight check (rank ${node_rank})...."
+    torchrun \
+      --nnodes="${NNODES:-1}" \
+      --nproc_per_node="${NPROC_PER_NODE:-1}" \
+      --node_rank="${node_rank}" \
+      --master_addr="${MASTER_ADDR:-}" \
+      --master_port="${MASTER_PORT:-29500}" \
+      /tmp/ddp_preflight.py || fail 32 "multi node DDP preflight check failed"
+    ;;
+
+  mpi_master)
+    run_basic_check
+    run_mpi_master_check
+    ;;
+
+  mpi_worker)
+    run_basic_check
+    run_gpu_check
+    ;;
+
+  *)
+    fail 3 "unknown PREFLIGHT_TYPE=${PREFLIGHT_TYPE}"
+    ;;
+esac
+
+echo "[platform] preflight passed"
+echo "[platform] start user command: $*"
+
+exec "$@"
+EOF
+chmod +x /tmp/preflight-and-run.sh
+exec /tmp/preflight-and-run.sh -- "$@"
+`
+
+	userCmd := append([]string(nil), opts.command...)
+	userCmd = append(userCmd, opts.args...)
+
+	opts.command = []string{"/bin/bash", "-lc", bootstrapScript, "--"}
+	opts.args = userCmd
 }

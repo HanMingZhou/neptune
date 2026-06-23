@@ -2,6 +2,10 @@ package consts
 
 // Training
 const (
+
+	// VvJob
+	DefaultTtlSecondsAfterFinished int32 = 86400
+
 	TrainingInstance = "training"
 
 	// 框架类型常量

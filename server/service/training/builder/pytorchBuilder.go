@@ -1,6 +1,7 @@
 package builder
 
 import (
+	"fmt"
 	"gin-vue-admin/model/consts"
 	trainingReq "gin-vue-admin/model/training/request"
 	helper "gin-vue-admin/utils/k8s"
@@ -110,6 +111,10 @@ func (s *PyTorchDDPStrategy) GetPolicies() []vcbatch.LifecyclePolicy {
 			Event:  vcbus.PodEvictedEvent,
 			Action: vcbus.RestartJobAction,
 		},
+		{
+			Event:  vcbus.JobUnknownEvent,
+			Action: vcbus.RestartJobAction,
+		},
 	}
 }
 
@@ -130,6 +135,23 @@ func (s *PyTorchDDPStrategy) buildEnvVars(spec *trainingReq.TrainingJobSpec) []c
 			Name:  "NCCL_DEBUG",
 			Value: "INFO",
 		},
+	)
+
+	gpuCount := spec.Product.GPUCount
+	if spec.Product.VGPUNumber > gpuCount {
+		gpuCount = spec.Product.VGPUNumber
+	}
+	if gpuCount == 0 {
+		gpuCount = 1
+	}
+
+	envs = append(envs,
+		corev1.EnvVar{Name: "PREFLIGHT_TYPE", Value: "multi_node_ddp"},
+		corev1.EnvVar{Name: "NNODES", Value: fmt.Sprintf("%d", spec.WorkerCount)},
+		corev1.EnvVar{Name: "NPROC_PER_NODE", Value: fmt.Sprintf("%d", gpuCount)},
+		corev1.EnvVar{Name: "NODE_RANK", Value: "$(RANK)"},
+		corev1.EnvVar{Name: "MASTER_ADDR", Value: "$(MASTER_ADDR)"},
+		corev1.EnvVar{Name: "MASTER_PORT", Value: "$(MASTER_PORT)"},
 	)
 
 	return envs

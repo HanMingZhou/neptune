@@ -64,6 +64,20 @@ func (s *MPIStrategy) BuildTasks(spec *trainingReq.TrainingJobSpec) ([]vcbatch.T
 		corev1.EnvVar{Name: "CUDA_VISIBLE_DEVICES", Value: ""},
 	)
 
+	gpuCount := spec.Product.GPUCount
+	if spec.Product.VGPUNumber > gpuCount {
+		gpuCount = spec.Product.VGPUNumber
+	}
+	if gpuCount == 0 {
+		gpuCount = 1
+	}
+
+	masterEnvs = append(masterEnvs,
+		corev1.EnvVar{Name: "PREFLIGHT_TYPE", Value: "mpi_master"},
+		corev1.EnvVar{Name: "WORLD_SIZE", Value: fmt.Sprintf("%d", spec.WorkerCount)},
+		corev1.EnvVar{Name: "GPUS_PER_NODE", Value: fmt.Sprintf("%d", gpuCount)},
+	)
+
 	// --- Master Task (Launcher) ---
 	masterCmd := s.buildMasterCommand(spec)
 	masterTask := vcbatch.TaskSpec{
@@ -143,6 +157,8 @@ func (s *MPIStrategy) buildWorkerTask(
 		FailureThreshold:    30,
 	}
 
+	workerEnvs := s.buildWorkerEnvVars(spec)
+
 	return vcbatch.TaskSpec{
 		Name:     consts.TaskSpecMPIWorker,
 		Replicas: int32(spec.WorkerCount),
@@ -152,7 +168,7 @@ func (s *MPIStrategy) buildWorkerTask(
 			command:       workerCmd,
 			resources:     workerResources,
 			volumeMounts:  spec.VolumeMounts,
-			envs:          spec.Envs,
+			envs:          workerEnvs,
 			volumes:       spec.Volumes,
 			tolerations:   tolerations,
 			readiness:     readinessProbe,
@@ -160,6 +176,14 @@ func (s *MPIStrategy) buildWorkerTask(
 			affinity:      affinity,
 		}),
 	}
+}
+
+func (s *MPIStrategy) buildWorkerEnvVars(spec *trainingReq.TrainingJobSpec) []corev1.EnvVar {
+	envs := cloneEnvVars(spec.Envs)
+	envs = append(envs,
+		corev1.EnvVar{Name: "PREFLIGHT_TYPE", Value: "mpi_worker"},
+	)
+	return envs
 }
 
 // GetPlugins 获取 MPI 插件配置
@@ -185,6 +209,10 @@ func (s *MPIStrategy) GetPolicies() []vcbatch.LifecyclePolicy {
 		},
 		{
 			Event:  vcbus.PodEvictedEvent,
+			Action: vcbus.RestartJobAction,
+		},
+		{
+			Event:  vcbus.JobUnknownEvent,
 			Action: vcbus.RestartJobAction,
 		},
 	}
